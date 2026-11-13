@@ -1,0 +1,236 @@
+# RSI Kernel Agent — Phase 2 Roadmap Adjustment and Core Foundation
+
+Phase 0 and Phase 1 have been completed.
+
+Before starting implementation, I need to clarify an important project decision:
+
+## 1. MLA Decode and MLA Forward are FINAL-STAGE TEST TARGETS
+
+The existing kernel repository is:
+
+`C:\Users\fengluo\Desktop\training\PallasKernels`
+
+The existing Colab CLI is:
+
+`C:\Users\fengluo\Desktop\colab`
+
+These are real resources that we will use for the final one or two stages of the RSI project.
+
+They are NOT the foundation or primary development environment for the current phase.
+
+The two Kernel tasks are:
+
+- MLA Decode
+- MLA Forward
+
+Only these two tasks may be used for the final real-kernel experiments.
+
+Only the exact two previously identified implementation files may be modified during those experiments.
+
+The Colab CLI must be reused rather than replaced.
+
+For the current development phases:
+
+- Treat both external repositories as read-only.
+- Do not modify either repository.
+- Do not run TPU jobs.
+- Do not modify the CLI configuration or authentication.
+- Do not install or upgrade their dependencies.
+
+The exact Kernel and Colab integration details will be revisited in the final integration stage.
+
+## 2. Adjust the Implementation Roadmap
+
+Replace the previous implementation sequence with:
+
+### Phase 2A — Core Foundation
+
+Implement the shared data model and persistent experiment records.
+
+Focus on:
+
+- Task and Workload.
+- Strategy.
+- Plan.
+- Candidate.
+- Parent Candidate.
+- Run.
+- Evidence.
+- EvaluationBundle.
+- ProfileBundle.
+- AnalysisBundle.
+- Decision.
+
+Requirements:
+
+1. Stable IDs and explicit relationships.
+2. Candidate source/config/build identity must be separate from the shared comparison context.
+3. Append-only experiment and evidence records where practical.
+4. Preserve failed, invalid, slower, repaired, deferred and incomplete runs.
+5. Support concurrent and idempotent updates.
+6. Prevent a worse or incomparable result from overwriting a better result.
+7. Keep Branch Best, Task Best and Frontier separate.
+8. Support versioned Memory snapshots.
+9. Keep raw artifacts separate from structured metadata.
+10. Define explicit status transitions and validation rules.
+
+Before implementation, inspect the existing repository and propose the minimum appropriate storage design. SQLite plus an artifact directory is acceptable if it satisfies the actual concurrency and recovery requirements.
+
+Do not create empty modules just to match the architecture.
+
+### Phase 2B — Knowledge and Memory
+
+Reuse the existing knowledge-site MCP capabilities.
+
+Inspect its actual search, fetch, create and update interfaces.
+
+Implement:
+
+- Internal knowledge retrieval.
+- Source and version provenance.
+- Method records.
+- Two-stage Memory retrieval.
+- Full history snapshots for every participating strategy.
+- Strategy status cards.
+- Branch Best / Task Best / Frontier.
+- Deferred and paused records.
+
+Do not treat the knowledge-site document store as the experiment database.
+
+### Phase 2C — Profiler and Analyzer
+
+Implement offline-first analysis.
+
+The Analyzer must consume:
+
+- Current candidate code and task contract.
+- Saved Profile and Benchmark evidence.
+- Memory snapshots.
+- Knowledge Search results.
+- Mathematical and hardware models.
+
+It must:
+
+- Validate evidence binding.
+- Read relevant code.
+- Separate facts, estimates, hypotheses and predictions.
+- Call available Skills and tools where appropriate.
+- Perform reproducible mathematical calculations.
+- Produce multiple evidence-backed Plans.
+- Avoid selecting a single winner before experiments.
+
+Use saved or synthetic fixtures for software tests.
+
+Do not claim real TPU profiling validation until the final MLA/Colab integration stage.
+
+### Phase 2D — Optimization Workflow and Controller
+
+Implement:
+
+- Multiple participating strategies.
+- Multiple Plans per strategy.
+- Multiple Candidates per Plan.
+- Independent candidate identities and parent relationships.
+- Candidate execution states.
+- Queue and resource budget interfaces.
+- Limited repair and retry logic.
+- Deferred work.
+- Checkpoints and recovery.
+- Branch-specific and task-level decisions.
+
+Use a deterministic state machine for critical scheduling and result promotion.
+
+LLM proposes Plans; deterministic code enforces permissions, budgets, correctness and state transitions.
+
+### Phase 3 — Final Real Kernel and Colab Integration
+
+Only in this stage:
+
+1. Connect the existing Colab CLI.
+2. Validate unchanged MLA Decode baseline.
+3. Validate unchanged MLA Forward baseline.
+4. Verify actual remote environment and imported source identity.
+5. Retrieve timing and Profile artifacts.
+6. Run controlled multi-plan optimization experiments.
+7. Verify that only the two authorized Kernel implementation files were changed.
+8. Confirm full result persistence and recovery.
+
+Keep Decode and Forward as separate task/evaluation contexts.
+
+## 3. Current Development Must Not Depend on MLA Source Changes
+
+Use:
+
+- CPU unit tests.
+- Deterministic synthetic records.
+- Saved Profile fixtures where available.
+- Mock execution adapters.
+- Database integration tests.
+- State-machine tests.
+- Analyzer evaluation cases.
+
+These are only tests of the RSI software infrastructure.
+
+Never label mock or synthetic results as real Kernel performance or TPU validation.
+
+Design clear interfaces so that the final MLA Adapter and Colab execution backend can be plugged in later without redesigning the system.
+
+## 4. Immediate Task
+
+First update:
+
+`knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md`
+
+Reflect the corrected sequence and explicitly state that MLA Decode, MLA Forward and Colab CLI are final-stage integration resources.
+
+Then begin Phase 2A only.
+
+Before coding:
+
+1. Inspect the completed Phase 1 documents.
+2. Review the existing repository structure and project rules.
+3. Check current Git state as far as available.
+4. Propose the data contracts and storage schema.
+5. Identify existing components that can be reused.
+6. Define unit and integration tests.
+
+Then implement the smallest complete Phase 2A foundation.
+
+Do not begin Phase 2B, 2C or 2D until Phase 2A passes its acceptance tests and the implementation report is reviewed.
+
+## 5. Phase 2A Acceptance Criteria
+
+Phase 2A is complete only when:
+
+- Strategy A and Strategy B can coexist.
+- Each Strategy can own multiple Plans.
+- Each Plan can own multiple Candidates.
+- Each Candidate has an exact Parent Candidate.
+- Multiple Runs can belong to one Candidate.
+- Failed and deferred Runs are preserved.
+- Raw evidence and structured metadata are linked.
+- Branch Best and Task Best are independent.
+- A worse result cannot overwrite a better result.
+- Incomplete history is never silently reported as complete.
+- Persistence survives process restart.
+- Unit and database integration tests pass.
+
+Do not run the external Kernel repository or Colab CLI in Phase 2A.
+
+## 6. Working Rules
+
+Prefer existing code over new abstractions.
+
+Do not install Skills or dependencies without approval.
+
+Do not change global Codex configuration.
+
+Do not modify the two external repositories.
+
+Do not modify `.auth` or existing account permissions.
+
+Do not claim real TPU validation.
+
+Report exact files, schema decisions, tests, outputs and remaining risks.
+
+Stop after Phase 2A and wait for review.

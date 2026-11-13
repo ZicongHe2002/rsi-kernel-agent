@@ -1,0 +1,24 @@
+{
+  "configuration": "skills",
+  "model_response_event_count": 3,
+  "analysis_tool_calls": 0,
+  "events": [
+    {
+      "event": 1,
+      "outputs": ["response-1.json", "case_answers.json"],
+      "description": "Independent initial reasoning from packet.json only. Filesystem tools were used to read the packet and write outputs; no deterministic analysis tool was available. An oversized initial shell write failed before file creation, and the same proposal was written using a file patch."
+    },
+    {
+      "event": 2,
+      "outputs": ["response-2.json"],
+      "feedback_type": "protocol structural validation only",
+      "description": "Preserved response-1.json. Corrected strategy ownership of exploration observations and their Plan observation links; removed an observation identifier from manifest-reference fields. No gold or scoring feedback was supplied."
+    },
+    {
+      "event": 3,
+      "outputs": ["case_answers.json", "protocol-notes.json"],
+      "feedback_type": "evaluation-wrapper structural validation only",
+      "description": "Changed only multi-strategy-plans.refs to case:multi-strategy-plans, source:B and history:B. Preserved verdict, category, controls, numeric result, reason and Plan outputs. Root retained case_answers-initial.json. No gold or scoring feedback was supplied."
+    }
+  ]
+}

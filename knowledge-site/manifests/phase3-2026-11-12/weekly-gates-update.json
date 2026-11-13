@@ -1,0 +1,13 @@
+{
+  "api_status": 401,
+  "auth_files_read": false,
+  "path": "knowledge-site/content/待办清单/一周待办 · 2026-11-09.md",
+  "method": "original-byte snapshot, reread merge, immediate SHA guard, fsync and atomic replace",
+  "unrelated_checkboxes_changed": false,
+  "before_sha256": "76cc38f7fc87dead45c0a64bafda888c550e9c63757a6e09b6200045ef4fb59f",
+  "changed": true,
+  "after_sha256": "751acc0e225a95d97f7d5995ef1019d838c5190eff34a24e6ec54ad975b12026",
+  "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/weekly-gates-76cc38f7fc87dead45c0a64bafda888c550e9c63757a6e09b6200045ef4fb59f.md.original",
+  "attempts": 1,
+  "original_prefix_bytes_preserved": 13656
+}

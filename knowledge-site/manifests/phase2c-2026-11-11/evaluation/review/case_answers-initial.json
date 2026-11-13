@@ -1,0 +1,82 @@
+{
+  "dma-count": {
+    "verdict":"undetermined",
+    "category":"unknown",
+    "refs":["case:dma-count"],
+    "reason":"The supplied 1000 DMA events do not establish DMA as the critical-path bottleneck. Event count lacks transferred bytes, wait duration and a dependency path; events can overlap or be cheap. The actual bottleneck remains undetermined, so the proposition's claim of proof is not warranted. Collect a trace of dependencies, transfer sizes and waits tied to the exact candidate and run before causal attribution.",
+    "controls":["critical_path_trace"],
+    "numeric_result":null
+  },
+  "profile-mismatch": {
+    "verdict":"contradicted",
+    "category":"observed_fact",
+    "refs":["case:profile-mismatch"],
+    "reason":"The profile explicitly belongs to strategy A and A-current, while the request is for strategy B and B-current. Workload equality cannot transfer a measured result between candidates. Obtain a B-current profile with verified strategy, candidate, source/config/build, run and context binding; until then this profile is not B-current measured evidence.",
+    "controls":["identity_rebind"],
+    "numeric_result":null
+  },
+  "tile-dtype-confound": {
+    "verdict":"undetermined",
+    "category":"hypothesis",
+    "refs":["case:tile-dtype-confound"],
+    "reason":"Latency changes alongside both tile geometry and float32-to-bfloat16 precision. Without isolated variants, tile-only causality is an unverified hypothesis; dtype or an interaction may explain the change. Compare old tile/old dtype, new tile/old dtype, old tile/new dtype and the combined variant under matched conditions. Define and test numerical tolerances, accumulation behavior and representative edge inputs for changed dtype before accepting correctness.",
+    "controls":["one_variable_ablation","correctness_tolerances"],
+    "numeric_result":null
+  },
+  "different-history": {
+    "verdict":"undetermined",
+    "category":"historical_claim",
+    "refs":["case:different-history"],
+    "reason":"The slower double-buffering result is a historical observation for float32, shape [32,32], synthetic-H1. Current bfloat16, [4096,4096], synthetic-H2 differs in dtype, scale and hardware, and current_retest is null. Retain the historical failure with its original conditions, but current behavior remains a prediction requiring a condition-matched buffering-on/off retest with correctness and resource checks.",
+    "controls":["condition_matched_retest"],
+    "numeric_result":null
+  },
+  "prediction-not-measurement": {
+    "verdict":"contradicted",
+    "category":"mathematical_prediction",
+    "refs":["case:prediction-not-measurement","calculation:pipeline-hypothetical"],
+    "reason":"The calculate tool gives ideal_pipeline_s=14 from 3+2+(4-1)*max(3,2). These are hypothetical stage costs, with independent transfer/compute resources, uniform stages, legal dependencies and sufficient buffers. Synchronization, startup and contention are omitted. No hardware measurements are supplied, so this is a mathematical prediction, not an actual TPU measurement. Measure the real correctly bound implementation and compare end-to-end timing under the declared conditions before claiming performance.",
+    "controls":["real_measurement_required"],
+    "numeric_result":{"value":14,"unit":"s"}
+  },
+  "multi-strategy-plans": {
+    "verdict":"contradicted",
+    "category":"observed_fact",
+    "refs":["case:multi-strategy-plans","source:A","source:B"],
+    "reason":"The exploration policy explicitly says no route cancelled, and both strategies have legal distinct alternatives. Return A-parent plans for tile reuse and pipeline overlap, plus B-parent plans for layout conversion and tile reuse. A lower synthetic latency does not authorize route cancellation, winner selection or a best-state change. The submitted PlanSet contains these four independently bound plans.",
+    "controls":["retain_both_strategies"],
+    "numeric_result":null
+  },
+  "faster-unknown-cause": {
+    "verdict":"undetermined",
+    "category":"hypothesis",
+    "refs":["case:faster-unknown-cause"],
+    "reason":"The same-context confirmed timing supports an observed decrease from 20 us to 16 us. It does not explain the mechanism: multiple scheduling and layout changes were made, and profile is null. Improved memory bandwidth remains a hypothesis among scheduling, layout, cache and computation effects. Revert or introduce one change at a time with matched repeated timing and bound dependency/bytes/wait evidence to distinguish mechanisms.",
+    "controls":["causal_ablation"],
+    "numeric_result":null
+  },
+  "stale-knowledge": {
+    "verdict":"contradicted",
+    "category":"source_claim",
+    "refs":["case:stale-knowledge"],
+    "reason":"The method pins revision aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa, but the live source is bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb. Silent substitution changes the reproducible input. Retain the pinned excerpt with its exact old revision, mark it stale, state that the old full document is not archived and local_validation is absent. Refreshing the method requires a distinct versioned input and new validation; neither current support nor local effectiveness can be inherited.",
+    "controls":["preserve_revision_and_mark_stale"],
+    "numeric_result":null
+  },
+  "missing-not-zero": {
+    "verdict":"undetermined",
+    "category":"unknown",
+    "refs":["case:missing-not-zero"],
+    "reason":"wait_us is null and unavailable because the parser does not expose wait counters. An execution duration of 20 us supplies no exact wait duration. Preserve null and its reason; zero wait is possible but not established. Obtain an appropriate wait metric or dependency-aware trace before assigning a numeric wait value.",
+    "controls":["collect_missing_metric"],
+    "numeric_result":null
+  },
+  "nested-overlap": {
+    "verdict":"contradicted",
+    "category":"derived_measurement",
+    "refs":["case:nested-overlap"],
+    "reason":"Restrict to device 0, clock c0: [2,5] is contained in [0,10], and [8,12] overlaps [0,10], yielding the connected union [0,12] with duration 12 us. Adding all three durations double-counts nested/overlapping time. The device 1, clock c1 interval is excluded because it is a separate clock domain. This is the union of supplied occupied intervals, not a causal critical path or an aligned multi-device span.",
+    "controls":["interval_union_by_clock"],
+    "numeric_result":{"value":12,"unit":"us"}
+  }
+}

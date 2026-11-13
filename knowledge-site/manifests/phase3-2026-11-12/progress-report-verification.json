@@ -1,0 +1,17 @@
+{
+    "report":  "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+    "report_sha256":  "a0057a8ef842276bcdedf797b0e1dae3c0ee997f3f8867f9d89500f3ec4d269e",
+    "relative_links_checked":  29,
+    "missing_links":  [
+
+                      ],
+    "report_utf8_no_replacement":  true,
+    "weekly_original_prefix_preserved":  true,
+    "weekly_snapshot_bytes":  13656,
+    "weekly_after_sha256":  "751acc0e225a95d97f7d5995ef1019d838c5190eff34a24e6ec54ad975b12026",
+    "session_result_digest_matches_file":  true,
+    "result_artifact_sha_matches_file":  true,
+    "test_log_sha256":  "a66379e1d2a10a65cdbfa9a4bc313f0652543ee87b05d8b83572f8cc90ef1804",
+    "store_writes":  0,
+    "network_scope":  "local note revision GET only"
+}

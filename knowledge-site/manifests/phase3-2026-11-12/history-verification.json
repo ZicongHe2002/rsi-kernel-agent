@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-12",
+  "experiments": 136,
+  "timed_rows_recomputed": 100,
+  "source_hash_checks": 935,
+  "latest_artifact_hash_checks": 1044,
+  "valid_relative_links": 10,
+  "links": [
+    {
+      "document": "phase3-project2-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/project2-inventory.json"
+    },
+    {
+      "document": "phase3-project2-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json"
+    },
+    {
+      "document": "phase3-project2-history.md",
+      "target": "mla-forward-history.md"
+    },
+    {
+      "document": "phase3-project2-history.md",
+      "target": "mla-decode-history.md"
+    },
+    {
+      "document": "phase3-project2-history.md",
+      "target": "optimization-methods.md"
+    },
+    {
+      "document": "phase3-project2-history.md",
+      "target": "failed-experiments.md"
+    },
+    {
+      "document": "mla-forward-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json"
+    },
+    {
+      "document": "mla-decode-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json"
+    },
+    {
+      "document": "optimization-methods.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json"
+    },
+    {
+      "document": "failed-experiments.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json"
+    }
+  ],
+  "real_tpu_executed_by_this_audit": false,
+  "status": "passed"
+}

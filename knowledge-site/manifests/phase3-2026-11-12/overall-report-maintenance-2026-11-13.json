@@ -1,0 +1,62 @@
+{
+  "api_status": 401,
+  "auth_files_read": false,
+  "changes": [
+    {
+      "path": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "before_sha256": "68ab706de85a631866fbc6275da6a3dd4577f695b4e239c717fd1cd613bfc185",
+      "after_sha256": "4bf2a5b8000288319a3d54063f01c10c0c81ac24eda2d9d0639c83fdde5ca400",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-68ab706de85a631866fbc6275da6a3dd4577f695b4e239c717fd1cd613bfc185.md.original"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "before_sha256": "c1120f41acb05d2649896af1ee49fa4007e84b803ad23e95f7338636c154fb42",
+      "after_sha256": "1e0203f42fd6ec7b9e218e90b4a6a40f311e9f1998c1781949572498450ae51a",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-c1120f41acb05d2649896af1ee49fa4007e84b803ad23e95f7338636c154fb42.md.original"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "before_sha256": "74e0e75d391b0cec58dbc85ecd6f2dccc2a7a44bdee99eb254d57fb99ca92f6c",
+      "after_sha256": "220c0199ae89061baf854c16c940dad122736c2c7e5f7484a8cf3cfdeaea4350",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-74e0e75d391b0cec58dbc85ecd6f2dccc2a7a44bdee99eb254d57fb99ca92f6c.md.original"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "before_sha256": "ed9c5892c7b25a1817f4295024d656248f6f5194d25547f50b95b8f0ad4b1676",
+      "after_sha256": "4dde83483af11172e96d97325bfe3a09431b8428d116e75e9c75755e22078511",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-ed9c5892c7b25a1817f4295024d656248f6f5194d25547f50b95b8f0ad4b1676.md.original"
+    },
+    {
+      "path": "knowledge-site/README.md",
+      "before_sha256": "83d3b23f8c8930bd8c79d488b1b85c017f5f48df812906d470589d335c17c384",
+      "after_sha256": "6a70935f7255d49e8e8a1227c6385ac815e892e5cb377d02b334e94a3c77ff32",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-83d3b23f8c8930bd8c79d488b1b85c017f5f48df812906d470589d335c17c384.md.original"
+    },
+    {
+      "path": "knowledge-site/index.md",
+      "before_sha256": "6259fd40a7821d147c9d1e69f5bba530804a7ccaa8604fb56eef5372f8b0cda9",
+      "after_sha256": "9a9bb3201c1b0cabfbd4b2524bc3a9619359370a97785cb6289a4474d96db19c",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-6259fd40a7821d147c9d1e69f5bba530804a7ccaa8604fb56eef5372f8b0cda9.md.original"
+    },
+    {
+      "path": "knowledge-site/content/待办清单/一周待办 · 2026-11-09.md",
+      "before_sha256": "40c828b3bcb262422c33e0064d6556d56255c33b03cacdcf7bdd5b777a8ad8b3",
+      "after_sha256": "0a1b491dd42cbbc48d7d6f7c73d6d1a6e3c0c0503c37273af9ba4e2e4b8184a5",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-40c828b3bcb262422c33e0064d6556d56255c33b03cacdcf7bdd5b777a8ad8b3.md.original"
+    },
+    {
+      "path": "docs/phase3/phase3-optimization-report.md",
+      "before_sha256": "4dfadc3a1d12f506e942eae9c9b987bf608dfb65c55241bdd252536f62866b93",
+      "after_sha256": "20e387649877f13fb2a4b389345e286ac9bba68196f635e56352a6967ce777af",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-4dfadc3a1d12f506e942eae9c9b987bf608dfb65c55241bdd252536f62866b93.md.original"
+    },
+    {
+      "path": "docs/phase3/phase3-real-execution.md",
+      "before_sha256": "fdb6872c972aee7e21c1f3e4f7ffb3fb08ed8fcf7a7bac6aa0d5d721fa13ef4d",
+      "after_sha256": "0d1fb90760936e107803f84784525f4813f02090d6c1dc05218b1980125c6601",
+      "snapshot": "knowledge-site/manifests/phase3-2026-11-12/before/report-status-2026-11-13-fdb6872c972aee7e21c1f3e4f7ffb3fb08ed8fcf7a7bac6aa0d5d721fa13ef4d.md.original"
+    }
+  ],
+  "store_writes": 0,
+  "hardware_execution": false
+}

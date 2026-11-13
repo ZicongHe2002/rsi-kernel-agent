@@ -1,0 +1,149 @@
+{
+  "classification": "Local independent re-verification of archived real TPU evidence",
+  "network_calls": 0,
+  "store_access": "sqlite mode=ro and query_only; no consider/integrate/write",
+  "run_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9",
+  "original_run_id": "mla-run:02c54a047534c109da0fab01ffd7629dcde9fb73dc494f975f27e48cfd8409ac",
+  "original_status": "compile_failed",
+  "recorded_evaluation_confirmed": true,
+  "verified_stage_receipts": [
+    "benchmark",
+    "compile",
+    "correctness",
+    "generate",
+    "profile"
+  ],
+  "unique_stage_artifacts": 49,
+  "unique_stage_artifact_bytes": 509947198,
+  "evidence_records_traversed": 9,
+  "all_stage_artifacts_reachable_from_evaluation": true,
+  "case_results_independently_recomputed_from_npz": [
+    {
+      "id": "decode-small",
+      "input_arrays_verified": 4,
+      "comparisons": [
+        {
+          "name": "attention",
+          "finite": true,
+          "tolerance_violations": 0,
+          "max_abs": 0.00390625,
+          "max_rel": 42.65079365079365,
+          "rms": 0.0002860686035596847
+        },
+        {
+          "name": "cache",
+          "shape": [
+            1,
+            1024,
+            640
+          ],
+          "exact_raw_bytes_equal": true
+        }
+      ]
+    },
+    {
+      "id": "decode-boundary",
+      "input_arrays_verified": 4,
+      "comparisons": [
+        {
+          "name": "attention",
+          "finite": true,
+          "tolerance_violations": 0,
+          "max_abs": 0.001953125,
+          "max_rel": 0.8807947019867549,
+          "rms": 0.00018485763088246714
+        },
+        {
+          "name": "cache",
+          "shape": [
+            3,
+            256,
+            256
+          ],
+          "exact_raw_bytes_equal": true
+        }
+      ]
+    },
+    {
+      "id": "decode-default",
+      "input_arrays_verified": 4,
+      "comparisons": [
+        {
+          "name": "attention",
+          "finite": true,
+          "tolerance_violations": 0,
+          "max_abs": 0.001953125,
+          "max_rel": 8.503355704697986,
+          "rms": 0.0001138156592686947
+        },
+        {
+          "name": "cache",
+          "shape": [
+            8,
+            16384,
+            640
+          ],
+          "exact_raw_bytes_equal": true
+        }
+      ]
+    }
+  ],
+  "benchmark_statistics_recomputed": {
+    "count": 20,
+    "max_ms": 0.2534099994591088,
+    "mean_ms": 0.2223145000243676,
+    "median_ms": 0.2207150005233416,
+    "min_ms": 0.20710999979201006,
+    "outlier_rule": "none",
+    "p25_ms": 0.21346500011532044,
+    "p75_ms": 0.2250975001061306,
+    "standard_deviation_ms": 0.012296239841166168
+  },
+  "benchmark_interval_asia_shanghai": [
+    "2026-11-12T12:33:45.144012+08:00",
+    "2026-11-12T12:33:54.238588+08:00"
+  ],
+  "profile_interval_asia_shanghai": [
+    "2026-11-12T12:34:39.243643+08:00",
+    "2026-11-12T12:34:52.443768+08:00"
+  ],
+  "profile_report_ref": {
+    "digest": "90d0cb64a2116c735c37499e9e7b8e05a831f1732da2833bfda80c106abc9001",
+    "size": 11717
+  },
+  "raw_xplane_refs": [
+    {
+      "digest": "88fef4fdab3a900adf7d3d1a72f97105c5a6a1c9d563b02445d3b8cd676ee45d",
+      "size": 78518
+    }
+  ],
+  "profile_normalization_availability": "available",
+  "profile_groups": [
+    {
+      "kind": "program",
+      "name": "jit_rsi_mla_5728798e51d32c84_0(7559519507731785760)",
+      "count": 20,
+      "median_us": 6.60375,
+      "mean_us": 6.62625,
+      "invalid_samples": 0
+    },
+    {
+      "kind": "kernel",
+      "name": "%mla_decode_contiguous_prepare.1 = (bf16[1,16,640]{2,1,0:T(8,128)(2,1)S(1)}, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)S(1)}, s32[1,16,1024]{2,1,0:T(8,128)S(1)}) custom-call(bf16[1,16,576]{2,1,0:T(8,128)(2,1)} %values_0_.1, bf16[1,576]{1,0:T(2,128)(2,1)} %values_1_.1, s32[1]{0:T(128)S(6)} %copy), custom_call_target=\"tpu_custom_call\", operand_layout_constraints={bf16[1,16,576]{2,1,0}, bf16[1,576]{1,0}, s32[1]{0}}",
+      "count": 20,
+      "median_us": 0.7268749999999999,
+      "mean_us": 0.74925,
+      "invalid_samples": 0
+    },
+    {
+      "kind": "kernel",
+      "name": "%mla_decode_contiguous_attention.1 = (bf16[1,16,512]{2,1,0:T(8,128)(2,1)}, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)}) custom-call(bf16[1,16,640]{2,1,0:T(8,128)(2,1)S(1)} %pallas_call.1, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)S(1)} %pallas_call.2, s32[1,16,1024]{2,1,0:T(8,128)S(1)} %pallas_call.3, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)} %values_2_.1), custom_call_target=\"tpu_custom_call\", operand_layout_constraints={bf16[1,16,640]{2,1,0}, bf16[1,1024,640]{2,1,0}, s32[1,16,1024]{2,1,0}, bf16[1,1024,640]{2,1,0}}",
+      "count": 20,
+      "median_us": 5.03875,
+      "mean_us": 5.07225,
+      "invalid_samples": 0
+    }
+  ],
+  "parser_rerun_on_raw_protobuf": false,
+  "limitation": "Raw XPlane SHA256/size checked; saved parser samples and normalization rechecked. Local TensorFlow parser not rerun. Oracle known-wrong real candidates remain unaccepted."
+}

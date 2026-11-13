@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "task_id": "p3-connectivity-20261112",
+  "database": ".artifacts\\phase3-2026-11-12\\experiments.sqlite3",
+  "artifact_root": ".artifacts\\phase3-2026-11-12\\artifacts",
+  "record_count": 25,
+  "snapshot": {
+    "digest": "a1684287d12e3ff028116d564a1e39ac2e6193acea1a691e97be39c24be91909",
+    "high_watermark": 40,
+    "id": "snapshot:2d3d91416de24a3e93f5d14366fe383a",
+    "record_count": 25,
+    "schema_version": 1,
+    "strategy_counts": {
+      "p3-connectivity-20261112:default:strategy": 9,
+      "p3-connectivity-20261112:isolated:strategy": 9
+    },
+    "task_id": "p3-connectivity-20261112",
+    "version": 1
+  },
+  "probes": [
+    {
+      "name": "default",
+      "workload": "p3-connectivity-20261112:default:workload",
+      "context": "p3-connectivity-20261112:default:context",
+      "strategy": "p3-connectivity-20261112:default:strategy",
+      "plan": "p3-connectivity-20261112:default:plan",
+      "parent": "p3-connectivity-20261112:default:parent",
+      "candidate": "p3-connectivity-20261112:default:candidate",
+      "run": "p3-connectivity-20261112:default:run",
+      "import_decision": "p3-connectivity-20261112:default:import",
+      "type": "connectivity_probe_import.v1",
+      "probe": "default",
+      "source_scope": "exact_remote_probe_source_matches_previously_recorded_source_digest",
+      "remote_operation_id": null,
+      "remote_ledger_available": false,
+      "evidence_ids": [
+        "p3-connectivity-20261112:default:source-evidence",
+        "p3-connectivity-20261112:default:result-evidence"
+      ],
+      "artifacts": {
+        "source": {
+          "digest": "672bb2a7b01a94b2a4b92a07437ec6d8144a6cf31e89e0026a95d61eec980fc0",
+          "size": 1440
+        },
+        "recipe": {
+          "digest": "7a0cc58fb7e89ad4ac0b6f7b5229d8cfb934270e95a607e624dd5ad95f450193",
+          "size": 3208
+        },
+        "configuration": {
+          "digest": "b1e7e6b6ba597d03db4e733479f9d6197bfacee91fbae4976afd854c1e7c2c21",
+          "size": 213
+        },
+        "build": {
+          "digest": "30aac7981329cc0e0a670e96a0d81db67ba6fe8a47a84efdb6dea9a31dfd0fca",
+          "size": 904
+        },
+        "raw_result": {
+          "digest": "76050d7ca8a47a1cd5f600c05e88c6b0d60f84ae9e2dbc6ff06843e90c5547b7",
+          "size": 1381
+        },
+        "raw_environment": {
+          "digest": "52afaa277350d0655a5ca7070ab57db1dbd27009d016866a552d342a7aa0ce09",
+          "size": 659
+        },
+        "fixed_contract": {
+          "digest": "cdcc7876e7423f6cef3c0044fbe4fa9f05fda91f9e5a515435abccce4d10b39f",
+          "size": 299
+        }
+      },
+      "claims": [
+        "real_colab_connectivity",
+        "real_tpu_execution",
+        "known_probe_result_matches"
+      ],
+      "not_claimed": [
+        "durable_remote_recovery",
+        "mla_correctness",
+        "benchmark",
+        "profile_capture",
+        "performance_improvement"
+      ],
+      "limitations": "Digest binds submitted script; no worker ledger or loaded-module attestation was captured.",
+      "origin_files": [
+        "knowledge-site\\manifests\\phase3-2026-11-12\\connectivity-probe.json",
+        "knowledge-site\\manifests\\phase3-2026-11-12\\environment.json",
+        ".artifacts\\phase3-2026-11-12\\probe_runtime.py"
+      ]
+    },
+    {
+      "name": "isolated",
+      "workload": "p3-connectivity-20261112:isolated:workload",
+      "context": "p3-connectivity-20261112:isolated:context",
+      "strategy": "p3-connectivity-20261112:isolated:strategy",
+      "plan": "p3-connectivity-20261112:isolated:plan",
+      "parent": "p3-connectivity-20261112:isolated:parent",
+      "candidate": "p3-connectivity-20261112:isolated:candidate",
+      "run": "p3-connectivity-20261112:isolated:run",
+      "import_decision": "p3-connectivity-20261112:isolated:import",
+      "type": "connectivity_probe_import.v1",
+      "probe": "isolated",
+      "source_scope": "local_probe_orchestration_recipe",
+      "remote_operation_id": null,
+      "remote_ledger_available": false,
+      "evidence_ids": [
+        "p3-connectivity-20261112:isolated:source-evidence",
+        "p3-connectivity-20261112:isolated:result-evidence"
+      ],
+      "artifacts": {
+        "source": {
+          "digest": "a119267680d6f09c555aea8bb3423c9929f7f3cee62109a604743b4b3f4cd084",
+          "size": 2316
+        },
+        "recipe": {
+          "digest": "a119267680d6f09c555aea8bb3423c9929f7f3cee62109a604743b4b3f4cd084",
+          "size": 2316
+        },
+        "configuration": {
+          "digest": "68e92b10ca156147237a8b7a317e9cf6936cdc4ec492e48582ea950a2cbf0740",
+          "size": 125
+        },
+        "build": {
+          "digest": "69a32038877244d0b9feb3dde9b3e03376e72cf922c2ef5bb439421c75cdf542",
+          "size": 1076
+        },
+        "raw_result": {
+          "digest": "261ced346399d6b0835c404a1fefeabbb023640b04d0a474715d750e5aa23eca",
+          "size": 1182
+        },
+        "raw_environment": {
+          "digest": "b064485e96784e1d83501aedc7c76f0df22934dc5b9311b2c54f7aded43324bf",
+          "size": 677
+        },
+        "fixed_contract": {
+          "digest": "cdcc7876e7423f6cef3c0044fbe4fa9f05fda91f9e5a515435abccce4d10b39f",
+          "size": 299
+        },
+        "isolated_setup": {
+          "digest": "63899ca765d8ef899bd03f603b3e7a05d8530db9cde34853c1b8a89bdf67985a",
+          "size": 439
+        },
+        "setup_recipe": {
+          "digest": "390c15bcfd8ec72bdd370e24da63677e373dc3ab39fad2f477d416789ba4eda2",
+          "size": 3340
+        }
+      },
+      "claims": [
+        "real_colab_connectivity",
+        "real_tpu_execution",
+        "known_probe_result_matches"
+      ],
+      "not_claimed": [
+        "durable_remote_recovery",
+        "mla_correctness",
+        "benchmark",
+        "profile_capture",
+        "performance_improvement"
+      ],
+      "limitations": "The isolated result did not record the remote source digest. The recipe embedded the runner bytes available at execution time; the exact prior payload cannot be recovered from this result. Candidate identity here names the saved local recipe, not a verified remote loaded module.",
+      "origin_files": [
+        "knowledge-site\\manifests\\phase3-2026-11-12\\isolated-probe.json",
+        "knowledge-site\\manifests\\phase3-2026-11-12\\environment-isolated.json",
+        ".artifacts\\phase3-2026-11-12\\probe_isolated.py"
+      ]
+    }
+  ],
+  "archive_only": true,
+  "remote_execution_performed_by_this_script": false,
+  "evaluation_bundles_created": 0,
+  "promotion_calls": 0
+}

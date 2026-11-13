@@ -1,0 +1,47 @@
+{
+  "observed_at_utc": "2026-11-13T08:21:07.543549+00:00",
+  "scope": "archived controller-status snapshot, not a new device query",
+  "admission_verification": "runtime3_prerequisites_verified",
+  "controller_revision": 86,
+  "spent": {
+    "executions": 6,
+    "time_s": 10800.0,
+    "tokens": 0
+  },
+  "snapshot": {
+    "digest": "f2caf2e71692a44a7a871ef83645d098c2a4a5ce1af538fc8e8f2a4a1e4d1cbd",
+    "high_watermark": 604,
+    "id": "snapshot:4cec7d3e1c0c43d9a041cb4113c1a697",
+    "record_count": 579,
+    "schema_version": 1,
+    "strategy_counts": {
+      "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd": 186,
+      "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e": 254,
+      "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf": 105
+    },
+    "task_id": "mla-decode-v1",
+    "version": 7
+  },
+  "confirmation_jobs": {
+    "p35-treatment-first": {
+      "state": "queued",
+      "stage": "generate",
+      "run_id": "wf-r:5457d24165692d83527fabe4434f0496"
+    },
+    "p35-control-before": {
+      "state": "blocked",
+      "stage": "compile",
+      "run_id": "wf-r:52bab2381770e5ba2fa1c9bfcb721f3f"
+    },
+    "p35-control-after": {
+      "state": "queued",
+      "stage": "generate",
+      "run_id": "wf-r:8395d67f949b364daf53a8197620bef7"
+    },
+    "p35-treatment-second": {
+      "state": "queued",
+      "stage": "generate",
+      "run_id": "wf-r:396d629c0dee5027ce556961ec76b841"
+    }
+  }
+}

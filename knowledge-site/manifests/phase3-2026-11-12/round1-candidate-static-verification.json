@@ -1,0 +1,200 @@
+{
+  "scope": "Static source and packaged bytes; no candidate imports, JAX/TPU calls, network or SQLite access",
+  "plans": 4,
+  "variants": 5,
+  "parent_source_sha256": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae",
+  "baseline_bundle_file_count": 375,
+  "checked_variants": [
+    {
+      "plan_id": "R1-A-tile",
+      "label": "tile512",
+      "source_ref": {
+        "digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae",
+        "size": 113009
+      },
+      "source_bundle_ref": {
+        "digest": "adf92f4b0c2dac129f6908ba8700c36fbd4143ea09a5774a426f31fc55d5cd13",
+        "size": 67014
+      },
+      "config_ref": {
+        "digest": "4ba337adbe7d23c72c2eb7df8f6973048d166595bc8344ccb7321b775103ba87",
+        "size": 106
+      },
+      "build_ref": {
+        "digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+        "size": 366
+      },
+      "diff_ref": {
+        "digest": "4aaf752f5174cf9f78f1b706edd533256f04854dc5e1ad9d0d02bb15b8433351",
+        "size": 206
+      },
+      "changed_top_level_definitions": [],
+      "changed_bundle_paths": [],
+      "bundle_file_count": 375,
+      "config": {
+        "case_overrides": {
+          "decode-small": {
+            "tiling": {
+              "block_size": 512
+            }
+          }
+        },
+        "kernel": "mla_decode",
+        "schema_version": 1
+      },
+      "oracle_and_runner_build_digests_unchanged": true
+    },
+    {
+      "plan_id": "R1-A-tile",
+      "label": "tile256",
+      "source_ref": {
+        "digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae",
+        "size": 113009
+      },
+      "source_bundle_ref": {
+        "digest": "adf92f4b0c2dac129f6908ba8700c36fbd4143ea09a5774a426f31fc55d5cd13",
+        "size": 67014
+      },
+      "config_ref": {
+        "digest": "4d5513421221960a2d0c3a8f14877765631439604c942ace92ebf1900d302431",
+        "size": 106
+      },
+      "build_ref": {
+        "digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+        "size": 366
+      },
+      "diff_ref": {
+        "digest": "eb6a1492812b6ad317ecaf57b3226361a53d2ea6e1cbfabb716079948a45ce2a",
+        "size": 206
+      },
+      "changed_top_level_definitions": [],
+      "changed_bundle_paths": [],
+      "bundle_file_count": 375,
+      "config": {
+        "case_overrides": {
+          "decode-small": {
+            "tiling": {
+              "block_size": 256
+            }
+          }
+        },
+        "kernel": "mla_decode",
+        "schema_version": 1
+      },
+      "oracle_and_runner_build_digests_unchanged": true
+    },
+    {
+      "plan_id": "R1-A-single",
+      "label": "single-tile",
+      "source_ref": {
+        "digest": "325e0e9098633d625bcac832f9cb043935c7ce205df64a13b53fc84e22133e23",
+        "size": 113372
+      },
+      "source_bundle_ref": {
+        "digest": "e391c6d95ff74f721fc37da39d7c63612e9b5d5ddd09ca0eb3947a90b50a3d67",
+        "size": 67014
+      },
+      "config_ref": {
+        "digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+        "size": 62
+      },
+      "build_ref": {
+        "digest": "14187af65b1d6b592bafdac1958360e218d141dff01af2cbf9a23a57a7a467f8",
+        "size": 366
+      },
+      "diff_ref": {
+        "digest": "6e199856d2a704c59adc9e28ce4773f705e09b30c77505eba1c4b2420c919ea8",
+        "size": 1515
+      },
+      "changed_top_level_definitions": [
+        "build_mla_decode_contiguous"
+      ],
+      "changed_bundle_paths": [
+        "pallas_kernels/kernels/mla_decode.py"
+      ],
+      "bundle_file_count": 375,
+      "config": {
+        "case_overrides": {},
+        "kernel": "mla_decode",
+        "schema_version": 1
+      },
+      "oracle_and_runner_build_digests_unchanged": true
+    },
+    {
+      "plan_id": "R1-B-store",
+      "label": "delayed-store-wait",
+      "source_ref": {
+        "digest": "0579beaa21cbf1119b64585c11334ab7051976a0f4b22400997fa510bd3b3a34",
+        "size": 113009
+      },
+      "source_bundle_ref": {
+        "digest": "1b7e59a51fd2e502c8e12adc0dcd8df89bb8dc673607d10f7d4666e936260a14",
+        "size": 67014
+      },
+      "config_ref": {
+        "digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+        "size": 62
+      },
+      "build_ref": {
+        "digest": "c83a19210cad11dd991d700629b4a83695af0409dd4312f66eb13788f1a829a1",
+        "size": 366
+      },
+      "diff_ref": {
+        "digest": "56c48bd4d59809d75d1814b9975575ea905c4b335e65f8f25554ea6834b30bac",
+        "size": 663
+      },
+      "changed_top_level_definitions": [
+        "build_mla_decode_contiguous"
+      ],
+      "changed_bundle_paths": [
+        "pallas_kernels/kernels/mla_decode.py"
+      ],
+      "bundle_file_count": 375,
+      "config": {
+        "case_overrides": {},
+        "kernel": "mla_decode",
+        "schema_version": 1
+      },
+      "oracle_and_runner_build_digests_unchanged": true
+    },
+    {
+      "plan_id": "R1-B-compact",
+      "label": "compact-new-row",
+      "source_ref": {
+        "digest": "c9e270a86764555f38cbbfe658857d9c48bf9d0e8163a1b7d4edc41959236c0d",
+        "size": 113016
+      },
+      "source_bundle_ref": {
+        "digest": "9911815753b0633f288c8497b604b692f2d9095eae57565150308abb594726f7",
+        "size": 67014
+      },
+      "config_ref": {
+        "digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+        "size": 62
+      },
+      "build_ref": {
+        "digest": "bed93ea23e62342406579fd2d33aa338293df6be9d814abb8006567c43d69231",
+        "size": 366
+      },
+      "diff_ref": {
+        "digest": "0dce58669608857ab97dd6459a0d55baa99f67a770e592259430bbefae8f0842",
+        "size": 1798
+      },
+      "changed_top_level_definitions": [
+        "build_mla_decode_contiguous"
+      ],
+      "changed_bundle_paths": [
+        "pallas_kernels/kernels/mla_decode.py"
+      ],
+      "bundle_file_count": 375,
+      "config": {
+        "case_overrides": {},
+        "kernel": "mla_decode",
+        "schema_version": 1
+      },
+      "oracle_and_runner_build_digests_unchanged": true
+    }
+  ],
+  "runtime_correctness_verified": false,
+  "performance_verified": false
+}

@@ -1,0 +1,3823 @@
+{
+  "analysis": {
+    "code_understanding": [
+      {
+        "dependencies": [
+          "Dot consumes both loads; acc updates have a K dependency; store follows the final update. Output tiles are independent only subject to alias and memory contracts, which are unspecified."
+        ],
+        "edge_cases": [
+          "mask=True does not specify masked-value semantics: K tails need zero fill and output tails require bounds protection. Given dimensions divide tile=16. Test permitted nonmultiple/zero dimensions, tiles exceeding dimensions, noncontiguous inputs, exceptional values and alias constraints. C=A@B requires independence from prior out contents; dtype/reassociation changes need tolerance validation."
+        ],
+        "layout_memory": [
+          "Config and accumulator are float32; logical tiles are square. Strides, physical layout, alignment, memory spaces, compiler temporaries and allocation are absent. Two-buffer live storage is modeled separately, not measured."
+        ],
+        "loops": [
+          "Outer i, inner j, innermost k advance by configured tile=16 for M=32,N=32,K=64. The route-bound model yields 4 output tiles, 4 reduction steps and 16 tile iterations."
+        ],
+        "movement": [
+          "Each k step requests left and right tiles while acc remains live; out is written once after reduction. Left requests repeat across j and right requests across i. Physical cache reuse and transfer bytes are unknown."
+        ],
+        "refs": [
+          "source:A",
+          "config:A",
+          "history:A",
+          "calculation:calc-A-tile"
+        ],
+        "stages": [
+          "The complete pinned synthetic source initializes a float32 accumulator, loads left/right reduction tiles, applies dot and accumulation, then performs a masked output store. The fixture says it is never executed; declared source identity does not prove loaded code."
+        ],
+        "status": "model_interpretation_requires_validation",
+        "strategy_id": "A",
+        "synchronization": [
+          "No explicit async copies or waits appear in pseudo-source; generated synchronization is unknown. A pipeline must wait before consumption and buffer overwrite while preserving accumulation and final-store dependencies."
+        ]
+      },
+      {
+        "dependencies": [
+          "Both loads precede dot, acc is loop-carried, and store follows reduction. Grouping j tiles requires separate accumulators retaining their original K traversal and disjoint output ownership."
+        ],
+        "edge_cases": [
+          "The given shape divides tile=8. New tile/group layouts require tail masks and neutral K fill. Packing must preserve B[k,j] rather than accidentally transpose the mathematical operand. Test supported strides, nonsymmetric inputs, degenerate shapes, exceptional values, accumulation tolerances and alias constraints."
+        ],
+        "layout_memory": [
+          "Float32 is configured for operands and accumulator. Physical strides and dot-preferred format are absent. Packing may add a temporary and conversion; grouping increases accumulator liveness. Compiler allocation and memory capacity are unknown."
+        ],
+        "loops": [
+          "i/j/k advance by configured tile=8 for M=32,N=32,K=64. B's tile model yields 16 output tiles, 8 reduction steps and 128 tile iterations."
+        ],
+        "movement": [
+          "Left and right loads repeat per reduction/output tile; acc remains live through k. Sharing left across j or right across i is possible in the recipe, but physical reuse is unknown."
+        ],
+        "refs": [
+          "source:B",
+          "config:B",
+          "history:B",
+          "calculation:calc-B-tile"
+        ],
+        "stages": [
+          "B independently declares accumulator initialization, two masked operand loads per k step, dot accumulation, and masked store. Similar source structure does not transfer A measurements or prove loaded B code."
+        ],
+        "status": "model_interpretation_requires_validation",
+        "strategy_id": "B",
+        "synchronization": [
+          "No explicit async scheduling or cross-tile barriers appear. A packed tile must be ready before dot and remain valid through consumption; grouping must preserve output ownership."
+        ]
+      }
+    ],
+    "hypotheses": [
+      {
+        "alternatives": [
+          "Cache/compiler reuse may already eliminate the reloads.",
+          "Compute, launch or accumulator dependency may dominate.",
+          "Additional accumulators may spill and slow execution."
+        ],
+        "id": "A-H1",
+        "refs": [
+          "source:A",
+          "profile:A-profile",
+          "calculation:calc-A-tile"
+        ],
+        "strategy_id": "A",
+        "text": "Sharing left tiles across neighboring j outputs may reduce physical reloads or address/loop work if those costs matter."
+      },
+      {
+        "alternatives": [
+          "Loads and compute may share the limiting resource or already overlap.",
+          "Short-reduction fill/drain and synchronization may dominate.",
+          "Buffer pressure may cause spills or reduce concurrency."
+        ],
+        "id": "A-H2",
+        "refs": [
+          "source:A",
+          "profile:A-profile",
+          "calculation:calc-A-pipeline-live",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "strategy_id": "A",
+        "text": "Next-K loads may overlap current dot work and hide exposed latency if the backend supports independent resources and legal asynchronous scheduling."
+      },
+      {
+        "alternatives": [
+          "Current lowering may already use the preferred format.",
+          "Explicit conversion traffic may dominate the small workload.",
+          "Launch, reduction dependencies or repeated loads may instead dominate."
+        ],
+        "id": "B-H1",
+        "refs": [
+          "source:B",
+          "profile:B-profile"
+        ],
+        "strategy_id": "B",
+        "text": "Packing B into a backend-preferred physical format may improve dot access or remove an implicit conversion if current layout is unfavorable."
+      },
+      {
+        "alternatives": [
+          "Cache/compiler may already provide equivalent reuse.",
+          "Accumulator pressure may spill or lower parallelism.",
+          "Total timing may be dominated by unrelated costs."
+        ],
+        "id": "B-H2",
+        "refs": [
+          "source:B",
+          "config:B",
+          "calculation:calc-B-tile"
+        ],
+        "strategy_id": "B",
+        "text": "Grouping neighboring j outputs may share left loads with original dtype and per-output K order."
+      }
+    ],
+    "observations": [
+      {
+        "category": "observed_fact",
+        "id": "A-timing",
+        "predicate": {
+          "path": [
+            "value",
+            "latency_ms"
+          ],
+          "ref": "benchmark:A-benchmark",
+          "value": 10
+        },
+        "refs": [
+          "benchmark:A-benchmark",
+          "evidence:A-timing"
+        ],
+        "strategy_id": "A",
+        "text": "Synthetic A-benchmark records confirmed valid timing 10 ms and correctness passed for A-run/A-candidate/A-parent. This is fixture timing, not real TPU performance or a causal explanation."
+      },
+      {
+        "category": "observed_fact",
+        "id": "B-timing",
+        "predicate": {
+          "path": [
+            "value",
+            "latency_ms"
+          ],
+          "ref": "benchmark:B-benchmark",
+          "value": 12
+        },
+        "refs": [
+          "benchmark:B-benchmark",
+          "evidence:B-timing"
+        ],
+        "strategy_id": "B",
+        "text": "Synthetic B-benchmark independently records confirmed valid timing 12 ms and correctness passed for B-run/B-candidate/B-parent. This neither identifies a bottleneck nor cancels B exploration."
+      },
+      {
+        "category": "historical_claim",
+        "id": "A-history",
+        "predicate": null,
+        "refs": [
+          "history:A",
+          "source:A"
+        ],
+        "strategy_id": "A",
+        "text": "Complete pinned A history contains original Plan, candidate derived from baseline, run, running/succeeded events, timing/trace Evidence, Benchmark/Profile bundles and task/workload/context/baseline dependencies. There is no controlled ablation. The requested next parent is A-parent, the captured reference to A-candidate, not baseline."
+      },
+      {
+        "category": "historical_claim",
+        "id": "B-history",
+        "predicate": null,
+        "refs": [
+          "history:B",
+          "source:B"
+        ],
+        "strategy_id": "B",
+        "text": "Complete pinned B history independently contains original Plan, candidate derived from baseline, run/status events, timing/trace Evidence, Benchmark/Profile bundles and task/workload/context/baseline dependencies. No controlled ablation is recorded. The next parent is B-parent, not baseline or A-parent."
+      },
+      {
+        "category": "derived_measurement",
+        "id": "A-profile",
+        "predicate": null,
+        "refs": [
+          "profile:A-profile",
+          "evidence:A-trace"
+        ],
+        "strategy_id": "A",
+        "text": "Normalized A-profile has one synthetic program interval and union of 10000000000 ps, operation statistics 10000 us from one measured call. This is a union of supplied intervals, not a dependency critical path or repeated-trial distribution. Binding is declared_identity_only. A TPU-like device label does not override synthetic CPU context/provenance."
+      },
+      {
+        "category": "derived_measurement",
+        "id": "B-profile",
+        "predicate": null,
+        "refs": [
+          "profile:B-profile",
+          "evidence:B-trace"
+        ],
+        "strategy_id": "B",
+        "text": "Normalized B-profile independently has one synthetic program interval/union of 12000000000 ps and 12000 us statistics from one call. Its scope is supplied intervals, not critical path. Declared identity does not prove loaded code; the TPU-like label remains synthetic evidence."
+      },
+      {
+        "category": "unknown",
+        "id": "A-missing",
+        "predicate": null,
+        "refs": [
+          "profile:A-profile",
+          "calculation:calc-A-workload-floor"
+        ],
+        "strategy_id": "A",
+        "text": "A lacks waits, DMA data, compiler metadata, LLO, resource metadata, critical path and hardware rates. Missing waits are not zero; no memory/compute bottleneck, compiler allocation, capacity or latency bound can be established."
+      },
+      {
+        "category": "unknown",
+        "id": "B-missing",
+        "predicate": null,
+        "refs": [
+          "profile:B-profile",
+          "calculation:calc-B-workload-floor"
+        ],
+        "strategy_id": "B",
+        "text": "B independently lacks waits, DMA data, compiler metadata, LLO, resource metadata, critical path and hardware rates. Missing metrics cannot establish zero waits, allocation, bandwidth or a compute/memory bottleneck."
+      },
+      {
+        "category": "source_claim",
+        "id": "A-recipe",
+        "predicate": null,
+        "refs": [
+          "source:A",
+          "config:A"
+        ],
+        "strategy_id": "A",
+        "text": "A's recipe repeats left requests across j and right requests across i, with acc retained across k. This motivates reuse and overlap experiments but does not prove physical transfers or their cost."
+      },
+      {
+        "category": "source_claim",
+        "id": "B-recipe",
+        "predicate": null,
+        "refs": [
+          "source:B",
+          "config:B"
+        ],
+        "strategy_id": "B",
+        "text": "B's recipe uses masked load/dot without stated physical layout or packing. Reuse and layout conversion are distinct experimental mechanisms; no layout defect is established."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-tile",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-A-tile",
+          "source:A",
+          "config:A"
+        ],
+        "strategy_id": "A",
+        "text": "A tile model predicts 131072 useful/padded FLOPs, zero padding work here, 32768 tiled read bytes, 4096 write bytes, 36864 total bytes and 20480 unique bytes. Assumptions: full tiles, operands reloaded per reduction/output tile, accumulator retained, output written once. It omits cache reuse, DMA startup, spills and compiler mapping; these are not observed traffic."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "B-tile",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-B-tile",
+          "source:B",
+          "config:B"
+        ],
+        "strategy_id": "B",
+        "text": "B's separately bound tile model predicts 131072 useful/padded FLOPs, zero padding work here, 65536 tiled read bytes, 4096 write bytes, 69632 total bytes and 20480 unique bytes. It assumes per-tile reloads and ignores cross-output cache reuse, spills, DMA startup and compiler scheduling. It does not prove bandwidth limitation."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-floor",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-A-workload-floor",
+          "history:A"
+        ],
+        "strategy_id": "A",
+        "text": "A's compulsory-traffic model predicts 131072 FLOPs, 16384 read bytes, 4096 write bytes and 6.4 FLOP/byte assuming one input read and one output write. All hardware time bounds remain unavailable because rates were not supplied."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "B-floor",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-B-workload-floor",
+          "history:B"
+        ],
+        "strategy_id": "B",
+        "text": "B's independently bound compulsory-traffic model predicts 131072 FLOPs, 16384 read bytes, 4096 write bytes and 6.4 FLOP/byte. No hardware time bound exists without rates; equal workload quantities do not transfer measured profile evidence."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-live",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-A-pipeline-live",
+          "source:A",
+          "config:A"
+        ],
+        "strategy_id": "A",
+        "text": "The hypothetical two-buffer A schedule has modeled peak 5120 bytes: two left tiles, two right tiles and one accumulator, all 16x16 float32 and coexisting. Abstract lifetimes are not measured seconds. Capacity/headroom are unknown; dot temporaries, padding, descriptors, alignment, spills and other resident data are omitted."
+      },
+      {
+        "category": "source_claim",
+        "id": "A-knowledge",
+        "predicate": null,
+        "refs": [
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "strategy_id": "A",
+        "text": "Overlap method revision a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f cites Research/Pipelining.md revision cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55, matching the revision recorded as current. It claims independent loads may overlap computation at extra buffer cost. Status is source_supported, with no local experiments; applicability/performance remain unvalidated."
+      },
+      {
+        "category": "unknown",
+        "id": "A-dma",
+        "predicate": null,
+        "refs": [
+          "case:dma-count"
+        ],
+        "strategy_id": "A",
+        "text": "The separate dma-count scenario has 1000 events and execution_us=50 but missing bytes, waits and critical path. Count cannot prove a critical-path bottleneck. Collect transfer sizes, timestamped dependencies/waits and a controlled transfer/scheduling ablation."
+      },
+      {
+        "category": "observed_fact",
+        "id": "B-mismatch",
+        "predicate": null,
+        "refs": [
+          "case:profile-mismatch"
+        ],
+        "strategy_id": "B",
+        "text": "The mismatch scenario's profile is A-current/A, while requested identity is B-current/B. Same workload cannot repair that binding. Obtain a correctly bound B profile or independently verified metadata correction; do not relabel A evidence as B measurements."
+      },
+      {
+        "category": "unknown",
+        "id": "A-confound",
+        "predicate": null,
+        "refs": [
+          "case:tile-dtype-confound"
+        ],
+        "strategy_id": "A",
+        "text": "Tile and dtype change together in the tile-dtype scenario, with no isolated variants or tolerance test. Tile's independent latency effect and numerical acceptability are unknown. Hold dtype fixed when changing tile, hold tile fixed for dtype, test interaction and validate numerical tolerances."
+      },
+      {
+        "category": "historical_claim",
+        "id": "B-history-transfer",
+        "predicate": null,
+        "refs": [
+          "case:different-history"
+        ],
+        "strategy_id": "B",
+        "text": "The history scenario records double buffering slower on synthetic-H1/float32/32x32. Current synthetic-H2/bfloat16/4096x4096 has no retest. Preserve the historical outcome with conditions; its sign cannot establish current behavior. Retest under current matched conditions with correctness, storage and overlap evidence."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-pipeline",
+        "predicate": null,
+        "refs": [
+          "case:prediction-not-measurement",
+          "calculation:calc-hypothetical-pipeline"
+        ],
+        "strategy_id": "A",
+        "text": "For the separate hypothetical four-item scenario, transfer=3 s and compute=2 s yield ideal duration 14 s versus serial 20 s, from transfer+compute+(stages-1)*max(transfer,compute). The model assumes independent engines, legal dependencies and enough buffers, omitting synchronization/startup, contention and uneven work. It is not a TPU measurement and its seconds are unrelated to route benchmark milliseconds."
+      },
+      {
+        "category": "observed_fact",
+        "id": "B-retain",
+        "predicate": {
+          "path": [
+            "value",
+            "budget_policy"
+          ],
+          "ref": "case:multi-strategy-plans",
+          "value": "no route cancelled"
+        },
+        "refs": [
+          "case:multi-strategy-plans"
+        ],
+        "strategy_id": "B",
+        "text": "The exploration scenario explicitly says no route cancelled and lists multiple alternatives. Its 10/12 us values are separate from route benchmark ms. Both exact parents retain two materially different Plans; no winner or best candidate is selected."
+      },
+      {
+        "category": "observed_fact",
+        "id": "A-faster",
+        "predicate": null,
+        "refs": [
+          "case:faster-unknown-cause"
+        ],
+        "strategy_id": "A",
+        "text": "The faster scenario confirms same-context timing from 20 us to 16 us after multiple scheduling/layout changes. Timing improvement is observed; memory bandwidth improvement is not established. Missing profile and coupled changes require causal ablations plus bytes, waits and dependency evidence."
+      },
+      {
+        "category": "source_claim",
+        "id": "B-stale",
+        "predicate": null,
+        "refs": [
+          "case:stale-knowledge"
+        ],
+        "strategy_id": "B",
+        "text": "The stale-source scenario pins revision aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa but live revision is bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb. Retain its pinned excerpt as stale source material, with old full document unavailable and local validation absent. Silent replacement changes reproducible input; any refresh requires a separately recorded revision. This differs from the supplied overlap method's matching revisions."
+      },
+      {
+        "category": "unknown",
+        "id": "A-null-wait",
+        "predicate": null,
+        "refs": [
+          "case:missing-not-zero"
+        ],
+        "strategy_id": "A",
+        "text": "The missing-wait scenario has wait_us=null because the parser does not expose wait counters. execution_us=20 does not establish waits, including zero. Preserve unavailable and its reason; use a capable trace/counter source."
+      },
+      {
+        "category": "derived_measurement",
+        "id": "A-union",
+        "predicate": null,
+        "refs": [
+          "case:nested-overlap"
+        ],
+        "strategy_id": "A",
+        "text": "For device 0/clock c0, [2,5] is contained in [0,10] and [8,12] overlaps it, so the union is [0,12], occupied time 12 us. Adding durations double-counts occupancy. Device 1/clock c1's [0,7] is excluded without clock alignment. Union occupancy is not critical path."
+      }
+    ],
+    "review": [],
+    "review_enabled": false,
+    "unknowns": [
+      "All inputs are evaluation-only synthetic artifacts. Source recipes, benchmark observations, separate scenarios and mathematical models have different scopes and prove no real TPU performance.",
+      "Memory snapshot is complete; combined atomic snapshot and Knowledge corpus snapshot consistency are false. Matching recorded revisions do not establish global simultaneity.",
+      "Profiles bind declared identities only; source/config/build digests do not independently prove loaded code or compiler lowering.",
+      "Neither route has measured critical paths, waits, bytes, compiler estimates, resource allocations, hardware rates or repeated-trial distributions sufficient to identify the bottleneck.",
+      "Exact predicates verify supplied field values, not explanations, causality or future performance.",
+      "The mixed-strategy compute_memory request was rejected without a result. Only successful independently bound calculations are used; shared workload dimensions never authorize borrowing another route's measurement.",
+      "The standalone nested-interval union is derived geometrically from supplied intervals; no allowlisted tool accepts that interval set. Its occupancy result is not a dependency critical path.",
+      "All four Plans remain proposals requiring correctness and performance experiments. No winner is selected, best is unchanged, and no implementation is modified."
+    ]
+  },
+  "calculations": {
+    "calc-A-pipeline-live": {
+      "assumptions": [
+        "Buffer lifetimes are half-open logical schedule intervals, not elapsed clock measurements",
+        "Listed buffers occupy one shared memory resource and copies coexist throughout each lifetime",
+        "Distinct buffers do not alias; an empty list means explicitly no modeled buffers",
+        "A hypothetical two-buffer pipeline retains two 16x16 float32 left tiles, two right tiles, and one accumulator simultaneously.",
+        "Lifetime coordinates 0 and 1 are abstract schedule positions, not measured seconds.",
+        "The estimate excludes padding, descriptors, layout conversions, dot temporaries, compiler allocation, and unrelated resident storage."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A",
+        "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+      ],
+      "formula": "size_i=elements_i*dtype_bytes_i*copies_i; live(t)=sum(size_i for start_i<=t<end_i); peak=max(live(t)); pressure=peak/capacity",
+      "input_units": {
+        "buffers[].copies": "count",
+        "buffers[].dtype_bytes": "byte/element",
+        "buffers[].elements": "elements",
+        "buffers[].end": "schedule_step",
+        "buffers[].name": "text",
+        "buffers[].start": "schedule_step",
+        "capacity_bytes": "byte",
+        "hardware_basis": "text"
+      },
+      "inputs": {
+        "buffers": [
+          {
+            "copies": 2,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 1,
+            "name": "left_ping_pong",
+            "start": 0
+          },
+          {
+            "copies": 2,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 1,
+            "name": "right_ping_pong",
+            "start": 0
+          },
+          {
+            "copies": 1,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 1,
+            "name": "accumulator",
+            "start": 0
+          }
+        ]
+      },
+      "model": "live_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Compiler temporaries and spills",
+        "Allocation alignment and fragmentation",
+        "Hidden runtime reservations",
+        "Unlisted memories and buffers"
+      ],
+      "output_units": {
+        "capacity_fraction": "ratio",
+        "headroom_bytes": "byte",
+        "peak_bytes": "byte",
+        "peak_step": "schedule_step"
+      },
+      "outputs": {
+        "capacity_fraction": null,
+        "headroom_bytes": null,
+        "peak_bytes": 5120,
+        "peak_step": 0
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {
+        "capacity_fraction": "No memory capacity supplied",
+        "headroom_bytes": "No memory capacity supplied"
+      }
+    },
+    "calc-A-tile": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "The source's scalar tile argument selects equal M,N,K tile extents.",
+        "All modeled operands and accumulator storage use four bytes per element.",
+        "This is logical tile storage/work, not compiler allocation, spill data, or hardware measurement."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A",
+        "history:A"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 16,
+        "tile_m": 16,
+        "tile_n": 16
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 16,
+        "b_tile_reuse": 16,
+        "output_tiles": 4,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 4,
+        "tile_iterations": 16,
+        "tiled_read_bytes": 32768,
+        "tiled_total_bytes": 36864,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {}
+    },
+    "calc-A-workload-floor": {
+      "assumptions": [
+        "Dense matrix multiplication with one multiply and one add per reduction element",
+        "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+        "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+        "Route A workload is M=32,N=32,K=64 float32 with C=A@B.",
+        "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+        "This route-bound correction replaces the rejected mixed-strategy request; no output from that rejected request is used.",
+        "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "history:A",
+        "source:A"
+      ],
+      "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+      "input_units": {
+        "bandwidth_bytes_s": "byte/s",
+        "compute_rate_flops_s": "FLOP/s",
+        "dtype_bytes": "byte/element",
+        "hardware_basis": "text",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Cache and hierarchy traffic",
+        "Launch and synchronization",
+        "Layout conversions",
+        "Non-matmul operations",
+        "Utilization and contention"
+      ],
+      "output_units": {
+        "arithmetic_intensity": "FLOP/byte",
+        "compute_bound_s": "s",
+        "memory_bound_s": "s",
+        "read_bytes": "byte",
+        "resource_lower_bound_s": "s",
+        "total_bytes": "byte",
+        "work_flops": "FLOP",
+        "write_bytes": "byte"
+      },
+      "outputs": {
+        "arithmetic_intensity": 6.4,
+        "compute_bound_s": null,
+        "memory_bound_s": null,
+        "read_bytes": 16384,
+        "resource_lower_bound_s": null,
+        "total_bytes": 20480,
+        "work_flops": 131072,
+        "write_bytes": 4096
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {
+        "compute_bound_s": "No compute throughput supplied",
+        "memory_bound_s": "No memory bandwidth supplied",
+        "resource_lower_bound_s": "No hardware rate supplied"
+      }
+    },
+    "calc-B-tile": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "The source's scalar tile argument selects equal M,N,K tile extents.",
+        "All modeled operands and accumulator storage use four bytes per element.",
+        "This is logical tile storage/work, not compiler allocation, spill data, or hardware measurement."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:B",
+        "config:B",
+        "history:B"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 8,
+        "tile_m": 8,
+        "tile_n": 8
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 8,
+        "b_tile_reuse": 8,
+        "output_tiles": 16,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 8,
+        "tile_iterations": 128,
+        "tiled_read_bytes": 65536,
+        "tiled_total_bytes": 69632,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "B",
+      "unavailable": {}
+    },
+    "calc-B-workload-floor": {
+      "assumptions": [
+        "Dense matrix multiplication with one multiply and one add per reduction element",
+        "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+        "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+        "Route B workload is M=32,N=32,K=64 float32 with C=A@B.",
+        "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+        "This is a route B model, independently bound to route B evidence.",
+        "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "history:B",
+        "source:B"
+      ],
+      "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+      "input_units": {
+        "bandwidth_bytes_s": "byte/s",
+        "compute_rate_flops_s": "FLOP/s",
+        "dtype_bytes": "byte/element",
+        "hardware_basis": "text",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Cache and hierarchy traffic",
+        "Launch and synchronization",
+        "Layout conversions",
+        "Non-matmul operations",
+        "Utilization and contention"
+      ],
+      "output_units": {
+        "arithmetic_intensity": "FLOP/byte",
+        "compute_bound_s": "s",
+        "memory_bound_s": "s",
+        "read_bytes": "byte",
+        "resource_lower_bound_s": "s",
+        "total_bytes": "byte",
+        "work_flops": "FLOP",
+        "write_bytes": "byte"
+      },
+      "outputs": {
+        "arithmetic_intensity": 6.4,
+        "compute_bound_s": null,
+        "memory_bound_s": null,
+        "read_bytes": 16384,
+        "resource_lower_bound_s": null,
+        "total_bytes": 20480,
+        "work_flops": 131072,
+        "write_bytes": 4096
+      },
+      "schema_version": 1,
+      "strategy_id": "B",
+      "unavailable": {
+        "compute_bound_s": "No compute throughput supplied",
+        "memory_bound_s": "No memory bandwidth supplied",
+        "resource_lower_bound_s": "No hardware rate supplied"
+      }
+    },
+    "calc-hypothetical-pipeline": {
+      "assumptions": [
+        "stages counts repeated work items through one transfer engine and one compute engine",
+        "Transfer and compute use independent resources, with sufficient buffers and legal dependencies",
+        "Identical per-item durations; first transfer fills and final compute drains the pipeline",
+        "These are explicitly hypothetical stage costs in seconds from the evaluation scenario, not the route benchmarks.",
+        "An independent transfer engine and compute engine overlap perfectly after fill, with fixed costs and no synchronization, contention, or extra buffer-management cost.",
+        "Dependencies allow transfer of the next tile while computing the current tile; actual routes require validation before such an assumption is accepted."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "case:prediction-not-measurement"
+      ],
+      "formula": "serial=N*(transfer+compute); ideal=transfer+compute+(N-1)*max(transfer,compute); speedup=serial/ideal",
+      "input_units": {
+        "compute_s": "s",
+        "stages": "count",
+        "transfer_s": "s"
+      },
+      "inputs": {
+        "compute_s": 2,
+        "stages": 4,
+        "transfer_s": 3
+      },
+      "model": "pipeline",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Synchronization and DMA startup",
+        "Bandwidth contention",
+        "Buffer allocation",
+        "Uneven work items",
+        "Additional transfer directions and pipeline engines"
+      ],
+      "output_units": {
+        "ideal_pipeline_s": "s",
+        "ideal_speedup": "ratio",
+        "saved_s": "s",
+        "serial_s": "s"
+      },
+      "outputs": {
+        "ideal_pipeline_s": 14,
+        "ideal_speedup": 1.4285714285714286,
+        "saved_s": 6,
+        "serial_s": 20
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {}
+    }
+  },
+  "configuration": "tools",
+  "exchanges": [
+    {
+      "tool_calls": [
+        {
+          "arguments": {
+            "profile_id": "A-profile",
+            "strategy_id": "A"
+          },
+          "id": "inspect-A-profile",
+          "name": "profile"
+        },
+        {
+          "arguments": {
+            "profile_id": "B-profile",
+            "strategy_id": "B"
+          },
+          "id": "inspect-B-profile",
+          "name": "profile"
+        },
+        {
+          "arguments": {
+            "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+          },
+          "id": "inspect-overlap-method",
+          "name": "knowledge"
+        }
+      ]
+    },
+    {
+      "tool_calls": [
+        {
+          "arguments": {
+            "assumptions": [
+              "The synthetic workload has M=32,N=32,K=64 and float32 operands/output.",
+              "Count dense conventional matrix multiplication with two operations per multiply-accumulate.",
+              "Minimum traffic is a model floor assuming each input is loaded once and output written once; it is not observed device traffic."
+            ],
+            "evidence_refs": [
+              "history:A",
+              "history:B",
+              "source:A",
+              "source:B"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32
+            },
+            "model": "compute_memory"
+          },
+          "id": "calc-workload-floor",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "The source's scalar tile argument selects equal M,N,K tile extents.",
+              "All modeled operands and accumulator storage use four bytes per element.",
+              "This is logical tile storage/work, not compiler allocation, spill data, or hardware measurement."
+            ],
+            "evidence_refs": [
+              "source:A",
+              "config:A",
+              "history:A"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32,
+              "tile_k": 16,
+              "tile_m": 16,
+              "tile_n": 16
+            },
+            "model": "tile"
+          },
+          "id": "calc-A-tile",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "The source's scalar tile argument selects equal M,N,K tile extents.",
+              "All modeled operands and accumulator storage use four bytes per element.",
+              "This is logical tile storage/work, not compiler allocation, spill data, or hardware measurement."
+            ],
+            "evidence_refs": [
+              "source:B",
+              "config:B",
+              "history:B"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32,
+              "tile_k": 8,
+              "tile_m": 8,
+              "tile_n": 8
+            },
+            "model": "tile"
+          },
+          "id": "calc-B-tile",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "A hypothetical two-buffer pipeline retains two 16x16 float32 left tiles, two right tiles, and one accumulator simultaneously.",
+              "Lifetime coordinates 0 and 1 are abstract schedule positions, not measured seconds.",
+              "The estimate excludes padding, descriptors, layout conversions, dot temporaries, compiler allocation, and unrelated resident storage."
+            ],
+            "evidence_refs": [
+              "source:A",
+              "config:A",
+              "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+            ],
+            "inputs": {
+              "buffers": [
+                {
+                  "copies": 2,
+                  "dtype_bytes": 4,
+                  "elements": 256,
+                  "end": 1,
+                  "name": "left_ping_pong",
+                  "start": 0
+                },
+                {
+                  "copies": 2,
+                  "dtype_bytes": 4,
+                  "elements": 256,
+                  "end": 1,
+                  "name": "right_ping_pong",
+                  "start": 0
+                },
+                {
+                  "copies": 1,
+                  "dtype_bytes": 4,
+                  "elements": 256,
+                  "end": 1,
+                  "name": "accumulator",
+                  "start": 0
+                }
+              ]
+            },
+            "model": "live_memory"
+          },
+          "id": "calc-A-pipeline-live",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "These are explicitly hypothetical stage costs in seconds from the evaluation scenario, not the route benchmarks.",
+              "An independent transfer engine and compute engine overlap perfectly after fill, with fixed costs and no synchronization, contention, or extra buffer-management cost.",
+              "Dependencies allow transfer of the next tile while computing the current tile; actual routes require validation before such an assumption is accepted."
+            ],
+            "evidence_refs": [
+              "case:prediction-not-measurement"
+            ],
+            "inputs": {
+              "compute_s": 2,
+              "stages": 4,
+              "transfer_s": 3
+            },
+            "model": "pipeline"
+          },
+          "id": "calc-hypothetical-pipeline",
+          "name": "calculate"
+        }
+      ]
+    },
+    {
+      "tool_calls": [
+        {
+          "arguments": {
+            "strategy_id": "A"
+          },
+          "id": "inspect-A-source",
+          "name": "source"
+        },
+        {
+          "arguments": {
+            "strategy_id": "B"
+          },
+          "id": "inspect-B-source",
+          "name": "source"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "Route A workload is M=32,N=32,K=64 float32 with C=A@B.",
+              "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+              "This route-bound correction replaces the rejected mixed-strategy request; no output from that rejected request is used.",
+              "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+            ],
+            "evidence_refs": [
+              "history:A",
+              "source:A"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32
+            },
+            "model": "compute_memory"
+          },
+          "id": "calc-A-workload-floor",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "Route B workload is M=32,N=32,K=64 float32 with C=A@B.",
+              "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+              "This is a route B model, independently bound to route B evidence.",
+              "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+            ],
+            "evidence_refs": [
+              "history:B",
+              "source:B"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32
+            },
+            "model": "compute_memory"
+          },
+          "id": "calc-B-workload-floor",
+          "name": "calculate"
+        }
+      ]
+    },
+    {
+      "final": {
+        "code_understanding": [
+          {
+            "dependencies": [
+              "Dot consumes both loads; acc updates have a K dependency; store follows the final update. Output tiles are independent only subject to alias and memory contracts, which are unspecified."
+            ],
+            "edge_cases": [
+              "mask=True does not specify masked-value semantics: K tails need zero fill and output tails require bounds protection. Given dimensions divide tile=16. Test permitted nonmultiple/zero dimensions, tiles exceeding dimensions, noncontiguous inputs, exceptional values and alias constraints. C=A@B requires independence from prior out contents; dtype/reassociation changes need tolerance validation."
+            ],
+            "layout_memory": [
+              "Config and accumulator are float32; logical tiles are square. Strides, physical layout, alignment, memory spaces, compiler temporaries and allocation are absent. Two-buffer live storage is modeled separately, not measured."
+            ],
+            "loops": [
+              "Outer i, inner j, innermost k advance by configured tile=16 for M=32,N=32,K=64. The route-bound model yields 4 output tiles, 4 reduction steps and 16 tile iterations."
+            ],
+            "movement": [
+              "Each k step requests left and right tiles while acc remains live; out is written once after reduction. Left requests repeat across j and right requests across i. Physical cache reuse and transfer bytes are unknown."
+            ],
+            "refs": [
+              "source:A",
+              "config:A",
+              "history:A",
+              "calculation:calc-A-tile"
+            ],
+            "stages": [
+              "The complete pinned synthetic source initializes a float32 accumulator, loads left/right reduction tiles, applies dot and accumulation, then performs a masked output store. The fixture says it is never executed; declared source identity does not prove loaded code."
+            ],
+            "strategy_id": "A",
+            "synchronization": [
+              "No explicit async copies or waits appear in pseudo-source; generated synchronization is unknown. A pipeline must wait before consumption and buffer overwrite while preserving accumulation and final-store dependencies."
+            ]
+          },
+          {
+            "dependencies": [
+              "Both loads precede dot, acc is loop-carried, and store follows reduction. Grouping j tiles requires separate accumulators retaining their original K traversal and disjoint output ownership."
+            ],
+            "edge_cases": [
+              "The given shape divides tile=8. New tile/group layouts require tail masks and neutral K fill. Packing must preserve B[k,j] rather than accidentally transpose the mathematical operand. Test supported strides, nonsymmetric inputs, degenerate shapes, exceptional values, accumulation tolerances and alias constraints."
+            ],
+            "layout_memory": [
+              "Float32 is configured for operands and accumulator. Physical strides and dot-preferred format are absent. Packing may add a temporary and conversion; grouping increases accumulator liveness. Compiler allocation and memory capacity are unknown."
+            ],
+            "loops": [
+              "i/j/k advance by configured tile=8 for M=32,N=32,K=64. B's tile model yields 16 output tiles, 8 reduction steps and 128 tile iterations."
+            ],
+            "movement": [
+              "Left and right loads repeat per reduction/output tile; acc remains live through k. Sharing left across j or right across i is possible in the recipe, but physical reuse is unknown."
+            ],
+            "refs": [
+              "source:B",
+              "config:B",
+              "history:B",
+              "calculation:calc-B-tile"
+            ],
+            "stages": [
+              "B independently declares accumulator initialization, two masked operand loads per k step, dot accumulation, and masked store. Similar source structure does not transfer A measurements or prove loaded B code."
+            ],
+            "strategy_id": "B",
+            "synchronization": [
+              "No explicit async scheduling or cross-tile barriers appear. A packed tile must be ready before dot and remain valid through consumption; grouping must preserve output ownership."
+            ]
+          }
+        ],
+        "hypotheses": [
+          {
+            "alternatives": [
+              "Cache/compiler reuse may already eliminate the reloads.",
+              "Compute, launch or accumulator dependency may dominate.",
+              "Additional accumulators may spill and slow execution."
+            ],
+            "id": "A-H1",
+            "refs": [
+              "source:A",
+              "profile:A-profile",
+              "calculation:calc-A-tile"
+            ],
+            "strategy_id": "A",
+            "text": "Sharing left tiles across neighboring j outputs may reduce physical reloads or address/loop work if those costs matter."
+          },
+          {
+            "alternatives": [
+              "Loads and compute may share the limiting resource or already overlap.",
+              "Short-reduction fill/drain and synchronization may dominate.",
+              "Buffer pressure may cause spills or reduce concurrency."
+            ],
+            "id": "A-H2",
+            "refs": [
+              "source:A",
+              "profile:A-profile",
+              "calculation:calc-A-pipeline-live",
+              "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+            ],
+            "strategy_id": "A",
+            "text": "Next-K loads may overlap current dot work and hide exposed latency if the backend supports independent resources and legal asynchronous scheduling."
+          },
+          {
+            "alternatives": [
+              "Current lowering may already use the preferred format.",
+              "Explicit conversion traffic may dominate the small workload.",
+              "Launch, reduction dependencies or repeated loads may instead dominate."
+            ],
+            "id": "B-H1",
+            "refs": [
+              "source:B",
+              "profile:B-profile"
+            ],
+            "strategy_id": "B",
+            "text": "Packing B into a backend-preferred physical format may improve dot access or remove an implicit conversion if current layout is unfavorable."
+          },
+          {
+            "alternatives": [
+              "Cache/compiler may already provide equivalent reuse.",
+              "Accumulator pressure may spill or lower parallelism.",
+              "Total timing may be dominated by unrelated costs."
+            ],
+            "id": "B-H2",
+            "refs": [
+              "source:B",
+              "config:B",
+              "calculation:calc-B-tile"
+            ],
+            "strategy_id": "B",
+            "text": "Grouping neighboring j outputs may share left loads with original dtype and per-output K order."
+          }
+        ],
+        "observations": [
+          {
+            "category": "observed_fact",
+            "id": "A-timing",
+            "predicate": {
+              "path": [
+                "value",
+                "latency_ms"
+              ],
+              "ref": "benchmark:A-benchmark",
+              "value": 10
+            },
+            "refs": [
+              "benchmark:A-benchmark",
+              "evidence:A-timing"
+            ],
+            "strategy_id": "A",
+            "text": "Synthetic A-benchmark records confirmed valid timing 10 ms and correctness passed for A-run/A-candidate/A-parent. This is fixture timing, not real TPU performance or a causal explanation."
+          },
+          {
+            "category": "observed_fact",
+            "id": "B-timing",
+            "predicate": {
+              "path": [
+                "value",
+                "latency_ms"
+              ],
+              "ref": "benchmark:B-benchmark",
+              "value": 12
+            },
+            "refs": [
+              "benchmark:B-benchmark",
+              "evidence:B-timing"
+            ],
+            "strategy_id": "B",
+            "text": "Synthetic B-benchmark independently records confirmed valid timing 12 ms and correctness passed for B-run/B-candidate/B-parent. This neither identifies a bottleneck nor cancels B exploration."
+          },
+          {
+            "category": "historical_claim",
+            "id": "A-history",
+            "predicate": null,
+            "refs": [
+              "history:A",
+              "source:A"
+            ],
+            "strategy_id": "A",
+            "text": "Complete pinned A history contains original Plan, candidate derived from baseline, run, running/succeeded events, timing/trace Evidence, Benchmark/Profile bundles and task/workload/context/baseline dependencies. There is no controlled ablation. The requested next parent is A-parent, the captured reference to A-candidate, not baseline."
+          },
+          {
+            "category": "historical_claim",
+            "id": "B-history",
+            "predicate": null,
+            "refs": [
+              "history:B",
+              "source:B"
+            ],
+            "strategy_id": "B",
+            "text": "Complete pinned B history independently contains original Plan, candidate derived from baseline, run/status events, timing/trace Evidence, Benchmark/Profile bundles and task/workload/context/baseline dependencies. No controlled ablation is recorded. The next parent is B-parent, not baseline or A-parent."
+          },
+          {
+            "category": "derived_measurement",
+            "id": "A-profile",
+            "predicate": null,
+            "refs": [
+              "profile:A-profile",
+              "evidence:A-trace"
+            ],
+            "strategy_id": "A",
+            "text": "Normalized A-profile has one synthetic program interval and union of 10000000000 ps, operation statistics 10000 us from one measured call. This is a union of supplied intervals, not a dependency critical path or repeated-trial distribution. Binding is declared_identity_only. A TPU-like device label does not override synthetic CPU context/provenance."
+          },
+          {
+            "category": "derived_measurement",
+            "id": "B-profile",
+            "predicate": null,
+            "refs": [
+              "profile:B-profile",
+              "evidence:B-trace"
+            ],
+            "strategy_id": "B",
+            "text": "Normalized B-profile independently has one synthetic program interval/union of 12000000000 ps and 12000 us statistics from one call. Its scope is supplied intervals, not critical path. Declared identity does not prove loaded code; the TPU-like label remains synthetic evidence."
+          },
+          {
+            "category": "unknown",
+            "id": "A-missing",
+            "predicate": null,
+            "refs": [
+              "profile:A-profile",
+              "calculation:calc-A-workload-floor"
+            ],
+            "strategy_id": "A",
+            "text": "A lacks waits, DMA data, compiler metadata, LLO, resource metadata, critical path and hardware rates. Missing waits are not zero; no memory/compute bottleneck, compiler allocation, capacity or latency bound can be established."
+          },
+          {
+            "category": "unknown",
+            "id": "B-missing",
+            "predicate": null,
+            "refs": [
+              "profile:B-profile",
+              "calculation:calc-B-workload-floor"
+            ],
+            "strategy_id": "B",
+            "text": "B independently lacks waits, DMA data, compiler metadata, LLO, resource metadata, critical path and hardware rates. Missing metrics cannot establish zero waits, allocation, bandwidth or a compute/memory bottleneck."
+          },
+          {
+            "category": "source_claim",
+            "id": "A-recipe",
+            "predicate": null,
+            "refs": [
+              "source:A",
+              "config:A"
+            ],
+            "strategy_id": "A",
+            "text": "A's recipe repeats left requests across j and right requests across i, with acc retained across k. This motivates reuse and overlap experiments but does not prove physical transfers or their cost."
+          },
+          {
+            "category": "source_claim",
+            "id": "B-recipe",
+            "predicate": null,
+            "refs": [
+              "source:B",
+              "config:B"
+            ],
+            "strategy_id": "B",
+            "text": "B's recipe uses masked load/dot without stated physical layout or packing. Reuse and layout conversion are distinct experimental mechanisms; no layout defect is established."
+          },
+          {
+            "category": "mathematical_prediction",
+            "id": "A-tile",
+            "predicate": null,
+            "refs": [
+              "calculation:calc-A-tile",
+              "source:A",
+              "config:A"
+            ],
+            "strategy_id": "A",
+            "text": "A tile model predicts 131072 useful/padded FLOPs, zero padding work here, 32768 tiled read bytes, 4096 write bytes, 36864 total bytes and 20480 unique bytes. Assumptions: full tiles, operands reloaded per reduction/output tile, accumulator retained, output written once. It omits cache reuse, DMA startup, spills and compiler mapping; these are not observed traffic."
+          },
+          {
+            "category": "mathematical_prediction",
+            "id": "B-tile",
+            "predicate": null,
+            "refs": [
+              "calculation:calc-B-tile",
+              "source:B",
+              "config:B"
+            ],
+            "strategy_id": "B",
+            "text": "B's separately bound tile model predicts 131072 useful/padded FLOPs, zero padding work here, 65536 tiled read bytes, 4096 write bytes, 69632 total bytes and 20480 unique bytes. It assumes per-tile reloads and ignores cross-output cache reuse, spills, DMA startup and compiler scheduling. It does not prove bandwidth limitation."
+          },
+          {
+            "category": "mathematical_prediction",
+            "id": "A-floor",
+            "predicate": null,
+            "refs": [
+              "calculation:calc-A-workload-floor",
+              "history:A"
+            ],
+            "strategy_id": "A",
+            "text": "A's compulsory-traffic model predicts 131072 FLOPs, 16384 read bytes, 4096 write bytes and 6.4 FLOP/byte assuming one input read and one output write. All hardware time bounds remain unavailable because rates were not supplied."
+          },
+          {
+            "category": "mathematical_prediction",
+            "id": "B-floor",
+            "predicate": null,
+            "refs": [
+              "calculation:calc-B-workload-floor",
+              "history:B"
+            ],
+            "strategy_id": "B",
+            "text": "B's independently bound compulsory-traffic model predicts 131072 FLOPs, 16384 read bytes, 4096 write bytes and 6.4 FLOP/byte. No hardware time bound exists without rates; equal workload quantities do not transfer measured profile evidence."
+          },
+          {
+            "category": "mathematical_prediction",
+            "id": "A-live",
+            "predicate": null,
+            "refs": [
+              "calculation:calc-A-pipeline-live",
+              "source:A",
+              "config:A"
+            ],
+            "strategy_id": "A",
+            "text": "The hypothetical two-buffer A schedule has modeled peak 5120 bytes: two left tiles, two right tiles and one accumulator, all 16x16 float32 and coexisting. Abstract lifetimes are not measured seconds. Capacity/headroom are unknown; dot temporaries, padding, descriptors, alignment, spills and other resident data are omitted."
+          },
+          {
+            "category": "source_claim",
+            "id": "A-knowledge",
+            "predicate": null,
+            "refs": [
+              "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+            ],
+            "strategy_id": "A",
+            "text": "Overlap method revision a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f cites Research/Pipelining.md revision cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55, matching the revision recorded as current. It claims independent loads may overlap computation at extra buffer cost. Status is source_supported, with no local experiments; applicability/performance remain unvalidated."
+          },
+          {
+            "category": "unknown",
+            "id": "A-dma",
+            "predicate": null,
+            "refs": [
+              "case:dma-count"
+            ],
+            "strategy_id": "A",
+            "text": "The separate dma-count scenario has 1000 events and execution_us=50 but missing bytes, waits and critical path. Count cannot prove a critical-path bottleneck. Collect transfer sizes, timestamped dependencies/waits and a controlled transfer/scheduling ablation."
+          },
+          {
+            "category": "observed_fact",
+            "id": "B-mismatch",
+            "predicate": null,
+            "refs": [
+              "case:profile-mismatch"
+            ],
+            "strategy_id": "B",
+            "text": "The mismatch scenario's profile is A-current/A, while requested identity is B-current/B. Same workload cannot repair that binding. Obtain a correctly bound B profile or independently verified metadata correction; do not relabel A evidence as B measurements."
+          },
+          {
+            "category": "unknown",
+            "id": "A-confound",
+            "predicate": null,
+            "refs": [
+              "case:tile-dtype-confound"
+            ],
+            "strategy_id": "A",
+            "text": "Tile and dtype change together in the tile-dtype scenario, with no isolated variants or tolerance test. Tile's independent latency effect and numerical acceptability are unknown. Hold dtype fixed when changing tile, hold tile fixed for dtype, test interaction and validate numerical tolerances."
+          },
+          {
+            "category": "historical_claim",
+            "id": "B-history-transfer",
+            "predicate": null,
+            "refs": [
+              "case:different-history"
+            ],
+            "strategy_id": "B",
+            "text": "The history scenario records double buffering slower on synthetic-H1/float32/32x32. Current synthetic-H2/bfloat16/4096x4096 has no retest. Preserve the historical outcome with conditions; its sign cannot establish current behavior. Retest under current matched conditions with correctness, storage and overlap evidence."
+          },
+          {
+            "category": "mathematical_prediction",
+            "id": "A-pipeline",
+            "predicate": null,
+            "refs": [
+              "case:prediction-not-measurement",
+              "calculation:calc-hypothetical-pipeline"
+            ],
+            "strategy_id": "A",
+            "text": "For the separate hypothetical four-item scenario, transfer=3 s and compute=2 s yield ideal duration 14 s versus serial 20 s, from transfer+compute+(stages-1)*max(transfer,compute). The model assumes independent engines, legal dependencies and enough buffers, omitting synchronization/startup, contention and uneven work. It is not a TPU measurement and its seconds are unrelated to route benchmark milliseconds."
+          },
+          {
+            "category": "observed_fact",
+            "id": "B-retain",
+            "predicate": {
+              "path": [
+                "value",
+                "budget_policy"
+              ],
+              "ref": "case:multi-strategy-plans",
+              "value": "no route cancelled"
+            },
+            "refs": [
+              "case:multi-strategy-plans"
+            ],
+            "strategy_id": "B",
+            "text": "The exploration scenario explicitly says no route cancelled and lists multiple alternatives. Its 10/12 us values are separate from route benchmark ms. Both exact parents retain two materially different Plans; no winner or best candidate is selected."
+          },
+          {
+            "category": "observed_fact",
+            "id": "A-faster",
+            "predicate": null,
+            "refs": [
+              "case:faster-unknown-cause"
+            ],
+            "strategy_id": "A",
+            "text": "The faster scenario confirms same-context timing from 20 us to 16 us after multiple scheduling/layout changes. Timing improvement is observed; memory bandwidth improvement is not established. Missing profile and coupled changes require causal ablations plus bytes, waits and dependency evidence."
+          },
+          {
+            "category": "source_claim",
+            "id": "B-stale",
+            "predicate": null,
+            "refs": [
+              "case:stale-knowledge"
+            ],
+            "strategy_id": "B",
+            "text": "The stale-source scenario pins revision aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa but live revision is bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb. Retain its pinned excerpt as stale source material, with old full document unavailable and local validation absent. Silent replacement changes reproducible input; any refresh requires a separately recorded revision. This differs from the supplied overlap method's matching revisions."
+          },
+          {
+            "category": "unknown",
+            "id": "A-null-wait",
+            "predicate": null,
+            "refs": [
+              "case:missing-not-zero"
+            ],
+            "strategy_id": "A",
+            "text": "The missing-wait scenario has wait_us=null because the parser does not expose wait counters. execution_us=20 does not establish waits, including zero. Preserve unavailable and its reason; use a capable trace/counter source."
+          },
+          {
+            "category": "derived_measurement",
+            "id": "A-union",
+            "predicate": null,
+            "refs": [
+              "case:nested-overlap"
+            ],
+            "strategy_id": "A",
+            "text": "For device 0/clock c0, [2,5] is contained in [0,10] and [8,12] overlaps it, so the union is [0,12], occupied time 12 us. Adding durations double-counts occupancy. Device 1/clock c1's [0,7] is excluded without clock alignment. Union occupancy is not critical path."
+          }
+        ],
+        "plans": [
+          {
+            "calculation_ids": [
+              "calc-A-tile",
+              "calc-A-workload-floor"
+            ],
+            "id": "A-P1",
+            "mechanism": "Share a left tile across adjacent output-column tiles.",
+            "modification": "From A-parent, group neighboring j tiles with separate float32 accumulators. At each k in original order, load left once, load each right tile and update its accumulator; store each output after reduction. Keep tile=16, dtype and layout fixed initially.",
+            "observation_ids": [
+              "A-history",
+              "A-timing",
+              "A-recipe",
+              "A-tile",
+              "A-floor",
+              "A-missing",
+              "A-confound"
+            ],
+            "parent_id": "A-parent",
+            "refs": [
+              "source:A",
+              "config:A",
+              "history:A",
+              "benchmark:A-benchmark",
+              "profile:A-profile",
+              "calculation:calc-A-tile",
+              "calculation:calc-A-workload-floor"
+            ],
+            "risks": [
+              "More accumulators may spill or reduce parallelism.",
+              "Partial groups/aliasing can cause bad addresses or premature stores.",
+              "Existing compiler/cache reuse may leave no benefit."
+            ],
+            "strategy_id": "A",
+            "tradeoffs": [
+              "Fewer repeated left requests versus larger live state.",
+              "Grouped scheduling changes locality and parallelism even with unchanged K order."
+            ],
+            "unknowns": [
+              "Actual physical reloads, allocation and critical path are absent.",
+              "Strides, alias rules and capacity remain unspecified.",
+              "Logical traffic reduction does not establish speedup."
+            ],
+            "validation": {
+              "correctness": [
+                "Compare to C=A@B at contract tolerances on original and supported tail/degenerate shapes.",
+                "Verify K order, float32 accumulation, mask zero fill, bounds and disjoint ownership; exercise permitted strides and exceptional values.",
+                "Keep dtype fixed; any later dtype change needs its own tolerance and tile-fixed ablation."
+              ],
+              "performance": [
+                "Repeat controlled baseline/grouped trials under matching hardware, shape, dtype, toolchain and warmup/timing scope.",
+                "Bind fresh Benchmark/Profile to exact candidate/source/config/build/run; verify loaded-code provenance when available.",
+                "Inspect generated loads, transferred bytes, dependencies/waits and allocation/spills; event counts alone do not explain timing.",
+                "Evaluate grouping independently and retain all routes without selecting best."
+              ]
+            },
+            "variants": [
+              "Original one-j-tile control.",
+              "Two adjacent j tiles sharing left, all other knobs fixed.",
+              "A larger group only as a separate subsequent experiment after resource checks."
+            ]
+          },
+          {
+            "calculation_ids": [
+              "calc-A-pipeline-live",
+              "calc-hypothetical-pipeline"
+            ],
+            "id": "A-P2",
+            "mechanism": "Overlap independent next-K operand loads with current dot using two buffers.",
+            "modification": "From A-parent, keep tile=16, dtype, output tiling and accumulation order. Add first-tile prologue, alternate two operand-buffer sets, prefetch next K when supported, wait before consumption and overwrite, compute current dot, drain then store. Include a synchronous control with identical buffer allocation.",
+            "observation_ids": [
+              "A-history",
+              "A-knowledge",
+              "A-live",
+              "A-missing",
+              "A-dma",
+              "A-pipeline"
+            ],
+            "parent_id": "A-parent",
+            "refs": [
+              "source:A",
+              "config:A",
+              "history:A",
+              "profile:A-profile",
+              "benchmark:A-benchmark",
+              "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+              "calculation:calc-A-pipeline-live",
+              "calculation:calc-hypothetical-pipeline",
+              "case:prediction-not-measurement"
+            ],
+            "risks": [
+              "Buffer-lifetime/wait errors can race loads and dot.",
+              "Extra storage may spill or exceed an unknown capacity.",
+              "Shared resources and management overhead may prevent useful overlap."
+            ],
+            "strategy_id": "A",
+            "tradeoffs": [
+              "Potential latency hiding versus storage and synchronization.",
+              "Fill/drain costs may dominate a short reduction."
+            ],
+            "unknowns": [
+              "Async backend API, engine independence and actual stage costs are absent.",
+              "5120 modeled bytes exclude compiler/runtime overhead and do not prove headroom.",
+              "The hypothetical 14-second scenario does not predict route milliseconds."
+            ],
+            "validation": {
+              "correctness": [
+                "Check prologue, steady state and drain for one/multiple K tiles and tails, including zero fill.",
+                "Verify wait-before-use/reuse, repeated launches, accumulator order and final completion against the reference.",
+                "Use only backend mechanisms with established ownership/dependency semantics."
+              ],
+              "performance": [
+                "Collect timestamped dependencies, operand bytes, waits and compute intervals before claiming latency hiding.",
+                "Compare original, synchronous two-buffer control and async variant with identical conditions and repeated total timing including fill/drain.",
+                "Inspect compiler live memory, spills, allocation and documented capacity.",
+                "Bind fresh measurements to exact candidate and actual target; source claims and ideal predictions are not local performance evidence."
+              ]
+            },
+            "variants": [
+              "Original schedule.",
+              "Two buffers with synchronous sequencing.",
+              "Two-buffer asynchronous overlap; later isolate each operand's prefetch separately."
+            ]
+          },
+          {
+            "calculation_ids": [
+              "calc-B-tile",
+              "calc-B-workload-floor"
+            ],
+            "id": "B-P1",
+            "mechanism": "Change physical right-operand layout, isolated from tile size and dtype.",
+            "modification": "From B-parent, retain tile=8, float32, loop order and K accumulation. Inspect backend load/dot contract, then pack or transpose each right tile into its documented preferred physical format while adapting indexing to preserve mathematical B[k,j]. Include conversion and temporary lifetime in execution and timing.",
+            "observation_ids": [
+              "B-timing",
+              "B-history",
+              "B-recipe",
+              "B-profile",
+              "B-missing",
+              "B-tile",
+              "B-mismatch",
+              "B-stale"
+            ],
+            "parent_id": "B-parent",
+            "refs": [
+              "source:B",
+              "config:B",
+              "history:B",
+              "profile:B-profile",
+              "benchmark:B-benchmark",
+              "calculation:calc-B-tile",
+              "calculation:calc-B-workload-floor"
+            ],
+            "risks": [
+              "Index/transpose errors can alter the product.",
+              "Conversion and temporary costs may outweigh access gains.",
+              "Compiler may undo or duplicate the transformation."
+            ],
+            "strategy_id": "B",
+            "tradeoffs": [
+              "Better dot operand access versus conversion work and storage.",
+              "Reusable prepacking changes lifetimes and timing boundaries and requires separate evaluation."
+            ],
+            "unknowns": [
+              "Preferred and current generated layouts are unavailable.",
+              "Conversion cost, strides, allocation and bandwidth are unknown.",
+              "Stale source cannot establish current/local validation."
+            ],
+            "validation": {
+              "correctness": [
+                "Use nonsymmetric/non-square inputs to detect accidental mathematical transpose.",
+                "Test original and supported tail/strided shapes, bounds and masks under unchanged float32 tolerances.",
+                "Verify packed-buffer lifetime and updates across repeated calls so stale input data cannot persist."
+              ],
+              "performance": [
+                "Inspect generated conversions/layout and acquire correctly bound B candidate profiles; A-current evidence cannot substitute.",
+                "Measure repeated complete latency including packing and dot-only diagnostics while holding tile/dtype/scheduling fixed.",
+                "Collect conversion bytes, relevant waits and compiler storage/spills; pack/no-pack ablation must precede causal claims.",
+                "Preserve exact source/toolchain/Knowledge revisions and record refreshes separately; retain both strategies."
+              ]
+            },
+            "variants": [
+              "Original unmodified load/dot.",
+              "Local per-tile pack with full cost included.",
+              "Reusable prepacking only as a later separate variant with both one-call and amortized timing."
+            ]
+          },
+          {
+            "calculation_ids": [
+              "calc-B-tile",
+              "calc-B-workload-floor"
+            ],
+            "id": "B-P2",
+            "mechanism": "Share a left tile across grouped j outputs with independent accumulators.",
+            "modification": "From B-parent, group adjacent j tiles, initialize one float32 accumulator per member, keep original k ordering, load left once per k group, load each member's right tile and update its accumulator, then mask each store. Keep tile=8 and layout unchanged.",
+            "observation_ids": [
+              "B-history",
+              "B-recipe",
+              "B-tile",
+              "B-floor",
+              "B-history-transfer",
+              "B-retain",
+              "B-missing"
+            ],
+            "parent_id": "B-parent",
+            "refs": [
+              "source:B",
+              "config:B",
+              "history:B",
+              "benchmark:B-benchmark",
+              "profile:B-profile",
+              "calculation:calc-B-tile",
+              "calculation:calc-B-workload-floor",
+              "case:different-history",
+              "case:multi-strategy-plans"
+            ],
+            "risks": [
+              "Larger accumulator state may spill or reduce concurrency.",
+              "Scheduling/locality can worsen despite fewer logical loads.",
+              "Partial groups may drop or overrun outputs."
+            ],
+            "strategy_id": "B",
+            "tradeoffs": [
+              "Fewer left requests versus larger working set.",
+              "Group size trades reuse against scheduling flexibility."
+            ],
+            "unknowns": [
+              "Physical cache reuse and traffic remain unmeasured.",
+              "Capacity, allocation and dominant runtime costs are absent.",
+              "Different-condition buffering history cannot predict current behavior."
+            ],
+            "validation": {
+              "correctness": [
+                "Check each output against C=A@B with original tolerances and per-output K order.",
+                "Exercise partial groups, K tails, permitted strides/degenerate shapes and prevent overlapping/premature stores.",
+                "Any later dtype variant needs independent tolerance checks and tile-fixed ablation."
+              ],
+              "performance": [
+                "Run condition-matched B-parent/variant trials with repeated timing and fresh identity-bound evidence.",
+                "Measure total latency, bytes/loads, waits/dependencies and compiler allocation/spills to distinguish reuse from scheduling effects.",
+                "Retest historical ideas under current conditions; vary one grouping knob at a time and retain B layout plus both A alternatives without changing best."
+              ]
+            },
+            "variants": [
+              "One output tile per group control.",
+              "Two adjacent output tiles with unchanged dtype/tile/layout.",
+              "Further group size as a separate one-variable experiment after resource checks."
+            ]
+          }
+        ],
+        "unknowns": [
+          "All inputs are evaluation-only synthetic artifacts. Source recipes, benchmark observations, separate scenarios and mathematical models have different scopes and prove no real TPU performance.",
+          "Memory snapshot is complete; combined atomic snapshot and Knowledge corpus snapshot consistency are false. Matching recorded revisions do not establish global simultaneity.",
+          "Profiles bind declared identities only; source/config/build digests do not independently prove loaded code or compiler lowering.",
+          "Neither route has measured critical paths, waits, bytes, compiler estimates, resource allocations, hardware rates or repeated-trial distributions sufficient to identify the bottleneck.",
+          "Exact predicates verify supplied field values, not explanations, causality or future performance.",
+          "The mixed-strategy compute_memory request was rejected without a result. Only successful independently bound calculations are used; shared workload dimensions never authorize borrowing another route's measurement.",
+          "The standalone nested-interval union is derived geometrically from supplied intervals; no allowlisted tool accepts that interval set. Its occupancy result is not a dependency critical path.",
+          "All four Plans remain proposals requiring correctness and performance experiments. No winner is selected, best is unchanged, and no implementation is modified."
+        ]
+      }
+    }
+  ],
+  "limits": {
+    "max_response_chars": 60000,
+    "max_tool_calls": 12,
+    "max_turns": 6
+  },
+  "manifest_digest": "c28f1819481237755f512d3c2b3d2976052bd9378b45d3fdfe3bd2d401c40079",
+  "plan_set": {
+    "plans": [
+      {
+        "calculation_ids": [
+          "calc-A-tile",
+          "calc-A-workload-floor"
+        ],
+        "id": "A-P1",
+        "mechanism": "Share a left tile across adjacent output-column tiles.",
+        "modification": "From A-parent, group neighboring j tiles with separate float32 accumulators. At each k in original order, load left once, load each right tile and update its accumulator; store each output after reduction. Keep tile=16, dtype and layout fixed initially.",
+        "observation_ids": [
+          "A-history",
+          "A-timing",
+          "A-recipe",
+          "A-tile",
+          "A-floor",
+          "A-missing",
+          "A-confound"
+        ],
+        "parent_id": "A-parent",
+        "refs": [
+          "source:A",
+          "config:A",
+          "history:A",
+          "benchmark:A-benchmark",
+          "profile:A-profile",
+          "calculation:calc-A-tile",
+          "calculation:calc-A-workload-floor"
+        ],
+        "risks": [
+          "More accumulators may spill or reduce parallelism.",
+          "Partial groups/aliasing can cause bad addresses or premature stores.",
+          "Existing compiler/cache reuse may leave no benefit."
+        ],
+        "status": "proposal_requires_validation",
+        "strategy_id": "A",
+        "tradeoffs": [
+          "Fewer repeated left requests versus larger live state.",
+          "Grouped scheduling changes locality and parallelism even with unchanged K order."
+        ],
+        "unknowns": [
+          "Actual physical reloads, allocation and critical path are absent.",
+          "Strides, alias rules and capacity remain unspecified.",
+          "Logical traffic reduction does not establish speedup."
+        ],
+        "validation": {
+          "correctness": [
+            "Compare to C=A@B at contract tolerances on original and supported tail/degenerate shapes.",
+            "Verify K order, float32 accumulation, mask zero fill, bounds and disjoint ownership; exercise permitted strides and exceptional values.",
+            "Keep dtype fixed; any later dtype change needs its own tolerance and tile-fixed ablation."
+          ],
+          "performance": [
+            "Repeat controlled baseline/grouped trials under matching hardware, shape, dtype, toolchain and warmup/timing scope.",
+            "Bind fresh Benchmark/Profile to exact candidate/source/config/build/run; verify loaded-code provenance when available.",
+            "Inspect generated loads, transferred bytes, dependencies/waits and allocation/spills; event counts alone do not explain timing.",
+            "Evaluate grouping independently and retain all routes without selecting best."
+          ]
+        },
+        "variants": [
+          "Original one-j-tile control.",
+          "Two adjacent j tiles sharing left, all other knobs fixed.",
+          "A larger group only as a separate subsequent experiment after resource checks."
+        ]
+      },
+      {
+        "calculation_ids": [
+          "calc-A-pipeline-live",
+          "calc-hypothetical-pipeline"
+        ],
+        "id": "A-P2",
+        "mechanism": "Overlap independent next-K operand loads with current dot using two buffers.",
+        "modification": "From A-parent, keep tile=16, dtype, output tiling and accumulation order. Add first-tile prologue, alternate two operand-buffer sets, prefetch next K when supported, wait before consumption and overwrite, compute current dot, drain then store. Include a synchronous control with identical buffer allocation.",
+        "observation_ids": [
+          "A-history",
+          "A-knowledge",
+          "A-live",
+          "A-missing",
+          "A-dma",
+          "A-pipeline"
+        ],
+        "parent_id": "A-parent",
+        "refs": [
+          "source:A",
+          "config:A",
+          "history:A",
+          "profile:A-profile",
+          "benchmark:A-benchmark",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+          "calculation:calc-A-pipeline-live",
+          "calculation:calc-hypothetical-pipeline",
+          "case:prediction-not-measurement"
+        ],
+        "risks": [
+          "Buffer-lifetime/wait errors can race loads and dot.",
+          "Extra storage may spill or exceed an unknown capacity.",
+          "Shared resources and management overhead may prevent useful overlap."
+        ],
+        "status": "proposal_requires_validation",
+        "strategy_id": "A",
+        "tradeoffs": [
+          "Potential latency hiding versus storage and synchronization.",
+          "Fill/drain costs may dominate a short reduction."
+        ],
+        "unknowns": [
+          "Async backend API, engine independence and actual stage costs are absent.",
+          "5120 modeled bytes exclude compiler/runtime overhead and do not prove headroom.",
+          "The hypothetical 14-second scenario does not predict route milliseconds."
+        ],
+        "validation": {
+          "correctness": [
+            "Check prologue, steady state and drain for one/multiple K tiles and tails, including zero fill.",
+            "Verify wait-before-use/reuse, repeated launches, accumulator order and final completion against the reference.",
+            "Use only backend mechanisms with established ownership/dependency semantics."
+          ],
+          "performance": [
+            "Collect timestamped dependencies, operand bytes, waits and compute intervals before claiming latency hiding.",
+            "Compare original, synchronous two-buffer control and async variant with identical conditions and repeated total timing including fill/drain.",
+            "Inspect compiler live memory, spills, allocation and documented capacity.",
+            "Bind fresh measurements to exact candidate and actual target; source claims and ideal predictions are not local performance evidence."
+          ]
+        },
+        "variants": [
+          "Original schedule.",
+          "Two buffers with synchronous sequencing.",
+          "Two-buffer asynchronous overlap; later isolate each operand's prefetch separately."
+        ]
+      },
+      {
+        "calculation_ids": [
+          "calc-B-tile",
+          "calc-B-workload-floor"
+        ],
+        "id": "B-P1",
+        "mechanism": "Change physical right-operand layout, isolated from tile size and dtype.",
+        "modification": "From B-parent, retain tile=8, float32, loop order and K accumulation. Inspect backend load/dot contract, then pack or transpose each right tile into its documented preferred physical format while adapting indexing to preserve mathematical B[k,j]. Include conversion and temporary lifetime in execution and timing.",
+        "observation_ids": [
+          "B-timing",
+          "B-history",
+          "B-recipe",
+          "B-profile",
+          "B-missing",
+          "B-tile",
+          "B-mismatch",
+          "B-stale"
+        ],
+        "parent_id": "B-parent",
+        "refs": [
+          "source:B",
+          "config:B",
+          "history:B",
+          "profile:B-profile",
+          "benchmark:B-benchmark",
+          "calculation:calc-B-tile",
+          "calculation:calc-B-workload-floor"
+        ],
+        "risks": [
+          "Index/transpose errors can alter the product.",
+          "Conversion and temporary costs may outweigh access gains.",
+          "Compiler may undo or duplicate the transformation."
+        ],
+        "status": "proposal_requires_validation",
+        "strategy_id": "B",
+        "tradeoffs": [
+          "Better dot operand access versus conversion work and storage.",
+          "Reusable prepacking changes lifetimes and timing boundaries and requires separate evaluation."
+        ],
+        "unknowns": [
+          "Preferred and current generated layouts are unavailable.",
+          "Conversion cost, strides, allocation and bandwidth are unknown.",
+          "Stale source cannot establish current/local validation."
+        ],
+        "validation": {
+          "correctness": [
+            "Use nonsymmetric/non-square inputs to detect accidental mathematical transpose.",
+            "Test original and supported tail/strided shapes, bounds and masks under unchanged float32 tolerances.",
+            "Verify packed-buffer lifetime and updates across repeated calls so stale input data cannot persist."
+          ],
+          "performance": [
+            "Inspect generated conversions/layout and acquire correctly bound B candidate profiles; A-current evidence cannot substitute.",
+            "Measure repeated complete latency including packing and dot-only diagnostics while holding tile/dtype/scheduling fixed.",
+            "Collect conversion bytes, relevant waits and compiler storage/spills; pack/no-pack ablation must precede causal claims.",
+            "Preserve exact source/toolchain/Knowledge revisions and record refreshes separately; retain both strategies."
+          ]
+        },
+        "variants": [
+          "Original unmodified load/dot.",
+          "Local per-tile pack with full cost included.",
+          "Reusable prepacking only as a later separate variant with both one-call and amortized timing."
+        ]
+      },
+      {
+        "calculation_ids": [
+          "calc-B-tile",
+          "calc-B-workload-floor"
+        ],
+        "id": "B-P2",
+        "mechanism": "Share a left tile across grouped j outputs with independent accumulators.",
+        "modification": "From B-parent, group adjacent j tiles, initialize one float32 accumulator per member, keep original k ordering, load left once per k group, load each member's right tile and update its accumulator, then mask each store. Keep tile=8 and layout unchanged.",
+        "observation_ids": [
+          "B-history",
+          "B-recipe",
+          "B-tile",
+          "B-floor",
+          "B-history-transfer",
+          "B-retain",
+          "B-missing"
+        ],
+        "parent_id": "B-parent",
+        "refs": [
+          "source:B",
+          "config:B",
+          "history:B",
+          "benchmark:B-benchmark",
+          "profile:B-profile",
+          "calculation:calc-B-tile",
+          "calculation:calc-B-workload-floor",
+          "case:different-history",
+          "case:multi-strategy-plans"
+        ],
+        "risks": [
+          "Larger accumulator state may spill or reduce concurrency.",
+          "Scheduling/locality can worsen despite fewer logical loads.",
+          "Partial groups may drop or overrun outputs."
+        ],
+        "status": "proposal_requires_validation",
+        "strategy_id": "B",
+        "tradeoffs": [
+          "Fewer left requests versus larger working set.",
+          "Group size trades reuse against scheduling flexibility."
+        ],
+        "unknowns": [
+          "Physical cache reuse and traffic remain unmeasured.",
+          "Capacity, allocation and dominant runtime costs are absent.",
+          "Different-condition buffering history cannot predict current behavior."
+        ],
+        "validation": {
+          "correctness": [
+            "Check each output against C=A@B with original tolerances and per-output K order.",
+            "Exercise partial groups, K tails, permitted strides/degenerate shapes and prevent overlapping/premature stores.",
+            "Any later dtype variant needs independent tolerance checks and tile-fixed ablation."
+          ],
+          "performance": [
+            "Run condition-matched B-parent/variant trials with repeated timing and fresh identity-bound evidence.",
+            "Measure total latency, bytes/loads, waits/dependencies and compiler allocation/spills to distinguish reuse from scheduling effects.",
+            "Retest historical ideas under current conditions; vary one grouping knob at a time and retain B layout plus both A alternatives without changing best."
+          ]
+        },
+        "variants": [
+          "One output tile per group control.",
+          "Two adjacent output tiles with unchanged dtype/tile/layout.",
+          "Further group size as a separate one-variable experiment after resource checks."
+        ]
+      }
+    ],
+    "schema_version": 1
+  },
+  "proposal": {
+    "code_understanding": [
+      {
+        "dependencies": [
+          "Dot consumes both loads; acc updates have a K dependency; store follows the final update. Output tiles are independent only subject to alias and memory contracts, which are unspecified."
+        ],
+        "edge_cases": [
+          "mask=True does not specify masked-value semantics: K tails need zero fill and output tails require bounds protection. Given dimensions divide tile=16. Test permitted nonmultiple/zero dimensions, tiles exceeding dimensions, noncontiguous inputs, exceptional values and alias constraints. C=A@B requires independence from prior out contents; dtype/reassociation changes need tolerance validation."
+        ],
+        "layout_memory": [
+          "Config and accumulator are float32; logical tiles are square. Strides, physical layout, alignment, memory spaces, compiler temporaries and allocation are absent. Two-buffer live storage is modeled separately, not measured."
+        ],
+        "loops": [
+          "Outer i, inner j, innermost k advance by configured tile=16 for M=32,N=32,K=64. The route-bound model yields 4 output tiles, 4 reduction steps and 16 tile iterations."
+        ],
+        "movement": [
+          "Each k step requests left and right tiles while acc remains live; out is written once after reduction. Left requests repeat across j and right requests across i. Physical cache reuse and transfer bytes are unknown."
+        ],
+        "refs": [
+          "source:A",
+          "config:A",
+          "history:A",
+          "calculation:calc-A-tile"
+        ],
+        "stages": [
+          "The complete pinned synthetic source initializes a float32 accumulator, loads left/right reduction tiles, applies dot and accumulation, then performs a masked output store. The fixture says it is never executed; declared source identity does not prove loaded code."
+        ],
+        "strategy_id": "A",
+        "synchronization": [
+          "No explicit async copies or waits appear in pseudo-source; generated synchronization is unknown. A pipeline must wait before consumption and buffer overwrite while preserving accumulation and final-store dependencies."
+        ]
+      },
+      {
+        "dependencies": [
+          "Both loads precede dot, acc is loop-carried, and store follows reduction. Grouping j tiles requires separate accumulators retaining their original K traversal and disjoint output ownership."
+        ],
+        "edge_cases": [
+          "The given shape divides tile=8. New tile/group layouts require tail masks and neutral K fill. Packing must preserve B[k,j] rather than accidentally transpose the mathematical operand. Test supported strides, nonsymmetric inputs, degenerate shapes, exceptional values, accumulation tolerances and alias constraints."
+        ],
+        "layout_memory": [
+          "Float32 is configured for operands and accumulator. Physical strides and dot-preferred format are absent. Packing may add a temporary and conversion; grouping increases accumulator liveness. Compiler allocation and memory capacity are unknown."
+        ],
+        "loops": [
+          "i/j/k advance by configured tile=8 for M=32,N=32,K=64. B's tile model yields 16 output tiles, 8 reduction steps and 128 tile iterations."
+        ],
+        "movement": [
+          "Left and right loads repeat per reduction/output tile; acc remains live through k. Sharing left across j or right across i is possible in the recipe, but physical reuse is unknown."
+        ],
+        "refs": [
+          "source:B",
+          "config:B",
+          "history:B",
+          "calculation:calc-B-tile"
+        ],
+        "stages": [
+          "B independently declares accumulator initialization, two masked operand loads per k step, dot accumulation, and masked store. Similar source structure does not transfer A measurements or prove loaded B code."
+        ],
+        "strategy_id": "B",
+        "synchronization": [
+          "No explicit async scheduling or cross-tile barriers appear. A packed tile must be ready before dot and remain valid through consumption; grouping must preserve output ownership."
+        ]
+      }
+    ],
+    "hypotheses": [
+      {
+        "alternatives": [
+          "Cache/compiler reuse may already eliminate the reloads.",
+          "Compute, launch or accumulator dependency may dominate.",
+          "Additional accumulators may spill and slow execution."
+        ],
+        "id": "A-H1",
+        "refs": [
+          "source:A",
+          "profile:A-profile",
+          "calculation:calc-A-tile"
+        ],
+        "strategy_id": "A",
+        "text": "Sharing left tiles across neighboring j outputs may reduce physical reloads or address/loop work if those costs matter."
+      },
+      {
+        "alternatives": [
+          "Loads and compute may share the limiting resource or already overlap.",
+          "Short-reduction fill/drain and synchronization may dominate.",
+          "Buffer pressure may cause spills or reduce concurrency."
+        ],
+        "id": "A-H2",
+        "refs": [
+          "source:A",
+          "profile:A-profile",
+          "calculation:calc-A-pipeline-live",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "strategy_id": "A",
+        "text": "Next-K loads may overlap current dot work and hide exposed latency if the backend supports independent resources and legal asynchronous scheduling."
+      },
+      {
+        "alternatives": [
+          "Current lowering may already use the preferred format.",
+          "Explicit conversion traffic may dominate the small workload.",
+          "Launch, reduction dependencies or repeated loads may instead dominate."
+        ],
+        "id": "B-H1",
+        "refs": [
+          "source:B",
+          "profile:B-profile"
+        ],
+        "strategy_id": "B",
+        "text": "Packing B into a backend-preferred physical format may improve dot access or remove an implicit conversion if current layout is unfavorable."
+      },
+      {
+        "alternatives": [
+          "Cache/compiler may already provide equivalent reuse.",
+          "Accumulator pressure may spill or lower parallelism.",
+          "Total timing may be dominated by unrelated costs."
+        ],
+        "id": "B-H2",
+        "refs": [
+          "source:B",
+          "config:B",
+          "calculation:calc-B-tile"
+        ],
+        "strategy_id": "B",
+        "text": "Grouping neighboring j outputs may share left loads with original dtype and per-output K order."
+      }
+    ],
+    "observations": [
+      {
+        "category": "observed_fact",
+        "id": "A-timing",
+        "predicate": {
+          "path": [
+            "value",
+            "latency_ms"
+          ],
+          "ref": "benchmark:A-benchmark",
+          "value": 10
+        },
+        "refs": [
+          "benchmark:A-benchmark",
+          "evidence:A-timing"
+        ],
+        "strategy_id": "A",
+        "text": "Synthetic A-benchmark records confirmed valid timing 10 ms and correctness passed for A-run/A-candidate/A-parent. This is fixture timing, not real TPU performance or a causal explanation."
+      },
+      {
+        "category": "observed_fact",
+        "id": "B-timing",
+        "predicate": {
+          "path": [
+            "value",
+            "latency_ms"
+          ],
+          "ref": "benchmark:B-benchmark",
+          "value": 12
+        },
+        "refs": [
+          "benchmark:B-benchmark",
+          "evidence:B-timing"
+        ],
+        "strategy_id": "B",
+        "text": "Synthetic B-benchmark independently records confirmed valid timing 12 ms and correctness passed for B-run/B-candidate/B-parent. This neither identifies a bottleneck nor cancels B exploration."
+      },
+      {
+        "category": "historical_claim",
+        "id": "A-history",
+        "predicate": null,
+        "refs": [
+          "history:A",
+          "source:A"
+        ],
+        "strategy_id": "A",
+        "text": "Complete pinned A history contains original Plan, candidate derived from baseline, run, running/succeeded events, timing/trace Evidence, Benchmark/Profile bundles and task/workload/context/baseline dependencies. There is no controlled ablation. The requested next parent is A-parent, the captured reference to A-candidate, not baseline."
+      },
+      {
+        "category": "historical_claim",
+        "id": "B-history",
+        "predicate": null,
+        "refs": [
+          "history:B",
+          "source:B"
+        ],
+        "strategy_id": "B",
+        "text": "Complete pinned B history independently contains original Plan, candidate derived from baseline, run/status events, timing/trace Evidence, Benchmark/Profile bundles and task/workload/context/baseline dependencies. No controlled ablation is recorded. The next parent is B-parent, not baseline or A-parent."
+      },
+      {
+        "category": "derived_measurement",
+        "id": "A-profile",
+        "predicate": null,
+        "refs": [
+          "profile:A-profile",
+          "evidence:A-trace"
+        ],
+        "strategy_id": "A",
+        "text": "Normalized A-profile has one synthetic program interval and union of 10000000000 ps, operation statistics 10000 us from one measured call. This is a union of supplied intervals, not a dependency critical path or repeated-trial distribution. Binding is declared_identity_only. A TPU-like device label does not override synthetic CPU context/provenance."
+      },
+      {
+        "category": "derived_measurement",
+        "id": "B-profile",
+        "predicate": null,
+        "refs": [
+          "profile:B-profile",
+          "evidence:B-trace"
+        ],
+        "strategy_id": "B",
+        "text": "Normalized B-profile independently has one synthetic program interval/union of 12000000000 ps and 12000 us statistics from one call. Its scope is supplied intervals, not critical path. Declared identity does not prove loaded code; the TPU-like label remains synthetic evidence."
+      },
+      {
+        "category": "unknown",
+        "id": "A-missing",
+        "predicate": null,
+        "refs": [
+          "profile:A-profile",
+          "calculation:calc-A-workload-floor"
+        ],
+        "strategy_id": "A",
+        "text": "A lacks waits, DMA data, compiler metadata, LLO, resource metadata, critical path and hardware rates. Missing waits are not zero; no memory/compute bottleneck, compiler allocation, capacity or latency bound can be established."
+      },
+      {
+        "category": "unknown",
+        "id": "B-missing",
+        "predicate": null,
+        "refs": [
+          "profile:B-profile",
+          "calculation:calc-B-workload-floor"
+        ],
+        "strategy_id": "B",
+        "text": "B independently lacks waits, DMA data, compiler metadata, LLO, resource metadata, critical path and hardware rates. Missing metrics cannot establish zero waits, allocation, bandwidth or a compute/memory bottleneck."
+      },
+      {
+        "category": "source_claim",
+        "id": "A-recipe",
+        "predicate": null,
+        "refs": [
+          "source:A",
+          "config:A"
+        ],
+        "strategy_id": "A",
+        "text": "A's recipe repeats left requests across j and right requests across i, with acc retained across k. This motivates reuse and overlap experiments but does not prove physical transfers or their cost."
+      },
+      {
+        "category": "source_claim",
+        "id": "B-recipe",
+        "predicate": null,
+        "refs": [
+          "source:B",
+          "config:B"
+        ],
+        "strategy_id": "B",
+        "text": "B's recipe uses masked load/dot without stated physical layout or packing. Reuse and layout conversion are distinct experimental mechanisms; no layout defect is established."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-tile",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-A-tile",
+          "source:A",
+          "config:A"
+        ],
+        "strategy_id": "A",
+        "text": "A tile model predicts 131072 useful/padded FLOPs, zero padding work here, 32768 tiled read bytes, 4096 write bytes, 36864 total bytes and 20480 unique bytes. Assumptions: full tiles, operands reloaded per reduction/output tile, accumulator retained, output written once. It omits cache reuse, DMA startup, spills and compiler mapping; these are not observed traffic."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "B-tile",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-B-tile",
+          "source:B",
+          "config:B"
+        ],
+        "strategy_id": "B",
+        "text": "B's separately bound tile model predicts 131072 useful/padded FLOPs, zero padding work here, 65536 tiled read bytes, 4096 write bytes, 69632 total bytes and 20480 unique bytes. It assumes per-tile reloads and ignores cross-output cache reuse, spills, DMA startup and compiler scheduling. It does not prove bandwidth limitation."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-floor",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-A-workload-floor",
+          "history:A"
+        ],
+        "strategy_id": "A",
+        "text": "A's compulsory-traffic model predicts 131072 FLOPs, 16384 read bytes, 4096 write bytes and 6.4 FLOP/byte assuming one input read and one output write. All hardware time bounds remain unavailable because rates were not supplied."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "B-floor",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-B-workload-floor",
+          "history:B"
+        ],
+        "strategy_id": "B",
+        "text": "B's independently bound compulsory-traffic model predicts 131072 FLOPs, 16384 read bytes, 4096 write bytes and 6.4 FLOP/byte. No hardware time bound exists without rates; equal workload quantities do not transfer measured profile evidence."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-live",
+        "predicate": null,
+        "refs": [
+          "calculation:calc-A-pipeline-live",
+          "source:A",
+          "config:A"
+        ],
+        "strategy_id": "A",
+        "text": "The hypothetical two-buffer A schedule has modeled peak 5120 bytes: two left tiles, two right tiles and one accumulator, all 16x16 float32 and coexisting. Abstract lifetimes are not measured seconds. Capacity/headroom are unknown; dot temporaries, padding, descriptors, alignment, spills and other resident data are omitted."
+      },
+      {
+        "category": "source_claim",
+        "id": "A-knowledge",
+        "predicate": null,
+        "refs": [
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "strategy_id": "A",
+        "text": "Overlap method revision a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f cites Research/Pipelining.md revision cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55, matching the revision recorded as current. It claims independent loads may overlap computation at extra buffer cost. Status is source_supported, with no local experiments; applicability/performance remain unvalidated."
+      },
+      {
+        "category": "unknown",
+        "id": "A-dma",
+        "predicate": null,
+        "refs": [
+          "case:dma-count"
+        ],
+        "strategy_id": "A",
+        "text": "The separate dma-count scenario has 1000 events and execution_us=50 but missing bytes, waits and critical path. Count cannot prove a critical-path bottleneck. Collect transfer sizes, timestamped dependencies/waits and a controlled transfer/scheduling ablation."
+      },
+      {
+        "category": "observed_fact",
+        "id": "B-mismatch",
+        "predicate": null,
+        "refs": [
+          "case:profile-mismatch"
+        ],
+        "strategy_id": "B",
+        "text": "The mismatch scenario's profile is A-current/A, while requested identity is B-current/B. Same workload cannot repair that binding. Obtain a correctly bound B profile or independently verified metadata correction; do not relabel A evidence as B measurements."
+      },
+      {
+        "category": "unknown",
+        "id": "A-confound",
+        "predicate": null,
+        "refs": [
+          "case:tile-dtype-confound"
+        ],
+        "strategy_id": "A",
+        "text": "Tile and dtype change together in the tile-dtype scenario, with no isolated variants or tolerance test. Tile's independent latency effect and numerical acceptability are unknown. Hold dtype fixed when changing tile, hold tile fixed for dtype, test interaction and validate numerical tolerances."
+      },
+      {
+        "category": "historical_claim",
+        "id": "B-history-transfer",
+        "predicate": null,
+        "refs": [
+          "case:different-history"
+        ],
+        "strategy_id": "B",
+        "text": "The history scenario records double buffering slower on synthetic-H1/float32/32x32. Current synthetic-H2/bfloat16/4096x4096 has no retest. Preserve the historical outcome with conditions; its sign cannot establish current behavior. Retest under current matched conditions with correctness, storage and overlap evidence."
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-pipeline",
+        "predicate": null,
+        "refs": [
+          "case:prediction-not-measurement",
+          "calculation:calc-hypothetical-pipeline"
+        ],
+        "strategy_id": "A",
+        "text": "For the separate hypothetical four-item scenario, transfer=3 s and compute=2 s yield ideal duration 14 s versus serial 20 s, from transfer+compute+(stages-1)*max(transfer,compute). The model assumes independent engines, legal dependencies and enough buffers, omitting synchronization/startup, contention and uneven work. It is not a TPU measurement and its seconds are unrelated to route benchmark milliseconds."
+      },
+      {
+        "category": "observed_fact",
+        "id": "B-retain",
+        "predicate": {
+          "path": [
+            "value",
+            "budget_policy"
+          ],
+          "ref": "case:multi-strategy-plans",
+          "value": "no route cancelled"
+        },
+        "refs": [
+          "case:multi-strategy-plans"
+        ],
+        "strategy_id": "B",
+        "text": "The exploration scenario explicitly says no route cancelled and lists multiple alternatives. Its 10/12 us values are separate from route benchmark ms. Both exact parents retain two materially different Plans; no winner or best candidate is selected."
+      },
+      {
+        "category": "observed_fact",
+        "id": "A-faster",
+        "predicate": null,
+        "refs": [
+          "case:faster-unknown-cause"
+        ],
+        "strategy_id": "A",
+        "text": "The faster scenario confirms same-context timing from 20 us to 16 us after multiple scheduling/layout changes. Timing improvement is observed; memory bandwidth improvement is not established. Missing profile and coupled changes require causal ablations plus bytes, waits and dependency evidence."
+      },
+      {
+        "category": "source_claim",
+        "id": "B-stale",
+        "predicate": null,
+        "refs": [
+          "case:stale-knowledge"
+        ],
+        "strategy_id": "B",
+        "text": "The stale-source scenario pins revision aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa but live revision is bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb. Retain its pinned excerpt as stale source material, with old full document unavailable and local validation absent. Silent replacement changes reproducible input; any refresh requires a separately recorded revision. This differs from the supplied overlap method's matching revisions."
+      },
+      {
+        "category": "unknown",
+        "id": "A-null-wait",
+        "predicate": null,
+        "refs": [
+          "case:missing-not-zero"
+        ],
+        "strategy_id": "A",
+        "text": "The missing-wait scenario has wait_us=null because the parser does not expose wait counters. execution_us=20 does not establish waits, including zero. Preserve unavailable and its reason; use a capable trace/counter source."
+      },
+      {
+        "category": "derived_measurement",
+        "id": "A-union",
+        "predicate": null,
+        "refs": [
+          "case:nested-overlap"
+        ],
+        "strategy_id": "A",
+        "text": "For device 0/clock c0, [2,5] is contained in [0,10] and [8,12] overlaps it, so the union is [0,12], occupied time 12 us. Adding durations double-counts occupancy. Device 1/clock c1's [0,7] is excluded without clock alignment. Union occupancy is not critical path."
+      }
+    ],
+    "plans": [
+      {
+        "calculation_ids": [
+          "calc-A-tile",
+          "calc-A-workload-floor"
+        ],
+        "id": "A-P1",
+        "mechanism": "Share a left tile across adjacent output-column tiles.",
+        "modification": "From A-parent, group neighboring j tiles with separate float32 accumulators. At each k in original order, load left once, load each right tile and update its accumulator; store each output after reduction. Keep tile=16, dtype and layout fixed initially.",
+        "observation_ids": [
+          "A-history",
+          "A-timing",
+          "A-recipe",
+          "A-tile",
+          "A-floor",
+          "A-missing",
+          "A-confound"
+        ],
+        "parent_id": "A-parent",
+        "refs": [
+          "source:A",
+          "config:A",
+          "history:A",
+          "benchmark:A-benchmark",
+          "profile:A-profile",
+          "calculation:calc-A-tile",
+          "calculation:calc-A-workload-floor"
+        ],
+        "risks": [
+          "More accumulators may spill or reduce parallelism.",
+          "Partial groups/aliasing can cause bad addresses or premature stores.",
+          "Existing compiler/cache reuse may leave no benefit."
+        ],
+        "strategy_id": "A",
+        "tradeoffs": [
+          "Fewer repeated left requests versus larger live state.",
+          "Grouped scheduling changes locality and parallelism even with unchanged K order."
+        ],
+        "unknowns": [
+          "Actual physical reloads, allocation and critical path are absent.",
+          "Strides, alias rules and capacity remain unspecified.",
+          "Logical traffic reduction does not establish speedup."
+        ],
+        "validation": {
+          "correctness": [
+            "Compare to C=A@B at contract tolerances on original and supported tail/degenerate shapes.",
+            "Verify K order, float32 accumulation, mask zero fill, bounds and disjoint ownership; exercise permitted strides and exceptional values.",
+            "Keep dtype fixed; any later dtype change needs its own tolerance and tile-fixed ablation."
+          ],
+          "performance": [
+            "Repeat controlled baseline/grouped trials under matching hardware, shape, dtype, toolchain and warmup/timing scope.",
+            "Bind fresh Benchmark/Profile to exact candidate/source/config/build/run; verify loaded-code provenance when available.",
+            "Inspect generated loads, transferred bytes, dependencies/waits and allocation/spills; event counts alone do not explain timing.",
+            "Evaluate grouping independently and retain all routes without selecting best."
+          ]
+        },
+        "variants": [
+          "Original one-j-tile control.",
+          "Two adjacent j tiles sharing left, all other knobs fixed.",
+          "A larger group only as a separate subsequent experiment after resource checks."
+        ]
+      },
+      {
+        "calculation_ids": [
+          "calc-A-pipeline-live",
+          "calc-hypothetical-pipeline"
+        ],
+        "id": "A-P2",
+        "mechanism": "Overlap independent next-K operand loads with current dot using two buffers.",
+        "modification": "From A-parent, keep tile=16, dtype, output tiling and accumulation order. Add first-tile prologue, alternate two operand-buffer sets, prefetch next K when supported, wait before consumption and overwrite, compute current dot, drain then store. Include a synchronous control with identical buffer allocation.",
+        "observation_ids": [
+          "A-history",
+          "A-knowledge",
+          "A-live",
+          "A-missing",
+          "A-dma",
+          "A-pipeline"
+        ],
+        "parent_id": "A-parent",
+        "refs": [
+          "source:A",
+          "config:A",
+          "history:A",
+          "profile:A-profile",
+          "benchmark:A-benchmark",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+          "calculation:calc-A-pipeline-live",
+          "calculation:calc-hypothetical-pipeline",
+          "case:prediction-not-measurement"
+        ],
+        "risks": [
+          "Buffer-lifetime/wait errors can race loads and dot.",
+          "Extra storage may spill or exceed an unknown capacity.",
+          "Shared resources and management overhead may prevent useful overlap."
+        ],
+        "strategy_id": "A",
+        "tradeoffs": [
+          "Potential latency hiding versus storage and synchronization.",
+          "Fill/drain costs may dominate a short reduction."
+        ],
+        "unknowns": [
+          "Async backend API, engine independence and actual stage costs are absent.",
+          "5120 modeled bytes exclude compiler/runtime overhead and do not prove headroom.",
+          "The hypothetical 14-second scenario does not predict route milliseconds."
+        ],
+        "validation": {
+          "correctness": [
+            "Check prologue, steady state and drain for one/multiple K tiles and tails, including zero fill.",
+            "Verify wait-before-use/reuse, repeated launches, accumulator order and final completion against the reference.",
+            "Use only backend mechanisms with established ownership/dependency semantics."
+          ],
+          "performance": [
+            "Collect timestamped dependencies, operand bytes, waits and compute intervals before claiming latency hiding.",
+            "Compare original, synchronous two-buffer control and async variant with identical conditions and repeated total timing including fill/drain.",
+            "Inspect compiler live memory, spills, allocation and documented capacity.",
+            "Bind fresh measurements to exact candidate and actual target; source claims and ideal predictions are not local performance evidence."
+          ]
+        },
+        "variants": [
+          "Original schedule.",
+          "Two buffers with synchronous sequencing.",
+          "Two-buffer asynchronous overlap; later isolate each operand's prefetch separately."
+        ]
+      },
+      {
+        "calculation_ids": [
+          "calc-B-tile",
+          "calc-B-workload-floor"
+        ],
+        "id": "B-P1",
+        "mechanism": "Change physical right-operand layout, isolated from tile size and dtype.",
+        "modification": "From B-parent, retain tile=8, float32, loop order and K accumulation. Inspect backend load/dot contract, then pack or transpose each right tile into its documented preferred physical format while adapting indexing to preserve mathematical B[k,j]. Include conversion and temporary lifetime in execution and timing.",
+        "observation_ids": [
+          "B-timing",
+          "B-history",
+          "B-recipe",
+          "B-profile",
+          "B-missing",
+          "B-tile",
+          "B-mismatch",
+          "B-stale"
+        ],
+        "parent_id": "B-parent",
+        "refs": [
+          "source:B",
+          "config:B",
+          "history:B",
+          "profile:B-profile",
+          "benchmark:B-benchmark",
+          "calculation:calc-B-tile",
+          "calculation:calc-B-workload-floor"
+        ],
+        "risks": [
+          "Index/transpose errors can alter the product.",
+          "Conversion and temporary costs may outweigh access gains.",
+          "Compiler may undo or duplicate the transformation."
+        ],
+        "strategy_id": "B",
+        "tradeoffs": [
+          "Better dot operand access versus conversion work and storage.",
+          "Reusable prepacking changes lifetimes and timing boundaries and requires separate evaluation."
+        ],
+        "unknowns": [
+          "Preferred and current generated layouts are unavailable.",
+          "Conversion cost, strides, allocation and bandwidth are unknown.",
+          "Stale source cannot establish current/local validation."
+        ],
+        "validation": {
+          "correctness": [
+            "Use nonsymmetric/non-square inputs to detect accidental mathematical transpose.",
+            "Test original and supported tail/strided shapes, bounds and masks under unchanged float32 tolerances.",
+            "Verify packed-buffer lifetime and updates across repeated calls so stale input data cannot persist."
+          ],
+          "performance": [
+            "Inspect generated conversions/layout and acquire correctly bound B candidate profiles; A-current evidence cannot substitute.",
+            "Measure repeated complete latency including packing and dot-only diagnostics while holding tile/dtype/scheduling fixed.",
+            "Collect conversion bytes, relevant waits and compiler storage/spills; pack/no-pack ablation must precede causal claims.",
+            "Preserve exact source/toolchain/Knowledge revisions and record refreshes separately; retain both strategies."
+          ]
+        },
+        "variants": [
+          "Original unmodified load/dot.",
+          "Local per-tile pack with full cost included.",
+          "Reusable prepacking only as a later separate variant with both one-call and amortized timing."
+        ]
+      },
+      {
+        "calculation_ids": [
+          "calc-B-tile",
+          "calc-B-workload-floor"
+        ],
+        "id": "B-P2",
+        "mechanism": "Share a left tile across grouped j outputs with independent accumulators.",
+        "modification": "From B-parent, group adjacent j tiles, initialize one float32 accumulator per member, keep original k ordering, load left once per k group, load each member's right tile and update its accumulator, then mask each store. Keep tile=8 and layout unchanged.",
+        "observation_ids": [
+          "B-history",
+          "B-recipe",
+          "B-tile",
+          "B-floor",
+          "B-history-transfer",
+          "B-retain",
+          "B-missing"
+        ],
+        "parent_id": "B-parent",
+        "refs": [
+          "source:B",
+          "config:B",
+          "history:B",
+          "benchmark:B-benchmark",
+          "profile:B-profile",
+          "calculation:calc-B-tile",
+          "calculation:calc-B-workload-floor",
+          "case:different-history",
+          "case:multi-strategy-plans"
+        ],
+        "risks": [
+          "Larger accumulator state may spill or reduce concurrency.",
+          "Scheduling/locality can worsen despite fewer logical loads.",
+          "Partial groups may drop or overrun outputs."
+        ],
+        "strategy_id": "B",
+        "tradeoffs": [
+          "Fewer left requests versus larger working set.",
+          "Group size trades reuse against scheduling flexibility."
+        ],
+        "unknowns": [
+          "Physical cache reuse and traffic remain unmeasured.",
+          "Capacity, allocation and dominant runtime costs are absent.",
+          "Different-condition buffering history cannot predict current behavior."
+        ],
+        "validation": {
+          "correctness": [
+            "Check each output against C=A@B with original tolerances and per-output K order.",
+            "Exercise partial groups, K tails, permitted strides/degenerate shapes and prevent overlapping/premature stores.",
+            "Any later dtype variant needs independent tolerance checks and tile-fixed ablation."
+          ],
+          "performance": [
+            "Run condition-matched B-parent/variant trials with repeated timing and fresh identity-bound evidence.",
+            "Measure total latency, bytes/loads, waits/dependencies and compiler allocation/spills to distinguish reuse from scheduling effects.",
+            "Retest historical ideas under current conditions; vary one grouping knob at a time and retain B layout plus both A alternatives without changing best."
+          ]
+        },
+        "variants": [
+          "One output tile per group control.",
+          "Two adjacent output tiles with unchanged dtype/tile/layout.",
+          "Further group size as a separate one-variable experiment after resource checks."
+        ]
+      }
+    ],
+    "unknowns": [
+      "All inputs are evaluation-only synthetic artifacts. Source recipes, benchmark observations, separate scenarios and mathematical models have different scopes and prove no real TPU performance.",
+      "Memory snapshot is complete; combined atomic snapshot and Knowledge corpus snapshot consistency are false. Matching recorded revisions do not establish global simultaneity.",
+      "Profiles bind declared identities only; source/config/build digests do not independently prove loaded code or compiler lowering.",
+      "Neither route has measured critical paths, waits, bytes, compiler estimates, resource allocations, hardware rates or repeated-trial distributions sufficient to identify the bottleneck.",
+      "Exact predicates verify supplied field values, not explanations, causality or future performance.",
+      "The mixed-strategy compute_memory request was rejected without a result. Only successful independently bound calculations are used; shared workload dimensions never authorize borrowing another route's measurement.",
+      "The standalone nested-interval union is derived geometrically from supplied intervals; no allowlisted tool accepts that interval set. Its occupancy result is not a dependency critical path.",
+      "All four Plans remain proposals requiring correctness and performance experiments. No winner is selected, best is unchanged, and no implementation is modified."
+    ]
+  },
+  "review_enabled": false,
+  "schema_version": 1,
+  "skill_captures": {
+    "karpathy-guidelines": "---\nname: karpathy-guidelines\ndescription: Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgical changes, surface assumptions, and define verifiable success criteria.\nlicense: MIT\n---\n\n# Karpathy Guidelines\n\nBehavioral guidelines to reduce common LLM coding mistakes, derived from [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls.\n\n**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.\n\n## 1. Think Before Coding\n\n**Don't assume. Don't hide confusion. Surface tradeoffs.**\n\nBefore implementing:\n- State your assumptions explicitly. If uncertain, ask.\n- If multiple interpretations exist, present them - don't pick silently.\n- If a simpler approach exists, say so. Push back when warranted.\n- If something is unclear, stop. Name what's confusing. Ask.\n\n## 2. Simplicity First\n\n**Minimum code that solves the problem. Nothing speculative.**\n\n- No features beyond what was asked.\n- No abstractions for single-use code.\n- No \"flexibility\" or \"configurability\" that wasn't requested.\n- No error handling for impossible scenarios.\n- If you write 200 lines and it could be 50, rewrite it.\n\nAsk yourself: \"Would a senior engineer say this is overcomplicated?\" If yes, simplify.\n\n## 3. Surgical Changes\n\n**Touch only what you must. Clean up only your own mess.**\n\nWhen editing existing code:\n- Don't \"improve\" adjacent code, comments, or formatting.\n- Don't refactor things that aren't broken.\n- Match existing style, even if you'd do it differently.\n- If you notice unrelated dead code, mention it - don't delete it.\n\nWhen your changes create orphans:\n- Remove imports/variables/functions that YOUR changes made unused.\n- Don't remove pre-existing dead code unless asked.\n\nThe test: Every changed line should trace directly to the user's request.\n\n## 4. Goal-Driven Execution\n\n**Define success criteria. Loop until verified.**\n\nTransform tasks into verifiable goals:\n- \"Add validation\" → \"Write tests for invalid inputs, then make them pass\"\n- \"Fix the bug\" → \"Write a test that reproduces it, then make it pass\"\n- \"Refactor X\" → \"Ensure tests pass before and after\"\n\nFor multi-step tasks, state a brief plan:\n```\n1. [Step] → verify: [check]\n2. [Step] → verify: [check]\n3. [Step] → verify: [check]\n```\n\nStrong success criteria let you loop independently. Weak criteria (\"make it work\") require constant clarification.\n",
+    "systematic-debugging": "---\nname: systematic-debugging\ndescription: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes\n---\n\n# Systematic Debugging\n\n## Overview\n\n**Core principle:** ALWAYS find root cause before attempting fixes. Symptom fixes are failure.\n\n**Violating the letter of this process is violating the spirit of debugging.**\n\n## The Iron Law\n\n```\nNO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST\n```\n\nIf you haven't completed Phase 1, you cannot propose fixes.\n\n## When to Use\n\nUse for ANY technical issue:\n- Test failures\n- Bugs in production\n- Unexpected behavior\n- Performance problems\n- Build failures\n- Integration issues\n\n**Use this ESPECIALLY when:**\n- Under time pressure (emergencies make guessing tempting)\n- \"Just one quick fix\" seems obvious\n- You've already tried multiple fixes\n- Previous fix didn't work\n- You don't fully understand the issue\n\n**Don't skip when:**\n- Issue seems simple (simple bugs have root causes too)\n- You're in a hurry (rushing guarantees rework)\n- Manager wants it fixed NOW (systematic is faster than thrashing)\n\n## The Four Phases\n\nYou MUST complete each phase before proceeding to the next.\n\n### Phase 1: Root Cause Investigation\n\n**BEFORE attempting ANY fix:**\n\n1. **Read Error Messages Carefully**\n   - Don't skip past errors or warnings\n   - They often contain the exact solution\n   - Read stack traces completely\n   - Note line numbers, file paths, error codes\n\n2. **Reproduce Consistently**\n   - Can you trigger it reliably?\n   - What are the exact steps?\n   - Does it happen every time?\n   - If not reproducible → gather more data, don't guess\n\n3. **Check Recent Changes**\n   - What changed that could cause this?\n   - Git diff, recent commits\n   - New dependencies, config changes\n   - Environmental differences\n\n4. **Gather Evidence in Multi-Component Systems**\n\n   **WHEN system has multiple components (CI → build → signing, API → service → database):**\n\n   **BEFORE proposing fixes, add diagnostic instrumentation:**\n   ```\n   For EACH component boundary:\n     - Log what data enters component\n     - Log what data exits component\n     - Verify environment/config propagation\n     - Check state at each layer\n\n   Run once to gather evidence showing WHERE it breaks\n   THEN analyze evidence to identify failing component\n   THEN investigate that specific component\n   ```\n\n   **Example (multi-layer system):**\n   ```bash\n   # Layer 1: Workflow\n   echo \"=== Secrets available in workflow: ===\"\n   echo \"IDENTITY: $([ -n \"${IDENTITY:-}\" ] && echo SET || echo UNSET)\"\n\n   # Layer 2: Build script\n   echo \"=== Env vars in build script: ===\"\n   printenv IDENTITY >/dev/null 2>&1 && echo \"IDENTITY in environment\" || echo \"IDENTITY not in environment\"\n\n   # Layer 3: Signing script\n   echo \"=== Keychain state: ===\"\n   security list-keychains\n   security find-identity -v\n\n   # Layer 4: Actual signing\n   codesign --sign \"$IDENTITY\" --verbose=4 \"$APP\"\n   ```\n\n   **This reveals:** Which layer fails (secrets → workflow ✓, workflow → build ✗)\n\n5. **Trace Data Flow**\n\n   **WHEN error is deep in call stack:**\n\n   See `root-cause-tracing.md` in this directory for the complete backward tracing technique.\n\n   **Quick version:**\n   - Where does bad value originate?\n   - What called this with bad value?\n   - Keep tracing up until you find the source\n   - Fix at source, not at symptom\n\n### Phase 2: Pattern Analysis\n\n**Find the pattern before fixing:**\n\n1. **Find Working Examples**\n   - Locate similar working code in same codebase\n   - What works that's similar to what's broken?\n\n2. **Compare Against References**\n   - If implementing pattern, read reference implementation COMPLETELY\n   - Don't skim - read every line\n   - Understand the pattern fully before applying\n\n3. **Identify Differences**\n   - What's different between working and broken?\n   - List every difference, however small\n   - Don't assume \"that can't matter\"\n\n4. **Understand Dependencies**\n   - What other components does this need?\n   - What settings, config, environment?\n   - What assumptions does it make?\n\n### Phase 3: Hypothesis and Testing\n\n**Scientific method:**\n\n1. **Form Single Hypothesis**\n   - State clearly: \"I think X is the root cause because Y\"\n   - Write it down\n   - Be specific, not vague\n\n2. **Test Minimally**\n   - Make the SMALLEST possible change to test hypothesis\n   - One variable at a time\n   - Don't fix multiple things at once\n\n3. **Verify Before Continuing**\n   - Did it work? Yes → Phase 4\n   - Didn't work? Form NEW hypothesis\n   - DON'T add more fixes on top\n\n4. **When You Don't Know**\n   - Say \"I don't understand X\"\n   - Don't pretend to know\n   - Ask for help\n   - Research more\n\n### Phase 4: Implementation\n\n**Fix the root cause, not the symptom:**\n\n1. **Create Failing Test Case**\n   - Simplest possible reproduction\n   - Automated test if possible\n   - One-off test script if no framework\n   - MUST have before fixing\n   - Use the `superpowers:test-driven-development` skill for writing proper failing tests\n\n2. **Implement Single Fix**\n   - Address the root cause identified\n   - ONE change at a time\n   - No \"while I'm here\" improvements\n   - No bundled refactoring\n\n3. **Verify Fix**\n   - Test passes now?\n   - No other tests broken?\n   - Issue actually resolved?\n   - Use the `superpowers:verification-before-completion` skill before claiming success\n\n4. **If Fix Doesn't Work**\n   - STOP\n   - Count: How many fixes have you tried?\n   - If < 3: Return to Phase 1, re-analyze with new information\n   - **If ≥ 3: STOP and question the architecture (step 5 below)**\n   - DON'T attempt Fix #4 without architectural discussion\n\n5. **If 3+ Fixes Failed: Question Architecture**\n\n   **Pattern indicating architectural problem:**\n   - Each fix reveals new shared state/coupling/problem in different place\n   - Fixes require \"massive refactoring\" to implement\n   - Each fix creates new symptoms elsewhere\n\n   **STOP and question fundamentals:**\n   - Is this pattern fundamentally sound?\n   - Are we \"sticking with it through sheer inertia\"?\n   - Should we refactor architecture vs. continue fixing symptoms?\n\n   **Discuss with your human partner before attempting more fixes**\n\n   This is NOT a failed hypothesis - this is a wrong architecture.\n\n## Red Flags - STOP and Follow Process\n\nIf you catch yourself thinking:\n- \"Quick fix for now, investigate later\"\n- \"Just try changing X and see if it works\"\n- \"Add multiple changes, run tests\"\n- \"Skip the test, I'll manually verify\"\n- \"It's probably X, let me fix that\"\n- \"I don't fully understand but this might work\"\n- \"Pattern says X but I'll adapt it differently\"\n- \"Here are the main problems: [lists fixes without investigation]\"\n- Proposing solutions before tracing data flow\n- **\"One more fix attempt\" (when already tried 2+)**\n- **Each fix reveals new problem in different place**\n\n**ALL of these mean: STOP. Return to Phase 1.**\n\n**If 3+ fixes failed:** Question the architecture (see Phase 4.5)\n\n## your human partner's Signals You're Doing It Wrong\n\n**Watch for these redirections:**\n- \"Is that not happening?\" - You assumed without verifying\n- \"Will it show us...?\" - You should have added evidence gathering\n- \"Stop guessing\" - You're proposing fixes without understanding\n- \"Ultra-think this\" - Question fundamentals, not just symptoms\n- \"We're stuck?\" (frustrated) - Your approach isn't working\n\n**When you see these:** STOP. Return to Phase 1.\n\n## Common Rationalizations\n\n| Excuse | Reality |\n|--------|---------|\n| \"Issue is simple, don't need process\" | Simple issues have root causes too. Process is fast for simple bugs. |\n| \"Emergency, no time for process\" | Systematic debugging is FASTER than guess-and-check thrashing. |\n| \"Just try this first, then investigate\" | First fix sets the pattern. Do it right from the start. |\n| \"I'll write test after confirming fix works\" | Untested fixes don't stick. Test first proves it. |\n| \"Multiple fixes at once saves time\" | Can't isolate what worked. Causes new bugs. |\n| \"Reference too long, I'll adapt the pattern\" | Partial understanding guarantees bugs. Read it completely. |\n| \"I see the problem, let me fix it\" | Seeing symptoms ≠ understanding root cause. |\n| \"One more fix attempt\" (after 2+ failures) | 3+ failures = architectural problem. Question pattern, don't fix again. |\n\n## Quick Reference\n\n| Phase | Key Activities | Success Criteria |\n|-------|---------------|------------------|\n| **1. Root Cause** | Read errors, reproduce, check changes, gather evidence | Understand WHAT and WHY |\n| **2. Pattern** | Find working examples, compare | Identify differences |\n| **3. Hypothesis** | Form theory, test minimally | Confirmed or new hypothesis |\n| **4. Implementation** | Create test, fix, verify | Bug resolved, tests pass |\n\n## When Process Reveals \"No Root Cause\"\n\nIf systematic investigation reveals issue is truly environmental, timing-dependent, or external:\n\n1. You've completed the process\n2. Document what you investigated\n3. Implement appropriate handling (retry, timeout, error message)\n4. Add monitoring/logging for future investigation\n\n**But:** 95% of \"no root cause\" cases are incomplete investigation.\n\n## Supporting Techniques\n\nThese techniques are part of systematic debugging and available in this directory:\n\n- **`root-cause-tracing.md`** - Trace bugs backward through call stack to find original trigger\n- **`defense-in-depth.md`** - Add validation at multiple layers after finding root cause\n- **`condition-based-waiting.md`** - Replace arbitrary timeouts with condition polling\n",
+    "verification-before-completion": "---\nname: verification-before-completion\ndescription: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always\n---\n\n# Verification Before Completion\n\n## Overview\n\n**Core principle:** Evidence before claims, always.\n\n**Violating the letter of this rule is violating the spirit of this rule.**\n\n## The Iron Law\n\n```\nNO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE\n```\n\nIf you haven't run the verification command in this message, you cannot claim it passes.\n\n## The Gate Function\n\n```\nBEFORE claiming any status or expressing satisfaction:\n\n1. IDENTIFY: What command proves this claim?\n2. RUN: Execute the FULL command (fresh, complete)\n3. READ: Full output, check exit code, count failures\n4. VERIFY: Does output confirm the claim?\n   - If NO: State actual status with evidence\n   - If YES: State claim WITH evidence\n5. ONLY THEN: Make the claim\n\nSkip any step = lying, not verifying\n```\n\n## Common Failures\n\n| Claim | Requires | Not Sufficient |\n|-------|----------|----------------|\n| Tests pass | Test command output: 0 failures | Previous run, \"should pass\" |\n| Linter clean | Linter output: 0 errors | Partial check, extrapolation |\n| Build succeeds | Build command: exit 0 | Linter passing, logs look good |\n| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |\n| Regression test works | Red-green cycle verified | Test passes once |\n| Agent completed | VCS diff shows changes | Agent reports \"success\" |\n| Requirements met | Line-by-line checklist | Tests passing |\n\n## Red Flags - STOP\n\n- Using \"should\", \"probably\", \"seems to\"\n- Expressing satisfaction before verification (\"Great!\", \"Perfect!\", \"Done!\", etc.)\n- About to commit/push/PR without verification\n- Trusting agent success reports\n- Relying on partial verification\n- Thinking \"just this once\"\n- Tired and wanting work over\n- **ANY wording implying success without having run verification**\n\n## Rationalization Prevention\n\n| Excuse | Reality |\n|--------|---------|\n| \"Should work now\" | RUN the verification |\n| \"I'm confident\" | Confidence ≠ evidence |\n| \"Just this once\" | No exceptions |\n| \"Linter passed\" | Linter ≠ compiler |\n| \"Agent said success\" | Verify independently |\n| \"I'm tired\" | Exhaustion ≠ excuse |\n| \"Partial check is enough\" | Partial proves nothing |\n| \"Different words so rule doesn't apply\" | Spirit over letter |\n\n## Key Patterns\n\n**Tests:**\n```\n✅ [Run test command] [See: 34/34 pass] \"All tests pass\"\n❌ \"Should pass now\" / \"Looks correct\"\n```\n\n**Regression tests (TDD Red-Green):**\n```\n✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)\n❌ \"I've written a regression test\" (without red-green verification)\n```\n\n**Build:**\n```\n✅ [Run build] [See: exit 0] \"Build passes\"\n❌ \"Linter passed\" (linter doesn't check compilation)\n```\n\n**Requirements:**\n```\n✅ Re-read plan → Create checklist → Verify each → Report gaps or completion\n❌ \"Tests pass, phase complete\"\n```\n\n**Agent delegation:**\n```\n✅ Agent reports success → Check VCS diff → Verify changes → Report actual state\n❌ Trust agent report\n```\n\n## When To Apply\n\n**ALWAYS before:**\n- ANY variation of success/completion claims\n- ANY expression of satisfaction\n- ANY positive statement about work state\n- Committing, PR creation, task completion\n- Moving to next task\n- Delegating to agents\n\n**Rule applies to:**\n- Exact phrases\n- Paraphrases and synonyms\n- Implications of success\n- ANY communication suggesting completion/correctness\n"
+  },
+  "skills": {
+    "karpathy-guidelines": "6e22cc54cb02a5e98ae42d06d9d7292db0c1b43894831b32879beb0166b2aea7",
+    "systematic-debugging": "51c6435d98c83c42c96ba7c35725a0b2c376cd487fb1a4e6bd0ddbe7e33ef202",
+    "verification-before-completion": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3"
+  },
+  "tool_calls": [
+    {
+      "arguments": {
+        "profile_id": "A-profile",
+        "strategy_id": "A"
+      },
+      "id": "inspect-A-profile",
+      "name": "profile",
+      "result": {
+        "availability": "available",
+        "profile_id": "A-profile",
+        "reports": [
+          {
+            "artifact_refs": [
+              {
+                "digest": "192b73be479994acb9a9cb86acfbf6eb4de207e7e25f2e6c1409323cc1c444ab",
+                "size": 648
+              }
+            ],
+            "binding": {
+              "candidate_id": "A-candidate",
+              "context_id": "context",
+              "declared_identity": {
+                "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+                "config_digest": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+                "source_digest": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e"
+              },
+              "parent_id": "A-parent",
+              "provenance": "synthetic",
+              "run_id": "A-run",
+              "strategy_id": "A"
+            },
+            "binding_qualification": "declared_identity_only",
+            "capabilities": {
+              "compiler_metadata": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "custom_call": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              },
+              "dma": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              },
+              "execution_intervals": {
+                "availability": "available",
+                "event_count": 1,
+                "reason": null
+              },
+              "llo": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "resource_metadata": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "target_execution": {
+                "availability": "available",
+                "event_count": 1,
+                "reason": null
+              },
+              "waits": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              }
+            },
+            "critical_path": {
+              "availability": "unavailable",
+              "reason": "Event count or interval union does not establish dependencies or critical path.",
+              "value": null
+            },
+            "events": [
+              {
+                "bytes": null,
+                "classification": "measured",
+                "clock": "device_offset_ps",
+                "device": "/device:TPU:0",
+                "duration_ps": 10000000000,
+                "id": "group:0:sample:0",
+                "kind": "program",
+                "metadata": {},
+                "name": "jit_matmul(123)",
+                "reason": null,
+                "source_refs": [
+                  "legacy:groups/0/samples/0"
+                ],
+                "start_ps": 0
+              }
+            ],
+            "format": "normalized_profile.v1",
+            "interval_unions": [
+              {
+                "availability": "available",
+                "classification": "trace_derived",
+                "clock": "device_offset_ps",
+                "device": "/device:TPU:0",
+                "duration_ps": 10000000000,
+                "event_ids": [
+                  "group:0:sample:0"
+                ],
+                "missing_interval_count": 0,
+                "scope": "union_of_supplied_intervals_not_end_to_end_or_critical_path",
+                "unit": "ps"
+              }
+            ],
+            "metadata": {
+              "compiler_metadata": [],
+              "llo": [],
+              "resource_metadata": []
+            },
+            "multi_device_span": {
+              "availability": "unavailable",
+              "reason": "Cross-device clock alignment has not been verified.",
+              "value": null
+            },
+            "operation_stats": [
+              {
+                "classification": "trace_derived",
+                "clock": "device_offset_ps",
+                "count": 1,
+                "device": "/device:TPU:0",
+                "event_ids": [
+                  "group:0:sample:0"
+                ],
+                "events_per_measured_call": 1,
+                "invalid_samples": 0,
+                "kind": "program",
+                "line": "XLA Modules",
+                "line_id": 1,
+                "max_us": 10000.0,
+                "mean_us": 10000.0,
+                "median_us": 10000.0,
+                "min_us": 10000.0,
+                "name": "jit_matmul(123)",
+                "p95_us": 10000.0,
+                "program_id": 123,
+                "unit": "us"
+              }
+            ],
+            "producer": {
+              "calls": 1,
+              "format": "PallasKernels.read_profile",
+              "profile_path_hint": "synthetic.xplane.pb",
+              "time_source": "TPU XPlane device_duration_ps"
+            },
+            "quality": {
+              "availability": "available",
+              "errors": [],
+              "issues": [],
+              "warnings": []
+            },
+            "schema_version": 1
+          }
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "profile_id": "B-profile",
+        "strategy_id": "B"
+      },
+      "id": "inspect-B-profile",
+      "name": "profile",
+      "result": {
+        "availability": "available",
+        "profile_id": "B-profile",
+        "reports": [
+          {
+            "artifact_refs": [
+              {
+                "digest": "1c3eb79542175bc16e95b46721276c18af06dbe49aa180770741a976e81816bb",
+                "size": 648
+              }
+            ],
+            "binding": {
+              "candidate_id": "B-candidate",
+              "context_id": "context",
+              "declared_identity": {
+                "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+                "config_digest": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+                "source_digest": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5"
+              },
+              "parent_id": "B-parent",
+              "provenance": "synthetic",
+              "run_id": "B-run",
+              "strategy_id": "B"
+            },
+            "binding_qualification": "declared_identity_only",
+            "capabilities": {
+              "compiler_metadata": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "custom_call": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              },
+              "dma": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              },
+              "execution_intervals": {
+                "availability": "available",
+                "event_count": 1,
+                "reason": null
+              },
+              "llo": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "resource_metadata": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "target_execution": {
+                "availability": "available",
+                "event_count": 1,
+                "reason": null
+              },
+              "waits": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              }
+            },
+            "critical_path": {
+              "availability": "unavailable",
+              "reason": "Event count or interval union does not establish dependencies or critical path.",
+              "value": null
+            },
+            "events": [
+              {
+                "bytes": null,
+                "classification": "measured",
+                "clock": "device_offset_ps",
+                "device": "/device:TPU:0",
+                "duration_ps": 12000000000,
+                "id": "group:0:sample:0",
+                "kind": "program",
+                "metadata": {},
+                "name": "jit_matmul(123)",
+                "reason": null,
+                "source_refs": [
+                  "legacy:groups/0/samples/0"
+                ],
+                "start_ps": 0
+              }
+            ],
+            "format": "normalized_profile.v1",
+            "interval_unions": [
+              {
+                "availability": "available",
+                "classification": "trace_derived",
+                "clock": "device_offset_ps",
+                "device": "/device:TPU:0",
+                "duration_ps": 12000000000,
+                "event_ids": [
+                  "group:0:sample:0"
+                ],
+                "missing_interval_count": 0,
+                "scope": "union_of_supplied_intervals_not_end_to_end_or_critical_path",
+                "unit": "ps"
+              }
+            ],
+            "metadata": {
+              "compiler_metadata": [],
+              "llo": [],
+              "resource_metadata": []
+            },
+            "multi_device_span": {
+              "availability": "unavailable",
+              "reason": "Cross-device clock alignment has not been verified.",
+              "value": null
+            },
+            "operation_stats": [
+              {
+                "classification": "trace_derived",
+                "clock": "device_offset_ps",
+                "count": 1,
+                "device": "/device:TPU:0",
+                "event_ids": [
+                  "group:0:sample:0"
+                ],
+                "events_per_measured_call": 1,
+                "invalid_samples": 0,
+                "kind": "program",
+                "line": "XLA Modules",
+                "line_id": 1,
+                "max_us": 12000.0,
+                "mean_us": 12000.0,
+                "median_us": 12000.0,
+                "min_us": 12000.0,
+                "name": "jit_matmul(123)",
+                "p95_us": 12000.0,
+                "program_id": 123,
+                "unit": "us"
+              }
+            ],
+            "producer": {
+              "calls": 1,
+              "format": "PallasKernels.read_profile",
+              "profile_path_hint": "synthetic.xplane.pb",
+              "time_source": "TPU XPlane device_duration_ps"
+            },
+            "quality": {
+              "availability": "available",
+              "errors": [],
+              "issues": [],
+              "warnings": []
+            },
+            "schema_version": 1
+          }
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+      },
+      "id": "inspect-overlap-method",
+      "name": "knowledge",
+      "result": {
+        "artifact": {
+          "digest": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+          "size": 1064
+        },
+        "availability": "available",
+        "document": {
+          "category": "RSI/Methods",
+          "content": "# Overlap\n\n```rsi-method-v1\n{\"method\":{\"applicable_hardware\":[\"synthetic CPU\"],\"applicable_workloads\":[],\"description\":\"## Overlap\\nIndependent loads may overlap computation; additional buffers consume memory.\",\"expected_tradeoffs\":[],\"implementation_requirements\":[],\"known_risks\":[],\"local_experiment_refs\":[],\"mechanism\":\"overlap\",\"method_id\":\"method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07\",\"method_name\":\"Overlap\",\"optimization_category\":\"unclassified\",\"preconditions\":[],\"source_refs\":[{\"availability\":\"available\",\"document_id\":\"Research/Pipelining.md\",\"excerpt\":\"## Overlap\\nIndependent loads may overlap computation; additional buffers consume memory.\",\"locator\":\"heading:Overlap\",\"reason\":null,\"revision\":\"cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55\"}],\"source_revision\":{\"Research/Pipelining.md\":\"cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55\"},\"unknowns\":[\"Applicability and local performance require experiment evidence.\"],\"validation_status\":\"source_supported\"},\"schema_version\":1}\n```\n",
+          "id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+          "revision": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+          "title": "method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md"
+        },
+        "method": {
+          "applicable_hardware": [
+            "synthetic CPU"
+          ],
+          "applicable_workloads": [],
+          "description": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+          "expected_tradeoffs": [],
+          "implementation_requirements": [],
+          "known_risks": [],
+          "local_experiment_refs": [],
+          "mechanism": "overlap",
+          "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+          "method_name": "Overlap",
+          "optimization_category": "unclassified",
+          "preconditions": [],
+          "source_refs": [
+            {
+              "availability": "available",
+              "document_id": "Research/Pipelining.md",
+              "excerpt": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+              "locator": "heading:Overlap",
+              "reason": null,
+              "revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+            }
+          ],
+          "source_revision": {
+            "Research/Pipelining.md": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+          },
+          "unknowns": [
+            "Applicability and local performance require experiment evidence."
+          ],
+          "validation_status": "source_supported"
+        },
+        "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+        "note_id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+        "revision": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+        "sources": [
+          {
+            "artifact": {
+              "digest": "bdd73a6a9b71f7b821391e3e3024a64544a3a9f1ab05a595fb82f0878aef3774",
+              "size": 103
+            },
+            "availability": "available",
+            "current_revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55",
+            "document_id": "Research/Pipelining.md",
+            "excerpt": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+            "reason": null,
+            "revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+          }
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "The synthetic workload has M=32,N=32,K=64 and float32 operands/output.",
+          "Count dense conventional matrix multiplication with two operations per multiply-accumulate.",
+          "Minimum traffic is a model floor assuming each input is loaded once and output written once; it is not observed device traffic."
+        ],
+        "evidence_refs": [
+          "history:A",
+          "history:B",
+          "source:A",
+          "source:B"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32
+        },
+        "model": "compute_memory"
+      },
+      "error": "Calculation mixes strategy evidence",
+      "id": "calc-workload-floor",
+      "name": "calculate"
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "The source's scalar tile argument selects equal M,N,K tile extents.",
+          "All modeled operands and accumulator storage use four bytes per element.",
+          "This is logical tile storage/work, not compiler allocation, spill data, or hardware measurement."
+        ],
+        "evidence_refs": [
+          "source:A",
+          "config:A",
+          "history:A"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 16,
+          "tile_m": 16,
+          "tile_n": 16
+        },
+        "model": "tile"
+      },
+      "id": "calc-A-tile",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Dense matmul with rectangular padding to full tiles",
+          "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+          "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+          "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+          "The source's scalar tile argument selects equal M,N,K tile extents.",
+          "All modeled operands and accumulator storage use four bytes per element.",
+          "This is logical tile storage/work, not compiler allocation, spill data, or hardware measurement."
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:A",
+          "config:A",
+          "history:A"
+        ],
+        "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+        "input_units": {
+          "dtype_bytes": "byte/element",
+          "k": "elements",
+          "m": "elements",
+          "n": "elements",
+          "tile_k": "elements",
+          "tile_m": "elements",
+          "tile_n": "elements"
+        },
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 16,
+          "tile_m": 16,
+          "tile_n": 16
+        },
+        "model": "tile",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Register and accumulator spills",
+          "DMA startup",
+          "Vector alignment requirements",
+          "Cache reuse between output tiles",
+          "Compiler mapping and scheduling"
+        ],
+        "output_units": {
+          "a_tile_reuse": "count",
+          "b_tile_reuse": "count",
+          "output_tiles": "count",
+          "padded_flops": "FLOP",
+          "padded_k": "elements",
+          "padded_m": "elements",
+          "padded_n": "elements",
+          "padding_flops": "FLOP",
+          "reduction_steps": "count",
+          "tile_iterations": "count",
+          "tiled_read_bytes": "byte",
+          "tiled_total_bytes": "byte",
+          "tiled_write_bytes": "byte",
+          "unique_bytes": "byte",
+          "useful_flops": "FLOP",
+          "work_efficiency": "ratio"
+        },
+        "outputs": {
+          "a_tile_reuse": 16,
+          "b_tile_reuse": 16,
+          "output_tiles": 4,
+          "padded_flops": 131072,
+          "padded_k": 64,
+          "padded_m": 32,
+          "padded_n": 32,
+          "padding_flops": 0,
+          "reduction_steps": 4,
+          "tile_iterations": 16,
+          "tiled_read_bytes": 32768,
+          "tiled_total_bytes": 36864,
+          "tiled_write_bytes": 4096,
+          "unique_bytes": 20480,
+          "useful_flops": 131072,
+          "work_efficiency": 1.0
+        },
+        "schema_version": 1,
+        "strategy_id": "A",
+        "unavailable": {}
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "The source's scalar tile argument selects equal M,N,K tile extents.",
+          "All modeled operands and accumulator storage use four bytes per element.",
+          "This is logical tile storage/work, not compiler allocation, spill data, or hardware measurement."
+        ],
+        "evidence_refs": [
+          "source:B",
+          "config:B",
+          "history:B"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 8,
+          "tile_m": 8,
+          "tile_n": 8
+        },
+        "model": "tile"
+      },
+      "id": "calc-B-tile",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Dense matmul with rectangular padding to full tiles",
+          "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+          "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+          "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+          "The source's scalar tile argument selects equal M,N,K tile extents.",
+          "All modeled operands and accumulator storage use four bytes per element.",
+          "This is logical tile storage/work, not compiler allocation, spill data, or hardware measurement."
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:B",
+          "config:B",
+          "history:B"
+        ],
+        "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+        "input_units": {
+          "dtype_bytes": "byte/element",
+          "k": "elements",
+          "m": "elements",
+          "n": "elements",
+          "tile_k": "elements",
+          "tile_m": "elements",
+          "tile_n": "elements"
+        },
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 8,
+          "tile_m": 8,
+          "tile_n": 8
+        },
+        "model": "tile",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Register and accumulator spills",
+          "DMA startup",
+          "Vector alignment requirements",
+          "Cache reuse between output tiles",
+          "Compiler mapping and scheduling"
+        ],
+        "output_units": {
+          "a_tile_reuse": "count",
+          "b_tile_reuse": "count",
+          "output_tiles": "count",
+          "padded_flops": "FLOP",
+          "padded_k": "elements",
+          "padded_m": "elements",
+          "padded_n": "elements",
+          "padding_flops": "FLOP",
+          "reduction_steps": "count",
+          "tile_iterations": "count",
+          "tiled_read_bytes": "byte",
+          "tiled_total_bytes": "byte",
+          "tiled_write_bytes": "byte",
+          "unique_bytes": "byte",
+          "useful_flops": "FLOP",
+          "work_efficiency": "ratio"
+        },
+        "outputs": {
+          "a_tile_reuse": 8,
+          "b_tile_reuse": 8,
+          "output_tiles": 16,
+          "padded_flops": 131072,
+          "padded_k": 64,
+          "padded_m": 32,
+          "padded_n": 32,
+          "padding_flops": 0,
+          "reduction_steps": 8,
+          "tile_iterations": 128,
+          "tiled_read_bytes": 65536,
+          "tiled_total_bytes": 69632,
+          "tiled_write_bytes": 4096,
+          "unique_bytes": 20480,
+          "useful_flops": 131072,
+          "work_efficiency": 1.0
+        },
+        "schema_version": 1,
+        "strategy_id": "B",
+        "unavailable": {}
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "A hypothetical two-buffer pipeline retains two 16x16 float32 left tiles, two right tiles, and one accumulator simultaneously.",
+          "Lifetime coordinates 0 and 1 are abstract schedule positions, not measured seconds.",
+          "The estimate excludes padding, descriptors, layout conversions, dot temporaries, compiler allocation, and unrelated resident storage."
+        ],
+        "evidence_refs": [
+          "source:A",
+          "config:A",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "inputs": {
+          "buffers": [
+            {
+              "copies": 2,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 1,
+              "name": "left_ping_pong",
+              "start": 0
+            },
+            {
+              "copies": 2,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 1,
+              "name": "right_ping_pong",
+              "start": 0
+            },
+            {
+              "copies": 1,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 1,
+              "name": "accumulator",
+              "start": 0
+            }
+          ]
+        },
+        "model": "live_memory"
+      },
+      "id": "calc-A-pipeline-live",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Buffer lifetimes are half-open logical schedule intervals, not elapsed clock measurements",
+          "Listed buffers occupy one shared memory resource and copies coexist throughout each lifetime",
+          "Distinct buffers do not alias; an empty list means explicitly no modeled buffers",
+          "A hypothetical two-buffer pipeline retains two 16x16 float32 left tiles, two right tiles, and one accumulator simultaneously.",
+          "Lifetime coordinates 0 and 1 are abstract schedule positions, not measured seconds.",
+          "The estimate excludes padding, descriptors, layout conversions, dot temporaries, compiler allocation, and unrelated resident storage."
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:A",
+          "config:A",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "formula": "size_i=elements_i*dtype_bytes_i*copies_i; live(t)=sum(size_i for start_i<=t<end_i); peak=max(live(t)); pressure=peak/capacity",
+        "input_units": {
+          "buffers[].copies": "count",
+          "buffers[].dtype_bytes": "byte/element",
+          "buffers[].elements": "elements",
+          "buffers[].end": "schedule_step",
+          "buffers[].name": "text",
+          "buffers[].start": "schedule_step",
+          "capacity_bytes": "byte",
+          "hardware_basis": "text"
+        },
+        "inputs": {
+          "buffers": [
+            {
+              "copies": 2,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 1,
+              "name": "left_ping_pong",
+              "start": 0
+            },
+            {
+              "copies": 2,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 1,
+              "name": "right_ping_pong",
+              "start": 0
+            },
+            {
+              "copies": 1,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 1,
+              "name": "accumulator",
+              "start": 0
+            }
+          ]
+        },
+        "model": "live_memory",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Compiler temporaries and spills",
+          "Allocation alignment and fragmentation",
+          "Hidden runtime reservations",
+          "Unlisted memories and buffers"
+        ],
+        "output_units": {
+          "capacity_fraction": "ratio",
+          "headroom_bytes": "byte",
+          "peak_bytes": "byte",
+          "peak_step": "schedule_step"
+        },
+        "outputs": {
+          "capacity_fraction": null,
+          "headroom_bytes": null,
+          "peak_bytes": 5120,
+          "peak_step": 0
+        },
+        "schema_version": 1,
+        "strategy_id": "A",
+        "unavailable": {
+          "capacity_fraction": "No memory capacity supplied",
+          "headroom_bytes": "No memory capacity supplied"
+        }
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "These are explicitly hypothetical stage costs in seconds from the evaluation scenario, not the route benchmarks.",
+          "An independent transfer engine and compute engine overlap perfectly after fill, with fixed costs and no synchronization, contention, or extra buffer-management cost.",
+          "Dependencies allow transfer of the next tile while computing the current tile; actual routes require validation before such an assumption is accepted."
+        ],
+        "evidence_refs": [
+          "case:prediction-not-measurement"
+        ],
+        "inputs": {
+          "compute_s": 2,
+          "stages": 4,
+          "transfer_s": 3
+        },
+        "model": "pipeline"
+      },
+      "id": "calc-hypothetical-pipeline",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "stages counts repeated work items through one transfer engine and one compute engine",
+          "Transfer and compute use independent resources, with sufficient buffers and legal dependencies",
+          "Identical per-item durations; first transfer fills and final compute drains the pipeline",
+          "These are explicitly hypothetical stage costs in seconds from the evaluation scenario, not the route benchmarks.",
+          "An independent transfer engine and compute engine overlap perfectly after fill, with fixed costs and no synchronization, contention, or extra buffer-management cost.",
+          "Dependencies allow transfer of the next tile while computing the current tile; actual routes require validation before such an assumption is accepted."
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "case:prediction-not-measurement"
+        ],
+        "formula": "serial=N*(transfer+compute); ideal=transfer+compute+(N-1)*max(transfer,compute); speedup=serial/ideal",
+        "input_units": {
+          "compute_s": "s",
+          "stages": "count",
+          "transfer_s": "s"
+        },
+        "inputs": {
+          "compute_s": 2,
+          "stages": 4,
+          "transfer_s": 3
+        },
+        "model": "pipeline",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Synchronization and DMA startup",
+          "Bandwidth contention",
+          "Buffer allocation",
+          "Uneven work items",
+          "Additional transfer directions and pipeline engines"
+        ],
+        "output_units": {
+          "ideal_pipeline_s": "s",
+          "ideal_speedup": "ratio",
+          "saved_s": "s",
+          "serial_s": "s"
+        },
+        "outputs": {
+          "ideal_pipeline_s": 14,
+          "ideal_speedup": 1.4285714285714286,
+          "saved_s": 6,
+          "serial_s": 20
+        },
+        "schema_version": 1,
+        "strategy_id": "A",
+        "unavailable": {}
+      }
+    },
+    {
+      "arguments": {
+        "strategy_id": "A"
+      },
+      "id": "inspect-A-source",
+      "name": "source",
+      "result": {
+        "config": "{\"dtype\":\"float32\",\"tile\":16}",
+        "identity": {
+          "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+          "config_digest": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+          "source_digest": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e"
+        },
+        "parent_id": "A-parent",
+        "ref": "source:A",
+        "source": "# Synthetic route A; this fixture is never executed.\ndef matmul(a, b, out, M, N, K, tile):\n    for i in range(0, M, tile):\n        for j in range(0, N, tile):\n            acc = zeros((tile, tile), dtype=\"float32\")\n            for k in range(0, K, tile):\n                left = load(a, i, k, tile, mask=True)\n                right = load(b, k, j, tile, mask=True)\n                acc += dot(left, right)\n            store(out, i, j, acc, mask=True)\n"
+      }
+    },
+    {
+      "arguments": {
+        "strategy_id": "B"
+      },
+      "id": "inspect-B-source",
+      "name": "source",
+      "result": {
+        "config": "{\"dtype\":\"float32\",\"tile\":8}",
+        "identity": {
+          "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+          "config_digest": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+          "source_digest": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5"
+        },
+        "parent_id": "B-parent",
+        "ref": "source:B",
+        "source": "# Synthetic route B; this fixture is never executed.\ndef matmul(a, b, out, M, N, K, tile):\n    for i in range(0, M, tile):\n        for j in range(0, N, tile):\n            acc = zeros((tile, tile), dtype=\"float32\")\n            for k in range(0, K, tile):\n                left = load(a, i, k, tile, mask=True)\n                right = load(b, k, j, tile, mask=True)\n                acc += dot(left, right)\n            store(out, i, j, acc, mask=True)\n"
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "Route A workload is M=32,N=32,K=64 float32 with C=A@B.",
+          "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+          "This route-bound correction replaces the rejected mixed-strategy request; no output from that rejected request is used.",
+          "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+        ],
+        "evidence_refs": [
+          "history:A",
+          "source:A"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32
+        },
+        "model": "compute_memory"
+      },
+      "id": "calc-A-workload-floor",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Dense matrix multiplication with one multiply and one add per reduction element",
+          "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+          "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+          "Route A workload is M=32,N=32,K=64 float32 with C=A@B.",
+          "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+          "This route-bound correction replaces the rejected mixed-strategy request; no output from that rejected request is used.",
+          "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "history:A",
+          "source:A"
+        ],
+        "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+        "input_units": {
+          "bandwidth_bytes_s": "byte/s",
+          "compute_rate_flops_s": "FLOP/s",
+          "dtype_bytes": "byte/element",
+          "hardware_basis": "text",
+          "k": "elements",
+          "m": "elements",
+          "n": "elements"
+        },
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32
+        },
+        "model": "compute_memory",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Cache and hierarchy traffic",
+          "Launch and synchronization",
+          "Layout conversions",
+          "Non-matmul operations",
+          "Utilization and contention"
+        ],
+        "output_units": {
+          "arithmetic_intensity": "FLOP/byte",
+          "compute_bound_s": "s",
+          "memory_bound_s": "s",
+          "read_bytes": "byte",
+          "resource_lower_bound_s": "s",
+          "total_bytes": "byte",
+          "work_flops": "FLOP",
+          "write_bytes": "byte"
+        },
+        "outputs": {
+          "arithmetic_intensity": 6.4,
+          "compute_bound_s": null,
+          "memory_bound_s": null,
+          "read_bytes": 16384,
+          "resource_lower_bound_s": null,
+          "total_bytes": 20480,
+          "work_flops": 131072,
+          "write_bytes": 4096
+        },
+        "schema_version": 1,
+        "strategy_id": "A",
+        "unavailable": {
+          "compute_bound_s": "No compute throughput supplied",
+          "memory_bound_s": "No memory bandwidth supplied",
+          "resource_lower_bound_s": "No hardware rate supplied"
+        }
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "Route B workload is M=32,N=32,K=64 float32 with C=A@B.",
+          "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+          "This is a route B model, independently bound to route B evidence.",
+          "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+        ],
+        "evidence_refs": [
+          "history:B",
+          "source:B"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32
+        },
+        "model": "compute_memory"
+      },
+      "id": "calc-B-workload-floor",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Dense matrix multiplication with one multiply and one add per reduction element",
+          "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+          "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+          "Route B workload is M=32,N=32,K=64 float32 with C=A@B.",
+          "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+          "This is a route B model, independently bound to route B evidence.",
+          "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "history:B",
+          "source:B"
+        ],
+        "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+        "input_units": {
+          "bandwidth_bytes_s": "byte/s",
+          "compute_rate_flops_s": "FLOP/s",
+          "dtype_bytes": "byte/element",
+          "hardware_basis": "text",
+          "k": "elements",
+          "m": "elements",
+          "n": "elements"
+        },
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32
+        },
+        "model": "compute_memory",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Cache and hierarchy traffic",
+          "Launch and synchronization",
+          "Layout conversions",
+          "Non-matmul operations",
+          "Utilization and contention"
+        ],
+        "output_units": {
+          "arithmetic_intensity": "FLOP/byte",
+          "compute_bound_s": "s",
+          "memory_bound_s": "s",
+          "read_bytes": "byte",
+          "resource_lower_bound_s": "s",
+          "total_bytes": "byte",
+          "work_flops": "FLOP",
+          "write_bytes": "byte"
+        },
+        "outputs": {
+          "arithmetic_intensity": 6.4,
+          "compute_bound_s": null,
+          "memory_bound_s": null,
+          "read_bytes": 16384,
+          "resource_lower_bound_s": null,
+          "total_bytes": 20480,
+          "work_flops": 131072,
+          "write_bytes": 4096
+        },
+        "schema_version": 1,
+        "strategy_id": "B",
+        "unavailable": {
+          "compute_bound_s": "No compute throughput supplied",
+          "memory_bound_s": "No memory bandwidth supplied",
+          "resource_lower_bound_s": "No hardware rate supplied"
+        }
+      }
+    }
+  ],
+  "winner_selected": false
+}

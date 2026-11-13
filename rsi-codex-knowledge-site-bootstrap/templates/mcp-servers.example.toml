@@ -1,0 +1,5 @@
+# Sanitized example only. Verify exact syntax against installed Codex version.
+# [mcp_servers.internal_knowledge]
+# url = "https://<approved-internal-mcp-endpoint>/mcp"
+# bearer_token_env_var = "INTERNAL_MCP_TOKEN"
+# Never place literal credentials or confidential endpoints here.

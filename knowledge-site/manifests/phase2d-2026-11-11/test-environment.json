@@ -1,0 +1,40 @@
+{
+  "python": "3.13.14 (main, Jun 23 2026, 15:19:27) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+  "sqlite": "3.53.1",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "mcp": "1.30.0",
+  "pydantic": "2.14.2",
+  "commands": [
+    {
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent",
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 588.377,
+      "log": "tests.txt"
+    },
+    {
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site",
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "test_mcp.MCPTests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.361,
+      "log": "existing-mcp-tests.txt"
+    }
+  ]
+}

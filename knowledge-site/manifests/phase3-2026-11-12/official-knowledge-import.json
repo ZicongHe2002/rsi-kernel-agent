@@ -1,0 +1,74 @@
+{
+  "classification": "Source audit; no runtime capability or performance claim",
+  "status": "saved_and_refetched",
+  "methods": [
+    {
+      "method_id": "official-jax-synchronized-benchmark",
+      "id": "RSI/Methods/method-7fed7127a192332c58b89977f3b4e79ff417408645d7260d9ee9537c82dadb5e.md",
+      "revision": "54dd5817591eda66b0e81fe7282da49ed857877fef29c84facc3b07e99600e6b",
+      "source_status": [
+        {
+          "document_id": "RSI/References/phase3-official-2026-11-12.md",
+          "captured_revision": "5658e0180d4ab3ab739b46209a51611ef3593a665acec4ddb521bd00deaa6f77",
+          "current_revision": "5658e0180d4ab3ab739b46209a51611ef3593a665acec4ddb521bd00deaa6f77",
+          "availability": "available",
+          "reason": null
+        }
+      ],
+      "validation_status": "source_supported",
+      "local_experiment_refs": []
+    },
+    {
+      "method_id": "official-tpu-profile-mode-version-gates",
+      "id": "RSI/Methods/method-ff87c1a48a0bfe8f4f213f898375d50d146c873ea86c72e01dc24ea27fe741e7.md",
+      "revision": "b7a9b8e0db33719d6884f2f0ec94f22128e6f190a96c5a13fc55f16f9bfaa553",
+      "source_status": [
+        {
+          "document_id": "RSI/References/phase3-official-2026-11-12.md",
+          "captured_revision": "5658e0180d4ab3ab739b46209a51611ef3593a665acec4ddb521bd00deaa6f77",
+          "current_revision": "5658e0180d4ab3ab739b46209a51611ef3593a665acec4ddb521bd00deaa6f77",
+          "availability": "available",
+          "reason": null
+        }
+      ],
+      "validation_status": "source_supported",
+      "local_experiment_refs": []
+    }
+  ],
+  "deduplication": {
+    "method_count_before": 10,
+    "existing_ids": [
+      "hist-profile-accounting",
+      "hist-decode-prepare-padding",
+      "hist-decode-dma2",
+      "hist-decode-fp32-score",
+      "hist-decode-dma-alignment",
+      "hist-fwd-state-lifetime",
+      "hist-fwd-projection-group",
+      "hist-fwd-layout-r25",
+      "hist-fwd-causal-panel",
+      "hist-fwd-qk256"
+    ],
+    "existing_mechanisms": [
+      "DMA layout",
+      "causal work pruning",
+      "data reuse",
+      "dot geometry",
+      "evidence interpretation",
+      "layout",
+      "layout correctness",
+      "numerical correctness",
+      "online recurrence",
+      "prefetch pipeline"
+    ],
+    "retained_without_duplicate": [
+      "hist-decode-dma2",
+      "hist-profile-accounting"
+    ],
+    "decision": "Add only synchronization-boundary and version-capability-gate methods; do not recreate historical pipeline or profile accounting methods"
+  },
+  "source": {
+    "id": "RSI/References/phase3-official-2026-11-12.md",
+    "revision": "5658e0180d4ab3ab739b46209a51611ef3593a665acec4ddb521bd00deaa6f77"
+  }
+}

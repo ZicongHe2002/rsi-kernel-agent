@@ -1,0 +1,1 @@
+﻿{"tool_calls":[{"id":"inspect-A-profile","name":"profile","arguments":{"strategy_id":"A","profile_id":"A-profile"}},{"id":"inspect-B-profile","name":"profile","arguments":{"strategy_id":"B","profile_id":"B-profile"}},{"id":"inspect-overlap-method","name":"knowledge","arguments":{"method_id":"method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"}}]}

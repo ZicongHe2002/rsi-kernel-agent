@@ -1,0 +1,150 @@
+[
+  {
+    "arguments": {
+      "name": "karpathy-guidelines"
+    },
+    "id": "skill-guidelines",
+    "name": "skill",
+    "result": {
+      "content": "---\nname: karpathy-guidelines\ndescription: Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgical changes, surface assumptions, and define verifiable success criteria.\nlicense: MIT\n---\n\n# Karpathy Guidelines\n\nBehavioral guidelines to reduce common LLM coding mistakes, derived from [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls.\n\n**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.\n\n## 1. Think Before Coding\n\n**Don't assume. Don't hide confusion. Surface tradeoffs.**\n\nBefore implementing:\n- State your assumptions explicitly. If uncertain, ask.\n- If multiple interpretations exist, present them - don't pick silently.\n- If a simpler approach exists, say so. Push back when warranted.\n- If something is unclear, stop. Name what's confusing. Ask.\n\n## 2. Simplicity First\n\n**Minimum code that solves the problem. Nothing speculative.**\n\n- No features beyond what was asked.\n- No abstractions for single-use code.\n- No \"flexibility\" or \"configurability\" that wasn't requested.\n- No error handling for impossible scenarios.\n- If you write 200 lines and it could be 50, rewrite it.\n\nAsk yourself: \"Would a senior engineer say this is overcomplicated?\" If yes, simplify.\n\n## 3. Surgical Changes\n\n**Touch only what you must. Clean up only your own mess.**\n\nWhen editing existing code:\n- Don't \"improve\" adjacent code, comments, or formatting.\n- Don't refactor things that aren't broken.\n- Match existing style, even if you'd do it differently.\n- If you notice unrelated dead code, mention it - don't delete it.\n\nWhen your changes create orphans:\n- Remove imports/variables/functions that YOUR changes made unused.\n- Don't remove pre-existing dead code unless asked.\n\nThe test: Every changed line should trace directly to the user's request.\n\n## 4. Goal-Driven Execution\n\n**Define success criteria. Loop until verified.**\n\nTransform tasks into verifiable goals:\n- \"Add validation\" → \"Write tests for invalid inputs, then make them pass\"\n- \"Fix the bug\" → \"Write a test that reproduces it, then make it pass\"\n- \"Refactor X\" → \"Ensure tests pass before and after\"\n\nFor multi-step tasks, state a brief plan:\n```\n1. [Step] → verify: [check]\n2. [Step] → verify: [check]\n3. [Step] → verify: [check]\n```\n\nStrong success criteria let you loop independently. Weak criteria (\"make it work\") require constant clarification.\n",
+      "name": "karpathy-guidelines",
+      "sha256": "6e22cc54cb02a5e98ae42d06d9d7292db0c1b43894831b32879beb0166b2aea7"
+    }
+  },
+  {
+    "arguments": {
+      "name": "systematic-debugging"
+    },
+    "id": "skill-debugging",
+    "name": "skill",
+    "result": {
+      "content": "---\nname: systematic-debugging\ndescription: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes\n---\n\n# Systematic Debugging\n\n## Overview\n\n**Core principle:** ALWAYS find root cause before attempting fixes. Symptom fixes are failure.\n\n**Violating the letter of this process is violating the spirit of debugging.**\n\n## The Iron Law\n\n```\nNO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST\n```\n\nIf you haven't completed Phase 1, you cannot propose fixes.\n\n## When to Use\n\nUse for ANY technical issue:\n- Test failures\n- Bugs in production\n- Unexpected behavior\n- Performance problems\n- Build failures\n- Integration issues\n\n**Use this ESPECIALLY when:**\n- Under time pressure (emergencies make guessing tempting)\n- \"Just one quick fix\" seems obvious\n- You've already tried multiple fixes\n- Previous fix didn't work\n- You don't fully understand the issue\n\n**Don't skip when:**\n- Issue seems simple (simple bugs have root causes too)\n- You're in a hurry (rushing guarantees rework)\n- Manager wants it fixed NOW (systematic is faster than thrashing)\n\n## The Four Phases\n\nYou MUST complete each phase before proceeding to the next.\n\n### Phase 1: Root Cause Investigation\n\n**BEFORE attempting ANY fix:**\n\n1. **Read Error Messages Carefully**\n   - Don't skip past errors or warnings\n   - They often contain the exact solution\n   - Read stack traces completely\n   - Note line numbers, file paths, error codes\n\n2. **Reproduce Consistently**\n   - Can you trigger it reliably?\n   - What are the exact steps?\n   - Does it happen every time?\n   - If not reproducible → gather more data, don't guess\n\n3. **Check Recent Changes**\n   - What changed that could cause this?\n   - Git diff, recent commits\n   - New dependencies, config changes\n   - Environmental differences\n\n4. **Gather Evidence in Multi-Component Systems**\n\n   **WHEN system has multiple components (CI → build → signing, API → service → database):**\n\n   **BEFORE proposing fixes, add diagnostic instrumentation:**\n   ```\n   For EACH component boundary:\n     - Log what data enters component\n     - Log what data exits component\n     - Verify environment/config propagation\n     - Check state at each layer\n\n   Run once to gather evidence showing WHERE it breaks\n   THEN analyze evidence to identify failing component\n   THEN investigate that specific component\n   ```\n\n   **Example (multi-layer system):**\n   ```bash\n   # Layer 1: Workflow\n   echo \"=== Secrets available in workflow: ===\"\n   echo \"IDENTITY: $([ -n \"${IDENTITY:-}\" ] && echo SET || echo UNSET)\"\n\n   # Layer 2: Build script\n   echo \"=== Env vars in build script: ===\"\n   printenv IDENTITY >/dev/null 2>&1 && echo \"IDENTITY in environment\" || echo \"IDENTITY not in environment\"\n\n   # Layer 3: Signing script\n   echo \"=== Keychain state: ===\"\n   security list-keychains\n   security find-identity -v\n\n   # Layer 4: Actual signing\n   codesign --sign \"$IDENTITY\" --verbose=4 \"$APP\"\n   ```\n\n   **This reveals:** Which layer fails (secrets → workflow ✓, workflow → build ✗)\n\n5. **Trace Data Flow**\n\n   **WHEN error is deep in call stack:**\n\n   See `root-cause-tracing.md` in this directory for the complete backward tracing technique.\n\n   **Quick version:**\n   - Where does bad value originate?\n   - What called this with bad value?\n   - Keep tracing up until you find the source\n   - Fix at source, not at symptom\n\n### Phase 2: Pattern Analysis\n\n**Find the pattern before fixing:**\n\n1. **Find Working Examples**\n   - Locate similar working code in same codebase\n   - What works that's similar to what's broken?\n\n2. **Compare Against References**\n   - If implementing pattern, read reference implementation COMPLETELY\n   - Don't skim - read every line\n   - Understand the pattern fully before applying\n\n3. **Identify Differences**\n   - What's different between working and broken?\n   - List every difference, however small\n   - Don't assume \"that can't matter\"\n\n4. **Understand Dependencies**\n   - What other components does this need?\n   - What settings, config, environment?\n   - What assumptions does it make?\n\n### Phase 3: Hypothesis and Testing\n\n**Scientific method:**\n\n1. **Form Single Hypothesis**\n   - State clearly: \"I think X is the root cause because Y\"\n   - Write it down\n   - Be specific, not vague\n\n2. **Test Minimally**\n   - Make the SMALLEST possible change to test hypothesis\n   - One variable at a time\n   - Don't fix multiple things at once\n\n3. **Verify Before Continuing**\n   - Did it work? Yes → Phase 4\n   - Didn't work? Form NEW hypothesis\n   - DON'T add more fixes on top\n\n4. **When You Don't Know**\n   - Say \"I don't understand X\"\n   - Don't pretend to know\n   - Ask for help\n   - Research more\n\n### Phase 4: Implementation\n\n**Fix the root cause, not the symptom:**\n\n1. **Create Failing Test Case**\n   - Simplest possible reproduction\n   - Automated test if possible\n   - One-off test script if no framework\n   - MUST have before fixing\n   - Use the `superpowers:test-driven-development` skill for writing proper failing tests\n\n2. **Implement Single Fix**\n   - Address the root cause identified\n   - ONE change at a time\n   - No \"while I'm here\" improvements\n   - No bundled refactoring\n\n3. **Verify Fix**\n   - Test passes now?\n   - No other tests broken?\n   - Issue actually resolved?\n   - Use the `superpowers:verification-before-completion` skill before claiming success\n\n4. **If Fix Doesn't Work**\n   - STOP\n   - Count: How many fixes have you tried?\n   - If < 3: Return to Phase 1, re-analyze with new information\n   - **If ≥ 3: STOP and question the architecture (step 5 below)**\n   - DON'T attempt Fix #4 without architectural discussion\n\n5. **If 3+ Fixes Failed: Question Architecture**\n\n   **Pattern indicating architectural problem:**\n   - Each fix reveals new shared state/coupling/problem in different place\n   - Fixes require \"massive refactoring\" to implement\n   - Each fix creates new symptoms elsewhere\n\n   **STOP and question fundamentals:**\n   - Is this pattern fundamentally sound?\n   - Are we \"sticking with it through sheer inertia\"?\n   - Should we refactor architecture vs. continue fixing symptoms?\n\n   **Discuss with your human partner before attempting more fixes**\n\n   This is NOT a failed hypothesis - this is a wrong architecture.\n\n## Red Flags - STOP and Follow Process\n\nIf you catch yourself thinking:\n- \"Quick fix for now, investigate later\"\n- \"Just try changing X and see if it works\"\n- \"Add multiple changes, run tests\"\n- \"Skip the test, I'll manually verify\"\n- \"It's probably X, let me fix that\"\n- \"I don't fully understand but this might work\"\n- \"Pattern says X but I'll adapt it differently\"\n- \"Here are the main problems: [lists fixes without investigation]\"\n- Proposing solutions before tracing data flow\n- **\"One more fix attempt\" (when already tried 2+)**\n- **Each fix reveals new problem in different place**\n\n**ALL of these mean: STOP. Return to Phase 1.**\n\n**If 3+ fixes failed:** Question the architecture (see Phase 4.5)\n\n## your human partner's Signals You're Doing It Wrong\n\n**Watch for these redirections:**\n- \"Is that not happening?\" - You assumed without verifying\n- \"Will it show us...?\" - You should have added evidence gathering\n- \"Stop guessing\" - You're proposing fixes without understanding\n- \"Ultra-think this\" - Question fundamentals, not just symptoms\n- \"We're stuck?\" (frustrated) - Your approach isn't working\n\n**When you see these:** STOP. Return to Phase 1.\n\n## Common Rationalizations\n\n| Excuse | Reality |\n|--------|---------|\n| \"Issue is simple, don't need process\" | Simple issues have root causes too. Process is fast for simple bugs. |\n| \"Emergency, no time for process\" | Systematic debugging is FASTER than guess-and-check thrashing. |\n| \"Just try this first, then investigate\" | First fix sets the pattern. Do it right from the start. |\n| \"I'll write test after confirming fix works\" | Untested fixes don't stick. Test first proves it. |\n| \"Multiple fixes at once saves time\" | Can't isolate what worked. Causes new bugs. |\n| \"Reference too long, I'll adapt the pattern\" | Partial understanding guarantees bugs. Read it completely. |\n| \"I see the problem, let me fix it\" | Seeing symptoms ≠ understanding root cause. |\n| \"One more fix attempt\" (after 2+ failures) | 3+ failures = architectural problem. Question pattern, don't fix again. |\n\n## Quick Reference\n\n| Phase | Key Activities | Success Criteria |\n|-------|---------------|------------------|\n| **1. Root Cause** | Read errors, reproduce, check changes, gather evidence | Understand WHAT and WHY |\n| **2. Pattern** | Find working examples, compare | Identify differences |\n| **3. Hypothesis** | Form theory, test minimally | Confirmed or new hypothesis |\n| **4. Implementation** | Create test, fix, verify | Bug resolved, tests pass |\n\n## When Process Reveals \"No Root Cause\"\n\nIf systematic investigation reveals issue is truly environmental, timing-dependent, or external:\n\n1. You've completed the process\n2. Document what you investigated\n3. Implement appropriate handling (retry, timeout, error message)\n4. Add monitoring/logging for future investigation\n\n**But:** 95% of \"no root cause\" cases are incomplete investigation.\n\n## Supporting Techniques\n\nThese techniques are part of systematic debugging and available in this directory:\n\n- **`root-cause-tracing.md`** - Trace bugs backward through call stack to find original trigger\n- **`defense-in-depth.md`** - Add validation at multiple layers after finding root cause\n- **`condition-based-waiting.md`** - Replace arbitrary timeouts with condition polling\n",
+      "name": "systematic-debugging",
+      "sha256": "51c6435d98c83c42c96ba7c35725a0b2c376cd487fb1a4e6bd0ddbe7e33ef202"
+    }
+  },
+  {
+    "arguments": {
+      "name": "verification-before-completion"
+    },
+    "id": "skill-verification",
+    "name": "skill",
+    "result": {
+      "content": "---\nname: verification-before-completion\ndescription: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always\n---\n\n# Verification Before Completion\n\n## Overview\n\n**Core principle:** Evidence before claims, always.\n\n**Violating the letter of this rule is violating the spirit of this rule.**\n\n## The Iron Law\n\n```\nNO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE\n```\n\nIf you haven't run the verification command in this message, you cannot claim it passes.\n\n## The Gate Function\n\n```\nBEFORE claiming any status or expressing satisfaction:\n\n1. IDENTIFY: What command proves this claim?\n2. RUN: Execute the FULL command (fresh, complete)\n3. READ: Full output, check exit code, count failures\n4. VERIFY: Does output confirm the claim?\n   - If NO: State actual status with evidence\n   - If YES: State claim WITH evidence\n5. ONLY THEN: Make the claim\n\nSkip any step = lying, not verifying\n```\n\n## Common Failures\n\n| Claim | Requires | Not Sufficient |\n|-------|----------|----------------|\n| Tests pass | Test command output: 0 failures | Previous run, \"should pass\" |\n| Linter clean | Linter output: 0 errors | Partial check, extrapolation |\n| Build succeeds | Build command: exit 0 | Linter passing, logs look good |\n| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |\n| Regression test works | Red-green cycle verified | Test passes once |\n| Agent completed | VCS diff shows changes | Agent reports \"success\" |\n| Requirements met | Line-by-line checklist | Tests passing |\n\n## Red Flags - STOP\n\n- Using \"should\", \"probably\", \"seems to\"\n- Expressing satisfaction before verification (\"Great!\", \"Perfect!\", \"Done!\", etc.)\n- About to commit/push/PR without verification\n- Trusting agent success reports\n- Relying on partial verification\n- Thinking \"just this once\"\n- Tired and wanting work over\n- **ANY wording implying success without having run verification**\n\n## Rationalization Prevention\n\n| Excuse | Reality |\n|--------|---------|\n| \"Should work now\" | RUN the verification |\n| \"I'm confident\" | Confidence ≠ evidence |\n| \"Just this once\" | No exceptions |\n| \"Linter passed\" | Linter ≠ compiler |\n| \"Agent said success\" | Verify independently |\n| \"I'm tired\" | Exhaustion ≠ excuse |\n| \"Partial check is enough\" | Partial proves nothing |\n| \"Different words so rule doesn't apply\" | Spirit over letter |\n\n## Key Patterns\n\n**Tests:**\n```\n✅ [Run test command] [See: 34/34 pass] \"All tests pass\"\n❌ \"Should pass now\" / \"Looks correct\"\n```\n\n**Regression tests (TDD Red-Green):**\n```\n✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)\n❌ \"I've written a regression test\" (without red-green verification)\n```\n\n**Build:**\n```\n✅ [Run build] [See: exit 0] \"Build passes\"\n❌ \"Linter passed\" (linter doesn't check compilation)\n```\n\n**Requirements:**\n```\n✅ Re-read plan → Create checklist → Verify each → Report gaps or completion\n❌ \"Tests pass, phase complete\"\n```\n\n**Agent delegation:**\n```\n✅ Agent reports success → Check VCS diff → Verify changes → Report actual state\n❌ Trust agent report\n```\n\n## When To Apply\n\n**ALWAYS before:**\n- ANY variation of success/completion claims\n- ANY expression of satisfaction\n- ANY positive statement about work state\n- Committing, PR creation, task completion\n- Moving to next task\n- Delegating to agents\n\n**Rule applies to:**\n- Exact phrases\n- Paraphrases and synonyms\n- Implications of success\n- ANY communication suggesting completion/correctness\n",
+      "name": "verification-before-completion",
+      "sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3"
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Shapes and float32 dtype follow the pinned synthetic workload; dtype_bytes=4 represents float32.",
+        "The declared tile=16 applies to all three blocked dimensions.",
+        "This is an analytic tile working-set calculation, not allocated compiler memory or measured hardware traffic.",
+        "Masked loads and stores must preserve the actual workload semantics; no unsupported hardware rate is assumed."
+      ],
+      "evidence_refs": [
+        "source:A",
+        "config:A",
+        "history:A"
+      ],
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 16,
+        "tile_m": 16,
+        "tile_n": 16
+      },
+      "model": "tile"
+    },
+    "id": "tile-A-baseline",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "Shapes and float32 dtype follow the pinned synthetic workload; dtype_bytes=4 represents float32.",
+        "The declared tile=16 applies to all three blocked dimensions.",
+        "This is an analytic tile working-set calculation, not allocated compiler memory or measured hardware traffic.",
+        "Masked loads and stores must preserve the actual workload semantics; no unsupported hardware rate is assumed."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A",
+        "history:A"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 16,
+        "tile_m": 16,
+        "tile_n": 16
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 16,
+        "b_tile_reuse": 16,
+        "output_tiles": 4,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 4,
+        "tile_iterations": 16,
+        "tiled_read_bytes": 32768,
+        "tiled_total_bytes": 36864,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {}
+    }
+  }
+]

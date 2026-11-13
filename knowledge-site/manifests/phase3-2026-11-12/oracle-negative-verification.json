@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-12T07:52:58.963037+00:00",
+  "network_calls": 0,
+  "store_access": "sqlite mode=ro and query_only; no Store writes or consider calls",
+  "scope": "Only saved runtime2 small/boundary Oracle negative controls; no baseline/default NPZ reads",
+  "controls": [
+    {
+      "kind": "attention",
+      "run_id": "runtime-run:9d5212d6c003a102b015985eced689242d5df5ef10160dfce9e5bb64bf52defa",
+      "candidate_id": "oracle-negative-candidate:54fba11bbe506e328cf12f6f96ccb9f97550153ba56e1e37f369292567a2d73e",
+      "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+      "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+      "classification": "incorrect",
+      "verified_stage_receipts": [
+        "compile",
+        "correctness",
+        "generate"
+      ],
+      "stored_execution_request_stages": [
+        "compile",
+        "correctness",
+        "generate"
+      ],
+      "benchmark_or_profile_requested": false,
+      "evaluation_confirmed": false,
+      "promotion_decision": {
+        "branch_promoted": false,
+        "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+        "eligible": false,
+        "reason": "run_not_succeeded",
+        "task_promoted": false
+      },
+      "promoted": false,
+      "source_ref": {
+        "digest": "2aa9feef6ca1dd722d1c52ae5451f5be2b46c70e8b9ece0278e115dac4d8ffc4",
+        "size": 113364
+      },
+      "source_bundle_ref": {
+        "digest": "26a51116ad211349233dc44c58cc8508e4bf08834bf0ac333095252a3790be4e",
+        "size": 67014
+      },
+      "diff_ref": {
+        "digest": "aeb35180c7922be4228866ccea67158cefc25c24aa8b7ebb027fc84ffa007238",
+        "size": 672
+      },
+      "changed_top_level_definitions": [
+        "build_mla_decode_contiguous"
+      ],
+      "native_builder_body_unchanged": true,
+      "frozen_oracle_source_sha256": "e53b0e5ccff3ecf18192f30ef179cdb207c177f2f2dac48b2a08f40acc5000a6",
+      "frozen_oracle_bundle_ref": {
+        "digest": "5d15d9724a1dfe21a10e5f3cf770203521935189ddac4b53dc6f0b3d6275ff74",
+        "size": 67013
+      },
+      "oracle_ast_unchanged": true,
+      "unique_stage_artifacts": 28,
+      "unique_stage_artifact_bytes": 5697469,
+      "evidence_records_traversed": 6,
+      "all_stage_artifacts_reachable_from_evaluation": true,
+      "cases_independently_recomputed_from_npz": [
+        {
+          "id": "decode-small",
+          "comparisons": [
+            {
+              "name": "attention",
+              "finite": true,
+              "tolerance_violations": 1,
+              "violation_coordinates": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "max_abs": 0.999267578125,
+              "max_rel": 42.65079365079365,
+              "rms": 0.01104415679421634
+            },
+            {
+              "name": "cache",
+              "exact_raw_bytes_equal": true,
+              "mismatching_bf16_words": 0,
+              "mismatch_coordinates": []
+            }
+          ]
+        },
+        {
+          "id": "decode-boundary",
+          "comparisons": [
+            {
+              "name": "attention",
+              "finite": true,
+              "tolerance_violations": 1,
+              "violation_coordinates": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              "max_abs": 1.0,
+              "max_rel": 9.999999999999999e+29,
+              "rms": 0.012759098283592072
+            },
+            {
+              "name": "cache",
+              "exact_raw_bytes_equal": true,
+              "mismatching_bf16_words": 0,
+              "mismatch_coordinates": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "cache",
+      "run_id": "runtime-run:e2a2ecf56d89101d8439099cb38ef1925d98f75bb5b429169dd3755b7fcb9ed0",
+      "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+      "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+      "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+      "classification": "incorrect",
+      "verified_stage_receipts": [
+        "compile",
+        "correctness",
+        "generate"
+      ],
+      "stored_execution_request_stages": [
+        "compile",
+        "correctness",
+        "generate"
+      ],
+      "benchmark_or_profile_requested": false,
+      "evaluation_confirmed": false,
+      "promotion_decision": {
+        "branch_promoted": false,
+        "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+        "eligible": false,
+        "reason": "run_not_succeeded",
+        "task_promoted": false
+      },
+      "promoted": false,
+      "source_ref": {
+        "digest": "4aa9cd1c3342e861e46927e834b9ecccb78e5ce6832125c39df0bc18988f901b",
+        "size": 113497
+      },
+      "source_bundle_ref": {
+        "digest": "72e0e714140562de9acc4467e23f044ac1a6dca56a9f16922eda35a2b1981196",
+        "size": 67014
+      },
+      "diff_ref": {
+        "digest": "b495ec92701f52934a9a1233d0109b969feddd339c331ac21dd6c5acac98d8f3",
+        "size": 807
+      },
+      "changed_top_level_definitions": [
+        "build_mla_decode_contiguous"
+      ],
+      "native_builder_body_unchanged": true,
+      "frozen_oracle_source_sha256": "e53b0e5ccff3ecf18192f30ef179cdb207c177f2f2dac48b2a08f40acc5000a6",
+      "frozen_oracle_bundle_ref": {
+        "digest": "5d15d9724a1dfe21a10e5f3cf770203521935189ddac4b53dc6f0b3d6275ff74",
+        "size": 67013
+      },
+      "oracle_ast_unchanged": true,
+      "unique_stage_artifacts": 28,
+      "unique_stage_artifact_bytes": 5697461,
+      "evidence_records_traversed": 6,
+      "all_stage_artifacts_reachable_from_evaluation": true,
+      "cases_independently_recomputed_from_npz": [
+        {
+          "id": "decode-small",
+          "comparisons": [
+            {
+              "name": "attention",
+              "finite": true,
+              "tolerance_violations": 0,
+              "violation_coordinates": [],
+              "max_abs": 0.00390625,
+              "max_rel": 42.65079365079365,
+              "rms": 0.0002860686035596847
+            },
+            {
+              "name": "cache",
+              "exact_raw_bytes_equal": false,
+              "mismatching_bf16_words": 1,
+              "mismatch_coordinates": [
+                [
+                  0,
+                  0,
+                  0
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "decode-boundary",
+          "comparisons": [
+            {
+              "name": "attention",
+              "finite": true,
+              "tolerance_violations": 0,
+              "violation_coordinates": [],
+              "max_abs": 0.001953125,
+              "max_rel": 0.8807947019867549,
+              "rms": 0.00018485763088246714
+            },
+            {
+              "name": "cache",
+              "exact_raw_bytes_equal": false,
+              "mismatching_bf16_words": 1,
+              "mismatch_coordinates": [
+                [
+                  1,
+                  0,
+                  0
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "known_wrong_attention_and_cache_rejected": true,
+  "limitation": "Archived real execution independently verified locally; no hardware re-execution. Does not prove every incorrect Candidate is rejected."
+}

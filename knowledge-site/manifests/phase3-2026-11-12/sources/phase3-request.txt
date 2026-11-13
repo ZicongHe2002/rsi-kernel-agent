@@ -1,0 +1,1676 @@
+# Phase 3 — Real Hardware Integration & RSI Kernel Optimization
+
+> 项目：RSI-Kernel-Agent
+>
+> 日期：2026-11-11
+>
+> 目标硬件：TPU v6e
+>
+> 目标 Kernel：MLA Forward / MLA Decode
+>
+> 前置阶段：Phase 2A / 2B / 2C / 2D+ 已完成本地软件验收
+>
+> 本文档包含完整执行 Prompt、项目架构、历史知识恢复要求、技术参考和验收标准。
+
+---
+
+# 0. 项目背景与最终目标
+
+我们正在开发 RSI-Kernel-Agent。
+
+项目的最终目标是构建一个能够自主优化 TPU Kernel 的系统：
+
+1. 分析当前 Kernel 的代码和性能瓶颈。
+2. 从开源资料和已有知识库中搜索优化方法。
+3. 读取之前的优化历史和实验经验。
+4. 利用数学模型分析不同优化方向。
+5. 生成多个有依据的优化 Plan。
+6. 自动生成独立 Candidate。
+7. 在真实 TPU 上执行实验。
+8. 验证正确性和性能。
+9. 将结果写回 Memory。
+10. 根据新的实验结果进入下一轮优化。
+
+目前已经完成：
+
+| 阶段 | 内容 | 状态 |
+|---|---|---|
+| Phase 2A | Core Foundation | 完成 |
+| Phase 2B | Knowledge / Memory | 完成 |
+| Phase 2C | Profiler / Analyzer | 完成 |
+| Phase 2D+ | Workflow / Controller / Synthetic E2E | 完成 |
+| Phase 3 | Real Hardware Integration | 当前开始 |
+
+Phase 2D+ 的最新验收报告显示：
+
+- 根级测试：230 项。
+- 229 项通过。
+- 1 项跳过。
+- 0 项失败。
+- 既有 MCP 回归：5/5 通过。
+- 已完成两轮 Synthetic RSI Demo。
+- 已验证多 Plan、Candidate、Repair、Recovery 和 Memory 更新。
+
+注意：这些是 Phase 2 的软件验收结果，不代表真实 Kernel 或 TPU 性能已经验证。
+
+## Phase 3 的最终目标
+
+**让现有 RSI-Kernel-Agent 真正连接 PallasKernels 和 Colab TPU v6e，完成真实 MLA Kernel 的多方案优化和递归实验。**
+
+最终系统：
+
+```text
+             Current Pallas Kernel
+                       |
+                       v
+              Memory + Knowledge
+                       |
+                       v
+               Profiler / Analyzer
+                       |
+                       v
+                    PlanSet
+                       |
+                       v
+                   Controller
+                       |
+                       v
+                Execution Adapter
+                       |
+                       v
+                Existing Colab Bridge
+                       |
+                       v
+                   TPU v6e
+                       |
+             +---------+---------+
+             |                   |
+             v                   v
+        Correctness           Benchmark
+             |                   |
+             +---------+---------+
+                       |
+                       v
+                 Profile / XPlane
+                       |
+                       v
+                Evidence Validation
+                       |
+                       v
+               ExperimentStore
+                       |
+                       v
+                 Memory Update
+                       |
+                       v
+                   Next Round
+```
+
+必须区分：
+
+- 软件集成成功。
+- 真实 Kernel 执行成功。
+- 正确性验证成功。
+- 性能测量有效。
+- 性能确实获得提升。
+
+不能将这些结果混为一谈。
+
+---
+
+# 1. 四个目录的职责与权威关系
+
+本节是最高优先级的目录约定。
+
+## 1.1 RSI 主项目
+
+路径：
+
+`C:\Users\fengluo\Desktop\rsi-kernel-agent`
+
+这是当前唯一的 RSI-Kernel-Agent 主项目。
+
+用户提供的目录截图显示，里面已经包含：
+
+```text
+rsi-kernel-agent/
+    .artifacts/
+    docs/
+    knowledge-site/
+    rsi-codex-knowledge-site-bootstrap/
+    src/
+    tests/
+    AGENTS
+    LICENSE
+```
+
+实际目录以本机为准。
+
+其中已经包含：
+
+- Phase 2A–2D+ 完整源码。
+- ExperimentStore / ArtifactStore。
+- Knowledge / Memory。
+- Profiler / Analyzer。
+- Workflow / Controller。
+- 测试。
+- CLI / Synthetic Demo。
+- 知识库网站。
+- 架构文档和验收报告。
+
+**这是 Phase 3 唯一的 RSI 系统开发主项目。**
+
+所有新的 RSI 系统代码、测试、接口、文档、实施计划和验收报告都优先放在这里。
+
+开始之前必须阅读根目录的 AGENTS.md 和现有开发约定。
+
+不要把这个目录误认为单纯的文档存储目录。
+
+## 1.2 当前真实 Kernel 仓库
+
+路径：
+
+`C:\Users\fengluo\Desktop\training\PallasKernels`
+
+这是目前真正存放 Pallas Kernel 的仓库。
+
+重点关注：
+
+- MLA Forward。
+- MLA Decode。
+- Kernel 数学实现。
+- Pallas Kernel 实现。
+- Reference Implementation。
+- Correctness Tests。
+- Benchmark Scripts。
+- Profiler Scripts。
+- XPlane Parser。
+- 现有 Kernel 优化版本。
+- 配置与运行环境。
+
+特别关注：
+
+- `mla_fwd.py`
+- `mla_decode.py`
+
+以及两者的相关调用、测试和配置。
+
+不要只看文件名，必须理解实际调用链和数学语义。
+
+优先只读审计。
+
+需要修改时，必须创建独立 Candidate 工作区，不得直接覆盖原始最佳实现。
+
+注意：此前曾出现漏掉 `training` 的错误路径。必须核实上述完整路径，不要擅自选择其他同名仓库。
+
+## 1.3 历史实验仓库
+
+路径：
+
+`C:\Users\fengluo\Desktop\project2`
+
+这是以前 MLA Forward 和 MLA Decode 的修改历史、实验记录和研究资料。
+
+它不是当前 RSI 主项目，也不是当前 Kernel 的权威源码目录。
+
+它的主要价值是恢复以前的经验：
+
+- 历史代码修改。
+- 历史优化版本。
+- 历史 Tile / Block Size。
+- Pipeline / Double Buffering。
+- DMA / Prefetch。
+- Layout / Data Reuse。
+- 历史 Shape。
+- 正确性测试。
+- Benchmark 数据。
+- Profile 数据。
+- 成功和失败的实验。
+- 优化原因分析。
+
+这个目录可能比较混乱。
+
+**不要简单复制整个 project2，也不要直接把里面的代码当成当前版本。**
+
+需要 AI 主动梳理历史实验，提炼有价值的信息，接入 RSI 现有 Knowledge / Memory 体系。
+
+## 1.4 Colab 连接资料
+
+路径：
+
+`C:\Users\fengluo\Desktop\colab`
+
+这是用户之前一直使用的本地连接 Colab 的方法。
+
+用户已经在 Colab 上运行过 PallasKernels。
+
+**必须优先阅读这个目录，并复用已有连接方式。**
+
+检查：
+
+- README。
+- Markdown。
+- Python 脚本。
+- Notebook。
+- PowerShell / Shell 脚本。
+- 连接命令。
+- Runtime 启动方式。
+- 端口和隧道。
+- 文件同步。
+- 结果回传。
+- 断线恢复。
+
+不要直接替换成另一套 Colab 连接方案。
+
+尤其不要把 Google Colab 的 Local Runtime 教程误认为用户已经使用的连接方式。
+
+必须先确认：
+
+1. Runtime 实际运行在哪里？
+2. TPU 实际挂载在哪里？
+3. 本地如何向 Colab 提交 Python 代码？
+4. 如何运行 PallasKernels？
+5. 如何取得 stdout / stderr？
+6. 如何回传 Benchmark？
+7. 如何回传 XPlane？
+8. 断开后如何恢复？
+9. 哪些文件在本地，哪些文件在 Colab？
+
+如果连接需要用户手动登录或授权，明确告诉用户，不得读取认证文件、Cookie、Token 或私钥。
+
+## 1.5 最终角色关系
+
+| 目录 | 角色 |
+|---|---|
+| rsi-kernel-agent | RSI 系统主体 |
+| training/PallasKernels | 当前真实 Kernel |
+| project2 | 历史实验知识来源 |
+| colab | 真实执行连接方式 |
+
+这四者必须形成协作，而不是复制成四套系统。
+
+---
+
+# 2. Phase 3 的总体架构原则
+
+## 2.1 复用现有 2A–2D+
+
+优先复用：
+
+### Phase 2A
+
+- Schema v1。
+- ExperimentStore。
+- ArtifactStore。
+- Append-only Records。
+- Idempotency。
+- Branch Best。
+- Task Best。
+- Frontier。
+- Snapshots。
+- 原有 Promotion / consider。
+
+### Phase 2B
+
+- 原 Knowledge MCP。
+- KnowledgeClient。
+- MemoryReader。
+- MemoryWriter。
+- 完整历史读取。
+- Source Revision。
+- Method Association。
+
+### Phase 2C
+
+- AnalysisRequest。
+- AnalysisInputManifest。
+- Profile Normalization。
+- Compute / Memory Model。
+- Tile Model。
+- Live Memory Model。
+- Pipeline Model。
+- Analyzer Session。
+- AnalysisBundle。
+- PlanSet。
+- Output Validation。
+
+### Phase 2D+
+
+- PlanSet Intake。
+- Round。
+- Journal。
+- Scheduler。
+- Controller。
+- Execution Adapter。
+- Fixed Evaluator。
+- Repair。
+- Recovery。
+- CLI / Demo。
+
+不要建立：
+
+- 第二个实验数据库。
+- 第二套 Memory。
+- 第二个 Knowledge MCP。
+- 第二套 Benchmark。
+- 独立模型 API。
+- 重复的 Controller。
+- 重复的 Best 晋升机制。
+
+如果现有接口存在实际阻塞，先分析最小兼容扩展和测试影响，再实施。
+
+## 2.2 模型推理方式
+
+继续使用已经确定的方式：
+
+**推理由当前对话模型承担，不使用独立模型 API。**
+
+Analyzer 继续使用 Phase 2C 的 packet / response / session 机制。
+
+模型负责：
+
+- 阅读代码。
+- 分析 Profile。
+- 搜索和理解知识。
+- 生成多个 Plan。
+- 修改 Candidate。
+- 提供必要的 Repair。
+
+程序负责：
+
+- 状态机。
+- 数据校验。
+- 预算。
+- 调度。
+- 正确性验证。
+- Benchmark。
+- Evidence 验证。
+- Best 晋升。
+- Recovery。
+
+LLM 不得直接修改 Best、Frontier 或 Store 状态。
+
+---
+
+# 3. P3.0 — 项目审计与 Historical Knowledge Recovery
+
+这是第一阶段。
+
+先审计，再决定实施方式。
+
+## 3.1 审计 rsi-kernel-agent
+
+阅读：
+
+- AGENTS.md。
+- Phase 2A–2D+ 实际源码。
+- 测试。
+- 实施计划。
+- 接口指南。
+- 路线图。
+- 最新验收报告。
+
+重点检查：
+
+- ExecutionBackend。
+- Controller。
+- Evaluator。
+- ExperimentStore。
+- ArtifactStore。
+- Memory。
+- Knowledge。
+- Profiler。
+- Analyzer。
+- AnalysisInputManifest。
+- PlanSet。
+- Recovery。
+
+输出：
+
+`docs/phase3/phase3-project-integration-audit.md`
+
+说明哪些接口可以直接复用，哪些需要新增。
+
+## 3.2 审计 PallasKernels
+
+分别审计 MLA Forward 和 Decode。
+
+必须检查：
+
+### Kernel 实现
+
+- 实际入口函数。
+- 调用链。
+- 输入输出。
+- Shape / dtype / layout。
+- Batch / Heads / Sequence。
+- Q Rank / KV Rank。
+- d_nope / d_rope / d_value。
+- Mask / Causal。
+- RoPE / NoPE。
+- LSE。
+- KV Cache（适用时）。
+- 编译参数。
+- Tile / Block Size。
+
+只记录实际支持的参数。
+
+### Correctness
+
+- Reference Implementation。
+- Dense JAX Reference。
+- Unit Tests。
+- Shape Tests。
+- Mask Tests。
+- 边界测试。
+- Decode KV Cache 测试。
+- 数值容差。
+- 中间 Tensor 比较。
+
+### Benchmark
+
+- Benchmark 入口。
+- 编译和预热。
+- 设备执行计时。
+- 同步方式。
+- 原始样本。
+- 统计结果。
+- 环境信息。
+
+### Profiler
+
+- XPlane。
+- XProf。
+- JAX Profiler。
+- `tpu_duration_profile.py`。
+- `read_profile`。
+- Parser 依赖。
+- 输出格式。
+
+输出：
+
+`docs/phase3/phase3-pallaskernels-audit.md`
+
+## 3.3 审计 Colab
+
+完整阅读 `C:\Users\fengluo\Desktop\colab`。
+
+先确定真实连接方法，再设计 Execution Adapter。
+
+优先复用现有工具。
+
+如果已经有脚本可以从本地向 Colab 提交任务，就直接研究和扩展它，不要重写一套。
+
+需要完成最小真实连接验证：
+
+1. 连接 Colab。
+2. 获取 Runtime 信息。
+3. 检查 TPU 设备。
+4. 读取 JAX 版本。
+5. 运行最小 JAX 运算。
+6. 确认设备计算真正完成。
+7. 返回本地结果。
+
+输出：
+
+`docs/phase3/phase3-colab-connectivity-audit.md`
+
+## 3.4 project2 历史实验恢复
+
+这是一个非常重要的任务。
+
+不要只把 project2 当成普通代码仓库扫描。
+
+你需要重建之前 MLA Forward / Decode 的优化历史。
+
+### 第一步：建立文件索引
+
+查找：
+
+- Python 源码。
+- Notebook。
+- Markdown。
+- JSON / CSV。
+- Benchmark Logs。
+- Profile。
+- XPlane。
+- Git History。
+- 实验配置。
+- 测试输出。
+
+先建立索引，不要直接执行未知脚本。
+
+### 第二步：重建版本关系
+
+尽可能恢复：
+
+```text
+Baseline
+   |
+   v
+Version 1
+   |
+   v
+Version 2
+   |
+   +---- Experiment A
+   |
+   +---- Experiment B
+   |
+   v
+Version 3
+```
+
+不能仅根据文件修改时间认定父子关系。
+
+优先依据 Git Commit、Diff、源码相似度、实验日志和明确记录。
+
+无法确认时标记 unknown。
+
+### 第三步：恢复优化方法
+
+重点提取：
+
+- Tile Size。
+- Block Size。
+- Pipeline。
+- Double Buffering。
+- DMA。
+- Prefetch。
+- Memory Layout。
+- Data Reuse。
+- Compute / Memory Overlap。
+- Spill。
+- MXU / XLU 调度。
+- 其他实际出现的方法。
+
+### 第四步：恢复实验结果
+
+每个实验尽量记录：
+
+| 字段 | 内容 |
+|---|---|
+| experiment_id | 历史实验 ID |
+| kernel | MLA Forward / Decode |
+| source | 原始文件路径 |
+| digest | 源码 SHA256 |
+| parent | 父版本 |
+| change | 具体修改 |
+| method | 优化方法 |
+| workload | Shape / dtype / config |
+| hardware | 硬件环境 |
+| correctness | 正确性结果 |
+| benchmark | 原始 Latency |
+| profile | Profile 证据 |
+| outcome | 成功 / 失败 / 退化 / 未知 |
+| evidence | 证据来源 |
+| limitations | 缺失信息 |
+
+### 第五步：证据分级
+
+必须区分：
+
+- 真实 TPU 原始测量。
+- CPU 测试。
+- Synthetic 测试。
+- 理论预测。
+- 只有文字报告。
+- 证据不完整。
+
+历史报告中的某个加速数字不能自动认定为真实 TPU 结果。
+
+必须尽可能找到对应：
+
+- 源码。
+- Shape。
+- 环境。
+- 正确性。
+- Benchmark。
+- 原始数据。
+
+如果缺少这些内容，保留历史结论和不确定性。
+
+不能把历史数据直接写成当前 Task Best。
+
+### 第六步：整理为 Knowledge
+
+输出：
+
+```text
+docs/phase3/
+    phase3-project2-history.md
+    mla-forward-history.md
+    mla-decode-history.md
+    optimization-methods.md
+    failed-experiments.md
+```
+
+尽量使用现有 KnowledgeClient / MCP，将高价值方法和来源写入原知识库。
+
+不要建立第二个 Memory 或实验数据库。
+
+历史实验缺少正式 Run 所需证据时，保存为有来源的历史知识，不得伪造 Run。
+
+### P3.0 验收
+
+必须完成：
+
+- 四个目录角色核实。
+- RSI 系统接口审计。
+- Pallas Kernel 审计。
+- Colab 连接方法审计。
+- project2 历史索引。
+- 首个目标 Kernel 的必要历史恢复。
+- Phase 3 实施计划。
+
+历史整理可以持续进行，不得无限阻塞 P3.1 的真实连接工作。
+
+---
+
+# 4. P3.1 — Real Colab Execution Adapter
+
+目标：
+
+**让本地 rsi-kernel-agent 通过用户已有连接方法，真正驱动 Colab TPU v6e。**
+
+优先复用 Phase 2D+ ExecutionBackend。
+
+不要凭空设计新 API。
+
+## 4.1 连接流程
+
+```text
+Local RSI Agent
+       |
+       v
+Existing Colab Bridge
+       |
+       v
+Colab Runtime
+       |
+       v
+TPU Device
+       |
+       v
+Execution Result
+       |
+       v
+Local ExperimentStore
+```
+
+需要实现：
+
+- Runtime 检查。
+- TPU 设备发现。
+- 环境信息。
+- Candidate 同步。
+- 任务提交。
+- 状态查询。
+- Poll。
+- Cancel（实际支持时）。
+- 结果回传。
+- 工件回传。
+- 断线恢复。
+
+## 4.2 环境指纹
+
+每次 Run 记录：
+
+- TPU 型号。
+- Device Count。
+- Topology（可读取时）。
+- Python。
+- JAX。
+- jaxlib。
+- libtpu。
+- XLA。
+- Candidate ID。
+- Source Digest。
+- Config Digest。
+- Build Identity。
+- Runtime Session ID。
+- Workload ID。
+
+实际读取，不能猜测。
+
+## 4.3 远程幂等
+
+使用：
+
+- operation_id。
+- request_digest。
+- receipt。
+- candidate_id。
+- run_id。
+
+恢复规则：
+
+| 状态 | 操作 |
+|---|---|
+| completed | 取回结果，不重新执行 |
+| running | 继续 poll |
+| definitely_not_started | 可重新提交原请求 |
+| unknown | 阻塞并核查，不盲目重跑 |
+
+不要声称本地数据库幂等就等于远端恰好一次执行。
+
+## 4.4 真实代码身份
+
+必须核对：
+
+```text
+Candidate Source
+      |
+      v
+Uploaded Source
+      |
+      v
+Remote Imported Module
+      |
+      v
+Actual Kernel Entry
+      |
+      v
+Compiled Execution
+```
+
+不能只检查上传文件的 SHA256。
+
+还要确认：
+
+- 实际导入的模块路径。
+- 依赖源码。
+- helper 文件。
+- 配置文件。
+- Candidate 入口。
+- 编译 specialization。
+
+防止 Colab 使用了旧 Notebook 状态、旧模块缓存或其他同名文件。
+
+至少增加一次错误源码身份的负例测试，验证 Evaluator 会拒绝结果。
+
+## 4.5 设备资源隔离
+
+2D+ 目前验证的是同 Task Synthetic 调度。
+
+真实 TPU 接入时，需要管理：
+
+- Compile。
+- Correctness。
+- Warmup。
+- Benchmark。
+- Profile。
+
+这些都可能占用设备。
+
+首版采用简单可验证的策略：
+
+同一个 TPU Runtime 内，正式实验相关阶段按受控队列执行，正式 Benchmark 尽可能独占设备。
+
+还必须考虑：
+
+- 不同 Task。
+- 用户手动运行 Notebook。
+- Runtime 断线。
+- 其他进程占用 TPU。
+
+如果无法证明测量期间没有明显干扰，不能声称环境独占，必要时标记无效测量。
+
+## 4.6 P3.1 验收
+
+完成：
+
+- 本地连接 Colab。
+- 识别 TPU v6e。
+- 获取真实环境信息。
+- 执行最小 JAX 运算。
+- 等待设备计算完成。
+- 返回真实结果。
+- 保存 operation 和 Run 证据。
+- 断线后能够查询和恢复。
+
+---
+
+# 5. P3.2 — Trusted MLA Baseline
+
+这是整个 Phase 3 的基础。
+
+**Baseline 没有建立之前，不允许开始自动优化。**
+
+## 5.1 选择首个 Kernel
+
+分别审计：
+
+- MLA Forward。
+- MLA Decode。
+
+优先选择当前测试、参考实现、依赖和执行入口最完整的一个完成首次真实验证。
+
+两个 Kernel 必须分别建立 Task 和 Evaluation Contract。
+
+不要将 FWD 和 Decode 混为一个 Workload。
+
+## 5.2 Workload Matrix
+
+从实际 Kernel 中提取参数。
+
+包括但不限于：
+
+- Batch。
+- Heads。
+- Sequence Length。
+- Q Rank。
+- KV Rank。
+- d_nope。
+- d_rope。
+- d_value。
+- dtype。
+- Mask。
+- Causal。
+- KV Cache。
+- Sequence Length Metadata。
+
+过去的 Shape 仅作为历史参考。
+
+必须支持真实配置变化，不能将某个示例固定成唯一基线。
+
+优先覆盖：
+
+- 小规模。
+- 中等规模。
+- 大规模。
+- 代表性生产配置。
+- 边界 Shape。
+
+## 5.3 Correctness Oracle
+
+优先复用 PallasKernels 现有的独立 Reference。
+
+验证：
+
+- Shape。
+- dtype。
+- NaN / Inf。
+- Max Absolute Error。
+- Max Relative Error。
+- RMS Error。
+- Mask。
+- Causal。
+- Sequence Length。
+- RoPE / NoPE。
+- Softmax。
+- LSE。
+- KV Cache（适用时）。
+
+必须使用完全相同的输入 Tensor 比较两边输出。
+
+不能只比较最终文本。
+
+不能为了让 Candidate 通过而修改 Reference 或放宽容差。
+
+增加已知错误 Candidate 的负例，确认 Oracle 确实能够识别错误。
+
+## 5.4 Benchmark
+
+复用现有 Benchmark 脚本。
+
+必须区分：
+
+1. JIT / Compile Time。
+2. Warmup。
+3. Device Execution。
+4. Host / Device Transfer。
+5. End-to-End Latency。
+
+JAX 有异步执行机制。
+
+计时必须等待设备执行真正完成。
+
+例如：
+
+```python
+result = kernel(...)
+result.block_until_ready()
+```
+
+如果输出为多个数组或 pytree，确保所有相关输出都完成。
+
+注意：
+
+`perf_counter + block_until_ready()` 测得的时间不应未经说明就叫作纯设备 Kernel 时间。
+
+必须记录：
+
+- 每次原始 Latency。
+- Warmup 次数。
+- Measurement 次数。
+- Median。
+- Mean。
+- Standard Deviation。
+- Min / Max。
+- P25 / P75（适用时）。
+- Outlier 规则。
+- 环境指纹。
+- Benchmark Protocol Version。
+
+Baseline 与 Candidate 应使用相同协议和可比环境。
+
+尽可能采用配对或交错测量观察设备漂移。
+
+## 5.5 必要工作不能移出计时范围
+
+如果 Kernel 正式使用过程中需要：
+
+- Packing。
+- Layout Conversion。
+- Preprocessing。
+- Projection。
+- Buffer Preparation。
+
+必须按照原始任务契约决定是否计入。
+
+如果报告摊销延迟，必须同时报告预处理成本、复用次数和成立条件。
+
+不能通过减少必要工作或改变输出语义制造加速。
+
+## 5.6 Baseline 验收
+
+至少一个 MLA Kernel：
+
+- 真实编译。
+- 真实 TPU 执行。
+- 独立 Correctness 通过。
+- 可信 Benchmark。
+- 环境指纹。
+- 源码身份。
+- 原始测量数据。
+
+交付：
+
+`docs/phase3/phase3-baseline-report.md`
+
+---
+
+# 6. P3.3 — Real Profiler / XPlane Integration
+
+目标：
+
+让 2C Profiler / Analyzer 使用真实 TPU Profile。
+
+## 6.1 优先复用现有工具
+
+检查：
+
+- PallasKernels 的 Profile 工具。
+- `tpu_duration_profile.py`。
+- `read_profile`。
+- JAX Profiler。
+- XPlane。
+- XProf。
+
+历史审计中的 Parser 入口为：
+
+```text
+C:\Users\fengluo\Desktop\training\PallasKernels\tools\tpu_duration_profile.py::read_profile
+```
+
+必须重新检查实际源码、SHA256、依赖、调用方式和输出 Schema。
+
+之前已知的能力是：
+
+- 读取 XPlane protobuf。
+- 提取目标 program / custom-call 时长样本。
+- 获取设备 offset 和统计。
+
+之前并未确认其提供：
+
+- 独立 DMA 时间。
+- 完整 Wait / Sync。
+- VMEM 资源计数。
+- MXU 利用率。
+- 完整 LLO 正文。
+
+不能擅自扩大其能力描述。
+
+## 6.2 XPlane Capture
+
+优先研究 JAX 官方：
+
+```python
+jax.profiler.start_trace(...)
+jax.profiler.stop_trace()
+```
+
+或：
+
+```python
+with jax.profiler.trace(...):
+    ...
+```
+
+具体 API 以当前实际 JAX 版本为准。
+
+采集结束前确保设备工作已经完成。
+
+Trace Mode 重点调查：
+
+```text
+TRACE_ONLY_HOST
+TRACE_ONLY_XLA
+TRACE_COMPUTE
+TRACE_COMPUTE_AND_SYNC
+```
+
+必须在实际 TPU v6e 环境中确认支持情况。
+
+不能因为文档有这个参数，就假设当前环境能够使用。
+
+## 6.3 Profile 证据
+
+每个 Profile 绑定：
+
+- Task。
+- Workload。
+- Strategy。
+- Candidate。
+- Run。
+- Source Digest。
+- Config Digest。
+- Build Identity。
+- Hardware Fingerprint。
+- Trace Mode。
+- Parser Version。
+- 原始 XPlane。
+- 解析结果。
+- Normalized Profile。
+- 时钟域。
+
+继续使用 2C 的分类：
+
+- measured。
+- trace-derived。
+- compiler-estimated。
+- inferred。
+- unavailable。
+
+注意：
+
+- 嵌套事件不能直接相加。
+- 不同钟域不能直接相加。
+- 区间并集不自动等于 Critical Path。
+- 没有 DMA 事件就不能报告实测 DMA 时间。
+- 没有资源计数就不能报告实测 MXU / VMEM 利用率。
+
+Profile 采集和正式 Benchmark 分开进行。
+
+不能将不同 Run 的 Profile 伪装成同一个 Run 的测量证据。
+
+## 6.4 Analyzer 接入
+
+真实 Profile 进入原有：
+
+`AnalysisInputManifest → Analyzer`
+
+Analyzer 必须：
+
+- 使用真实 Profile。
+- 引用准确 Evidence。
+- 区分 Observation / Hypothesis。
+- 记录未知信息。
+- 不支持的事实降级。
+- 输出多个有依据的 Plan。
+
+交付：
+
+`docs/phase3/phase3-profiler-report.md`
+
+---
+
+# 7. P3.4 — First Real Kernel Optimization
+
+只有 Baseline 和 Profiler 两个 Gate 通过后才开始。
+
+## 7.1 选择优化问题
+
+结合：
+
+- 当前源码。
+- Profile。
+- 数学模型。
+- project2 历史。
+- Memory。
+- Knowledge Search。
+
+确定真正值得尝试的优化方向。
+
+可研究：
+
+- Tile / Block Size。
+- Pipeline。
+- Double Buffering。
+- DMA / Prefetch。
+- Compute / Memory Overlap。
+- Data Layout。
+- Data Reuse。
+- Spill。
+- MXU / XLU 调度。
+
+这些只是候选方向，不代表当前 Kernel 一定存在相应瓶颈。
+
+不能编造 Profile 观察。
+
+## 7.2 Knowledge Search
+
+复用原 KnowledgeClient / MCP。
+
+同时支持：
+
+- 定向搜索。
+- 主动探索。
+- 官方技术文档。
+- 开源实现。
+- project2 历史方法。
+- 现有 Memory。
+
+每个方法保存：
+
+- 原始来源。
+- Revision。
+- 适用条件。
+- 机制。
+- 实现要求。
+- 资源成本。
+- 风险。
+- 未知项。
+
+来源支持某个方法，不代表它在当前 Kernel 上一定有效。
+
+## 7.3 Multi-Plan Exploration
+
+继续遵守已经确定的正式设计原则：
+
+**不在实验前强行选择唯一最优方法。**
+
+如果存在多个有依据、合法且有区别的方向，就分别生成 Plan 并进入实验队列。
+
+例如：
+
+```text
+Strategy A
+    Plan A1: Tile Optimization
+    Plan A2: Pipeline Optimization
+
+Strategy B
+    Plan B1: Data Reuse
+    Plan B2: Prefetch Optimization
+```
+
+以上仅为示意，真正的 Plan 必须来自当前 Kernel 的代码和证据。
+
+每个 Plan 必须明确：
+
+- Strategy ID。
+- Parent Candidate。
+- 修改位置。
+- 修改内容。
+- 优化理由。
+- 引用证据。
+- 数学依据。
+- 资源代价。
+- 风险。
+- Correctness Test。
+- Benchmark Protocol。
+
+不要求预先证明收益。
+
+## 7.4 Candidate Generation
+
+每个 Candidate：
+
+- 独立工作区。
+- 独立源码。
+- 精确父版本。
+- Source Digest。
+- Config Digest。
+- Build Identity。
+- Diff。
+- Correctness Result。
+- Benchmark Result。
+- Profile。
+- Repair History。
+
+不能覆盖原始 Kernel。
+
+不能修改 Reference、Evaluator 或 Benchmark 规则来制造成功。
+
+每次修复必须生成新 Candidate。
+
+## 7.5 真实执行
+
+```text
+Plan
+  |
+  v
+Candidate Generation
+  |
+  v
+Compile
+  |
+  v
+Correctness
+  |
+  +---- Failure
+  |        |
+  |        v
+  |     Repair / Pause
+  |
+  v
+Benchmark
+  |
+  v
+Profile
+  |
+  v
+Evidence Validation
+  |
+  v
+ExperimentStore
+  |
+  v
+Memory Update
+```
+
+所有正式性能结果必须通过原有 Evaluator 和 Store 晋升规则。
+
+---
+
+# 8. P3.5 — Multi-Round Real Hardware RSI
+
+这是最终目标。
+
+第一轮真实优化完成后，保存：
+
+- Candidate。
+- Run。
+- Correctness。
+- Benchmark。
+- Profile。
+- Knowledge References。
+- Decision。
+- Memory Snapshot。
+
+第二轮必须重新读取新历史。
+
+```text
+Round 1
+   |
+   v
+Real TPU Experiments
+   |
+   v
+Evidence + Memory Update
+   |
+   v
+New Snapshot
+   |
+   v
+Round 2
+   |
+   v
+Read All Strategy Status Cards
+   |
+   v
+Read Participating Strategy Histories
+   |
+   v
+Analyze New Evidence
+   |
+   v
+Generate New Plans
+   |
+   v
+Run New TPU Candidates
+   |
+   v
+Update Memory
+```
+
+第二轮不能简单复制第一轮的 Plan。
+
+必须证明新实验结果影响了下一轮的优化判断。
+
+继续维护：
+
+- Branch Best。
+- Task Best。
+- Frontier。
+- Latest Attempt。
+- Last Correct Candidate。
+- Current Parent。
+- Paused。
+- Deferred。
+
+某条路线不是当前冠军，不代表必须停止探索。
+
+至少完成两轮真实硬件实验，才能申请最终 RSI 闭环验收。
+
+---
+
+# 9. 真实执行的安全与恢复
+
+必须保留 Phase 2D+ 已有的：
+
+- Operation ID。
+- Request Digest。
+- Receipt。
+- Journal。
+- Idempotency。
+- Recovery。
+
+特别注意：
+
+1. 远端未知状态不能盲目重试。
+2. Runtime 断开不能认定执行失败。
+3. 已完成的远端实验不能无故再次执行。
+4. 回执必须绑定 Candidate 和 Run。
+5. 原始工件必须保存。
+6. 用户手动执行的其他 Notebook 任务不能被擅自终止。
+7. 同一 TPU 的正式计时需要受控资源调度。
+
+首版以同一 Runtime / TPU 的独占实验队列为目标。
+
+跨 Task、远端共享设备和更复杂的仲裁可以根据实际需求扩展，不要一开始建立复杂分布式系统。
+
+---
+
+# 10. Phase 3 实施顺序
+
+严格按照以下 Gate：
+
+| Gate | 内容 | 交付 |
+|---|---|---|
+| P3.0 | 四个目录审计、project2 历史恢复 | 审计报告、历史知识 |
+| P3.1 | Colab 真实连接 | Execution Adapter、设备指纹、最小任务 |
+| P3.2 | MLA Baseline | 正确性、Benchmark、原始结果 |
+| P3.3 | Profiler | XPlane、Parser、Evidence |
+| P3.4 | 第一次真实优化 | Multi-Plan、Candidate、实验报告 |
+| P3.5 | 多轮 RSI | 至少两轮真实硬件优化 |
+
+某个 Gate 未通过时，停止依赖该 Gate 的后续工作。
+
+不依赖该 Gate 的文档整理、测试和接口审计可以继续。
+
+---
+
+# 11. 测试要求
+
+保留全部 2A–2D+ 测试。
+
+新增：
+
+## Execution Adapter
+
+- 连接成功。
+- TPU 识别。
+- Runtime 身份。
+- 源码同步。
+- 实际加载身份。
+- 结果回传。
+- 超时。
+- 断线。
+- 未知状态。
+- 恢复。
+
+## Correctness
+
+- 正常输入。
+- 边界输入。
+- 不同 Shape。
+- 不同 dtype。
+- Mask。
+- Causal。
+- NaN / Inf。
+- 数值误差。
+- 已知错误 Candidate。
+
+## Benchmark
+
+- JIT 隔离。
+- Warmup。
+- 异步等待。
+- 多输出同步。
+- 原始测量。
+- 设备独占。
+- 环境指纹。
+- Invalid Measurement 拒绝。
+
+## Profiler
+
+- XPlane Capture。
+- Parser。
+- Event Normalization。
+- 时钟域。
+- 重叠事件。
+- 缺失事件。
+- Candidate / Run 绑定。
+
+## RSI
+
+- 多 Plan。
+- 多 Candidate。
+- Repair。
+- Branch Best。
+- Task Best。
+- Frontier。
+- Memory Update。
+- 多轮递归。
+
+Synthetic、CPU 和真实 TPU 测试必须分开报告。
+
+不能通过降低旧测试门槛来制造通过。
+
+---
+
+# 12. 最终文件与报告
+
+全部新增系统代码优先放在：
+
+`C:\Users\fengluo\Desktop\rsi-kernel-agent`
+
+文档建议：
+
+```text
+docs/
+  phase3/
+    phase3-environment-audit.md
+    phase3-pallaskernels-audit.md
+    phase3-project2-history.md
+    phase3-colab-connectivity-audit.md
+    phase3-profiler-capability-audit.md
+    phase3-workload-and-correctness.md
+    phase3-implementation-plan.md
+    phase3-baseline-report.md
+    phase3-profiler-report.md
+    phase3-optimization-report.md
+    phase3-final-report.md
+```
+
+实验工件继续遵循现有 ArtifactStore 和项目归档约定。
+
+不要建立第二个互相矛盾的实验数据源。
+
+最终报告必须包含：
+
+1. 四个目录的实际审计结果。
+2. project2 历史实验时间线。
+3. Colab 连接方式。
+4. 当前 TPU 环境。
+5. 真实执行 Adapter。
+6. MLA Workload Matrix。
+7. Correctness Oracle。
+8. Benchmark Protocol。
+9. 原始 Baseline。
+10. XPlane / Profile。
+11. 多 Plan。
+12. Candidate Diff。
+13. 真实实验数据。
+14. Repair 和失败记录。
+15. Memory Snapshot。
+16. 第二轮实验。
+17. 测试日志。
+18. 独立审查（如实际完成）。
+19. 尚未解决的问题。
+
+所有结果必须标记其来源：
+
+- Source audit。
+- Local CPU test。
+- Synthetic。
+- Theoretical。
+- Real Colab connectivity。
+- Real TPU execution。
+- Real correctness。
+- Real benchmark。
+- Real profile。
+- Verified performance improvement。
+
+Git CLI 不可用时不得声称已经提交。
+
+---
+
+# 13. 官方技术参考资料
+
+以下资料供 Coding Agent 研究。
+
+必须根据实际 JAX / Pallas 版本判断 API 兼容性，不能直接使用最新版 API 并升级整个环境。
+
+## 13.1 Pallas
+
+Pallas 总览：
+
+https://docs.jax.dev/en/latest/pallas/index.html
+
+Pallas TPU：
+
+https://docs.jax.dev/en/latest/pallas/tpu/
+
+TPU Pipelining：
+
+https://docs.jax.dev/en/latest/pallas/tpu/pipelining.html
+
+重点研究：
+
+- Ref。
+- BlockSpec。
+- Grid。
+- TPU Memory Spaces。
+- VMEM / SMEM。
+- DMA。
+- Prefetch。
+- Pipelining。
+- Double Buffering。
+- MXU / XLU。
+- TPU Backend 限制。
+
+这些是研究方向，具体支持能力以当前安装版本和实际 TPU 运行结果为准。
+
+## 13.2 JAX Benchmark
+
+https://docs.jax.dev/en/latest/benchmarking.html
+
+https://docs.jax.dev/en/latest/async_dispatch.html
+
+重点研究：
+
+- JIT 编译。
+- 异步派发。
+- block_until_ready。
+- 数据传输。
+- Warmup。
+- 计时边界。
+
+## 13.3 XProf / Profiling
+
+https://docs.jax.dev/en/latest/profiling.html
+
+https://openxla.org/xprof/custom_call_profiling
+
+https://openxla.org/xprof/kernel-profiling
+
+重点研究：
+
+- jax.profiler。
+- XPlane。
+- XProf。
+- Trace Mode。
+- Compute / Sync Events。
+- Memory Profile。
+- HLO / Custom Call。
+- LLO 相关分析能力。
+
+必须确认当前 TPU v6e 和软件版本实际支持什么。
+
+不要把 TPU7x 才有的高级硬件计数器能力直接套用到 v6e。
+
+## 13.4 Colab
+
+https://research.google.com/colaboratory/local-runtimes.html
+
+这份官方资料用于理解 Local Runtime 连接方式。
+
+但用户已有 `Desktop\colab` 目录中的连接方式优先级更高，不能擅自替换。
+
+## 13.5 TPU v6e
+
+https://docs.cloud.google.com/tpu/docs/v6e
+
+用于核对硬件架构和规格。
+
+实际运行设备必须从 Runtime 获取，不能根据文档推断当前设备状态。
+
+---
+
+# 14. 立即开始执行
+
+现在开始 Phase 3。
+
+第一步：
+
+阅读：
+
+```text
+C:\Users\fengluo\Desktop\rsi-kernel-agent
+
+C:\Users\fengluo\Desktop\training\PallasKernels
+
+C:\Users\fengluo\Desktop\colab
+
+C:\Users\fengluo\Desktop\project2
+```
+
+执行顺序：
+
+1. 阅读 RSI 主项目的 AGENTS.md。
+2. 审计 2A–2D+ 实际代码和接口。
+3. 审计当前 PallasKernels 的 MLA Forward / Decode。
+4. 阅读 colab 中已有连接教程和脚本。
+5. 梳理 project2 的历史实验。
+6. 输出 P3.0 审计和实施计划。
+7. 如果连接条件已经具备，继续 P3.1 实际连接。
+8. 完成最小 TPU 测试。
+9. 建立 MLA Baseline。
+10. 接入真实 Profiler。
+11. 生成多个优化 Plan。
+12. 运行真实 TPU Candidate。
+13. 保存实验结果。
+14. 进入第二轮 RSI。
+
+不要只输出设计方案后停止。
+
+在条件允许时持续推进每个 Gate。
+
+如果需要用户手动登录、选择 Runtime 或进行授权，明确告诉用户具体操作。
+
+不要擅自读取认证文件、修改账号权限、升级全局依赖或覆盖已有 Kernel。
+
+**最终目标：让现有 RSI-Kernel-Agent 真正通过用户已有 Colab 连接方式，运行 PallasKernels 中的真实 MLA Kernel，使用 project2 的历史知识，在 TPU v6e 上完成多方案实验、正确性验证、性能优化和多轮递归自我改进。**

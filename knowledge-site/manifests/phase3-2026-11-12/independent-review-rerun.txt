@@ -1,0 +1,20 @@
+test_aliased_top_level_helper_cannot_load_an_old_source_copy (test_phase3_runner.RunnerTests.test_aliased_top_level_helper_cannot_load_an_old_source_copy) ... ok
+test_candidate_configuration_cannot_change_workload_or_oracle (test_phase3_runner.RunnerTests.test_candidate_configuration_cannot_change_workload_or_oracle) ... ok
+test_contiguous_matrix_requires_explicit_tuple_outputs (test_phase3_runner.RunnerTests.test_contiguous_matrix_requires_explicit_tuple_outputs) ... ok
+test_controlled_measurement_excludes_compile_and_synchronizes_inputs (test_phase3_runner.RunnerTests.test_controlled_measurement_excludes_compile_and_synchronizes_inputs) ... ok
+test_declared_entry_must_be_actual_loaded_source (test_phase3_runner.RunnerTests.test_declared_entry_must_be_actual_loaded_source) ... ok
+test_exact_opaque_cache_accepts_same_nan_bits_and_rejects_wrong_cache (test_phase3_runner.RunnerTests.test_exact_opaque_cache_accepts_same_nan_bits_and_rejects_wrong_cache) ... ok
+test_frozen_tool_loader_rejects_changed_benchmark_before_import (test_phase3_runner.RunnerTests.test_frozen_tool_loader_rejects_changed_benchmark_before_import) ... ok
+test_metrics_and_original_tolerance_detect_wrong_attention (test_phase3_runner.RunnerTests.test_metrics_and_original_tolerance_detect_wrong_attention) ... ok
+test_runtime_package_init_is_not_confused_with_candidate_package_init (test_phase3_runner.RunnerTests.test_runtime_package_init_is_not_confused_with_candidate_package_init) ... ok
+test_source_bundle_path_escape_and_duplicate_are_rejected (test_phase3_runner.RunnerTests.test_source_bundle_path_escape_and_duplicate_are_rejected) ... ok
+test_source_identity_rejects_replaced_helper_and_old_module (test_phase3_runner.RunnerTests.test_source_identity_rejects_replaced_helper_and_old_module) ... ok
+test_statistics_keep_all_raw_samples_and_reject_invalid_measurements (test_phase3_runner.RunnerTests.test_statistics_keep_all_raw_samples_and_reject_invalid_measurements) ... ok
+test_system_dist_packages_remain_allowed_runtime_dependencies (test_phase3_runner.RunnerTests.test_system_dist_packages_remain_allowed_runtime_dependencies) ... ok
+test_untrusted_runner_inputs_fail_before_jax_import (test_phase3_runner.RunnerTests.test_untrusted_runner_inputs_fail_before_jax_import) ... ok
+test_wrong_shape_dtype_and_nonfinite_cannot_pass (test_phase3_runner.RunnerTests.test_wrong_shape_dtype_and_nonfinite_cannot_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.215s
+
+OK

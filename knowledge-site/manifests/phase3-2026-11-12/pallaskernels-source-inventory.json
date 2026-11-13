@@ -1,0 +1,2351 @@
+{
+    "schema":  "phase3.pallaskernels-source-audit.v1",
+    "date":  "2026-11-12",
+    "classification":  "Source audit",
+    "root":  "C:\\Users\\fengluo\\Desktop\\training\\PallasKernels",
+    "git_head":  "9979d4949ebc673fd7e81555e4af2ebfd1619d20",
+    "git_clean":  "unknown: Git status not executed",
+    "runtime_execution":  false,
+    "files":  [
+                  {
+                      "path":  "AGENTS.md",
+                      "bytes":  5945,
+                      "sha256":  "db0421697d39f68995ff037bfcab47e3381c81b7b34b1e57bbeb173271a757f7",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "benchmarks/metrics.py",
+                      "bytes":  1383,
+                      "sha256":  "cf1f13c84727036da5ad12007b0f7098f2faa624485893f3d2f6a9f5275c8e23",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "benchmarks/profiler.py",
+                      "bytes":  835,
+                      "sha256":  "b47ab10f4eb094d2058b995c01a52e9981d5d66a0616a80fcc237794aa1046f5",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "benchmarks/runner.py",
+                      "bytes":  2772,
+                      "sha256":  "a6bcd13b18dc6b5a91db71a2218622da0604aa4c734c8bd839afa9679e3dd3ec",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "context/correctness.md",
+                      "bytes":  5447,
+                      "sha256":  "551de8f5b70c9b51f3658495dc34845a4f0db96d5dcc711ccc5e5b6b045ed997",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "context/kernel-contracts.md",
+                      "bytes":  3282,
+                      "sha256":  "ff80a5162415bb9048ed89876166d8924c68d320783a4e251ee0238e314c9d82",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "context/programming.md",
+                      "bytes":  10964,
+                      "sha256":  "03075c186f4bbd18d111d3e4ce254ff48aa729a8bd0fbe112e5fe74ac658a206",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "docs/kernels/mla_decode.md",
+                      "bytes":  7667,
+                      "sha256":  "8d23874fa4c14acd876ece62772cfd9cf1160b8f100e772efbd75157293d728f",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "docs/kernels/mla_fwd.md",
+                      "bytes":  6714,
+                      "sha256":  "7fb60753579eda5fb8244e46039f0431f68f653ae8a04b9c354fc888dd0d4449",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "docs/tpu_duration_info.md",
+                      "bytes":  16184,
+                      "sha256":  "a1fc1ad5244c02d060b359ed3be14884bce250efdf35260addb34fc42b73ded6",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "jax_ops/__init__.py",
+                      "bytes":  8279,
+                      "sha256":  "9a7064dc18f76a1d2d5d826601122ea9ade3c551966b53609407e01a51f182c7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/adamw.py",
+                      "bytes":  2160,
+                      "sha256":  "819f3c619c7d24968e6e900da16170a9ab8ca01b90784284fce61335d2d6057c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/all_gather.py",
+                      "bytes":  291,
+                      "sha256":  "4c4720ceee5f76cc795f1c6742a395a53f5021050d0d72bb5e7b4f869f20e6a4",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/all_gather_matmul.py",
+                      "bytes":  506,
+                      "sha256":  "a2964d858a6fd7b3b32e041639c5f4dfe7711025d8c83428cc2ba89f2fba7e8a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/all_to_all.py",
+                      "bytes":  1318,
+                      "sha256":  "4679067b81d8a2bd3e71b26dc4500c7b3d992ffc44def4627c704ddae6c9bc2d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/build_rope_cos_sin.py",
+                      "bytes":  1140,
+                      "sha256":  "0fcc400eed8b735f25618bb1db99cfe4d226def484f99cc1d76cffa67c0fe7d3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/cp_gqa_fwd.py",
+                      "bytes":  8489,
+                      "sha256":  "4efd0e9d93e210f225d0ce9f48c8fa932c2d7aae27c525de3157abe88a42f7c8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/csa_bwd.py",
+                      "bytes":  10554,
+                      "sha256":  "c4b9439d1ff1de04a211cf52ac2db862fecf91e997b245a3cf8ae6b5c347777d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/csa_fwd.py",
+                      "bytes":  5744,
+                      "sha256":  "d24ed383af5416b80c26dd7abd1fd2f578a366cfa06b4dbb26ab6e4686c392dd",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/dsa_indexer.py",
+                      "bytes":  7365,
+                      "sha256":  "c8e13d47f86e6948005f8098217c1504e93aebd386bb2f4b643bad8299309175",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/dsa_indexer_bwd.py",
+                      "bytes":  14210,
+                      "sha256":  "ccc00b3400056f6a11a3eb5489eb330f503967e1e080d76abb54e8a156d804da",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/embedding.py",
+                      "bytes":  336,
+                      "sha256":  "3db3e347226eb39dff70a03bb261404cb2f29d95c9f5e1f757e74468d68b445b",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/embedding_bwd.py",
+                      "bytes":  681,
+                      "sha256":  "a3920234bb730d5fa7dd2146a0c70e2ddcf1df7b03b694f57fa94e4bf53968f0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/expert_ffn_bwd.py",
+                      "bytes":  1069,
+                      "sha256":  "e0538fb769da4dbcb07d756d9e9833eae8812854a2bf39b3442d015eeaba3883",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/expert_ffn_common.py",
+                      "bytes":  1685,
+                      "sha256":  "d28d157bc713ea5f95da194be9cbb70553ebfa2fe80b093721261e9700d86790",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/expert_ffn_fwd.py",
+                      "bytes":  937,
+                      "sha256":  "3715189dfa65e43342bdc3c3814c53f7f5fb8fd4afd67a9e274a8e43bd55008b",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/flash_attention.py",
+                      "bytes":  3338,
+                      "sha256":  "69e72a564c32afb862695539053813c0d40866ab0345e1a66c954e9c1e85dc9f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/fused_moe.py",
+                      "bytes":  3212,
+                      "sha256":  "3fd30d84bdb8eee5d19bc81595f570c660637da84f6c6636911df3fc496ef441",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/gmm.py",
+                      "bytes":  5474,
+                      "sha256":  "9fd846ba57bc429de41b9738516431dce124dff2f8d94a8f4090424cce0b5e8e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/gmm_bf16.py",
+                      "bytes":  1678,
+                      "sha256":  "29f0a8bdbe77fbf1c7204377e3e3707755ffb0c47a43dbd92f19c419be81419a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/gqa_bwd.py",
+                      "bytes":  7623,
+                      "sha256":  "4b4f3ae3abb4e8e9b7847a3dae478dac45930a58142d1deb9c51bfced75d485d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/gqa_decode.py",
+                      "bytes":  3749,
+                      "sha256":  "110a4a092198fd3918b538c762dbe35e56080af3e2b46a9b926c4a635b13df9c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/gqa_fwd.py",
+                      "bytes":  3295,
+                      "sha256":  "8c6d68f6194a1631fca3a4ae690efa6824b4b8f12df5f1c55320ba21c56af936",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/hca_bwd.py",
+                      "bytes":  8999,
+                      "sha256":  "b3b2552355b5920b36ee9f593946d208694b6eab7a1c6be8d21978f1120dde80",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/hca_fwd.py",
+                      "bytes":  4672,
+                      "sha256":  "4861b77b24b243a75dcabccf8dba36f5728d41075eb4f2b6af7872da77fbb234",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/kda_bwd.py",
+                      "bytes":  1637,
+                      "sha256":  "0e9ace242a335fe56cf371da14c422549435cdd53ff7a275c9c185d4868b234f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/kda_decode.py",
+                      "bytes":  3377,
+                      "sha256":  "a7005c08a9db4706b95ff9d3c892a044e667c928fa1887edfeb559cb34451cfd",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/kda_fwd.py",
+                      "bytes":  6807,
+                      "sha256":  "bbb6c3bcd72a65ff74a618b612c70a2f20ab44931acc82753d8c0aa938a0b1a0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/layernorm_bwd.py",
+                      "bytes":  1012,
+                      "sha256":  "4ed5e8af1cbaf1fff2f4eac7c9d1adb66420de3e7e912188fa4f40609e0d931e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/layernorm_fwd.py",
+                      "bytes":  757,
+                      "sha256":  "5e7bf26aec2260c001ff5a1be880dbdcb9e71c6c720fd27c550aba77cf5d4d71",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/lm_head_ce_bwd.py",
+                      "bytes":  1117,
+                      "sha256":  "e46953c3369ced39b2400358102a79429f978343f314ee24aee6302fdbe9f362",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/lm_head_ce_fwd.py",
+                      "bytes":  969,
+                      "sha256":  "02533e9afa20f06aa788a085520101732476776862ff5d77112b1eec5b8cdb0e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/local_window_attention.py",
+                      "bytes":  3025,
+                      "sha256":  "53318bb0a10ac8d4be210c969cf36cc56e45d5f0c9a2123adbc683ee3c92b94b",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/local_window_attention_with_sink.py",
+                      "bytes":  3537,
+                      "sha256":  "bbaad0a57a8d74edce1b301e30a26826fc542cd887c89a03355e630b3386436f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/matmul.py",
+                      "bytes":  622,
+                      "sha256":  "cb240f155444e6655f146297ed8885b18b6eb858db47c76505e7f1e176a1f3d0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/mhc_bwd.py",
+                      "bytes":  1498,
+                      "sha256":  "f3cb04a6055b22807f7a050b4767d54124bad0e64a7d076dac56b826810e3f37",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/mhc_sinkhorn.py",
+                      "bytes":  2286,
+                      "sha256":  "29efa1ebe469f692ed07b095bd4e0c415f41d199892a818bac57e6b7a9f4fd59",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/mla_bwd.py",
+                      "bytes":  14529,
+                      "sha256":  "3725f9ecfad48d37575cc425c5a83701eda6473803800a256fea29321c12346c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/mla_decode.py",
+                      "bytes":  4715,
+                      "sha256":  "6def735c2398a053ab6499a44ae2e9e61674f07e89b9e33271de2ce5ff7a2feb",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "jax_ops/mla_fwd.py",
+                      "bytes":  9443,
+                      "sha256":  "7b0951422021673148e5e2bd08373dd974d3a0b02d7e40af52eb73eddc705fe4",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "jax_ops/moe_combine.py",
+                      "bytes":  4090,
+                      "sha256":  "0fab1dee0cdee57893116419ddc7e83f9e5c20d969b66c679d466de007b06b73",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/moe_combine_after_a2a.py",
+                      "bytes":  2964,
+                      "sha256":  "86001cef125298969aefca68045a2cedd7fc09e8926c3296d4509ab54fb47a40",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/moe_combine_after_a2a_bwd.py",
+                      "bytes":  4565,
+                      "sha256":  "3c793d0e47febd4ef6f3e7dd32640c0b549651d81fdcd094f40766cc6406a84d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/moe_dispatch_a2a.py",
+                      "bytes":  8088,
+                      "sha256":  "0cbe286da611ea9261b67c4d6b62cf166906bed87f644c5b23e289fe5b106cb9",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/moe_dispatch_metadata.py",
+                      "bytes":  8301,
+                      "sha256":  "3d341b859bf5c218c69c3474a04c06a4da7bbfc1f60b49968034820f8ba95cb8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/moe_permute_before_a2a.py",
+                      "bytes":  2696,
+                      "sha256":  "81d1bdb2d7b5d4ec7253f7dc6c97b69abc336aa47dea3137d3d6aab76356dd68",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/moe_permute_before_a2a_bwd.py",
+                      "bytes":  2398,
+                      "sha256":  "517f0b7927e462b0fee0c25effc812eafeb9947ea1c26a9bb1eae6e1d4566e54",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/moe_router.py",
+                      "bytes":  2272,
+                      "sha256":  "a3d060990a9023f79164703f9ac45e02ec6198e6c12b8636d1b8ef21ce22bce4",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/moe_router_bwd.py",
+                      "bytes":  4781,
+                      "sha256":  "de97ca281d456832942de15e63fd501263916fea6507925be568d027bfa8625f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/mtp_accept.py",
+                      "bytes":  845,
+                      "sha256":  "3d27db82efbde750fb89aa12ec14b539696e81b143702560c94e4df4a1d7febb",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/mtp_lm_head_sample.py",
+                      "bytes":  1472,
+                      "sha256":  "ccdfd1e96e09a6297bf75aaabd9538cc0f239c6febf17306a34570d1d40ad672",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/muon.py",
+                      "bytes":  2238,
+                      "sha256":  "c03ec0c535d805e557265e8318d55625a18b803f9db2d3ca07b096c422f591ed",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/reduce_scatter.py",
+                      "bytes":  1680,
+                      "sha256":  "d8fbeaeb2afa8f1bddb1aa05e7d950735655c9b349a7c5ac8549471b5ab3da24",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/residual_rmsnorm.py",
+                      "bytes":  711,
+                      "sha256":  "d4a8dc9cecb02c30e5fd8d0187a5ee9d3504472218f1c0ab36f6b48e257e09ed",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/residual_rmsnorm_bwd.py",
+                      "bytes":  2112,
+                      "sha256":  "24e0d86264fe907f43522ae0aeb2687a58c964ec4f70a41b22154930460a3c33",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/rope.py",
+                      "bytes":  822,
+                      "sha256":  "3c0c2fb72618c8b5de97283732123b0416be13c9e4f9b1d9a529b9b34a6179d0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/rope_bwd.py",
+                      "bytes":  803,
+                      "sha256":  "0a9f864b947baa7dc1bafc72d36eab662c4e9126b59b826b7c14b0c64e85940b",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/softmax_bwd.py",
+                      "bytes":  502,
+                      "sha256":  "e0fb15a6078dd3431b849c58ca2fa54d2a23b2afa3e21a50329a6cb269855034",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/softmax_fwd.py",
+                      "bytes":  473,
+                      "sha256":  "7e6bdd824763490505c890ba7d7efcabf1872cbb789dd0be9da33e37658d6ab9",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/swiglu.py",
+                      "bytes":  383,
+                      "sha256":  "c9beb9ca16ad10229dbc7bed32b21ac578f5caff2de08b27200ba7e66983dc58",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/swiglu_bwd.py",
+                      "bytes":  694,
+                      "sha256":  "1678d94de34c792724cd13975b5ce7ad0a6cd7e696f0474a9da5960ad10fe684",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/update_kv_cache.py",
+                      "bytes":  2241,
+                      "sha256":  "412013ab78b68baae292b7b8fb0a2691c0162fbc0090c84c289f2a4201e764fc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/utils.py",
+                      "bytes":  4637,
+                      "sha256":  "256a1a458413a6ad07d0c56a389cde86ad28b4a17acf70ffb055afe294a99979",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "jax_ops/w4a4_fp_blockwise.py",
+                      "bytes":  4442,
+                      "sha256":  "05b3840110cead6630a6d5760b67f62644bc8766e05ed2ca3d21d09f643ffda4",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/w4a4_int_blockwise.py",
+                      "bytes":  3541,
+                      "sha256":  "b23c0b7e869cf9d7fbdceee913b32ff1fc33b56381b4183d9cee37a28aa1cd97",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/w4a8_fp_blockwise.py",
+                      "bytes":  6192,
+                      "sha256":  "5810fd3a018f3af05b6e12a324bb5699acde506aff745345d9a3895d79fcca7e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/w8a8_fp_blockwise.py",
+                      "bytes":  3396,
+                      "sha256":  "e26248cf99ba1209999708633b37758452ee0b42befa5d1e8ed035e26128d1f5",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "jax_ops/w8a8_fp8_perchannel.py",
+                      "bytes":  4865,
+                      "sha256":  "e7c44536680ffe008374692e8a2bab78f551827048595ec794b722cb1c042df1",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/__init__.py",
+                      "bytes":  136,
+                      "sha256":  "e8af6b89507b7130e83d21a3b1170e6c7c0d7b606a43bab477a6c2925599b2ba",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/_version.py",
+                      "bytes":  229,
+                      "sha256":  "f39ee9ffa5f5cbf3cf42d4cf19e5a987ad99a8e39a4b8fe10c0f03cb99c3d115",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/adamw.yaml",
+                      "bytes":  303,
+                      "sha256":  "265afaf9cb3f43b81e235030cc8acaa02f6c868b5000a62858f640e65a6d698d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/adamw_VCS.yaml",
+                      "bytes":  305,
+                      "sha256":  "dc04d4b91951643abbf7b7bf39ceda4c22912edb071072c8f5a22638461c7576",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/all_gather.yaml",
+                      "bytes":  313,
+                      "sha256":  "c12ba81ee403a79c8d21c9234fea17483da3ec509dc9b4c50c78396851fc6a9b",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/all_gather_2x4.yaml",
+                      "bytes":  319,
+                      "sha256":  "cb0abf908c9bba7fdea2ae607fefc21f43139379f79e23bed1607ef7cb546ca6",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/all_gather_matmul.yaml",
+                      "bytes":  330,
+                      "sha256":  "dfaec454bce97bbdf7a020109659ba99e6ebfe09de82447d659f942a4cdc8935",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/all_gather_matmul_2.yaml",
+                      "bytes":  332,
+                      "sha256":  "39a9b231a129e212391310cf6da6dd76afb8adca795539f3f9b7e649d9367d1a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/all_gather_matmul_2x4.yaml",
+                      "bytes":  337,
+                      "sha256":  "ea10a0e6ecb23f60cd7200ae36e5ed49f33afd38e966927fdfe8766375bbecf3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/all_to_all.yaml",
+                      "bytes":  289,
+                      "sha256":  "c17a8d807e3752f7b1d817cd5c56e544cbb6104e9470c22b33ac5da48f67ae29",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/all_to_all_2x4.yaml",
+                      "bytes":  293,
+                      "sha256":  "99b4152623d1e131f837454f358f58068dcd418f0e4b6098ba59dc9712a9791f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/build_rope_cos_sin.yaml",
+                      "bytes":  316,
+                      "sha256":  "730421d97a0c4829f3be6afd55c184a801fd2ce511a8e31612d941f11dec99d3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/cp_gqa_fwd.yaml",
+                      "bytes":  381,
+                      "sha256":  "9a221ddeccdb7cc721dd3561f8a2ff9b579448f2b8e69b01f597d9d4141d7416",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/csa_bwd.yaml",
+                      "bytes":  396,
+                      "sha256":  "e0153c3aba1bd72b51d5dfcc3b40638fe37921e3b9723d759f7e76f696ded46e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/csa_bwd_shrinking_bundle.yaml",
+                      "bytes":  414,
+                      "sha256":  "7ece982f5a5ad7bfddfa2b04cd4e144f586352ad2428cc8c4dfe9c1ad8eab98f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/csa_fwd.yaml",
+                      "bytes":  391,
+                      "sha256":  "438585bc649453a9f1ecdbccb2f1a3f9639a7bdfa178009dd312437531ff35d3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/dsa_indexer.yaml",
+                      "bytes":  542,
+                      "sha256":  "57cdce902d7500c1d4e58e1339fd9621b8424564da73e22e883212f976af4d69",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/dsa_indexer_bwd.yaml",
+                      "bytes":  609,
+                      "sha256":  "59009ceb9e6ec06877944f450c663778c8dc7067f8212acd838127356e8d2484",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/dsa_indexer_bwd_shrinking_bundle.yaml",
+                      "bytes":  622,
+                      "sha256":  "4aaa517f58530f36277a700a787c4d5fec57e08ccd454b65a33ba33bd8072d60",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/dsa_indexer_shrinking_bundle.yaml",
+                      "bytes":  704,
+                      "sha256":  "51285cdb2f2cc1b26b22fec37de91072fdee204c446bf20d0267b3ca85caf1fc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/embedding_bwd.yaml",
+                      "bytes":  289,
+                      "sha256":  "5e5378fd5feea1f5bae1e0957e169ec4f4367938b1f79a4ba1f83767ea038ab6",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/embedding_h1024.yaml",
+                      "bytes":  288,
+                      "sha256":  "7b4b59934ccf92f9a8fc23ef73b49dc29ac0f627d78596772c9563b2bf42939e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/embedding_h512.yaml",
+                      "bytes":  286,
+                      "sha256":  "2963b3130d08257eaf47124716b2893ad6715f690ca7267c16b8a601322acd63",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/expert_ffn_bwd.yaml",
+                      "bytes":  343,
+                      "sha256":  "a4bc53de638537d65143839c8daafbce83dd3f2b2848897c565350a381c4fdbe",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/expert_ffn_fwd.yaml",
+                      "bytes":  326,
+                      "sha256":  "ede10e40dca553ecb1cb735d2ec039958e86f977eaee98f98fb39f03818a9293",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/flash_attention.yaml",
+                      "bytes":  362,
+                      "sha256":  "ec644b34f1944c7d7e7ebcfc2a73002f59827c5945fb04c041adc211fb0d3c52",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/flash_attention_vcs.yaml",
+                      "bytes":  357,
+                      "sha256":  "ba1b42351344aae81fc6bf5866bef87d5514bdbca9b85cea8690ed80dff39726",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/fused_moe_multi.yaml",
+                      "bytes":  473,
+                      "sha256":  "7d49ba38d411e4da4b256c11f4428add00787dcb05c555034eaa962ea0115368",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/fused_moe_single.yaml",
+                      "bytes":  473,
+                      "sha256":  "955e8bcfca27aafd969adf029f6407897d0e9d5308c9bfba91ce40cfa02cc3fd",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gmm_bf16.yaml",
+                      "bytes":  269,
+                      "sha256":  "2ef98c6d675074a9b9168a84e9a8dbbd0cead9657292ec5d5649ddcde92be489",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gmm_e4m3_blocksize16.yaml",
+                      "bytes":  353,
+                      "sha256":  "dc24d2f1c85439c723ad4bfba179e79a8ba216619dab3c82fda69613d6a8d172",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gmm_e4m3_blocksize32.yaml",
+                      "bytes":  353,
+                      "sha256":  "08921df199dcbf8f517881af1b540d8ae191bb2e9a08ad813f521ead686709be",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gmm_e4m3_blocksize8.yaml",
+                      "bytes":  349,
+                      "sha256":  "6e99bf9507206410dfaab38c1c70b46dbfc6e7306fb617dae0dddf3bf54c7269",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gmm_e5m2_blocksize128.yaml",
+                      "bytes":  357,
+                      "sha256":  "24863fb2e6af38054473bbe962fa04ea67a3730584742e1928e6f39cb7924dbd",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gmm_e5m2_blocksize32.yaml",
+                      "bytes":  353,
+                      "sha256":  "e4c1222c897f8cb971043548039db5e1c6bd25eec9688f3751afc962c2c50b57",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gmm_e5m2_blocksize64.yaml",
+                      "bytes":  353,
+                      "sha256":  "9ad8563d8005ab0b92ad562dc9d538022888dbb5f977613b33321177b677be3c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_bwd.yaml",
+                      "bytes":  358,
+                      "sha256":  "e54a53aae66c2a7f4bfc023ee5daa0e889f6fde7e79ad63b7a94b18fae903701",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_bwd_fused.yaml",
+                      "bytes":  393,
+                      "sha256":  "2db164776a4e149701b0be9a8d820d26b00d3da97baa2eab2208ff579b3dbab0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_bwd_fused_seq_512.yaml",
+                      "bytes":  419,
+                      "sha256":  "1c6cf28f686943c484d4d227ec1fcfa4bb18b294ec090fa751fb1ae847fb3fc3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_bwd_vcs.yaml",
+                      "bytes":  384,
+                      "sha256":  "f50213831403c3220a2f8ef4e7acadfd0315f1846eae3ba1ccc21dafc9a511ba",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_decode.yaml",
+                      "bytes":  269,
+                      "sha256":  "eeb3aa8a2b3f29f8d53f555b4cad8574e17ed260ff6da61323638cb0338cbc14",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_decode_llama3_8b.yaml",
+                      "bytes":  279,
+                      "sha256":  "c9b9e9fca284bd4f78beb7402872ea023d6a2c89addc2177c5b4a9fa5d234b98",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_fwd.yaml",
+                      "bytes":  434,
+                      "sha256":  "226c427e998fbe272d76d68f27ab9a73c45a8af3c6b2683d77d274b214f4ed36",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_fwd_seq_len_1024.yaml",
+                      "bytes":  520,
+                      "sha256":  "c0f0ba6603a00b8338b13041e9a177f107a6687b2afe8d8525f253eaa871ebce",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/gqa_fwd_seq_len_256.yaml",
+                      "bytes":  444,
+                      "sha256":  "b74d270548e3466dcc9292000cd1ae6ffcdefc5248da789b1c94948b0de98ca8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/hca_bwd.yaml",
+                      "bytes":  392,
+                      "sha256":  "303760402e65b885a01d941d91021daa378674e05b41eda5f5e8f445360773f1",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/hca_fwd.yaml",
+                      "bytes":  391,
+                      "sha256":  "72306ae8bd1bcb7252b713c077555f959d8e67128221430c65c8d2f5979d4a23",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/hca_fwd_multidevice.yaml",
+                      "bytes":  403,
+                      "sha256":  "c9338655d2e9af8f0a3ba0d462e6af34433db7eb88399c19a0045aeca7688abc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/kda_bwd.yaml",
+                      "bytes":  312,
+                      "sha256":  "686639ba2750b3bb82c7d3526ba469fe09bb41562ff2300cf6b84845058ca9e2",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/kda_bwd_fp32.yaml",
+                      "bytes":  314,
+                      "sha256":  "565600ccb0471584a9082e5f0835cc6ab758cf75740de60aa160a65738316d07",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/kda_decode.yaml",
+                      "bytes":  331,
+                      "sha256":  "da975d74030b16bc7bd37938cb42b414d06eaeca79dfbeb9f192925475f03374",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/kda_fwd.yaml",
+                      "bytes":  245,
+                      "sha256":  "d719b875c4af5b1166d06b2683969baac47212d32eac1e5c2b9b62f789b60ca1",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/kda_fwd_vcs.yaml",
+                      "bytes":  247,
+                      "sha256":  "cc627b9d7d5ff8199d8abbbac13f2267a32a3e49a9ce18f1585d9ebbfc9b0211",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/layernorm_bwd.yaml",
+                      "bytes":  255,
+                      "sha256":  "df49547d1c4579186aaac2c85611a008c3cad96cb067d1f70668fee8bbff2b6f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/layernorm_fwd.yaml",
+                      "bytes":  255,
+                      "sha256":  "96a4922fd671bc926dcf1c683b92b4adc925e07a2b7ac74b362055a261d554c5",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/lm_head_ce_bwd.yaml",
+                      "bytes":  233,
+                      "sha256":  "a4c32905a310fa520d483d9258d7b3523369709211e0bb709b4bd68977895c17",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/lm_head_ce_bwd_shrinking_bundle.yaml",
+                      "bytes":  250,
+                      "sha256":  "0773e4bb73a8590a80eb8fcbbd3717138e8b446b7940a6fa13ea3d40ea882102",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/lm_head_ce_fwd.yaml",
+                      "bytes":  254,
+                      "sha256":  "bb4ca7dda6c6d2bc183a989cdb858c58eb672e6e2f4727a3215d9dbff5e65887",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/lm_head_ce_fwd_shrinking_bundle.yaml",
+                      "bytes":  271,
+                      "sha256":  "0d3a33ca03ad54db12748c8466962a03d61acb69ffd4ed666ada50cb7dd2f8c2",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/local_window_attention.yaml",
+                      "bytes":  332,
+                      "sha256":  "220a3289129dbd572dd429c46692752b6ec59e6078520119e1520bb0bf02de41",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/local_window_attention_with_sink.yaml",
+                      "bytes":  369,
+                      "sha256":  "606d9982ffe9b62769498647e19709cf8d377bd2a8cf6212aebaa3022a2f0e88",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/matmul.yaml",
+                      "bytes":  223,
+                      "sha256":  "4dae18db638cb3c2006591555b3386966346fcb983ef0fb6aed56ed15a001dfe",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/matmul_m256_k1024_n1024.yaml",
+                      "bytes":  281,
+                      "sha256":  "f73a1c738cc824d8c3aa13ab5fa21c94b8dc0ae1d0b04cfe57fec8fc093faa4f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/matmul_m256_k1024_n1024_full.yaml",
+                      "bytes":  288,
+                      "sha256":  "9113f506023da45de48a64f96363f7b6a3e48486347f044118e934db3f4e5527",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/matmul_m256_k512_n512.yaml",
+                      "bytes":  277,
+                      "sha256":  "87ac629e9f9e80dd0dc514537eb240a6ea5d5e9c850606119fe56ab3901e3ebf",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/matmul_n1024_m1024.yaml",
+                      "bytes":  276,
+                      "sha256":  "5e700f71c53edce310fc34810048c503810a6486a12b17407c784d6ccf92e7bf",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mhc_bwd.yaml",
+                      "bytes":  264,
+                      "sha256":  "999702459b457c75c9fbfffdc374e625b66c038d0957f857d481effea483c8f3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mhc_sinkhorn.yaml",
+                      "bytes":  274,
+                      "sha256":  "32cf095daa9a62218ef5edc15da923f841a8b9cb6560411d77b8cedf298efc2e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mhc_sinkhorn_shrinking_bundle.yaml",
+                      "bytes":  288,
+                      "sha256":  "48779fcb71661beae4544bc81a3294b17009c37efe8ed29a4bfd686ee676d55c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mla_bwd.yaml",
+                      "bytes":  472,
+                      "sha256":  "5d8e2ee7c0eb6ba9caa988c2737a34add5ffafa085084384dde1e6e2c35b6a5c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mla_decode.yaml",
+                      "bytes":  412,
+                      "sha256":  "f1b000111ea5a16fee58cc3fd5016db2249382ac1ef27a0ee9f81ec703145dfa",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mla_decode_vcs.yaml",
+                      "bytes":  409,
+                      "sha256":  "f76c1c267c2c8101c03ef8c656931d84c6607fe8a78cdaccef9e023ec901c13f",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mla_fwd.yaml",
+                      "bytes":  584,
+                      "sha256":  "ea0dc7dea0a374cf11d0548a4b439976cca3c98a39467748432029ecee26084b",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mla_fwd_vcs.yaml",
+                      "bytes":  578,
+                      "sha256":  "2982490ad766b767e7128d689ad917b69b643a9708ab28aa20605acd3403eb7d",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_combine.yaml",
+                      "bytes":  310,
+                      "sha256":  "cc0918dcac7647069e82046e03befce86716ff46a9be5dc497fbe8e96dc0ee33",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_combine_after_a2a.yaml",
+                      "bytes":  265,
+                      "sha256":  "40d57746fc06faf899338dc24001e71cd27d1f780da633fb63f88b495214a6c8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_combine_after_a2a_bwd.yaml",
+                      "bytes":  290,
+                      "sha256":  "42fc524d65ff2fe7882280322f1b3cd3b17ab0b84d7574916a1a9e07aef74507",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_combine_after_a2a_bwd_shrinking_bundle.yaml",
+                      "bytes":  305,
+                      "sha256":  "7ae51beca9410362fdadcff12061031e1b564c6cb5ae9f5f28159a48f671d4bc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_combine_v6e_2x4.yaml",
+                      "bytes":  414,
+                      "sha256":  "3c848d0441feb5d9d7f0ecb128163b3522437f8c3c395467d4e0d5b1a4fe0598",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_dispatch_a2a.yaml",
+                      "bytes":  317,
+                      "sha256":  "5a8ad63e5cd4cf209a79439e88d47d5984ed77f6dad03223a13273c238286421",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_dispatch_a2a_v6e_2x4.yaml",
+                      "bytes":  421,
+                      "sha256":  "61168573b620113970bd8be66195733bd43f277aee8990b1dad786540ec492cc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_permute_before_a2a.yaml",
+                      "bytes":  268,
+                      "sha256":  "4fbb20ac808e8edf94d7a6de3147db524d3982ac64c4fe2886d98ebaa9e8cebb",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_permute_before_a2a_bwd.yaml",
+                      "bytes":  276,
+                      "sha256":  "b1aaf198de8bd738e3fe249b129c9159a8f0af2513b07f775841bbf1a29f3002",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router.yaml",
+                      "bytes":  345,
+                      "sha256":  "6278a7e005a6de1d5627ce216dc423e0525620e88bd94487e6b72953aa571ee7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_bwd.yaml",
+                      "bytes":  336,
+                      "sha256":  "c96dbfc22ce3f51ef00f9a0fe153ef88cd76eb28eb72ddef08d93c6df1af437f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_bwd_fp32.yaml",
+                      "bytes":  340,
+                      "sha256":  "f7b9dc0b337810313eadf18788a31a5ce6ea2f20a0fa480a125076e19a00e91c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_bwd_fp32_shrinking_bundle.yaml",
+                      "bytes":  356,
+                      "sha256":  "73bc16b58573942dd7d7ff56498aef259c1f194d58d784af1f479af4f8d3aa59",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_bwd_shrinking_bundle.yaml",
+                      "bytes":  352,
+                      "sha256":  "395fd68ec54da39e3fa6da63c22935c458abf7d95a2b3735869fdf8163a308a0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_bwd_sigmoid.yaml",
+                      "bytes":  343,
+                      "sha256":  "91c221e13c0f7f7095881a0773d4a00df02ca2fa80a04b738ac1debf6f572aac",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_shrinking_bundle.yaml",
+                      "bytes":  373,
+                      "sha256":  "784a79164116cdd7a5e88b34896f7ca2bf858d6309e92736101e66d2303279b7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_shrinking_bundle_bt2048.yaml",
+                      "bytes":  381,
+                      "sha256":  "95138a2c70c77016dee48f79d09f080ea193a532908f90cc14742daba3f18381",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_sigmoid.yaml",
+                      "bytes":  336,
+                      "sha256":  "46152b0db7b7f849e5532ddb8ae0b4c8c829f50b48c839f64b10cd65529384f4",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_sigmoid_shrinking_bundle.yaml",
+                      "bytes":  382,
+                      "sha256":  "34ba7358787eeff358febbab4e160153b41a37dbd1262c46cbaba8a2343c7653",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/moe_router_vcs.yaml",
+                      "bytes":  359,
+                      "sha256":  "c9d6c2f7844b0f8eef28c71b2f5f715b372c141729f2093b4bfa3f3751e6fbb0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mtp_accept.yaml",
+                      "bytes":  229,
+                      "sha256":  "e32dc06a0f72deb9d327fc920afe3523330b21404d6daf3b48d557e755576beb",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mtp_lm_head_sample.yaml",
+                      "bytes":  313,
+                      "sha256":  "7e21d27cde62e0ce035f0039ac49b6f3ca5b7ed2438238a265ff769b902050db",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/mtp_lm_head_sample_fp32.yaml",
+                      "bytes":  317,
+                      "sha256":  "47a52e797384bcfa93d7699032223a6eebddc230c9c96836eaec848a1ff89e93",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/muon.yaml",
+                      "bytes":  288,
+                      "sha256":  "90f3caf8f11111e57827f19ff0c61f612ac488c1ac758ac42d8bd02065f00240",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/reduce_scatter.yaml",
+                      "bytes":  311,
+                      "sha256":  "7d2bcc359c4f2996e645e10b300d534cf7e34b39b4394b73e1f85725e402b9d3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/reduce_scatter_2.yaml",
+                      "bytes":  313,
+                      "sha256":  "61cd218c9b14c581f324533e9f7a2f001e203c1eccd940d55fc1d4736178e967",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/reduce_scatter_2x4.yaml",
+                      "bytes":  323,
+                      "sha256":  "9d2da89a76a3de5a6f7820132cd3fad30ec87a0700526c10aecc002b9e3c02c2",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/residual_rmsnorm.yaml",
+                      "bytes":  261,
+                      "sha256":  "51b47bcde6ffaa3aba5b048b8e9a49a1232d8259b16f13afbf118771255aa89c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/residual_rmsnorm_bwd.yaml",
+                      "bytes":  247,
+                      "sha256":  "87b6893a2cd63453f075548389fe240086e7c559bebd08e830adae3db35b77e8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/residual_rmsnorm_bwd_VCS.yaml",
+                      "bytes":  250,
+                      "sha256":  "a26e073641d148791c38abf499498ccb3312cf5ee1880241f7f2180f1391eab0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/rope_bwd.yaml",
+                      "bytes":  231,
+                      "sha256":  "d6a2ef774a0984e7086885da94e6197e9ee09f9733ffbc34e6cfed777e4ef928",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/rope_h4096.yaml",
+                      "bytes":  231,
+                      "sha256":  "609288c2cc94afbe63a1313a2e549becc903d8dfb752fedf6a32ddcb875a502e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/rope_h8192.yaml",
+                      "bytes":  231,
+                      "sha256":  "0b6d306c461481cd92840d73fb57952aee31e8a54ce646695b1cd4642c911a00",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/softmax_bwd_h4096.yaml",
+                      "bytes":  227,
+                      "sha256":  "d0deaa85ede735f88d8e033aa9b0d9999565a192b84f9f9838ec26c555705f0d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/softmax_fwd_h4096.yaml",
+                      "bytes":  245,
+                      "sha256":  "eda1f3e17aace27c6d6d75496c8ed84d1955d161f6b3c77dcd30a2954d8b6a41",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/softmax_fwd_h8192.yaml",
+                      "bytes":  245,
+                      "sha256":  "c892d642c0bbeca6054b3d57f1d5fc350970b661d4a5741e25b8e18f2e614ad8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/swiglu.yaml",
+                      "bytes":  229,
+                      "sha256":  "dfe716de7400509c6ed66757dbc52e9479f82198e6ef915f44d8394a330ee2f3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/swiglu_bwd.yaml",
+                      "bytes":  237,
+                      "sha256":  "870cf8ad8662b00a7fcdb754992a9eca2420ad13769c5fbf8ccac444fb9c01d4",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/update_kv_cache.yaml",
+                      "bytes":  307,
+                      "sha256":  "670e3befe852fd22d5ea2143858df7a150c1a25fdc73ee147d8681c4577244fe",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/update_kv_cache_fp32.yaml",
+                      "bytes":  311,
+                      "sha256":  "79af2c54dd91b2b2b3d21c02d9e4df0c038df04957054d99a054133a24d12d1a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a4_fp_blockwise_blocksize16.yaml",
+                      "bytes":  447,
+                      "sha256":  "b9ee8654afaa9afc4d58856baf4f635e41fb9dbf6758d2de76f6e7868e6a78c3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a4_fp_blockwise_blocksize32.yaml",
+                      "bytes":  447,
+                      "sha256":  "2146e148db0e782803f961969eedd552eb07e7a6bf3951889d9371cbbe8c5de5",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a4_fp_blockwise_blocksize8.yaml",
+                      "bytes":  443,
+                      "sha256":  "3643c531d3887a74299f900809559b9b696cf6cc7c3772d8b4d4077ab44e6941",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a4_fp_blockwise_blocksize8_b256_o512_i512.yaml",
+                      "bytes":  458,
+                      "sha256":  "7a49ac9de9fee780933d31b97e39cce0b1eb3fc0c4af3d054395a83d8ae95b93",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a4_fp_blockwise_blocksize8_single_program.yaml",
+                      "bytes":  460,
+                      "sha256":  "ff6bd662661bcb80f495fef32f0c969f1ba9117234f97d41e7046325d5b88671",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a4_int_blockwise_blocksize256.yaml",
+                      "bytes":  411,
+                      "sha256":  "530af046df541f972eaf7d8716e93dce16cba863504d84500d9e404851932a45",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a8_fp_blockwise_e4m3_blocksize16.yaml",
+                      "bytes":  415,
+                      "sha256":  "2962383c317ec154172074f6412ab7437856a69ff09e609eb15fe4e6ac3e9603",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a8_fp_blockwise_e4m3_blocksize16_b256_o512_i512.yaml",
+                      "bytes":  430,
+                      "sha256":  "8ba559587ce16f9b987b4de3cf4cac8d58bb59b6f179f55e3588bf8c0242cc1a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a8_fp_blockwise_e4m3_blocksize16_single_program.yaml",
+                      "bytes":  432,
+                      "sha256":  "73cd3d9be11a962fa57efacc12079a743c65f9bbcbb51b1181668507e604123a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a8_fp_blockwise_e4m3_blocksize8.yaml",
+                      "bytes":  411,
+                      "sha256":  "1b2408a455234e6fd84a29b681d09817886e70073c6d04bf5f89ebb18b678a68",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w4a8_fp_blockwise_e5m2_blocksize32.yaml",
+                      "bytes":  415,
+                      "sha256":  "6aeb334474c6ec74d678b5da62f7354bf1135fa216d327821381a573a6cc724a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp_blockwise_e4m3_blocksize16.yaml",
+                      "bytes":  456,
+                      "sha256":  "f0cecaef48e394df93926def43dcae5771b73c855d91e5343d8bc226a2d803c3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp_blockwise_e4m3_blocksize32.yaml",
+                      "bytes":  456,
+                      "sha256":  "b60b51de6aec2a171cb3b9b45293dde16563b629b3be5152bbb1d63ece8352e5",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp_blockwise_e4m3_blocksize8.yaml",
+                      "bytes":  452,
+                      "sha256":  "06f5dc66e4765aaad930d823797ca7e6b67432dc6e21532b44cc763630601906",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp_blockwise_e4m3_blocksize8_single_program.yaml",
+                      "bytes":  469,
+                      "sha256":  "7c21bf9ebacb5239352acbc6706c5dd7757f588e511deccf3a578b620f0d1355",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp_blockwise_e5m2_blocksize128.yaml",
+                      "bytes":  456,
+                      "sha256":  "e7febcb7d355c81f2d78e5083424c943df7c62cf3d4e48e68517bf576f9fb221",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp_blockwise_e5m2_blocksize128_single_program.yaml",
+                      "bytes":  473,
+                      "sha256":  "dd4609b5e059b5cdc55c762251c78e8ec2c6d9e1b03f67b55f8027afe558d061",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp_blockwise_e5m2_blocksize32.yaml",
+                      "bytes":  452,
+                      "sha256":  "c27c1f492ab93fcafa9c9d9ed45a7181f3309900e21fc47a2dbf3d3198c56620",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp_blockwise_e5m2_blocksize64.yaml",
+                      "bytes":  452,
+                      "sha256":  "8cd8481d84c1d6d8cec2e9d430a26dcaf2272f518b30cf1b5563f03187ce4a3e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp8_perchannel_e4m3.yaml",
+                      "bytes":  384,
+                      "sha256":  "f3a77aa2cc84967ed0f8ca04c7e6e93c2c67d60a15232e1ed2ff562fee826e38",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/configs/w8a8_fp8_perchannel_e5m2.yaml",
+                      "bytes":  380,
+                      "sha256":  "a997d90d7d5a869874beb59f52726f31abefe540d24fb02146c4dea0cd76e429",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/__init__.py",
+                      "bytes":  20639,
+                      "sha256":  "574c5edaa0dae887a2021777214dadc3b9c171d2757468dd7a28ff4bf88a4699",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/all_gather.py",
+                      "bytes":  7286,
+                      "sha256":  "dd7c013956dcfb9700c53ce7695026cbc86cf068bbeb396a19f9ae59aab9d53f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/all_gather_matmul.py",
+                      "bytes":  10502,
+                      "sha256":  "5f2c1c0012e11f965a7a31cdd2635079c07971ec4c4f612e8f00e7dcb89b8f01",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/all_to_all.py",
+                      "bytes":  9855,
+                      "sha256":  "1fbe626f1bffca5e169e0bd786b0be27c7d4d57d19da339af23f62c4e24d0b11",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/config_loader.py",
+                      "bytes":  198,
+                      "sha256":  "3b181f65c61bc5dc70680007045b73f946ca6b4b2ae572fe5ffb1110e6f4aaf9",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/cp_gqa_fwd.py",
+                      "bytes":  29847,
+                      "sha256":  "d6ab7dfe3af47254d58a405a84731e0253f68aaae4648287812c8d4e7f34d6cd",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/csa_bwd.py",
+                      "bytes":  35068,
+                      "sha256":  "00c5d337569fb998c99b81928c509a356ced9999a28168b20d41ec868fea488a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/csa_fwd.py",
+                      "bytes":  20230,
+                      "sha256":  "36cee7ab739642afe5fd9683e31803fe76918caf783051ae2f54f359f5bc7e05",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer.py",
+                      "bytes":  9429,
+                      "sha256":  "6bf64ddedff217bcdbaec278ed72fa3b6f3c52cef4bcc37dc6211b492f274784",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_bwd.py",
+                      "bytes":  4917,
+                      "sha256":  "d845f3c258af623e0ab8a38980548d4c2da7b25eb6c086226982a03b60021995",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_prepare_k.py",
+                      "bytes":  7939,
+                      "sha256":  "17f5a7ebe1fc9b2445932b02baeeb4ecb914526085d30d9513f36a9b388de1c5",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_prepare_k_bwd.py",
+                      "bytes":  13120,
+                      "sha256":  "8cde02cf015e5fced977bc1e481be1ad4d35646f745487c463757ae3811b9b51",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_prepare_q.py",
+                      "bytes":  4619,
+                      "sha256":  "adb5f49f951c13d2f3e4c24afb36e114b64423821197bffc427e8e3c3519e284",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_prepare_q_bwd.py",
+                      "bytes":  12723,
+                      "sha256":  "6a09ae666a3f4b3e7a6e00b97403287e13b0018e6d1f89b4cf7667e524e8a050",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_prepare_weights.py",
+                      "bytes":  2850,
+                      "sha256":  "24de082ac05ad2da951a21fc1ab8976dab4d4ad3d2a0ca675f9e0686292dc44f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_prepare_weights_bwd.py",
+                      "bytes":  6388,
+                      "sha256":  "15011a85bb55c8956dc73fdd54fdc843a6b812eeee82c22be29348d82739d152",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_score_bwd.py",
+                      "bytes":  6845,
+                      "sha256":  "fc10f5ba98b35b56b6657578ae9fb611ae68686033da4af91f310bb7dfa31420",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/dsa_indexer_score_topk.py",
+                      "bytes":  7156,
+                      "sha256":  "bf918daf32b34170c33b9628ba417a67f2e729b21c71e3f810347482e44cbda6",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/expert_ffn_bwd.py",
+                      "bytes":  13471,
+                      "sha256":  "b1f2273c69b9b563f45ed1ef4a757da6cfd928f51a1ce4724887a507f982bedd",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/expert_ffn_fwd.py",
+                      "bytes":  6797,
+                      "sha256":  "c384072420444e02063844faa37f132701dddd66da3a8ca9628cc94263b8aa2f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/flash_attention.py",
+                      "bytes":  18010,
+                      "sha256":  "e9e3292f4d2d87fdff6c18405c1f7b4479c07375b222354feb2e107599ddc878",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/fused_moe.py",
+                      "bytes":  39088,
+                      "sha256":  "1c4d48f394f550765847cdd1fb1c2720a1b7119dd44dd280a99d92e2fd8fa1e8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/gmm.py",
+                      "bytes":  11555,
+                      "sha256":  "6bd7ffe80bcb9e990df2c65bcebec89c5ccd1e5ce091cc3200bb545a40d2832c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/gmm_bf16.py",
+                      "bytes":  7500,
+                      "sha256":  "ff7bbd9c68f0d25e3d11ad426eba28d957f710272769ad1b2f6175cdd9ad44ae",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/gqa_bwd.py",
+                      "bytes":  22953,
+                      "sha256":  "bd2b0b4fa0accb1a5792346ef2cd3e4585fde8cdf7da88f630c7b6ebb013d0f0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/gqa_common.py",
+                      "bytes":  5124,
+                      "sha256":  "f2653e1e26dbf08ee9b3c841e2b1323bcae14e3ecabfad44a8a415b7a8ce30ef",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/gqa_decode.py",
+                      "bytes":  7914,
+                      "sha256":  "c35294ed9d69f67e95a062315c708c7c8c5eda4627c47481131ec993c85ae19e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/gqa_fwd.py",
+                      "bytes":  21197,
+                      "sha256":  "0217b8356b7aee783c0efa0f5ab6d40709f69779a3766f5c0d2690b24d8eec73",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/hca_bwd.py",
+                      "bytes":  24958,
+                      "sha256":  "40db0ce9c7eeb4b965c578121765d280cfc6c0f8da41d7123f58d970ce5a4e62",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/hca_fwd.py",
+                      "bytes":  13339,
+                      "sha256":  "21989ef4a277a73e084473e955680ad713de1f57f11df655a66e0456b24867af",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/kda_bwd.py",
+                      "bytes":  10754,
+                      "sha256":  "fcd306de5692d30cc87c7d568c906d2b110cc820dfb5393bc78c99117fa1e4f6",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/kda_bwd_intra.py",
+                      "bytes":  18911,
+                      "sha256":  "626e0ac7188ebc631b95b602bd6502baec4a2a16b53a2f7f580d13f9cebb704e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/kda_bwd_stages.py",
+                      "bytes":  12425,
+                      "sha256":  "a93cb4fdd64b370487d889017b1f5358b0ca77e881958afad57b348072bfe245",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/kda_common.py",
+                      "bytes":  1444,
+                      "sha256":  "e27786fa631f180de18765c632af91908b9b153cc7a05f94018a5580229d4d17",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/kda_decode.py",
+                      "bytes":  7116,
+                      "sha256":  "850125408e453561a10434e232c94f3e00c6af4e0f15bae63b7313a6116e3541",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/kda_fwd.py",
+                      "bytes":  22547,
+                      "sha256":  "cf60ed225bf09ce357955301f544b37ea9a365a2717f4cebc7d04a023565f2ca",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/local_window_attention.py",
+                      "bytes":  10600,
+                      "sha256":  "44982e86a5114fbf7d9804df74f96503dcfc4c12b7fa839d00f14e085a773e51",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/local_window_attention_with_sink.py",
+                      "bytes":  12270,
+                      "sha256":  "d25515dd46e39587b2b70f05a8d27413b789a32712fae5ed5ffb30db86c981c4",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/matmul.py",
+                      "bytes":  5113,
+                      "sha256":  "97f4d14fe8a43c8e263ac29bf41b20bff7ca6283931c11e774ccc254b2eaa185",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/mhc_bwd.py",
+                      "bytes":  8008,
+                      "sha256":  "88cfcc92d854cb0d234bb4841df569ef9dd74f4633d561e7be6c005b1a5d7776",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/mhc_common.py",
+                      "bytes":  2571,
+                      "sha256":  "c5bf35ca26697d25aa14a5d2e2b45eeb261c6f5c4d69d1a78217067deb16c33c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/mhc_sinkhorn.py",
+                      "bytes":  2819,
+                      "sha256":  "8718a91d9c857d87d7b94b96ff2823d923f3269a12877b85c04fa00cb9c9f491",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/mla_bwd.py",
+                      "bytes":  29651,
+                      "sha256":  "49abbb1696dcd983378d670f385dc5a1ba820896c83acb13627b44d5f76051a3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/mla_decode.py",
+                      "bytes":  112939,
+                      "sha256":  "e53b0e5ccff3ecf18192f30ef179cdb207c177f2f2dac48b2a08f40acc5000a6",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/mla_fwd.py",
+                      "bytes":  36174,
+                      "sha256":  "f9b07f0c62d14d4ecf4b17242b3ee913db4c0039e20786830688c8ec38fff13d",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/moe_combine.py",
+                      "bytes":  9148,
+                      "sha256":  "c21c7cb520b03a735cf81357cebab105862f1d4b0906a99bea7a6549dc85e9cf",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/moe_combine_after_a2a.py",
+                      "bytes":  16021,
+                      "sha256":  "12c62b6b92b888b1117f1d008d578e65ce67e73b9c0e541039c06b522362cb25",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/moe_combine_after_a2a_bwd.py",
+                      "bytes":  19057,
+                      "sha256":  "7f4209950d1e6c70b02a7e63307ca23d88e275e3cca96b691e22e0acb0c7eb91",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/moe_dispatch_a2a.py",
+                      "bytes":  10677,
+                      "sha256":  "3b5eca6b90f138617dceed7ed05cd3ab384a87daba226adef6e900b2fb75ac0f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/moe_permute_before_a2a.py",
+                      "bytes":  8137,
+                      "sha256":  "d6a590a054ebf6629d0452ab50130089d89ee73eb9445b6e09406f65df79a5d6",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/moe_permute_before_a2a_bwd.py",
+                      "bytes":  5976,
+                      "sha256":  "2a1ed02152f049a1c7d05606f59b0d573bc33bc702745996120e77495d6db879",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/moe_router.py",
+                      "bytes":  7748,
+                      "sha256":  "d6b81af9914df69f8ced41f614c893ff10bd79c102671a5a3d21edfd4cd62c75",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/moe_router_bwd.py",
+                      "bytes":  10600,
+                      "sha256":  "24520b8ea38e1c69df7001cdc814acc292c43b1dce3ad4e9346e2136891df616",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/__init__.py",
+                      "bytes":  4655,
+                      "sha256":  "c7abca91bde6818aa5dfc57e3401f6149f7542d969c1315b052c62382b6412d8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/all_gather.py",
+                      "bytes":  7061,
+                      "sha256":  "9620b5e777db07a34754d57d8bd2b4d9333c808d9ee4c5fb6cb60e4eaccfb2af",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/all_gather_matmul.py",
+                      "bytes":  6474,
+                      "sha256":  "1e031c6207ea573d4374aa2d06dd849cabc0d1ec36dff8f50956a3fd08ca82fa",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/all_to_all.py",
+                      "bytes":  6948,
+                      "sha256":  "144ae15020e64f03a87fb50750c98eb2287ee27c93214f6cca1eb36fc7d4b7c7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/base.py",
+                      "bytes":  10962,
+                      "sha256":  "202fd38a7b9ed56502e7a995b9196d967aea4d5c0832d59fe3d27163cf8574c1",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/cp_gqa_fwd.py",
+                      "bytes":  7017,
+                      "sha256":  "6bc07a1e10bd3cbfff3dfcbb8bb09770dc470d1abac9d72d718148a4f59e58e2",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/csa_bwd.py",
+                      "bytes":  6213,
+                      "sha256":  "8999038b4479f725e73fcb75e0b98f7ab8fef48c42c8d1ad8ad6b01914f6a8b7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/csa_fwd.py",
+                      "bytes":  7562,
+                      "sha256":  "839d1d7c6c0a07daf00ea1d9f42f836d4c57160bdd35009bb8005a0db646cfdb",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/dsa_indexer.py",
+                      "bytes":  8173,
+                      "sha256":  "0bb4a805b51f8fcb4ba9e96a1a64df724e9913d73c6c70cc6f6d38395213337d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/dsa_indexer_bwd.py",
+                      "bytes":  6982,
+                      "sha256":  "0d538198b5e28fad9679cec9610f0c953be71ae9383b5e6df37ffdc2891ea1e0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/expert_ffn_bwd.py",
+                      "bytes":  4357,
+                      "sha256":  "4f784d41b0870ab756a0f1b8d1f4bf84a890292e3a449af76f660e4a7244d959",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/expert_ffn_fwd.py",
+                      "bytes":  2827,
+                      "sha256":  "3b4d47d5dfab91b9dbb3388fb07c8b7eb27b49ae87d37f5af69becf11147fa28",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/flash_attention.py",
+                      "bytes":  4836,
+                      "sha256":  "6ec02a75c5a7a9701d45fb4e7056543d11d435b55d6b8d76e49a3c75e0b96126",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/fused_moe.py",
+                      "bytes":  7578,
+                      "sha256":  "11ae647507ace0d6308e34d5388ba507445be7f08f28c1d930e1c8665febedfc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/gmm.py",
+                      "bytes":  18114,
+                      "sha256":  "8d6531adb08f1cedcec617ae5d2994dc2bde8dbadb925890d4cb73e7cdec0060",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/gmm_bf16.py",
+                      "bytes":  4318,
+                      "sha256":  "ca97ea4f895a1527d9e787b96fe70fb012f05ef9a63916b0189a270d6338f731",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/gqa_bwd.py",
+                      "bytes":  6086,
+                      "sha256":  "7627e611ff92df8e2149e3bd902b58961691a00d4d77f9ce31b6c2be975cf9c7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/gqa_decode.py",
+                      "bytes":  5223,
+                      "sha256":  "27e6b62110848067be57740492101d831b5373945b016ed99ec8ac00cc1fa13d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/gqa_fwd.py",
+                      "bytes":  6289,
+                      "sha256":  "c234134e1c700d0f5d6da91b3215495de40fe336ce46581fc3e89a92aa5623e8",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/hca_bwd.py",
+                      "bytes":  6603,
+                      "sha256":  "dbed19e95fb7264fabe8b1480752a83e49374141e69edf3c75ad85d95b880e20",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/hca_fwd.py",
+                      "bytes":  4460,
+                      "sha256":  "87f07f9e2a0e0eb4c238a3def5b5bb708e19c2f2d4459468e9a3542c4c557a36",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/kda_bwd.py",
+                      "bytes":  3983,
+                      "sha256":  "072e50b2652c99aa1d8001f809a765d135144cef6b299719dd2371754472696e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/kda_decode.py",
+                      "bytes":  3452,
+                      "sha256":  "634619086d9d926194b646c703925d161513bf5575e9285ccecb085c5a31191f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/kda_fwd.py",
+                      "bytes":  9564,
+                      "sha256":  "8e0252891bec46165e9a43b64fc1a342d7f4dcd4996cad81598273c221e57f35",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/local_window_attention.py",
+                      "bytes":  4645,
+                      "sha256":  "83727430b2a86bdbe4bde55978bcceb5973357967338f10c5e3f07a747628007",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/local_window_attention_with_sink.py",
+                      "bytes":  5620,
+                      "sha256":  "400294bac48cd2d88e1e0616564c19c97b7dd8e5b3d200445341936dcf925c11",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/lookup.py",
+                      "bytes":  7308,
+                      "sha256":  "7fd7d2ba8f7a0281c749b078597ca7a6e4770bb923ecceeeafeadb084b76c458",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/matmul.py",
+                      "bytes":  2690,
+                      "sha256":  "6dee28e3746afe0404f1cccc38c31feec234aa5f9b655db7c77b492763aa93f3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/mhc_bwd.py",
+                      "bytes":  3047,
+                      "sha256":  "08e7b6b4d2791c5a85e9114244bb4a66191f1cb47a53630843419a24d0b34ab4",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/mhc_sinkhorn.py",
+                      "bytes":  2969,
+                      "sha256":  "2a58dc824706534bf9a207f477713a0d1a66d551c85e91d8f15d50f6f1ebe0b1",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/mla_bwd.py",
+                      "bytes":  10380,
+                      "sha256":  "a94cd1fb68c0431d92cf21a6b12ea7f2c61a0e081e401a8bf0320ef391d43ee0",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/mla_decode.py",
+                      "bytes":  12230,
+                      "sha256":  "1faac9bee5d9380e5a95a5c8f7ef2156be5c8e6e70ce02a2e02d86af21861fa5",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/mla_fwd.py",
+                      "bytes":  6244,
+                      "sha256":  "7803fea8ed06881f674a92e132636c2cda7f4d044079a9ce2504b96568b56ea9",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/moe_combine.py",
+                      "bytes":  4812,
+                      "sha256":  "908cd8e8ecac3ef27ad8661abf8bf7f9f3db5d730976139481f1fbe8201544af",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/moe_combine_after_a2a.py",
+                      "bytes":  3608,
+                      "sha256":  "1494f847863e929cb009c0e60d790b6dbcde095e991dcc61fa71556e5b6df0e2",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/moe_combine_after_a2a_bwd.py",
+                      "bytes":  5592,
+                      "sha256":  "de998d407f99230e17c59beabf8eb13faf51f8636a04717b191699bec70511ae",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/moe_dispatch_a2a.py",
+                      "bytes":  5338,
+                      "sha256":  "09e8d0197d4a22a3971b49a4bedf8240807063ef2d7565b05ed5612ba533ac6a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/moe_permute_before_a2a.py",
+                      "bytes":  3714,
+                      "sha256":  "5c99ccee62dd28a6712c591030b5f574509b88e31dfb24c1f6d8e48a18148991",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/moe_permute_before_a2a_bwd.py",
+                      "bytes":  3102,
+                      "sha256":  "91fa312387b56c28788f2997ef7efb56565c1510e5a24ab7c4962f03c90f0ab7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/moe_router.py",
+                      "bytes":  3922,
+                      "sha256":  "526535a5f32ff6ec158aee7f6c53713d2b58d859d09c089f937477e96e4a8f9e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/moe_router_bwd.py",
+                      "bytes":  3936,
+                      "sha256":  "e8cfba1f9fff1df8ed4e56d60fe87676168428ff648ff9a439dc642bae70d329",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/trace_named_hlo.py",
+                      "bytes":  1143,
+                      "sha256":  "52325d4a4bdb8f4356a341c950685a93d798c6a2b8e1dd17d6e7c465975871f3",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/w4a4_fp_blockwise.py",
+                      "bytes":  6481,
+                      "sha256":  "0e6742844e7302f9e3d31b7013ddf6feb0160ecde1ecc765eb14d50627a02b61",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/w4a4_int_blockwise.py",
+                      "bytes":  6357,
+                      "sha256":  "55cb14ed7ba50f812c052b90513f3248b3f668c9f27a4e040f29d14a977e57aa",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/w4a8_fp_blockwise.py",
+                      "bytes":  7755,
+                      "sha256":  "7244561b98b6f44eda2f6fa31c15db2f529214d800fd913ea392f9ce0140c71b",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/w8a8_fp_blockwise.py",
+                      "bytes":  6036,
+                      "sha256":  "d8437821560095e1c4b440151db5bf1b7e47b26b62660d2f3d5c3bf4abe35d22",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/registry/w8a8_fp8_perchannel.py",
+                      "bytes":  4090,
+                      "sha256":  "4ce51598f502af3562e19baf21dacd4fe086d1ef5bc888842ac5ce2039d43003",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/__init__.py",
+                      "bytes":  1374,
+                      "sha256":  "1adc3887c41f42c3641497a5466468ac1cdcec2f4b747c94bcd5e4f0321d4a2b",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/_block_matmul.py",
+                      "bytes":  6249,
+                      "sha256":  "587917468f2ae456afb8d3bc979bf31cf96ba6cf900b780697524e3f145e0980",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/_block_matmul_w4a8.py",
+                      "bytes":  9561,
+                      "sha256":  "39593bb13aec2ef8ec41060fc8693801853ba86bfd32b13fa41b1006c1e2637b",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/_blockwise_utils.py",
+                      "bytes":  4208,
+                      "sha256":  "6db988524d484f299fea2c897f0322261e41aa333abe4dd7d2c53b3cfc4d2dda",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/_dsa_topk/bitonic/sort.py",
+                      "bytes":  8468,
+                      "sha256":  "c8b3aa457647d8e7e1ad015ed61575bbe188e1cb78c56d0d948980945eed0971",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/_dsa_topk/bitonic/topk.py",
+                      "bytes":  3379,
+                      "sha256":  "9a3c16fd64002b5f964a653328889a5039578980410d78dc67186c96acae68b4",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/_dsa_topk/utils.py",
+                      "bytes":  6009,
+                      "sha256":  "f5bf10b1798352dacf8d727a60cf04d395215b9a22481626871b6c0071e6edf7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/_mosaic_lowering_helpers.py",
+                      "bytes":  6417,
+                      "sha256":  "05778c22faa3f5987b3b34e2793a9024fbab92bf3ab32e80433420c6ae80fb80",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/config.py",
+                      "bytes":  5555,
+                      "sha256":  "c83667e4314a91dc3abf151f6b59699412d622fc451f22cdd4dbc2c6fe63ee1d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/interpret.py",
+                      "bytes":  1100,
+                      "sha256":  "c3dd0e4fd1e15402bbbcb03b1d3ba54d73e42129298d16338268e17a1049351f",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/layernorm.py",
+                      "bytes":  1690,
+                      "sha256":  "2c11c9b7f41f6e70c4cfef51282ce9d8ffe5aa6268c2e8be889100f45efc328c",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/merge_config.py",
+                      "bytes":  850,
+                      "sha256":  "e8ef06c2857e540efc6b72a0aa99dfc5a417b6a210be453c34b3e141d54d10c5",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/mosaic_metadata_patch.py",
+                      "bytes":  4477,
+                      "sha256":  "a0940d3eed1145c8c19a97aa12c5cf7015dfc15000e89e3905d8b54073ce376d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/profiling.py",
+                      "bytes":  2222,
+                      "sha256":  "26763abc154106302afeb89e2bc3cee9efeb3c32346892537eca1d46b048c9fd",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/rope.py",
+                      "bytes":  1669,
+                      "sha256":  "96d9f998588ee93947d6dae1c339a4383771ed5779679d7dd14bf1b1ada51a2f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/utils/wrapped_pallas.py",
+                      "bytes":  16195,
+                      "sha256":  "0645093bcf7050f2abde62a77b0246038a6d7d38b92ea8e0bc0d16c038df75cf",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/w4a4_fp_blockwise.py",
+                      "bytes":  6351,
+                      "sha256":  "de39c971f08babb64e15aacb9c2118e1657c90656c39ed363c62606faf249b78",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/w4a4_int_blockwise.py",
+                      "bytes":  10004,
+                      "sha256":  "5dab1655ec3fd9ff911a08e9f88d698f51f19a057d8a695da73f58fe9f6391bc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/w4a8_fp_blockwise.py",
+                      "bytes":  10103,
+                      "sha256":  "f94b23658bc26c3c63f11dbf8874714d4f40b05c057b45967916988976524d1d",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/w8a8_fp_blockwise.py",
+                      "bytes":  5095,
+                      "sha256":  "dd19fc1bb0344ea377e9b1e0423be16a90c0166055d4bffbba12d947ad1ecf62",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/kernels/w8a8_fp8_perchannel.py",
+                      "bytes":  19214,
+                      "sha256":  "2fff835b2e1c643138d360482cefbee1e83a724e340292e12e934d9f37239e00",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/__init__.py",
+                      "bytes":  7154,
+                      "sha256":  "0071d018905f826cf735751dfaf33b86a006d9f7a99104c757406719f715d494",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/adamw.py",
+                      "bytes":  6059,
+                      "sha256":  "cd3db85c36dcf55b83bc537c4ed6e95ddc54a9fbd5d4a38d8f64f353beb622e7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/build_rope_cos_sin.py",
+                      "bytes":  5415,
+                      "sha256":  "0a4639f6938a9941469d863b3d22e023ec82f706be1be894fee9c5a5abb8a654",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/embedding.py",
+                      "bytes":  5563,
+                      "sha256":  "2aa60fe5b6fee560f99fbf402cb10c824c7ae82be87a56542b145c045c9d9037",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/embedding_bwd.py",
+                      "bytes":  5434,
+                      "sha256":  "53a5499b2cc1d1a79a066c001abad3c3da78fa4416c50dbcfe98b8b8015ce5e9",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/layernorm_bwd.py",
+                      "bytes":  3794,
+                      "sha256":  "11fb2229c58a57a8127873efff1cf003632335da2b15ba49c8b2a25990c85d7a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/layernorm_fwd.py",
+                      "bytes":  3653,
+                      "sha256":  "11adc025f25178b1d5e3469a45c408fc9f726ba0f76443cd8c307d8790d35ef9",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/lm_head_ce_bwd.py",
+                      "bytes":  4372,
+                      "sha256":  "72422eb5fe4af0458e5117ad02529270cd3115de6a3d6222e2128bcdc2782cbc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/lm_head_ce_fwd.py",
+                      "bytes":  5176,
+                      "sha256":  "7c420d8799edefb5d100b7f1d58a63e8b9e82bfc411718d24d96bdf7020be635",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/mtp_accept.py",
+                      "bytes":  3027,
+                      "sha256":  "4e8efb93b8ced19d085fb702f62e54718e16f26a20b3132dc1c1ba1fae2a67c7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/mtp_lm_head_sample.py",
+                      "bytes":  5838,
+                      "sha256":  "4639dad4979ae142fc292082a405cfd6e9e803301bcb92278918df5aaf920cc2",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/muon.py",
+                      "bytes":  19337,
+                      "sha256":  "65e98bd5da17110387fbe4600793b12b25262cd5b2e7a8b2b08430e16910b8dc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/reduce_scatter.py",
+                      "bytes":  12351,
+                      "sha256":  "68ba43db2dc280c6003b775403ddbd7afc2ff93f8ef0f6a53ec7eda3a33258ea",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/__init__.py",
+                      "bytes":  2548,
+                      "sha256":  "6873d68c78ef4e310c224fac16a44c8c8bb800290c857e2f935f81453db7e6ff",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/adamw.py",
+                      "bytes":  3526,
+                      "sha256":  "162bbcfab9ffb09cacb7f6f1fdd3e1548ea547a3206f9144924a82e980de3388",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/build_rope_cos_sin.py",
+                      "bytes":  3985,
+                      "sha256":  "9525901193e694cff62c49194ccffbf823b396b6cd401989bdb44f3fd187f6cf",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/embedding.py",
+                      "bytes":  2813,
+                      "sha256":  "28577f0df58ea634bc2c1c75c0957cbc9f29bf2310298c0d33494fc39932d650",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/embedding_bwd.py",
+                      "bytes":  3092,
+                      "sha256":  "2316166838ec7878668830c01a6ffd7e3f57ea30927b3d2d3521b596c6b09ed9",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/layernorm_bwd.py",
+                      "bytes":  3019,
+                      "sha256":  "b993ba0ff6f1f92d492a51fcc11fe53c68a7ad6bb96682d3c2ef4c78491a1796",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/layernorm_fwd.py",
+                      "bytes":  2751,
+                      "sha256":  "8848de1f441c7c20f7ab20ca894a92ceebad2d1d3a26af5b5c065dbde01de1be",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/lm_head_ce_bwd.py",
+                      "bytes":  2755,
+                      "sha256":  "5f583f72844dc985f31afc9b3416ec0c645f1d83e630faa76f8248bb6478c4c5",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/lm_head_ce_fwd.py",
+                      "bytes":  2827,
+                      "sha256":  "1ee1d302ca12da141422886ff802a77be2be8916b27c525614b5cb8e9bd30904",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/lookup.py",
+                      "bytes":  3709,
+                      "sha256":  "8c369b3c8dd4ad753836993e83a47244285605f1dbc0f0988560aea745ef4edb",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/mtp_accept.py",
+                      "bytes":  4233,
+                      "sha256":  "33ddbc278e314709cf38c994483e9e2d3590bfb8d12e7a4ca671ce7fc3f917fe",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/mtp_lm_head_sample.py",
+                      "bytes":  5294,
+                      "sha256":  "7b83d5036dcef428d90a899d2531477751ff29cbbe049790a5720b3f16e11a00",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/muon.py",
+                      "bytes":  3204,
+                      "sha256":  "d39985ae4137f03d2aa7f44d4cc273fd5775129cc9d64e23cfe87842bdb0e8eb",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/reduce_scatter.py",
+                      "bytes":  8667,
+                      "sha256":  "a921048f7bc5a79f466203e432c390085a0f293d72326b11cd0204d5a03710ff",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/residual_rmsnorm.py",
+                      "bytes":  3004,
+                      "sha256":  "4ea463b3bc1d6e321dba42f640bf8520e281494f2fe20446ea79f373f209f57e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/residual_rmsnorm_bwd.py",
+                      "bytes":  3785,
+                      "sha256":  "289eee09056c7e9572a22b4529124e352d44343ecc3003fa435ed7db1833f0ab",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/rope.py",
+                      "bytes":  2569,
+                      "sha256":  "4dd1c76c8f2703a362c10e8c5bc309164fe2e19dc397ca9f016bd1d2c106d570",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/rope_bwd.py",
+                      "bytes":  2653,
+                      "sha256":  "fd618022bed0c0550768c950b8ca80499dd309041fb36b1eed1d7dab118b3357",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/softmax_bwd.py",
+                      "bytes":  2094,
+                      "sha256":  "b1b3801a64ab461f9204ab84e83d636e4a6cc70fdecdf37fc21874d93de5b91a",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/softmax_fwd.py",
+                      "bytes":  2184,
+                      "sha256":  "8b49bb548ffcdb192979347387dacb6a9be14796c7b5f88f9bb825a8c8d2b021",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/swiglu.py",
+                      "bytes":  2312,
+                      "sha256":  "eb4453c2d9a270ed3c8b8d544cb19d557a5e92c11b89efd3a3c2e093ee2fae9e",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/swiglu_bwd.py",
+                      "bytes":  2647,
+                      "sha256":  "236e8975036646dba72a18ab3b1403853d8133565488b74aadcd1b625a80eca9",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/registry/update_kv_cache.py",
+                      "bytes":  2674,
+                      "sha256":  "0fe2c310af9c82ff87c6471309c36640250747879bdb158da0db9e70cea277c7",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/residual_rmsnorm.py",
+                      "bytes":  4020,
+                      "sha256":  "ffd0737c4fa8354b0ebe737e9a7632512cf097de7cffb62fbdc3d19caf6e7e69",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/residual_rmsnorm_bwd.py",
+                      "bytes":  7855,
+                      "sha256":  "834400967d3174eafc76516bb88ee4a68378571588ae93c00bfee8a3f3e10acc",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/rope.py",
+                      "bytes":  3677,
+                      "sha256":  "a67dd6a7b87358c20fbc99d08cf516f05d0c7011f969608445d4467ed37a3ebb",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/rope_bwd.py",
+                      "bytes":  3732,
+                      "sha256":  "a68134b0f5769a1957dc401d20372256d3df7a77833f9aaff6a253926448be63",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/softmax_bwd.py",
+                      "bytes":  3596,
+                      "sha256":  "16bf531fe1e2d5265cd0003ca71748f94cb420cd5b0dbdce783fc7354315caed",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/softmax_fwd.py",
+                      "bytes":  2865,
+                      "sha256":  "67cebbc74ef6d9074056d392221224dc905cb40ba39f8507a54a9efe502ded1f",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/swiglu.py",
+                      "bytes":  2847,
+                      "sha256":  "0ded337f978d87f1f09d91040a1056560283fc68eb467e7e3c64086cf3c44c30",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/swiglu_bwd.py",
+                      "bytes":  3317,
+                      "sha256":  "5abb51f2702b037ef191a76cbaaaf5d309722d71ec1cb595915954100b2e0fde",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pallas_kernels/presilicon_ops/update_kv_cache.py",
+                      "bytes":  2615,
+                      "sha256":  "9e13759d0b618218bba827ccb477db0c39a778f0e16e78ee2d3f55b032ae5713",
+                      "direct_audit":  false
+                  },
+                  {
+                      "path":  "pyproject.toml",
+                      "bytes":  1924,
+                      "sha256":  "006aa1b95f9b9114ee88dc92b9cc9bcc285247d33dac822806d33aa35e755474",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tests/kernels/test_mla_decode.py",
+                      "bytes":  3509,
+                      "sha256":  "807856a490bffd8f7469b51f151acb0a9b695dee149080fcf0322d5441c7b1b6",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tests/kernels/test_mla_fwd.py",
+                      "bytes":  3436,
+                      "sha256":  "fdfb7b6ac682934fb179161b0f3cfe4071330b81027a5a6736b146a2878ed298",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tests/unit/test_get_tpu_duration_info.py",
+                      "bytes":  5098,
+                      "sha256":  "e6462936554c42ff349124caf8d1f7fdb9427acf855bc214455d65e697f61a48",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tests/unit/test_mla_decode_reference.py",
+                      "bytes":  10316,
+                      "sha256":  "c9e5e599e81a6112e6709ecc23535c2c03354ca0a35f10a86365ea840b692675",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tests/unit/test_mla_fwd.py",
+                      "bytes":  21067,
+                      "sha256":  "6a7e0ea70aa93e7693c017f43bbfbc37143d3c2a12d20ebd6c514ccf504573b8",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tests/unit/test_tpu_duration_profile.py",
+                      "bytes":  10314,
+                      "sha256":  "3db775c0ab2d78a8b8f9092ef05169df04b1271bdbc019daf9fe39c80f62858c",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tests/unit/test_tpu_duration_runtime.py",
+                      "bytes":  8043,
+                      "sha256":  "775f6d91046f1888e0d0d76deeabff8c91a6c8a0429f4b4fa622c38e8c5a7eba",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tools/get_tpu_duration_info.py",
+                      "bytes":  7790,
+                      "sha256":  "38804b7af3ecad7a0279f63cdd48e9f3f54d9c543d76cb9a302f8f4963a7175c",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tools/tpu_duration_profile.py",
+                      "bytes":  10858,
+                      "sha256":  "eb718d742010fbeccf9c45eb8eaf35300d2d23814be7222a7499cb739b9bf561",
+                      "direct_audit":  true
+                  },
+                  {
+                      "path":  "tools/tpu_duration_runtime.py",
+                      "bytes":  4049,
+                      "sha256":  "2b0ec43f4bc47bcd1c09505e1c21a13ef888ac6f4b87a6ec27dc83ebad1c706f",
+                      "direct_audit":  true
+                  }
+              ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "request_id": "analysis-fixture",
+  "task_id": "task",
+  "workload_id": "workload",
+  "strategies": [
+    {
+      "strategy_id": "A",
+      "parent_id": "A-parent",
+      "context_id": "context",
+      "snapshot_id": "snapshot:0b9ae4b6268445e08ee71982b828aa7c",
+      "run_id": "A-run",
+      "source_artifact": {
+        "digest": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e",
+        "size": 448
+      },
+      "config_artifact": {
+        "digest": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+        "size": 29
+      },
+      "profile_ids": [
+        "A-profile"
+      ],
+      "benchmark_ids": [
+        "A-benchmark"
+      ]
+    },
+    {
+      "strategy_id": "B",
+      "parent_id": "B-parent",
+      "context_id": "context",
+      "snapshot_id": "snapshot:0b9ae4b6268445e08ee71982b828aa7c",
+      "run_id": "B-run",
+      "source_artifact": {
+        "digest": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5",
+        "size": 448
+      },
+      "config_artifact": {
+        "digest": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+        "size": 28
+      },
+      "profile_ids": [
+        "B-profile"
+      ],
+      "benchmark_ids": [
+        "B-benchmark"
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+      "note_id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+      "revision": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f"
+    }
+  ],
+  "environment": {
+    "analysis_host": "synthetic local fixture"
+  },
+  "tool_versions": {
+    "fixture": "1"
+  }
+}

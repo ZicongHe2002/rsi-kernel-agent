@@ -1,0 +1,220 @@
+[
+  {
+    "arguments": {
+      "strategy_id": "A"
+    },
+    "id": "inspect-A-source",
+    "name": "source",
+    "result": {
+      "config": "{\"dtype\":\"float32\",\"tile\":16}",
+      "identity": {
+        "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+        "config_digest": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+        "source_digest": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e"
+      },
+      "parent_id": "A-parent",
+      "ref": "source:A",
+      "source": "# Synthetic route A; this fixture is never executed.\ndef matmul(a, b, out, M, N, K, tile):\n    for i in range(0, M, tile):\n        for j in range(0, N, tile):\n            acc = zeros((tile, tile), dtype=\"float32\")\n            for k in range(0, K, tile):\n                left = load(a, i, k, tile, mask=True)\n                right = load(b, k, j, tile, mask=True)\n                acc += dot(left, right)\n            store(out, i, j, acc, mask=True)\n"
+    }
+  },
+  {
+    "arguments": {
+      "strategy_id": "B"
+    },
+    "id": "inspect-B-source",
+    "name": "source",
+    "result": {
+      "config": "{\"dtype\":\"float32\",\"tile\":8}",
+      "identity": {
+        "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+        "config_digest": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+        "source_digest": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5"
+      },
+      "parent_id": "B-parent",
+      "ref": "source:B",
+      "source": "# Synthetic route B; this fixture is never executed.\ndef matmul(a, b, out, M, N, K, tile):\n    for i in range(0, M, tile):\n        for j in range(0, N, tile):\n            acc = zeros((tile, tile), dtype=\"float32\")\n            for k in range(0, K, tile):\n                left = load(a, i, k, tile, mask=True)\n                right = load(b, k, j, tile, mask=True)\n                acc += dot(left, right)\n            store(out, i, j, acc, mask=True)\n"
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Route A workload is M=32,N=32,K=64 float32 with C=A@B.",
+        "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+        "This route-bound correction replaces the rejected mixed-strategy request; no output from that rejected request is used.",
+        "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+      ],
+      "evidence_refs": [
+        "history:A",
+        "source:A"
+      ],
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory"
+    },
+    "id": "calc-A-workload-floor",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "Dense matrix multiplication with one multiply and one add per reduction element",
+        "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+        "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+        "Route A workload is M=32,N=32,K=64 float32 with C=A@B.",
+        "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+        "This route-bound correction replaces the rejected mixed-strategy request; no output from that rejected request is used.",
+        "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "history:A",
+        "source:A"
+      ],
+      "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+      "input_units": {
+        "bandwidth_bytes_s": "byte/s",
+        "compute_rate_flops_s": "FLOP/s",
+        "dtype_bytes": "byte/element",
+        "hardware_basis": "text",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Cache and hierarchy traffic",
+        "Launch and synchronization",
+        "Layout conversions",
+        "Non-matmul operations",
+        "Utilization and contention"
+      ],
+      "output_units": {
+        "arithmetic_intensity": "FLOP/byte",
+        "compute_bound_s": "s",
+        "memory_bound_s": "s",
+        "read_bytes": "byte",
+        "resource_lower_bound_s": "s",
+        "total_bytes": "byte",
+        "work_flops": "FLOP",
+        "write_bytes": "byte"
+      },
+      "outputs": {
+        "arithmetic_intensity": 6.4,
+        "compute_bound_s": null,
+        "memory_bound_s": null,
+        "read_bytes": 16384,
+        "resource_lower_bound_s": null,
+        "total_bytes": 20480,
+        "work_flops": 131072,
+        "write_bytes": 4096
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {
+        "compute_bound_s": "No compute throughput supplied",
+        "memory_bound_s": "No memory bandwidth supplied",
+        "resource_lower_bound_s": "No hardware rate supplied"
+      }
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Route B workload is M=32,N=32,K=64 float32 with C=A@B.",
+        "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+        "This is a route B model, independently bound to route B evidence.",
+        "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+      ],
+      "evidence_refs": [
+        "history:B",
+        "source:B"
+      ],
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory"
+    },
+    "id": "calc-B-workload-floor",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "Dense matrix multiplication with one multiply and one add per reduction element",
+        "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+        "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+        "Route B workload is M=32,N=32,K=64 float32 with C=A@B.",
+        "Dense two-operation multiply-accumulate counting and ideal compulsory input reads plus one output write.",
+        "This is a route B model, independently bound to route B evidence.",
+        "No hardware throughput or bandwidth is provided, and no latency lower bound is inferred."
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "history:B",
+        "source:B"
+      ],
+      "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+      "input_units": {
+        "bandwidth_bytes_s": "byte/s",
+        "compute_rate_flops_s": "FLOP/s",
+        "dtype_bytes": "byte/element",
+        "hardware_basis": "text",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Cache and hierarchy traffic",
+        "Launch and synchronization",
+        "Layout conversions",
+        "Non-matmul operations",
+        "Utilization and contention"
+      ],
+      "output_units": {
+        "arithmetic_intensity": "FLOP/byte",
+        "compute_bound_s": "s",
+        "memory_bound_s": "s",
+        "read_bytes": "byte",
+        "resource_lower_bound_s": "s",
+        "total_bytes": "byte",
+        "work_flops": "FLOP",
+        "write_bytes": "byte"
+      },
+      "outputs": {
+        "arithmetic_intensity": 6.4,
+        "compute_bound_s": null,
+        "memory_bound_s": null,
+        "read_bytes": 16384,
+        "resource_lower_bound_s": null,
+        "total_bytes": 20480,
+        "work_flops": 131072,
+        "write_bytes": 4096
+      },
+      "schema_version": 1,
+      "strategy_id": "B",
+      "unavailable": {
+        "compute_bound_s": "No compute throughput supplied",
+        "memory_bound_s": "No memory bandwidth supplied",
+        "resource_lower_bound_s": "No hardware rate supplied"
+      }
+    }
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "observed_at_utc": "2026-11-12T14:27:41.690133+00:00",
+  "scope": "local CPU/synthetic auxiliary tests; not real Runtime3 evidence",
+  "tests": [
+    {
+      "file": "test_runtime_binding.py",
+      "count": 2,
+      "seconds": 0.009,
+      "exit_code": 0
+    },
+    {
+      "file": "test_real_round_aux.py",
+      "count": 11,
+      "seconds": 71.213,
+      "exit_code": 0
+    },
+    {
+      "file": "test_confirmation_round.py",
+      "count": 7,
+      "seconds": 342.526,
+      "exit_code": 0
+    },
+    {
+      "file": "test_runtime2_aux.py",
+      "count": 6,
+      "seconds": 1.559,
+      "exit_code": 0
+    },
+    {
+      "file": "test_runtime_readmission.py",
+      "count": 5,
+      "seconds": 0.658,
+      "exit_code": 0
+    }
+  ],
+  "evidence_source": "executed command outputs in this session; original asyncio diagnostics not suppressed",
+  "files": {
+    "real_round_aux.py": "98503866d6374cdb22716033cbc16de4d346508f3843f9c254a26ef3b2b0d8ad",
+    "prepare_real_round.py": "5527a6ce45101679ff500f59e3d57cbb7cfc456a534be03f56de376e21bdeeb8",
+    "run_real_round.py": "79be32fd6e999feee558854cc06bc327ae36896a585df78e54b13e17101c2e80",
+    "resume_active_round.py": "905d2cd112a1f2add5abc37a60b52f740c37bdbf2a81db71137255463886c034",
+    "prepare_confirmation_round.py": "c3b93f8c33e394e4d1d5b65734fefa4c37b76c7720b4eba7d33f3a004e2cb304",
+    "run_confirmation_round.py": "a52f97ffb33cdc608448b5cd4cea634a1e44dfe7897fe2543872283e0dac2b53",
+    "runtime_readmission.py": "b280af1946d63e486fd57f2954df4285e8b0184b1443ab236c0183e2c87485d3",
+    "admit_runtime3.py": "190ba101b143e9926839618b81b52cc578caaa361ac7cf817e267afe8f5beee0",
+    "setup_runtime_environment.py": "a45c90c07007ad02a09680db87340d6b7379257759486a0f265c36868f144c86",
+    "probe_isolated.py": "68c2952630a95dc9af796b8ed1a3dd88b1f7239e150a626005190d7256407a4d",
+    "advance_runtime2.py": "d861a27cccc6a74b860ffccabddf86fa27571d26301b0c996f8985686e7b8074"
+  },
+  "runtime3_allocated": false,
+  "round2_executed": false,
+  "exploration_budget_reset": false
+}

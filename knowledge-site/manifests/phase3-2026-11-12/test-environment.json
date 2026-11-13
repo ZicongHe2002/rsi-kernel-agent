@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "observed_date": "2026-11-12",
+  "classification": "Local CPU test / Synthetic software validation",
+  "python": "3.13.14 (main, Jun 23 2026, 15:19:27) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+  "sqlite": "3.53.1",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "mcp": "1.30.0",
+  "pydantic": "2.14.2",
+  "local_dependencies_installed_or_upgraded": false,
+  "commands": [
+    {
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent",
+      "environment": {
+        "PYTHONPATH": "src"
+      },
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests": 308,
+      "passed": 306,
+      "skipped": 2,
+      "failures": 0,
+      "errors": 0,
+      "unittest_elapsed_seconds": 529.627,
+      "log": "tests.txt",
+      "full_suite_runs_for_this_result": 1,
+      "skip_reasons": [
+        {
+          "test": "test_symlink_object_is_rejected_when_platform_allows_symlinks",
+          "reason": "Windows symlink creation permission unavailable: WinError 1314"
+        },
+        {
+          "test": "test_system_owned_startup_hook_is_allowed_without_allowing_other_etc_files",
+          "reason": "System-owned Debian Python startup file is not present on Windows",
+          "linux_specific_case_exercised_separately": true
+        }
+      ]
+    },
+    {
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site",
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "test_mcp.MCPTests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests": 5,
+      "passed": 5,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "unittest_elapsed_seconds": 0.747,
+      "log": "existing-mcp-tests.txt"
+    },
+    {
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent",
+      "environment": {
+        "PYTHONPATH": "src"
+      },
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests": 315,
+      "passed": 313,
+      "skipped": 2,
+      "failures": 0,
+      "errors": 0,
+      "unittest_elapsed_seconds": 583.186,
+      "log": "tests-final.txt",
+      "full_suite_runs_for_this_result": 1,
+      "skip_reasons": [
+        {
+          "test": "test_symlink_object_is_rejected_when_platform_allows_symlinks",
+          "reason": "Windows symlink creation permission unavailable: WinError 1314"
+        },
+        {
+          "test": "test_system_owned_startup_hook_is_allowed_without_allowing_other_etc_files",
+          "reason": "System-owned Debian Python startup file is not present on Windows",
+          "linux_specific_case_exercised_separately": true
+        }
+      ]
+    },
+    {
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent",
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "exit_code_source": "Root observed completed unified exec session 99027",
+      "tests": 321,
+      "passed": 318,
+      "skipped": 3,
+      "failures": 0,
+      "errors": 0,
+      "unittest_elapsed_seconds": 477.822,
+      "log": "tests-final-after-chunk-cache.txt",
+      "log_sha256": "a66379e1d2a10a65cdbfa9a4bc313f0652543ee87b05d8b83572f8cc90ef1804",
+      "log_size": 161514,
+      "log_encoding": "utf-16",
+      "archived_original_bytes": true,
+      "full_suite_runs_for_this_result": 1,
+      "skip_reasons": [
+        {
+          "test": "test_symlink_object_is_rejected_when_platform_allows_symlinks",
+          "reason": "Windows symlink creation permission unavailable: WinError 1314",
+          "raw_log_reason": "\"Platform symlink permission unavailable: [WinError 1314] �ͻ���û�������\r\n��Ȩ��: 'C:\\\\\\\\Users\\\\\\\\fengluo\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\tmphvhk69dy\\\\\\\\outside-object' -> 'C:\\\\\\\\Users\\\\\\\\fengluo\r\n\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\tmphvhk69dy\\\\\\\\sha256\\\\\\\\ba\\\\\\\\ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61\r\nf20015ad'\""
+        },
+        {
+          "test": "test_shared_chunk_symlink_is_rejected_without_following_it",
+          "reason": "Windows symlink creation permission unavailable: WinError 1314",
+          "raw_log_reason": "\"Platform symlink permission unavailable: [WinError 1314] �ͻ���û���������Ȩ�\r\n�: 'C:\\\\\\\\Users\\\\\\\\fengluo\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\tmpja5f74xf\\\\\\\\outside-chunk' -> 'C:\\\\\\\\Users\\\\\\\\fengluo\\\\\\\\A\r\nppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\tmpja5f74xf\\\\\\\\cache\\\\\\\\chunks\\\\\\\\88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f\r\n031589'\""
+        },
+        {
+          "test": "test_system_owned_startup_hook_is_allowed_without_allowing_other_etc_files",
+          "reason": "System-owned Debian Python startup file is not present on this Windows host",
+          "raw_log_reason": "'System-owned Debian Python startup file is\r\n not present'"
+        }
+      ],
+      "environment_note": "Inherited process environment was not separately captured for session 99027; command did not specify -X utf8"
+    },
+    {
+      "command": "python -B -m unittest discover -s tests -v",
+      "tests": 321,
+      "passed": 318,
+      "skipped": 3,
+      "exit_code": 0,
+      "unittest_elapsed_seconds": 615.025,
+      "log": "tests-runtime3-preparation.txt",
+      "sha256": "27b92653e17b4dfd2f9d471e2447bd0dc31537920ceb95c7a3924b2f9f8291d1",
+      "scope": "local CPU/synthetic regression, not Runtime3 hardware"
+    }
+  ],
+  "specialist_worker_suites": [
+    {
+      "platform": "Windows",
+      "tests": 20,
+      "passed": 20,
+      "skipped": 0,
+      "unittest_elapsed_seconds": 8.052,
+      "log": "worker-windows-tests.txt"
+    },
+    {
+      "platform": "WSL Ubuntu",
+      "python": "3.12.3",
+      "tests": 20,
+      "passed": 20,
+      "skipped": 0,
+      "unittest_elapsed_seconds": 4.917,
+      "log": "worker-linux-tests.txt"
+    }
+  ],
+  "log_notes": [
+    "PowerShell wrapped unittest stderr in NativeCommandError text; the retained logs end in unittest OK and execution exit code was 0.",
+    "Asyncio slow callback/subprocess diagnostics remain in the original logs.",
+    "Local suites use software fixtures and CPU child processes; these totals do not represent real TPU correctness or performance tests.",
+    "Candidate artifact changes do not constitute a second full-suite run. Further system code changes require relevant verification and a separately recorded result."
+  ],
+  "real_environment_evidence": {
+    "default": "environment.json",
+    "isolated": "environment-isolated.json",
+    "isolated_setup": "isolated-environment-setup.json",
+    "connectivity_default": "connectivity-probe.json",
+    "connectivity_isolated": "isolated-probe.json",
+    "probe_store_import": "probe-evidence.json",
+    "isolated_runtime2": "environment-isolated-runtime2.json",
+    "connectivity_isolated_runtime2": "isolated-probe-runtime2.json",
+    "isolated_setup_runtime2": "isolated-environment-setup-runtime2.json"
+  },
+  "real_validation_status_at_report": {
+    "connectivity_and_minimal_synchronized_tpu_operation": "observed_success",
+    "unmodified_mla_decode": "compile_failed_on_decode-boundary",
+    "trusted_baseline": "positive evidence complete; negative Oracle Gate pending",
+    "repair_candidate": "three_real_cases_passed",
+    "real_correctness": "three_positive_cases_passed; known-wrong controls pending",
+    "real_benchmark": "decode-small host-synchronized 20 samples archived",
+    "real_profile": "raw XPlane and original parser output archived; original Analyzer normalization available",
+    "verified_performance_improvement": "not_established",
+    "phase3_complete": false,
+    "runtime": "2026-11-13 10:04 Asia/Shanghai control-plane assignments empty; runtime3 had allocated on 2026-11-12 22:54 but no admission or round2 evidence; original allocation loop exited successfully",
+    "evidence_summary_observed_at_utc": "2026-11-12T14:30:46.179661+00:00",
+    "runtime1": "lost_after_completed_baseline; original evidence retained",
+    "runtime2_connectivity": {
+      "confirmed_from_probe": true,
+      "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+      "environment": "environment-isolated-runtime2.json",
+      "probe": "isolated-probe-runtime2.json",
+      "result": 140.0,
+      "synchronized": true
+    },
+    "runtime2_prerequisite_results": {
+      "oracle-negative-attention": {
+        "status": "result_file_observed",
+        "source": ".artifacts/phase3-2026-11-12/oracle-negative-attention-runtime2-result.json",
+        "run_id": "runtime-run:9d5212d6c003a102b015985eced689242d5df5ef10160dfce9e5bb64bf52defa",
+        "candidate_id": "oracle-negative-candidate:54fba11bbe506e328cf12f6f96ccb9f97550153ba56e1e37f369292567a2d73e",
+        "classification": "incorrect",
+        "provenance": "real",
+        "correctness": "failed",
+        "confirmed": false,
+        "timing_validity": "unknown",
+        "latency_ms": null,
+        "evaluation_id": "evaluation:3c2264ad1d5ef01ab7fa34daed20c01685f1dbae2df60b490ddb47146270a0cb",
+        "profile_id": "profile:3c2264ad1d5ef01ab7fa34daed20c01685f1dbae2df60b490ddb47146270a0cb",
+        "receipt_stages": [
+          "compile",
+          "correctness",
+          "generate"
+        ]
+      },
+      "oracle-negative-cache": {
+        "status": "result_file_observed",
+        "source": ".artifacts/phase3-2026-11-12/oracle-negative-cache-runtime2-result.json",
+        "run_id": "runtime-run:e2a2ecf56d89101d8439099cb38ef1925d98f75bb5b429169dd3755b7fcb9ed0",
+        "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+        "classification": "incorrect",
+        "provenance": "real",
+        "correctness": "failed",
+        "confirmed": false,
+        "timing_validity": "unknown",
+        "latency_ms": null,
+        "evaluation_id": "evaluation:dbcd7b68d22253e8128f321a8312bd09a971aaeeeaabf293b3d0d49b69546d1a",
+        "profile_id": "profile:dbcd7b68d22253e8128f321a8312bd09a971aaeeeaabf293b3d0d49b69546d1a",
+        "receipt_stages": [
+          "compile",
+          "correctness",
+          "generate"
+        ]
+      },
+      "baseline-repair": {
+        "status": "result_file_observed",
+        "source": ".artifacts/phase3-2026-11-12/baseline-repair-runtime2-result.json",
+        "run_id": "runtime-run:4686bd6eb923d2ce96be095360d34f0c3f533a30c4cf64c8e0bf70c3d275f223",
+        "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+        "classification": "correct_inconclusive",
+        "provenance": "real",
+        "correctness": "passed",
+        "confirmed": true,
+        "timing_validity": "valid",
+        "latency_ms": 0.19319499995162914,
+        "evaluation_id": "evaluation:3bf65cc359132ac5af087bc4f7147a524add9b09551d8d525a41110db8608abb",
+        "profile_id": "profile:3bf65cc359132ac5af087bc4f7147a524add9b09551d8d525a41110db8608abb",
+        "receipt_stages": [
+          "benchmark",
+          "compile",
+          "correctness",
+          "generate",
+          "profile"
+        ]
+      },
+      "baseline-b": {
+        "status": "result_file_observed",
+        "source": ".artifacts/phase3-2026-11-12/baseline-b-runtime2-result.json",
+        "run_id": "strategy-seed-run:c339eda9de36ae18d4916561688194d9fd100ebb7fff38f30fdc2f473cdfcf08",
+        "candidate_id": "strategy-seed-candidate:c642e60add3890d7092175549edd57a26ea1441a5dd4f54f54195cd8cb036270",
+        "classification": "correct_inconclusive",
+        "provenance": "real",
+        "correctness": "passed",
+        "confirmed": true,
+        "timing_validity": "valid",
+        "latency_ms": 0.21536499980356894,
+        "evaluation_id": "evaluation:13f4ff8018bffac6acb277e11886571ef8d9b92cf647f4e937b3f65adf07a97a",
+        "profile_id": "profile:13f4ff8018bffac6acb277e11886571ef8d9b92cf647f4e937b3f65adf07a97a",
+        "receipt_stages": [
+          "benchmark",
+          "compile",
+          "correctness",
+          "generate",
+          "profile"
+        ]
+      }
+    },
+    "gate_summary_policy": "Recorded result files only; this helper does not approve or close Gates",
+    "round1_completed_candidates": 5,
+    "current_status_source": "status-at-report-2026-11-13.json",
+    "round2_executed": false,
+    "verified_repeatable_improvement": false
+  }
+}

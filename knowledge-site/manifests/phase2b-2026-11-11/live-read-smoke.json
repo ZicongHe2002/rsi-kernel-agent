@@ -1,0 +1,14 @@
+{
+  "connection": "existing local mcp_server.py via installed SDK",
+  "operations": [
+    "search",
+    "fetch"
+  ],
+  "writes": 0,
+  "query": "Memory",
+  "matches": 14,
+  "snapshot_consistent": false,
+  "document_id": "待办清单/一周待办 · 2026-11-09.md",
+  "revision": "de46060a14b68a1d74238e386a785692b26f217616df9ce7983c3b58cbc8cf37",
+  "characters": 3720
+}

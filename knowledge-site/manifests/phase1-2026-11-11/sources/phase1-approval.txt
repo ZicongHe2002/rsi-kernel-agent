@@ -1,0 +1,129 @@
+The Phase 0 audit is reviewed. I approve proceeding with Phase 1 documentation work, with the additional requirements below.
+
+Do not start Phase 2 implementation yet.
+
+## Part 1 — Phase 1: Knowledge-Site Reconciliation
+
+Use the existing `knowledge-site/` as the canonical knowledge base.
+
+Please resolve the issues identified in the audit:
+
+1. Update `rsi-kernel-agent.md` to reflect the current module hierarchy, including Profiler → Analyzer.
+2. Update `rsi-optimization-workflow.md` to remove obsolete single-strategy restrictions and duplicate sections.
+3. Preserve the confirmed multi-strategy, multi-plan exploration design.
+4. Merge `rsi-method-search-and-selection.md` into `rsi-multi-plan-exploration.md`. Preserve all unique search, source-inspection, applicability-checking, and method-extraction content. After verifying the merged result, archive the old document or replace it with a migration notice. Do not discard unique content.
+5. Repair all broken mathematical expressions in `rsi-profiler-analyzer.md`. Verify formulas, variable definitions, units, assumptions, and consistency with the existing mathematical-model design.
+6. Unify evidence terminology across Profiler, Analyzer, Benchmark, and Memory.
+7. Ensure Memory explicitly distinguishes `latest_attempt`, `last_correct_candidate`, `branch_best`, `task_best`, `frontier`, `paused`, and `deferred`.
+8. Update README and navigation to reflect actual website capabilities, including existing MCP write operations. Do not claim that the knowledge MCP is read-only.
+9. Add an accurate document index, authority map, source manifest, and link/image validation report.
+10. Add `access/ACCESS_POLICY.md` and `connections/README.md` using sanitized information only.
+11. Propose and validate a `.gitignore` for credentials, local authentication state, temporary traces, and large generated artifacts.
+
+### Security requirement
+
+The audit identified authentication state under `knowledge-site/.auth/`.
+
+Do not inspect its secret contents, copy it, move it, delete it, or change authentication behavior during this phase.
+
+First inspect only the relevant code references and Git tracking status. Propose a separate migration plan that moves runtime authentication state outside the documentation/content area without breaking the existing website.
+
+Do not claim credentials were leaked unless there is evidence.
+
+Do not change actual account ACLs or ChatGPT authorization.
+
+### Documentation requirements
+
+- Preserve all original content and source references.
+- Do not silently delete archives.
+- Do not overwrite user changes.
+- Keep the existing `content/` organization unless a specific approved change is needed.
+- Preserve Mermaid source and all images.
+- Validate every relative link after changes.
+- Record exact file changes and before/after hashes.
+
+## Part 2 — Focused Integration Audit: Real MLA Kernels and Colab CLI
+
+I am providing two existing resources.
+
+### Kernel repository
+
+`C:\Users\fengluo\Desktop\training\PallasKernels`
+
+It contains real implementations of:
+
+- MLA Decode
+- MLA Forward / MLA Fwd
+
+Only these two Kernel tasks are allowed to run.
+
+Optimization source-code changes are restricted to the exact MLA Decode implementation file and exact MLA Forward implementation file.
+
+First identify their actual file paths, callable entry points, dependencies, reference implementations, and existing tests.
+
+Do not assume filenames.
+
+Do not modify other kernels, shared utilities, reference implementations, tests, benchmark rules, tolerances, package registration, or environment files.
+
+An isolated candidate workspace may be prepared later, but only the two allowlisted Kernel implementation files may differ from the baseline package.
+
+Do not write changes back to the original Kernel repository without separate approval.
+
+### Existing Colab CLI
+
+`C:\Users\fengluo\Desktop\colab`
+
+This already provides remote Colab connectivity and execution.
+
+Inspect its actual README, entry points, commands, arguments, return values, artifact retrieval, timeout, and recovery behavior.
+
+Reuse it. Do not build a replacement connection system.
+
+Treat its source, credentials, and persistent configuration as read-only.
+
+Do not print tokens, copy authentication state, reset active sessions, or upgrade the remote runtime.
+
+### Integration audit deliverables
+
+Produce:
+
+1. Exact MLA Decode implementation file.
+2. Exact MLA Forward implementation file.
+3. Protected dependency/reference/test files.
+4. Exact Kernel modification allowlist.
+5. Existing workload and correctness entry points.
+6. Colab CLI command/API contract based on actual source.
+7. Local-to-remote path mapping.
+8. Result and Profile artifact retrieval design.
+9. JAX/jaxlib/libtpu/XProf version discovery plan.
+10. A minimal unchanged-baseline experiment plan for both MLA tasks.
+
+Do not run TPU jobs in this phase.
+
+## Part 3 — Update the Implementation Roadmap
+
+Reflect the newly identified assets:
+
+- Existing Kernel source is available.
+- Existing Colab CLI is available.
+- Task Adapter should reuse existing MLA invocation and correctness logic.
+- Remote execution should use the existing CLI.
+- Only the two authorized Kernel implementation files may be optimized.
+- Formal experiments are limited to MLA Decode and MLA Forward.
+
+Keep the following project principles unchanged:
+
+- Multiple strategies may run in the same round.
+- Each strategy may generate multiple Plans and Candidates.
+- Do not force a single winner before experiments.
+- Benchmark owns correctness and performance promotion.
+- Profiler owns Analyzer as a child branch.
+- All attempts, failures, regressions, and deferred candidates must be preserved.
+
+## Stop condition
+
+Complete Phase 1 and the focused read-only integration audit.
+
+Do not start Phase 2 implementation, install dependencies or Skills, change account permissions, modify `.auth`, authorize connectors, or execute TPU jobs.
+
+Return a detailed change report, exact paths, validation results, remaining risks, and the proposed Phase 2 plan.

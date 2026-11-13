@@ -1,0 +1,13 @@
+User's additional implementation principles (conversation text, 2026-11-11):
+
+第一，Controller 要确定性，Analyzer 才负责智能推理。
+
+这与现有架构一致。业界的 Agent Workflow 设计也通常区分代码控制的确定性流程和 LLM 驱动的 Agent Loop，两者可以组合，而不必把整个控制权交给模型。
+
+第二，Recovery 必须基于持久化事件和幂等，而不是简单重跑。
+
+例如一次 TPU 实验已经完成，但写回结果时程序崩溃，恢复时不能再把它当成一次新实验执行。Temporal 对事件历史、重放和幂等 Activity 的设计可以作为参考，但不意味着我们需要引入 Temporal 依赖。
+
+第三，Synthetic End-to-End 不能冒充真实优化。
+
+2D+ 完成意味着软件系统能够完整运转，不意味着它已经证明可以优化 TPU Kernel。真实性能收益仍然要等 Phase 3。

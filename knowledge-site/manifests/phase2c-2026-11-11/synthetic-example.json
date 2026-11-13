@@ -1,0 +1,3303 @@
+{
+  "analysis": {
+    "code_understanding": [
+      {
+        "dependencies": [
+          "accumulator depends on previous reduction step; next input loads are candidates for overlap if backend supports it"
+        ],
+        "edge_cases": [
+          "mask=True hides implementation details; ragged M/N/K, zero sizes and aliasing require defined contracts"
+        ],
+        "layout_memory": [
+          "Actual strides and target memory spaces unspecified; modeled 16x16 float32 operands and accumulator"
+        ],
+        "loops": [
+          "i and j enumerate 16x16 output tiles; k reduction has four steps for K=64"
+        ],
+        "movement": [
+          "Both operand loads occur inside k loop; no explicit prefetch in pinned pseudo-source"
+        ],
+        "refs": [
+          "source:A",
+          "config:A"
+        ],
+        "stages": [
+          "Load left and right tiles, reduce dot products into float32 accumulator, masked output store"
+        ],
+        "status": "model_interpretation_requires_validation",
+        "strategy_id": "A",
+        "synchronization": [
+          "No explicit wait or asynchronous API; legal barriers must be designed and validated"
+        ]
+      },
+      {
+        "dependencies": [
+          "Reduction order must remain fixed when isolating output tile shape"
+        ],
+        "edge_cases": [
+          "Masked tails and noncontiguous inputs; physical layout and allocation are unknown"
+        ],
+        "layout_memory": [
+          "Float32 accumulator; rectangular tile requires distinct dimensions in load and store"
+        ],
+        "loops": [
+          "16 output tiles, eight reduction steps per tile in the current modeled workload"
+        ],
+        "movement": [
+          "Repeated A/B loads across output tiles; no cached reuse demonstrated"
+        ],
+        "refs": [
+          "source:B",
+          "config:B"
+        ],
+        "stages": [
+          "Same load-dot-store structure using tile8"
+        ],
+        "status": "model_interpretation_requires_validation",
+        "strategy_id": "B",
+        "synchronization": [
+          "Synchronous pseudo-source gives no proof of overlap"
+        ]
+      }
+    ],
+    "hypotheses": [
+      {
+        "alternatives": [
+          "Compute dominates; synchronization overhead could exceed hidden transfer time",
+          "Backend may already overlap loads"
+        ],
+        "id": "A-overlap",
+        "refs": [
+          "source:A",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "strategy_id": "A",
+        "text": "Prefetch may hide an independent load while the current tile computes"
+      },
+      {
+        "alternatives": [
+          "Larger live operands cause spills or reduce parallelism",
+          "Tail overhead outweighs fewer iterations"
+        ],
+        "id": "A-loop-overhead",
+        "refs": [
+          "source:A",
+          "config:A"
+        ],
+        "strategy_id": "A",
+        "text": "Increasing K tile may reduce loop/load-start overhead without changing output tile"
+      },
+      {
+        "alternatives": [
+          "Compiler mapping or spills dominate",
+          "Current cache already captures reuse"
+        ],
+        "id": "B-reuse",
+        "refs": [
+          "source:B",
+          "calculation:B-tile",
+          "calculation:B-tile-variant"
+        ],
+        "strategy_id": "B",
+        "text": "Wider output tile may reuse left tile across more columns"
+      },
+      {
+        "alternatives": [
+          "Input already contiguous",
+          "Packing adds more movement than it saves"
+        ],
+        "id": "B-layout",
+        "refs": [
+          "source:B"
+        ],
+        "strategy_id": "B",
+        "text": "Packing the right tile could improve contiguous accesses if actual strides justify conversion"
+      }
+    ],
+    "observations": [
+      {
+        "category": "observed_fact",
+        "explanation_status": "hypothesis",
+        "id": "A-time",
+        "predicate": {
+          "path": [
+            "value"
+          ],
+          "ref": "evidence:A-timing",
+          "value": 10
+        },
+        "proposed_explanation": "Fixture reports 10ms in synthetic context; cause and actual TPU behavior unknown",
+        "refs": [
+          "evidence:A-timing"
+        ],
+        "strategy_id": "A",
+        "text": "evidence:A-timing [\"value\"] = 10"
+      },
+      {
+        "category": "observed_fact",
+        "explanation_status": "hypothesis",
+        "id": "B-time",
+        "predicate": {
+          "path": [
+            "value"
+          ],
+          "ref": "evidence:B-timing",
+          "value": 12
+        },
+        "proposed_explanation": "Fixture reports 12ms; this does not establish any cause or invalidate B exploration",
+        "refs": [
+          "evidence:B-timing"
+        ],
+        "strategy_id": "B",
+        "text": "evidence:B-timing [\"value\"] = 12"
+      },
+      {
+        "category": "mathematical_prediction",
+        "explanation_status": "hypothesis",
+        "id": "A-work",
+        "predicate": {
+          "path": [
+            "outputs",
+            "work_flops"
+          ],
+          "ref": "calculation:A-compute",
+          "value": 131072
+        },
+        "proposed_explanation": "Dense idealization counts131072FLOP and20480minimum bytes; missing hardware rates prevent a time bound",
+        "refs": [
+          "calculation:A-compute"
+        ],
+        "strategy_id": "A",
+        "text": "calculation:A-compute [\"outputs\",\"work_flops\"] = 131072"
+      },
+      {
+        "category": "mathematical_prediction",
+        "explanation_status": "hypothesis",
+        "id": "B-tile-cost",
+        "predicate": {
+          "path": [
+            "outputs",
+            "tiled_total_bytes"
+          ],
+          "ref": "calculation:B-tile-variant",
+          "value": 53248
+        },
+        "proposed_explanation": "Rectangular8x16x8 variant models53248bytes versus69632baseline; cache/compiler/launch effects are omitted",
+        "refs": [
+          "calculation:B-tile-variant"
+        ],
+        "strategy_id": "B",
+        "text": "calculation:B-tile-variant [\"outputs\",\"tiled_total_bytes\"] = 53248"
+      },
+      {
+        "category": "unknown",
+        "id": "A-profile-limits",
+        "predicate": null,
+        "refs": [
+          "profile:A-profile"
+        ],
+        "strategy_id": "A",
+        "text": "One aggregate program event gives no DMA, waits, occupancy or causal critical path"
+      },
+      {
+        "category": "unknown",
+        "id": "B-profile-limits",
+        "predicate": null,
+        "refs": [
+          "profile:B-profile"
+        ],
+        "strategy_id": "B",
+        "text": "One aggregate synthetic program event cannot isolate movement or compute"
+      }
+    ],
+    "review": [],
+    "review_enabled": true,
+    "unknowns": [
+      "All timings and traces are synthetic; no MLA or TPU run occurred",
+      "Raw XPlane protobuf decoder is unavailable in the present environment",
+      "Hardware throughput, capacity, compiler layout and trace dependency edges absent",
+      "Memory contains no previous optimization failures beyond the explicit current synthetic records",
+      "The source is pseudo-code for tool validation, not an executable kernel; Plan legality requires implementation and correctness tests"
+    ]
+  },
+  "calculations": {
+    "A-buffer": {
+      "assumptions": [
+        "Buffer lifetimes are half-open logical schedule intervals, not elapsed clock measurements",
+        "Listed buffers occupy one shared memory resource and copies coexist throughout each lifetime",
+        "Distinct buffers do not alias; an empty list means explicitly no modeled buffers",
+        "Logical tile schedule; two copies of each operand plus one float32 accumulator; no hardware capacity supplied"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "formula": "size_i=elements_i*dtype_bytes_i*copies_i; live(t)=sum(size_i for start_i<=t<end_i); peak=max(live(t)); pressure=peak/capacity",
+      "input_units": {
+        "buffers[].copies": "count",
+        "buffers[].dtype_bytes": "byte/element",
+        "buffers[].elements": "elements",
+        "buffers[].end": "schedule_step",
+        "buffers[].name": "text",
+        "buffers[].start": "schedule_step",
+        "capacity_bytes": "byte",
+        "hardware_basis": "text"
+      },
+      "inputs": {
+        "buffers": [
+          {
+            "copies": 2,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "left",
+            "start": 0
+          },
+          {
+            "copies": 2,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "right",
+            "start": 0
+          },
+          {
+            "copies": 1,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "accumulator",
+            "start": 0
+          }
+        ]
+      },
+      "model": "live_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Compiler temporaries and spills",
+        "Allocation alignment and fragmentation",
+        "Hidden runtime reservations",
+        "Unlisted memories and buffers"
+      ],
+      "output_units": {
+        "capacity_fraction": "ratio",
+        "headroom_bytes": "byte",
+        "peak_bytes": "byte",
+        "peak_step": "schedule_step"
+      },
+      "outputs": {
+        "capacity_fraction": null,
+        "headroom_bytes": null,
+        "peak_bytes": 5120,
+        "peak_step": 0
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {
+        "capacity_fraction": "No memory capacity supplied",
+        "headroom_bytes": "No memory capacity supplied"
+      }
+    },
+    "A-compute": {
+      "assumptions": [
+        "Dense matrix multiplication with one multiply and one add per reduction element",
+        "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+        "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+        "Synthetic workload dimensions M=N=32,K=64; all operands and output float32; no hardware throughput supplied"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+      "input_units": {
+        "bandwidth_bytes_s": "byte/s",
+        "compute_rate_flops_s": "FLOP/s",
+        "dtype_bytes": "byte/element",
+        "hardware_basis": "text",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Cache and hierarchy traffic",
+        "Launch and synchronization",
+        "Layout conversions",
+        "Non-matmul operations",
+        "Utilization and contention"
+      ],
+      "output_units": {
+        "arithmetic_intensity": "FLOP/byte",
+        "compute_bound_s": "s",
+        "memory_bound_s": "s",
+        "read_bytes": "byte",
+        "resource_lower_bound_s": "s",
+        "total_bytes": "byte",
+        "work_flops": "FLOP",
+        "write_bytes": "byte"
+      },
+      "outputs": {
+        "arithmetic_intensity": 6.4,
+        "compute_bound_s": null,
+        "memory_bound_s": null,
+        "read_bytes": 16384,
+        "resource_lower_bound_s": null,
+        "total_bytes": 20480,
+        "work_flops": 131072,
+        "write_bytes": 4096
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {
+        "compute_bound_s": "No compute throughput supplied",
+        "memory_bound_s": "No memory bandwidth supplied",
+        "resource_lower_bound_s": "No hardware rate supplied"
+      }
+    },
+    "A-pipeline": {
+      "assumptions": [
+        "stages counts repeated work items through one transfer engine and one compute engine",
+        "Transfer and compute use independent resources, with sufficient buffers and legal dependencies",
+        "Identical per-item durations; first transfer fills and final compute drains the pipeline",
+        "Stage times are hypothetical sensitivity inputs, not derived from synthetic 10ms total; independent transfer/compute engines and sufficient buffers"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A"
+      ],
+      "formula": "serial=N*(transfer+compute); ideal=transfer+compute+(N-1)*max(transfer,compute); speedup=serial/ideal",
+      "input_units": {
+        "compute_s": "s",
+        "stages": "count",
+        "transfer_s": "s"
+      },
+      "inputs": {
+        "compute_s": 3e-06,
+        "stages": 4,
+        "transfer_s": 2e-06
+      },
+      "model": "pipeline",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Synchronization and DMA startup",
+        "Bandwidth contention",
+        "Buffer allocation",
+        "Uneven work items",
+        "Additional transfer directions and pipeline engines"
+      ],
+      "output_units": {
+        "ideal_pipeline_s": "s",
+        "ideal_speedup": "ratio",
+        "saved_s": "s",
+        "serial_s": "s"
+      },
+      "outputs": {
+        "ideal_pipeline_s": 1.4e-05,
+        "ideal_speedup": 1.4285714285714284,
+        "saved_s": 5.9999999999999985e-06,
+        "serial_s": 1.9999999999999998e-05
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {}
+    },
+    "A-tile": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 16,
+        "tile_m": 16,
+        "tile_n": 16
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 16,
+        "b_tile_reuse": 16,
+        "output_tiles": 4,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 4,
+        "tile_iterations": 16,
+        "tiled_read_bytes": 32768,
+        "tiled_total_bytes": 36864,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {}
+    },
+    "B-tile": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:B",
+        "config:B"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 8,
+        "tile_m": 8,
+        "tile_n": 8
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 8,
+        "b_tile_reuse": 8,
+        "output_tiles": 16,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 8,
+        "tile_iterations": 128,
+        "tiled_read_bytes": 65536,
+        "tiled_total_bytes": 69632,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "B",
+      "unavailable": {}
+    },
+    "B-tile-variant": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "Exploratory rectangular output tile; extend current scalar tile configuration without changing dtype or K ordering"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:B",
+        "config:B"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 8,
+        "tile_m": 8,
+        "tile_n": 16
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 16,
+        "b_tile_reuse": 8,
+        "output_tiles": 8,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 8,
+        "tile_iterations": 64,
+        "tiled_read_bytes": 49152,
+        "tiled_total_bytes": 53248,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "B",
+      "unavailable": {}
+    }
+  },
+  "configuration": "review",
+  "exchanges": [
+    {
+      "tool_calls": [
+        {
+          "arguments": {
+            "profile_id": "A-profile",
+            "strategy_id": "A"
+          },
+          "id": "A-profile",
+          "name": "profile"
+        },
+        {
+          "arguments": {
+            "profile_id": "B-profile",
+            "strategy_id": "B"
+          },
+          "id": "B-profile",
+          "name": "profile"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "Synthetic workload dimensions M=N=32,K=64; all operands and output float32; no hardware throughput supplied"
+            ],
+            "evidence_refs": [
+              "source:A",
+              "config:A"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32
+            },
+            "model": "compute_memory"
+          },
+          "id": "A-compute",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+            ],
+            "evidence_refs": [
+              "source:A",
+              "config:A"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32,
+              "tile_k": 16,
+              "tile_m": 16,
+              "tile_n": 16
+            },
+            "model": "tile"
+          },
+          "id": "A-tile",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+            ],
+            "evidence_refs": [
+              "source:B",
+              "config:B"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32,
+              "tile_k": 8,
+              "tile_m": 8,
+              "tile_n": 8
+            },
+            "model": "tile"
+          },
+          "id": "B-tile",
+          "name": "calculate"
+        }
+      ]
+    },
+    {
+      "tool_calls": [
+        {
+          "arguments": {
+            "strategy_id": "A"
+          },
+          "id": "A-history",
+          "name": "history"
+        },
+        {
+          "arguments": {
+            "strategy_id": "B"
+          },
+          "id": "B-history",
+          "name": "history"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "Logical tile schedule; two copies of each operand plus one float32 accumulator; no hardware capacity supplied"
+            ],
+            "evidence_refs": [
+              "source:A",
+              "config:A"
+            ],
+            "inputs": {
+              "buffers": [
+                {
+                  "copies": 2,
+                  "dtype_bytes": 4,
+                  "elements": 256,
+                  "end": 4,
+                  "name": "left",
+                  "start": 0
+                },
+                {
+                  "copies": 2,
+                  "dtype_bytes": 4,
+                  "elements": 256,
+                  "end": 4,
+                  "name": "right",
+                  "start": 0
+                },
+                {
+                  "copies": 1,
+                  "dtype_bytes": 4,
+                  "elements": 256,
+                  "end": 4,
+                  "name": "accumulator",
+                  "start": 0
+                }
+              ]
+            },
+            "model": "live_memory"
+          },
+          "id": "A-buffer",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "Stage times are hypothetical sensitivity inputs, not derived from synthetic 10ms total; independent transfer/compute engines and sufficient buffers"
+            ],
+            "evidence_refs": [
+              "source:A"
+            ],
+            "inputs": {
+              "compute_s": 3e-06,
+              "stages": 4,
+              "transfer_s": 2e-06
+            },
+            "model": "pipeline"
+          },
+          "id": "A-pipeline",
+          "name": "calculate"
+        },
+        {
+          "arguments": {
+            "assumptions": [
+              "Exploratory rectangular output tile; extend current scalar tile configuration without changing dtype or K ordering"
+            ],
+            "evidence_refs": [
+              "source:B",
+              "config:B"
+            ],
+            "inputs": {
+              "dtype_bytes": 4,
+              "k": 64,
+              "m": 32,
+              "n": 32,
+              "tile_k": 8,
+              "tile_m": 8,
+              "tile_n": 16
+            },
+            "model": "tile"
+          },
+          "id": "B-tile-variant",
+          "name": "calculate"
+        }
+      ]
+    },
+    {
+      "tool_calls": [
+        {
+          "arguments": {
+            "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+          },
+          "id": "overlap-method",
+          "name": "knowledge"
+        }
+      ]
+    },
+    {
+      "final": {
+        "code_understanding": [
+          {
+            "dependencies": [
+              "accumulator depends on previous reduction step; next input loads are candidates for overlap if backend supports it"
+            ],
+            "edge_cases": [
+              "mask=True hides implementation details; ragged M/N/K, zero sizes and aliasing require defined contracts"
+            ],
+            "layout_memory": [
+              "Actual strides and target memory spaces unspecified; modeled 16x16 float32 operands and accumulator"
+            ],
+            "loops": [
+              "i and j enumerate 16x16 output tiles; k reduction has four steps for K=64"
+            ],
+            "movement": [
+              "Both operand loads occur inside k loop; no explicit prefetch in pinned pseudo-source"
+            ],
+            "refs": [
+              "source:A",
+              "config:A"
+            ],
+            "stages": [
+              "Load left and right tiles, reduce dot products into float32 accumulator, masked output store"
+            ],
+            "strategy_id": "A",
+            "synchronization": [
+              "No explicit wait or asynchronous API; legal barriers must be designed and validated"
+            ]
+          },
+          {
+            "dependencies": [
+              "Reduction order must remain fixed when isolating output tile shape"
+            ],
+            "edge_cases": [
+              "Masked tails and noncontiguous inputs; physical layout and allocation are unknown"
+            ],
+            "layout_memory": [
+              "Float32 accumulator; rectangular tile requires distinct dimensions in load and store"
+            ],
+            "loops": [
+              "16 output tiles, eight reduction steps per tile in the current modeled workload"
+            ],
+            "movement": [
+              "Repeated A/B loads across output tiles; no cached reuse demonstrated"
+            ],
+            "refs": [
+              "source:B",
+              "config:B"
+            ],
+            "stages": [
+              "Same load-dot-store structure using tile8"
+            ],
+            "strategy_id": "B",
+            "synchronization": [
+              "Synchronous pseudo-source gives no proof of overlap"
+            ]
+          }
+        ],
+        "hypotheses": [
+          {
+            "alternatives": [
+              "Compute dominates; synchronization overhead could exceed hidden transfer time",
+              "Backend may already overlap loads"
+            ],
+            "id": "A-overlap",
+            "refs": [
+              "source:A",
+              "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+            ],
+            "strategy_id": "A",
+            "text": "Prefetch may hide an independent load while the current tile computes"
+          },
+          {
+            "alternatives": [
+              "Larger live operands cause spills or reduce parallelism",
+              "Tail overhead outweighs fewer iterations"
+            ],
+            "id": "A-loop-overhead",
+            "refs": [
+              "source:A",
+              "config:A"
+            ],
+            "strategy_id": "A",
+            "text": "Increasing K tile may reduce loop/load-start overhead without changing output tile"
+          },
+          {
+            "alternatives": [
+              "Compiler mapping or spills dominate",
+              "Current cache already captures reuse"
+            ],
+            "id": "B-reuse",
+            "refs": [
+              "source:B",
+              "calculation:B-tile",
+              "calculation:B-tile-variant"
+            ],
+            "strategy_id": "B",
+            "text": "Wider output tile may reuse left tile across more columns"
+          },
+          {
+            "alternatives": [
+              "Input already contiguous",
+              "Packing adds more movement than it saves"
+            ],
+            "id": "B-layout",
+            "refs": [
+              "source:B"
+            ],
+            "strategy_id": "B",
+            "text": "Packing the right tile could improve contiguous accesses if actual strides justify conversion"
+          }
+        ],
+        "observations": [
+          {
+            "category": "observed_fact",
+            "id": "A-time",
+            "predicate": {
+              "path": [
+                "value"
+              ],
+              "ref": "evidence:A-timing",
+              "value": 10
+            },
+            "refs": [
+              "evidence:A-timing"
+            ],
+            "strategy_id": "A",
+            "text": "Fixture reports 10ms in synthetic context; cause and actual TPU behavior unknown"
+          },
+          {
+            "category": "observed_fact",
+            "id": "B-time",
+            "predicate": {
+              "path": [
+                "value"
+              ],
+              "ref": "evidence:B-timing",
+              "value": 12
+            },
+            "refs": [
+              "evidence:B-timing"
+            ],
+            "strategy_id": "B",
+            "text": "Fixture reports 12ms; this does not establish any cause or invalidate B exploration"
+          },
+          {
+            "category": "mathematical_prediction",
+            "id": "A-work",
+            "predicate": {
+              "path": [
+                "outputs",
+                "work_flops"
+              ],
+              "ref": "calculation:A-compute",
+              "value": 131072
+            },
+            "refs": [
+              "calculation:A-compute"
+            ],
+            "strategy_id": "A",
+            "text": "Dense idealization counts131072FLOP and20480minimum bytes; missing hardware rates prevent a time bound"
+          },
+          {
+            "category": "mathematical_prediction",
+            "id": "B-tile-cost",
+            "predicate": {
+              "path": [
+                "outputs",
+                "tiled_total_bytes"
+              ],
+              "ref": "calculation:B-tile-variant",
+              "value": 53248
+            },
+            "refs": [
+              "calculation:B-tile-variant"
+            ],
+            "strategy_id": "B",
+            "text": "Rectangular8x16x8 variant models53248bytes versus69632baseline; cache/compiler/launch effects are omitted"
+          },
+          {
+            "category": "unknown",
+            "id": "A-profile-limits",
+            "predicate": null,
+            "refs": [
+              "profile:A-profile"
+            ],
+            "strategy_id": "A",
+            "text": "One aggregate program event gives no DMA, waits, occupancy or causal critical path"
+          },
+          {
+            "category": "unknown",
+            "id": "B-profile-limits",
+            "predicate": null,
+            "refs": [
+              "profile:B-profile"
+            ],
+            "strategy_id": "B",
+            "text": "One aggregate synthetic program event cannot isolate movement or compute"
+          }
+        ],
+        "plans": [
+          {
+            "calculation_ids": [
+              "A-buffer",
+              "A-pipeline"
+            ],
+            "id": "A-P1",
+            "mechanism": "asynchronous double buffering",
+            "modification": "Keep tile16 and float32; introduce two left/right buffers, prefetch k+1 while computing k, with explicit first-fill, wait-before-use and final-drain control",
+            "observation_ids": [
+              "A-time",
+              "A-profile-limits"
+            ],
+            "parent_id": "A-parent",
+            "refs": [
+              "source:A",
+              "config:A",
+              "profile:A-profile",
+              "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+            ],
+            "risks": [
+              "Buffer reuse race or wrong wait ordering",
+              "Extra memory can cause spills"
+            ],
+            "strategy_id": "A",
+            "tradeoffs": [
+              "Modelled5120bytes excludes hidden temporaries; capacity unknown",
+              "Hypothetical2us transfer+3us compute predicts14us rather than20us for four stages; not a fitted or measured result"
+            ],
+            "unknowns": [
+              "Actual transfer/compute durations",
+              "Backend async capability and capacity"
+            ],
+            "validation": {
+              "correctness": [
+                "Reference comparison for raggedK and last-stage drain; test buffer reuse across output tiles",
+                "Keep numerical dtype and reduction semantics fixed"
+              ],
+              "performance": [
+                "Same workload/environment/protocol repeated timing",
+                "Collect dependency-aligned events to distinguish hidden DMA from added waits"
+              ]
+            },
+            "variants": [
+              "Single next-tile prefetch with two buffers",
+              "Same schedule with guarded tail prefetch"
+            ]
+          },
+          {
+            "calculation_ids": [
+              "A-compute",
+              "A-tile"
+            ],
+            "id": "A-P2",
+            "mechanism": "reduction blocking",
+            "modification": "Separate tile_k from tile_m/tile_n; compare K blocks16and32 with output16x16 and float32 unchanged, retaining masked load and accumulator semantics",
+            "observation_ids": [
+              "A-work",
+              "A-profile-limits"
+            ],
+            "parent_id": "A-parent",
+            "refs": [
+              "source:A",
+              "config:A",
+              "history:A",
+              "profile:A-profile"
+            ],
+            "risks": [
+              "Compiler changes reduction grouping",
+              "RaggedK masking error"
+            ],
+            "strategy_id": "A",
+            "tradeoffs": [
+              "Fewer reduction steps may reduce overhead but larger operands increase residency"
+            ],
+            "unknowns": [
+              "Live temporaries and resource limits",
+              "Whether any loop overhead is material"
+            ],
+            "validation": {
+              "correctness": [
+                "Compare tolerances under reduction regrouping; retain float32",
+                "Cover K values below block, exactly divisible and one past boundary"
+              ],
+              "performance": [
+                "Paired repeated trials with matching context",
+                "Record compiler metadata if available; no attribution from total time alone"
+              ]
+            },
+            "variants": [
+              "tile_k16 baseline control",
+              "tile_k32 only, without dtype or pipeline changes"
+            ]
+          },
+          {
+            "calculation_ids": [
+              "B-tile",
+              "B-tile-variant"
+            ],
+            "id": "B-P1",
+            "mechanism": "rectangular output reuse",
+            "modification": "Extend scalar tile into8x16x8: widen N tile while keeping M and K tile8 and float32; adjust accumulator shape/load masks/output mask consistently",
+            "observation_ids": [
+              "B-time",
+              "B-tile-cost"
+            ],
+            "parent_id": "B-parent",
+            "refs": [
+              "source:B",
+              "config:B",
+              "profile:B-profile"
+            ],
+            "risks": [
+              "Index/layout error on N tail",
+              "Lower occupancy or compiler spill"
+            ],
+            "strategy_id": "B",
+            "tradeoffs": [
+              "Modeled tile traffic69632to53248bytes excludes caching/hidden traffic",
+              "Output accumulator doubles, possible resource pressure"
+            ],
+            "unknowns": [
+              "Physical traffic and target mapping",
+              "Measured cause of synthetic timing difference"
+            ],
+            "validation": {
+              "correctness": [
+                "Test nonmultiple N with explicit bounds and reference output",
+                "Keep dtype/reductionK fixed for causal ablation"
+              ],
+              "performance": [
+                "Repeated same-context timing and actual bytes if available",
+                "Retain B even if A remains faster; no best override"
+              ]
+            },
+            "variants": [
+              "8x16x8 output tile",
+              "8x8x8 matched baseline"
+            ]
+          },
+          {
+            "calculation_ids": [
+              "B-tile"
+            ],
+            "id": "B-P2",
+            "mechanism": "right tile layout packing",
+            "modification": "Inspect actual right-input strides first; if noncontiguous, pack each8x8 right tile into contiguous scratch before dot while preserving mathematical transpose/indexing",
+            "observation_ids": [
+              "B-profile-limits"
+            ],
+            "parent_id": "B-parent",
+            "refs": [
+              "source:B",
+              "config:B",
+              "history:B",
+              "profile:B-profile"
+            ],
+            "risks": [
+              "Incorrect transpose/index map",
+              "Packing overhead or extra scratch cost"
+            ],
+            "strategy_id": "B",
+            "tradeoffs": [
+              "Packing adds conversion and movement; no gain expected if already contiguous"
+            ],
+            "unknowns": [
+              "Actual input strides and backend layout rules",
+              "Hardware-native dot operand layout"
+            ],
+            "validation": {
+              "correctness": [
+                "Contiguous and strided right inputs; verify orientation and tail masks",
+                "Check alias rules before scratch reuse"
+              ],
+              "performance": [
+                "Include packing in end-to-end timing",
+                "Compare layout-only variants and gather conversion evidence if supported"
+              ]
+            },
+            "variants": [
+              "Conditional local packing only for noncontiguous right tiles",
+              "Unpacked control with identical tile/dtype"
+            ]
+          }
+        ],
+        "unknowns": [
+          "All timings and traces are synthetic; no MLA or TPU run occurred",
+          "Raw XPlane protobuf decoder is unavailable in the present environment",
+          "Hardware throughput, capacity, compiler layout and trace dependency edges absent",
+          "Memory contains no previous optimization failures beyond the explicit current synthetic records",
+          "The source is pseudo-code for tool validation, not an executable kernel; Plan legality requires implementation and correctness tests"
+        ]
+      }
+    }
+  ],
+  "limits": {
+    "max_response_chars": 60000,
+    "max_tool_calls": 12,
+    "max_turns": 6
+  },
+  "manifest_digest": "48d9e7da579ed10411ca8f0d6dcc61ffbb7d27580712dd2bda0a6f5110ad849c",
+  "model_label": "current conversation model (inherited; exact model identifier not exposed)",
+  "model_transport": "conversation_session",
+  "plan_set": {
+    "plans": [
+      {
+        "calculation_ids": [
+          "A-buffer",
+          "A-pipeline"
+        ],
+        "id": "A-P1",
+        "mechanism": "asynchronous double buffering",
+        "modification": "Keep tile16 and float32; introduce two left/right buffers, prefetch k+1 while computing k, with explicit first-fill, wait-before-use and final-drain control",
+        "observation_ids": [
+          "A-time",
+          "A-profile-limits"
+        ],
+        "parent_id": "A-parent",
+        "refs": [
+          "source:A",
+          "config:A",
+          "profile:A-profile",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "risks": [
+          "Buffer reuse race or wrong wait ordering",
+          "Extra memory can cause spills"
+        ],
+        "status": "proposal_requires_validation",
+        "strategy_id": "A",
+        "tradeoffs": [
+          "Modelled5120bytes excludes hidden temporaries; capacity unknown",
+          "Hypothetical2us transfer+3us compute predicts14us rather than20us for four stages; not a fitted or measured result"
+        ],
+        "unknowns": [
+          "Actual transfer/compute durations",
+          "Backend async capability and capacity"
+        ],
+        "validation": {
+          "correctness": [
+            "Reference comparison for raggedK and last-stage drain; test buffer reuse across output tiles",
+            "Keep numerical dtype and reduction semantics fixed"
+          ],
+          "performance": [
+            "Same workload/environment/protocol repeated timing",
+            "Collect dependency-aligned events to distinguish hidden DMA from added waits"
+          ]
+        },
+        "variants": [
+          "Single next-tile prefetch with two buffers",
+          "Same schedule with guarded tail prefetch"
+        ]
+      },
+      {
+        "calculation_ids": [
+          "A-compute",
+          "A-tile"
+        ],
+        "id": "A-P2",
+        "mechanism": "reduction blocking",
+        "modification": "Separate tile_k from tile_m/tile_n; compare K blocks16and32 with output16x16 and float32 unchanged, retaining masked load and accumulator semantics",
+        "observation_ids": [
+          "A-work",
+          "A-profile-limits"
+        ],
+        "parent_id": "A-parent",
+        "refs": [
+          "source:A",
+          "config:A",
+          "history:A",
+          "profile:A-profile"
+        ],
+        "risks": [
+          "Compiler changes reduction grouping",
+          "RaggedK masking error"
+        ],
+        "status": "proposal_requires_validation",
+        "strategy_id": "A",
+        "tradeoffs": [
+          "Fewer reduction steps may reduce overhead but larger operands increase residency"
+        ],
+        "unknowns": [
+          "Live temporaries and resource limits",
+          "Whether any loop overhead is material"
+        ],
+        "validation": {
+          "correctness": [
+            "Compare tolerances under reduction regrouping; retain float32",
+            "Cover K values below block, exactly divisible and one past boundary"
+          ],
+          "performance": [
+            "Paired repeated trials with matching context",
+            "Record compiler metadata if available; no attribution from total time alone"
+          ]
+        },
+        "variants": [
+          "tile_k16 baseline control",
+          "tile_k32 only, without dtype or pipeline changes"
+        ]
+      },
+      {
+        "calculation_ids": [
+          "B-tile",
+          "B-tile-variant"
+        ],
+        "id": "B-P1",
+        "mechanism": "rectangular output reuse",
+        "modification": "Extend scalar tile into8x16x8: widen N tile while keeping M and K tile8 and float32; adjust accumulator shape/load masks/output mask consistently",
+        "observation_ids": [
+          "B-time",
+          "B-tile-cost"
+        ],
+        "parent_id": "B-parent",
+        "refs": [
+          "source:B",
+          "config:B",
+          "profile:B-profile"
+        ],
+        "risks": [
+          "Index/layout error on N tail",
+          "Lower occupancy or compiler spill"
+        ],
+        "status": "proposal_requires_validation",
+        "strategy_id": "B",
+        "tradeoffs": [
+          "Modeled tile traffic69632to53248bytes excludes caching/hidden traffic",
+          "Output accumulator doubles, possible resource pressure"
+        ],
+        "unknowns": [
+          "Physical traffic and target mapping",
+          "Measured cause of synthetic timing difference"
+        ],
+        "validation": {
+          "correctness": [
+            "Test nonmultiple N with explicit bounds and reference output",
+            "Keep dtype/reductionK fixed for causal ablation"
+          ],
+          "performance": [
+            "Repeated same-context timing and actual bytes if available",
+            "Retain B even if A remains faster; no best override"
+          ]
+        },
+        "variants": [
+          "8x16x8 output tile",
+          "8x8x8 matched baseline"
+        ]
+      },
+      {
+        "calculation_ids": [
+          "B-tile"
+        ],
+        "id": "B-P2",
+        "mechanism": "right tile layout packing",
+        "modification": "Inspect actual right-input strides first; if noncontiguous, pack each8x8 right tile into contiguous scratch before dot while preserving mathematical transpose/indexing",
+        "observation_ids": [
+          "B-profile-limits"
+        ],
+        "parent_id": "B-parent",
+        "refs": [
+          "source:B",
+          "config:B",
+          "history:B",
+          "profile:B-profile"
+        ],
+        "risks": [
+          "Incorrect transpose/index map",
+          "Packing overhead or extra scratch cost"
+        ],
+        "status": "proposal_requires_validation",
+        "strategy_id": "B",
+        "tradeoffs": [
+          "Packing adds conversion and movement; no gain expected if already contiguous"
+        ],
+        "unknowns": [
+          "Actual input strides and backend layout rules",
+          "Hardware-native dot operand layout"
+        ],
+        "validation": {
+          "correctness": [
+            "Contiguous and strided right inputs; verify orientation and tail masks",
+            "Check alias rules before scratch reuse"
+          ],
+          "performance": [
+            "Include packing in end-to-end timing",
+            "Compare layout-only variants and gather conversion evidence if supported"
+          ]
+        },
+        "variants": [
+          "Conditional local packing only for noncontiguous right tiles",
+          "Unpacked control with identical tile/dtype"
+        ]
+      }
+    ],
+    "schema_version": 1
+  },
+  "proposal": {
+    "code_understanding": [
+      {
+        "dependencies": [
+          "accumulator depends on previous reduction step; next input loads are candidates for overlap if backend supports it"
+        ],
+        "edge_cases": [
+          "mask=True hides implementation details; ragged M/N/K, zero sizes and aliasing require defined contracts"
+        ],
+        "layout_memory": [
+          "Actual strides and target memory spaces unspecified; modeled 16x16 float32 operands and accumulator"
+        ],
+        "loops": [
+          "i and j enumerate 16x16 output tiles; k reduction has four steps for K=64"
+        ],
+        "movement": [
+          "Both operand loads occur inside k loop; no explicit prefetch in pinned pseudo-source"
+        ],
+        "refs": [
+          "source:A",
+          "config:A"
+        ],
+        "stages": [
+          "Load left and right tiles, reduce dot products into float32 accumulator, masked output store"
+        ],
+        "strategy_id": "A",
+        "synchronization": [
+          "No explicit wait or asynchronous API; legal barriers must be designed and validated"
+        ]
+      },
+      {
+        "dependencies": [
+          "Reduction order must remain fixed when isolating output tile shape"
+        ],
+        "edge_cases": [
+          "Masked tails and noncontiguous inputs; physical layout and allocation are unknown"
+        ],
+        "layout_memory": [
+          "Float32 accumulator; rectangular tile requires distinct dimensions in load and store"
+        ],
+        "loops": [
+          "16 output tiles, eight reduction steps per tile in the current modeled workload"
+        ],
+        "movement": [
+          "Repeated A/B loads across output tiles; no cached reuse demonstrated"
+        ],
+        "refs": [
+          "source:B",
+          "config:B"
+        ],
+        "stages": [
+          "Same load-dot-store structure using tile8"
+        ],
+        "strategy_id": "B",
+        "synchronization": [
+          "Synchronous pseudo-source gives no proof of overlap"
+        ]
+      }
+    ],
+    "hypotheses": [
+      {
+        "alternatives": [
+          "Compute dominates; synchronization overhead could exceed hidden transfer time",
+          "Backend may already overlap loads"
+        ],
+        "id": "A-overlap",
+        "refs": [
+          "source:A",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "strategy_id": "A",
+        "text": "Prefetch may hide an independent load while the current tile computes"
+      },
+      {
+        "alternatives": [
+          "Larger live operands cause spills or reduce parallelism",
+          "Tail overhead outweighs fewer iterations"
+        ],
+        "id": "A-loop-overhead",
+        "refs": [
+          "source:A",
+          "config:A"
+        ],
+        "strategy_id": "A",
+        "text": "Increasing K tile may reduce loop/load-start overhead without changing output tile"
+      },
+      {
+        "alternatives": [
+          "Compiler mapping or spills dominate",
+          "Current cache already captures reuse"
+        ],
+        "id": "B-reuse",
+        "refs": [
+          "source:B",
+          "calculation:B-tile",
+          "calculation:B-tile-variant"
+        ],
+        "strategy_id": "B",
+        "text": "Wider output tile may reuse left tile across more columns"
+      },
+      {
+        "alternatives": [
+          "Input already contiguous",
+          "Packing adds more movement than it saves"
+        ],
+        "id": "B-layout",
+        "refs": [
+          "source:B"
+        ],
+        "strategy_id": "B",
+        "text": "Packing the right tile could improve contiguous accesses if actual strides justify conversion"
+      }
+    ],
+    "observations": [
+      {
+        "category": "observed_fact",
+        "id": "A-time",
+        "predicate": {
+          "path": [
+            "value"
+          ],
+          "ref": "evidence:A-timing",
+          "value": 10
+        },
+        "refs": [
+          "evidence:A-timing"
+        ],
+        "strategy_id": "A",
+        "text": "Fixture reports 10ms in synthetic context; cause and actual TPU behavior unknown"
+      },
+      {
+        "category": "observed_fact",
+        "id": "B-time",
+        "predicate": {
+          "path": [
+            "value"
+          ],
+          "ref": "evidence:B-timing",
+          "value": 12
+        },
+        "refs": [
+          "evidence:B-timing"
+        ],
+        "strategy_id": "B",
+        "text": "Fixture reports 12ms; this does not establish any cause or invalidate B exploration"
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "A-work",
+        "predicate": {
+          "path": [
+            "outputs",
+            "work_flops"
+          ],
+          "ref": "calculation:A-compute",
+          "value": 131072
+        },
+        "refs": [
+          "calculation:A-compute"
+        ],
+        "strategy_id": "A",
+        "text": "Dense idealization counts131072FLOP and20480minimum bytes; missing hardware rates prevent a time bound"
+      },
+      {
+        "category": "mathematical_prediction",
+        "id": "B-tile-cost",
+        "predicate": {
+          "path": [
+            "outputs",
+            "tiled_total_bytes"
+          ],
+          "ref": "calculation:B-tile-variant",
+          "value": 53248
+        },
+        "refs": [
+          "calculation:B-tile-variant"
+        ],
+        "strategy_id": "B",
+        "text": "Rectangular8x16x8 variant models53248bytes versus69632baseline; cache/compiler/launch effects are omitted"
+      },
+      {
+        "category": "unknown",
+        "id": "A-profile-limits",
+        "predicate": null,
+        "refs": [
+          "profile:A-profile"
+        ],
+        "strategy_id": "A",
+        "text": "One aggregate program event gives no DMA, waits, occupancy or causal critical path"
+      },
+      {
+        "category": "unknown",
+        "id": "B-profile-limits",
+        "predicate": null,
+        "refs": [
+          "profile:B-profile"
+        ],
+        "strategy_id": "B",
+        "text": "One aggregate synthetic program event cannot isolate movement or compute"
+      }
+    ],
+    "plans": [
+      {
+        "calculation_ids": [
+          "A-buffer",
+          "A-pipeline"
+        ],
+        "id": "A-P1",
+        "mechanism": "asynchronous double buffering",
+        "modification": "Keep tile16 and float32; introduce two left/right buffers, prefetch k+1 while computing k, with explicit first-fill, wait-before-use and final-drain control",
+        "observation_ids": [
+          "A-time",
+          "A-profile-limits"
+        ],
+        "parent_id": "A-parent",
+        "refs": [
+          "source:A",
+          "config:A",
+          "profile:A-profile",
+          "knowledge:method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+        ],
+        "risks": [
+          "Buffer reuse race or wrong wait ordering",
+          "Extra memory can cause spills"
+        ],
+        "strategy_id": "A",
+        "tradeoffs": [
+          "Modelled5120bytes excludes hidden temporaries; capacity unknown",
+          "Hypothetical2us transfer+3us compute predicts14us rather than20us for four stages; not a fitted or measured result"
+        ],
+        "unknowns": [
+          "Actual transfer/compute durations",
+          "Backend async capability and capacity"
+        ],
+        "validation": {
+          "correctness": [
+            "Reference comparison for raggedK and last-stage drain; test buffer reuse across output tiles",
+            "Keep numerical dtype and reduction semantics fixed"
+          ],
+          "performance": [
+            "Same workload/environment/protocol repeated timing",
+            "Collect dependency-aligned events to distinguish hidden DMA from added waits"
+          ]
+        },
+        "variants": [
+          "Single next-tile prefetch with two buffers",
+          "Same schedule with guarded tail prefetch"
+        ]
+      },
+      {
+        "calculation_ids": [
+          "A-compute",
+          "A-tile"
+        ],
+        "id": "A-P2",
+        "mechanism": "reduction blocking",
+        "modification": "Separate tile_k from tile_m/tile_n; compare K blocks16and32 with output16x16 and float32 unchanged, retaining masked load and accumulator semantics",
+        "observation_ids": [
+          "A-work",
+          "A-profile-limits"
+        ],
+        "parent_id": "A-parent",
+        "refs": [
+          "source:A",
+          "config:A",
+          "history:A",
+          "profile:A-profile"
+        ],
+        "risks": [
+          "Compiler changes reduction grouping",
+          "RaggedK masking error"
+        ],
+        "strategy_id": "A",
+        "tradeoffs": [
+          "Fewer reduction steps may reduce overhead but larger operands increase residency"
+        ],
+        "unknowns": [
+          "Live temporaries and resource limits",
+          "Whether any loop overhead is material"
+        ],
+        "validation": {
+          "correctness": [
+            "Compare tolerances under reduction regrouping; retain float32",
+            "Cover K values below block, exactly divisible and one past boundary"
+          ],
+          "performance": [
+            "Paired repeated trials with matching context",
+            "Record compiler metadata if available; no attribution from total time alone"
+          ]
+        },
+        "variants": [
+          "tile_k16 baseline control",
+          "tile_k32 only, without dtype or pipeline changes"
+        ]
+      },
+      {
+        "calculation_ids": [
+          "B-tile",
+          "B-tile-variant"
+        ],
+        "id": "B-P1",
+        "mechanism": "rectangular output reuse",
+        "modification": "Extend scalar tile into8x16x8: widen N tile while keeping M and K tile8 and float32; adjust accumulator shape/load masks/output mask consistently",
+        "observation_ids": [
+          "B-time",
+          "B-tile-cost"
+        ],
+        "parent_id": "B-parent",
+        "refs": [
+          "source:B",
+          "config:B",
+          "profile:B-profile"
+        ],
+        "risks": [
+          "Index/layout error on N tail",
+          "Lower occupancy or compiler spill"
+        ],
+        "strategy_id": "B",
+        "tradeoffs": [
+          "Modeled tile traffic69632to53248bytes excludes caching/hidden traffic",
+          "Output accumulator doubles, possible resource pressure"
+        ],
+        "unknowns": [
+          "Physical traffic and target mapping",
+          "Measured cause of synthetic timing difference"
+        ],
+        "validation": {
+          "correctness": [
+            "Test nonmultiple N with explicit bounds and reference output",
+            "Keep dtype/reductionK fixed for causal ablation"
+          ],
+          "performance": [
+            "Repeated same-context timing and actual bytes if available",
+            "Retain B even if A remains faster; no best override"
+          ]
+        },
+        "variants": [
+          "8x16x8 output tile",
+          "8x8x8 matched baseline"
+        ]
+      },
+      {
+        "calculation_ids": [
+          "B-tile"
+        ],
+        "id": "B-P2",
+        "mechanism": "right tile layout packing",
+        "modification": "Inspect actual right-input strides first; if noncontiguous, pack each8x8 right tile into contiguous scratch before dot while preserving mathematical transpose/indexing",
+        "observation_ids": [
+          "B-profile-limits"
+        ],
+        "parent_id": "B-parent",
+        "refs": [
+          "source:B",
+          "config:B",
+          "history:B",
+          "profile:B-profile"
+        ],
+        "risks": [
+          "Incorrect transpose/index map",
+          "Packing overhead or extra scratch cost"
+        ],
+        "strategy_id": "B",
+        "tradeoffs": [
+          "Packing adds conversion and movement; no gain expected if already contiguous"
+        ],
+        "unknowns": [
+          "Actual input strides and backend layout rules",
+          "Hardware-native dot operand layout"
+        ],
+        "validation": {
+          "correctness": [
+            "Contiguous and strided right inputs; verify orientation and tail masks",
+            "Check alias rules before scratch reuse"
+          ],
+          "performance": [
+            "Include packing in end-to-end timing",
+            "Compare layout-only variants and gather conversion evidence if supported"
+          ]
+        },
+        "variants": [
+          "Conditional local packing only for noncontiguous right tiles",
+          "Unpacked control with identical tile/dtype"
+        ]
+      }
+    ],
+    "unknowns": [
+      "All timings and traces are synthetic; no MLA or TPU run occurred",
+      "Raw XPlane protobuf decoder is unavailable in the present environment",
+      "Hardware throughput, capacity, compiler layout and trace dependency edges absent",
+      "Memory contains no previous optimization failures beyond the explicit current synthetic records",
+      "The source is pseudo-code for tool validation, not an executable kernel; Plan legality requires implementation and correctness tests"
+    ]
+  },
+  "review_enabled": true,
+  "schema_version": 1,
+  "skill_captures": {
+    "karpathy-guidelines": "---\nname: karpathy-guidelines\ndescription: Behavioral guidelines to reduce common LLM coding mistakes. Use when writing, reviewing, or refactoring code to avoid overcomplication, make surgical changes, surface assumptions, and define verifiable success criteria.\nlicense: MIT\n---\n\n# Karpathy Guidelines\n\nBehavioral guidelines to reduce common LLM coding mistakes, derived from [Andrej Karpathy's observations](https://x.com/karpathy/status/2015883857489522876) on LLM coding pitfalls.\n\n**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.\n\n## 1. Think Before Coding\n\n**Don't assume. Don't hide confusion. Surface tradeoffs.**\n\nBefore implementing:\n- State your assumptions explicitly. If uncertain, ask.\n- If multiple interpretations exist, present them - don't pick silently.\n- If a simpler approach exists, say so. Push back when warranted.\n- If something is unclear, stop. Name what's confusing. Ask.\n\n## 2. Simplicity First\n\n**Minimum code that solves the problem. Nothing speculative.**\n\n- No features beyond what was asked.\n- No abstractions for single-use code.\n- No \"flexibility\" or \"configurability\" that wasn't requested.\n- No error handling for impossible scenarios.\n- If you write 200 lines and it could be 50, rewrite it.\n\nAsk yourself: \"Would a senior engineer say this is overcomplicated?\" If yes, simplify.\n\n## 3. Surgical Changes\n\n**Touch only what you must. Clean up only your own mess.**\n\nWhen editing existing code:\n- Don't \"improve\" adjacent code, comments, or formatting.\n- Don't refactor things that aren't broken.\n- Match existing style, even if you'd do it differently.\n- If you notice unrelated dead code, mention it - don't delete it.\n\nWhen your changes create orphans:\n- Remove imports/variables/functions that YOUR changes made unused.\n- Don't remove pre-existing dead code unless asked.\n\nThe test: Every changed line should trace directly to the user's request.\n\n## 4. Goal-Driven Execution\n\n**Define success criteria. Loop until verified.**\n\nTransform tasks into verifiable goals:\n- \"Add validation\" → \"Write tests for invalid inputs, then make them pass\"\n- \"Fix the bug\" → \"Write a test that reproduces it, then make it pass\"\n- \"Refactor X\" → \"Ensure tests pass before and after\"\n\nFor multi-step tasks, state a brief plan:\n```\n1. [Step] → verify: [check]\n2. [Step] → verify: [check]\n3. [Step] → verify: [check]\n```\n\nStrong success criteria let you loop independently. Weak criteria (\"make it work\") require constant clarification.\n",
+    "systematic-debugging": "---\nname: systematic-debugging\ndescription: Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes\n---\n\n# Systematic Debugging\n\n## Overview\n\n**Core principle:** ALWAYS find root cause before attempting fixes. Symptom fixes are failure.\n\n**Violating the letter of this process is violating the spirit of debugging.**\n\n## The Iron Law\n\n```\nNO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST\n```\n\nIf you haven't completed Phase 1, you cannot propose fixes.\n\n## When to Use\n\nUse for ANY technical issue:\n- Test failures\n- Bugs in production\n- Unexpected behavior\n- Performance problems\n- Build failures\n- Integration issues\n\n**Use this ESPECIALLY when:**\n- Under time pressure (emergencies make guessing tempting)\n- \"Just one quick fix\" seems obvious\n- You've already tried multiple fixes\n- Previous fix didn't work\n- You don't fully understand the issue\n\n**Don't skip when:**\n- Issue seems simple (simple bugs have root causes too)\n- You're in a hurry (rushing guarantees rework)\n- Manager wants it fixed NOW (systematic is faster than thrashing)\n\n## The Four Phases\n\nYou MUST complete each phase before proceeding to the next.\n\n### Phase 1: Root Cause Investigation\n\n**BEFORE attempting ANY fix:**\n\n1. **Read Error Messages Carefully**\n   - Don't skip past errors or warnings\n   - They often contain the exact solution\n   - Read stack traces completely\n   - Note line numbers, file paths, error codes\n\n2. **Reproduce Consistently**\n   - Can you trigger it reliably?\n   - What are the exact steps?\n   - Does it happen every time?\n   - If not reproducible → gather more data, don't guess\n\n3. **Check Recent Changes**\n   - What changed that could cause this?\n   - Git diff, recent commits\n   - New dependencies, config changes\n   - Environmental differences\n\n4. **Gather Evidence in Multi-Component Systems**\n\n   **WHEN system has multiple components (CI → build → signing, API → service → database):**\n\n   **BEFORE proposing fixes, add diagnostic instrumentation:**\n   ```\n   For EACH component boundary:\n     - Log what data enters component\n     - Log what data exits component\n     - Verify environment/config propagation\n     - Check state at each layer\n\n   Run once to gather evidence showing WHERE it breaks\n   THEN analyze evidence to identify failing component\n   THEN investigate that specific component\n   ```\n\n   **Example (multi-layer system):**\n   ```bash\n   # Layer 1: Workflow\n   echo \"=== Secrets available in workflow: ===\"\n   echo \"IDENTITY: $([ -n \"${IDENTITY:-}\" ] && echo SET || echo UNSET)\"\n\n   # Layer 2: Build script\n   echo \"=== Env vars in build script: ===\"\n   printenv IDENTITY >/dev/null 2>&1 && echo \"IDENTITY in environment\" || echo \"IDENTITY not in environment\"\n\n   # Layer 3: Signing script\n   echo \"=== Keychain state: ===\"\n   security list-keychains\n   security find-identity -v\n\n   # Layer 4: Actual signing\n   codesign --sign \"$IDENTITY\" --verbose=4 \"$APP\"\n   ```\n\n   **This reveals:** Which layer fails (secrets → workflow ✓, workflow → build ✗)\n\n5. **Trace Data Flow**\n\n   **WHEN error is deep in call stack:**\n\n   See `root-cause-tracing.md` in this directory for the complete backward tracing technique.\n\n   **Quick version:**\n   - Where does bad value originate?\n   - What called this with bad value?\n   - Keep tracing up until you find the source\n   - Fix at source, not at symptom\n\n### Phase 2: Pattern Analysis\n\n**Find the pattern before fixing:**\n\n1. **Find Working Examples**\n   - Locate similar working code in same codebase\n   - What works that's similar to what's broken?\n\n2. **Compare Against References**\n   - If implementing pattern, read reference implementation COMPLETELY\n   - Don't skim - read every line\n   - Understand the pattern fully before applying\n\n3. **Identify Differences**\n   - What's different between working and broken?\n   - List every difference, however small\n   - Don't assume \"that can't matter\"\n\n4. **Understand Dependencies**\n   - What other components does this need?\n   - What settings, config, environment?\n   - What assumptions does it make?\n\n### Phase 3: Hypothesis and Testing\n\n**Scientific method:**\n\n1. **Form Single Hypothesis**\n   - State clearly: \"I think X is the root cause because Y\"\n   - Write it down\n   - Be specific, not vague\n\n2. **Test Minimally**\n   - Make the SMALLEST possible change to test hypothesis\n   - One variable at a time\n   - Don't fix multiple things at once\n\n3. **Verify Before Continuing**\n   - Did it work? Yes → Phase 4\n   - Didn't work? Form NEW hypothesis\n   - DON'T add more fixes on top\n\n4. **When You Don't Know**\n   - Say \"I don't understand X\"\n   - Don't pretend to know\n   - Ask for help\n   - Research more\n\n### Phase 4: Implementation\n\n**Fix the root cause, not the symptom:**\n\n1. **Create Failing Test Case**\n   - Simplest possible reproduction\n   - Automated test if possible\n   - One-off test script if no framework\n   - MUST have before fixing\n   - Use the `superpowers:test-driven-development` skill for writing proper failing tests\n\n2. **Implement Single Fix**\n   - Address the root cause identified\n   - ONE change at a time\n   - No \"while I'm here\" improvements\n   - No bundled refactoring\n\n3. **Verify Fix**\n   - Test passes now?\n   - No other tests broken?\n   - Issue actually resolved?\n   - Use the `superpowers:verification-before-completion` skill before claiming success\n\n4. **If Fix Doesn't Work**\n   - STOP\n   - Count: How many fixes have you tried?\n   - If < 3: Return to Phase 1, re-analyze with new information\n   - **If ≥ 3: STOP and question the architecture (step 5 below)**\n   - DON'T attempt Fix #4 without architectural discussion\n\n5. **If 3+ Fixes Failed: Question Architecture**\n\n   **Pattern indicating architectural problem:**\n   - Each fix reveals new shared state/coupling/problem in different place\n   - Fixes require \"massive refactoring\" to implement\n   - Each fix creates new symptoms elsewhere\n\n   **STOP and question fundamentals:**\n   - Is this pattern fundamentally sound?\n   - Are we \"sticking with it through sheer inertia\"?\n   - Should we refactor architecture vs. continue fixing symptoms?\n\n   **Discuss with your human partner before attempting more fixes**\n\n   This is NOT a failed hypothesis - this is a wrong architecture.\n\n## Red Flags - STOP and Follow Process\n\nIf you catch yourself thinking:\n- \"Quick fix for now, investigate later\"\n- \"Just try changing X and see if it works\"\n- \"Add multiple changes, run tests\"\n- \"Skip the test, I'll manually verify\"\n- \"It's probably X, let me fix that\"\n- \"I don't fully understand but this might work\"\n- \"Pattern says X but I'll adapt it differently\"\n- \"Here are the main problems: [lists fixes without investigation]\"\n- Proposing solutions before tracing data flow\n- **\"One more fix attempt\" (when already tried 2+)**\n- **Each fix reveals new problem in different place**\n\n**ALL of these mean: STOP. Return to Phase 1.**\n\n**If 3+ fixes failed:** Question the architecture (see Phase 4.5)\n\n## your human partner's Signals You're Doing It Wrong\n\n**Watch for these redirections:**\n- \"Is that not happening?\" - You assumed without verifying\n- \"Will it show us...?\" - You should have added evidence gathering\n- \"Stop guessing\" - You're proposing fixes without understanding\n- \"Ultra-think this\" - Question fundamentals, not just symptoms\n- \"We're stuck?\" (frustrated) - Your approach isn't working\n\n**When you see these:** STOP. Return to Phase 1.\n\n## Common Rationalizations\n\n| Excuse | Reality |\n|--------|---------|\n| \"Issue is simple, don't need process\" | Simple issues have root causes too. Process is fast for simple bugs. |\n| \"Emergency, no time for process\" | Systematic debugging is FASTER than guess-and-check thrashing. |\n| \"Just try this first, then investigate\" | First fix sets the pattern. Do it right from the start. |\n| \"I'll write test after confirming fix works\" | Untested fixes don't stick. Test first proves it. |\n| \"Multiple fixes at once saves time\" | Can't isolate what worked. Causes new bugs. |\n| \"Reference too long, I'll adapt the pattern\" | Partial understanding guarantees bugs. Read it completely. |\n| \"I see the problem, let me fix it\" | Seeing symptoms ≠ understanding root cause. |\n| \"One more fix attempt\" (after 2+ failures) | 3+ failures = architectural problem. Question pattern, don't fix again. |\n\n## Quick Reference\n\n| Phase | Key Activities | Success Criteria |\n|-------|---------------|------------------|\n| **1. Root Cause** | Read errors, reproduce, check changes, gather evidence | Understand WHAT and WHY |\n| **2. Pattern** | Find working examples, compare | Identify differences |\n| **3. Hypothesis** | Form theory, test minimally | Confirmed or new hypothesis |\n| **4. Implementation** | Create test, fix, verify | Bug resolved, tests pass |\n\n## When Process Reveals \"No Root Cause\"\n\nIf systematic investigation reveals issue is truly environmental, timing-dependent, or external:\n\n1. You've completed the process\n2. Document what you investigated\n3. Implement appropriate handling (retry, timeout, error message)\n4. Add monitoring/logging for future investigation\n\n**But:** 95% of \"no root cause\" cases are incomplete investigation.\n\n## Supporting Techniques\n\nThese techniques are part of systematic debugging and available in this directory:\n\n- **`root-cause-tracing.md`** - Trace bugs backward through call stack to find original trigger\n- **`defense-in-depth.md`** - Add validation at multiple layers after finding root cause\n- **`condition-based-waiting.md`** - Replace arbitrary timeouts with condition polling\n",
+    "verification-before-completion": "---\nname: verification-before-completion\ndescription: Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always\n---\n\n# Verification Before Completion\n\n## Overview\n\n**Core principle:** Evidence before claims, always.\n\n**Violating the letter of this rule is violating the spirit of this rule.**\n\n## The Iron Law\n\n```\nNO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE\n```\n\nIf you haven't run the verification command in this message, you cannot claim it passes.\n\n## The Gate Function\n\n```\nBEFORE claiming any status or expressing satisfaction:\n\n1. IDENTIFY: What command proves this claim?\n2. RUN: Execute the FULL command (fresh, complete)\n3. READ: Full output, check exit code, count failures\n4. VERIFY: Does output confirm the claim?\n   - If NO: State actual status with evidence\n   - If YES: State claim WITH evidence\n5. ONLY THEN: Make the claim\n\nSkip any step = lying, not verifying\n```\n\n## Common Failures\n\n| Claim | Requires | Not Sufficient |\n|-------|----------|----------------|\n| Tests pass | Test command output: 0 failures | Previous run, \"should pass\" |\n| Linter clean | Linter output: 0 errors | Partial check, extrapolation |\n| Build succeeds | Build command: exit 0 | Linter passing, logs look good |\n| Bug fixed | Test original symptom: passes | Code changed, assumed fixed |\n| Regression test works | Red-green cycle verified | Test passes once |\n| Agent completed | VCS diff shows changes | Agent reports \"success\" |\n| Requirements met | Line-by-line checklist | Tests passing |\n\n## Red Flags - STOP\n\n- Using \"should\", \"probably\", \"seems to\"\n- Expressing satisfaction before verification (\"Great!\", \"Perfect!\", \"Done!\", etc.)\n- About to commit/push/PR without verification\n- Trusting agent success reports\n- Relying on partial verification\n- Thinking \"just this once\"\n- Tired and wanting work over\n- **ANY wording implying success without having run verification**\n\n## Rationalization Prevention\n\n| Excuse | Reality |\n|--------|---------|\n| \"Should work now\" | RUN the verification |\n| \"I'm confident\" | Confidence ≠ evidence |\n| \"Just this once\" | No exceptions |\n| \"Linter passed\" | Linter ≠ compiler |\n| \"Agent said success\" | Verify independently |\n| \"I'm tired\" | Exhaustion ≠ excuse |\n| \"Partial check is enough\" | Partial proves nothing |\n| \"Different words so rule doesn't apply\" | Spirit over letter |\n\n## Key Patterns\n\n**Tests:**\n```\n✅ [Run test command] [See: 34/34 pass] \"All tests pass\"\n❌ \"Should pass now\" / \"Looks correct\"\n```\n\n**Regression tests (TDD Red-Green):**\n```\n✅ Write → Run (pass) → Revert fix → Run (MUST FAIL) → Restore → Run (pass)\n❌ \"I've written a regression test\" (without red-green verification)\n```\n\n**Build:**\n```\n✅ [Run build] [See: exit 0] \"Build passes\"\n❌ \"Linter passed\" (linter doesn't check compilation)\n```\n\n**Requirements:**\n```\n✅ Re-read plan → Create checklist → Verify each → Report gaps or completion\n❌ \"Tests pass, phase complete\"\n```\n\n**Agent delegation:**\n```\n✅ Agent reports success → Check VCS diff → Verify changes → Report actual state\n❌ Trust agent report\n```\n\n## When To Apply\n\n**ALWAYS before:**\n- ANY variation of success/completion claims\n- ANY expression of satisfaction\n- ANY positive statement about work state\n- Committing, PR creation, task completion\n- Moving to next task\n- Delegating to agents\n\n**Rule applies to:**\n- Exact phrases\n- Paraphrases and synonyms\n- Implications of success\n- ANY communication suggesting completion/correctness\n"
+  },
+  "skills": {
+    "karpathy-guidelines": "6e22cc54cb02a5e98ae42d06d9d7292db0c1b43894831b32879beb0166b2aea7",
+    "systematic-debugging": "51c6435d98c83c42c96ba7c35725a0b2c376cd487fb1a4e6bd0ddbe7e33ef202",
+    "verification-before-completion": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3"
+  },
+  "tool_calls": [
+    {
+      "arguments": {
+        "profile_id": "A-profile",
+        "strategy_id": "A"
+      },
+      "id": "A-profile",
+      "name": "profile",
+      "result": {
+        "availability": "available",
+        "profile_id": "A-profile",
+        "reports": [
+          {
+            "artifact_refs": [
+              {
+                "digest": "192b73be479994acb9a9cb86acfbf6eb4de207e7e25f2e6c1409323cc1c444ab",
+                "size": 648
+              }
+            ],
+            "binding": {
+              "candidate_id": "A-candidate",
+              "context_id": "context",
+              "declared_identity": {
+                "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+                "config_digest": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+                "source_digest": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e"
+              },
+              "parent_id": "A-parent",
+              "provenance": "synthetic",
+              "run_id": "A-run",
+              "strategy_id": "A"
+            },
+            "binding_qualification": "declared_identity_only",
+            "capabilities": {
+              "compiler_metadata": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "custom_call": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              },
+              "dma": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              },
+              "execution_intervals": {
+                "availability": "available",
+                "event_count": 1,
+                "reason": null
+              },
+              "llo": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "resource_metadata": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "target_execution": {
+                "availability": "available",
+                "event_count": 1,
+                "reason": null
+              },
+              "waits": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              }
+            },
+            "critical_path": {
+              "availability": "unavailable",
+              "reason": "Event count or interval union does not establish dependencies or critical path.",
+              "value": null
+            },
+            "events": [
+              {
+                "bytes": null,
+                "classification": "measured",
+                "clock": "device_offset_ps",
+                "device": "/device:TPU:0",
+                "duration_ps": 10000000000,
+                "id": "group:0:sample:0",
+                "kind": "program",
+                "metadata": {},
+                "name": "jit_matmul(123)",
+                "reason": null,
+                "source_refs": [
+                  "legacy:groups/0/samples/0"
+                ],
+                "start_ps": 0
+              }
+            ],
+            "format": "normalized_profile.v1",
+            "interval_unions": [
+              {
+                "availability": "available",
+                "classification": "trace_derived",
+                "clock": "device_offset_ps",
+                "device": "/device:TPU:0",
+                "duration_ps": 10000000000,
+                "event_ids": [
+                  "group:0:sample:0"
+                ],
+                "missing_interval_count": 0,
+                "scope": "union_of_supplied_intervals_not_end_to_end_or_critical_path",
+                "unit": "ps"
+              }
+            ],
+            "metadata": {
+              "compiler_metadata": [],
+              "llo": [],
+              "resource_metadata": []
+            },
+            "multi_device_span": {
+              "availability": "unavailable",
+              "reason": "Cross-device clock alignment has not been verified.",
+              "value": null
+            },
+            "operation_stats": [
+              {
+                "classification": "trace_derived",
+                "clock": "device_offset_ps",
+                "count": 1,
+                "device": "/device:TPU:0",
+                "event_ids": [
+                  "group:0:sample:0"
+                ],
+                "events_per_measured_call": 1,
+                "invalid_samples": 0,
+                "kind": "program",
+                "line": "XLA Modules",
+                "line_id": 1,
+                "max_us": 10000.0,
+                "mean_us": 10000.0,
+                "median_us": 10000.0,
+                "min_us": 10000.0,
+                "name": "jit_matmul(123)",
+                "p95_us": 10000.0,
+                "program_id": 123,
+                "unit": "us"
+              }
+            ],
+            "producer": {
+              "calls": 1,
+              "format": "PallasKernels.read_profile",
+              "profile_path_hint": "synthetic.xplane.pb",
+              "time_source": "TPU XPlane device_duration_ps"
+            },
+            "quality": {
+              "availability": "available",
+              "errors": [],
+              "issues": [],
+              "warnings": []
+            },
+            "schema_version": 1
+          }
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "profile_id": "B-profile",
+        "strategy_id": "B"
+      },
+      "id": "B-profile",
+      "name": "profile",
+      "result": {
+        "availability": "available",
+        "profile_id": "B-profile",
+        "reports": [
+          {
+            "artifact_refs": [
+              {
+                "digest": "1c3eb79542175bc16e95b46721276c18af06dbe49aa180770741a976e81816bb",
+                "size": 648
+              }
+            ],
+            "binding": {
+              "candidate_id": "B-candidate",
+              "context_id": "context",
+              "declared_identity": {
+                "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+                "config_digest": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+                "source_digest": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5"
+              },
+              "parent_id": "B-parent",
+              "provenance": "synthetic",
+              "run_id": "B-run",
+              "strategy_id": "B"
+            },
+            "binding_qualification": "declared_identity_only",
+            "capabilities": {
+              "compiler_metadata": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "custom_call": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              },
+              "dma": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              },
+              "execution_intervals": {
+                "availability": "available",
+                "event_count": 1,
+                "reason": null
+              },
+              "llo": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "resource_metadata": {
+                "availability": "unavailable",
+                "reason": "Not present in supplied evidence."
+              },
+              "target_execution": {
+                "availability": "available",
+                "event_count": 1,
+                "reason": null
+              },
+              "waits": {
+                "availability": "unavailable",
+                "event_count": null,
+                "reason": "Not present in supplied evidence."
+              }
+            },
+            "critical_path": {
+              "availability": "unavailable",
+              "reason": "Event count or interval union does not establish dependencies or critical path.",
+              "value": null
+            },
+            "events": [
+              {
+                "bytes": null,
+                "classification": "measured",
+                "clock": "device_offset_ps",
+                "device": "/device:TPU:0",
+                "duration_ps": 12000000000,
+                "id": "group:0:sample:0",
+                "kind": "program",
+                "metadata": {},
+                "name": "jit_matmul(123)",
+                "reason": null,
+                "source_refs": [
+                  "legacy:groups/0/samples/0"
+                ],
+                "start_ps": 0
+              }
+            ],
+            "format": "normalized_profile.v1",
+            "interval_unions": [
+              {
+                "availability": "available",
+                "classification": "trace_derived",
+                "clock": "device_offset_ps",
+                "device": "/device:TPU:0",
+                "duration_ps": 12000000000,
+                "event_ids": [
+                  "group:0:sample:0"
+                ],
+                "missing_interval_count": 0,
+                "scope": "union_of_supplied_intervals_not_end_to_end_or_critical_path",
+                "unit": "ps"
+              }
+            ],
+            "metadata": {
+              "compiler_metadata": [],
+              "llo": [],
+              "resource_metadata": []
+            },
+            "multi_device_span": {
+              "availability": "unavailable",
+              "reason": "Cross-device clock alignment has not been verified.",
+              "value": null
+            },
+            "operation_stats": [
+              {
+                "classification": "trace_derived",
+                "clock": "device_offset_ps",
+                "count": 1,
+                "device": "/device:TPU:0",
+                "event_ids": [
+                  "group:0:sample:0"
+                ],
+                "events_per_measured_call": 1,
+                "invalid_samples": 0,
+                "kind": "program",
+                "line": "XLA Modules",
+                "line_id": 1,
+                "max_us": 12000.0,
+                "mean_us": 12000.0,
+                "median_us": 12000.0,
+                "min_us": 12000.0,
+                "name": "jit_matmul(123)",
+                "p95_us": 12000.0,
+                "program_id": 123,
+                "unit": "us"
+              }
+            ],
+            "producer": {
+              "calls": 1,
+              "format": "PallasKernels.read_profile",
+              "profile_path_hint": "synthetic.xplane.pb",
+              "time_source": "TPU XPlane device_duration_ps"
+            },
+            "quality": {
+              "availability": "available",
+              "errors": [],
+              "issues": [],
+              "warnings": []
+            },
+            "schema_version": 1
+          }
+        ]
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "Synthetic workload dimensions M=N=32,K=64; all operands and output float32; no hardware throughput supplied"
+        ],
+        "evidence_refs": [
+          "source:A",
+          "config:A"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32
+        },
+        "model": "compute_memory"
+      },
+      "id": "A-compute",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Dense matrix multiplication with one multiply and one add per reduction element",
+          "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+          "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+          "Synthetic workload dimensions M=N=32,K=64; all operands and output float32; no hardware throughput supplied"
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:A",
+          "config:A"
+        ],
+        "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+        "input_units": {
+          "bandwidth_bytes_s": "byte/s",
+          "compute_rate_flops_s": "FLOP/s",
+          "dtype_bytes": "byte/element",
+          "hardware_basis": "text",
+          "k": "elements",
+          "m": "elements",
+          "n": "elements"
+        },
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32
+        },
+        "model": "compute_memory",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Cache and hierarchy traffic",
+          "Launch and synchronization",
+          "Layout conversions",
+          "Non-matmul operations",
+          "Utilization and contention"
+        ],
+        "output_units": {
+          "arithmetic_intensity": "FLOP/byte",
+          "compute_bound_s": "s",
+          "memory_bound_s": "s",
+          "read_bytes": "byte",
+          "resource_lower_bound_s": "s",
+          "total_bytes": "byte",
+          "work_flops": "FLOP",
+          "write_bytes": "byte"
+        },
+        "outputs": {
+          "arithmetic_intensity": 6.4,
+          "compute_bound_s": null,
+          "memory_bound_s": null,
+          "read_bytes": 16384,
+          "resource_lower_bound_s": null,
+          "total_bytes": 20480,
+          "work_flops": 131072,
+          "write_bytes": 4096
+        },
+        "schema_version": 1,
+        "strategy_id": "A",
+        "unavailable": {
+          "compute_bound_s": "No compute throughput supplied",
+          "memory_bound_s": "No memory bandwidth supplied",
+          "resource_lower_bound_s": "No hardware rate supplied"
+        }
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+        ],
+        "evidence_refs": [
+          "source:A",
+          "config:A"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 16,
+          "tile_m": 16,
+          "tile_n": 16
+        },
+        "model": "tile"
+      },
+      "id": "A-tile",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Dense matmul with rectangular padding to full tiles",
+          "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+          "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+          "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+          "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:A",
+          "config:A"
+        ],
+        "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+        "input_units": {
+          "dtype_bytes": "byte/element",
+          "k": "elements",
+          "m": "elements",
+          "n": "elements",
+          "tile_k": "elements",
+          "tile_m": "elements",
+          "tile_n": "elements"
+        },
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 16,
+          "tile_m": 16,
+          "tile_n": 16
+        },
+        "model": "tile",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Register and accumulator spills",
+          "DMA startup",
+          "Vector alignment requirements",
+          "Cache reuse between output tiles",
+          "Compiler mapping and scheduling"
+        ],
+        "output_units": {
+          "a_tile_reuse": "count",
+          "b_tile_reuse": "count",
+          "output_tiles": "count",
+          "padded_flops": "FLOP",
+          "padded_k": "elements",
+          "padded_m": "elements",
+          "padded_n": "elements",
+          "padding_flops": "FLOP",
+          "reduction_steps": "count",
+          "tile_iterations": "count",
+          "tiled_read_bytes": "byte",
+          "tiled_total_bytes": "byte",
+          "tiled_write_bytes": "byte",
+          "unique_bytes": "byte",
+          "useful_flops": "FLOP",
+          "work_efficiency": "ratio"
+        },
+        "outputs": {
+          "a_tile_reuse": 16,
+          "b_tile_reuse": 16,
+          "output_tiles": 4,
+          "padded_flops": 131072,
+          "padded_k": 64,
+          "padded_m": 32,
+          "padded_n": 32,
+          "padding_flops": 0,
+          "reduction_steps": 4,
+          "tile_iterations": 16,
+          "tiled_read_bytes": 32768,
+          "tiled_total_bytes": 36864,
+          "tiled_write_bytes": 4096,
+          "unique_bytes": 20480,
+          "useful_flops": 131072,
+          "work_efficiency": 1.0
+        },
+        "schema_version": 1,
+        "strategy_id": "A",
+        "unavailable": {}
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+        ],
+        "evidence_refs": [
+          "source:B",
+          "config:B"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 8,
+          "tile_m": 8,
+          "tile_n": 8
+        },
+        "model": "tile"
+      },
+      "id": "B-tile",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Dense matmul with rectangular padding to full tiles",
+          "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+          "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+          "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+          "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:B",
+          "config:B"
+        ],
+        "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+        "input_units": {
+          "dtype_bytes": "byte/element",
+          "k": "elements",
+          "m": "elements",
+          "n": "elements",
+          "tile_k": "elements",
+          "tile_m": "elements",
+          "tile_n": "elements"
+        },
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 8,
+          "tile_m": 8,
+          "tile_n": 8
+        },
+        "model": "tile",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Register and accumulator spills",
+          "DMA startup",
+          "Vector alignment requirements",
+          "Cache reuse between output tiles",
+          "Compiler mapping and scheduling"
+        ],
+        "output_units": {
+          "a_tile_reuse": "count",
+          "b_tile_reuse": "count",
+          "output_tiles": "count",
+          "padded_flops": "FLOP",
+          "padded_k": "elements",
+          "padded_m": "elements",
+          "padded_n": "elements",
+          "padding_flops": "FLOP",
+          "reduction_steps": "count",
+          "tile_iterations": "count",
+          "tiled_read_bytes": "byte",
+          "tiled_total_bytes": "byte",
+          "tiled_write_bytes": "byte",
+          "unique_bytes": "byte",
+          "useful_flops": "FLOP",
+          "work_efficiency": "ratio"
+        },
+        "outputs": {
+          "a_tile_reuse": 8,
+          "b_tile_reuse": 8,
+          "output_tiles": 16,
+          "padded_flops": 131072,
+          "padded_k": 64,
+          "padded_m": 32,
+          "padded_n": 32,
+          "padding_flops": 0,
+          "reduction_steps": 8,
+          "tile_iterations": 128,
+          "tiled_read_bytes": 65536,
+          "tiled_total_bytes": 69632,
+          "tiled_write_bytes": 4096,
+          "unique_bytes": 20480,
+          "useful_flops": 131072,
+          "work_efficiency": 1.0
+        },
+        "schema_version": 1,
+        "strategy_id": "B",
+        "unavailable": {}
+      }
+    },
+    {
+      "arguments": {
+        "strategy_id": "A"
+      },
+      "id": "A-history",
+      "name": "history",
+      "result": {
+        "complete": true,
+        "dependency_ids": [
+          "task",
+          "workload",
+          "context",
+          "baseline"
+        ],
+        "dependency_total": 4,
+        "next_offset": null,
+        "offset": 0,
+        "owned_ids": [
+          "A",
+          "A-initial",
+          "A-candidate",
+          "A-run",
+          "A-running",
+          "A-done",
+          "A-timing",
+          "A-benchmark",
+          "A-trace",
+          "A-profile"
+        ],
+        "owned_total": 10,
+        "records": [
+          {
+            "kind": "Task",
+            "payload": {
+              "contract_revision": "fixture-v1",
+              "id": "task",
+              "name": "Synthetic tiled matrix multiplication"
+            }
+          },
+          {
+            "kind": "Workload",
+            "payload": {
+              "id": "workload",
+              "spec": {
+                "K": 64,
+                "M": 32,
+                "N": 32,
+                "dtype": "float32",
+                "semantics": "C = A @ B"
+              },
+              "task_id": "task"
+            }
+          },
+          {
+            "kind": "EvaluationContext",
+            "payload": {
+              "environment": {
+                "device": "synthetic CPU",
+                "throughput": null
+              },
+              "id": "context",
+              "protocol": {
+                "timer": "synthetic",
+                "unit": "ms"
+              },
+              "provenance": "synthetic",
+              "task_id": "task",
+              "workload_id": "workload"
+            }
+          },
+          {
+            "kind": "ParentCandidate",
+            "payload": {
+              "candidate_id": null,
+              "id": "baseline",
+              "identity": {
+                "build_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24",
+                "config_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24",
+                "source_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24"
+              },
+              "task_id": "task"
+            }
+          },
+          {
+            "kind": "Strategy",
+            "payload": {
+              "id": "A",
+              "name": "Route A",
+              "task_id": "task"
+            }
+          },
+          {
+            "kind": "Plan",
+            "payload": {
+              "description": "Synthetic original implementation",
+              "id": "A-initial",
+              "strategy_id": "A"
+            }
+          },
+          {
+            "kind": "Candidate",
+            "payload": {
+              "change_kind": "proposal",
+              "id": "A-candidate",
+              "identity": {
+                "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+                "config_digest": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+                "source_digest": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e"
+              },
+              "parent_id": "baseline",
+              "plan_id": "A-initial"
+            }
+          },
+          {
+            "kind": "Run",
+            "payload": {
+              "candidate_id": "A-candidate",
+              "context_id": "context",
+              "id": "A-run"
+            }
+          },
+          {
+            "kind": "RunEvent",
+            "payload": {
+              "execution_status": "running",
+              "id": "A-running",
+              "reason": "Synthetic fixture",
+              "run_id": "A-run",
+              "scheduling_status": "active"
+            }
+          },
+          {
+            "kind": "RunEvent",
+            "payload": {
+              "execution_status": "succeeded",
+              "id": "A-done",
+              "reason": "Synthetic fixture",
+              "run_id": "A-run",
+              "scheduling_status": "finished"
+            }
+          },
+          {
+            "kind": "Evidence",
+            "payload": {
+              "artifacts": [
+                {
+                  "digest": "2bcbdd51aec3dcaee3e63530d44fd6eedf94b92e2bdd4645b1fb0e370db54835",
+                  "size": 34
+                }
+              ],
+              "availability": "available",
+              "claim_status": "supported",
+              "evidence_kind": "measured_timing",
+              "id": "A-timing",
+              "input_ids": [],
+              "request_status": "completed",
+              "run_id": "A-run",
+              "source": {
+                "provenance": "synthetic"
+              },
+              "unit": "ms",
+              "value": 10
+            }
+          },
+          {
+            "kind": "EvaluationBundle",
+            "payload": {
+              "confirmed": true,
+              "correctness": "passed",
+              "evidence_ids": [
+                "A-timing"
+              ],
+              "id": "A-benchmark",
+              "latency_ms": 10,
+              "run_id": "A-run",
+              "timing_validity": "valid"
+            }
+          },
+          {
+            "kind": "Evidence",
+            "payload": {
+              "artifacts": [
+                {
+                  "digest": "192b73be479994acb9a9cb86acfbf6eb4de207e7e25f2e6c1409323cc1c444ab",
+                  "size": 648
+                }
+              ],
+              "availability": "available",
+              "claim_status": "supported",
+              "evidence_kind": "trace_derived",
+              "id": "A-trace",
+              "input_ids": [],
+              "request_status": "completed",
+              "run_id": "A-run",
+              "source": {
+                "provenance": "synthetic"
+              },
+              "unit": null,
+              "value": {
+                "target": "matmul"
+              }
+            }
+          },
+          {
+            "kind": "ProfileBundle",
+            "payload": {
+              "availability": "available",
+              "evidence_ids": [
+                "A-trace"
+              ],
+              "id": "A-profile",
+              "run_id": "A-run"
+            }
+          }
+        ],
+        "snapshot": {
+          "digest": "8c422763d2be27c86630f7709d8451768887b877283a8d24607af3ca5a081ccd",
+          "high_watermark": 26,
+          "id": "snapshot:0b9ae4b6268445e08ee71982b828aa7c",
+          "record_count": 26,
+          "schema_version": 1,
+          "strategy_counts": {
+            "A": 10,
+            "B": 10
+          },
+          "task_id": "task",
+          "version": 1
+        },
+        "strategy_id": "A",
+        "total": 14
+      }
+    },
+    {
+      "arguments": {
+        "strategy_id": "B"
+      },
+      "id": "B-history",
+      "name": "history",
+      "result": {
+        "complete": true,
+        "dependency_ids": [
+          "task",
+          "workload",
+          "context",
+          "baseline"
+        ],
+        "dependency_total": 4,
+        "next_offset": null,
+        "offset": 0,
+        "owned_ids": [
+          "B",
+          "B-initial",
+          "B-candidate",
+          "B-run",
+          "B-running",
+          "B-done",
+          "B-timing",
+          "B-benchmark",
+          "B-trace",
+          "B-profile"
+        ],
+        "owned_total": 10,
+        "records": [
+          {
+            "kind": "Task",
+            "payload": {
+              "contract_revision": "fixture-v1",
+              "id": "task",
+              "name": "Synthetic tiled matrix multiplication"
+            }
+          },
+          {
+            "kind": "Workload",
+            "payload": {
+              "id": "workload",
+              "spec": {
+                "K": 64,
+                "M": 32,
+                "N": 32,
+                "dtype": "float32",
+                "semantics": "C = A @ B"
+              },
+              "task_id": "task"
+            }
+          },
+          {
+            "kind": "EvaluationContext",
+            "payload": {
+              "environment": {
+                "device": "synthetic CPU",
+                "throughput": null
+              },
+              "id": "context",
+              "protocol": {
+                "timer": "synthetic",
+                "unit": "ms"
+              },
+              "provenance": "synthetic",
+              "task_id": "task",
+              "workload_id": "workload"
+            }
+          },
+          {
+            "kind": "ParentCandidate",
+            "payload": {
+              "candidate_id": null,
+              "id": "baseline",
+              "identity": {
+                "build_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24",
+                "config_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24",
+                "source_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24"
+              },
+              "task_id": "task"
+            }
+          },
+          {
+            "kind": "Strategy",
+            "payload": {
+              "id": "B",
+              "name": "Route B",
+              "task_id": "task"
+            }
+          },
+          {
+            "kind": "Plan",
+            "payload": {
+              "description": "Synthetic original implementation",
+              "id": "B-initial",
+              "strategy_id": "B"
+            }
+          },
+          {
+            "kind": "Candidate",
+            "payload": {
+              "change_kind": "proposal",
+              "id": "B-candidate",
+              "identity": {
+                "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+                "config_digest": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+                "source_digest": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5"
+              },
+              "parent_id": "baseline",
+              "plan_id": "B-initial"
+            }
+          },
+          {
+            "kind": "Run",
+            "payload": {
+              "candidate_id": "B-candidate",
+              "context_id": "context",
+              "id": "B-run"
+            }
+          },
+          {
+            "kind": "RunEvent",
+            "payload": {
+              "execution_status": "running",
+              "id": "B-running",
+              "reason": "Synthetic fixture",
+              "run_id": "B-run",
+              "scheduling_status": "active"
+            }
+          },
+          {
+            "kind": "RunEvent",
+            "payload": {
+              "execution_status": "succeeded",
+              "id": "B-done",
+              "reason": "Synthetic fixture",
+              "run_id": "B-run",
+              "scheduling_status": "finished"
+            }
+          },
+          {
+            "kind": "Evidence",
+            "payload": {
+              "artifacts": [
+                {
+                  "digest": "f28b66e92e520f050158b1e5633e0023566396d21812631d2abd82d663ce4778",
+                  "size": 34
+                }
+              ],
+              "availability": "available",
+              "claim_status": "supported",
+              "evidence_kind": "measured_timing",
+              "id": "B-timing",
+              "input_ids": [],
+              "request_status": "completed",
+              "run_id": "B-run",
+              "source": {
+                "provenance": "synthetic"
+              },
+              "unit": "ms",
+              "value": 12
+            }
+          },
+          {
+            "kind": "EvaluationBundle",
+            "payload": {
+              "confirmed": true,
+              "correctness": "passed",
+              "evidence_ids": [
+                "B-timing"
+              ],
+              "id": "B-benchmark",
+              "latency_ms": 12,
+              "run_id": "B-run",
+              "timing_validity": "valid"
+            }
+          },
+          {
+            "kind": "Evidence",
+            "payload": {
+              "artifacts": [
+                {
+                  "digest": "1c3eb79542175bc16e95b46721276c18af06dbe49aa180770741a976e81816bb",
+                  "size": 648
+                }
+              ],
+              "availability": "available",
+              "claim_status": "supported",
+              "evidence_kind": "trace_derived",
+              "id": "B-trace",
+              "input_ids": [],
+              "request_status": "completed",
+              "run_id": "B-run",
+              "source": {
+                "provenance": "synthetic"
+              },
+              "unit": null,
+              "value": {
+                "target": "matmul"
+              }
+            }
+          },
+          {
+            "kind": "ProfileBundle",
+            "payload": {
+              "availability": "available",
+              "evidence_ids": [
+                "B-trace"
+              ],
+              "id": "B-profile",
+              "run_id": "B-run"
+            }
+          }
+        ],
+        "snapshot": {
+          "digest": "8c422763d2be27c86630f7709d8451768887b877283a8d24607af3ca5a081ccd",
+          "high_watermark": 26,
+          "id": "snapshot:0b9ae4b6268445e08ee71982b828aa7c",
+          "record_count": 26,
+          "schema_version": 1,
+          "strategy_counts": {
+            "A": 10,
+            "B": 10
+          },
+          "task_id": "task",
+          "version": 1
+        },
+        "strategy_id": "B",
+        "total": 14
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "Logical tile schedule; two copies of each operand plus one float32 accumulator; no hardware capacity supplied"
+        ],
+        "evidence_refs": [
+          "source:A",
+          "config:A"
+        ],
+        "inputs": {
+          "buffers": [
+            {
+              "copies": 2,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 4,
+              "name": "left",
+              "start": 0
+            },
+            {
+              "copies": 2,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 4,
+              "name": "right",
+              "start": 0
+            },
+            {
+              "copies": 1,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 4,
+              "name": "accumulator",
+              "start": 0
+            }
+          ]
+        },
+        "model": "live_memory"
+      },
+      "id": "A-buffer",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Buffer lifetimes are half-open logical schedule intervals, not elapsed clock measurements",
+          "Listed buffers occupy one shared memory resource and copies coexist throughout each lifetime",
+          "Distinct buffers do not alias; an empty list means explicitly no modeled buffers",
+          "Logical tile schedule; two copies of each operand plus one float32 accumulator; no hardware capacity supplied"
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:A",
+          "config:A"
+        ],
+        "formula": "size_i=elements_i*dtype_bytes_i*copies_i; live(t)=sum(size_i for start_i<=t<end_i); peak=max(live(t)); pressure=peak/capacity",
+        "input_units": {
+          "buffers[].copies": "count",
+          "buffers[].dtype_bytes": "byte/element",
+          "buffers[].elements": "elements",
+          "buffers[].end": "schedule_step",
+          "buffers[].name": "text",
+          "buffers[].start": "schedule_step",
+          "capacity_bytes": "byte",
+          "hardware_basis": "text"
+        },
+        "inputs": {
+          "buffers": [
+            {
+              "copies": 2,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 4,
+              "name": "left",
+              "start": 0
+            },
+            {
+              "copies": 2,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 4,
+              "name": "right",
+              "start": 0
+            },
+            {
+              "copies": 1,
+              "dtype_bytes": 4,
+              "elements": 256,
+              "end": 4,
+              "name": "accumulator",
+              "start": 0
+            }
+          ]
+        },
+        "model": "live_memory",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Compiler temporaries and spills",
+          "Allocation alignment and fragmentation",
+          "Hidden runtime reservations",
+          "Unlisted memories and buffers"
+        ],
+        "output_units": {
+          "capacity_fraction": "ratio",
+          "headroom_bytes": "byte",
+          "peak_bytes": "byte",
+          "peak_step": "schedule_step"
+        },
+        "outputs": {
+          "capacity_fraction": null,
+          "headroom_bytes": null,
+          "peak_bytes": 5120,
+          "peak_step": 0
+        },
+        "schema_version": 1,
+        "strategy_id": "A",
+        "unavailable": {
+          "capacity_fraction": "No memory capacity supplied",
+          "headroom_bytes": "No memory capacity supplied"
+        }
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "Stage times are hypothetical sensitivity inputs, not derived from synthetic 10ms total; independent transfer/compute engines and sufficient buffers"
+        ],
+        "evidence_refs": [
+          "source:A"
+        ],
+        "inputs": {
+          "compute_s": 3e-06,
+          "stages": 4,
+          "transfer_s": 2e-06
+        },
+        "model": "pipeline"
+      },
+      "id": "A-pipeline",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "stages counts repeated work items through one transfer engine and one compute engine",
+          "Transfer and compute use independent resources, with sufficient buffers and legal dependencies",
+          "Identical per-item durations; first transfer fills and final compute drains the pipeline",
+          "Stage times are hypothetical sensitivity inputs, not derived from synthetic 10ms total; independent transfer/compute engines and sufficient buffers"
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:A"
+        ],
+        "formula": "serial=N*(transfer+compute); ideal=transfer+compute+(N-1)*max(transfer,compute); speedup=serial/ideal",
+        "input_units": {
+          "compute_s": "s",
+          "stages": "count",
+          "transfer_s": "s"
+        },
+        "inputs": {
+          "compute_s": 3e-06,
+          "stages": 4,
+          "transfer_s": 2e-06
+        },
+        "model": "pipeline",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Synchronization and DMA startup",
+          "Bandwidth contention",
+          "Buffer allocation",
+          "Uneven work items",
+          "Additional transfer directions and pipeline engines"
+        ],
+        "output_units": {
+          "ideal_pipeline_s": "s",
+          "ideal_speedup": "ratio",
+          "saved_s": "s",
+          "serial_s": "s"
+        },
+        "outputs": {
+          "ideal_pipeline_s": 1.4e-05,
+          "ideal_speedup": 1.4285714285714284,
+          "saved_s": 5.9999999999999985e-06,
+          "serial_s": 1.9999999999999998e-05
+        },
+        "schema_version": 1,
+        "strategy_id": "A",
+        "unavailable": {}
+      }
+    },
+    {
+      "arguments": {
+        "assumptions": [
+          "Exploratory rectangular output tile; extend current scalar tile configuration without changing dtype or K ordering"
+        ],
+        "evidence_refs": [
+          "source:B",
+          "config:B"
+        ],
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 8,
+          "tile_m": 8,
+          "tile_n": 16
+        },
+        "model": "tile"
+      },
+      "id": "B-tile-variant",
+      "name": "calculate",
+      "result": {
+        "assumptions": [
+          "Dense matmul with rectangular padding to full tiles",
+          "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+          "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+          "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+          "Exploratory rectangular output tile; extend current scalar tile configuration without changing dtype or K ordering"
+        ],
+        "classification": "model_predicted",
+        "evidence_refs": [
+          "source:B",
+          "config:B"
+        ],
+        "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+        "input_units": {
+          "dtype_bytes": "byte/element",
+          "k": "elements",
+          "m": "elements",
+          "n": "elements",
+          "tile_k": "elements",
+          "tile_m": "elements",
+          "tile_n": "elements"
+        },
+        "inputs": {
+          "dtype_bytes": 4,
+          "k": 64,
+          "m": 32,
+          "n": 32,
+          "tile_k": 8,
+          "tile_m": 8,
+          "tile_n": 16
+        },
+        "model": "tile",
+        "model_revision": "1",
+        "omitted_costs": [
+          "Register and accumulator spills",
+          "DMA startup",
+          "Vector alignment requirements",
+          "Cache reuse between output tiles",
+          "Compiler mapping and scheduling"
+        ],
+        "output_units": {
+          "a_tile_reuse": "count",
+          "b_tile_reuse": "count",
+          "output_tiles": "count",
+          "padded_flops": "FLOP",
+          "padded_k": "elements",
+          "padded_m": "elements",
+          "padded_n": "elements",
+          "padding_flops": "FLOP",
+          "reduction_steps": "count",
+          "tile_iterations": "count",
+          "tiled_read_bytes": "byte",
+          "tiled_total_bytes": "byte",
+          "tiled_write_bytes": "byte",
+          "unique_bytes": "byte",
+          "useful_flops": "FLOP",
+          "work_efficiency": "ratio"
+        },
+        "outputs": {
+          "a_tile_reuse": 16,
+          "b_tile_reuse": 8,
+          "output_tiles": 8,
+          "padded_flops": 131072,
+          "padded_k": 64,
+          "padded_m": 32,
+          "padded_n": 32,
+          "padding_flops": 0,
+          "reduction_steps": 8,
+          "tile_iterations": 64,
+          "tiled_read_bytes": 49152,
+          "tiled_total_bytes": 53248,
+          "tiled_write_bytes": 4096,
+          "unique_bytes": 20480,
+          "useful_flops": 131072,
+          "work_efficiency": 1.0
+        },
+        "schema_version": 1,
+        "strategy_id": "B",
+        "unavailable": {}
+      }
+    },
+    {
+      "arguments": {
+        "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+      },
+      "id": "overlap-method",
+      "name": "knowledge",
+      "result": {
+        "artifact": {
+          "digest": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+          "size": 1064
+        },
+        "availability": "available",
+        "document": {
+          "category": "RSI/Methods",
+          "content": "# Overlap\n\n```rsi-method-v1\n{\"method\":{\"applicable_hardware\":[\"synthetic CPU\"],\"applicable_workloads\":[],\"description\":\"## Overlap\\nIndependent loads may overlap computation; additional buffers consume memory.\",\"expected_tradeoffs\":[],\"implementation_requirements\":[],\"known_risks\":[],\"local_experiment_refs\":[],\"mechanism\":\"overlap\",\"method_id\":\"method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07\",\"method_name\":\"Overlap\",\"optimization_category\":\"unclassified\",\"preconditions\":[],\"source_refs\":[{\"availability\":\"available\",\"document_id\":\"Research/Pipelining.md\",\"excerpt\":\"## Overlap\\nIndependent loads may overlap computation; additional buffers consume memory.\",\"locator\":\"heading:Overlap\",\"reason\":null,\"revision\":\"cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55\"}],\"source_revision\":{\"Research/Pipelining.md\":\"cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55\"},\"unknowns\":[\"Applicability and local performance require experiment evidence.\"],\"validation_status\":\"source_supported\"},\"schema_version\":1}\n```\n",
+          "id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+          "revision": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+          "title": "method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md"
+        },
+        "method": {
+          "applicable_hardware": [
+            "synthetic CPU"
+          ],
+          "applicable_workloads": [],
+          "description": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+          "expected_tradeoffs": [],
+          "implementation_requirements": [],
+          "known_risks": [],
+          "local_experiment_refs": [],
+          "mechanism": "overlap",
+          "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+          "method_name": "Overlap",
+          "optimization_category": "unclassified",
+          "preconditions": [],
+          "source_refs": [
+            {
+              "availability": "available",
+              "document_id": "Research/Pipelining.md",
+              "excerpt": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+              "locator": "heading:Overlap",
+              "reason": null,
+              "revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+            }
+          ],
+          "source_revision": {
+            "Research/Pipelining.md": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+          },
+          "unknowns": [
+            "Applicability and local performance require experiment evidence."
+          ],
+          "validation_status": "source_supported"
+        },
+        "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+        "note_id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+        "revision": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+        "sources": [
+          {
+            "artifact": {
+              "digest": "bdd73a6a9b71f7b821391e3e3024a64544a3a9f1ab05a595fb82f0878aef3774",
+              "size": 103
+            },
+            "availability": "available",
+            "current_revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55",
+            "document_id": "Research/Pipelining.md",
+            "excerpt": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+            "reason": null,
+            "revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+          }
+        ]
+      }
+    }
+  ],
+  "winner_selected": false
+}

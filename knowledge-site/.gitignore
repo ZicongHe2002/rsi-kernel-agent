@@ -1,0 +1,11 @@
+__pycache__/
+logs/
+qa/
+/.venv-mcp/
+/tools/
+/.tunnel/
+/.auth/
+.env
+.env.*
+!.env.example
+/.artifacts/

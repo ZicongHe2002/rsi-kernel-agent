@@ -1,0 +1,42 @@
+{
+  "api_status": 401,
+  "auth_files_read": false,
+  "method": "reread, original-byte snapshot, hash guard, fsync atomic replace",
+  "changes": [
+    {
+      "path": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "before_sha256": "b4a4a8d69685a1fa63cd6c6e3475530748008388343ad19e0e510920da0a2859",
+      "after_sha256": "68ab706de85a631866fbc6275da6a3dd4577f695b4e239c717fd1cd613bfc185"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "before_sha256": "efd7333c597c3421de3a3f6f3b192508df1b71f08004c0f3ec872d916e8989eb",
+      "after_sha256": "c1120f41acb05d2649896af1ee49fa4007e84b803ad23e95f7338636c154fb42"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "before_sha256": "8db4fd41d2f0e291bab5313b50dcdd5a73fc597f753e1cddaced0d5875a7361d",
+      "after_sha256": "74e0e75d391b0cec58dbc85ecd6f2dccc2a7a44bdee99eb254d57fb99ca92f6c"
+    },
+    {
+      "path": "knowledge-site/README.md",
+      "before_sha256": "774ad9119fdc90ee14c70a917dc06ded23135f94d3b37e13534d2e325a82115c",
+      "after_sha256": "83d3b23f8c8930bd8c79d488b1b85c017f5f48df812906d470589d335c17c384"
+    },
+    {
+      "path": "knowledge-site/index.md",
+      "before_sha256": "a828a5bfc31e2b5a735acced04374bdd31e36099f39e1cf05ea84387c4e34b72",
+      "after_sha256": "6259fd40a7821d147c9d1e69f5bba530804a7ccaa8604fb56eef5372f8b0cda9"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "before_sha256": "705563b78c322ed960a3fe7b665f11cfcdd5d0da0ec470f01601ebc8d8e0efee",
+      "after_sha256": "ed9c5892c7b25a1817f4295024d656248f6f5194d25547f50b95b8f0ad4b1676"
+    },
+    {
+      "path": "knowledge-site/content/待办清单/一周待办 · 2026-11-09.md",
+      "before_sha256": "5c11f1e7e0aee676edd7694b0dc445bf8aa4873d3401ac1821d150b9dad4fbe7",
+      "after_sha256": "2434a2763543046eeb4c3f4b47ecb98817e1af066d24a44e3ffb7eca917e17b9"
+    }
+  ]
+}

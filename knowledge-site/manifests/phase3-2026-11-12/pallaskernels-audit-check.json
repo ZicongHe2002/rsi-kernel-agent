@@ -1,0 +1,39 @@
+{
+    "classification":  "Source audit",
+    "checked_source_count":  390,
+    "source_changed_count":  0,
+    "links":  [
+                  {
+                      "document":  "phase3-pallaskernels-audit.md",
+                      "target":  "../../knowledge-site/manifests/phase3-2026-11-12/pallaskernels-source-inventory.json",
+                      "exists":  true
+                  },
+                  {
+                      "document":  "phase3-pallaskernels-audit.md",
+                      "target":  "phase3-workload-and-correctness.md",
+                      "exists":  true
+                  },
+                  {
+                      "document":  "phase3-pallaskernels-audit.md",
+                      "target":  "phase3-profiler-capability-audit.md",
+                      "exists":  true
+                  },
+                  {
+                      "document":  "phase3-workload-and-correctness.md",
+                      "target":  "phase3-pallaskernels-audit.md",
+                      "exists":  true
+                  },
+                  {
+                      "document":  "phase3-workload-and-correctness.md",
+                      "target":  "../../knowledge-site/manifests/phase3-2026-11-12/pallaskernels-source-inventory.json",
+                      "exists":  true
+                  },
+                  {
+                      "document":  "phase3-profiler-capability-audit.md",
+                      "target":  "../../knowledge-site/manifests/phase3-2026-11-12/pallaskernels-source-inventory.json",
+                      "exists":  true
+                  }
+              ],
+    "broken_links":  0,
+    "runtime_tests_executed":  false
+}

@@ -1,0 +1,1441 @@
+[
+  {
+    "arguments": {
+      "profile_id": "A-profile",
+      "strategy_id": "A"
+    },
+    "id": "A-profile",
+    "name": "profile",
+    "result": {
+      "availability": "available",
+      "profile_id": "A-profile",
+      "reports": [
+        {
+          "artifact_refs": [
+            {
+              "digest": "192b73be479994acb9a9cb86acfbf6eb4de207e7e25f2e6c1409323cc1c444ab",
+              "size": 648
+            }
+          ],
+          "binding": {
+            "candidate_id": "A-candidate",
+            "context_id": "context",
+            "declared_identity": {
+              "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+              "config_digest": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+              "source_digest": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e"
+            },
+            "parent_id": "A-parent",
+            "provenance": "synthetic",
+            "run_id": "A-run",
+            "strategy_id": "A"
+          },
+          "binding_qualification": "declared_identity_only",
+          "capabilities": {
+            "compiler_metadata": {
+              "availability": "unavailable",
+              "reason": "Not present in supplied evidence."
+            },
+            "custom_call": {
+              "availability": "unavailable",
+              "event_count": null,
+              "reason": "Not present in supplied evidence."
+            },
+            "dma": {
+              "availability": "unavailable",
+              "event_count": null,
+              "reason": "Not present in supplied evidence."
+            },
+            "execution_intervals": {
+              "availability": "available",
+              "event_count": 1,
+              "reason": null
+            },
+            "llo": {
+              "availability": "unavailable",
+              "reason": "Not present in supplied evidence."
+            },
+            "resource_metadata": {
+              "availability": "unavailable",
+              "reason": "Not present in supplied evidence."
+            },
+            "target_execution": {
+              "availability": "available",
+              "event_count": 1,
+              "reason": null
+            },
+            "waits": {
+              "availability": "unavailable",
+              "event_count": null,
+              "reason": "Not present in supplied evidence."
+            }
+          },
+          "critical_path": {
+            "availability": "unavailable",
+            "reason": "Event count or interval union does not establish dependencies or critical path.",
+            "value": null
+          },
+          "events": [
+            {
+              "bytes": null,
+              "classification": "measured",
+              "clock": "device_offset_ps",
+              "device": "/device:TPU:0",
+              "duration_ps": 10000000000,
+              "id": "group:0:sample:0",
+              "kind": "program",
+              "metadata": {},
+              "name": "jit_matmul(123)",
+              "reason": null,
+              "source_refs": [
+                "legacy:groups/0/samples/0"
+              ],
+              "start_ps": 0
+            }
+          ],
+          "format": "normalized_profile.v1",
+          "interval_unions": [
+            {
+              "availability": "available",
+              "classification": "trace_derived",
+              "clock": "device_offset_ps",
+              "device": "/device:TPU:0",
+              "duration_ps": 10000000000,
+              "event_ids": [
+                "group:0:sample:0"
+              ],
+              "missing_interval_count": 0,
+              "scope": "union_of_supplied_intervals_not_end_to_end_or_critical_path",
+              "unit": "ps"
+            }
+          ],
+          "metadata": {
+            "compiler_metadata": [],
+            "llo": [],
+            "resource_metadata": []
+          },
+          "multi_device_span": {
+            "availability": "unavailable",
+            "reason": "Cross-device clock alignment has not been verified.",
+            "value": null
+          },
+          "operation_stats": [
+            {
+              "classification": "trace_derived",
+              "clock": "device_offset_ps",
+              "count": 1,
+              "device": "/device:TPU:0",
+              "event_ids": [
+                "group:0:sample:0"
+              ],
+              "events_per_measured_call": 1,
+              "invalid_samples": 0,
+              "kind": "program",
+              "line": "XLA Modules",
+              "line_id": 1,
+              "max_us": 10000.0,
+              "mean_us": 10000.0,
+              "median_us": 10000.0,
+              "min_us": 10000.0,
+              "name": "jit_matmul(123)",
+              "p95_us": 10000.0,
+              "program_id": 123,
+              "unit": "us"
+            }
+          ],
+          "producer": {
+            "calls": 1,
+            "format": "PallasKernels.read_profile",
+            "profile_path_hint": "synthetic.xplane.pb",
+            "time_source": "TPU XPlane device_duration_ps"
+          },
+          "quality": {
+            "availability": "available",
+            "errors": [],
+            "issues": [],
+            "warnings": []
+          },
+          "schema_version": 1
+        }
+      ]
+    }
+  },
+  {
+    "arguments": {
+      "profile_id": "B-profile",
+      "strategy_id": "B"
+    },
+    "id": "B-profile",
+    "name": "profile",
+    "result": {
+      "availability": "available",
+      "profile_id": "B-profile",
+      "reports": [
+        {
+          "artifact_refs": [
+            {
+              "digest": "1c3eb79542175bc16e95b46721276c18af06dbe49aa180770741a976e81816bb",
+              "size": 648
+            }
+          ],
+          "binding": {
+            "candidate_id": "B-candidate",
+            "context_id": "context",
+            "declared_identity": {
+              "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+              "config_digest": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+              "source_digest": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5"
+            },
+            "parent_id": "B-parent",
+            "provenance": "synthetic",
+            "run_id": "B-run",
+            "strategy_id": "B"
+          },
+          "binding_qualification": "declared_identity_only",
+          "capabilities": {
+            "compiler_metadata": {
+              "availability": "unavailable",
+              "reason": "Not present in supplied evidence."
+            },
+            "custom_call": {
+              "availability": "unavailable",
+              "event_count": null,
+              "reason": "Not present in supplied evidence."
+            },
+            "dma": {
+              "availability": "unavailable",
+              "event_count": null,
+              "reason": "Not present in supplied evidence."
+            },
+            "execution_intervals": {
+              "availability": "available",
+              "event_count": 1,
+              "reason": null
+            },
+            "llo": {
+              "availability": "unavailable",
+              "reason": "Not present in supplied evidence."
+            },
+            "resource_metadata": {
+              "availability": "unavailable",
+              "reason": "Not present in supplied evidence."
+            },
+            "target_execution": {
+              "availability": "available",
+              "event_count": 1,
+              "reason": null
+            },
+            "waits": {
+              "availability": "unavailable",
+              "event_count": null,
+              "reason": "Not present in supplied evidence."
+            }
+          },
+          "critical_path": {
+            "availability": "unavailable",
+            "reason": "Event count or interval union does not establish dependencies or critical path.",
+            "value": null
+          },
+          "events": [
+            {
+              "bytes": null,
+              "classification": "measured",
+              "clock": "device_offset_ps",
+              "device": "/device:TPU:0",
+              "duration_ps": 12000000000,
+              "id": "group:0:sample:0",
+              "kind": "program",
+              "metadata": {},
+              "name": "jit_matmul(123)",
+              "reason": null,
+              "source_refs": [
+                "legacy:groups/0/samples/0"
+              ],
+              "start_ps": 0
+            }
+          ],
+          "format": "normalized_profile.v1",
+          "interval_unions": [
+            {
+              "availability": "available",
+              "classification": "trace_derived",
+              "clock": "device_offset_ps",
+              "device": "/device:TPU:0",
+              "duration_ps": 12000000000,
+              "event_ids": [
+                "group:0:sample:0"
+              ],
+              "missing_interval_count": 0,
+              "scope": "union_of_supplied_intervals_not_end_to_end_or_critical_path",
+              "unit": "ps"
+            }
+          ],
+          "metadata": {
+            "compiler_metadata": [],
+            "llo": [],
+            "resource_metadata": []
+          },
+          "multi_device_span": {
+            "availability": "unavailable",
+            "reason": "Cross-device clock alignment has not been verified.",
+            "value": null
+          },
+          "operation_stats": [
+            {
+              "classification": "trace_derived",
+              "clock": "device_offset_ps",
+              "count": 1,
+              "device": "/device:TPU:0",
+              "event_ids": [
+                "group:0:sample:0"
+              ],
+              "events_per_measured_call": 1,
+              "invalid_samples": 0,
+              "kind": "program",
+              "line": "XLA Modules",
+              "line_id": 1,
+              "max_us": 12000.0,
+              "mean_us": 12000.0,
+              "median_us": 12000.0,
+              "min_us": 12000.0,
+              "name": "jit_matmul(123)",
+              "p95_us": 12000.0,
+              "program_id": 123,
+              "unit": "us"
+            }
+          ],
+          "producer": {
+            "calls": 1,
+            "format": "PallasKernels.read_profile",
+            "profile_path_hint": "synthetic.xplane.pb",
+            "time_source": "TPU XPlane device_duration_ps"
+          },
+          "quality": {
+            "availability": "available",
+            "errors": [],
+            "issues": [],
+            "warnings": []
+          },
+          "schema_version": 1
+        }
+      ]
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Synthetic workload dimensions M=N=32,K=64; all operands and output float32; no hardware throughput supplied"
+      ],
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory"
+    },
+    "id": "A-compute",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "Dense matrix multiplication with one multiply and one add per reduction element",
+        "A and B read once; C written once; no initial C read; all operands use dtype_bytes",
+        "An available single-resource bound is partial; supplied ceilings are not sustained measurements",
+        "Synthetic workload dimensions M=N=32,K=64; all operands and output float32; no hardware throughput supplied"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "formula": "F=2*m*n*k; R=(m*k+k*n)*d; W=m*n*d; I=F/(R+W); t_compute=F/P; t_memory=(R+W)/B; bound=max(available bounds)",
+      "input_units": {
+        "bandwidth_bytes_s": "byte/s",
+        "compute_rate_flops_s": "FLOP/s",
+        "dtype_bytes": "byte/element",
+        "hardware_basis": "text",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32
+      },
+      "model": "compute_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Cache and hierarchy traffic",
+        "Launch and synchronization",
+        "Layout conversions",
+        "Non-matmul operations",
+        "Utilization and contention"
+      ],
+      "output_units": {
+        "arithmetic_intensity": "FLOP/byte",
+        "compute_bound_s": "s",
+        "memory_bound_s": "s",
+        "read_bytes": "byte",
+        "resource_lower_bound_s": "s",
+        "total_bytes": "byte",
+        "work_flops": "FLOP",
+        "write_bytes": "byte"
+      },
+      "outputs": {
+        "arithmetic_intensity": 6.4,
+        "compute_bound_s": null,
+        "memory_bound_s": null,
+        "read_bytes": 16384,
+        "resource_lower_bound_s": null,
+        "total_bytes": 20480,
+        "work_flops": 131072,
+        "write_bytes": 4096
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {
+        "compute_bound_s": "No compute throughput supplied",
+        "memory_bound_s": "No memory bandwidth supplied",
+        "resource_lower_bound_s": "No hardware rate supplied"
+      }
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+      ],
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 16,
+        "tile_m": 16,
+        "tile_n": 16
+      },
+      "model": "tile"
+    },
+    "id": "A-tile",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 16,
+        "tile_m": 16,
+        "tile_n": 16
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 16,
+        "b_tile_reuse": 16,
+        "output_tiles": 4,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 4,
+        "tile_iterations": 16,
+        "tiled_read_bytes": 32768,
+        "tiled_total_bytes": 36864,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {}
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+      ],
+      "evidence_refs": [
+        "source:B",
+        "config:B"
+      ],
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 8,
+        "tile_m": 8,
+        "tile_n": 8
+      },
+      "model": "tile"
+    },
+    "id": "B-tile",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "Uniform square tiles in the pinned fixture; no cache retention between output tiles"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:B",
+        "config:B"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 8,
+        "tile_m": 8,
+        "tile_n": 8
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 8,
+        "b_tile_reuse": 8,
+        "output_tiles": 16,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 8,
+        "tile_iterations": 128,
+        "tiled_read_bytes": 65536,
+        "tiled_total_bytes": 69632,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "B",
+      "unavailable": {}
+    }
+  },
+  {
+    "arguments": {
+      "strategy_id": "A"
+    },
+    "id": "A-history",
+    "name": "history",
+    "result": {
+      "complete": true,
+      "dependency_ids": [
+        "task",
+        "workload",
+        "context",
+        "baseline"
+      ],
+      "dependency_total": 4,
+      "next_offset": null,
+      "offset": 0,
+      "owned_ids": [
+        "A",
+        "A-initial",
+        "A-candidate",
+        "A-run",
+        "A-running",
+        "A-done",
+        "A-timing",
+        "A-benchmark",
+        "A-trace",
+        "A-profile"
+      ],
+      "owned_total": 10,
+      "records": [
+        {
+          "kind": "Task",
+          "payload": {
+            "contract_revision": "fixture-v1",
+            "id": "task",
+            "name": "Synthetic tiled matrix multiplication"
+          }
+        },
+        {
+          "kind": "Workload",
+          "payload": {
+            "id": "workload",
+            "spec": {
+              "K": 64,
+              "M": 32,
+              "N": 32,
+              "dtype": "float32",
+              "semantics": "C = A @ B"
+            },
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "EvaluationContext",
+          "payload": {
+            "environment": {
+              "device": "synthetic CPU",
+              "throughput": null
+            },
+            "id": "context",
+            "protocol": {
+              "timer": "synthetic",
+              "unit": "ms"
+            },
+            "provenance": "synthetic",
+            "task_id": "task",
+            "workload_id": "workload"
+          }
+        },
+        {
+          "kind": "ParentCandidate",
+          "payload": {
+            "candidate_id": null,
+            "id": "baseline",
+            "identity": {
+              "build_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24",
+              "config_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24",
+              "source_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24"
+            },
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Strategy",
+          "payload": {
+            "id": "A",
+            "name": "Route A",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Plan",
+          "payload": {
+            "description": "Synthetic original implementation",
+            "id": "A-initial",
+            "strategy_id": "A"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "A-candidate",
+            "identity": {
+              "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+              "config_digest": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+              "source_digest": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e"
+            },
+            "parent_id": "baseline",
+            "plan_id": "A-initial"
+          }
+        },
+        {
+          "kind": "Run",
+          "payload": {
+            "candidate_id": "A-candidate",
+            "context_id": "context",
+            "id": "A-run"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "running",
+            "id": "A-running",
+            "reason": "Synthetic fixture",
+            "run_id": "A-run",
+            "scheduling_status": "active"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "succeeded",
+            "id": "A-done",
+            "reason": "Synthetic fixture",
+            "run_id": "A-run",
+            "scheduling_status": "finished"
+          }
+        },
+        {
+          "kind": "Evidence",
+          "payload": {
+            "artifacts": [
+              {
+                "digest": "2bcbdd51aec3dcaee3e63530d44fd6eedf94b92e2bdd4645b1fb0e370db54835",
+                "size": 34
+              }
+            ],
+            "availability": "available",
+            "claim_status": "supported",
+            "evidence_kind": "measured_timing",
+            "id": "A-timing",
+            "input_ids": [],
+            "request_status": "completed",
+            "run_id": "A-run",
+            "source": {
+              "provenance": "synthetic"
+            },
+            "unit": "ms",
+            "value": 10
+          }
+        },
+        {
+          "kind": "EvaluationBundle",
+          "payload": {
+            "confirmed": true,
+            "correctness": "passed",
+            "evidence_ids": [
+              "A-timing"
+            ],
+            "id": "A-benchmark",
+            "latency_ms": 10,
+            "run_id": "A-run",
+            "timing_validity": "valid"
+          }
+        },
+        {
+          "kind": "Evidence",
+          "payload": {
+            "artifacts": [
+              {
+                "digest": "192b73be479994acb9a9cb86acfbf6eb4de207e7e25f2e6c1409323cc1c444ab",
+                "size": 648
+              }
+            ],
+            "availability": "available",
+            "claim_status": "supported",
+            "evidence_kind": "trace_derived",
+            "id": "A-trace",
+            "input_ids": [],
+            "request_status": "completed",
+            "run_id": "A-run",
+            "source": {
+              "provenance": "synthetic"
+            },
+            "unit": null,
+            "value": {
+              "target": "matmul"
+            }
+          }
+        },
+        {
+          "kind": "ProfileBundle",
+          "payload": {
+            "availability": "available",
+            "evidence_ids": [
+              "A-trace"
+            ],
+            "id": "A-profile",
+            "run_id": "A-run"
+          }
+        }
+      ],
+      "snapshot": {
+        "digest": "8c422763d2be27c86630f7709d8451768887b877283a8d24607af3ca5a081ccd",
+        "high_watermark": 26,
+        "id": "snapshot:0b9ae4b6268445e08ee71982b828aa7c",
+        "record_count": 26,
+        "schema_version": 1,
+        "strategy_counts": {
+          "A": 10,
+          "B": 10
+        },
+        "task_id": "task",
+        "version": 1
+      },
+      "strategy_id": "A",
+      "total": 14
+    }
+  },
+  {
+    "arguments": {
+      "strategy_id": "B"
+    },
+    "id": "B-history",
+    "name": "history",
+    "result": {
+      "complete": true,
+      "dependency_ids": [
+        "task",
+        "workload",
+        "context",
+        "baseline"
+      ],
+      "dependency_total": 4,
+      "next_offset": null,
+      "offset": 0,
+      "owned_ids": [
+        "B",
+        "B-initial",
+        "B-candidate",
+        "B-run",
+        "B-running",
+        "B-done",
+        "B-timing",
+        "B-benchmark",
+        "B-trace",
+        "B-profile"
+      ],
+      "owned_total": 10,
+      "records": [
+        {
+          "kind": "Task",
+          "payload": {
+            "contract_revision": "fixture-v1",
+            "id": "task",
+            "name": "Synthetic tiled matrix multiplication"
+          }
+        },
+        {
+          "kind": "Workload",
+          "payload": {
+            "id": "workload",
+            "spec": {
+              "K": 64,
+              "M": 32,
+              "N": 32,
+              "dtype": "float32",
+              "semantics": "C = A @ B"
+            },
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "EvaluationContext",
+          "payload": {
+            "environment": {
+              "device": "synthetic CPU",
+              "throughput": null
+            },
+            "id": "context",
+            "protocol": {
+              "timer": "synthetic",
+              "unit": "ms"
+            },
+            "provenance": "synthetic",
+            "task_id": "task",
+            "workload_id": "workload"
+          }
+        },
+        {
+          "kind": "ParentCandidate",
+          "payload": {
+            "candidate_id": null,
+            "id": "baseline",
+            "identity": {
+              "build_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24",
+              "config_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24",
+              "source_digest": "8ba8496a2525ae171ffd104d632dede6ef418d9b95962a9d88e2fcdbc8d48d24"
+            },
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Strategy",
+          "payload": {
+            "id": "B",
+            "name": "Route B",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Plan",
+          "payload": {
+            "description": "Synthetic original implementation",
+            "id": "B-initial",
+            "strategy_id": "B"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "B-candidate",
+            "identity": {
+              "build_digest": "f5744a684a9e17e3b587aa6fbf2265e87df2f100eff5ba4f35952ed09bf72a79",
+              "config_digest": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+              "source_digest": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5"
+            },
+            "parent_id": "baseline",
+            "plan_id": "B-initial"
+          }
+        },
+        {
+          "kind": "Run",
+          "payload": {
+            "candidate_id": "B-candidate",
+            "context_id": "context",
+            "id": "B-run"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "running",
+            "id": "B-running",
+            "reason": "Synthetic fixture",
+            "run_id": "B-run",
+            "scheduling_status": "active"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "succeeded",
+            "id": "B-done",
+            "reason": "Synthetic fixture",
+            "run_id": "B-run",
+            "scheduling_status": "finished"
+          }
+        },
+        {
+          "kind": "Evidence",
+          "payload": {
+            "artifacts": [
+              {
+                "digest": "f28b66e92e520f050158b1e5633e0023566396d21812631d2abd82d663ce4778",
+                "size": 34
+              }
+            ],
+            "availability": "available",
+            "claim_status": "supported",
+            "evidence_kind": "measured_timing",
+            "id": "B-timing",
+            "input_ids": [],
+            "request_status": "completed",
+            "run_id": "B-run",
+            "source": {
+              "provenance": "synthetic"
+            },
+            "unit": "ms",
+            "value": 12
+          }
+        },
+        {
+          "kind": "EvaluationBundle",
+          "payload": {
+            "confirmed": true,
+            "correctness": "passed",
+            "evidence_ids": [
+              "B-timing"
+            ],
+            "id": "B-benchmark",
+            "latency_ms": 12,
+            "run_id": "B-run",
+            "timing_validity": "valid"
+          }
+        },
+        {
+          "kind": "Evidence",
+          "payload": {
+            "artifacts": [
+              {
+                "digest": "1c3eb79542175bc16e95b46721276c18af06dbe49aa180770741a976e81816bb",
+                "size": 648
+              }
+            ],
+            "availability": "available",
+            "claim_status": "supported",
+            "evidence_kind": "trace_derived",
+            "id": "B-trace",
+            "input_ids": [],
+            "request_status": "completed",
+            "run_id": "B-run",
+            "source": {
+              "provenance": "synthetic"
+            },
+            "unit": null,
+            "value": {
+              "target": "matmul"
+            }
+          }
+        },
+        {
+          "kind": "ProfileBundle",
+          "payload": {
+            "availability": "available",
+            "evidence_ids": [
+              "B-trace"
+            ],
+            "id": "B-profile",
+            "run_id": "B-run"
+          }
+        }
+      ],
+      "snapshot": {
+        "digest": "8c422763d2be27c86630f7709d8451768887b877283a8d24607af3ca5a081ccd",
+        "high_watermark": 26,
+        "id": "snapshot:0b9ae4b6268445e08ee71982b828aa7c",
+        "record_count": 26,
+        "schema_version": 1,
+        "strategy_counts": {
+          "A": 10,
+          "B": 10
+        },
+        "task_id": "task",
+        "version": 1
+      },
+      "strategy_id": "B",
+      "total": 14
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Logical tile schedule; two copies of each operand plus one float32 accumulator; no hardware capacity supplied"
+      ],
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "inputs": {
+        "buffers": [
+          {
+            "copies": 2,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "left",
+            "start": 0
+          },
+          {
+            "copies": 2,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "right",
+            "start": 0
+          },
+          {
+            "copies": 1,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "accumulator",
+            "start": 0
+          }
+        ]
+      },
+      "model": "live_memory"
+    },
+    "id": "A-buffer",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "Buffer lifetimes are half-open logical schedule intervals, not elapsed clock measurements",
+        "Listed buffers occupy one shared memory resource and copies coexist throughout each lifetime",
+        "Distinct buffers do not alias; an empty list means explicitly no modeled buffers",
+        "Logical tile schedule; two copies of each operand plus one float32 accumulator; no hardware capacity supplied"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A",
+        "config:A"
+      ],
+      "formula": "size_i=elements_i*dtype_bytes_i*copies_i; live(t)=sum(size_i for start_i<=t<end_i); peak=max(live(t)); pressure=peak/capacity",
+      "input_units": {
+        "buffers[].copies": "count",
+        "buffers[].dtype_bytes": "byte/element",
+        "buffers[].elements": "elements",
+        "buffers[].end": "schedule_step",
+        "buffers[].name": "text",
+        "buffers[].start": "schedule_step",
+        "capacity_bytes": "byte",
+        "hardware_basis": "text"
+      },
+      "inputs": {
+        "buffers": [
+          {
+            "copies": 2,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "left",
+            "start": 0
+          },
+          {
+            "copies": 2,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "right",
+            "start": 0
+          },
+          {
+            "copies": 1,
+            "dtype_bytes": 4,
+            "elements": 256,
+            "end": 4,
+            "name": "accumulator",
+            "start": 0
+          }
+        ]
+      },
+      "model": "live_memory",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Compiler temporaries and spills",
+        "Allocation alignment and fragmentation",
+        "Hidden runtime reservations",
+        "Unlisted memories and buffers"
+      ],
+      "output_units": {
+        "capacity_fraction": "ratio",
+        "headroom_bytes": "byte",
+        "peak_bytes": "byte",
+        "peak_step": "schedule_step"
+      },
+      "outputs": {
+        "capacity_fraction": null,
+        "headroom_bytes": null,
+        "peak_bytes": 5120,
+        "peak_step": 0
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {
+        "capacity_fraction": "No memory capacity supplied",
+        "headroom_bytes": "No memory capacity supplied"
+      }
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Stage times are hypothetical sensitivity inputs, not derived from synthetic 10ms total; independent transfer/compute engines and sufficient buffers"
+      ],
+      "evidence_refs": [
+        "source:A"
+      ],
+      "inputs": {
+        "compute_s": 3e-06,
+        "stages": 4,
+        "transfer_s": 2e-06
+      },
+      "model": "pipeline"
+    },
+    "id": "A-pipeline",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "stages counts repeated work items through one transfer engine and one compute engine",
+        "Transfer and compute use independent resources, with sufficient buffers and legal dependencies",
+        "Identical per-item durations; first transfer fills and final compute drains the pipeline",
+        "Stage times are hypothetical sensitivity inputs, not derived from synthetic 10ms total; independent transfer/compute engines and sufficient buffers"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:A"
+      ],
+      "formula": "serial=N*(transfer+compute); ideal=transfer+compute+(N-1)*max(transfer,compute); speedup=serial/ideal",
+      "input_units": {
+        "compute_s": "s",
+        "stages": "count",
+        "transfer_s": "s"
+      },
+      "inputs": {
+        "compute_s": 3e-06,
+        "stages": 4,
+        "transfer_s": 2e-06
+      },
+      "model": "pipeline",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Synchronization and DMA startup",
+        "Bandwidth contention",
+        "Buffer allocation",
+        "Uneven work items",
+        "Additional transfer directions and pipeline engines"
+      ],
+      "output_units": {
+        "ideal_pipeline_s": "s",
+        "ideal_speedup": "ratio",
+        "saved_s": "s",
+        "serial_s": "s"
+      },
+      "outputs": {
+        "ideal_pipeline_s": 1.4e-05,
+        "ideal_speedup": 1.4285714285714284,
+        "saved_s": 5.9999999999999985e-06,
+        "serial_s": 1.9999999999999998e-05
+      },
+      "schema_version": 1,
+      "strategy_id": "A",
+      "unavailable": {}
+    }
+  },
+  {
+    "arguments": {
+      "assumptions": [
+        "Exploratory rectangular output tile; extend current scalar tile configuration without changing dtype or K ordering"
+      ],
+      "evidence_refs": [
+        "source:B",
+        "config:B"
+      ],
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 8,
+        "tile_m": 8,
+        "tile_n": 16
+      },
+      "model": "tile"
+    },
+    "id": "B-tile-variant",
+    "name": "calculate",
+    "result": {
+      "assumptions": [
+        "Dense matmul with rectangular padding to full tiles",
+        "Each reduction tile reloads A and B; accumulator retained through reduction; output written once",
+        "Tile traffic counts full padded transfers; masked edges may move fewer bytes",
+        "A/B reuse counts padded multiply uses per tile element; this is not observed cache reuse",
+        "Exploratory rectangular output tile; extend current scalar tile configuration without changing dtype or K ordering"
+      ],
+      "classification": "model_predicted",
+      "evidence_refs": [
+        "source:B",
+        "config:B"
+      ],
+      "formula": "i=ceil(m/tm); j=ceil(n/tn); r=ceil(k/tk); padded=(i*tm,j*tn,r*tk); reads=i*j*r*(tm*tk+tk*tn)*d; writes=i*j*tm*tn*d",
+      "input_units": {
+        "dtype_bytes": "byte/element",
+        "k": "elements",
+        "m": "elements",
+        "n": "elements",
+        "tile_k": "elements",
+        "tile_m": "elements",
+        "tile_n": "elements"
+      },
+      "inputs": {
+        "dtype_bytes": 4,
+        "k": 64,
+        "m": 32,
+        "n": 32,
+        "tile_k": 8,
+        "tile_m": 8,
+        "tile_n": 16
+      },
+      "model": "tile",
+      "model_revision": "1",
+      "omitted_costs": [
+        "Register and accumulator spills",
+        "DMA startup",
+        "Vector alignment requirements",
+        "Cache reuse between output tiles",
+        "Compiler mapping and scheduling"
+      ],
+      "output_units": {
+        "a_tile_reuse": "count",
+        "b_tile_reuse": "count",
+        "output_tiles": "count",
+        "padded_flops": "FLOP",
+        "padded_k": "elements",
+        "padded_m": "elements",
+        "padded_n": "elements",
+        "padding_flops": "FLOP",
+        "reduction_steps": "count",
+        "tile_iterations": "count",
+        "tiled_read_bytes": "byte",
+        "tiled_total_bytes": "byte",
+        "tiled_write_bytes": "byte",
+        "unique_bytes": "byte",
+        "useful_flops": "FLOP",
+        "work_efficiency": "ratio"
+      },
+      "outputs": {
+        "a_tile_reuse": 16,
+        "b_tile_reuse": 8,
+        "output_tiles": 8,
+        "padded_flops": 131072,
+        "padded_k": 64,
+        "padded_m": 32,
+        "padded_n": 32,
+        "padding_flops": 0,
+        "reduction_steps": 8,
+        "tile_iterations": 64,
+        "tiled_read_bytes": 49152,
+        "tiled_total_bytes": 53248,
+        "tiled_write_bytes": 4096,
+        "unique_bytes": 20480,
+        "useful_flops": 131072,
+        "work_efficiency": 1.0
+      },
+      "schema_version": 1,
+      "strategy_id": "B",
+      "unavailable": {}
+    }
+  },
+  {
+    "arguments": {
+      "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07"
+    },
+    "id": "overlap-method",
+    "name": "knowledge",
+    "result": {
+      "artifact": {
+        "digest": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+        "size": 1064
+      },
+      "availability": "available",
+      "document": {
+        "category": "RSI/Methods",
+        "content": "# Overlap\n\n```rsi-method-v1\n{\"method\":{\"applicable_hardware\":[\"synthetic CPU\"],\"applicable_workloads\":[],\"description\":\"## Overlap\\nIndependent loads may overlap computation; additional buffers consume memory.\",\"expected_tradeoffs\":[],\"implementation_requirements\":[],\"known_risks\":[],\"local_experiment_refs\":[],\"mechanism\":\"overlap\",\"method_id\":\"method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07\",\"method_name\":\"Overlap\",\"optimization_category\":\"unclassified\",\"preconditions\":[],\"source_refs\":[{\"availability\":\"available\",\"document_id\":\"Research/Pipelining.md\",\"excerpt\":\"## Overlap\\nIndependent loads may overlap computation; additional buffers consume memory.\",\"locator\":\"heading:Overlap\",\"reason\":null,\"revision\":\"cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55\"}],\"source_revision\":{\"Research/Pipelining.md\":\"cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55\"},\"unknowns\":[\"Applicability and local performance require experiment evidence.\"],\"validation_status\":\"source_supported\"},\"schema_version\":1}\n```\n",
+        "id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+        "revision": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+        "title": "method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md"
+      },
+      "method": {
+        "applicable_hardware": [
+          "synthetic CPU"
+        ],
+        "applicable_workloads": [],
+        "description": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+        "expected_tradeoffs": [],
+        "implementation_requirements": [],
+        "known_risks": [],
+        "local_experiment_refs": [],
+        "mechanism": "overlap",
+        "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+        "method_name": "Overlap",
+        "optimization_category": "unclassified",
+        "preconditions": [],
+        "source_refs": [
+          {
+            "availability": "available",
+            "document_id": "Research/Pipelining.md",
+            "excerpt": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+            "locator": "heading:Overlap",
+            "reason": null,
+            "revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+          }
+        ],
+        "source_revision": {
+          "Research/Pipelining.md": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+        },
+        "unknowns": [
+          "Applicability and local performance require experiment evidence."
+        ],
+        "validation_status": "source_supported"
+      },
+      "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+      "note_id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+      "revision": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+      "sources": [
+        {
+          "artifact": {
+            "digest": "bdd73a6a9b71f7b821391e3e3024a64544a3a9f1ab05a595fb82f0878aef3774",
+            "size": 103
+          },
+          "availability": "available",
+          "current_revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55",
+          "document_id": "Research/Pipelining.md",
+          "excerpt": "## Overlap\nIndependent loads may overlap computation; additional buffers consume memory.",
+          "reason": null,
+          "revision": "cd2a0f4a9e6ffff9faac4da0e90446b3380cb07da1e1ddde46a346fd5ac6ff55"
+        }
+      ]
+    }
+  }
+]

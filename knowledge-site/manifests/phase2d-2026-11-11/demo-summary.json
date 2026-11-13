@@ -1,0 +1,63 @@
+﻿{
+    "remaining":  {
+                      "executions":  89,
+                      "time_s":  9999.89,
+                      "tokens":  100000
+                  },
+    "classifications":  [
+                            {
+                                "classification":  "invalid_measurement",
+                                "count":  1
+                            },
+                            {
+                                "classification":  "incorrect",
+                                "count":  1
+                            },
+                            {
+                                "classification":  "incomplete",
+                                "count":  1
+                            },
+                            {
+                                "classification":  "compile_failed",
+                                "count":  1
+                            },
+                            {
+                                "classification":  "correct_faster",
+                                "count":  6
+                            },
+                            {
+                                "classification":  "correct_inconclusive",
+                                "count":  1
+                            }
+                        ],
+    "results":  11,
+    "runs":  13,
+    "task":  "demo-task",
+    "histories":  [
+                      {
+                          "B":  20,
+                          "snapshot":  "snapshot:fce4c5bf5cc54b6aa8055f89d86326b6",
+                          "round":  "demo-round:1",
+                          "A":  20
+                      },
+                      {
+                          "B":  130,
+                          "snapshot":  "snapshot:ae8326d837d741b18de26a49b7d03758",
+                          "round":  "demo-round:2",
+                          "A":  152
+                      }
+                  ],
+    "rounds":  2,
+    "B":  9,
+    "candidates":  13,
+    "repairs":  1,
+    "spent":  {
+                  "executions":  11,
+                  "time_s":  0.10999999999999999,
+                  "tokens":  0
+              },
+    "task_best":  7,
+    "state":  "completed",
+    "A":  7,
+    "jobs":  11
+}

@@ -1,0 +1,249 @@
+{
+  "provenance": "source_audit",
+  "methods": [
+    {
+      "method_id": "hist-fwd-qk256",
+      "id": "RSI/Methods/method-e8d8b776f68153c67201d5d785c79931aa93e39a27d1545ef8df5ad250f3dad8.md",
+      "revision": "ef4e78bc63ed1a60392fec97e153f5d1644cc2c1f6c457424c3b7c0ef429bf3c"
+    },
+    {
+      "method_id": "hist-fwd-causal-panel",
+      "id": "RSI/Methods/method-04ab8f1de0974ef83c307e907e50bb289bea1e296566c470f8f5ecbba479637a.md",
+      "revision": "01240e6dde1a2105037a59f763e1c32573f2f0027a20535ebec0af9a878b53f0"
+    },
+    {
+      "method_id": "hist-fwd-layout-r25",
+      "id": "RSI/Methods/method-930cba80c4c6816cb2e701547600bd44a874296e6acdc13a10f8344f708934a2.md",
+      "revision": "578ec6cf5d18d9473a54c06731fd815f1e95a32f79794a264e615622802a9c3f"
+    },
+    {
+      "method_id": "hist-fwd-projection-group",
+      "id": "RSI/Methods/method-b521f19cd23621bacbc6cc903a3dab40b193b6bdf796ce2ddf73f332602d4514.md",
+      "revision": "fc35c9f9a96f53f75192184fbb391035ffe79d1678a4583694c43642fadb9e59"
+    },
+    {
+      "method_id": "hist-fwd-state-lifetime",
+      "id": "RSI/Methods/method-7c2a35e9d49ff3b804a57c7148002d39558059cc904d9b4dd19925d9f04d4ab6.md",
+      "revision": "f8eb9a93be5e03ac6018deb9158da52f8bfb1c1ea0d2b4975a3a90530b36a794"
+    },
+    {
+      "method_id": "hist-decode-dma-alignment",
+      "id": "RSI/Methods/method-f94274499f46e632849b2758f8f889109f73db5e4d98524debca209bd0a16725.md",
+      "revision": "419b8b86c7c4f2704b96f9f14ecf7e08c2df29422759df8f69fd48bd02c5e8a5"
+    },
+    {
+      "method_id": "hist-decode-fp32-score",
+      "id": "RSI/Methods/method-fe5a3b2b49178cf8942d5d88976c10816bbbd8a79657fca8309d4b86eee10077.md",
+      "revision": "a103efe77f68dda69adad8d91cbe63bc97da144f8797a2729afe66b64a697315"
+    },
+    {
+      "method_id": "hist-decode-dma2",
+      "id": "RSI/Methods/method-16925513d40bb10a1a87bfd7cd4b3239c8f511b3306f840b79ab56f0f6fc4316.md",
+      "revision": "f9753641322bbe0b0f060f5a91c74ecf9d601e8ec9e0b19d96e027ea9b7a4ef3"
+    },
+    {
+      "method_id": "hist-decode-prepare-padding",
+      "id": "RSI/Methods/method-9d13e92d6a08fe23d534ce26905d95c29b326749c802b6c5e9104192a47f3038.md",
+      "revision": "8169a9a74469f23bf9d5d9e00449842e75130f6722191e0f50b4252b39df6c3c"
+    },
+    {
+      "method_id": "hist-profile-accounting",
+      "id": "RSI/Methods/method-13ada53dbf9a371274c56c7f5095b94fd3cad1ae7d91cb390418c16f0bc63046.md",
+      "revision": "c9511365e6c5ad3b2d94b4725df1e64094c546944613f0b87469b0222f5733bd"
+    }
+  ],
+  "status": "saved_and_refetched",
+  "source": {
+    "id": "RSI/History/phase3-project2-2026-11-12.md",
+    "revision": "691a21c5eac34ad28638ae7c24b487b3280dad71230e8a5362c970e74dd2e6f5"
+  },
+  "original_import": {
+    "source": {
+      "id": "RSI/History/phase3-project2-2026-11-12.md",
+      "revision": "101bd469daf106189b27188b83892f45bc878da356cf242bc1068221f0c6eab5"
+    },
+    "methods": [
+      {
+        "method_id": "hist-fwd-qk256",
+        "id": "RSI/Methods/method-e8d8b776f68153c67201d5d785c79931aa93e39a27d1545ef8df5ad250f3dad8.md",
+        "revision": "9bc8a2abf8696cf1a9cb7f57eecf253d07947eeda3abdf2537c1f61c045f25dd"
+      },
+      {
+        "method_id": "hist-fwd-causal-panel",
+        "id": "RSI/Methods/method-04ab8f1de0974ef83c307e907e50bb289bea1e296566c470f8f5ecbba479637a.md",
+        "revision": "e345ae55bee00c2aa10d194686fc6c36b46e732d0db2f4d91e3cfaea7f15e13a"
+      },
+      {
+        "method_id": "hist-fwd-layout-r25",
+        "id": "RSI/Methods/method-930cba80c4c6816cb2e701547600bd44a874296e6acdc13a10f8344f708934a2.md",
+        "revision": "c61ba603579f4a0474f57912d2529b09aaa02d3cf2ebbb85dd14773f31544d5e"
+      },
+      {
+        "method_id": "hist-fwd-projection-group",
+        "id": "RSI/Methods/method-b521f19cd23621bacbc6cc903a3dab40b193b6bdf796ce2ddf73f332602d4514.md",
+        "revision": "6334b62b3575b5376cb0244f5031a8caeb0197929d10c9eadb4cb3d91afceed9"
+      },
+      {
+        "method_id": "hist-fwd-state-lifetime",
+        "id": "RSI/Methods/method-7c2a35e9d49ff3b804a57c7148002d39558059cc904d9b4dd19925d9f04d4ab6.md",
+        "revision": "b65f0031980e43853f8d27344010d28190e5b20eaec1989fcbcc7d9ae31a3139"
+      },
+      {
+        "method_id": "hist-decode-dma-alignment",
+        "id": "RSI/Methods/method-f94274499f46e632849b2758f8f889109f73db5e4d98524debca209bd0a16725.md",
+        "revision": "2241d7bde20e114a03bde1e83ab839c557f84b6400234b31469590cd1b550b12"
+      },
+      {
+        "method_id": "hist-decode-fp32-score",
+        "id": "RSI/Methods/method-fe5a3b2b49178cf8942d5d88976c10816bbbd8a79657fca8309d4b86eee10077.md",
+        "revision": "f085c36b522825cbc675c35d8fd14f6fa1a96216a0cb60ef4afeefb5a5a7a371"
+      },
+      {
+        "method_id": "hist-decode-dma2",
+        "id": "RSI/Methods/method-16925513d40bb10a1a87bfd7cd4b3239c8f511b3306f840b79ab56f0f6fc4316.md",
+        "revision": "8c5e6e48256f0796563b72e1eb493ebc90b57af65279a19bd6a9d6aac4614560"
+      },
+      {
+        "method_id": "hist-decode-prepare-padding",
+        "id": "RSI/Methods/method-9d13e92d6a08fe23d534ce26905d95c29b326749c802b6c5e9104192a47f3038.md",
+        "revision": "884338da1b9dafb1885d93add9fbda0d13fbb4db416693f0fc91daab51ad02bb"
+      },
+      {
+        "method_id": "hist-profile-accounting",
+        "id": "RSI/Methods/method-13ada53dbf9a371274c56c7f5095b94fd3cad1ae7d91cb390418c16f0bc63046.md",
+        "revision": "32d190dc040bfb246dc3d5d84d6afac538628a34ea09779d261e1b6d8fbeb1b6"
+      }
+    ],
+    "status": "saved_and_refetched"
+  },
+  "link_maintenance": {
+    "status": "saved_and_refetched",
+    "conflicts": [],
+    "methods": [
+      {
+        "id": "RSI/Methods/method-e8d8b776f68153c67201d5d785c79931aa93e39a27d1545ef8df5ad250f3dad8.md",
+        "revision": "ef4e78bc63ed1a60392fec97e153f5d1644cc2c1f6c457424c3b7c0ef429bf3c",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-04ab8f1de0974ef83c307e907e50bb289bea1e296566c470f8f5ecbba479637a.md",
+        "revision": "01240e6dde1a2105037a59f763e1c32573f2f0027a20535ebec0af9a878b53f0",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-930cba80c4c6816cb2e701547600bd44a874296e6acdc13a10f8344f708934a2.md",
+        "revision": "578ec6cf5d18d9473a54c06731fd815f1e95a32f79794a264e615622802a9c3f",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-b521f19cd23621bacbc6cc903a3dab40b193b6bdf796ce2ddf73f332602d4514.md",
+        "revision": "fc35c9f9a96f53f75192184fbb391035ffe79d1678a4583694c43642fadb9e59",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-7c2a35e9d49ff3b804a57c7148002d39558059cc904d9b4dd19925d9f04d4ab6.md",
+        "revision": "f8eb9a93be5e03ac6018deb9158da52f8bfb1c1ea0d2b4975a3a90530b36a794",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-f94274499f46e632849b2758f8f889109f73db5e4d98524debca209bd0a16725.md",
+        "revision": "419b8b86c7c4f2704b96f9f14ecf7e08c2df29422759df8f69fd48bd02c5e8a5",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-fe5a3b2b49178cf8942d5d88976c10816bbbd8a79657fca8309d4b86eee10077.md",
+        "revision": "a103efe77f68dda69adad8d91cbe63bc97da144f8797a2729afe66b64a697315",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-16925513d40bb10a1a87bfd7cd4b3239c8f511b3306f840b79ab56f0f6fc4316.md",
+        "revision": "f9753641322bbe0b0f060f5a91c74ecf9d601e8ec9e0b19d96e027ea9b7a4ef3",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-9d13e92d6a08fe23d534ce26905d95c29b326749c802b6c5e9104192a47f3038.md",
+        "revision": "8169a9a74469f23bf9d5d9e00449842e75130f6722191e0f50b4252b39df6c3c",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      },
+      {
+        "id": "RSI/Methods/method-13ada53dbf9a371274c56c7f5095b94fd3cad1ae7d91cb390418c16f0bc63046.md",
+        "revision": "c9511365e6c5ad3b2d94b4725df1e64094c546944613f0b87469b0222f5733bd",
+        "source_status": "available",
+        "outside_block_preserved": true,
+        "excerpt_preserved": true
+      }
+    ],
+    "relative_links": [
+      {
+        "label": "文件索引",
+        "relative": "../../knowledge-site/manifests/phase3-2026-11-12/project2-inventory.json",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\manifests\\phase3-2026-11-12\\project2-inventory.json"
+      },
+      {
+        "label": "结构化实验清单",
+        "relative": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\manifests\\phase3-2026-11-12\\history-experiments.json"
+      },
+      {
+        "label": "Forward",
+        "relative": "mla-forward-history.md",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\docs\\phase3\\mla-forward-history.md"
+      },
+      {
+        "label": "Decode",
+        "relative": "mla-decode-history.md",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\docs\\phase3\\mla-decode-history.md"
+      },
+      {
+        "label": "方法",
+        "relative": "optimization-methods.md",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\docs\\phase3\\optimization-methods.md"
+      },
+      {
+        "label": "失败",
+        "relative": "failed-experiments.md",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\docs\\phase3\\failed-experiments.md"
+      },
+      {
+        "label": "实验清单",
+        "relative": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\manifests\\phase3-2026-11-12\\history-experiments.json"
+      },
+      {
+        "label": "实验清单",
+        "relative": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\manifests\\phase3-2026-11-12\\history-experiments.json"
+      },
+      {
+        "label": "恢复清单",
+        "relative": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\manifests\\phase3-2026-11-12\\history-experiments.json"
+      },
+      {
+        "label": "136条实验记录",
+        "relative": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+        "local_path": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\manifests\\phase3-2026-11-12\\history-experiments.json"
+      }
+    ],
+    "source_revision": "691a21c5eac34ad28638ae7c24b487b3280dad71230e8a5362c970e74dd2e6f5",
+    "verified_notes": 11
+  }
+}

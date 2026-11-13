@@ -1,0 +1,444 @@
+{
+  "schema_version": 1,
+  "verified_at_utc": "2026-11-12T08:20:08.277370+00:00",
+  "network_calls": 0,
+  "store_writes": 0,
+  "scope": "Local SHA/size and saved event inventory verification; raw XPlane protobuf not reparsed",
+  "request_digest": "fe25e2d2347c828d34f1230b4a11c84753678d34be5a846fa7e8f40ae8cec0b1",
+  "diagnostic_source_digest": "c4c3e01e386c6606940ffb30dbb10f781266841d908d4b1d31bf2745e6ff7fdc",
+  "receipt_ref": {
+    "digest": "d30032c209fb40da9815d8cc9e4e9fee0facbb00f367039b6771e696961bca1e",
+    "size": 65980
+  },
+  "receipt_digest": "431681038fa04430743f208ca9e1de9f445d7e9dd1af946a309fde5707fd7296",
+  "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+  "environment": {
+    "device_count": 1,
+    "devices": [
+      {
+        "coords": [
+          0,
+          0,
+          0
+        ],
+        "core_on_chip": 0,
+        "device_kind": "TPU v6 lite",
+        "id": 0,
+        "platform": "tpu",
+        "process_index": 0
+      }
+    ],
+    "jax": "0.8.1",
+    "jaxlib": "0.8.1",
+    "libtpu": "0.0.30",
+    "process_count": 1,
+    "python": "3.11.17",
+    "runtime_session_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+    "tensorflow": "2.20.0",
+    "tpu_model": "TPU v6 lite",
+    "xla": {
+      "backend_platform_version": "PJRT C API\nTFRT TPU v6 lite\nBuilt on Nov 12 2025 14:16:36 (1762985796) cl/831091709",
+      "jaxlib_version": "0.8.1"
+    },
+    "xprof": "2.22.1"
+  },
+  "modes": [
+    {
+      "mode": "TRACE_ONLY_HOST",
+      "api_status": "succeeded",
+      "synchronized": true,
+      "result_0_0": 129.0,
+      "errors": [],
+      "device_plane_count": 0,
+      "device_event_count": 0,
+      "device_event_names": {},
+      "mode_artifact_ref": {
+        "digest": "d609546d007a6cbe4008e52eff4c33b1529ebfd02bda4d12b838c660d792e39c",
+        "size": 39816
+      },
+      "raw_xplane_refs": [
+        {
+          "digest": "54cb78e7dc12db1a6e4e2177e97df7a29cd16cbfa36dd1e9d17466796826f7d2",
+          "size": 197107
+        }
+      ]
+    },
+    {
+      "mode": "TRACE_ONLY_XLA",
+      "api_status": "succeeded",
+      "synchronized": true,
+      "result_0_0": 129.0,
+      "errors": [],
+      "device_plane_count": 1,
+      "device_event_count": 16,
+      "device_event_names": {
+        "%convolution_add_fusion = f32[128,128]{1,0:T(8,128)} fusion(f32[128,128]{1,0:T(8,128)} %value.1), kind=kOutput, calls=%fused_computation": 5,
+        "%copy-done = f32[128,128]{1,0:T(8,128)S(1)} copy-done((f32[128,128]{1,0:T(8,128)S(1)}, f32[128,128]{1,0:T(8,128)}, u32[]{:S(2)}) %copy-start)": 1,
+        "%copy-start = (f32[128,128]{1,0:T(8,128)S(1)}, f32[128,128]{1,0:T(8,128)}, u32[]{:S(2)}) copy-start(f32[128,128]{1,0:T(8,128)} %args_0_.1), cross_program_prefetch_index=0": 2,
+        "%dynamic_slice.1 = f32[1,1]{1,0:T(1,128)} dynamic-slice(f32[128,128]{1,0:T(8,128)S(1)} %copy-done, s32[]{:T(128)S(6)} %copy, s32[]{:T(128)S(6)} %copy.1), dynamic_slice_sizes={1,1}": 1,
+        "jit__lambda(766492147688783389)": 5,
+        "jit_dynamic_slice(203654295763867922)": 1,
+        "jit_squeeze(17550221632388847164)": 1
+      },
+      "mode_artifact_ref": {
+        "digest": "863945823fde407b98e0e1643adbae4ae66214ecb136b30d9f9e19331cb234f9",
+        "size": 6666
+      },
+      "raw_xplane_refs": [
+        {
+          "digest": "6b4d979e6a15c813895b208bdc2422b1d62b83d4ddf24df008fef88f039177d4",
+          "size": 31842
+        }
+      ]
+    },
+    {
+      "mode": "TRACE_COMPUTE",
+      "api_status": "succeeded",
+      "synchronized": true,
+      "result_0_0": 129.0,
+      "errors": [],
+      "device_plane_count": 1,
+      "device_event_count": 16,
+      "device_event_names": {
+        "%convolution_add_fusion = f32[128,128]{1,0:T(8,128)} fusion(f32[128,128]{1,0:T(8,128)} %value.1), kind=kOutput, calls=%fused_computation": 5,
+        "%copy-done = f32[128,128]{1,0:T(8,128)S(1)} copy-done((f32[128,128]{1,0:T(8,128)S(1)}, f32[128,128]{1,0:T(8,128)}, u32[]{:S(2)}) %copy-start)": 1,
+        "%copy-start = (f32[128,128]{1,0:T(8,128)S(1)}, f32[128,128]{1,0:T(8,128)}, u32[]{:S(2)}) copy-start(f32[128,128]{1,0:T(8,128)} %args_0_.1), cross_program_prefetch_index=0": 2,
+        "%dynamic_slice.1 = f32[1,1]{1,0:T(1,128)} dynamic-slice(f32[128,128]{1,0:T(8,128)S(1)} %copy-done, s32[]{:T(128)S(6)} %copy, s32[]{:T(128)S(6)} %copy.1), dynamic_slice_sizes={1,1}": 1,
+        "jit__lambda(766492147688783389)": 5,
+        "jit_dynamic_slice(203654295763867922)": 1,
+        "jit_squeeze(17550221632388847164)": 1
+      },
+      "mode_artifact_ref": {
+        "digest": "02dca5a3026ad593c09aafe1e90595c9ee360b323301ad1fdf356d3ba391b688",
+        "size": 6662
+      },
+      "raw_xplane_refs": [
+        {
+          "digest": "ef60485c2367572e63adbb3c0339d923365860ca9dfb79ba36225f29890ecb1e",
+          "size": 31831
+        }
+      ]
+    },
+    {
+      "mode": "TRACE_COMPUTE_AND_SYNC",
+      "api_status": "succeeded",
+      "synchronized": true,
+      "result_0_0": 129.0,
+      "errors": [],
+      "device_plane_count": 1,
+      "device_event_count": 134,
+      "device_event_names": {
+        "%convolution_add_fusion = f32[128,128]{1,0:T(8,128)} fusion(f32[128,128]{1,0:T(8,128)} %value.1), kind=kOutput, calls=%fused_computation": 5,
+        "%copy-done = f32[128,128]{1,0:T(8,128)S(1)} copy-done((f32[128,128]{1,0:T(8,128)S(1)}, f32[128,128]{1,0:T(8,128)}, u32[]{:S(2)}) %copy-start)": 1,
+        "%copy-start = (f32[128,128]{1,0:T(8,128)S(1)}, f32[128,128]{1,0:T(8,128)}, u32[]{:S(2)}) copy-start(f32[128,128]{1,0:T(8,128)} %args_0_.1), cross_program_prefetch_index=0": 2,
+        "%dynamic_slice.1 = f32[1,1]{1,0:T(1,128)} dynamic-slice(f32[128,128]{1,0:T(8,128)S(1)} %copy-done, s32[]{:T(128)S(6)} %copy, s32[]{:T(128)S(6)} %copy.1), dynamic_slice_sizes={1,1}": 1,
+        "Add:507": 7,
+        "Add:51": 4,
+        "Add:511": 14,
+        "Add:52": 7,
+        "Add:53": 6,
+        "Add:54": 5,
+        "Read:503": 7,
+        "Read:506": 7,
+        "Set:505": 7,
+        "Set:506": 7,
+        "Set:511": 3,
+        "SyncNoWait:51": 1,
+        "SyncWait:507": 6,
+        "SyncWait:51": 2,
+        "SyncWait:511": 17,
+        "SyncWait:52": 7,
+        "SyncWait:53": 6,
+        "SyncWait:54": 5,
+        "jit__lambda(766492147688783389)": 5,
+        "jit_dynamic_slice(203654295763867922)": 1,
+        "jit_squeeze(17550221632388847164)": 1
+      },
+      "mode_artifact_ref": {
+        "digest": "7c216041c6c5faf87f85b27b27a9dbc45a81bb6c433236d59756105828a46cb6",
+        "size": 6947
+      },
+      "raw_xplane_refs": [
+        {
+          "digest": "53cecc2324b38c6ecef8ed686b06ec2bd323de59a501aa5c7bc65f8d1afbafdb",
+          "size": 36283
+        }
+      ]
+    }
+  ],
+  "idle_observation": {
+    "type": "runtime_idle_observation.v1",
+    "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+    "request_digest": "fe25e2d2347c828d34f1230b4a11c84753678d34be5a846fa7e8f40ae8cec0b1",
+    "worker_digest": "f254b9153f2b2aa91d68cf7c90889dc40559382447baa8c6676e7308c59f1c14",
+    "scope": "post-diagnostic visible Linux process/device ownership at one observation",
+    "observed_ns": 1794471170126176161,
+    "status": "clear_visible_processes_after_diagnostic_exit",
+    "reasons": [],
+    "runtime_lock_available": true,
+    "diagnostic_lock_available": true,
+    "guard_cleared": true,
+    "receipt_verified": true,
+    "diagnostic_pid": 17292,
+    "diagnostic_pid_exited": true,
+    "device_owners": {
+      "scope": "visible Linux process device handles",
+      "observed_ns": 1794471171709843435,
+      "worker_pid": 19131,
+      "scanned_pids": [
+        1,
+        7,
+        9,
+        11,
+        12,
+        54,
+        55,
+        166,
+        175,
+        191,
+        773,
+        19139
+      ],
+      "unreadable_pids": [],
+      "device_nodes": [
+        "/dev/vfio/0"
+      ],
+      "other_device_owners": [],
+      "status": "clear_visible_processes"
+    },
+    "jax_imported": false,
+    "remote_mutations": [],
+    "formal_work_started": false,
+    "receipt_digest": "431681038fa04430743f208ca9e1de9f445d7e9dd1af946a309fde5707fd7296",
+    "diagnostic_status": "completed_modes",
+    "finished_ns": 1794471171711225495
+  },
+  "idle_file_sha256": "6fc58912710eec9b4b45a3dbea529b29c65cf815a2ce6a2bc9a732fcb949f405",
+  "oracle_negative_controls": [
+    {
+      "name": "oracle-negative-attention",
+      "run_id": "runtime-run:9d5212d6c003a102b015985eced689242d5df5ef10160dfce9e5bb64bf52defa",
+      "candidate_id": "oracle-negative-candidate:54fba11bbe506e328cf12f6f96ccb9f97550153ba56e1e37f369292567a2d73e",
+      "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+      "classification": "incorrect",
+      "correctness": "failed",
+      "receipt_stages": [
+        "compile",
+        "correctness",
+        "generate"
+      ],
+      "benchmark_executed": false,
+      "profile_executed": false,
+      "cases": [
+        {
+          "id": "decode-small",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.999267578125,
+              "max_rel": 42.65079365079365,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": false,
+              "rms": 0.01104415679421634,
+              "shape": [
+                1,
+                16,
+                512
+              ],
+              "tolerance_violations": 1
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": true,
+              "rms": null,
+              "shape": [
+                1,
+                1024,
+                640
+              ],
+              "tolerance_violations": 0
+            }
+          ],
+          "passed": false
+        },
+        {
+          "id": "decode-boundary",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 1.0,
+              "max_rel": 9.999999999999999e+29,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": false,
+              "rms": 0.012759098283592072,
+              "shape": [
+                3,
+                16,
+                128
+              ],
+              "tolerance_violations": 1
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": false,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": true,
+              "rms": null,
+              "shape": [
+                3,
+                256,
+                256
+              ],
+              "tolerance_violations": 0
+            }
+          ],
+          "passed": false
+        }
+      ],
+      "promotion_decision": {
+        "details": {
+          "branch_promoted": false,
+          "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+          "eligible": false,
+          "reason": "run_not_succeeded",
+          "task_promoted": false
+        },
+        "id": "decision:befb6f4336ec4064aacf0452ceec27e4",
+        "kind": "promotion",
+        "reason": "run_not_succeeded",
+        "target_id": "evaluation:3c2264ad1d5ef01ab7fa34daed20c01685f1dbae2df60b490ddb47146270a0cb",
+        "task_id": "mla-decode-v1"
+      },
+      "result_file_sha256": "a8c52c05509f3196bdd4a089181e67e8571a66d58b585ae704230c0a2ca730f2"
+    },
+    {
+      "name": "oracle-negative-cache",
+      "run_id": "runtime-run:e2a2ecf56d89101d8439099cb38ef1925d98f75bb5b429169dd3755b7fcb9ed0",
+      "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+      "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+      "classification": "incorrect",
+      "correctness": "failed",
+      "receipt_stages": [
+        "compile",
+        "correctness",
+        "generate"
+      ],
+      "benchmark_executed": false,
+      "profile_executed": false,
+      "cases": [
+        {
+          "id": "decode-small",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.00390625,
+              "max_rel": 42.65079365079365,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": true,
+              "rms": 0.0002860686035596847,
+              "shape": [
+                1,
+                16,
+                512
+              ],
+              "tolerance_violations": 0
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": false,
+              "rms": null,
+              "shape": [
+                1,
+                1024,
+                640
+              ],
+              "tolerance_violations": 1
+            }
+          ],
+          "passed": false
+        },
+        {
+          "id": "decode-boundary",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.001953125,
+              "max_rel": 0.8807947019867549,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": true,
+              "rms": 0.00018485763088246714,
+              "shape": [
+                3,
+                16,
+                128
+              ],
+              "tolerance_violations": 0
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": false,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": false,
+              "rms": null,
+              "shape": [
+                3,
+                256,
+                256
+              ],
+              "tolerance_violations": 1
+            }
+          ],
+          "passed": false
+        }
+      ],
+      "promotion_decision": {
+        "details": {
+          "branch_promoted": false,
+          "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+          "eligible": false,
+          "reason": "run_not_succeeded",
+          "task_promoted": false
+        },
+        "id": "decision:e5a587b307834f0cb2cfb3502b00a20a",
+        "kind": "promotion",
+        "reason": "run_not_succeeded",
+        "target_id": "evaluation:dbcd7b68d22253e8128f321a8312bd09a971aaeeeaabf293b3d0d49b69546d1a",
+        "task_id": "mla-decode-v1"
+      },
+      "result_file_sha256": "40108b8c944ac28003ede6eab2dd3b034f80cababc1cf3800d5f9ab76b3d5e45"
+    }
+  ],
+  "verified_unique_artifacts": 69,
+  "verified_bytes": 8714335,
+  "limitations": [
+    "API success does not establish full mode semantics or hardware counter support.",
+    "Scalar extraction device_get(result[0,0]) occurred before stop_trace; dynamic_slice/squeeze are additional traced work.",
+    "The 134 AND_SYNC events cannot all be assigned to the five matrix computations.",
+    "This diagnostic is not an MLA Run/ProfileBundle, a DMA timing breakdown or a performance experiment.",
+    "Negative correctness receipt bindings and all raw artifact hashes verified; numerical comparisons not recomputed here."
+  ]
+}

@@ -1,0 +1,2 @@
+# Optional ChatGPT read/write connection; the website itself needs no packages.
+mcp==1.30.0

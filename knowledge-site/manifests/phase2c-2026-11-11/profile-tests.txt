@@ -1,0 +1,21 @@
+test_binding_required_and_detached_from_caller (test_profiles.ProfileTests.test_binding_required_and_detached_from_caller) ... ok
+test_estimated_intervals_never_join_measured_intervals (test_profiles.ProfileTests.test_estimated_intervals_never_join_measured_intervals) ... ok
+test_explicit_compiler_resource_llo_metadata_keeps_classification (test_profiles.ProfileTests.test_explicit_compiler_resource_llo_metadata_keeps_classification) ... ok
+test_high_dma_count_does_not_claim_critical_path_or_known_bytes (test_profiles.ProfileTests.test_high_dma_count_does_not_claim_critical_path_or_known_bytes) ... ok
+test_injected_offline_reader_reports_missing_dependencies_without_install (test_profiles.ProfileTests.test_injected_offline_reader_reports_missing_dependencies_without_install) ... ok
+test_legacy_no_groups_is_explicitly_unavailable (test_profiles.ProfileTests.test_legacy_no_groups_is_explicitly_unavailable) ... ok
+test_legacy_samples_recompute_statistics_and_keep_scopes_separate (test_profiles.ProfileTests.test_legacy_samples_recompute_statistics_and_keep_scopes_separate) ... ok
+test_malformed_container_types_and_huge_numbers_raise_validation_error (test_profiles.ProfileTests.test_malformed_container_types_and_huge_numbers_raise_validation_error) ... ok
+test_malformed_duration_and_inconsistent_legacy_summary_are_rejected (test_profiles.ProfileTests.test_malformed_duration_and_inconsistent_legacy_summary_are_rejected) ... ok
+test_malformed_ids_kinds_artifacts_and_nonfinite_data_rejected (test_profiles.ProfileTests.test_malformed_ids_kinds_artifacts_and_nonfinite_data_rejected) ... ok
+test_missing_metrics_remain_null_with_reason (test_profiles.ProfileTests.test_missing_metrics_remain_null_with_reason) ... ok
+test_missing_offsets_do_not_become_zero_or_complete_intervals (test_profiles.ProfileTests.test_missing_offsets_do_not_become_zero_or_complete_intervals) ... ok
+test_nested_overlap_union_and_clock_domains_are_independent (test_profiles.ProfileTests.test_nested_overlap_union_and_clock_domains_are_independent) ... ok
+test_program_identity_and_sample_coverage_cannot_be_silently_lost (test_profiles.ProfileTests.test_program_identity_and_sample_coverage_cannot_be_silently_lost) ... ok
+test_quality_errors_and_invalid_counts_survive_normalization (test_profiles.ProfileTests.test_quality_errors_and_invalid_counts_survive_normalization) ... ok
+test_timing_capability_requires_actual_intervals (test_profiles.ProfileTests.test_timing_capability_requires_actual_intervals) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.006s
+
+OK

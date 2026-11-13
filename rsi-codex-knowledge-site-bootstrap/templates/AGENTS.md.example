@@ -1,0 +1,14 @@
+# RSI Kernel Agent — Repository Guidance
+
+- Multiple strategies A/B/... may be explored in the same round.
+- Each strategy may produce multiple evidence-backed Plans and Candidates.
+- Do not force a single winner before experiments.
+- Preserve failed, regressed, deferred and successful runs.
+- Analyzer is a Profiler child branch.
+- Benchmark owns correctness, comparable timing, coverage and promotion.
+- Unknown causal explanation does not automatically invalidate a correct, reliably faster candidate.
+- Respect approved write scopes and existing user changes.
+- Do not alter correctness oracles, tolerances, workloads or timing boundaries to make candidates pass.
+- Distinguish measured facts, trace-derived values, compiler estimates, model predictions and hypotheses.
+- Never claim TPU validation when only CPU/mock tests ran.
+- Keep credentials and local auth stores out of the repository.

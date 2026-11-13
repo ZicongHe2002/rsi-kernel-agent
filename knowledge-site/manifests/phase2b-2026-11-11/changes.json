@@ -1,0 +1,376 @@
+{
+  "date": "2026-11-11",
+  "phase": "2B only",
+  "schema_changed": false,
+  "git_head_observed": "260de63fb57f5f494326936cdfbead188e10df01",
+  "git_status": "CLI unavailable; no clean-tree claim or commit",
+  "tests": {
+    "root_run": 85,
+    "passed": 84,
+    "skipped": 1,
+    "failed": 0,
+    "existing_mcp_passed": 5
+  },
+  "synthetic_example": {
+    "source_methods": 3,
+    "strategy_history_counts": {
+      "A": {
+        "total": 25,
+        "owned": 21,
+        "dependencies": 4
+      },
+      "B": {
+        "total": 28,
+        "owned": 24,
+        "dependencies": 4
+      }
+    }
+  },
+  "manifest_self_excluded": true,
+  "files": [
+    {
+      "path": ".artifacts/phase2b-2026-11-11/finish_docs.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "b62e091e02f5d40fe939d97bc9e14c4a8ae1ad57d2afd1f9ea2b8adfb404a5aa",
+      "bytes": 11274,
+      "snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2b-2026-11-11/manifest.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "9faa8238917a72c6b7a379acd4cf90fcb4b1a01bf2113cff58cbcdf89a3a3f15",
+      "bytes": 4595,
+      "snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2b-2026-11-11/validate.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "a74cd4b1702a9eb91111482986565b3a6faca07ef1a0c3d9e8fdf8af1ecb6540",
+      "bytes": 5081,
+      "snapshot": null
+    },
+    {
+      "path": "docs/phase2b-knowledge-memory.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "50b0280d30b8297f303e5a2b629a74992a0eced58a55c3c4d51f4f610d1dd7f8",
+      "bytes": 17291,
+      "snapshot": null
+    },
+    {
+      "path": "docs/superpowers/plans/2026-11-11-phase2b-knowledge-memory.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "555d80fc58d71895937298ad5141fef60b47761201c21be7b113cc69443b1b81",
+      "bytes": 7933,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "change": "modified",
+      "before_sha256": "95f841e31b94939c8e75e51bd8ae67dc2545868cd3806fc48314ab08d6fb3ac7",
+      "after_sha256": "7e387a019323895bc2015386293b4c44fad0c73a6ad4beb3f2d20c43a2495b8d",
+      "bytes": 3057,
+      "snapshot": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/rsi-document-index.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "change": "modified",
+      "before_sha256": "c734f3e7751c1de5a65fdf32c8cf94fcf5bd28c5c4f9ca5ca1e9f66f8ad1b445",
+      "after_sha256": "594cacdfdf648006c206e5cb97d90b10bd425e44d1f1045c6cfa11c23d7409ab",
+      "bytes": 14000,
+      "snapshot": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "change": "modified",
+      "before_sha256": "3fb8a7dcb8c7f5ea00e90e63922a4becd785f4fb592bdd952915f56cf3e46c92",
+      "after_sha256": "bf1f76fcc8f72fe2b0a1ef39cc9c70e9cf6e1566112ad208eb6454720ae78f5a",
+      "bytes": 18129,
+      "snapshot": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/rsi-knowledge-search.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-memory.md",
+      "change": "modified",
+      "before_sha256": "e35d555adbd307856cff8116f19cb600fd7bafd370aa8b3a2eec66450105916e",
+      "after_sha256": "00eae94af90c3a24d91942d4356689b7f66415dcb616b629c32054334990a867",
+      "bytes": 25312,
+      "snapshot": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/rsi-memory.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "change": "modified",
+      "before_sha256": "c04a440d1b333b2d82b51f4b07485cbce23067b8c0d1c668016e359d95eb768c",
+      "after_sha256": "6f5cfacc7f1dcc7a7b48a0442d3e0c891fd7cea9f7c276297155332dcd0f8e9a",
+      "bytes": 11628,
+      "snapshot": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md"
+    },
+    {
+      "path": "knowledge-site/content/待办清单/一周待办 · 2026-11-09.md",
+      "change": "modified",
+      "before_sha256": "7eac84b5cfb173d53cf5025362a3f488c3162e6da2464dd145aba8e51b1620ff",
+      "after_sha256": "3d369f4602d9bb634c14b76681665514fc0dac9f5bb3739b8b035156aa6ce430",
+      "bytes": 8716,
+      "snapshot": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-09.md"
+    },
+    {
+      "path": "knowledge-site/index.md",
+      "change": "modified",
+      "before_sha256": "144e55ebd07b20e731bc50b4faba46e23a4a9a11e3de01cef9072c336fa69f66",
+      "after_sha256": "9431ca1cb0fa088b86c560d4b086597f8622e27cb39355ac4a8e6fd7eee33b1a",
+      "bytes": 2912,
+      "snapshot": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/index.md"
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/rsi-document-index.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "95f841e31b94939c8e75e51bd8ae67dc2545868cd3806fc48314ab08d6fb3ac7",
+      "bytes": 3021,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "c734f3e7751c1de5a65fdf32c8cf94fcf5bd28c5c4f9ca5ca1e9f66f8ad1b445",
+      "bytes": 13982,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "3fb8a7dcb8c7f5ea00e90e63922a4becd785f4fb592bdd952915f56cf3e46c92",
+      "bytes": 17963,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/rsi-memory.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "e35d555adbd307856cff8116f19cb600fd7bafd370aa8b3a2eec66450105916e",
+      "bytes": 25145,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "c04a440d1b333b2d82b51f4b07485cbce23067b8c0d1c668016e359d95eb768c",
+      "bytes": 10170,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-09.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "7eac84b5cfb173d53cf5025362a3f488c3162e6da2464dd145aba8e51b1620ff",
+      "bytes": 7928,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/index.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "144e55ebd07b20e731bc50b4faba46e23a4a9a11e3de01cef9072c336fa69f66",
+      "bytes": 2618,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/README.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "9593be173a9c322ccd795a7f47e11c8187eee112d9d012106d87afbd09459c15",
+      "bytes": 15588,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/existing-mcp-tests.txt",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "08e3053de966b98e118211f1e92db6e9019bf288ae811d7fb0aa355a485690f2",
+      "bytes": 1654,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/implementation-report.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "60f623248cb0ac9a717561e925497368b79bc700df9d476b4eec803f544f5d94",
+      "bytes": 10843,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/links.json",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "93d8acfb8d5f3a4b913e53f3f9fe5907cef7d65dd6b95850b0dd4a5b5b7664ae",
+      "bytes": 69,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/live-read-smoke.json",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "66f3914d93860b25dbefdd239589d14648ce3a439afb0af2b2ad347b7c77052f",
+      "bytes": 384,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/mcp-audit.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "6dc1f311b1b5b4c0fe4db8b389b7f9aebe1e0f0d19b0aac7d050996b54052610",
+      "bytes": 5465,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/protected-baseline.json",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "35c8f9b2b0cf73b79e44e1190cbebd7d603ffc3c79918bdcdca5777516ad316e",
+      "bytes": 1085,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/review.md",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "ef3c7b7b2e1f87b3fb7f6bc6ea15b5ff7efc809ff11b88e6f1ec5e540c674755",
+      "bytes": 2425,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/sources/phase2b-request.txt",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "95a1dc5c963e04eb6d74635925006ab8f6a3644d9e101930f8468f97464d6df5",
+      "bytes": 7666,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/synthetic-example.json",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "fdccc60eed615afcc4261e29d171fcd543eda6be714d13aaa10f58762e0d55af",
+      "bytes": 47663,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/test-environment.json",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "144f6eda8fb96fa41686fae4324d04e2424b551b8b2237d0aa7380c90e3b3e15",
+      "bytes": 971,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/tests.txt",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "5ce5d2501f0acd53ab433b2b9d60734d9fc12ef5ba7c26bbd966379470c6f43f",
+      "bytes": 15595,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2b-2026-11-11/weekly-update.json",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "ed34acffefdd3d6e5e5238a8bd64804f89f22a2e2c26f4a23b740af10e2f0037",
+      "bytes": 111,
+      "snapshot": null
+    },
+    {
+      "path": "knowledge-site/README.md",
+      "change": "modified",
+      "before_sha256": "9593be173a9c322ccd795a7f47e11c8187eee112d9d012106d87afbd09459c15",
+      "after_sha256": "02d773f3e52489e01e6490e6a5c200af24d60311cf5d757c20ec7a53176cafc4",
+      "bytes": 15706,
+      "snapshot": "knowledge-site/manifests/phase2b-2026-11-11/before/knowledge-site/README.md"
+    },
+    {
+      "path": "src/rsi_kernel_agent/associations.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "3701a63145718f2a87c590a0330c912d5d56421a788facde6d7d5f1cb991bc0f",
+      "bytes": 6760,
+      "snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/knowledge.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "f3d2cf030d213d02b309e05d319f6a325c959b714b1264793f7bfcec631e5db5",
+      "bytes": 19649,
+      "snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/knowledge_mcp.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "e692cf83bb390f9da181f6d0ff226df82a9d26cb37daddd70bf432c02b806ef4",
+      "bytes": 3825,
+      "snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/memory.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "e2e0375c186d1d777d6d4ba04fb8eeb8633c525ff40fc33f99cea0cdb425d12e",
+      "bytes": 24499,
+      "snapshot": null
+    },
+    {
+      "path": "tests/phase2b_fixtures.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "f587c3fbb45f6d17a8f1a8bfd3b6434cdaa31dfaf4e04550a50a4ae23814562d",
+      "bytes": 2752,
+      "snapshot": null
+    },
+    {
+      "path": "tests/test_associations.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "34bc451a9897b78f7efaaf948acf1781452f4feeb85b89ab9f37c161cca469da",
+      "bytes": 7855,
+      "snapshot": null
+    },
+    {
+      "path": "tests/test_knowledge.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "6dfc0f573e017a31058c5e5d17a60e52ebcd00776970d9ce31f6935e5c3b9c77",
+      "bytes": 10894,
+      "snapshot": null
+    },
+    {
+      "path": "tests/test_knowledge_mcp.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "0b240029a066fd349de0e6b5c977ea1d203b553b83d7fff0f95b60af356d53e5",
+      "bytes": 4253,
+      "snapshot": null
+    },
+    {
+      "path": "tests/test_memory.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "0ff8e2dba2f8ef9fdb6970b88b3084e205b34ef2c33e5758291878277636edc8",
+      "bytes": 23091,
+      "snapshot": null
+    },
+    {
+      "path": "tests/test_phase2b_integration.py",
+      "change": "new",
+      "before_sha256": null,
+      "after_sha256": "13789fbcb4069feabcd056ddf8a702ebe25dcc4b9b88a8fb272b4b9f019d555c",
+      "bytes": 9922,
+      "snapshot": null
+    }
+  ]
+}

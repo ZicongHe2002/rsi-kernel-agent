@@ -1,0 +1,532 @@
+{
+  "documents": 14,
+  "links": 105,
+  "missing": [],
+  "results": [
+    {
+      "file": "knowledge-site/index.md",
+      "target": "content/学习方法/rsi-document-index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "content/学习方法/rsi-kernel-agent.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase2d-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase2c-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase2c-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase2b-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase2b-knowledge-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase2a-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase2a-core-foundation.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/mla-integration-audit.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/mla-source-manifest.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/colab-cli-audit.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/colab-source-manifest.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase1-validation.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase1-change-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase1-changes.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/site-inventory.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/source-manifest.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "access/ACCESS_POLICY.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "access/AUTH_STATE_MIGRATION_PLAN.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "access/gitignore.proposed",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "connections/README.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase1-2026-11-11/before.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "README.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-kernel-agent.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-knowledge-search.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-optimization-workflow.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-profiler.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-multi-plan-exploration.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-evidence-contract.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-phase2-roadmap.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-method-search-and-selection.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "../归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-knowledge-search.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-optimization-workflow.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-profiler.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-multi-plan-exploration.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-document-index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-evidence-contract.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-phase2-roadmap.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-kernel-agent.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-knowledge-search.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-evidence-contract.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "target": "../rsi-evidence-contract.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "target": "../rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "content/学习方法/rsi-document-index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "access/AUTH_STATE_MIGRATION_PLAN.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "CHATGPT_SETUP.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "manifests/phase2a-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "manifests/phase2b-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "../docs/phase2c-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "manifests/phase2c-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "../docs/phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "manifests/phase2d-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "access/ACCESS_POLICY.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "connections/README.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase2d-workflow-controller.md",
+      "target": "../knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "sources/phase2d-request.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "protected-baseline.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "protected-check.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/intake.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/rounds.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/journal.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/scheduling.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/controller.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/execution.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/evaluation.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/__main__.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/demo.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../docs/phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../docs/superpowers/plans/2026-11-11-phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "changes.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "../../../.artifacts/phase2d-2026-11-11/synthetic-demo/report.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "demo-summary.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "test-environment.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "tests.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "existing-mcp-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "independent-review.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "links.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "target": "changes.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/progress.md",
+      "target": "implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/progress.md",
+      "target": "sources/phase2d-request.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/progress.md",
+      "target": "protected-baseline.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/progress.md",
+      "target": "../../../docs/superpowers/plans/2026-11-11-phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/review.md",
+      "target": "independent-review.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/review.md",
+      "target": "tests.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase2d-2026-11-11/review.md",
+      "target": "test-environment.json",
+      "exists": true
+    }
+  ]
+}

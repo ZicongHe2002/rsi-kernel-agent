@@ -1,0 +1,78 @@
+﻿[
+    {
+        "sha256":  "fd8fe272278132eb487c998c382e039ef6e0853ba1a7043baf8302d1ca1bf9e2",
+        "path":  "src/rsi_kernel_agent/artifacts.py"
+    },
+    {
+        "sha256":  "3701a63145718f2a87c590a0330c912d5d56421a788facde6d7d5f1cb991bc0f",
+        "path":  "src/rsi_kernel_agent/associations.py"
+    },
+    {
+        "sha256":  "85959babf27a5b76cc6cab189e7586c048623a34613760bc33e60a564868da8b",
+        "path":  "src/rsi_kernel_agent/contracts.py"
+    },
+    {
+        "sha256":  "f3d2cf030d213d02b309e05d319f6a325c959b714b1264793f7bfcec631e5db5",
+        "path":  "src/rsi_kernel_agent/knowledge.py"
+    },
+    {
+        "sha256":  "e692cf83bb390f9da181f6d0ff226df82a9d26cb37daddd70bf432c02b806ef4",
+        "path":  "src/rsi_kernel_agent/knowledge_mcp.py"
+    },
+    {
+        "sha256":  "e2e0375c186d1d777d6d4ba04fb8eeb8633c525ff40fc33f99cea0cdb425d12e",
+        "path":  "src/rsi_kernel_agent/memory.py"
+    },
+    {
+        "sha256":  "da735f1f8ba1908df9392a8ab50e77114588c9188adb3b1c7811c26e4732bd0b",
+        "path":  "src/rsi_kernel_agent/store.py"
+    },
+    {
+        "sha256":  "8f6f8953f91e517572eee55f79888200614ccf85835f5a520a65c95542f08e76",
+        "path":  "src/rsi_kernel_agent/__init__.py"
+    },
+    {
+        "sha256":  "33b11310cb87b46680f4c2b7403b30ee318d578f29622c8a7d4cef41902f8db1",
+        "path":  "src/rsi_kernel_agent/profiler/analyzer.py"
+    },
+    {
+        "sha256":  "0ae22eb5b2e15b7b506be250de9a873fad805195ac72134570aeff403294ebb3",
+        "path":  "src/rsi_kernel_agent/profiler/evaluation.py"
+    },
+    {
+        "sha256":  "497bbb85a5c53935123a45648bfcaa38416fbe5fe927e417c1dab18d876f95cc",
+        "path":  "src/rsi_kernel_agent/profiler/inputs.py"
+    },
+    {
+        "sha256":  "6e4bc6319f6885e008af08c32cdfd962c50e0446a9eec5d4d45e51294bc80e16",
+        "path":  "src/rsi_kernel_agent/profiler/models.py"
+    },
+    {
+        "sha256":  "c2f6b03639a5413be097746d108f793253817eb9e9ee59b9c1a979bea1c899c4",
+        "path":  "src/rsi_kernel_agent/profiler/outputs.py"
+    },
+    {
+        "sha256":  "0ab672dc8a6a4791c8173d8747ddd31f4a410ae573aab0951ac999d47a03f536",
+        "path":  "src/rsi_kernel_agent/profiler/profiles.py"
+    },
+    {
+        "sha256":  "e20abd0c769ad9a4ccd03182e950d2da9e40e85413c591cbf2f7e47874e490f3",
+        "path":  "src/rsi_kernel_agent/profiler/session.py"
+    },
+    {
+        "sha256":  "2ae0cba68c340981575c998ab2030315d87fbec65b77d54eb53d914ee78f2d6c",
+        "path":  "src/rsi_kernel_agent/profiler/tools.py"
+    },
+    {
+        "sha256":  "e592d25147517d36fd0179d10e81f27eeffded3b901c144451c6112e2489a596",
+        "path":  "src/rsi_kernel_agent/profiler/__init__.py"
+    },
+    {
+        "sha256":  "271448e3a7aead17b38e54f4d27eae09a33e0c4812a3fbcb567decc2d0726d66",
+        "path":  "knowledge-site/server.py"
+    },
+    {
+        "sha256":  "f634c9ab6ff90fa9d63d7fe3938fd30c8019cd7de332aba02ec01c0f4a6afad2",
+        "path":  "knowledge-site/mcp_server.py"
+    }
+]

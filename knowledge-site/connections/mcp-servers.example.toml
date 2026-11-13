@@ -1,0 +1,7 @@
+# Sanitized documentation example only. No live endpoint or credential.
+# Project-scoped config requires a trusted project and explicit connection setup.
+# [mcp_servers.approved_knowledge]
+# url = "https://approved-example.invalid/mcp"
+# bearer_token_env_var = "APPROVED_KNOWLEDGE_TOKEN"
+# Select server tools/scopes through the approved product configuration.
+# Do not copy user authentication/provider overrides into project config.

@@ -1,0 +1,23 @@
+{
+  "dataset_sha256": "8327a4c5f368693f67b49d95589f0028c6ba7db0ebd869fe69be4bd3d2cab2ec",
+  "model": "inherited current conversation model; exact identifier not exposed",
+  "configurations": [
+    "base",
+    "skills",
+    "tools",
+    "review"
+  ],
+  "samples_per_configuration": 1,
+  "cases_per_sample": 10,
+  "budget": {
+    "model_responses": 6,
+    "tool_calls": 12,
+    "response_chars": 60000
+  },
+  "execution": "fresh no-history session-model workers; no external model API",
+  "limitations": [
+    "One grouped sample per configuration; not statistical quality evidence",
+    "Infrastructure/system instructions still shared by all workers",
+    "Configured action/response ceilings equal; provider token accounting unavailable"
+  ]
+}

@@ -1,0 +1,33 @@
+# Machine-local execution state and large evidence stores.
+/.artifacts/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.venv-*/
+venv/
+node_modules/
+.env
+.env.*
+!.env.example
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-wal
+*.db-shm
+*.pem
+*.key
+
+# Personal knowledge and access state are local data, separate from application code.
+/knowledge-site/content/
+/knowledge-site/.auth/
+/knowledge-site/.tunnel/
+/knowledge-site/.venv-mcp/
+/knowledge-site/logs/
+/knowledge-site/qa/
+/knowledge-site/tools/
+/knowledge-site/.artifacts/
+/knowledge-site/manifests/**/before/
+/knowledge-site/manifests/**/*.original
+/knowledge-site/manifests/phase3-2026-11-12/project2-inventory.json

@@ -1,0 +1,5 @@
+{
+  "version": "p35-abba-v1",
+  "min_paired_reduction": 0.02,
+  "max_within_role_spread": 0.05
+}

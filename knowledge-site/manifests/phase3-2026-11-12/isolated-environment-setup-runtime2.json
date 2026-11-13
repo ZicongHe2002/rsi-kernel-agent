@@ -1,0 +1,16 @@
+{
+  "status": "ready",
+  "started_ns": 1794469231989579247,
+  "python": "3.11.17 (main, Oct 21 2026, 17:46:53) [Clang 23.1.3 ]",
+  "executable": "/content/rsi-kernel-agent/env-20261112/venv/bin/python",
+  "versions": {
+    "jax": "0.8.1",
+    "jaxlib": "0.8.1",
+    "libtpu": "0.0.30",
+    "tensorflow": "2.20.0",
+    "xprof": "2.22.1",
+    "numpy": "2.4.6",
+    "PyYAML": "6.0.3"
+  },
+  "finished_ns": 1794469240884835487
+}

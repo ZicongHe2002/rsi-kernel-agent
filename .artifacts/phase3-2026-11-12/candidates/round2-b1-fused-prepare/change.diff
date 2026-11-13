@@ -1,0 +1,73 @@
+--- round1-delayed-store-wait/mla_decode.py
++++ round2-b1-fused-prepare/mla_decode.py
+@@ -2914,23 +2914,37 @@
+         lp_ref[b] = jnp.broadcast_to(lens[b : b + 1], (heads, block_size))
+ 
+     vmem = pl.BlockSpec(memory_space=pltpu.VMEM)
+-    qp, np_, lp = pl.pallas_call(
+-      prepare,
+-      in_specs=(vmem, vmem, vmem),
+-      out_specs=(vmem, vmem, vmem),
+-      out_shape=(
+-        jax.ShapeDtypeStruct((batch, heads, padded_dim), q.dtype),
+-        jax.ShapeDtypeStruct((batch, block_size, padded_dim), new.dtype),
+-        jax.ShapeDtypeStruct((batch, heads, block_size), lengths.dtype),
+-      ),
+-      compiler_params=pltpu.CompilerParams(vmem_limit_bytes=vmem_limit_bytes),
+-      interpret=interpret_mode,
+-      name="mla_decode_contiguous_prepare",
+-    )(q, new, lengths)
++    if batch == 1:
++      qp, np_, lp = q, new, lengths
++    else:
++      qp, np_, lp = pl.pallas_call(
++        prepare,
++        in_specs=(vmem, vmem, vmem),
++        out_specs=(vmem, vmem, vmem),
++        out_shape=(
++          jax.ShapeDtypeStruct((batch, heads, padded_dim), q.dtype),
++          jax.ShapeDtypeStruct((batch, block_size, padded_dim), new.dtype),
++          jax.ShapeDtypeStruct((batch, heads, block_size), lengths.dtype),
++        ),
++        compiler_params=pltpu.CompilerParams(vmem_limit_bytes=vmem_limit_bytes),
++        interpret=interpret_mode,
++        name="mla_decode_contiguous_prepare",
++      )(q, new, lengths)
+ 
+     def attention(q_ref, new_ref, len_ref, cache_ref, out_ref, updated_ref, tile, sem):
+       b = pl.program_id(0)
+-      query, new_tile, lens = q_ref[0], new_ref[0], len_ref[0]
++      if batch == 1:
++        query = jnp.concatenate(
++          (q_ref[0], jnp.zeros((heads, padded_dim - dim), q.dtype)), axis=1
++        )
++        # Keep the full newKV row through padding before broadcasting.
++        new_rows = jnp.concatenate(
++          (new_ref[...], jnp.zeros((batch, padded_dim - dim), new.dtype)), axis=1
++        )
++        new_tile = jnp.broadcast_to(new_rows, (block_size, padded_dim))
++        lens = jnp.broadcast_to(len_ref[...], (heads, block_size))
++      else:
++        query, new_tile, lens = q_ref[0], new_ref[0], len_ref[0]
+       # Encode clipped lengths in masks; Proton signed min/max lowering fails.
+       offsets = lax.broadcasted_iota(jnp.int32, (heads, block_size), 1)
+       # Proton transpose supports int32, but not boolean vectors.
+@@ -3005,10 +3019,14 @@
+       attention,
+       grid=(batch,),
+       in_specs=(
+-        pl.BlockSpec((1, heads, padded_dim), index),
+-        pl.BlockSpec((1, block_size, padded_dim), index),
+-        pl.BlockSpec((1, heads, block_size), index),
+-        hbm,
++        (vmem, vmem, vmem, hbm)
++        if batch == 1
++        else (
++          pl.BlockSpec((1, heads, padded_dim), index),
++          pl.BlockSpec((1, block_size, padded_dim), index),
++          pl.BlockSpec((1, heads, block_size), index),
++          hbm,
++        )
+       ),
+       out_specs=(pl.BlockSpec((1, heads, lkv_dim), index), hbm),
+       out_shape=(

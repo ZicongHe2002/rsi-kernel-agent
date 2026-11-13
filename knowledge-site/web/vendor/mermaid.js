@@ -1,0 +1,30 @@
+// Generated from the verified official mermaid@11.17.2 minified ESM distribution.
+// Direct imports expose the complete flowchart + Dagre dependency set together.
+import mermaid from './mermaid-11.17.2/mermaid.esm.min.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-2NMSUPJH.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-4CAJECRU.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-4OADUZ5Q.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-5IMINLNL.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-AQ6EADP3.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-AZZRMDJM.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-CLS4B6BI.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-DZP67EKU.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-EICP7K5X.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-H7VHZCWX.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-IJBDOHL6.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-NUDPKBEF.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-QJSWEUOL.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-R7JDMUKV.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-RCXAM2GK.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-STOV2HOB.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-VRZKL3EH.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-VTHDQ7BV.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-VY2OSTJR.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-WUBWJARI.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-YDMLL4PJ.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-Z6V44ARX.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-ZNLK7HRR.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/chunk-ZQN7UHIL.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/dagre-MPVFI544.mjs';
+import './mermaid-11.17.2/chunks/mermaid.esm.min/flowDiagram-YHGXBVSY.mjs';
+window.mermaid = mermaid;

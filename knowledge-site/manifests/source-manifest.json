@@ -1,0 +1,708 @@
+{
+  "date": "2026-11-11",
+  "policy": "URLs collected from complete local documents; no blanket refetch or local-performance verification claim",
+  "missing_original_material": [
+    "original overview reference image",
+    "internal ChatGPT Library Benchmark report",
+    "DeepEvolve original source",
+    "immutable revisions for rolling main sources"
+  ],
+  "sources": [
+    {
+      "url": "https://chatgpt.com/plugins",
+      "locations": [
+        {
+          "path": "knowledge-site/CHATGPT_SETUP.md",
+          "label": ""
+        },
+        {
+          "path": "knowledge-site/CHATGPT_SETUP.md",
+          "label": ""
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://platform.openai.com/settings/organization/tunnels",
+      "locations": [
+        {
+          "path": "knowledge-site/CHATGPT_SETUP.md",
+          "label": ""
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://platform.openai.com/settings/organization/api-keys",
+      "locations": [
+        {
+          "path": "knowledge-site/CHATGPT_SETUP.md",
+          "label": ""
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://github.com/openai/tunnel-client/releases/latest",
+      "locations": [
+        {
+          "path": "knowledge-site/CHATGPT_SETUP.md",
+          "label": ""
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/guides/secure-mcp-tunnels",
+      "locations": [
+        {
+          "path": "knowledge-site/CHATGPT_SETUP.md",
+          "label": ""
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://developers.openai.com/apps-sdk/deploy/connect-chatgpt/",
+      "locations": [
+        {
+          "path": "knowledge-site/CHATGPT_SETUP.md",
+          "label": ""
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://learn.chatgpt.com/docs/build-skills",
+      "locations": [
+        {
+          "path": "knowledge-site/connections/README.md",
+          "label": "官方Skills文档"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://developers.openai.com/codex/mcp/",
+      "locations": [
+        {
+          "path": "knowledge-site/connections/README.md",
+          "label": "官方MCP文档入口"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://docs.jax.dev/en/latest/benchmarking.html",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "JAX 官方计时说明"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "JAX Benchmarking"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "JAX Benchmarking"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+          "label": "JAX 官方计时说明"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+          "label": "JAX Benchmarking"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "JAX Benchmarking"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://github.com/NVIDIA/SOL-ExecBench",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "NVIDIA SOL-ExecBench"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://research.nvidia.com/benchmarks/sol-execbench/leaderboard/collection/3/B200",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "集合页"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "集合页"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://research.nvidia.com/benchmarks/sol-execbench/leaderboard/kernel/26/B200",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "单任务页"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "单任务页"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NVIDIA/SOL-ExecBench/main/docs/workload.md",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "SOL-ExecBench Workload schema"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "SOL-ExecBench Workload schema"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NVIDIA/SOL-ExecBench/main/docs/trace.md",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "SOL-ExecBench Trace schema"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "SOL-ExecBench Trace schema"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NVIDIA/SOL-ExecBench/main/src/sol_execbench/sol_score.py",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "SOL score 实现"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "SOL score 实现"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://research.nvidia.com/benchmarks/sol-execbench/blog/introducing-sol-execbench",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "NVIDIA 官方方法介绍"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "NVIDIA 官方方法介绍"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://openxla.org/tokamax/benchmarking",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "Tokamax Benchmarking"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "Tokamax Benchmarking"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+          "label": "Tokamax Benchmarking"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "Tokamax Benchmarking"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://github.com/openxla/tokamax/blob/main/tokamax/experimental/utils/tuning/tpu/README.md",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "Tokamax TPU tuning README"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "Tokamax TPU tuning README"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null,
+      "revision_note": "branch/ref in URL; rolling main not immutable"
+    },
+    {
+      "url": "https://github.com/AI-Hypercomputer/accelerator-agents/tree/main/JAXBench",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "JAXBench 仓库目录与说明"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "JAXBench 仓库目录与说明"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null,
+      "revision_note": "branch/ref in URL; rolling main not immutable"
+    },
+    {
+      "url": "https://github.com/AI-Hypercomputer/accelerator-agents/blob/main/JAXBench/harness/profiler.py",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "JAXBench profiler.py"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "JAXBench profiler.py"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null,
+      "revision_note": "branch/ref in URL; rolling main not immutable"
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang-jax/blob/main/docs/developer_guide/benchmark_and_profiling.md",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "SGLang-JAX Benchmark and Profiling"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "SGLang-JAX Benchmark and Profiling"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null,
+      "revision_note": "branch/ref in URL; rolling main not immutable"
+    },
+    {
+      "url": "https://openxla.org/xprof/kernel-profiling",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "XProf Kernel Profiling"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "XProf Kernel User Guide"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "XProf Kernel User Guide"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+          "label": "XProf Kernel User Guide"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+          "label": "XProf Kernel User Guide"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "XProf Kernel Profiling"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://openxla.org/xprof/roofline_model",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "XProf Roofline"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "XProf Roofline"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://docs.cloud.google.com/tpu/docs/v6e",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "Cloud TPU v6e 规格"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "Cloud TPU v6e 规格"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NVlabs/SOLAR/master/docs/SOL_GUIDE.md",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "SOLAR SOL Guide"
+        },
+        {
+          "path": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+          "label": "SOLAR SOL Guide"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://chatgpt.com/library?file_id=libfile_5641d682fa9081919d4d1e38647a4b5d&account_id=personal",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "《执行摘要(8)》"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://docs.jax.dev/en/latest/pallas/pipelining.html",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "JAX Software Pipelining"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+          "label": "JAX Software Pipelining"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://github.com/OpenBMB/ForgeKernel/blob/main/docs/milestones-template.md",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "ForgeKernel milestone 模板"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-benchmark.md",
+          "label": "ForgeKernel milestones-template"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+          "label": "ForgeKernel milestone 模板"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+          "label": "ForgeKernel milestones-template"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null,
+      "revision_note": "branch/ref in URL; rolling main not immutable"
+    },
+    {
+      "url": "https://docs.jax.dev/en/latest/pallas/CHANGELOG.html",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+          "label": "Pallas Changelog"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://docs.jax.dev/en/latest/pallas/tpu/pipelining.html",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+          "label": "TPU Pipelining"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+          "label": "JAX — TPU Pipelining"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://arxiv.org/html/2511.15915v2",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-memory.md",
+          "label": "AccelOpt"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+          "label": "AccelOpt，arXiv:2511.15915v2"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": "2511.15915v2"
+    },
+    {
+      "url": "https://arxiv.org/html/2506.13131v1",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-memory.md",
+          "label": "AlphaEvolve"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+          "label": "AlphaEvolve，arXiv:2506.13131v1"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": "2506.13131v1"
+    },
+    {
+      "url": "https://arxiv.org/html/2510.04618v3",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-memory.md",
+          "label": "ACE"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": "2510.04618v3"
+    },
+    {
+      "url": "https://docs.jax.dev/en/latest/profiling.html",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+          "label": "JAX Profiling computation"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+          "label": "JAX Profiling"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://docs.jax.dev/en/latest/_autosummary/jax.profiler.trace.html",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+          "label": "jax.profiler.trace"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://docs.jax.dev/en/latest/_autosummary/jax.block_until_ready.html",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+          "label": "jax.block_until_ready"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://openxla.org/xprof/hlo_op_stats",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+          "label": "XProf HLO Op Stats"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+          "label": "XProf HLO Op Stats"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://openxla.org/xprof/custom_call_profiling",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+          "label": "XProf Custom Call Profiling"
+        },
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+          "label": "XProf Custom Call Profiling"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://arxiv.org/html/2511.15915v2#S2.SS2",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+          "label": "AccelOpt，arXiv:2511.15915v2，第 2.2 节"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": "2511.15915v2"
+    },
+    {
+      "url": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+          "label": "Google DeepMind：AlphaEvolve 官方介绍"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://openxla.org/tokamax/autotuning",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+          "label": "Tokamax — Autotuning and Heuristics"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://docs.jax.dev/en/latest/pallas/tpu/matmul.html",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+          "label": "JAX — Matrix Multiplication"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://github.com/sgl-project/sglang-jax/blob/main/python/sgl_jax/srt/kernels/ragged_paged_attention/ragged_paged_attention_v3.py",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+          "label": "SGLang-JAX — ragged_paged_attention_v3.py"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null,
+      "revision_note": "branch/ref in URL; rolling main not immutable"
+    },
+    {
+      "url": "https://github.com/AI-Hypercomputer/accelerator-agents",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+          "label": "MaxKernel / accelerator-agents"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://github.com/ucb-bar/autocomp",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+          "label": "AutoComp"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://arxiv.org/abs/2511.15915",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+          "label": "AccelOpt"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://agentskills.io/specification",
+      "locations": [
+        {
+          "path": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+          "label": "Agent Skills"
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    },
+    {
+      "url": "https://registry.npmjs.org/mermaid/-/mermaid-11.17.2.tgz",
+      "locations": [
+        {
+          "path": "knowledge-site/web/vendor/README.md",
+          "label": ""
+        }
+      ],
+      "availability": "not_refetched_in_phase1",
+      "pinned_revision": null
+    }
+  ],
+  "local_source_manifests": [
+    "mla-source-manifest.json",
+    "colab-source-manifest.json"
+  ],
+  "specifications": [
+    {
+      "path": "manifests/phase1-2026-11-11/sources/master-build-prompt.txt",
+      "sha256": "2405cfad91c8baedeb31764a134a78bb06ced3ff362a18d33e6dff58e07883f1"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/sources/phase1-approval.txt",
+      "sha256": "09bd8d9e51f20f891b7e8ac9e1ebb69316866e5c7e9fca2939d5b577a89b9546"
+    }
+  ]
+}

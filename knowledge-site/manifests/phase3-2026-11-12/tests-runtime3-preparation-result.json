@@ -1,0 +1,7 @@
+{
+  "command": "python -B -m unittest discover -s tests -v",
+  "exit_code": 0,
+  "wall_seconds": 615.7550903999945,
+  "log": "tests-runtime3-preparation.txt",
+  "scope": "local CPU/synthetic suite, no Runtime3 hardware validation"
+}

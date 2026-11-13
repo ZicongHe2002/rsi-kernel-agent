@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-11-13T11:07:31.341005+00:00",
+  "reader": "/root/p35_recovery_review",
+  "mode": "SQLite mode=ro, query_only, one read transaction; existing local files; no network",
+  "task": "mla-decode-v1",
+  "scope": "Upload-time progress evidence; P3.5 remains incomplete",
+  "local_driver": {
+    "running": false,
+    "process_observation": {
+      "operation": "readonly_process_query",
+      "processes": [],
+      "observed_at_utc": "2026-11-13T11:05:41.6774910Z"
+    },
+    "last_process_exit_record": {
+      "exit_code": -1,
+      "finished_at_utc": "2026-11-13T10:53:28.9844460Z"
+    },
+    "last_persisted_progress": {
+      "name": "oracle-negative-attention-runtime4",
+      "operation_id": "operation:079d2d129595c886b74f35bdc44630a39e7ab03cc9817e67719659c733f64c3a",
+      "stage": "correctness",
+      "status": "running",
+      "utc": "2026-11-13T10:53:03.325085+00:00"
+    }
+  },
+  "remote_worker": {
+    "queried_in_this_review": false,
+    "final_state": "not independently observed by this review",
+    "root_report": "Original remote worker was not stopped; local prerequisite driver was stopped before upload preparation."
+  },
+  "controller": {
+    "revision": 146,
+    "spent": {
+      "executions": 10,
+      "time_s": 18000.0,
+      "tokens": 0
+    },
+    "limits": {
+      "executions": 16,
+      "max_concurrency": 1,
+      "max_repairs": 1,
+      "max_retries": 1,
+      "time_s": 28800,
+      "tokens": 100000,
+      "weights": {}
+    },
+    "remaining": {
+      "executions": 6,
+      "time_s": 10800.0,
+      "tokens": 100000
+    },
+    "task_cancelled": false,
+    "job_count": 13
+  },
+  "live_task_records": {
+    "record_count": 835,
+    "high_watermark": 860
+  },
+  "latest_saved_snapshot": {
+    "high_watermark": 843,
+    "id": "snapshot:4bf3f066a1904b0b821ff553bb5b60e5",
+    "record_count": 818,
+    "schema_version": 1,
+    "strategy_counts": {
+      "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd": 382,
+      "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e": 279,
+      "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf": 105
+    },
+    "task_id": "mla-decode-v1",
+    "version": 11,
+    "digest": "45e84d244ae9033d669083c129ffa3bf6f4ee34132cdb40db26b9a1bcc39c4a2"
+  },
+  "runtime3_loss_archive": {
+    "decision_id": "p35-loss-result:cf1ceaed21b624b7bae85dc4e467eb591c3e431f22267e1eaa6676bea6a66e6d",
+    "snapshot": {
+      "digest": "45e84d244ae9033d669083c129ffa3bf6f4ee34132cdb40db26b9a1bcc39c4a2",
+      "high_watermark": 843,
+      "id": "snapshot:4bf3f066a1904b0b821ff553bb5b60e5",
+      "record_count": 818,
+      "schema_version": 1,
+      "strategy_counts": {
+        "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd": 382,
+        "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e": 279,
+        "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf": 105
+      },
+      "task_id": "mla-decode-v1",
+      "version": 11
+    },
+    "budget_retained": {
+      "executions": 10,
+      "time_s": 18000.0,
+      "tokens": 0
+    },
+    "round_execution_completed": false
+  },
+  "runtime4_prerequisites": [
+    {
+      "name": "oracle-negative-attention",
+      "run_id": "runtime-run:c9e383063a3da8b8500b2a36596049ea28b0920595d66d4c229133f5626699a1",
+      "context_id": "runtime-context:c80194af1ca0b02a8c98de303baddf8e560cea1a0dce5ebfea8234850ea77ace",
+      "candidate_id": "oracle-negative-candidate:54fba11bbe506e328cf12f6f96ccb9f97550153ba56e1e37f369292567a2d73e",
+      "state": {
+        "execution_status": "running",
+        "scheduling_status": "active"
+      },
+      "stages": [
+        {
+          "stage": "generate",
+          "operation_id": "operation:d77b233aa9467d342911bc7271beb15ca900fa3f482349f5878b3b2bfb8786b3",
+          "request_id": "execution-request:e4ced557c5ef19bea3cd9c2ebbd6bcea287dd53975c5ae79eeb211065cf4ea0b",
+          "local_receipt_id": "execution-receipt:e4ced557c5ef19bea3cd9c2ebbd6bcea287dd53975c5ae79eeb211065cf4ea0b",
+          "local_receipt_status": "succeeded"
+        },
+        {
+          "stage": "compile",
+          "operation_id": "operation:cd786516556640958509c1de9b9e8488bce74f159b085841e696be98119c6c91",
+          "request_id": "execution-request:749605a589e364092a1a5d6c3afcec274e5b7be897b3b1cf494f5b6cbd0e5e95",
+          "local_receipt_id": "execution-receipt:749605a589e364092a1a5d6c3afcec274e5b7be897b3b1cf494f5b6cbd0e5e95",
+          "local_receipt_status": "succeeded"
+        },
+        {
+          "stage": "correctness",
+          "operation_id": "operation:079d2d129595c886b74f35bdc44630a39e7ab03cc9817e67719659c733f64c3a",
+          "request_id": "execution-request:75f825f7a2d589ab3c1bda98afb9854abfa6408f5fa7608bda674e30c48138b4",
+          "local_receipt_id": null,
+          "local_receipt_status": null
+        }
+      ],
+      "workflow_result_id": null,
+      "classification": null
+    },
+    {
+      "name": "oracle-negative-cache",
+      "run_id": "runtime-run:5790bd420b306b43ebd0bdf91e5913e0e046125ab529d0c5cab2ef9b222c7ae2",
+      "context_id": "runtime-context:c80194af1ca0b02a8c98de303baddf8e560cea1a0dce5ebfea8234850ea77ace",
+      "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+      "state": {
+        "execution_status": "not_run",
+        "scheduling_status": "ready"
+      },
+      "stages": [],
+      "workflow_result_id": null,
+      "classification": null
+    },
+    {
+      "name": "baseline-repair",
+      "run_id": "runtime-run:45e442783a9b42f24edb76d34aa69053035f87b264e1ca12dfe425f17122e234",
+      "context_id": "runtime-context:b258736e3702fbc2bb2bd752dd491fea6288c978ecaf881bc0644ed2ed1aad75",
+      "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+      "state": {
+        "execution_status": "not_run",
+        "scheduling_status": "ready"
+      },
+      "stages": [],
+      "workflow_result_id": null,
+      "classification": null
+    },
+    {
+      "name": "baseline-b",
+      "run_id": "runtime-run:663c7612c2400263c8ba9bf44deaaf17e79f54c94e1f248eba6d95ea58efe8a8",
+      "context_id": "runtime-context:b258736e3702fbc2bb2bd752dd491fea6288c978ecaf881bc0644ed2ed1aad75",
+      "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+      "state": {
+        "execution_status": "not_run",
+        "scheduling_status": "ready"
+      },
+      "stages": [],
+      "workflow_result_id": null,
+      "classification": null
+    }
+  ],
+  "runtime4_recovery_prepared_round_ids": [],
+  "active_binding_file": {
+    "generation": "runtime3"
+  },
+  "latest_root_tests": {
+    "exit_code": 0,
+    "started_at_utc": "2026-11-13T10:47:54.3031635Z",
+    "finished_at_utc": "2026-11-13T10:54:58.2936853Z",
+    "command": "knowledge-site/.venv-mcp/Scripts/python.exe -B -X utf8 -m unittest discover -s tests -v",
+    "total": 321,
+    "passed": 318,
+    "skipped": 3,
+    "failed": 0,
+    "errors": 0,
+    "duration_s": 423.235
+  },
+  "evidence_files": [
+    {
+      "path": "p35-upload-driver-processes.json",
+      "sha256": "bd4af3362ad1072485c4cbe7d210a04f3049c300fc6952113bfc1f81abb89a46",
+      "size": 155
+    },
+    {
+      "path": "runtime4-prerequisite-execution-result-20261113.json",
+      "sha256": "15c225010f6375c75b953281f91539b647d71d99c4a0e576e9225e97f48acedb",
+      "size": 88
+    },
+    {
+      "path": "p35-root-tests-runtime4-20261113-result.json",
+      "sha256": "a42c57fd31edd2d42caf34be8869aa61a8396a69dbcdc4bbf86da716189a73b3",
+      "size": 251
+    },
+    {
+      "path": "p35-root-tests-runtime4-20261113.txt",
+      "sha256": "8ad990d640ac39a6ad5e07771146ddc552618386098334092b693e32b66634cd",
+      "size": 161168
+    },
+    {
+      "path": "runtime4-progress.jsonl",
+      "sha256": "4f6b3a9a6d5b12a32a8f0c427e320c7dd4026da1255b0cb5de87e759c622409d",
+      "size": 3747
+    },
+    {
+      "path": "oracle-negative-attention-runtime4-job.json",
+      "sha256": "5ccdac6cac32af2a4d66d62f83bcc7bdfd7acf599a9d7fbc31985738a0f5c6b5",
+      "size": 46934
+    },
+    {
+      "path": "oracle-negative-cache-runtime4-job.json",
+      "sha256": "685e86b85729bb543bfd3d16b9f3f92c7fd0c03765dfc4ad4eb3c81d20b32498",
+      "size": 46930
+    },
+    {
+      "path": "baseline-repair-runtime4-job.json",
+      "sha256": "6e6c53dea6ae59b002639369604c6c28a004924c14ef9cd49a624c5b77dcd6de",
+      "size": 46978
+    },
+    {
+      "path": "baseline-b-runtime4-job.json",
+      "sha256": "1ea7ca43a993a902a2cdb06f9fd53145aed45d23f47c73f13cfca26e231d7424",
+      "size": 46768
+    },
+    {
+      "path": "runtime-loss-archive.json",
+      "sha256": "76c269734ffe6c7d52efb311f1f755164848b7b53e007c356b5e26edd4711251",
+      "size": 49194
+    },
+    {
+      "path": "active-runtime-binding.json",
+      "sha256": "1f5de4125c0a13fb3bab3cc3934ec15205875b2c78d03cea0014d88f4ac0ef18",
+      "size": 25
+    }
+  ],
+  "limits_of_claim": [
+    "A local running RunEvent is persisted scheduling state, not evidence that its local driver is currently alive.",
+    "The absence of a local correctness receipt/completion marker means its final result has not been integrated; it does not prove remote execution is incomplete.",
+    "No prerequisite gate pass, second-round hardware completion, single-tile hardware result or stable end-to-end gain is claimed.",
+    "No Store writes, snapshot creation, bridge calls, remote worker stop or GitHub access occurred in this review.",
+    "Runtime4 prerequisite costs are separate reservation Decisions; original exploration budget is unchanged by their Run creation."
+  ]
+}

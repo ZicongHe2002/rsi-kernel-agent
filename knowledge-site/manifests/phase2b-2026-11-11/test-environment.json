@@ -1,0 +1,35 @@
+{
+  "python": "3.13.14 (main, Jun 23 2026, 15:19:27) [MSC v.1944 64 bit (AMD64)]",
+  "sqlite": "3.53.1",
+  "mcp": "1.30.0",
+  "pydantic": "2.14.2",
+  "scope": "synthetic CPU infrastructure, temporary stdio/HTTP fixtures; no TPU evidence",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "test_mcp.MCPTests",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site",
+      "exit_code": 0
+    }
+  ]
+}

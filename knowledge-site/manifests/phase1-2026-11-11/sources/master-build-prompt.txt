@@ -1,0 +1,706 @@
+
+# RSI Kernel Agent — Master Build Prompt for OpenAI Codex
+
+> Project root: `Desktop/rsi-kernel-agent`
+>
+> The current project directory is expected to contain:
+> - `knowledge-site/` — the canonical source of RSI documentation and assets.
+> - `rsi-codex-knowledge-site-bootstrap/` — supporting setup prompts and templates.
+> - `AGENTS.md`
+> - `LICENSE`
+>
+> Verify this layout before acting. Do not assume the screenshot is more current than the filesystem.
+
+---
+
+# ROLE AND MISSION
+
+You are the engineering agent responsible for implementing the **RSI Kernel Agent**: a recursive self-improvement system for optimizing real TPU kernels.
+
+The goal is not to build a generic coding agent or a conventional single-winner autotuner.
+
+The system must repeatedly:
+
+1. Inspect and benchmark real kernel implementations.
+2. Collect and preserve execution/profile evidence.
+3. Combine code, workload, Profile/Benchmark evidence, historical Memory, and external/internal Knowledge.
+4. Generate **multiple evidence-backed optimization Plans across multiple long-lived strategies**.
+5. Implement multiple Candidate variants for those Plans.
+6. Evaluate eligible candidates on real TPU under a fixed protocol.
+7. Preserve every result, including failures, regressions, deferred work, and costs.
+8. Update each strategy's history and continue exploration.
+
+**Do not force the system to select one supposedly optimal method before experiments.**
+
+If strategies A and B each have reasonable, distinct, legal Plans, both may be implemented and evaluated in the same optimization round.
+
+Selection of a performance winner happens after valid experiments, not before them.
+
+Your job is to turn the approved design into a reliable, testable engineering system. Do not silently redesign the project.
+
+# NON-NEGOTIABLE PROJECT PRINCIPLES
+
+## A. Multi-strategy, multi-plan exploration
+
+- Multiple long-lived strategies (A/B/C/...) may participate in one round.
+- Each participating strategy can generate multiple Plans.
+- Each Plan can generate multiple Candidate implementations.
+- Plans need a reasoned basis: code location, Profile evidence, prior experiment, source material, hardware/API constraint, mathematical reasoning, or an explicitly labeled exploratory hypothesis.
+- A Plan does not need a guaranteed speedup or a complete causal proof before it can be tried.
+- Do not cancel B merely because A is currently faster.
+- Resource limits may defer work, but deferred means `not_run/deferred`, never `failed`.
+- Deduplicate genuinely redundant Plans, but preserve meaningfully different approaches.
+
+## B. Memory semantics
+
+Use two-stage retrieval:
+
+1. Read the latest status card for every known strategy.
+2. Determine the set of strategies participating in this round.
+3. Read the complete, versioned history snapshot for each participating strategy.
+4. Select and bind an exact parent Candidate for each strategy.
+
+Keep these concepts separate:
+
+- `latest_attempt`
+- `last_correct_candidate`
+- `branch_best`
+- `task_best`
+- `frontier`
+- `paused`
+- `deferred`
+
+A branch best is not necessarily the task best.
+
+A candidate that is faster than its parent may still be slower than the task best.
+
+Do not overwrite a better result with a worse or incomparable result.
+
+Preserve all attempts, including failed, invalid, slower, repaired, incomplete, and deferred attempts. Never silently truncate a history and call it complete.
+
+## C. Profiler and Analyzer
+
+- Profiler owns Analyzer as a child branch, not as a separate top-level peer module.
+- Profiler concerns runtime capture, artifact preservation, parsing, evidence queries, and optional recapture.
+- Analyzer consumes saved Profile/Benchmark evidence, current code, workload contracts, Memory snapshots, and Knowledge.
+- Analyzer separates facts, derived measurements, compiler estimates, mathematical predictions, historical claims, and hypotheses.
+- Analyzer uses tools and Skills where available; it must not merely write a long natural-language summary.
+- Analyzer should produce multiple evidence-backed Plans, not a single winner.
+- If saved evidence is sufficient, analyze it offline. Do not rerun TPU work by default.
+- If evidence is missing, create an explicit `CaptureRequest`; the Controller decides whether budget and permissions allow a new capture.
+
+## D. Benchmark authority
+
+Benchmark/Evaluator owns:
+
+- Correctness oracle and tolerance.
+- Workload coverage.
+- Timing method and boundaries.
+- Statistical comparison and confirmation.
+- Eligibility for performance promotion.
+
+Do not let an LLM change reference outputs, tolerances, test coverage, timing boundaries, or promotion rules to make a candidate pass.
+
+A correct, reliably faster candidate is not automatically rejected because its causal explanation is unknown.
+
+Record:
+
+`performance gain confirmed; cause unknown/pending`
+
+However, suspected incorrectness, missing work, invalid synchronization, or unfair timing must be investigated before promotion.
+
+## E. Knowledge and human editing
+
+- Support both targeted search and proactive exploration.
+- Knowledge can be stored before it is used in an experiment.
+- Source claims are not local TPU performance evidence.
+- Human review/editing is optional and must not block the automated loop.
+- Keep provenance, source versions, and correction history where practical.
+
+## F. Security and scope
+
+- Never place API keys, passwords, OAuth access/refresh tokens, cookies, private keys, browser profiles, local auth databases, or service-account secrets in `knowledge-site/`, source control, or generated reports.
+- Document account roles, permissions, and connection requirements as policy/metadata only.
+- Keep actual authentication in the approved local secure credential store or interactive authorization flow.
+- Respect existing directory write restrictions, company data policy, and TPU access controls.
+- Do not upload private source code, traces, or inputs to external services unless explicitly authorized.
+- Do not install dependencies, plugins, Skills, or change global configuration without approval.
+- Do not upgrade JAX, jaxlib, libtpu, compiler, or TPU runtime versions without explicit approval.
+
+---
+
+# PHASE 0 — ESTABLISH PROJECT ROOT AND AUDIT BEFORE WRITING
+
+Do not start by creating a new architecture or generating many files.
+
+## 0.1 Verify the filesystem layout
+
+1. Print current working directory, Git root, branch, and `git status`.
+2. Verify whether the actual root is `Desktop/rsi-kernel-agent`.
+3. Inspect:
+   - `knowledge-site/`
+   - `rsi-codex-knowledge-site-bootstrap/`
+   - `AGENTS.md`
+   - `LICENSE`
+   - Existing source, tests, configs, and scripts.
+4. The existing `knowledge-site/` is the canonical knowledge-base folder unless filesystem evidence shows otherwise.
+5. The sibling `rsi-codex-knowledge-site-bootstrap/` is a supporting prompt/template package. Read its README and relevant templates, but do not blindly merge the bootstrap package into the knowledge base.
+6. Do not create `knowledge-site/knowledge-site/`.
+7. Do not move or delete source material during the audit.
+8. If the actual layout differs, report the observed layout and adapt without guessing.
+
+## 0.2 Read the project's instructions
+
+Read root and applicable nested `AGENTS.md` files, README, license, project config, and existing development rules.
+
+Record existing uncommitted changes. Do not overwrite user work.
+
+Check for scope restrictions such as "only modify PallasKernel/".
+
+Treat the most specific applicable restriction as binding.
+
+If a required project file would be outside the allowed write scope, do not create it there. Report the constraint and propose an allowed alternative.
+
+## 0.3 Audit the knowledge site completely
+
+Recursively inventory `knowledge-site/`:
+
+- Markdown and text documents.
+- PDFs and Office documents.
+- Images and screenshots.
+- Mermaid source and rendered diagrams.
+- Attachments and relative links.
+- Manifests and indexes.
+- Access-policy documents.
+- ChatGPT/Codex/MCP connection templates.
+
+For each item record:
+
+- Path, file type, size, title/heading.
+- Status: `CURRENT`, `SUPPLEMENT`, `REFERENCE`, `ARCHIVE`, `DRAFT`, or `UNKNOWN`.
+- Referenced assets and relative links.
+- Source/revision/checksum where available.
+- Duplicate/conflict/incomplete status.
+
+Preserve images and attachments.
+
+Do not claim a document is complete if only a partial excerpt is available.
+
+Do not silently choose between conflicting revisions.
+
+Check that the intended hierarchy is represented:
+
+- RSI system overview.
+- Memory.
+- Knowledge Search and method-search/multi-plan practice.
+- Optimization Workflow.
+- Benchmark.
+- Profiler, with Analyzer as a child branch.
+- Multi-plan exploration practice.
+- External references and research.
+
+Do not create duplicate parallel "current" documents.
+
+Use an index and links.
+
+If the two Knowledge Search practice notes overlap, report the relationship and propose one canonical page with the other archived/redirected only after confirming contents and approval.
+
+## 0.4 Audit access permissions and ChatGPT/Codex connections
+
+Inspect configuration structure without revealing secret values.
+
+Distinguish:
+
+- Repository/file permissions.
+- Account/workspace roles.
+- TPU execution permissions.
+- Codex local authentication.
+- ChatGPT account-level connector authorization.
+- Project MCP server configuration.
+
+Create or update only documentation/templates after approval:
+
+- `knowledge-site/access/ACCESS_POLICY.md`
+- `knowledge-site/connections/README.md`
+- Sanitized MCP/Codex configuration examples if needed.
+
+Never copy live credentials into the repository.
+
+Do not copy:
+
+- `~/.codex/auth.json`
+- OAuth refresh tokens.
+- API keys.
+- Cookies.
+- Private keys.
+- Browser state.
+- Service-account secrets.
+
+Do not assume ChatGPT account connectors can be exported as files.
+
+Document interactive reauthorization steps where applicable.
+
+Check `.gitignore` for credentials, local auth files, temporary traces, and large generated artifacts.
+
+Do not change account ACLs or permissions during the audit.
+
+## 0.5 Audit actual installed Codex Skills
+
+Do not assume Skills from a public web page are installed locally.
+
+Inspect the actual supported locations:
+
+- Repository `.agents/skills/` in the current directory and parent directories up to the Git root.
+- User `~/.agents/skills/`.
+- Admin `/etc/codex/skills/` if accessible.
+- Bundled/system Skills exposed by the installed Codex version.
+- Enabled plugin-provided Skills where visible.
+
+Also inspect:
+
+- `AGENTS.md`
+- Relevant `~/.codex/AGENTS.md`
+- Trusted project `.codex/config.toml`
+- Available MCP/subagent/CLI/Python tools as separate capability types.
+
+For each relevant Skill record:
+
+- Exact name and description.
+- Path and scope (repo/user/admin/system/plugin).
+- Version/commit/content hash if available.
+- Referenced scripts/resources and dependencies.
+- Side effects (shell, write, network, install, external service, TPU).
+- Whether it is discoverable in the current session.
+- Whether it was only inspected or actually tested.
+
+Check bundled `skill-creator` and `skill-installer` if exposed.
+
+The old `openai/skills` GitHub repository has been marked deprecated; use current Codex documentation and currently exposed system/plugin Skills as authority.
+
+Do not install anything during Phase 0.
+
+Classify reuse:
+
+- `REUSE`
+- `COMPOSE`
+- `EXTEND`
+- `MISSING`
+- `UNVERIFIED`
+
+Track validation separately:
+
+- `inspected_only`
+- `cpu_tested`
+- `tpu_tested`
+- `unavailable`
+
+A Skill being present does not prove its scripts/dependencies work.
+
+A public repository Skill is only a candidate until inspected.
+
+Do not create a new Skill merely to fill a matrix cell.
+
+## 0.6 Audit existing code and tools
+
+Locate actual implementations of:
+
+- Task Adapter and workload definitions.
+- Kernel invocation and reference implementation.
+- Correctness tests and tolerance contracts.
+- Timing/benchmark runner.
+- Profile capture and raw artifact storage.
+- XProf/Perfetto parsing and query tools.
+- LLO/compiler metadata handling.
+- Mathematical/resource models.
+- Persistent experiment storage.
+- Strategy/Plan/Candidate/Run identity.
+- Scheduling, queueing, budget, retries, checkpoints.
+
+Classify each capability as:
+
+- `EXISTING`
+- `PARTIAL`
+- `MISSING`
+- `UNVERIFIED`
+
+Provide file/line evidence.
+
+Do not replace existing working code simply because a new directory design looks cleaner.
+
+## 0.7 Phase 0 deliverables
+
+Produce an audit report (in the approved location; otherwise return it in the response) containing:
+
+1. Repository map and current status.
+2. Knowledge-site inventory and authority map.
+3. Image/attachment/link manifest.
+4. Duplicate/conflict report.
+5. Access/connection audit with no secrets.
+6. Actual Codex Skills inventory and capability matrix.
+7. Existing code capability map.
+8. Source/reference manifest.
+9. Proposed implementation architecture and module contracts.
+10. Unresolved decisions, risks, and exact permissions needed.
+
+**Stop after Phase 0.**
+
+Do not install Skills, migrate/delete documents, change ACLs, authorize connectors, run TPU jobs, or implement the full framework until the owner reviews the audit and approves the next scope.
+
+---
+
+# PHASE 1 — KNOWLEDGE-SITE COMPLETENESS AND SAFE POPULATION
+
+Only after Phase 0 is reviewed and the owner approves the exact source/destination scope:
+
+1. Treat the existing `knowledge-site/` as the target. Do not nest another copy inside it.
+2. Preserve all current files before making structural changes.
+3. Import only missing approved materials from the designated source folder.
+4. Preserve original files when converting formats.
+5. Preserve images, embedded document images, Mermaid sources, and rendered diagrams.
+6. Repair relative links and validate every link.
+7. Create/update `README.md` and `index.md`.
+8. Separate current design, supplements, references, archives, and drafts.
+9. Keep a manifest of source path, destination path, checksum, import status, and completeness.
+10. Keep permissions as documented policy; actual ACL changes remain separate and require authorization.
+11. Keep only sanitized ChatGPT/Codex/MCP templates in the repository.
+12. Run a secret scan that reports paths/categories only, never secret values.
+13. Verify `.gitignore` and ensure credentials/local auth are not tracked.
+14. Do not delete the original source folder.
+
+Do not report complete until counts, checksums, links, images, diagrams, and unresolved items have been checked.
+
+---
+
+# PHASE 2 — BUILD THE MINIMUM REAL EXPERIMENT FOUNDATION
+
+Do not implement all modules at once.
+
+First establish common data contracts and a real single-workload execution path.
+
+## 2.1 Common identities and contracts
+
+Define typed, versioned records for:
+
+- `Task`
+- `Workload`
+- `Strategy`
+- `ParentCandidate`
+- `Plan`
+- `Candidate`
+- `Run`
+- `Evidence`
+- `AnalysisBundle`
+- `Decision`
+- `EvaluationContext`
+
+Do not put source-code identity inside a comparison context in a way that prevents different candidates from being compared.
+
+Keep these separate:
+
+- Shared task/workload/environment/protocol comparison context.
+- Candidate-specific source/config/build identity.
+
+Use immutable IDs and append-only run/evidence records where practical.
+
+Handle concurrent writes and idempotency.
+
+Never silently overwrite raw results.
+
+## 2.2 Task Adapter and Runner
+
+Reuse existing task invocation and correctness code.
+
+For one real existing Kernel:
+
+- Read actual Shape/dtype/layout/mask/length from workload/config.
+- Prepare valid inputs and state.
+- Call the exact Candidate.
+- Wait for all output leaves to complete.
+- Handle multi-output pytrees.
+- Handle stateful/cache/donation behavior explicitly.
+- Record compile/runtime errors.
+
+Do not hard-code historical example shapes as universal values.
+
+## 2.3 Benchmark
+
+For one real workload, implement/reuse:
+
+- Correctness against the existing reference.
+- Fixed tolerance and boundary contract.
+- Warmup and synchronized timing.
+- Raw timing samples and summary statistics.
+- Explicit timing method and measurement scope.
+- Parent/branch-best/task-best comparison.
+- Confirmation/retest policy.
+- Failure and cost recording.
+
+Do not build a generic public leaderboard first.
+
+Do not use mock timing as TPU validation.
+
+## 2.4 Persistence
+
+Persist the minimum experiment data before adding complex AI:
+
+- Task/workload identity.
+- Candidate source/config/build identity.
+- Run identity.
+- Correctness result.
+- Raw timing samples and measurement method.
+- Environment.
+- Artifact references.
+- Errors/costs.
+- Decisions.
+
+A local database plus artifact directories is acceptable for the first version if it meets concurrency and recovery requirements.
+
+Choose storage based on actual environment and constraints, not fashion.
+
+---
+
+# PHASE 3 — PROFILER AND ANALYZER
+
+## 3.1 Profiler data flow
+
+The intended sequence is:
+
+`Execute and capture as configured → save raw artifacts → parse saved data offline → analyze → request recapture only if necessary`
+
+- Collector is the runtime capture/save function. If the existing Benchmark runner already captures the required artifacts, reuse it; do not create a redundant Collector service.
+- Parser reads saved artifacts, validates capture integrity, locates the target execution, extracts events/metrics and emits structured evidence.
+- Analyzer interprets the evidence with code, workload, Memory and Knowledge.
+- Shared Runner means code reuse for task setup/invocation, not that Benchmark and Profile must run simultaneously or share one capture.
+- If existing saved data is sufficient, do not rerun TPU.
+- If detailed LLO/custom-call information was not captured, request a separate diagnostic run and bind it to the same Candidate/Workload while preserving a distinct Run ID and compile/capture settings.
+- Distinguish direct measurements, trace-derived values, compiler estimates, model predictions and unavailable metrics.
+- Check actual TPU v6e/software capability. Do not assume TPU7x-only counters exist on v6e.
+- Never sum nested/overlapping trace events naively as total latency.
+
+## 3.2 Analyzer responsibilities
+
+Analyzer is a Profiler child branch.
+
+It must:
+
+1. Verify Candidate/Parent/Workload/Environment binding.
+2. Read the relevant current source and call path.
+3. Inspect Profile/Benchmark evidence and historical experiments.
+4. Separate observed facts, derived measurements, estimates, predictions and hypotheses.
+5. Preserve alternative explanations where evidence is ambiguous.
+6. Select relevant existing Skills/tools based on the question.
+7. Query code, trace, compiler information, Memory and Knowledge.
+8. Use reproducible math/statistics scripts for quantitative claims.
+9. Produce multiple evidence-backed Plans across participating strategies.
+10. Attach evidence references, assumptions, tradeoffs, unknowns and validation ideas.
+11. Submit the PlanSet to Optimization Workflow.
+
+Do not treat a long prompt or a second LLM vote as proof.
+
+Use deterministic checks for IDs, units, schemas, formula inputs and reference existence.
+
+Use evidence review to check whether citations actually support claims.
+
+## 3.3 Mathematics
+
+Use Python/SymPy or existing math-model tools where appropriate:
+
+- Semantic/dimensional checks.
+- Compute/bandwidth resource estimates.
+- Live-memory/VMEM estimates.
+- Tile/buffer tradeoffs.
+- Ideal pipeline models.
+- Paired timing statistics.
+
+Every calculation must record formula/model revision, inputs, units, assumptions, omitted costs and output.
+
+A model prediction is not a TPU measurement.
+
+Do not use MXU peak for operations that do not execute on MXU.
+
+---
+
+# PHASE 4 — KNOWLEDGE SEARCH AND MULTI-PLAN GENERATION
+
+## 4.1 Knowledge Search
+
+Support:
+
+- Targeted retrieval from current code/Profile/history.
+- Proactive exploration of alternative implementations.
+- Approved web/paper/repository sources.
+- Internal knowledge-site retrieval.
+- Code-symbol and API lookup.
+- Method extraction with provenance, version, applicability, costs and unknowns.
+
+A method can be stored before it is tested.
+
+Source claims do not become local performance facts automatically.
+
+## 4.2 Plan generation
+
+For every participating strategy, generate multiple materially distinct Plans where justified.
+
+Each Plan should identify:
+
+- Strategy and exact parent Candidate.
+- Intended change and code location.
+- Basis references (Profile, code, Memory, Knowledge, math, or explicit hypothesis).
+- Semantic and hardware constraints.
+- Expected tradeoffs, not guaranteed speedup.
+- Candidate variants to implement.
+- Correctness/performance validation requirements.
+- Unresolved assumptions.
+
+Do not invent a numeric "potential score" without calibrated evidence.
+
+Do not force exactly N Plans if fewer are justified.
+
+Do not suppress good Plans merely to keep a small fixed number.
+
+## 4.3 Executor
+
+Each Candidate must have:
+
+- Unique ID.
+- Exact parent.
+- Source/config/build digest.
+- Plan link.
+- Isolated working copy/worktree where appropriate.
+- Execution status and logs.
+
+Allow independent implementation attempts per Plan.
+
+A repair creates a new Candidate/Run and preserves the original failure.
+
+Candidate code cannot alter correctness oracle, tolerances, workload contract, timing boundaries, or result parser.
+
+---
+
+# PHASE 5 — CONTROLLER AND COMPLETE RSI LOOP
+
+Use deterministic Python orchestration/state machine for:
+
+- Participating strategy selection.
+- Plan/Candidate queue.
+- TPU resource scheduling.
+- Compile/run budgets.
+- Limited repairs.
+- Retries and infrastructure failure handling.
+- Deferred work.
+- Best/frontier updates.
+- Checkpoints and recovery.
+
+LLM proposes Plans and interpretations.
+
+Deterministic code enforces budgets, permissions, protocol, state transitions and result promotion.
+
+On one shared TPU, Candidate generation and offline analysis can run concurrently; formal timing must use a controlled queue to avoid resource contention.
+
+A complete round should be:
+
+1. Read all strategy status cards.
+2. Choose multiple participating strategies.
+3. Read full history snapshots for each.
+4. Bind exact parents and matching Profile/Benchmark evidence.
+5. Search/reuse knowledge and generate multiple Plans.
+6. Implement multiple Candidates.
+7. Compile and correctness-check.
+8. Queue eligible Candidates for TPU evaluation.
+9. Save all raw results and artifacts.
+10. Perform confirmation/retest according to Benchmark policy.
+11. Update branch best/task best/frontier independently.
+12. Analyze results as needed and update claims/knowledge references.
+13. Checkpoint and begin the next round.
+
+---
+
+# PHASE 6 — TESTING AND ACCEPTANCE
+
+Use existing Skills discovered in Phase 0 where appropriate.
+
+Do not create a new Skill if an existing installed one can be safely reused.
+
+Required test layers:
+
+- Unit tests.
+- Integration tests.
+- Acceptance tests.
+- CPU/static tests.
+- Real TPU tests when authorized and available.
+
+Include failure cases:
+
+- Correct Candidate.
+- Intentionally incorrect Candidate.
+- Profile artifact exists but contains no target device event.
+- Candidate/Profile mismatch.
+- Workload/environment mismatch.
+- Missing metric incorrectly treated as zero.
+- Compiler estimate mislabeled as measured.
+- Nested trace events double-counted.
+- Invalid timing method mixed with device timing.
+- Multiple output leaves not synchronized.
+- Concurrent A/B strategies.
+- A wins but B remains eligible to explore.
+- One Plan fails while other Plans continue.
+- Incomplete history snapshot.
+- Budget exhaustion and deferred Candidate.
+- Infrastructure failure.
+- Duplicate/retried writes.
+- Worse result attempting to overwrite task best.
+- Correct faster Candidate with unknown causal explanation.
+- Secret accidentally present in destination.
+
+Do not claim a TPU test passed unless it actually ran on the target TPU and the evidence is saved.
+
+For Analyzer quality, create a fixed evaluation set of historical cases and compare under the same model/budget:
+
+- Base prompt.
+- Prompt + existing Skills.
+- Prompt + Skills + deterministic tools.
+- Prompt + tools + evidence review.
+
+Measure evidence support, invalid/redundant Plan rate, semantic legality, useful candidate diversity, verified performance outcomes under fixed budget, and cost.
+
+Do not use report length or model self-rating as the primary metric.
+
+---
+
+# WORKING RULES AND COMMUNICATION
+
+- Work in small, reviewable milestones.
+- Before editing, inspect current files and `git status`.
+- Never overwrite user changes.
+- Prefer reuse over rewrite.
+- Do not create empty modules just to match a diagram.
+- Do not add a new Skill until the existing Skill inventory proves a real gap and the owner approves it.
+- Keep design decisions in concise ADRs when a real tradeoff is made.
+- Keep docs synchronized with implemented behavior; label planned/unverified features.
+- Report exact files changed, commands run, exit codes, tests, artifacts and remaining risks.
+- If blocked, continue independent safe work and clearly mark the blocker.
+- Ask only when a genuinely consequential ambiguity cannot be resolved from the repository or approved docs.
+- Do not repeatedly ask the owner to restate decisions already recorded in `knowledge-site/`.
+
+---
+
+# FIRST ACTION
+
+Start with **Phase 0 only**.
+
+Return:
+
+1. Verified project root and filesystem layout.
+2. `knowledge-site/` inventory and completeness report.
+3. Current-vs-archive document authority map.
+4. Image/diagram/link manifest.
+5. Permission and ChatGPT/Codex connection audit (no secrets).
+6. Actual Codex Skills inventory and routing matrix.
+7. Existing code/tool capability map.
+8. Conflicts/gaps between design docs.
+9. Recommended Phase 1 migration and Phase 2 implementation plan.
+10. Exact write permissions/dependencies/TPU access needed.
+
+Do not modify files, install Skills, alter permissions, authorize connectors, or run TPU jobs during this first action.
+
+Stop and wait for approval after presenting the Phase 0 findings.

@@ -1,0 +1,15 @@
+{
+  "observed_at_utc": "2026-11-13T06:17:05.916654+00:00",
+  "discovery": {
+    "status": "connected_control_plane",
+    "bridge_source": "C:\\Users\\fengluo\\Desktop\\colab\\google-colab-cli\\src\\colab_cli\\client.py",
+    "assignments": []
+  },
+  "exit_code": 0,
+  "new_allocation_attempts": 5,
+  "allocation_batch_completed": true,
+  "allocation_batch_exit_code": 0,
+  "background_allocation_loop": false,
+  "remote_experiment_submitted": false,
+  "limitations": "Empty assignment list does not prove a timed-out allocation cannot later appear. Query persisted notebook ID before any future POST."
+}

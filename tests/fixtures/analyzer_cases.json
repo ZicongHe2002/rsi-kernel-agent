@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "dataset_id": "rsi-analyzer-fixed-synthetic-v1",
+  "provenance": "synthetic",
+  "cases": [
+    {
+      "id": "dma-count",
+      "strategy_id": "A",
+      "title": "High DMA event count without a dependency path",
+      "facts": {"dma_event_count": 1000, "execution_us": 50, "dma_bytes": null, "wait_us": null, "critical_path": null},
+      "proposition": "The 1000 DMA events prove that DMA is the critical-path bottleneck.",
+      "question": "Assess this proposition and select the investigation needed before making a causal claim.",
+      "expected": {"verdict": "undetermined", "categories": ["hypothesis", "unknown"], "controls": ["critical_path_trace"], "numeric_result": null}
+    },
+    {
+      "id": "profile-mismatch",
+      "strategy_id": "B",
+      "title": "Profile belongs to a different candidate and strategy",
+      "facts": {"requested_strategy": "B", "requested_candidate": "B-current", "profile_strategy": "A", "profile_candidate": "A-current", "same_workload": true, "profile_latency_us": 10},
+      "proposition": "Because the workload matches, A-current's profile can be used as B-current's measured evidence.",
+      "question": "Assess the measurement binding and select the required next action.",
+      "expected": {"verdict": "contradicted", "categories": ["observed_fact"], "controls": ["identity_rebind"], "numeric_result": null}
+    },
+    {
+      "id": "tile-dtype-confound",
+      "strategy_id": "A",
+      "title": "Two simultaneous implementation changes",
+      "facts": {"before": {"tile": [64, 64], "dtype": "float32", "latency_us": 20}, "after": {"tile": [128, 64], "dtype": "bfloat16", "latency_us": 12}, "isolated_variants": [], "tolerance_tested": false},
+      "proposition": "The tile size change alone caused the measured latency decrease.",
+      "question": "Assess causal attribution and select controls for the next experiment, including changed numerical semantics.",
+      "expected": {"verdict": "undetermined", "categories": ["hypothesis", "unknown"], "controls": ["one_variable_ablation", "correctness_tolerances"], "numeric_result": null}
+    },
+    {
+      "id": "different-history",
+      "strategy_id": "B",
+      "title": "Historical failure under different conditions",
+      "facts": {"historical": {"shape": [32, 32], "dtype": "float32", "hardware": "synthetic-H1", "outcome": "double buffering slower"}, "current": {"shape": [4096, 4096], "dtype": "bfloat16", "hardware": "synthetic-H2"}, "current_retest": null},
+      "proposition": "The historical failure establishes that double buffering will be slower for the current workload.",
+      "question": "Assess transferability and distinguish the historical observation from the current causal prediction.",
+      "expected": {"verdict": "undetermined", "categories": ["historical_claim", "hypothesis", "unknown"], "controls": ["condition_matched_retest"], "numeric_result": null}
+    },
+    {
+      "id": "prediction-not-measurement",
+      "strategy_id": "A",
+      "title": "Ideal pipeline model has no hardware run",
+      "facts": {"model": "pipeline", "inputs": {"stages": 4, "transfer_s": 3, "compute_s": 2}, "input_basis": "explicit hypothetical stage costs", "real_hardware_measurements": []},
+      "proposition": "The ideal pipeline result is an actual TPU measurement.",
+      "question": "Classify the result, calculate the ideal pipeline duration in seconds, and select validation needed for a performance claim.",
+      "expected": {"verdict": "contradicted", "categories": ["mathematical_prediction"], "controls": ["real_measurement_required"], "numeric_result": {"value": 14, "unit": "s"}}
+    },
+    {
+      "id": "multi-strategy-plans",
+      "strategy_id": "B",
+      "title": "Both strategies retain legal alternatives",
+      "facts": {"A_latency_us": 10, "B_latency_us": 12, "A_alternatives": ["tile reuse", "pipeline overlap"], "B_alternatives": ["layout conversion", "tile reuse"], "budget_policy": "no route cancelled", "candidate_correctness": "synthetic passed"},
+      "proposition": "A's lower latency means B must be cancelled and only one A Plan returned.",
+      "question": "Assess the requested exploration policy. The Analyzer PlanSet must retain at least two materially different Plans for both exact parents.",
+      "expected": {"verdict": "contradicted", "categories": ["hypothesis", "observed_fact"], "controls": ["retain_both_strategies"], "numeric_result": null, "minimum_plans_per_strategy": 2}
+    },
+    {
+      "id": "faster-unknown-cause",
+      "strategy_id": "A",
+      "title": "Valid timing does not explain the mechanism",
+      "facts": {"before_latency_us": 20, "after_latency_us": 16, "same_context": true, "timing_confirmed": true, "profile": null, "implementation_difference": "multiple scheduling and layout changes"},
+      "proposition": "The faster candidate proves that memory bandwidth improved.",
+      "question": "Separate observed timing from an explanation, and identify a useful causal test.",
+      "expected": {"verdict": "undetermined", "categories": ["hypothesis", "unknown"], "controls": ["causal_ablation"], "numeric_result": null}
+    },
+    {
+      "id": "stale-knowledge",
+      "strategy_id": "B",
+      "title": "Pinned source changed after method extraction",
+      "facts": {"method_source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "live_source_revision": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "pinned_excerpt": "Overlap independent transfers; verify buffer lifetimes.", "archived_old_full_document": false, "local_validation": null},
+      "proposition": "The current source can silently replace the pinned revision while preserving the same reproducible analysis input.",
+      "question": "Assess revision consistency and explain how to retain stale source material without claiming current or local validation.",
+      "expected": {"verdict": "contradicted", "categories": ["source_claim", "observed_fact"], "controls": ["preserve_revision_and_mark_stale"], "numeric_result": null}
+    },
+    {
+      "id": "missing-not-zero",
+      "strategy_id": "A",
+      "title": "Unavailable wait counter",
+      "facts": {"wait_us": null, "availability": "unavailable", "reason": "parser does not expose wait counters", "execution_us": 20},
+      "proposition": "The kernel spent exactly zero microseconds waiting.",
+      "question": "Assess the missing metric without substituting a numeric default.",
+      "expected": {"verdict": "undetermined", "categories": ["unknown"], "controls": ["collect_missing_metric"], "numeric_result": null}
+    },
+    {
+      "id": "nested-overlap",
+      "strategy_id": "A",
+      "title": "Nested intervals and unrelated device clocks",
+      "facts": {"interval_unit": "us", "intervals": [{"device": "0", "clock": "c0", "start": 0, "end": 10, "kind": "program"}, {"device": "0", "clock": "c0", "start": 2, "end": 5, "kind": "kernel"}, {"device": "0", "clock": "c0", "start": 8, "end": 12, "kind": "kernel"}, {"device": "1", "clock": "c1", "start": 0, "end": 7, "kind": "program"}]},
+      "proposition": "The occupied time on device 0, clock c0, is 17 microseconds because all three durations are additive.",
+      "question": "Assess the proposition and calculate the union occupied time only for device 0/clock c0; do not combine device clocks.",
+      "expected": {"verdict": "contradicted", "categories": ["derived_measurement"], "controls": ["interval_union_by_clock"], "numeric_result": {"value": 12, "unit": "us"}}
+    }
+  ]
+}

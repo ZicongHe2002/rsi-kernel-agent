@@ -1,0 +1,27 @@
+{
+  "date": "2026-11-13",
+  "report": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+  "report_sha256": "74509e62bec275b278ad98d85e9792e890ee25bdf2ec1fc3c09a4d24258e3548",
+  "report_utf8_no_replacement": true,
+  "documents_checked": 29,
+  "relative_links_checked": 282,
+  "missing_links": [],
+  "protected_modules_unchanged": 17,
+  "saved_full_test_log_sha256": "27b92653e17b4dfd2f9d471e2447bd0dc31537920ceb95c7a3924b2f9f8291d1",
+  "saved_test_exit_code": 0,
+  "round1_verified_results": 5,
+  "phase3_complete": false,
+  "new_tests_run": false,
+  "store_writes": 0,
+  "hardware_execution": false,
+  "status_evidence": "status-at-report-2026-11-13.json",
+  "weekly_original_content_preserved": true,
+  "independent_report_fact_review": {
+    "agent": "report_evidence_check",
+    "read_only": true,
+    "hardware_execution": false,
+    "new_tests_run": false,
+    "blocking_findings": 0,
+    "limitation_correction": "NPZ recompare does not independently reverify device input mutation or cache finite metadata; original runner receipts remain the evidence"
+  }
+}

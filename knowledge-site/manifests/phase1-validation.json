@@ -1,0 +1,1757 @@
+{
+  "relative_links": [
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "content/学习方法/rsi-document-index.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "content/学习方法/rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/mla-integration-audit.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/mla-source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/colab-cli-audit.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/colab-source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/phase1-validation.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/phase1-change-report.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/phase1-changes.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/site-inventory.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "access/ACCESS_POLICY.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "access/AUTH_STATE_MIGRATION_PLAN.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "access/gitignore.proposed",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "connections/README.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "manifests/phase1-2026-11-11/before.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/index.md",
+      "logical_source": "knowledge-site/index.md",
+      "target": "README.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/README.md",
+      "logical_source": "knowledge-site/README.md",
+      "target": "content/学习方法/rsi-document-index.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/README.md",
+      "logical_source": "knowledge-site/README.md",
+      "target": "index.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/README.md",
+      "logical_source": "knowledge-site/README.md",
+      "target": "access/AUTH_STATE_MIGRATION_PLAN.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/README.md",
+      "logical_source": "knowledge-site/README.md",
+      "target": "CHATGPT_SETUP.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/README.md",
+      "logical_source": "knowledge-site/README.md",
+      "target": "index.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/README.md",
+      "logical_source": "knowledge-site/README.md",
+      "target": "access/ACCESS_POLICY.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/README.md",
+      "logical_source": "knowledge-site/README.md",
+      "target": "connections/README.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/access/ACCESS_POLICY.md",
+      "logical_source": "knowledge-site/access/ACCESS_POLICY.md",
+      "target": "AUTH_STATE_MIGRATION_PLAN.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/access/ACCESS_POLICY.md",
+      "logical_source": "knowledge-site/access/ACCESS_POLICY.md",
+      "target": "gitignore.proposed",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/access/ACCESS_POLICY.md",
+      "logical_source": "knowledge-site/access/ACCESS_POLICY.md",
+      "target": "../manifests/phase1-2026-11-11/sources/phase1-approval.txt",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/access/ACCESS_POLICY.md",
+      "logical_source": "knowledge-site/access/ACCESS_POLICY.md",
+      "target": "../manifests/mla-integration-audit.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/access/ACCESS_POLICY.md",
+      "logical_source": "knowledge-site/access/ACCESS_POLICY.md",
+      "target": "../manifests/colab-cli-audit.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/access/ACCESS_POLICY.md",
+      "logical_source": "knowledge-site/access/ACCESS_POLICY.md",
+      "target": "../manifests/phase1-validation.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/connections/README.md",
+      "logical_source": "knowledge-site/connections/README.md",
+      "target": "../manifests/colab-cli-audit.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/connections/README.md",
+      "logical_source": "knowledge-site/connections/README.md",
+      "target": "mcp-servers.example.toml",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/connections/README.md",
+      "logical_source": "knowledge-site/connections/README.md",
+      "target": "../CHATGPT_SETUP.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/connections/README.md",
+      "logical_source": "knowledge-site/connections/README.md",
+      "target": "../access/ACCESS_POLICY.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/connections/README.md",
+      "logical_source": "knowledge-site/connections/README.md",
+      "target": "../access/AUTH_STATE_MIGRATION_PLAN.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/.trash/288e87a620af2859b9d2519e3762889b/note.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-analyzer-legacy-redirect.md",
+      "target": "rsi-profiler-analyzer.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "target": "rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "target": "rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "target": "rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "target": "rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-benchmark.md",
+      "target": "RSI实践/rsi-phase2-roadmap.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-profiler.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-multi-plan-exploration.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-phase2-roadmap.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-method-search-and-selection.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "../归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "target": "rsi-document-index.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "target": "rsi-profiler.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-profiler.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-multi-plan-exploration.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-document-index.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-phase2-roadmap.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "target": "rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "target": "rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "target": "rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "target": "RSI实践/rsi-multi-plan-exploration.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-knowledge-search.md",
+      "target": "rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "target": "rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "target": "rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "target": "rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-memory.md",
+      "target": "rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "target": "rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "target": "rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "target": "rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "target": "rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "target": "rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "target": "rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "logical_source": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "target": "RSI实践/rsi-phase2-roadmap.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-method-search-and-selection.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-method-search-and-selection.md",
+      "target": "rsi-multi-plan-exploration.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "target": "../rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "target": "../rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "target": "../rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "target": "../rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "target": "../rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "target": "rsi-profiler-analyzer.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "target": "../rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "../rsi-profiler.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "../rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "../rsi-profiler.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "../rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "../rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "../rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "../rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "rsi-multi-plan-exploration.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "logical_source": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "target": "../rsi-evidence-contract.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "logical_source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "target": "../../学习方法/rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "logical_source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "target": "../../学习方法/rsi-benchmark.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "logical_source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "target": "../../学习方法/rsi-kernel-agent.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "logical_source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "target": "../../学习方法/rsi-memory.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "logical_source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "target": "../../学习方法/rsi-knowledge-search.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "logical_source": "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "target": "../../学习方法/rsi-optimization-workflow.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/colab-cli-audit.md",
+      "logical_source": "knowledge-site/manifests/colab-cli-audit.md",
+      "target": "colab-source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/mla-integration-audit.md",
+      "logical_source": "knowledge-site/manifests/mla-integration-audit.md",
+      "target": "mla-source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/mla-integration-audit.md",
+      "logical_source": "knowledge-site/manifests/mla-integration-audit.md",
+      "target": "mla-source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-change-report.md",
+      "logical_source": "knowledge-site/manifests/phase1-change-report.md",
+      "target": "phase1-changes.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-change-report.md",
+      "logical_source": "knowledge-site/manifests/phase1-change-report.md",
+      "target": "phase1-validation.md",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-validation.md",
+      "logical_source": "knowledge-site/manifests/phase1-validation.md",
+      "target": "phase1-validation.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-validation.md",
+      "logical_source": "knowledge-site/manifests/phase1-validation.md",
+      "target": "phase1-2026-11-11/before.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-validation.md",
+      "logical_source": "knowledge-site/manifests/phase1-validation.md",
+      "target": "../access/gitignore.proposed",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-validation.md",
+      "logical_source": "knowledge-site/manifests/phase1-validation.md",
+      "target": "site-inventory.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-validation.md",
+      "logical_source": "knowledge-site/manifests/phase1-validation.md",
+      "target": "source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-validation.md",
+      "logical_source": "knowledge-site/manifests/phase1-validation.md",
+      "target": "phase1-changes.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-validation.md",
+      "logical_source": "knowledge-site/manifests/phase1-validation.md",
+      "target": "mla-source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    },
+    {
+      "source": "knowledge-site/manifests/phase1-validation.md",
+      "logical_source": "knowledge-site/manifests/phase1-validation.md",
+      "target": "colab-source-manifest.json",
+      "image": false,
+      "exists": true,
+      "fragment": null
+    }
+  ],
+  "broken_links": [],
+  "source_urls_before": 39,
+  "source_urls_missing": [],
+  "snapshots": [
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-benchmark.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-knowledge-search.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-memory.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-optimization-workflow.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-profiler.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-02.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-09.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/长期待办.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-method-search-and-selection.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/README.md.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/requirements-mcp.txt.original",
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/.gitignore.original",
+      "ok": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "qa/inline-tasks-results/inline-weekly-tasks.png",
+      "bytes": 124922,
+      "sha256": "23696803b97e6763275f29c771e69d14abecbc3fb15e554bce65684e85596323",
+      "unchanged": true
+    },
+    {
+      "path": "qa/inline-tasks-results/weekly-task-template.png",
+      "bytes": 112889,
+      "sha256": "b9e3a28487d2b8fcdf4666685e5ec20e3a8100d42a38c7ab311c5ef0279c210e",
+      "unchanged": true
+    },
+    {
+      "path": "qa/layout-collapse-results/desktop-collapsed.png",
+      "bytes": 48132,
+      "sha256": "90fb9dd1dabfb9ab0cc31b6e0778d981893ac27e77cad1587923bb8ec015bd19",
+      "unchanged": true
+    },
+    {
+      "path": "qa/layout-collapse-results/desktop-expanded.png",
+      "bytes": 71769,
+      "sha256": "285026ef4d04da56f2a6f2926b8130dc800c274dd2a374f051527586bcd59fd5",
+      "unchanged": true
+    },
+    {
+      "path": "qa/layout-collapse-results/mobile-collapsed.png",
+      "bytes": 34398,
+      "sha256": "d113e7cc17b6318e2b4c027f377b39cde5c1ea4a2348e9b99fcd4cb161fc9b0d",
+      "unchanged": true
+    },
+    {
+      "path": "qa/layout-collapse-results/mobile-expanded.png",
+      "bytes": 37672,
+      "sha256": "0a72ca52769e9580f004c42bee0db9521e4a5005978f6b41576e564b3f0f00e2",
+      "unchanged": true
+    },
+    {
+      "path": "qa/links-trash-results/deleted-note-read-only.png",
+      "bytes": 108685,
+      "sha256": "1b281743a801092fba66377f977c025aa5a03b0d4d85792ca582cb148787be50",
+      "unchanged": true
+    },
+    {
+      "path": "qa/mermaid-cache-regression-results/mermaid-user-diagram.png",
+      "bytes": 131508,
+      "sha256": "e45389688504f6c3f99fc3fbb5c37ccbd141b83500bb9756e5402ba8e3a4461f",
+      "unchanged": true
+    },
+    {
+      "path": "qa/mermaid-lazy-regression-results/mermaid-user-diagram.png",
+      "bytes": 131549,
+      "sha256": "b6aef8b2fb30bdac9a34144c7977f4d5e6ebc4f1c29312dc478c3ff9c61c01bb",
+      "unchanged": true
+    },
+    {
+      "path": "qa/mermaid-module-results/mermaid-user-diagram.png",
+      "bytes": 131518,
+      "sha256": "ad0e963279e4bd482e2975296828e8e38789f8c9b88db9bb42a7133cf94c0a20",
+      "unchanged": true
+    },
+    {
+      "path": "qa/mermaid-results/mermaid-user-diagram.png",
+      "bytes": 116563,
+      "sha256": "5902111b1325b4b336938ecf35c85a845b9fab4651251eccbe323735a4f93f56",
+      "unchanged": true
+    },
+    {
+      "path": "qa/mermaid-scroll-regression-results/mermaid-user-diagram.png",
+      "bytes": 131469,
+      "sha256": "5f40ee552fa72de3ee97bd3e05156a30627a5d61f0c1a2e510b3ae37fe3a7005",
+      "unchanged": true
+    },
+    {
+      "path": "qa/task-lists-layout-results/desktop-collapsed.png",
+      "bytes": 57284,
+      "sha256": "eed5c387eac35ce54fbc293f8c6d4e1a8968ab7041698ed81750f63bc028c747",
+      "unchanged": true
+    },
+    {
+      "path": "qa/task-lists-layout-results/desktop-expanded.png",
+      "bytes": 86792,
+      "sha256": "148c4a47c1948731d36712e93c19a1bc83bdc654659cb5c8212b022338ac0a66",
+      "unchanged": true
+    },
+    {
+      "path": "qa/task-lists-layout-results/mobile-collapsed.png",
+      "bytes": 42645,
+      "sha256": "0c47770a439cf683b7ab43337f482168705673390ed50054398725ebaadeca01",
+      "unchanged": true
+    },
+    {
+      "path": "qa/task-lists-layout-results/mobile-expanded.png",
+      "bytes": 43289,
+      "sha256": "55ded8a2824f0e2a6645f133fc2429065fed31a9841c0b9f370228a29ab1a049",
+      "unchanged": true
+    },
+    {
+      "path": "qa/task-rows-results/blank-task-row.png",
+      "bytes": 97572,
+      "sha256": "594d155ee874b94b11b04de9e377db38f6ec27d5ee11663b09e6fa7c090352d5",
+      "unchanged": true
+    },
+    {
+      "path": "qa/task-rows-results/weekly-task-rows.png",
+      "bytes": 137773,
+      "sha256": "97398233600393e2d6fac618739597b6d2c0cf33ec3edc5d7f41bc3d4d991751",
+      "unchanged": true
+    },
+    {
+      "path": "qa/tasks-results/ordinary-document-tasks.png",
+      "bytes": 86345,
+      "sha256": "8e4ab339086cdc9c7d61d2aef536224db990dfcc4d14241ed0430808a7137d45",
+      "unchanged": true
+    },
+    {
+      "path": "qa/tasks-results/weekly-task-template.png",
+      "bytes": 100493,
+      "sha256": "9203ab5e2b69c07ce88e4fe1503a0d5b41abb8f254b04bbd56a01be9d9be6eaf",
+      "unchanged": true
+    }
+  ],
+  "mermaid_blocks": [
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "block": 1,
+      "sha256": "940b241b0c9a8109fc569c040930fed6803d54f31d21f12d497c6511fe1aa652"
+    },
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "block": 2,
+      "sha256": "213cc50dbdec6f31e0ec1f0c0925d3f800de5ce5776db104c0493edd41eba7a6"
+    },
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "block": 3,
+      "sha256": "aa6989a6d5f3938ce5b635d702ad1d596d3b011bf8b8ef277254fbcde41f77d7"
+    },
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "block": 4,
+      "sha256": "eca170b657211ad7c034bb34a6f1152c54f22d83a1cf43aebb80b93cfa4c5776"
+    },
+    {
+      "path": "content/学习方法/rsi-kernel-agent.md",
+      "block": 1,
+      "sha256": "7dea5c0b7d7695b6fd32135168601a4dbab99d1015cfd783a0d4c9b06e6cdc1c"
+    },
+    {
+      "path": "content/学习方法/rsi-kernel-agent.md",
+      "block": 2,
+      "sha256": "f6c34e0af3626817c7da355c700b6cf20be241b558b8baf81d10e741ca45b723"
+    },
+    {
+      "path": "content/学习方法/rsi-knowledge-search.md",
+      "block": 1,
+      "sha256": "cdcb786ed6ae32d8694b8a828591596031090665399434f5f125939c370bc611"
+    },
+    {
+      "path": "content/学习方法/rsi-knowledge-search.md",
+      "block": 2,
+      "sha256": "56807fc2dd9e7c0dad65dc5936a6bdcc874a5b2d77940f67bffa88fb3615524d"
+    },
+    {
+      "path": "content/学习方法/rsi-knowledge-search.md",
+      "block": 3,
+      "sha256": "203cef332955024171bbccf20d6ee55bd5d197bc62c42a16aafed203c49e85a4"
+    },
+    {
+      "path": "content/学习方法/rsi-memory.md",
+      "block": 1,
+      "sha256": "35bc900b1f89c8d0a5ca42d5ceeed92586a50a68d5ef5846bd71635d9b11f94f"
+    },
+    {
+      "path": "content/学习方法/rsi-memory.md",
+      "block": 2,
+      "sha256": "ec251f08b426aa130f8ef90d4c12d4189dcdfe39f83493b01ffb47725cf7168c"
+    },
+    {
+      "path": "content/学习方法/rsi-memory.md",
+      "block": 3,
+      "sha256": "126efa4052835ca935344cf5ff479c9bcfde7cdccf70f5c5853f5d44937d166c"
+    },
+    {
+      "path": "content/学习方法/rsi-optimization-workflow.md",
+      "block": 1,
+      "sha256": "4a40919936ee8dd970dd3e3639319f732c2f0b84a8ff049918cb1f2d95c6a988"
+    },
+    {
+      "path": "content/学习方法/rsi-optimization-workflow.md",
+      "block": 2,
+      "sha256": "f2b8cd5de647b36b8da34225bfc9b39b2c6036429b949ed0923b2fe4d1e914ec"
+    },
+    {
+      "path": "content/学习方法/rsi-optimization-workflow.md",
+      "block": 3,
+      "sha256": "a9c74d2387c51621f67405fab58168ede299abc65077b6e2ed5b79ce828b2f63"
+    },
+    {
+      "path": "content/学习方法/rsi-profiler.md",
+      "block": 1,
+      "sha256": "70debe2c6922c423e3470cef725a201f625655e5a33b392a73f21abfd879be6c"
+    },
+    {
+      "path": "content/学习方法/rsi-profiler.md",
+      "block": 2,
+      "sha256": "38f36c0304a85b4ce0d88602fee905ffa61949b8381787c52eee9563a44b3930"
+    },
+    {
+      "path": "content/学习方法/rsi-profiler.md",
+      "block": 3,
+      "sha256": "458da5da8bb0dea3da757fb138acf0ff277b421d9a282da8a8907ea5b1877d8f"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "block": 1,
+      "sha256": "9c9c77f3c1ea68e5984832874ab6901f045b4a090f4c8abed4e97d3fdc598292"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "block": 2,
+      "sha256": "068e0edcbd93bd9279591047ccceeac5f1782e44bdb64096d9f390d3b8cebaf9"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "block": 3,
+      "sha256": "2fe795e27ad62143a2fd8d3466a389377aa85bbf9d37cd20cf7958aa8b317174"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "block": 4,
+      "sha256": "2349e73ce171f068ebdd17dcbbb8c40c3d7065efd1ca99f13a57f98fd85dc40f"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "block": 1,
+      "sha256": "fe9a6c543a8d29719e05325adf79b9df09fb753261118fdccf32fcd9f7bd4f2d"
+    }
+  ],
+  "browser_diagrams": {
+    "passed": 23,
+    "failed": 0,
+    "scope": "headless Chrome temporary profile; all network blocked; website/auth not opened"
+  },
+  "vendor_files_checked": 104,
+  "vendor_mismatches": [],
+  "external_sources": 48,
+  "original_source_checks": [
+    {
+      "manifest": "mla-source-manifest.json",
+      "files": 597,
+      "mismatches": []
+    },
+    {
+      "manifest": "colab-source-manifest.json",
+      "files": 25,
+      "mismatches": []
+    },
+    {
+      "manifest": "colab-source-manifest.json",
+      "files": 1,
+      "mismatches": [],
+      "additional_source": "C:/Users/fengluo/Desktop/colab/WINDOWS-COLAB.md"
+    }
+  ],
+  "formula_checks": [
+    {
+      "case": "resource seconds",
+      "value": 0.001,
+      "expected": 0.001
+    },
+    {
+      "case": "pipeline",
+      "N": 1,
+      "L_us": 3,
+      "C_us": 5,
+      "serial_us": 8,
+      "model_us": 8,
+      "schedule_us": 8
+    },
+    {
+      "case": "pipeline",
+      "N": 4,
+      "L_us": 3,
+      "C_us": 5,
+      "serial_us": 32,
+      "model_us": 23,
+      "schedule_us": 23
+    },
+    {
+      "case": "pipeline",
+      "N": 4,
+      "L_us": 5,
+      "C_us": 3,
+      "serial_us": 32,
+      "model_us": 23,
+      "schedule_us": 23
+    },
+    {
+      "case": "pipeline",
+      "N": 4,
+      "L_us": 0,
+      "C_us": 5,
+      "serial_us": 20,
+      "model_us": 20,
+      "schedule_us": 20
+    },
+    {
+      "case": "unique physical allocations, aliases not repeated",
+      "bytes": 3072
+    },
+    {
+      "case": "overlapping events",
+      "sum": 18,
+      "union": 12
+    },
+    {
+      "case": "paired geometric speedup",
+      "value": 1.2331060371652351
+    }
+  ],
+  "ignore_proposal_checks": [
+    {
+      "path": ".env",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": ".env.local",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "nested/.env",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "nested/.env.example",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": ".env.example",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/.auth/auth.sqlite3",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": ".auth/local-service.key",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "nested/auth.json",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "credentials.json",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "service-account-prod.json",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "cert.p12",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "state.sqlite3-wal",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "state.sqlite3-shm",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "x/__pycache__/x.pyc",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": ".venv/bin/python",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "runs/r1/raw.pb",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "artifacts/x.zip",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "candidate-workspaces/c1/kernel.py",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/logs/x.log",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/.artifacts/check.py",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/tools/tool.exe",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/qa/screenshot.png",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "x/raw.xplane.pb",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "x/foo.trace.json.gz",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "x/program.hlo",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "x/program.llo",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/content/asset.png",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/content/diagram.mmd",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/content/note.md",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/source-manifest.json",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "tests/test_x.py",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "pallas_kernels/kernels/mla_decode.py",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/connections/mcp-servers.example.toml",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/manifests/archive.zip",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "path": "private.pem",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "path": "knowledge-site/content/diagram.svg",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    }
+  ],
+  "ignore_limit": "Synthetic check of the patterns used, not native git check-ignore; proposal not activated. Existing tracked files unaffected.",
+  "git_index_paths": [
+    "LICENSE"
+  ],
+  "git_status": "not verified; Git executable not available",
+  "python_ast_files": [
+    "auth.py",
+    "launch.py",
+    "local_access.py",
+    "mcp_server.py",
+    "owner_admin.py",
+    "server.py",
+    "share.py",
+    "stop.py",
+    "task_rollover.py",
+    "test_auth.py",
+    "test_auth_http.py",
+    "test_mcp.py",
+    "test_owner_admin.py",
+    "test_server.py",
+    "test_share.py",
+    "test_static_delivery.py",
+    "test_task_rollover.py"
+  ],
+  "runtime_tests": "not run; no TPU or CLI execution"
+}

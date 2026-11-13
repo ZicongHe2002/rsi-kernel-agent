@@ -1,0 +1,9 @@
+{
+  "updated": true,
+  "before_sha256": "57a7233b26e9833362b3db7c10384b24563cd48b82e5858106b0c78b672d8a29",
+  "after_sha256": "6907843f9b9a55bd0531ab8b778437950236ed6fd743f0e5e7fc3e67f54ff853",
+  "backup": "knowledge-site\\manifests\\phase3-2026-11-12\\before\\weekly-before-p35-57a7233b26e9833362b3db7c10384b24563cd48b82e5858106b0c78b672d8a29.md.original",
+  "utc": "2026-11-13T07:24:03.959554+00:00",
+  "api_status": 401,
+  "auth_files_read": false
+}

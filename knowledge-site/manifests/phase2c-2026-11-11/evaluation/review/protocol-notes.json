@@ -1,0 +1,19 @@
+{
+  "model_response_events": 5,
+  "events": [
+    {
+      "event": 5,
+      "type": "structural_reference_ownership_correction",
+      "feedback_source": "evaluation-wrapper structural validation only; no gold feedback",
+      "artifact": "case_answers.json",
+      "case_id": "multi-strategy-plans",
+      "change": "Removed A-owned source:A reference from the B-owned case; retained case:multi-strategy-plans and source:B.",
+      "preserved": [
+        "case_answers-initial.json",
+        "all verdicts, categories, controls, numeric results and reasons",
+        "Plan output"
+      ],
+      "analysis_tool_calls_added": 0
+    }
+  ]
+}

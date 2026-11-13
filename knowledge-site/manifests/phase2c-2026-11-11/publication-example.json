@@ -1,0 +1,64 @@
+{
+  "details": {
+    "bundles": [
+      {
+        "claim_status": "hypothesis",
+        "evidence_ids": [
+          "A-timing",
+          "A-trace"
+        ],
+        "id": "analysis:da2b8923076f314eb65e002f:559aead08264d5795d390971",
+        "profile_ids": [
+          "A-profile"
+        ],
+        "run_id": "A-run",
+        "summary": "Exploration plans; immutable report SHA256 8fedddaf88a1f156f96a9c45f8e7e8ec30d7d9c3c8fbf20ff09006fd3cc5743e"
+      },
+      {
+        "claim_status": "hypothesis",
+        "evidence_ids": [
+          "B-timing",
+          "B-trace"
+        ],
+        "id": "analysis:da2b8923076f314eb65e002f:df7e70e5021544f4834bbee6",
+        "profile_ids": [
+          "B-profile"
+        ],
+        "run_id": "B-run",
+        "summary": "Exploration plans; immutable report SHA256 8fedddaf88a1f156f96a9c45f8e7e8ec30d7d9c3c8fbf20ff09006fd3cc5743e"
+      }
+    ],
+    "manifest": {
+      "digest": "48d9e7da579ed10411ca8f0d6dcc61ffbb7d27580712dd2bda0a6f5110ad849c",
+      "size": 34185
+    },
+    "plans": [
+      {
+        "proposal_id": "A-P1",
+        "record_id": "analysis:da2b8923076f314eb65e002f:plan:0d43b6879abc9d8d"
+      },
+      {
+        "proposal_id": "A-P2",
+        "record_id": "analysis:da2b8923076f314eb65e002f:plan:65a182c8808fc222"
+      },
+      {
+        "proposal_id": "B-P1",
+        "record_id": "analysis:da2b8923076f314eb65e002f:plan:dfd3ef7e83f2ae0f"
+      },
+      {
+        "proposal_id": "B-P2",
+        "record_id": "analysis:da2b8923076f314eb65e002f:plan:798f1485609441c8"
+      }
+    ],
+    "result": {
+      "digest": "8fedddaf88a1f156f96a9c45f8e7e8ec30d7d9c3c8fbf20ff09006fd3cc5743e",
+      "size": 87030
+    },
+    "type": "analysis_result.v1"
+  },
+  "id": "analysis:da2b8923076f314eb65e002f:complete",
+  "kind": "note",
+  "reason": "Completed Phase 2C analysis publication",
+  "target_id": "task",
+  "task_id": "task"
+}

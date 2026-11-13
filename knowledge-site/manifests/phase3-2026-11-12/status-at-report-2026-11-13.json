@@ -1,0 +1,24 @@
+{
+  "observed_at_utc": "2026-11-13T02:04:38.842576+00:00",
+  "operation": "read-only control-plane discovery; no allocation, setup or TPU execution",
+  "exit_code": 0,
+  "discovery": {
+    "status": "connected_control_plane",
+    "bridge_source": "C:\\Users\\fengluo\\Desktop\\colab\\google-colab-cli\\src\\colab_cli\\client.py",
+    "assignments": []
+  },
+  "last_allocation": {
+    "status": "allocated",
+    "runtime_id": "tpu-v6e1-s-euw4a0-36iwmkvtdh8qa",
+    "attempts": 87
+  },
+  "allocation_log_tail": "{\"utc\": \"2026-11-12T14:54:16.883347+00:00\", \"status\": \"allocated\", \"session\": \"rsi-p3-20261112\", \"runtime_id\": \"tpu-v6e1-s-euw4a0-36iwmkvtdh8qa\"}",
+  "runtime3_environment_report_exists": false,
+  "round2_directory_exists": false,
+  "allocation_loop_exit_observation": {
+    "exec_session_id": 73534,
+    "exit_code": 0,
+    "source": "write_stdin result observed in preceding status turn; loop ended after allocated",
+    "new_allocation_loop_started_by_this_report": false
+  }
+}

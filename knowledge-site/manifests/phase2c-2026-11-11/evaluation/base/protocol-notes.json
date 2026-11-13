@@ -1,0 +1,23 @@
+﻿{
+  "configuration": "base",
+  "model_response_events": 3,
+  "events": [
+    {
+      "response_event": 1,
+      "artifacts": ["response-1.json", "case_answers-initial.json"],
+      "description": "Initial blind proposal and case answers from the supplied packet."
+    },
+    {
+      "response_event": 2,
+      "artifacts": ["response-2.json"],
+      "feedback_type": "protocol structural validation only",
+      "description": "Removed A-owned history reference from the B exploration observation; preserved response-1.json. No gold or scoring feedback."
+    },
+    {
+      "response_event": 3,
+      "artifacts": ["case_answers.json"],
+      "feedback_type": "evaluation-wrapper structural validation only",
+      "description": "Removed A-owned history/source references from the multi-strategy-plans case answer. Verdict, category, controls, numeric result and reason are unchanged. Plan output is unchanged. Root-preserved case_answers-initial.json is untouched. No gold or scoring feedback."
+    }
+  ]
+}

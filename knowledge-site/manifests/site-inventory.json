@@ -1,0 +1,701 @@
+{
+  "date": "2026-11-11",
+  "scope": "Authored documents, preserved originals, images and attachments; auth/runtime/venv excluded, generated JSON manifests excluded to avoid recursive hashes",
+  "items": [
+    {
+      "path": "CHATGPT_SETUP.md",
+      "type": ".md",
+      "bytes": 7215,
+      "sha256": "65a0147271c8049ce2007640d094e505c700c0545fc50164e90488c2f6da6271",
+      "title": "让网页版 ChatGPT 读写知序知识库",
+      "status": "CURRENT"
+    },
+    {
+      "path": "index.md",
+      "type": ".md",
+      "bytes": 2250,
+      "sha256": "4110bb85d1c5ff12cf927301e4badbf28a98c70e25312964045eb8a85f96cbb5",
+      "title": "RSI 知识库工程索引",
+      "status": "CURRENT"
+    },
+    {
+      "path": "README.md",
+      "type": ".md",
+      "bytes": 15409,
+      "sha256": "271dd0e38ac5399ef69dd1e2916cc99fe9a24cdd2b4eb45c64c7be01bb0fe804",
+      "title": "知序 · 本地 Markdown 知识库",
+      "status": "CURRENT"
+    },
+    {
+      "path": "access/ACCESS_POLICY.md",
+      "type": ".md",
+      "bytes": 2684,
+      "sha256": "cbcc76f135d9b183fb1e6d8a41d8973f7367e3be2dbcc67adee80234df9f7a67",
+      "title": "RSI 文档、源码与执行权限政策",
+      "status": "CURRENT"
+    },
+    {
+      "path": "access/AUTH_STATE_MIGRATION_PLAN.md",
+      "type": ".md",
+      "bytes": 3663,
+      "sha256": "fad0179bc688c2230a584c3e6d8e3bd03cfcff1833ea8afb5480c282f6f7b891",
+      "title": "认证运行状态迁移提案",
+      "status": "DRAFT"
+    },
+    {
+      "path": "connections/README.md",
+      "type": ".md",
+      "bytes": 2867,
+      "sha256": "3e98b6845f5914a5bc715ccc75f924ee880ed064f3ff1b630f4f9d1f8d12dce0",
+      "title": "知识库、Codex 与 Colab 连接边界",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/.trash/0dcb32844a2d52e0fd12324912e86fed/note.md",
+      "type": ".md",
+      "bytes": 296,
+      "sha256": "1ea94d1115abac4d26b6b4ac4bbbc1ba293da524a75ba21bc0c486f6ca9e382e",
+      "title": "一周待办 · 2026-11-02 (2)",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/.trash/288e87a620af2859b9d2519e3762889b/note.md",
+      "type": ".md",
+      "bytes": 924,
+      "sha256": "9636b668b1e1345f968351c2de52009f6d37b5c9f7a3f878b547627763dc7f7a",
+      "title": "Analyzer 结构调整说明",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/.trash/44ee3f2f04b8e609bd0bc559e7cb7504/note.md",
+      "type": ".md",
+      "bytes": 1860,
+      "sha256": "e4f3363c82b24270166f9f904482348d19d52eecb6d879e0d96d2b55522717d2",
+      "title": "让知识，有处可寻",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/.trash/4b2c1a18784ccbd1b982f5336f68089d/note.md",
+      "type": ".md",
+      "bytes": 924,
+      "sha256": "87e0b70edd7a1b4d2a7ff664cb3c58bf314fd739e5aa72a93f45daf2932aeab6",
+      "title": "Markdown 写作速查",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/.trash/58edff06ab1783a3a788965e449842b8/note.md",
+      "type": ".md",
+      "bytes": 732,
+      "sha256": "3550df22729b113f143d322cfa305329534a27aa909b4f74146f429e36e5d5ab",
+      "title": "技术笔记怎么组织",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/.trash/9616aae6076f8df4799582a2fdea0828/note.md",
+      "type": ".md",
+      "bytes": 296,
+      "sha256": "1ea94d1115abac4d26b6b4ac4bbbc1ba293da524a75ba21bc0c486f6ca9e382e",
+      "title": "一周待办 · 2026-11-02 (2)",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/.trash/a922ac1a2a4e66fc7c71d66fa0fa079f/note.md",
+      "type": ".md",
+      "bytes": 640,
+      "sha256": "2f2597693b7c19b8b087e771dbc2d88008a96a3709e9384d5c96b6320301d71b",
+      "title": "把学习变成可复用的知识",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "type": ".md",
+      "bytes": 62200,
+      "sha256": "12c60f93caf2aceca899ca6ab1c2eebd5959106209db36f86da31567d0dcbad8",
+      "title": "Benchmark：RSI Kernel 优化中的正确性、性能比较与结果决策",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/学习方法/rsi-document-index.md",
+      "type": ".md",
+      "bytes": 2925,
+      "sha256": "31883d67481f7c07c9388607876864e657793fadee07dd668c7deac4460d6f8d",
+      "title": "RSI 文档索引与权威关系",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/学习方法/rsi-evidence-contract.md",
+      "type": ".md",
+      "bytes": 4278,
+      "sha256": "79317c04962f04c2f968280d1358ce94bb619f5c0cf5988f0c2154293c25eb63",
+      "title": "RSI 共用证据与状态契约",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/学习方法/rsi-kernel-agent.md",
+      "type": ".md",
+      "bytes": 13242,
+      "sha256": "aec584c298344bf7149d8617f8eb2985fd8c5354e7670b81bc099ab6ca24adf7",
+      "title": "RSI Kernel Agent：系统架构与组织调度",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/学习方法/rsi-knowledge-search.md",
+      "type": ".md",
+      "bytes": 17963,
+      "sha256": "3fb8a7dcb8c7f5ea00e90e63922a4becd785f4fb592bdd952915f56cf3e46c92",
+      "title": "Knowledge Search：发现资料、整理方法与支持 Kernel 优化",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/学习方法/rsi-memory.md",
+      "type": ".md",
+      "bytes": 25145,
+      "sha256": "e35d555adbd307856cff8116f19cb600fd7bafd370aa8b3a2eec66450105916e",
+      "title": "Memory：实验事实、两阶段读取与潜力分支",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/学习方法/rsi-optimization-workflow.md",
+      "type": ".md",
+      "bytes": 22278,
+      "sha256": "7fef43c789c0490a8a4a574019a8a681aa443e392d1ea8661a5649194be92421",
+      "title": "Optimization Workflow：候选生成、验证与分支选择",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/学习方法/rsi-profiler.md",
+      "type": ".md",
+      "bytes": 22374,
+      "sha256": "8306125247f66d764c73604a9789814f1ef2ebed831eb541600306575d38e3ef",
+      "title": "Profiler：运行时采集保存，运行后整理与分析",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-method-search-and-selection.md",
+      "type": ".md",
+      "bytes": 1235,
+      "sha256": "844e3509ab1e2d1362f650b17f027ce8d07b9af2cfbf82f7c5f2eb1ef85877e0",
+      "title": "方法搜索实践：迁移说明",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "type": ".md",
+      "bytes": 38162,
+      "sha256": "5c3b76a6ea32813f8602c2ae3017cb8b8eb4bef67a626cfcdaaf7c61b7c55e5c",
+      "title": "RSI Kernel Agent：多方案生成、批量实验与结果驱动迭代",
+      "status": "SUPPLEMENT"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "type": ".md",
+      "bytes": 14030,
+      "sha256": "30f66234560be41a56da41f0f7b25db5f5cf50d596827e0b8bb866b3fca842e6",
+      "title": "MLA 实验基础 Implementation Plan",
+      "status": "DRAFT"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "type": ".md",
+      "bytes": 28448,
+      "sha256": "4504834250b64f73399e5b0551b7349858deddf2db65e201d3bbf1dc714b3e29",
+      "title": "Profiler 分支：Analyzer——从证据到多方案优化计划",
+      "status": "SUPPLEMENT"
+    },
+    {
+      "path": "content/归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "type": ".md",
+      "bytes": 29456,
+      "sha256": "eea3f76416fea8bfb2a8d389fe7f5795a41dc976de86e05f6f2010d7652e8ddf",
+      "title": "TPU Benchmark v0.1：资料核查、评测协议与榜单设计",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "content/待办清单/一周待办 · 2026-11-02.md",
+      "type": ".md",
+      "bytes": 16973,
+      "sha256": "dcd6b6eef2bab7f641a8a3bdf840995a0db8feefd6a680aa71756318c5262d0b",
+      "title": "一周待办 · 2026-11-02",
+      "status": "REFERENCE"
+    },
+    {
+      "path": "content/待办清单/一周待办 · 2026-11-09.md",
+      "type": ".md",
+      "bytes": 5224,
+      "sha256": "af233dc4eebc58b72af1e60004ed71bcf68e398721192bb80edd6f33b8ce0eb7",
+      "title": "一周待办 · 2026-11-09",
+      "status": "CURRENT"
+    },
+    {
+      "path": "content/待办清单/长期待办.md",
+      "type": ".md",
+      "bytes": 49,
+      "sha256": "6a99192fdeae311f912ddab9ad7f83a76f5c74998b3abc233624c2812bbfe3b8",
+      "title": "长期待办",
+      "status": "CURRENT"
+    },
+    {
+      "path": "manifests/colab-cli-audit.md",
+      "type": ".md",
+      "bytes": 17853,
+      "sha256": "df4ebe89ea0ea2301053a99b72917df2f3ab7746e569e0d6aaf6b805b7d9c2a6",
+      "title": "Colab CLI：Phase 1 只读集成审计",
+      "status": "CURRENT"
+    },
+    {
+      "path": "manifests/mla-integration-audit.md",
+      "type": ".md",
+      "bytes": 24057,
+      "sha256": "76f0c9a9060c0a6aeee12eb8c2efa2fa1cb4333f34c3589e829aa07baffb4c63",
+      "title": "MLA Decode / Forward 集成审计",
+      "status": "CURRENT"
+    },
+    {
+      "path": "manifests/phase1-change-report.md",
+      "type": ".md",
+      "bytes": 4462,
+      "sha256": "7481c6c249fdab8a80942ca5a28f9a15ac4ea5046d8ea14efc281e20f5b0ee89",
+      "title": "Phase 1 变更报告",
+      "status": "CURRENT"
+    },
+    {
+      "path": "manifests/phase1-review.md",
+      "type": ".md",
+      "bytes": 1498,
+      "sha256": "f874ff4d053a87129ad8642ed09558fbb23a3071f99fc187e81fe6e6dffc5334",
+      "title": "Phase 1 独立审查记录",
+      "status": "CURRENT"
+    },
+    {
+      "path": "manifests/phase1-validation.md",
+      "type": ".md",
+      "bytes": 5822,
+      "sha256": "5e20e2e281626cd67a3d14c1507987bd621cff7a8aa3198e4545258af20c675c",
+      "title": "Phase 1 验证报告",
+      "status": "CURRENT"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/.gitignore.original",
+      "type": ".original",
+      "bytes": 100,
+      "sha256": "70dfcfc1a70fd121158cf12312ada0ee0f5e0841d96cbfb03422572fcd4c01dd",
+      "title": "",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/README.md.original",
+      "type": ".original",
+      "bytes": 13991,
+      "sha256": "741b612b26d6a60f225aa00bd9f06ef95856ae866afcd4a34b57c30880267a42",
+      "title": "知序 · 本地 Markdown 知识库",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/requirements-mcp.txt.original",
+      "type": ".original",
+      "bytes": 91,
+      "sha256": "200004ac0e9fd05ddd4e3e8a7daf4b8319ef8ac225abe784f33993b652df09c3",
+      "title": "Optional ChatGPT read-only connection; the website itself needs no packages.",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-benchmark.md.original",
+      "type": ".original",
+      "bytes": 60785,
+      "sha256": "d80709642a4f23995d07201939d6577375fd0252c50f71b11cb4d659a2df3f77",
+      "title": "Benchmark：RSI Kernel 优化中的正确性、性能比较与结果决策",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md.original",
+      "type": ".original",
+      "bytes": 10700,
+      "sha256": "20df6481c2d2786296388f77a70edc3b2be3634e6f7c0a053102ef7f5d4c6066",
+      "title": "RSI Kernel Agent：系统架构与组织调度",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-knowledge-search.md.original",
+      "type": ".original",
+      "bytes": 17470,
+      "sha256": "aa8d3a626be0599f51ada0a42efc67dde82573221fa899be113041af28e44f15",
+      "title": "Knowledge Search：发现资料、整理方法与支持 Kernel 优化",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-memory.md.original",
+      "type": ".original",
+      "bytes": 22316,
+      "sha256": "b7dacffed95deca864b661e5859ab3318a55b8a21a177c30da39651c347119e5",
+      "title": "Memory：实验事实、两阶段读取与潜力分支",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-optimization-workflow.md.original",
+      "type": ".original",
+      "bytes": 22729,
+      "sha256": "f62bc6259fa3ef07704f55e0f1d6c020af1d94516fbfcd8339bf4bd0de78de0a",
+      "title": "Optimization Workflow：候选生成、验证与分支选择",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-profiler.md.original",
+      "type": ".original",
+      "bytes": 21642,
+      "sha256": "680ea5ee89bccecc0671b2cf811192fe3064c1d05373edab90a7b1d1741cc8e6",
+      "title": "Profiler：运行时采集保存，运行后整理与分析",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-method-search-and-selection.md.original",
+      "type": ".original",
+      "bytes": 20019,
+      "sha256": "948be8e5110c54c14268d43c8c1558b4c80367bf9a3c5dc11bbb3df944d210c2",
+      "title": "Kernel 方法搜索与候选选择：从资料到 TPU 实验",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md.original",
+      "type": ".original",
+      "bytes": 18444,
+      "sha256": "262c0e52a5d0ca04da0eaccd57fcfdfa15d133dbe8ec184126dea3316c63a0d9",
+      "title": "RSI Kernel Agent：多方案生成、批量实验与结果驱动迭代",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md.original",
+      "type": ".original",
+      "bytes": 24843,
+      "sha256": "84db904ed0c9704402c5abcf072cb2715064296821191f89960d0348f2abbd1f",
+      "title": "Profiler 分支：Analyzer——从证据到多方案优化计划",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md.original",
+      "type": ".original",
+      "bytes": 29456,
+      "sha256": "eea3f76416fea8bfb2a8d389fe7f5795a41dc976de86e05f6f2010d7652e8ddf",
+      "title": "TPU Benchmark v0.1：资料核查、评测协议与榜单设计",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-02.md.original",
+      "type": ".original",
+      "bytes": 16973,
+      "sha256": "dcd6b6eef2bab7f641a8a3bdf840995a0db8feefd6a680aa71756318c5262d0b",
+      "title": "一周待办 · 2026-11-02",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-09.md.original",
+      "type": ".original",
+      "bytes": 4449,
+      "sha256": "c677d9e89a4b911fe569c2c5bed0b349bd544ba6b88f0ca013002f85be988cce",
+      "title": "一周待办 · 2026-11-09",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/长期待办.md.original",
+      "type": ".original",
+      "bytes": 49,
+      "sha256": "6a99192fdeae311f912ddab9ad7f83a76f5c74998b3abc233624c2812bbfe3b8",
+      "title": "长期待办",
+      "status": "ARCHIVE"
+    },
+    {
+      "path": "qa/mermaid-user-example.md",
+      "type": ".md",
+      "bytes": 1336,
+      "sha256": "a6f9c51a9eee4dbcf1a3c29ac7fc300ca85d098067ab7bacb8df9f60cf50e3a6",
+      "title": "2. 模块内部结构",
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/inline-tasks-results/inline-weekly-tasks.png",
+      "type": ".png",
+      "bytes": 124922,
+      "sha256": "23696803b97e6763275f29c771e69d14abecbc3fb15e554bce65684e85596323",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/inline-tasks-results/weekly-task-template.png",
+      "type": ".png",
+      "bytes": 112889,
+      "sha256": "b9e3a28487d2b8fcdf4666685e5ec20e3a8100d42a38c7ab311c5ef0279c210e",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/layout-collapse-results/desktop-collapsed.png",
+      "type": ".png",
+      "bytes": 48132,
+      "sha256": "90fb9dd1dabfb9ab0cc31b6e0778d981893ac27e77cad1587923bb8ec015bd19",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/layout-collapse-results/desktop-expanded.png",
+      "type": ".png",
+      "bytes": 71769,
+      "sha256": "285026ef4d04da56f2a6f2926b8130dc800c274dd2a374f051527586bcd59fd5",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/layout-collapse-results/mobile-collapsed.png",
+      "type": ".png",
+      "bytes": 34398,
+      "sha256": "d113e7cc17b6318e2b4c027f377b39cde5c1ea4a2348e9b99fcd4cb161fc9b0d",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/layout-collapse-results/mobile-expanded.png",
+      "type": ".png",
+      "bytes": 37672,
+      "sha256": "0a72ca52769e9580f004c42bee0db9521e4a5005978f6b41576e564b3f0f00e2",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/links-trash-results/deleted-note-read-only.png",
+      "type": ".png",
+      "bytes": 108685,
+      "sha256": "1b281743a801092fba66377f977c025aa5a03b0d4d85792ca582cb148787be50",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/mermaid-cache-regression-results/mermaid-user-diagram.png",
+      "type": ".png",
+      "bytes": 131508,
+      "sha256": "e45389688504f6c3f99fc3fbb5c37ccbd141b83500bb9756e5402ba8e3a4461f",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/mermaid-lazy-regression-results/mermaid-user-diagram.png",
+      "type": ".png",
+      "bytes": 131549,
+      "sha256": "b6aef8b2fb30bdac9a34144c7977f4d5e6ebc4f1c29312dc478c3ff9c61c01bb",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/mermaid-module-results/mermaid-user-diagram.png",
+      "type": ".png",
+      "bytes": 131518,
+      "sha256": "ad0e963279e4bd482e2975296828e8e38789f8c9b88db9bb42a7133cf94c0a20",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/mermaid-results/mermaid-user-diagram.png",
+      "type": ".png",
+      "bytes": 116563,
+      "sha256": "5902111b1325b4b336938ecf35c85a845b9fab4651251eccbe323735a4f93f56",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/mermaid-scroll-regression-results/mermaid-user-diagram.png",
+      "type": ".png",
+      "bytes": 131469,
+      "sha256": "5f40ee552fa72de3ee97bd3e05156a30627a5d61f0c1a2e510b3ae37fe3a7005",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/task-lists-layout-results/desktop-collapsed.png",
+      "type": ".png",
+      "bytes": 57284,
+      "sha256": "eed5c387eac35ce54fbc293f8c6d4e1a8968ab7041698ed81750f63bc028c747",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/task-lists-layout-results/desktop-expanded.png",
+      "type": ".png",
+      "bytes": 86792,
+      "sha256": "148c4a47c1948731d36712e93c19a1bc83bdc654659cb5c8212b022338ac0a66",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/task-lists-layout-results/mobile-collapsed.png",
+      "type": ".png",
+      "bytes": 42645,
+      "sha256": "0c47770a439cf683b7ab43337f482168705673390ed50054398725ebaadeca01",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/task-lists-layout-results/mobile-expanded.png",
+      "type": ".png",
+      "bytes": 43289,
+      "sha256": "55ded8a2824f0e2a6645f133fc2429065fed31a9841c0b9f370228a29ab1a049",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/task-rows-results/blank-task-row.png",
+      "type": ".png",
+      "bytes": 97572,
+      "sha256": "594d155ee874b94b11b04de9e377db38f6ec27d5ee11663b09e6fa7c090352d5",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/task-rows-results/weekly-task-rows.png",
+      "type": ".png",
+      "bytes": 137773,
+      "sha256": "97398233600393e2d6fac618739597b6d2c0cf33ec3edc5d7f41bc3d4d991751",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/tasks-results/ordinary-document-tasks.png",
+      "type": ".png",
+      "bytes": 86345,
+      "sha256": "8e4ab339086cdc9c7d61d2aef536224db990dfcc4d14241ed0430808a7137d45",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "qa/tasks-results/weekly-task-template.png",
+      "type": ".png",
+      "bytes": 100493,
+      "sha256": "9203ab5e2b69c07ce88e4fe1503a0d5b41abb8f254b04bbd56a01be9d9be6eaf",
+      "title": null,
+      "status": "REFERENCE"
+    },
+    {
+      "path": "web/vendor/README.md",
+      "type": ".md",
+      "bytes": 2791,
+      "sha256": "dff6f84b5b7dddfa2de2bbd4ef45d336fb7c3b508d196495de7b6282bdf04d36",
+      "title": "Vendored browser libraries",
+      "status": "REFERENCE"
+    }
+  ],
+  "diagrams": [
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "block": 1,
+      "sha256": "940b241b0c9a8109fc569c040930fed6803d54f31d21f12d497c6511fe1aa652"
+    },
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "block": 2,
+      "sha256": "213cc50dbdec6f31e0ec1f0c0925d3f800de5ce5776db104c0493edd41eba7a6"
+    },
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "block": 3,
+      "sha256": "aa6989a6d5f3938ce5b635d702ad1d596d3b011bf8b8ef277254fbcde41f77d7"
+    },
+    {
+      "path": "content/学习方法/rsi-benchmark.md",
+      "block": 4,
+      "sha256": "eca170b657211ad7c034bb34a6f1152c54f22d83a1cf43aebb80b93cfa4c5776"
+    },
+    {
+      "path": "content/学习方法/rsi-kernel-agent.md",
+      "block": 1,
+      "sha256": "7dea5c0b7d7695b6fd32135168601a4dbab99d1015cfd783a0d4c9b06e6cdc1c"
+    },
+    {
+      "path": "content/学习方法/rsi-kernel-agent.md",
+      "block": 2,
+      "sha256": "f6c34e0af3626817c7da355c700b6cf20be241b558b8baf81d10e741ca45b723"
+    },
+    {
+      "path": "content/学习方法/rsi-knowledge-search.md",
+      "block": 1,
+      "sha256": "cdcb786ed6ae32d8694b8a828591596031090665399434f5f125939c370bc611"
+    },
+    {
+      "path": "content/学习方法/rsi-knowledge-search.md",
+      "block": 2,
+      "sha256": "56807fc2dd9e7c0dad65dc5936a6bdcc874a5b2d77940f67bffa88fb3615524d"
+    },
+    {
+      "path": "content/学习方法/rsi-knowledge-search.md",
+      "block": 3,
+      "sha256": "203cef332955024171bbccf20d6ee55bd5d197bc62c42a16aafed203c49e85a4"
+    },
+    {
+      "path": "content/学习方法/rsi-memory.md",
+      "block": 1,
+      "sha256": "35bc900b1f89c8d0a5ca42d5ceeed92586a50a68d5ef5846bd71635d9b11f94f"
+    },
+    {
+      "path": "content/学习方法/rsi-memory.md",
+      "block": 2,
+      "sha256": "ec251f08b426aa130f8ef90d4c12d4189dcdfe39f83493b01ffb47725cf7168c"
+    },
+    {
+      "path": "content/学习方法/rsi-memory.md",
+      "block": 3,
+      "sha256": "126efa4052835ca935344cf5ff479c9bcfde7cdccf70f5c5853f5d44937d166c"
+    },
+    {
+      "path": "content/学习方法/rsi-optimization-workflow.md",
+      "block": 1,
+      "sha256": "4a40919936ee8dd970dd3e3639319f732c2f0b84a8ff049918cb1f2d95c6a988"
+    },
+    {
+      "path": "content/学习方法/rsi-optimization-workflow.md",
+      "block": 2,
+      "sha256": "f2b8cd5de647b36b8da34225bfc9b39b2c6036429b949ed0923b2fe4d1e914ec"
+    },
+    {
+      "path": "content/学习方法/rsi-optimization-workflow.md",
+      "block": 3,
+      "sha256": "a9c74d2387c51621f67405fab58168ede299abc65077b6e2ed5b79ce828b2f63"
+    },
+    {
+      "path": "content/学习方法/rsi-profiler.md",
+      "block": 1,
+      "sha256": "70debe2c6922c423e3470cef725a201f625655e5a33b392a73f21abfd879be6c"
+    },
+    {
+      "path": "content/学习方法/rsi-profiler.md",
+      "block": 2,
+      "sha256": "38f36c0304a85b4ce0d88602fee905ffa61949b8381787c52eee9563a44b3930"
+    },
+    {
+      "path": "content/学习方法/rsi-profiler.md",
+      "block": 3,
+      "sha256": "458da5da8bb0dea3da757fb138acf0ff277b421d9a282da8a8907ea5b1877d8f"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "block": 1,
+      "sha256": "9c9c77f3c1ea68e5984832874ab6901f045b4a090f4c8abed4e97d3fdc598292"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "block": 2,
+      "sha256": "068e0edcbd93bd9279591047ccceeac5f1782e44bdb64096d9f390d3b8cebaf9"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "block": 3,
+      "sha256": "2fe795e27ad62143a2fd8d3466a389377aa85bbf9d37cd20cf7958aa8b317174"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-multi-plan-exploration.md",
+      "block": 4,
+      "sha256": "2349e73ce171f068ebdd17dcbbb8c40c3d7065efd1ca99f13a57f98fd85dc40f"
+    },
+    {
+      "path": "content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "block": 1,
+      "sha256": "fe9a6c543a8d29719e05325adf79b9df09fb753261118fdccf32fcd9f7bd4f2d"
+    }
+  ],
+  "links_manifest": "phase1-validation.json",
+  "sources_manifest": "source-manifest.json"
+}

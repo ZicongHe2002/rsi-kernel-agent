@@ -1,0 +1,20 @@
+--- a/pallas_kernels/kernels/mla_decode.py
++++ b/pallas_kernels/kernels/mla_decode.py
+@@ -3028,7 +3028,16 @@
+ 
+   if interpret_mode:
+     warn_if_interpret("mla_decode_contiguous")
+-  return native
++  @jax.jit
++  def oracle_negative_cache(q, new, cache, lengths):
++    attention, updated_cache = native(q, new, cache, lengths)
++    # The boundary case's row 1, token 0 is appended and finite; B1 uses row 0.
++    row = 1 if updated_cache.shape[0] > 1 else 0
++    # Deliberately wrong validation candidate: corrupt only one cache value.
++    updated_cache = updated_cache.at[row, 0, 0].add(jnp.asarray(1, dtype=updated_cache.dtype))
++    return attention, updated_cache
++
++  return oracle_negative_cache
+ 
+ 
+ __all__ = ["build_mla_decode_contiguous", "build_mla_decode_paged", "mla_decode"]

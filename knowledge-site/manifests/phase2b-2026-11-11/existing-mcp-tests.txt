@@ -1,0 +1,12 @@
+test_bad_paths_unknown_tools_and_invalid_pagination_are_rejected (test_mcp.MCPTests.test_bad_paths_unknown_tools_and_invalid_pagination_are_rejected) ... ok
+test_chinese_body_and_category_search_with_pagination (test_mcp.MCPTests.test_chinese_body_and_category_search_with_pagination) ... ok
+test_fetch_pages_reconstruct_complete_unicode_and_exact_revision (test_mcp.MCPTests.test_fetch_pages_reconstruct_complete_unicode_and_exact_revision) ... ok
+test_real_stdio_initialization_listing_and_error_protocol (test_mcp.MCPTests.test_real_stdio_initialization_listing_and_error_protocol) ... execute program 'C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe': <_WindowsSubprocessTransport pid=61412 running stdin=<_ProactorWritePipeTransport fd=644 read=<_OverlappedFuture pending cb=[_ProactorWritePipeTransport._pipe_closed()] created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\windows_events.py:494>> stdout=<_ProactorReadPipeTransport fd=648 read=<_OverlappedFuture pending cb=[_ProactorReadPipeTransport._loop_reading()] created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\windows_events.py:507>>>
+<_WindowsSubprocessTransport pid=61412 running stdin=<_ProactorWritePipeTransport closed> stdout=<_ProactorReadPipeTransport closed>> exited with return code 0
+ok
+test_tool_table_distinguishes_read_and_write_permissions (test_mcp.MCPTests.test_tool_table_distinguishes_read_and_write_permissions) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.748s
+
+OK

@@ -1,0 +1,417 @@
+# RSI Kernel Agent — Phase 2C: Profiler and Analyzer
+
+Phase 2A and Phase 2B have been implemented and passed their reported local acceptance tests.
+
+We are now starting Phase 2C only.
+
+Do not start Phase 2D or Phase 3.
+
+## 1. Main Objective
+
+Implement the Profiler and Analyzer capabilities.
+
+The most important objective is not merely to summarize Profile data.
+
+We need an Analyzer that can combine:
+
+- Current Kernel source and task semantics.
+- Profile and Benchmark evidence.
+- Historical Memory from multiple participating strategies.
+- Knowledge Search results and optimization methods.
+- Mathematical and hardware cost models.
+
+It must reason about the implementation, investigate possible bottlenecks, use actual tools and calculations, and produce multiple evidence-backed optimization Plans.
+
+Analyzer belongs under Profiler. Do not create a new top-level system module.
+
+## 2. Preserve Existing Foundations
+
+Reuse the Phase 2A and 2B implementations.
+
+Inspect the actual interfaces before making changes:
+
+- contracts.py
+- artifacts.py
+- store.py
+- knowledge.py
+- knowledge_mcp.py
+- memory.py
+- associations.py
+
+Do not create a second experiment database.
+
+Do not replace the existing Knowledge MCP.
+
+Do not modify the Phase 2A schema unless a concrete incompatibility is demonstrated.
+
+If a schema change is genuinely required, propose the migration and compatibility plan before implementing it.
+
+## 3. Phase 2C-1: Evidence Integration
+
+Implement a versioned AnalysisRequest and AnalysisInputManifest.
+
+The input should bind:
+
+- Task and Workload.
+- Participating Strategies.
+- Exact Parent Candidates.
+- Source and configuration identities.
+- Memory snapshot IDs.
+- Profile evidence references.
+- Benchmark evidence references.
+- Knowledge method IDs and document revisions.
+- Environment and tool versions.
+
+Important requirements:
+
+1. A and B must have independent evidence bindings.
+2. A Profile must not be silently reused as B's measured evidence.
+3. Cross-strategy knowledge reuse is allowed.
+4. Knowledge document revisions must be pinned for each analysis.
+5. Missing or stale evidence must be explicitly identified.
+6. A snapshot must not claim complete consistency when the underlying source does not provide it.
+7. Analysis inputs must be reproducible from their recorded references.
+
+Do not duplicate the underlying evidence into a new database.
+
+Create an immutable manifest referencing existing records and artifacts.
+
+## 4. Phase 2C-2: Profile Analysis
+
+First inspect the existing Profile/XPlane parser discovered during Phase 1.
+
+Verify its:
+- Actual file path.
+- Input format.
+- Output schema.
+- Supported event types.
+- Dependencies.
+- Limitations.
+
+Reuse existing functionality wherever possible.
+
+Do not implement a new XProf parser before determining what can already be reused.
+
+Implement a normalized Profile Evidence interface.
+
+It should support, where actually available:
+
+- Target kernel execution identification.
+- Execution intervals and operation statistics.
+- DMA and data-transfer events.
+- Wait and synchronization information.
+- Compiler and resource metadata.
+- LLO/custom-call information.
+- Capture quality and missing-data indicators.
+- References to original artifacts.
+
+Distinguish:
+
+- Directly measured values.
+- Trace-derived values.
+- Compiler estimates.
+- Interpolated or inferred values.
+- Unavailable information.
+
+Do not fabricate unavailable TPU counters.
+
+Do not assume all TPU v6e profiling features are supported.
+
+The parser should be deterministic and independently testable.
+
+## 5. Phase 2C-3: Mathematical Analysis
+
+Implement reusable, executable mathematical tools.
+
+Start with four model categories:
+
+### A. Compute and Memory Model
+
+Estimate computational work, data movement, arithmetic intensity, and resource bounds.
+
+### B. Tile Cost Model
+
+Analyze tile dimensions, padding, loop count, data reuse, and associated costs.
+
+### C. Live Memory Model
+
+Estimate simultaneous data residency, buffer requirements, and resource pressure.
+
+### D. Pipeline Model
+
+Estimate ideal overlap opportunities between data movement and computation.
+
+For every calculation, record:
+
+- Formula and model revision.
+- Input values.
+- Units.
+- Assumptions.
+- Omitted costs.
+- Output.
+- Evidence references.
+
+Use Python or existing mathematical libraries for reproducible calculations.
+
+The LLM chooses which model is relevant and explains why.
+
+The calculation tool performs the numerical work.
+
+A theoretical estimate must never be presented as an actual TPU measurement.
+
+Do not invent resource capacities or hardware throughput.
+
+Use the actual hardware configuration when available; otherwise mark the result as an assumption-based estimate.
+
+## 6. Phase 2C-4: Analyzer
+
+This is the central component of Phase 2C.
+
+Build one primary Analyzer workflow first.
+
+Do not create multiple autonomous analysis agents unless a demonstrated requirement justifies them.
+
+The Analyzer should perform:
+
+### Step 1: Evidence validation
+
+Verify Candidate, Parent, Workload, Environment, Profile, Benchmark and Memory bindings.
+
+### Step 2: Code understanding
+
+Read the relevant source and identify:
+
+- Main computation stages.
+- Loop organization.
+- Data movement.
+- Dependencies.
+- Layout and memory usage.
+- Synchronization and pipeline structure.
+- Relevant constraints and edge cases.
+
+### Step 3: Observation extraction
+
+Record what the code, Profile and Benchmark actually show.
+
+Every important observation must have a source reference.
+
+### Step 4: Multiple hypothesis generation
+
+Generate reasonable explanations for important performance observations.
+
+Do not force one explanation when evidence is ambiguous.
+
+### Step 5: Tool-based investigation
+
+Select appropriate existing Skills and tools.
+
+Possible operations include:
+
+- Querying Profile events.
+- Inspecting relevant source code.
+- Reading previous experiment history.
+- Searching Knowledge methods.
+- Checking API and hardware documentation.
+- Calculating resource and pipeline estimates.
+- Comparing before/after evidence.
+
+Do not mechanically invoke every available tool.
+
+### Step 6: Evidence-backed conclusions
+
+Separate:
+
+- Observed facts.
+- Derived measurements.
+- Compiler estimates.
+- Mathematical predictions.
+- Historical claims.
+- Hypotheses.
+- Unknowns.
+
+Do not use unsupported confidence percentages.
+
+### Step 7: Multi-Plan generation
+
+Generate multiple materially different Plans.
+
+For example:
+
+- A-P1 and A-P2 for Strategy A.
+- B-P1 and B-P2 for Strategy B.
+
+Each Plan must specify:
+
+- Strategy and exact parent.
+- Intended code modification.
+- Evidence and source references.
+- Relevant Profile observations.
+- Mathematical assumptions and results.
+- Expected tradeoffs.
+- Unknowns and risks.
+- Candidate implementation variants.
+- Correctness and performance validation requirements.
+
+A Plan may be based on code analysis, source material, historical experience, mathematical reasoning, or an explicitly labeled exploration hypothesis.
+
+It does not need guaranteed performance improvement.
+
+Do not force the system to select one Plan before execution.
+
+### Step 8: Evidence review
+
+Check whether important claims are actually supported by their references.
+
+Check units, candidate identities, source revisions, and mathematical assumptions.
+
+When evidence is insufficient, downgrade a claim to a hypothesis rather than automatically rejecting a legal Plan.
+
+### Step 9: Output
+
+Return an AnalysisBundle and PlanSet compatible with the existing contracts.
+
+Do not let Analyzer directly update Task Best or override Benchmark results.
+
+## 7. Skills and Tools
+
+First inspect the Skills already available in the current environment.
+
+Reuse existing relevant Skills for:
+
+- Code analysis.
+- Technical research.
+- Mathematical reasoning.
+- Profile/trace analysis.
+- Evidence review.
+
+Do not create a new Skill simply because a module needs functionality.
+
+Use deterministic Python tools for numerical calculations, data parsing, schema validation, and evidence checking.
+
+If an existing Skill is unavailable, continue using ordinary tools where possible and document the limitation.
+
+## 8. Phase 2C-5: Analyzer Evaluation
+
+Build a fixed Analyzer evaluation dataset.
+
+Include at least:
+
+1. High DMA event count without a proven critical-path bottleneck.
+2. Profile and Candidate identity mismatch.
+3. Simultaneous Tile and dtype changes.
+4. Historical optimization failure under different conditions.
+5. Mathematical prediction without actual TPU measurement.
+6. Multiple reasonable Plans across A and B.
+7. Faster Candidate with unknown causal explanation.
+8. Stale Knowledge source revision.
+9. Missing metrics incorrectly treated as zero.
+10. Nested or overlapping events incorrectly summed.
+
+Evaluate:
+
+- Evidence-reference validity.
+- Unsupported-claim rate.
+- Correct identification of uncertainty.
+- Plan semantic legality.
+- Plan diversity.
+- Duplicate or redundant Plan rate.
+- Correct strategy and parent binding.
+- Tool and calculation reproducibility.
+
+Compare different Analyzer configurations under the same model and evaluation budget:
+
+- Base instructions.
+- Instructions plus existing Skills.
+- Skills plus deterministic tools.
+- Tools plus evidence review.
+
+Do not evaluate Analyzer quality using response length or LLM self-rating.
+
+Synthetic results must remain labeled synthetic.
+
+## 9. Testing Requirements
+
+Add:
+
+- Unit tests for normalized Profile evidence.
+- Unit tests for mathematical models.
+- AnalysisRequest and manifest validation.
+- Strategy and Candidate evidence-binding tests.
+- Knowledge revision consistency tests.
+- Analyzer output schema tests.
+- Multi-strategy Plan generation tests.
+- Analyzer evaluation cases.
+
+Test failures, missing artifacts, stale revisions, unavailable metrics, and malformed evidence.
+
+Do not run real MLA kernels or access the Colab CLI.
+
+Do not run TPU jobs.
+
+Do not modify the two external Kernel repositories.
+
+Real hardware validation is reserved for Phase 3.
+
+## 10. Implementation Order
+
+Implement in this order:
+
+1. Inspect Phase 2A/2B interfaces.
+2. Audit and reuse the existing XPlane/Profile parser.
+3. Define AnalysisRequest and AnalysisInputManifest.
+4. Implement normalized Profile Evidence.
+5. Implement mathematical analysis tools.
+6. Implement the Analyzer workflow.
+7. Implement multi-Plan output.
+8. Build Analyzer evaluation dataset.
+9. Run tests and independent code review.
+10. Update the Phase 2 roadmap and documentation.
+
+Do not create empty modules.
+
+Do not implement everything in one large file.
+
+Keep deterministic logic separate from LLM reasoning.
+
+## 11. Completion Criteria
+
+Phase 2C is complete only when:
+
+- Analyzer can load a reproducible analysis input.
+- It can retrieve the correct A/B Memory histories.
+- It can retrieve the correct Knowledge revisions.
+- It can inspect saved Profile and Benchmark evidence.
+- It can call mathematical tools.
+- It distinguishes facts from estimates and hypotheses.
+- It can produce multiple Plans for multiple strategies.
+- It never automatically selects a single winner.
+- It passes the fixed Analyzer evaluation suite.
+- All results and limitations are documented.
+
+## 12. Restrictions
+
+- Do not modify MLA Decode or MLA Forward.
+- Do not use the Colab CLI.
+- Do not run TPU jobs.
+- Do not change account permissions.
+- Do not modify .auth.
+- Do not install new Skills or dependencies without approval.
+- Do not alter Phase 2A/2B historical records.
+- Do not silently change existing contracts.
+
+## 13. Final Report
+
+Provide:
+
+1. Implemented modules and interfaces.
+2. Reused Profile parser and actual capabilities.
+3. AnalysisRequest and evidence manifest examples.
+4. Mathematical model definitions and test results.
+5. Analyzer workflow and actual tool calls.
+6. Example multi-strategy AnalysisBundle and PlanSet.
+7. Analyzer evaluation results.
+8. Unit and integration test results.
+9. Remaining limitations.
+10. Recommended Phase 2D implementation plan.
+
+Stop after Phase 2C and wait for review.

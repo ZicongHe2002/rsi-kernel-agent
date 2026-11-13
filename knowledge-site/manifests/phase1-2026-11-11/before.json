@@ -1,0 +1,82 @@
+{
+  "knowledge-site/content/学习方法/rsi-benchmark.md": {
+    "sha256": "d80709642a4f23995d07201939d6577375fd0252c50f71b11cb4d659a2df3f77",
+    "bytes": 60785,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-benchmark.md.original"
+  },
+  "knowledge-site/content/学习方法/rsi-kernel-agent.md": {
+    "sha256": "20df6481c2d2786296388f77a70edc3b2be3634e6f7c0a053102ef7f5d4c6066",
+    "bytes": 10700,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md.original"
+  },
+  "knowledge-site/content/学习方法/rsi-knowledge-search.md": {
+    "sha256": "aa8d3a626be0599f51ada0a42efc67dde82573221fa899be113041af28e44f15",
+    "bytes": 17470,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-knowledge-search.md.original"
+  },
+  "knowledge-site/content/学习方法/rsi-memory.md": {
+    "sha256": "b7dacffed95deca864b661e5859ab3318a55b8a21a177c30da39651c347119e5",
+    "bytes": 22316,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-memory.md.original"
+  },
+  "knowledge-site/content/学习方法/rsi-optimization-workflow.md": {
+    "sha256": "f62bc6259fa3ef07704f55e0f1d6c020af1d94516fbfcd8339bf4bd0de78de0a",
+    "bytes": 22729,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-optimization-workflow.md.original"
+  },
+  "knowledge-site/content/学习方法/rsi-profiler.md": {
+    "sha256": "680ea5ee89bccecc0671b2cf811192fe3064c1d05373edab90a7b1d1741cc8e6",
+    "bytes": 21642,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/rsi-profiler.md.original"
+  },
+  "knowledge-site/content/待办清单/一周待办 · 2026-11-02.md": {
+    "sha256": "dcd6b6eef2bab7f641a8a3bdf840995a0db8feefd6a680aa71756318c5262d0b",
+    "bytes": 16973,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-02.md.original"
+  },
+  "knowledge-site/content/待办清单/一周待办 · 2026-11-09.md": {
+    "sha256": "c677d9e89a4b911fe569c2c5bed0b349bd544ba6b88f0ca013002f85be988cce",
+    "bytes": 4449,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-09.md.original"
+  },
+  "knowledge-site/content/待办清单/长期待办.md": {
+    "sha256": "6a99192fdeae311f912ddab9ad7f83a76f5c74998b3abc233624c2812bbfe3b8",
+    "bytes": 49,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/待办清单/长期待办.md.original"
+  },
+  "knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md": {
+    "sha256": "eea3f76416fea8bfb2a8d389fe7f5795a41dc976de86e05f6f2010d7652e8ddf",
+    "bytes": 29456,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/归档/已合并/已合并-TPU评测规范-2026-10-31.md.original"
+  },
+  "knowledge-site/content/学习方法/RSI实践/rsi-method-search-and-selection.md": {
+    "sha256": "948be8e5110c54c14268d43c8c1558b4c80367bf9a3c5dc11bbb3df944d210c2",
+    "bytes": 20019,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-method-search-and-selection.md.original"
+  },
+  "knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md": {
+    "sha256": "262c0e52a5d0ca04da0eaccd57fcfdfa15d133dbe8ec184126dea3316c63a0d9",
+    "bytes": 18444,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-multi-plan-exploration.md.original"
+  },
+  "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md": {
+    "sha256": "84db904ed0c9704402c5abcf072cb2715064296821191f89960d0348f2abbd1f",
+    "bytes": 24843,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md.original"
+  },
+  "knowledge-site/README.md": {
+    "sha256": "741b612b26d6a60f225aa00bd9f06ef95856ae866afcd4a34b57c30880267a42",
+    "bytes": 13991,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/README.md.original"
+  },
+  "knowledge-site/requirements-mcp.txt": {
+    "sha256": "200004ac0e9fd05ddd4e3e8a7daf4b8319ef8ac225abe784f33993b652df09c3",
+    "bytes": 91,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/requirements-mcp.txt.original"
+  },
+  "knowledge-site/.gitignore": {
+    "sha256": "70dfcfc1a70fd121158cf12312ada0ee0f5e0841d96cbfb03422572fcd4c01dd",
+    "bytes": 100,
+    "snapshot": "knowledge-site/manifests/phase1-2026-11-11/before/knowledge-site/.gitignore.original"
+  }
+}

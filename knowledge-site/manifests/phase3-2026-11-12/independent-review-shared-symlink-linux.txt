@@ -1,0 +1,6 @@
+﻿test_shared_chunk_symlink_is_rejected_without_following_it (test_phase3_remote.RemoteTests.test_shared_chunk_symlink_is_rejected_without_following_it) ... ok
+System.Management.Automation.RemoteException
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+System.Management.Automation.RemoteException
+OK

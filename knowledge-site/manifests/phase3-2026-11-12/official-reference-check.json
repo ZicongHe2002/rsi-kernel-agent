@@ -1,0 +1,9 @@
+{
+  "classification": "Source audit / local verification only",
+  "archived_files_verified": 16,
+  "local_report_links_verified": 13,
+  "broken_links": [],
+  "official_methods_saved_and_refetched": 2,
+  "report_sha256": "61a90fe23aedb25addd044bbf841079b11c68271d7c8e8047dc5bc5b284de6ce",
+  "runtime_execution": false
+}

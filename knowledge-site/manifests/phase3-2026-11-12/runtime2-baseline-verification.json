@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "network_calls": 0,
+  "store_access": "sqlite mode=ro and query_only; no Store writes or consider calls",
+  "scope": "Archived runtime2 receipts, complete Evidence closure, raw timing samples and saved Profile parser output",
+  "baselines": {
+    "baseline-repair": {
+      "name": "baseline-repair",
+      "verified_at_utc": "2026-11-12T08:05:16.344747+00:00",
+      "result_file_sha256": "d63656dea7c842517b614424222676967a85d52840c66dd525b964c81e3fc6e4",
+      "job_file_sha256": "1fe82890a9c9945060c354541358125a013bf6bb8682068939b045a7b6c7ffcc",
+      "run_id": "runtime-run:4686bd6eb923d2ce96be095360d34f0c3f533a30c4cf64c8e0bf70c3d275f223",
+      "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+      "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+      "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+      "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+      "source_ref": {
+        "digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae",
+        "size": 113009
+      },
+      "classification": "correct_inconclusive",
+      "evaluation_id": "evaluation:3bf65cc359132ac5af087bc4f7147a524add9b09551d8d525a41110db8608abb",
+      "confirmed": true,
+      "verified_stage_receipts": [
+        "benchmark",
+        "compile",
+        "correctness",
+        "generate",
+        "profile"
+      ],
+      "receipt_refs": {
+        "benchmark": {
+          "digest": "2a551a5423073eb87d13b878b67c2141d160bb69098298e18d769264c4f06739",
+          "size": 53448
+        },
+        "compile": {
+          "digest": "660a75377556300df6ab171825e832999e13df2366868d56676ddf25ec447d9e",
+          "size": 53452
+        },
+        "correctness": {
+          "digest": "f576729580c4dab9d42b35696100347213c6b76816f21f65c05b91f89ad0cc3b",
+          "size": 106004
+        },
+        "generate": {
+          "digest": "beed1768b2c5490c490d703a50b038993e4f02fed1acb693b7722b77b0b92d36",
+          "size": 2043
+        },
+        "profile": {
+          "digest": "740f70b07e617ce75e8cfb9e098b8145ad03ad87df9057c7fda89dfccd5540d5",
+          "size": 53414
+        }
+      },
+      "unique_stage_artifacts": 49,
+      "unique_stage_artifact_bytes": 509949153,
+      "evidence_records_traversed": 9,
+      "all_stage_artifacts_reachable_from_evaluation": true,
+      "correctness_from_reverified_receipts": [
+        {
+          "id": "decode-small",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.00390625,
+              "max_rel": 42.65079365079365,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": true,
+              "rms": 0.0002860686035596847,
+              "shape": [
+                1,
+                16,
+                512
+              ],
+              "tolerance_violations": 0
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": true,
+              "rms": null,
+              "shape": [
+                1,
+                1024,
+                640
+              ],
+              "tolerance_violations": 0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "id": "decode-boundary",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.001953125,
+              "max_rel": 0.8807947019867549,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": true,
+              "rms": 0.00018485763088246714,
+              "shape": [
+                3,
+                16,
+                128
+              ],
+              "tolerance_violations": 0
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": false,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": true,
+              "rms": null,
+              "shape": [
+                3,
+                256,
+                256
+              ],
+              "tolerance_violations": 0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "id": "decode-default",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.001953125,
+              "max_rel": 8.503355704697986,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": true,
+              "rms": 0.0001138156592686947,
+              "shape": [
+                8,
+                16,
+                512
+              ],
+              "tolerance_violations": 0
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": true,
+              "rms": null,
+              "shape": [
+                8,
+                16384,
+                640
+              ],
+              "tolerance_violations": 0
+            }
+          ],
+          "passed": true
+        }
+      ],
+      "benchmark_case_id": "decode-small",
+      "benchmark_raw_samples_ms": [
+        0.21599000001515378,
+        0.2015999998548068,
+        0.20548999987113348,
+        0.20448000009309908,
+        0.20767000000887492,
+        0.19924999992326775,
+        0.19973999997091596,
+        0.19371999997019884,
+        0.19100999998045154,
+        0.19266999993305944,
+        0.19083000006503426,
+        0.1903100001072744,
+        0.18985999986398383,
+        0.1945199999227043,
+        0.19173999999111402,
+        0.1858900000115682,
+        0.1878299999589217,
+        0.18260999991071003,
+        0.1837800000430434,
+        0.20467000013013603
+      ],
+      "benchmark_statistics_recomputed": {
+        "count": 20,
+        "median_ms": 0.19319499995162914,
+        "mean_ms": 0.1956829999812726,
+        "standard_deviation_ms": 0.008610285193469373,
+        "min_ms": 0.18260999991071003,
+        "max_ms": 0.21599000001515378,
+        "p25_ms": 0.19019750004645175,
+        "p75_ms": 0.20231999991437988,
+        "outlier_rule": "none"
+      },
+      "benchmark_warmup_count": 5,
+      "benchmark_synchronized": true,
+      "parent_latency_ms": null,
+      "profile_report_ref": {
+        "digest": "8c5e11a6e763b9bf68ac9df53ff7718e16770968106cf4c377bed802b2e6c4d7",
+        "size": 11729
+      },
+      "raw_xplane_refs": [
+        {
+          "digest": "44fe5fb09a58a2ea6924a7799a5fefa90aebd047b527653e83c5e5391f61d1f4",
+          "size": 78877
+        }
+      ],
+      "profile_trace_mode": "default_profile_options",
+      "profile_operation_id": "operation:b36c6a7ae78cc3aeb308f6c0d83ae557ff44e9fe4b8a52acc777ca9e95fa0bda",
+      "benchmark_operation_id": "operation:c692dbffc03b06aff418bd2ec23ebb362fcbb51f90c9e6795e933e801fc1c9ea",
+      "profile_and_benchmark_nonoverlapping": true,
+      "profile_normalization_quality": {
+        "availability": "available",
+        "errors": [],
+        "issues": [],
+        "warnings": []
+      },
+      "profile_groups": [
+        {
+          "kind": "program",
+          "name": "jit_rsi_mla_8936cf60b338bbea_0(7559519507731785760)",
+          "count": 20,
+          "median_us": 6.624375000000001,
+          "mean_us": 6.62325,
+          "invalid_samples": 0
+        },
+        {
+          "kind": "kernel",
+          "name": "%mla_decode_contiguous_prepare.1 = (bf16[1,16,640]{2,1,0:T(8,128)(2,1)S(1)}, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)S(1)}, s32[1,16,1024]{2,1,0:T(8,128)S(1)}) custom-call(bf16[1,16,576]{2,1,0:T(8,128)(2,1)} %values_0_.1, bf16[1,576]{1,0:T(2,128)(2,1)} %values_1_.1, s32[1]{0:T(128)S(6)} %copy), custom_call_target=\"tpu_custom_call\", operand_layout_constraints={bf16[1,16,576]{2,1,0}, bf16[1,576]{1,0}, s32[1]{0}}",
+          "count": 20,
+          "median_us": 0.694375,
+          "mean_us": 0.737125,
+          "invalid_samples": 0
+        },
+        {
+          "kind": "kernel",
+          "name": "%mla_decode_contiguous_attention.1 = (bf16[1,16,512]{2,1,0:T(8,128)(2,1)}, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)}) custom-call(bf16[1,16,640]{2,1,0:T(8,128)(2,1)S(1)} %pallas_call.1, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)S(1)} %pallas_call.2, s32[1,16,1024]{2,1,0:T(8,128)S(1)} %pallas_call.3, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)} %values_2_.1), custom_call_target=\"tpu_custom_call\", operand_layout_constraints={bf16[1,16,640]{2,1,0}, bf16[1,1024,640]{2,1,0}, s32[1,16,1024]{2,1,0}, bf16[1,1024,640]{2,1,0}}",
+          "count": 20,
+          "median_us": 5.055625,
+          "mean_us": 5.071875,
+          "invalid_samples": 0
+        }
+      ],
+      "profile_multi_device_span": {
+        "availability": "unavailable",
+        "reason": "Cross-device clock alignment has not been verified.",
+        "value": null
+      },
+      "promotion_decision_at_completion": {
+        "branch_promoted": true,
+        "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+        "eligible": true,
+        "reason": "confirmed_by_producer",
+        "task_promoted": true
+      },
+      "current_branch_best_evaluation_id": "evaluation:3bf65cc359132ac5af087bc4f7147a524add9b09551d8d525a41110db8608abb",
+      "independent_raw_correctness_recomparison": false,
+      "independent_raw_protobuf_reparse": false
+    },
+    "baseline-b": {
+      "name": "baseline-b",
+      "verified_at_utc": "2026-11-12T08:06:59.367035+00:00",
+      "result_file_sha256": "06a02a35978da87c9e0056a00d5803c944e6450156547f05a6f4e92b7342bbd7",
+      "job_file_sha256": "b43d4cadd5d6d990651ab68ebef8189eb1c684214cb05ea3e3686e26866a7a59",
+      "run_id": "strategy-seed-run:c339eda9de36ae18d4916561688194d9fd100ebb7fff38f30fdc2f473cdfcf08",
+      "candidate_id": "strategy-seed-candidate:c642e60add3890d7092175549edd57a26ea1441a5dd4f54f54195cd8cb036270",
+      "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+      "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+      "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+      "source_ref": {
+        "digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae",
+        "size": 113009
+      },
+      "classification": "correct_inconclusive",
+      "evaluation_id": "evaluation:13f4ff8018bffac6acb277e11886571ef8d9b92cf647f4e937b3f65adf07a97a",
+      "confirmed": true,
+      "verified_stage_receipts": [
+        "benchmark",
+        "compile",
+        "correctness",
+        "generate",
+        "profile"
+      ],
+      "receipt_refs": {
+        "benchmark": {
+          "digest": "394aea468a063b9783f9abc054ac0db976b9f33fbfa02f5773ffad2e8b38fa14",
+          "size": 53455
+        },
+        "compile": {
+          "digest": "8cf9a57ac1a36e33bf81319d241021e6b6ce9ebef005ab7020884359e7b5c766",
+          "size": 53454
+        },
+        "correctness": {
+          "digest": "810fba3862412504421ac54146fa08b2b7dfe414e19facad255a4259b0b947fa",
+          "size": 106006
+        },
+        "generate": {
+          "digest": "fe03c1dced10ff9346116dfc3489a6514e345ddba528b904a9c7e77b97a2126a",
+          "size": 2045
+        },
+        "profile": {
+          "digest": "4f88c773f1c6fac2c29669cd2528b14a561a62468e06ee62b738aa8008686794",
+          "size": 53422
+        }
+      },
+      "unique_stage_artifacts": 49,
+      "unique_stage_artifact_bytes": 509948192,
+      "evidence_records_traversed": 9,
+      "all_stage_artifacts_reachable_from_evaluation": true,
+      "correctness_from_reverified_receipts": [
+        {
+          "id": "decode-small",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.00390625,
+              "max_rel": 42.65079365079365,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": true,
+              "rms": 0.0002860686035596847,
+              "shape": [
+                1,
+                16,
+                512
+              ],
+              "tolerance_violations": 0
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": true,
+              "rms": null,
+              "shape": [
+                1,
+                1024,
+                640
+              ],
+              "tolerance_violations": 0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "id": "decode-boundary",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.001953125,
+              "max_rel": 0.8807947019867549,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": true,
+              "rms": 0.00018485763088246714,
+              "shape": [
+                3,
+                16,
+                128
+              ],
+              "tolerance_violations": 0
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": false,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": true,
+              "rms": null,
+              "shape": [
+                3,
+                256,
+                256
+              ],
+              "tolerance_violations": 0
+            }
+          ],
+          "passed": true
+        },
+        {
+          "id": "decode-default",
+          "outputs": [
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": 0.001953125,
+              "max_rel": 8.503355704697986,
+              "metric_reason": null,
+              "name": "attention",
+              "passed": true,
+              "rms": 0.0001138156592686947,
+              "shape": [
+                8,
+                16,
+                512
+              ],
+              "tolerance_violations": 0
+            },
+            {
+              "dtype": "bfloat16",
+              "finite": true,
+              "max_abs": null,
+              "max_rel": null,
+              "metric_reason": "Opaque cache compared byte-for-byte; numeric error is not its contract",
+              "name": "cache",
+              "passed": true,
+              "rms": null,
+              "shape": [
+                8,
+                16384,
+                640
+              ],
+              "tolerance_violations": 0
+            }
+          ],
+          "passed": true
+        }
+      ],
+      "benchmark_case_id": "decode-small",
+      "benchmark_raw_samples_ms": [
+        0.24335000011888042,
+        0.235909999901196,
+        0.22396000008484407,
+        0.21546999983002024,
+        0.23039000006974675,
+        0.23503000011260156,
+        0.21876999994674406,
+        0.2122600001257524,
+        0.20831000006182876,
+        0.23016999989522446,
+        0.20943000004081114,
+        0.206019999950513,
+        0.2134300000307121,
+        0.2071799999612267,
+        0.22684999999000866,
+        0.21945999992567522,
+        0.20599999993464735,
+        0.20739000001412933,
+        0.21003000006203365,
+        0.21525999977711763
+      ],
+      "benchmark_statistics_recomputed": {
+        "count": 20,
+        "median_ms": 0.21536499980356894,
+        "mean_ms": 0.21873349999168568,
+        "standard_deviation_ms": 0.011127911893173751,
+        "min_ms": 0.20599999993464735,
+        "max_ms": 0.24335000011888042,
+        "p25_ms": 0.20915000004606554,
+        "p75_ms": 0.2276799999663126,
+        "outlier_rule": "none"
+      },
+      "benchmark_warmup_count": 5,
+      "benchmark_synchronized": true,
+      "parent_latency_ms": null,
+      "profile_report_ref": {
+        "digest": "09d6181a30f8ba4a3b6c8f3fea3969e5a919140953e463440f8e79f8a587c48b",
+        "size": 11710
+      },
+      "raw_xplane_refs": [
+        {
+          "digest": "ccb3385b43905b69d5e78f6b0a94d89a37294a3c5f9d253d04b9e327f1c07204",
+          "size": 78749
+        }
+      ],
+      "profile_trace_mode": "default_profile_options",
+      "profile_operation_id": "operation:0a525d0dec9b2e651685bf04bc9ffc477c5f8c12703eb83ee70f6b66cdd62954",
+      "benchmark_operation_id": "operation:f312ec48bca0a41786ea489442c545b08ef414f6be6a36aaa5fa1c8d30d07bcc",
+      "profile_and_benchmark_nonoverlapping": true,
+      "profile_normalization_quality": {
+        "availability": "available",
+        "errors": [],
+        "issues": [],
+        "warnings": []
+      },
+      "profile_groups": [
+        {
+          "kind": "program",
+          "name": "jit_rsi_mla_750d6a5f28673b96_0(7559519507731785760)",
+          "count": 20,
+          "median_us": 6.615,
+          "mean_us": 6.635125,
+          "invalid_samples": 0
+        },
+        {
+          "kind": "kernel",
+          "name": "%mla_decode_contiguous_prepare.1 = (bf16[1,16,640]{2,1,0:T(8,128)(2,1)S(1)}, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)S(1)}, s32[1,16,1024]{2,1,0:T(8,128)S(1)}) custom-call(bf16[1,16,576]{2,1,0:T(8,128)(2,1)} %values_0_.1, bf16[1,576]{1,0:T(2,128)(2,1)} %values_1_.1, s32[1]{0:T(128)S(6)} %copy), custom_call_target=\"tpu_custom_call\", operand_layout_constraints={bf16[1,16,576]{2,1,0}, bf16[1,576]{1,0}, s32[1]{0}}",
+          "count": 20,
+          "median_us": 0.69375,
+          "mean_us": 0.7295625,
+          "invalid_samples": 0
+        },
+        {
+          "kind": "kernel",
+          "name": "%mla_decode_contiguous_attention.1 = (bf16[1,16,512]{2,1,0:T(8,128)(2,1)}, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)}) custom-call(bf16[1,16,640]{2,1,0:T(8,128)(2,1)S(1)} %pallas_call.1, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)S(1)} %pallas_call.2, s32[1,16,1024]{2,1,0:T(8,128)S(1)} %pallas_call.3, bf16[1,1024,640]{2,1,0:T(8,128)(2,1)} %values_2_.1), custom_call_target=\"tpu_custom_call\", operand_layout_constraints={bf16[1,16,640]{2,1,0}, bf16[1,1024,640]{2,1,0}, s32[1,16,1024]{2,1,0}, bf16[1,1024,640]{2,1,0}}",
+          "count": 20,
+          "median_us": 5.07,
+          "mean_us": 5.098875,
+          "invalid_samples": 0
+        }
+      ],
+      "profile_multi_device_span": {
+        "availability": "unavailable",
+        "reason": "Cross-device clock alignment has not been verified.",
+        "value": null
+      },
+      "promotion_decision_at_completion": {
+        "branch_promoted": true,
+        "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+        "eligible": true,
+        "reason": "confirmed_by_producer",
+        "task_promoted": false
+      },
+      "current_branch_best_evaluation_id": "evaluation:13f4ff8018bffac6acb277e11886571ef8d9b92cf647f4e937b3f65adf07a97a",
+      "independent_raw_correctness_recomparison": false,
+      "independent_raw_protobuf_reparse": false
+    }
+  },
+  "limitations": [
+    "Correctness metrics verified against original receipt protocol; raw NPZ hashes verified but comparisons not recomputed.",
+    "Raw XPlane SHA/size verified and saved parser samples/normalization recomputed; protobuf not reparsed.",
+    "No cross-Runtime speedup claim; baseline source is unchanged compatibility repair."
+  ],
+  "both_runtime2_baselines_verified": true
+}

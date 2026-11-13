@@ -1,0 +1,642 @@
+{
+  "schema_version": 1,
+  "provenance": "synthetic",
+  "total_cases": 10,
+  "passed_cases": 9,
+  "cases": [
+    {
+      "case_id": "dma-count",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": 1.0,
+        "numerator": 1,
+        "denominator": 1
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "profile-mismatch",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": null,
+        "numerator": 0,
+        "denominator": 0
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "tile-dtype-confound",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": 1.0,
+        "numerator": 1,
+        "denominator": 1
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "different-history",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": 1.0,
+        "numerator": 1,
+        "denominator": 1
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "prediction-not-measurement",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 99,
+        "denominator": 99
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": null,
+        "numerator": 0,
+        "denominator": 0
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "multi-strategy-plans",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": null,
+        "numerator": 0,
+        "denominator": 0
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "faster-unknown-cause",
+      "provenance": "synthetic",
+      "case_passed": false,
+      "case_failures": [
+        "category"
+      ],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 1
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "stale-knowledge",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": null,
+        "numerator": 0,
+        "denominator": 0
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "missing-not-zero",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": 1.0,
+        "numerator": 1,
+        "denominator": 1
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    },
+    {
+      "case_id": "nested-overlap",
+      "provenance": "synthetic",
+      "case_passed": true,
+      "case_failures": [],
+      "reference_validity": {
+        "value": 1.0,
+        "numerator": 98,
+        "denominator": 98
+      },
+      "unsupported_claim_rate": {
+        "value": 1.0,
+        "numerator": 21,
+        "denominator": 21
+      },
+      "uncertainty": {
+        "value": null,
+        "numerator": 0,
+        "denominator": 0
+      },
+      "semantic_legality": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "diversity": {
+        "value": 1.0,
+        "numerator": 2,
+        "denominator": 2
+      },
+      "duplicate_rate": {
+        "value": 0.0,
+        "numerator": 0,
+        "denominator": 4
+      },
+      "binding": {
+        "value": 1.0,
+        "numerator": 4,
+        "denominator": 4
+      },
+      "tool_reproducibility": {
+        "value": 1.0,
+        "numerator": 11,
+        "denominator": 11
+      },
+      "unreplayable_tool_ids": [],
+      "failed_tool_ids": [
+        "calc-workload-floor"
+      ],
+      "coverage": {
+        "semantic_legality": "Plan fields, validation requirements, references and exact parents only",
+        "diversity": "Distinct normalized mechanisms and modifications per strategy; semantic synonyms need human review",
+        "unsupported_claim_rate": "Only exact rendered assertions can be mechanically supported",
+        "case_reason": "Preserved for independent human review, not scored by length or self-rating"
+      },
+      "limitations": [
+        "prose_semantics_unscored",
+        "kernel_transformation_legality_not_proven",
+        "synthetic_cases_not_hardware_validation",
+        "single_sample_not_statistical_quality_estimate"
+      ]
+    }
+  ],
+  "overall_accepted": false,
+  "acceptance_failures": [
+    "case_answers",
+    "tool_execution",
+    "unsupported_claim_rate"
+  ],
+  "metrics_note": "passed_cases counts answer rubrics only; overall_accepted also gates output validity. Shared PlanSet metrics repeat per case; do not sum them as independent samples.",
+  "configuration": "tools",
+  "response_files": 4,
+  "accepted_responses": 4,
+  "tool_calls": 12,
+  "model_response_events": 4
+}

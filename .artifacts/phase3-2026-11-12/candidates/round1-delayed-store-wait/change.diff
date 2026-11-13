@@ -1,0 +1,18 @@
+--- a/pallas_kernels/kernels/mla_decode.py
++++ b/pallas_kernels/kernels/mla_decode.py
+@@ -2954,7 +2954,6 @@
+           tile, updated_ref.at[b, pl.ds(i * block_size, block_size), :], sem
+         )
+         store.start()
+-        store.wait()
+         valid = tokens < lens
+         cache_valid = cache_tokens < cache_lens
+         if sliding_window > 0:
+@@ -2982,6 +2981,7 @@
+         acc = acc * alpha + lax.dot(
+           p.astype(q.dtype), kv[:, :lkv_dim], preferred_element_type=jnp.float32
+         )
++        store.wait()
+         return m_next, total, acc
+ 
+       # Visit every cache block to preserve the full tail in the separate output.

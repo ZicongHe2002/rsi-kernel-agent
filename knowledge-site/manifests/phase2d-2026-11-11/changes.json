@@ -1,0 +1,1414 @@
+{
+  "schema_version": 1,
+  "scope": "Phase2D+ local synthetic software loop",
+  "self_excluded": true,
+  "files": [
+    {
+      "path": ".artifacts/phase2d-2026-11-11/demo-cli-output.json",
+      "before_sha256": null,
+      "after_sha256": "00194bbf1eb4ea0c544cf90c62021b7412c611a893a0a2d285b96b3aca15107e",
+      "size": 5079576,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/execution-handoff.md",
+      "before_sha256": null,
+      "after_sha256": "307ad0d14a2a9f206e4bf9cd05d0b0fbfffd13b7249c2adc40046a7462224fdc",
+      "size": 6640,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/finalize.py",
+      "before_sha256": null,
+      "after_sha256": "e4ac3aaf10e34c1df241af7ede04977b6f657df7fdf504a685294e7e90dda7ca",
+      "size": 8741,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/full-intermediate-environment.json",
+      "before_sha256": null,
+      "after_sha256": "bcd6bdf232767f7e28a2cd9a6c1ce7f315cf9b7f0ad26a4f93f8d38914094e4f",
+      "size": 1170,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/full-intermediate-tests.txt",
+      "before_sha256": null,
+      "after_sha256": "473dfc8aa2c3451417ea536cb45e14b5c7feedb7634e29bbdf8bfe43ec291ebb",
+      "size": 64028,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/journal-controller-integration.txt",
+      "before_sha256": null,
+      "after_sha256": "ba6bf79a932bf2d0d9bc7697f96ae617800e086b6f968cb6d929c13a36e3e3d0",
+      "size": 21014,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/journal-green.txt",
+      "before_sha256": null,
+      "after_sha256": "7c72cfa3a15acd63d5ff4406b7af87d3942deb7ff938085c9309262a12c9fb34",
+      "size": 2296,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/journal-red.txt",
+      "before_sha256": null,
+      "after_sha256": "f40c23ea24a2fb10e860365a235168518336bd537910c729d47203dc37de79dc",
+      "size": 14858,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/recovery-cancel-marker-red.txt",
+      "before_sha256": null,
+      "after_sha256": "c652352afee5877489effd0c0a2e181451cff4cb5387898f35459da0f38dc1ff",
+      "size": 7174,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/recovery-first.txt",
+      "before_sha256": null,
+      "after_sha256": "7401b9ffd79d4262e3b04948e7d706812c5ed0f7d15f0428bd2639ef001b6983",
+      "size": 12624,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/recovery-green.txt",
+      "before_sha256": null,
+      "after_sha256": "590d859fbce9233edeb919185b5f33876fad678bbfce64a326316511d5b9969c",
+      "size": 4542,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/recovery-pause-red.txt",
+      "before_sha256": null,
+      "after_sha256": "e70e2f563b4c1c97f9d4df9237ce9b59a1a6e95df5098baeddbd0a2802acffca",
+      "size": 2768,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/recovery-pending-device-red.txt",
+      "before_sha256": null,
+      "after_sha256": "1224b9041b25163ad9edbbc3d8f3dccaf638f92fb77d5989ce1cdc7a95d5147d",
+      "size": 2868,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/scheduling-green.txt",
+      "before_sha256": null,
+      "after_sha256": "660869aa3ba52d2e1666c5ecf933c054a68e143d08f0d3d4ba82a90d106cedf4",
+      "size": 2646,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/scheduling-red.txt",
+      "before_sha256": null,
+      "after_sha256": "4a8b3bb0311d05c22d7e6f8b70800d4e79d34db021e76aff6a9e44f1b4f74489",
+      "size": 19008,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/01/0189123b815767748a192c1eb9448e190213d4b72f346486575a779b0ed67e81",
+      "before_sha256": null,
+      "after_sha256": "0189123b815767748a192c1eb9448e190213d4b72f346486575a779b0ed67e81",
+      "size": 1306,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/02/02bd7c0c3cd62dd2595a3e6ee006967951a3e496073ef2729b5c3f22875e24cb",
+      "before_sha256": null,
+      "after_sha256": "02bd7c0c3cd62dd2595a3e6ee006967951a3e496073ef2729b5c3f22875e24cb",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/0b/0bfc1bdd49c8d2515ff7c32f0e978893a5d3e76db78179e5e58a98228c296040",
+      "before_sha256": null,
+      "after_sha256": "0bfc1bdd49c8d2515ff7c32f0e978893a5d3e76db78179e5e58a98228c296040",
+      "size": 130,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/0c/0c5fbdd2dabf1dc3122b29836f4f47af6dbc775f90fb606d5f43d5d08e2050d1",
+      "before_sha256": null,
+      "after_sha256": "0c5fbdd2dabf1dc3122b29836f4f47af6dbc775f90fb606d5f43d5d08e2050d1",
+      "size": 109,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/0c/0c62aba49de7973b9dd53fe6a52f743ad3270e82f483a908b12352704d8515f1",
+      "before_sha256": null,
+      "after_sha256": "0c62aba49de7973b9dd53fe6a52f743ad3270e82f483a908b12352704d8515f1",
+      "size": 1201,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/0f/0f639f21c70ea2a9231421cafcb1ecf81615c3b72930d0035665f689ef0239d3",
+      "before_sha256": null,
+      "after_sha256": "0f639f21c70ea2a9231421cafcb1ecf81615c3b72930d0035665f689ef0239d3",
+      "size": 4801590,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/12/127ebb3155e3745cfc17620ea352a5ac1f6c1cdbffd188093a33a8ade50862b1",
+      "before_sha256": null,
+      "after_sha256": "127ebb3155e3745cfc17620ea352a5ac1f6c1cdbffd188093a33a8ade50862b1",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/16/1611808347f4db2e9fef3192f8003ff588f3e446c3160a5a628a293006a300c5",
+      "before_sha256": null,
+      "after_sha256": "1611808347f4db2e9fef3192f8003ff588f3e446c3160a5a628a293006a300c5",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/17/173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/1a/1a98b0f9fa3229c7d33124437ca0fe111a1dcc453c1589733eefa120d445642a",
+      "before_sha256": null,
+      "after_sha256": "1a98b0f9fa3229c7d33124437ca0fe111a1dcc453c1589733eefa120d445642a",
+      "size": 42,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/22/2255f1620b7bc94e83bde5e1dc956e02b11606089cd2332d6ba400b9658c1bce",
+      "before_sha256": null,
+      "after_sha256": "2255f1620b7bc94e83bde5e1dc956e02b11606089cd2332d6ba400b9658c1bce",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/24/24a61b0e65540a388d15fe16d1aaabdd929b32d202224f6eb9515753302b3fad",
+      "before_sha256": null,
+      "after_sha256": "24a61b0e65540a388d15fe16d1aaabdd929b32d202224f6eb9515753302b3fad",
+      "size": 30890,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/24/24f971a4cb28e77bf7da786700f4076ddf2c535ed89c77ba44c347bed390bc3c",
+      "before_sha256": null,
+      "after_sha256": "24f971a4cb28e77bf7da786700f4076ddf2c535ed89c77ba44c347bed390bc3c",
+      "size": 66,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/25/25aa491025c169a19300bab96dff3821fb4984efe3b4159367b468ebba725545",
+      "before_sha256": null,
+      "after_sha256": "25aa491025c169a19300bab96dff3821fb4984efe3b4159367b468ebba725545",
+      "size": 134,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/2c/2cc5b47c3ab55ed96527743852cd1cd99794fe17fd584f69b053de40b26507a4",
+      "before_sha256": null,
+      "after_sha256": "2cc5b47c3ab55ed96527743852cd1cd99794fe17fd584f69b053de40b26507a4",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/2d/2df1e65908c7e719880c770c9727f645221de9f42f199cc079a309e010cd9902",
+      "before_sha256": null,
+      "after_sha256": "2df1e65908c7e719880c770c9727f645221de9f42f199cc079a309e010cd9902",
+      "size": 1146,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/2e/2e889c23feed0e5469c7eb12b8a4c32d19522da009bec416647eb14c9f6a1572",
+      "before_sha256": null,
+      "after_sha256": "2e889c23feed0e5469c7eb12b8a4c32d19522da009bec416647eb14c9f6a1572",
+      "size": 1146,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/30/304ecec34e7fa2c18d7c15eddd5d514af7320e27e5df77b45d4ea45f90c3dec3",
+      "before_sha256": null,
+      "after_sha256": "304ecec34e7fa2c18d7c15eddd5d514af7320e27e5df77b45d4ea45f90c3dec3",
+      "size": 1146,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/32/325e13436b16551d38d324b1cdb52a8a1d199e9e2b263d9ecb529f695d7f60f0",
+      "before_sha256": null,
+      "after_sha256": "325e13436b16551d38d324b1cdb52a8a1d199e9e2b263d9ecb529f695d7f60f0",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/36/36b5d103068c032ce990b7e880d9fd88aeab91bb55879e3360cde18a028b6b1c",
+      "before_sha256": null,
+      "after_sha256": "36b5d103068c032ce990b7e880d9fd88aeab91bb55879e3360cde18a028b6b1c",
+      "size": 1306,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/39/394fe3b3cd1b32e8c9b49e96ffc6085f4ac426e1b0d4a38fd4885fd113b720dc",
+      "before_sha256": null,
+      "after_sha256": "394fe3b3cd1b32e8c9b49e96ffc6085f4ac426e1b0d4a38fd4885fd113b720dc",
+      "size": 1306,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/39/39f54ec0bee50f8a3b43a174f628862365b1cc7fe61e458f25f16a87238007c9",
+      "before_sha256": null,
+      "after_sha256": "39f54ec0bee50f8a3b43a174f628862365b1cc7fe61e458f25f16a87238007c9",
+      "size": 1306,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/3a/3a235d716b0e9c347d63515878fe5798a40ac0cc02fec0361eac66eca5daddff",
+      "before_sha256": null,
+      "after_sha256": "3a235d716b0e9c347d63515878fe5798a40ac0cc02fec0361eac66eca5daddff",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/3a/3abf05d5beead9b4385ec4e9da5d719475498e12f72ead7b2dddbbcffdd8a0cb",
+      "before_sha256": null,
+      "after_sha256": "3abf05d5beead9b4385ec4e9da5d719475498e12f72ead7b2dddbbcffdd8a0cb",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/3b/3b061f5cceecadee24043f9fa003bd99a9f35ae12e354b51c2b0ccf661f89379",
+      "before_sha256": null,
+      "after_sha256": "3b061f5cceecadee24043f9fa003bd99a9f35ae12e354b51c2b0ccf661f89379",
+      "size": 166,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/45/4591476d927a36f0a499966c252e510daaa11200e97e1f0f6af7e394f2f62246",
+      "before_sha256": null,
+      "after_sha256": "4591476d927a36f0a499966c252e510daaa11200e97e1f0f6af7e394f2f62246",
+      "size": 1373,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/45/45cfe16bcdefda8ebe8ba79259553378c7d709bd9764cb2a022d32edeba3fd2c",
+      "before_sha256": null,
+      "after_sha256": "45cfe16bcdefda8ebe8ba79259553378c7d709bd9764cb2a022d32edeba3fd2c",
+      "size": 1152,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/47/4774a16d6e8dcf98f5897c9b3f3df4efd1c36a77b3f93aa22906dfd2a4fab227",
+      "before_sha256": null,
+      "after_sha256": "4774a16d6e8dcf98f5897c9b3f3df4efd1c36a77b3f93aa22906dfd2a4fab227",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/49/497823e5b406b5f71b32dde958eb099766cc7004761f39578a7d2d4985f2270b",
+      "before_sha256": null,
+      "after_sha256": "497823e5b406b5f71b32dde958eb099766cc7004761f39578a7d2d4985f2270b",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/4e/4ef4825a959fbfb35fe9dd419ec9eba407c66bbe6fbd9bd404fe82e3b1cc984b",
+      "before_sha256": null,
+      "after_sha256": "4ef4825a959fbfb35fe9dd419ec9eba407c66bbe6fbd9bd404fe82e3b1cc984b",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/50/50995ba360be892cb566f6d674666142ff2ae73d7c9a55c05966157f416a88f1",
+      "before_sha256": null,
+      "after_sha256": "50995ba360be892cb566f6d674666142ff2ae73d7c9a55c05966157f416a88f1",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/57/5779f2f07ac8c3c768dfd02da423ca2b2b3ba0725f1dd530416448d946e3825c",
+      "before_sha256": null,
+      "after_sha256": "5779f2f07ac8c3c768dfd02da423ca2b2b3ba0725f1dd530416448d946e3825c",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/5e/5e1927f5650ad9a900cee9f417233fda58ec3f2ff3e8c00e1242f35fd28374ed",
+      "before_sha256": null,
+      "after_sha256": "5e1927f5650ad9a900cee9f417233fda58ec3f2ff3e8c00e1242f35fd28374ed",
+      "size": 1372,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/63/636dca7a6b28b6de44b17b70d88df689f0213ca6e5ed213f3aae86060a0b831a",
+      "before_sha256": null,
+      "after_sha256": "636dca7a6b28b6de44b17b70d88df689f0213ca6e5ed213f3aae86060a0b831a",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/6d/6d17136ec50cb71dd142e6d4ebad72ac57bfaeffe309b35229fbf6e2e66ba232",
+      "before_sha256": null,
+      "after_sha256": "6d17136ec50cb71dd142e6d4ebad72ac57bfaeffe309b35229fbf6e2e66ba232",
+      "size": 1306,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/6d/6d390a4a601155a143b8dfecf008b5670d0191f4e4689d1f636f52b8befe07ef",
+      "before_sha256": null,
+      "after_sha256": "6d390a4a601155a143b8dfecf008b5670d0191f4e4689d1f636f52b8befe07ef",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/6e/6e8ee480a12f1f2b4af0faabb9ee5ac5b2801201629ebc264918ef49d6f4ca39",
+      "before_sha256": null,
+      "after_sha256": "6e8ee480a12f1f2b4af0faabb9ee5ac5b2801201629ebc264918ef49d6f4ca39",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/6e/6e932c95a867472ea2155c3ced0c302bb87d84c0e91b3674a082ca971c6cc514",
+      "before_sha256": null,
+      "after_sha256": "6e932c95a867472ea2155c3ced0c302bb87d84c0e91b3674a082ca971c6cc514",
+      "size": 66,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/6e/6eda0f3720f8239d7782b36c5d0004e60038b1b7aa02b0bc31b0423a4da3724d",
+      "before_sha256": null,
+      "after_sha256": "6eda0f3720f8239d7782b36c5d0004e60038b1b7aa02b0bc31b0423a4da3724d",
+      "size": 639,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/71/71bba24448ca030ff71197565138dc05fddaeac4447e39b6e68a2f229e4a94e6",
+      "before_sha256": null,
+      "after_sha256": "71bba24448ca030ff71197565138dc05fddaeac4447e39b6e68a2f229e4a94e6",
+      "size": 130,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/75/75a4de38e7bd62d8b35146780927a1aef791936282e7834520d4649425d4f545",
+      "before_sha256": null,
+      "after_sha256": "75a4de38e7bd62d8b35146780927a1aef791936282e7834520d4649425d4f545",
+      "size": 2374176,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/76/7677ab2420ad051ccde33e8fe06f4f0a7cbf5b7fb2fa7d804bd7d96e5f33c258",
+      "before_sha256": null,
+      "after_sha256": "7677ab2420ad051ccde33e8fe06f4f0a7cbf5b7fb2fa7d804bd7d96e5f33c258",
+      "size": 1366,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/7d/7d6021c9257a5e9703e46bf34fe4dbb42cdbbe8fc6e3bfc87f9426b4e239b03d",
+      "before_sha256": null,
+      "after_sha256": "7d6021c9257a5e9703e46bf34fe4dbb42cdbbe8fc6e3bfc87f9426b4e239b03d",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/7f/7f70c18abddee94f058f9020a38887691d0d8a989497f54379948fb66c7c4c1f",
+      "before_sha256": null,
+      "after_sha256": "7f70c18abddee94f058f9020a38887691d0d8a989497f54379948fb66c7c4c1f",
+      "size": 46937,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/82/822be147273fb6abe83788f905205e70d2ee678e02935f8f6d7ed42d2308abbe",
+      "before_sha256": null,
+      "after_sha256": "822be147273fb6abe83788f905205e70d2ee678e02935f8f6d7ed42d2308abbe",
+      "size": 1303,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/85/85e9004bfc1dc5ea9827029dd6f83031553f5ec2ea504874cfa5cf45d699c229",
+      "before_sha256": null,
+      "after_sha256": "85e9004bfc1dc5ea9827029dd6f83031553f5ec2ea504874cfa5cf45d699c229",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/8e/8e1367c7c62e6f5aef8ff3f9c9305ce6a25087b736d8b9798cdb52f096672e29",
+      "before_sha256": null,
+      "after_sha256": "8e1367c7c62e6f5aef8ff3f9c9305ce6a25087b736d8b9798cdb52f096672e29",
+      "size": 1372,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/8e/8e3891992dd5d22c0e336de806ce5022fd6b7fe43557e08c0a11e548cbd8ffb0",
+      "before_sha256": null,
+      "after_sha256": "8e3891992dd5d22c0e336de806ce5022fd6b7fe43557e08c0a11e548cbd8ffb0",
+      "size": 639,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/94/94696fb7438716b0094b6e909f0ec628d40c7898b67175a267a72dec1e8b9ea5",
+      "before_sha256": null,
+      "after_sha256": "94696fb7438716b0094b6e909f0ec628d40c7898b67175a267a72dec1e8b9ea5",
+      "size": 1597,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/95/95808c88f196ea9e138a5aa82628ff3a2310583a5e5f1b70bf15f8c9895a403c",
+      "before_sha256": null,
+      "after_sha256": "95808c88f196ea9e138a5aa82628ff3a2310583a5e5f1b70bf15f8c9895a403c",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/96/96facfffbfd8381689a215454dd0ddaba26c6f7b99ef22e9317588afd48ef3c9",
+      "before_sha256": null,
+      "after_sha256": "96facfffbfd8381689a215454dd0ddaba26c6f7b99ef22e9317588afd48ef3c9",
+      "size": 11,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/9b/9b60be843dcf02a5ce4714fc6aa92f6fbd768f67cf4e814a4dbdee6f87a5f592",
+      "before_sha256": null,
+      "after_sha256": "9b60be843dcf02a5ce4714fc6aa92f6fbd768f67cf4e814a4dbdee6f87a5f592",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/9e/9e3c5d0fbd5d5517dc8ef306949c96cab70fe176506cc67090ab5a057ce392f5",
+      "before_sha256": null,
+      "after_sha256": "9e3c5d0fbd5d5517dc8ef306949c96cab70fe176506cc67090ab5a057ce392f5",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/a2/a2d15d1a46caf1b2f2a3ef83ee35a1a806742280bd547edbb0ce85455121d3f6",
+      "before_sha256": null,
+      "after_sha256": "a2d15d1a46caf1b2f2a3ef83ee35a1a806742280bd547edbb0ce85455121d3f6",
+      "size": 1146,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/a4/a4a91e209ff75a11d02a82bfc2b27b7113b28f93acb44f639169e6668a7b198f",
+      "before_sha256": null,
+      "after_sha256": "a4a91e209ff75a11d02a82bfc2b27b7113b28f93acb44f639169e6668a7b198f",
+      "size": 1372,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/a6/a60f0d322667376c598912efb9f254482400e8abca6434e15adb9ec1aaeb1a88",
+      "before_sha256": null,
+      "after_sha256": "a60f0d322667376c598912efb9f254482400e8abca6434e15adb9ec1aaeb1a88",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/a6/a699194dffb328065569c53c5f3bab458ef4684f57c4359b6010e0ade1fc99f1",
+      "before_sha256": null,
+      "after_sha256": "a699194dffb328065569c53c5f3bab458ef4684f57c4359b6010e0ade1fc99f1",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/a8/a82f0f6a158b2976aad4d0ddb36be568315569d864d56e048811339c31116b9b",
+      "before_sha256": null,
+      "after_sha256": "a82f0f6a158b2976aad4d0ddb36be568315569d864d56e048811339c31116b9b",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/b1/b148e03e5319cb150930725ba08a3dcd77e4af5f6a28ffd92f3b8cc4473404f0",
+      "before_sha256": null,
+      "after_sha256": "b148e03e5319cb150930725ba08a3dcd77e4af5f6a28ffd92f3b8cc4473404f0",
+      "size": 1158,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/b1/b1a93c72b79b324c87e4a008b1926191cebc7d2768b1fcb1ca210ca26865c6de",
+      "before_sha256": null,
+      "after_sha256": "b1a93c72b79b324c87e4a008b1926191cebc7d2768b1fcb1ca210ca26865c6de",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/b1/b1b7d2c2b4526586f565a55bc68d1b87c61b37e6ac5598fefd145704abead010",
+      "before_sha256": null,
+      "after_sha256": "b1b7d2c2b4526586f565a55bc68d1b87c61b37e6ac5598fefd145704abead010",
+      "size": 1298,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/b4/b4d77c393e8a63013870e954ad55ae1f73150d6d267d182e499a8daf69098572",
+      "before_sha256": null,
+      "after_sha256": "b4d77c393e8a63013870e954ad55ae1f73150d6d267d182e499a8daf69098572",
+      "size": 1472,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/b6/b60a8949f16d888cab4aac84f900289e8c08c55eb06d322bd05a89e105f7e069",
+      "before_sha256": null,
+      "after_sha256": "b60a8949f16d888cab4aac84f900289e8c08c55eb06d322bd05a89e105f7e069",
+      "size": 166,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/b7/b78918e0104ef14522ac57990471a3df79787e49231f5ee4d139ca4d95e3bd09",
+      "before_sha256": null,
+      "after_sha256": "b78918e0104ef14522ac57990471a3df79787e49231f5ee4d139ca4d95e3bd09",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/b9/b99e245e6778f44cb29ba8f919f8d9b17de3e764a2ce643ef547524e6671a110",
+      "before_sha256": null,
+      "after_sha256": "b99e245e6778f44cb29ba8f919f8d9b17de3e764a2ce643ef547524e6671a110",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/be/befa83a1b54bb3e464452f3a83b84800221bbc17c8d66c5662260ad1b6a290b2",
+      "before_sha256": null,
+      "after_sha256": "befa83a1b54bb3e464452f3a83b84800221bbc17c8d66c5662260ad1b6a290b2",
+      "size": 1199,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/bf/bfe35206374645a040195d8e37142af69eccdc69be19a2414d3f7cd154c8e7e9",
+      "before_sha256": null,
+      "after_sha256": "bfe35206374645a040195d8e37142af69eccdc69be19a2414d3f7cd154c8e7e9",
+      "size": 1306,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/c1/c1cf99166aa73c5a2b7351fd16f3aea1906cbcc74203e175339e47b063403826",
+      "before_sha256": null,
+      "after_sha256": "c1cf99166aa73c5a2b7351fd16f3aea1906cbcc74203e175339e47b063403826",
+      "size": 1480,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/c3/c3de5e54dd8e5ae4ca6d771f38ea9468cd12d1efd81309eaf83e524ce364e633",
+      "before_sha256": null,
+      "after_sha256": "c3de5e54dd8e5ae4ca6d771f38ea9468cd12d1efd81309eaf83e524ce364e633",
+      "size": 1306,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/c6/c61e5db5f0d979a66fa4291b99047fd2581af71fc467e11a162846026c083ce6",
+      "before_sha256": null,
+      "after_sha256": "c61e5db5f0d979a66fa4291b99047fd2581af71fc467e11a162846026c083ce6",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/ca/ca188be091ffe507676adde6102376a26a6c3c3dce3d97021b40729609f6cb10",
+      "before_sha256": null,
+      "after_sha256": "ca188be091ffe507676adde6102376a26a6c3c3dce3d97021b40729609f6cb10",
+      "size": 1372,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/d5/d5319bc19864dd52b34e30128d3022f7d2858fff08ef5523b144a708d51e7b6d",
+      "before_sha256": null,
+      "after_sha256": "d5319bc19864dd52b34e30128d3022f7d2858fff08ef5523b144a708d51e7b6d",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/d7/d70e1e3ab57e91301e7a8869edcb1c66ac13ba09503de1221265f5c8e0f1c37a",
+      "before_sha256": null,
+      "after_sha256": "d70e1e3ab57e91301e7a8869edcb1c66ac13ba09503de1221265f5c8e0f1c37a",
+      "size": 1146,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/de/dec7f5ce912e7a08fa94568f0306b7e0dcf1bbcf0180f920f13d50b5ca7cfcc3",
+      "before_sha256": null,
+      "after_sha256": "dec7f5ce912e7a08fa94568f0306b7e0dcf1bbcf0180f920f13d50b5ca7cfcc3",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/e0/e035fbea9d6959a4675d6465d0c4142e3aab621f310eeb3b047ed811bc808186",
+      "before_sha256": null,
+      "after_sha256": "e035fbea9d6959a4675d6465d0c4142e3aab621f310eeb3b047ed811bc808186",
+      "size": 1372,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/e4/e43a820422806fa127522b628b64af1b3dd7e7c984b6ee03523583ab958a8b70",
+      "before_sha256": null,
+      "after_sha256": "e43a820422806fa127522b628b64af1b3dd7e7c984b6ee03523583ab958a8b70",
+      "size": 1303,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/e9/e96887d4c27161c54761523486c0b0af722cc544b334195491fe9bc20452da19",
+      "before_sha256": null,
+      "after_sha256": "e96887d4c27161c54761523486c0b0af722cc544b334195491fe9bc20452da19",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/e9/e9ef03e8ae2e66a79983d0f62a96070aa187eb84786955fe8b9c14a6f0314810",
+      "before_sha256": null,
+      "after_sha256": "e9ef03e8ae2e66a79983d0f62a96070aa187eb84786955fe8b9c14a6f0314810",
+      "size": 10,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/f2/f2fc0abf69dba8b4e6d1fbe4094ca848f3e033848dc89cfa86afc79b1757057d",
+      "before_sha256": null,
+      "after_sha256": "f2fc0abf69dba8b4e6d1fbe4094ca848f3e033848dc89cfa86afc79b1757057d",
+      "size": 1040,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/f6/f673abd919ebceca67282e99b4ff46adc82e26c9764fe31e8b91f7cda0bba5bf",
+      "before_sha256": null,
+      "after_sha256": "f673abd919ebceca67282e99b4ff46adc82e26c9764fe31e8b91f7cda0bba5bf",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/f7/f7967fc78d405020101a90422f9008e8f043d220a6112340ddab92f7b73b7509",
+      "before_sha256": null,
+      "after_sha256": "f7967fc78d405020101a90422f9008e8f043d220a6112340ddab92f7b73b7509",
+      "size": 42,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/fa/fa80a91074e35cb03079a1eb45712b5351b72edcfde470862e7167d9c175744a",
+      "before_sha256": null,
+      "after_sha256": "fa80a91074e35cb03079a1eb45712b5351b72edcfde470862e7167d9c175744a",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/fb/fbaa21042c3723b474f2b1b1954c1f4ad4992c39e920549fb7861f59a75e8705",
+      "before_sha256": null,
+      "after_sha256": "fbaa21042c3723b474f2b1b1954c1f4ad4992c39e920549fb7861f59a75e8705",
+      "size": 1605,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/artifacts/sha256/ff/ff708ef505029f4a40ad8efe7368d66ef46e60e6f9df46739e64cc21003c1e0f",
+      "before_sha256": null,
+      "after_sha256": "ff708ef505029f4a40ad8efe7368d66ef46e60e6f9df46739e64cc21003c1e0f",
+      "size": 1306,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/05dd4bf60bf915314b9b9e03348c59b181972403e19058aea2a74584a28f9eea/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/05dd4bf60bf915314b9b9e03348c59b181972403e19058aea2a74584a28f9eea/config.json",
+      "before_sha256": null,
+      "after_sha256": "4ef4825a959fbfb35fe9dd419ec9eba407c66bbe6fbd9bd404fe82e3b1cc984b",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/05dd4bf60bf915314b9b9e03348c59b181972403e19058aea2a74584a28f9eea/source.txt",
+      "before_sha256": null,
+      "after_sha256": "25aa491025c169a19300bab96dff3821fb4984efe3b4159367b468ebba725545",
+      "size": 134,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/220705f35e231d286c36f57f0761121a3b3b6cfd5c02f64e4b7840a4459bfbaf/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/220705f35e231d286c36f57f0761121a3b3b6cfd5c02f64e4b7840a4459bfbaf/config.json",
+      "before_sha256": null,
+      "after_sha256": "a82f0f6a158b2976aad4d0ddb36be568315569d864d56e048811339c31116b9b",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/220705f35e231d286c36f57f0761121a3b3b6cfd5c02f64e4b7840a4459bfbaf/source.txt",
+      "before_sha256": null,
+      "after_sha256": "325e13436b16551d38d324b1cdb52a8a1d199e9e2b263d9ecb529f695d7f60f0",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/35047c3eabdb562de10075537a278075f68792ed9eb39051b087487f68a5a30c/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/35047c3eabdb562de10075537a278075f68792ed9eb39051b087487f68a5a30c/config.json",
+      "before_sha256": null,
+      "after_sha256": "dec7f5ce912e7a08fa94568f0306b7e0dcf1bbcf0180f920f13d50b5ca7cfcc3",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/35047c3eabdb562de10075537a278075f68792ed9eb39051b087487f68a5a30c/source.txt",
+      "before_sha256": null,
+      "after_sha256": "b78918e0104ef14522ac57990471a3df79787e49231f5ee4d139ca4d95e3bd09",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/6b5bc86a37a0f5159a7819accb2e2e39b30b191b2efddf68de34072963d72d77/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/6b5bc86a37a0f5159a7819accb2e2e39b30b191b2efddf68de34072963d72d77/config.json",
+      "before_sha256": null,
+      "after_sha256": "2cc5b47c3ab55ed96527743852cd1cd99794fe17fd584f69b053de40b26507a4",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/6b5bc86a37a0f5159a7819accb2e2e39b30b191b2efddf68de34072963d72d77/source.txt",
+      "before_sha256": null,
+      "after_sha256": "71bba24448ca030ff71197565138dc05fddaeac4447e39b6e68a2f229e4a94e6",
+      "size": 130,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/7db3a6b48aa6e24fe6d10c1634f69bcb7688275c24d785b72505dffd2270f651/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/7db3a6b48aa6e24fe6d10c1634f69bcb7688275c24d785b72505dffd2270f651/config.json",
+      "before_sha256": null,
+      "after_sha256": "3abf05d5beead9b4385ec4e9da5d719475498e12f72ead7b2dddbbcffdd8a0cb",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/7db3a6b48aa6e24fe6d10c1634f69bcb7688275c24d785b72505dffd2270f651/source.txt",
+      "before_sha256": null,
+      "after_sha256": "5779f2f07ac8c3c768dfd02da423ca2b2b3ba0725f1dd530416448d946e3825c",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/87506ffddb47cb6f38717fda86f9af819fd6053263b7e63c902f752d6d3496f1/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/87506ffddb47cb6f38717fda86f9af819fd6053263b7e63c902f752d6d3496f1/config.json",
+      "before_sha256": null,
+      "after_sha256": "50995ba360be892cb566f6d674666142ff2ae73d7c9a55c05966157f416a88f1",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/87506ffddb47cb6f38717fda86f9af819fd6053263b7e63c902f752d6d3496f1/source.txt",
+      "before_sha256": null,
+      "after_sha256": "b60a8949f16d888cab4aac84f900289e8c08c55eb06d322bd05a89e105f7e069",
+      "size": 166,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/bf07ecc635d0b1a0decefbee9c81e96a4a20688aa75c433e800edb8b16dc8b6b/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/bf07ecc635d0b1a0decefbee9c81e96a4a20688aa75c433e800edb8b16dc8b6b/config.json",
+      "before_sha256": null,
+      "after_sha256": "a60f0d322667376c598912efb9f254482400e8abca6434e15adb9ec1aaeb1a88",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/bf07ecc635d0b1a0decefbee9c81e96a4a20688aa75c433e800edb8b16dc8b6b/source.txt",
+      "before_sha256": null,
+      "after_sha256": "3b061f5cceecadee24043f9fa003bd99a9f35ae12e354b51c2b0ccf661f89379",
+      "size": 166,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/cf491f3d5cc0785c748afcd8f06ca858c7be56b099df3050d8c21b6514d50b4b/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/cf491f3d5cc0785c748afcd8f06ca858c7be56b099df3050d8c21b6514d50b4b/config.json",
+      "before_sha256": null,
+      "after_sha256": "4ef4825a959fbfb35fe9dd419ec9eba407c66bbe6fbd9bd404fe82e3b1cc984b",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/cf491f3d5cc0785c748afcd8f06ca858c7be56b099df3050d8c21b6514d50b4b/source.txt",
+      "before_sha256": null,
+      "after_sha256": "fa80a91074e35cb03079a1eb45712b5351b72edcfde470862e7167d9c175744a",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/dacd9e42a66710682716d812c36cde0e83de0a3579deb5745f6698c7f3e4f934/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/dacd9e42a66710682716d812c36cde0e83de0a3579deb5745f6698c7f3e4f934/config.json",
+      "before_sha256": null,
+      "after_sha256": "636dca7a6b28b6de44b17b70d88df689f0213ca6e5ed213f3aae86060a0b831a",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/dacd9e42a66710682716d812c36cde0e83de0a3579deb5745f6698c7f3e4f934/source.txt",
+      "before_sha256": null,
+      "after_sha256": "3a235d716b0e9c347d63515878fe5798a40ac0cc02fec0361eac66eca5daddff",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/e6a771b73f5457f93090b53c11fc283fc63740f5ee005a430b959fef8c0a39b0/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/e6a771b73f5457f93090b53c11fc283fc63740f5ee005a430b959fef8c0a39b0/config.json",
+      "before_sha256": null,
+      "after_sha256": "4774a16d6e8dcf98f5897c9b3f3df4efd1c36a77b3f93aa22906dfd2a4fab227",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/e6a771b73f5457f93090b53c11fc283fc63740f5ee005a430b959fef8c0a39b0/source.txt",
+      "before_sha256": null,
+      "after_sha256": "0bfc1bdd49c8d2515ff7c32f0e978893a5d3e76db78179e5e58a98228c296040",
+      "size": 130,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/fd5757dede871318ed14689b9de17e9acbad1d723e617a6387029465e4a257e5/build.txt",
+      "before_sha256": null,
+      "after_sha256": "173f8fa0bb199d3f80b563346b977704f2a27f61d170eca4a57d3587057bf074",
+      "size": 19,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/fd5757dede871318ed14689b9de17e9acbad1d723e617a6387029465e4a257e5/config.json",
+      "before_sha256": null,
+      "after_sha256": "b99e245e6778f44cb29ba8f919f8d9b17de3e764a2ce643ef547524e6671a110",
+      "size": 37,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/candidates/fd5757dede871318ed14689b9de17e9acbad1d723e617a6387029465e4a257e5/source.txt",
+      "before_sha256": null,
+      "after_sha256": "02bd7c0c3cd62dd2595a3e6ee006967951a3e496073ef2729b5c3f22875e24cb",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/experiments.sqlite3",
+      "before_sha256": null,
+      "after_sha256": "f3d4c47880424528877b5394685f59903d877a38c27febaa487fd2ee6de07848",
+      "size": 11776000,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/knowledge/content/Research/Synthetic.md",
+      "before_sha256": null,
+      "after_sha256": "0c5fbdd2dabf1dc3122b29836f4f47af6dbc775f90fb606d5f43d5d08e2050d1",
+      "size": 109,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/knowledge/content/RSI/Methods/method-2232b8239ca6bed099240d2ba1cb5cf023eec1ccd5b0aa9316aae175cf24efa8.md",
+      "before_sha256": null,
+      "after_sha256": "f2fc0abf69dba8b4e6d1fbe4094ca848f3e033848dc89cfa86afc79b1757057d",
+      "size": 1040,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/knowledge/stdio.py",
+      "before_sha256": null,
+      "after_sha256": "131cb276a9f65b2793164252c422896abda90177bcd635a55a3f06416c1928d6",
+      "size": 335,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/repair-response.json",
+      "before_sha256": null,
+      "after_sha256": "d31cfd78538fc7fee89b83866f455513a8df55ca45aa5fb9b05be1baf17eb15d",
+      "size": 1920,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/report.json",
+      "before_sha256": null,
+      "after_sha256": "57b509814615a0345a3b2f03853849f09d7581a632ef33339fc250fbfb078702",
+      "size": 2539785,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/session-1/packet.json",
+      "before_sha256": null,
+      "after_sha256": "697c2508b7032c7a7e024b0bfbe350e967427fb78a833d739413fc6415c3967b",
+      "size": 120,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/session-1/response.json",
+      "before_sha256": null,
+      "after_sha256": "d216a50f66762aa2f2ecfe56494458b98f34f5eed5e36f48b9d7b56a76b0ea40",
+      "size": 3682,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/session-1/result.json",
+      "before_sha256": null,
+      "after_sha256": "24a61b0e65540a388d15fe16d1aaabdd929b32d202224f6eb9515753302b3fad",
+      "size": 30890,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/session-1/session.json",
+      "before_sha256": null,
+      "after_sha256": "63e0d06a3170247fd62381ee73eb72084c9e161d8cf2c0b0eccbb1d50803dfbf",
+      "size": 4400,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/session-2/packet.json",
+      "before_sha256": null,
+      "after_sha256": "e39d9b703b9277502552bd0d38630b955e338274dfff2488f141f97843df1040",
+      "size": 120,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/session-2/response.json",
+      "before_sha256": null,
+      "after_sha256": "ff24cd46feeb0147ddce89b8fa7900ac2627244ebaaeca6ac78d2c8ca8808af2",
+      "size": 3604,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/session-2/result.json",
+      "before_sha256": null,
+      "after_sha256": "75a4de38e7bd62d8b35146780927a1aef791936282e7834520d4649425d4f545",
+      "size": 2374176,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/synthetic-demo/session-2/session.json",
+      "before_sha256": null,
+      "after_sha256": "21e0f1d25696a5c0dc035a52bd0301d85e1d053bfccf9aaab8a39279441cc1ab",
+      "size": 4450,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/update_current_docs.py",
+      "before_sha256": null,
+      "after_sha256": "38109c97b25659ae3a74b390eddb50387142831a038517a83bf4f916c77e4e87",
+      "size": 14364,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2d-2026-11-11/verify.py",
+      "before_sha256": null,
+      "after_sha256": "9b554fa11f02616b56de47e66d5d82ad24508f05fec4f4c4fe1065d348ec941a",
+      "size": 1919,
+      "before_snapshot": null
+    },
+    {
+      "path": "docs/phase2d-workflow-controller.md",
+      "before_sha256": null,
+      "after_sha256": "65ee601ce60c68d65c504379130a01946bf235714af773ad7eb4cfd92100b17c",
+      "size": 11812,
+      "before_snapshot": null
+    },
+    {
+      "path": "docs/superpowers/plans/2026-11-11-phase2d-workflow-controller.md",
+      "before_sha256": null,
+      "after_sha256": "1a22f47a21673a632389020abca08729c53d2c76c29b2ad4a4a2ae09b327799f",
+      "size": 7437,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "before_sha256": "5a4bfebf3750975bd3f127475f6cc2c023ed4f470665e212e6b1bf55711a1332",
+      "after_sha256": "b4a4a8d69685a1fa63cd6c6e3475530748008388343ad19e0e510920da0a2859",
+      "size": 3490,
+      "before_snapshot": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/学习方法/rsi-document-index.md.original"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "before_sha256": "32240ebabe4febcfe3ba70490f4f1cadf7edc10736dd507dbfb0475c1362c768",
+      "after_sha256": "efd7333c597c3421de3a3f6f3b192508df1b71f08004c0f3ec872d916e8989eb",
+      "size": 14699,
+      "before_snapshot": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md.original"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "before_sha256": "7fef43c789c0490a8a4a574019a8a681aa443e392d1ea8661a5649194be92421",
+      "after_sha256": "8db4fd41d2f0e291bab5313b50dcdd5a73fc597f753e1cddaced0d5875a7361d",
+      "size": 24325,
+      "before_snapshot": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/学习方法/rsi-optimization-workflow.md.original"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "before_sha256": "c6fb98e503b445e9fd9ddb611e0b126bb887fb807100fbba80f8be9c38a22755",
+      "after_sha256": "705563b78c322ed960a3fe7b665f11cfcdd5d0da0ec470f01601ebc8d8e0efee",
+      "size": 13561,
+      "before_snapshot": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md.original"
+    },
+    {
+      "path": "knowledge-site/content/待办清单/一周待办 · 2026-11-09.md",
+      "before_sha256": "005157a4533cc0ba3d8ff21d88e1d67cd2ca621f1f9476a5c2449a206e5786e0",
+      "after_sha256": "bc8c23434fdeb36be2d1bf4fb296eb1f4f0680256142429884821630a4a00997",
+      "size": 10307,
+      "before_snapshot": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-09.md.original"
+    },
+    {
+      "path": "knowledge-site/index.md",
+      "before_sha256": "dc093c86c20a9321a67209da078be751e230512a1e380197ce6b132b3195e9ed",
+      "after_sha256": "a828a5bfc31e2b5a735acced04374bdd31e36099f39e1cf05ea84387c4e34b72",
+      "size": 3439,
+      "before_snapshot": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/index.md.original"
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/学习方法/rsi-document-index.md.original",
+      "before_sha256": null,
+      "after_sha256": "5a4bfebf3750975bd3f127475f6cc2c023ed4f470665e212e6b1bf55711a1332",
+      "size": 3142,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md.original",
+      "before_sha256": null,
+      "after_sha256": "32240ebabe4febcfe3ba70490f4f1cadf7edc10736dd507dbfb0475c1362c768",
+      "size": 14188,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/学习方法/rsi-optimization-workflow.md.original",
+      "before_sha256": null,
+      "after_sha256": "7fef43c789c0490a8a4a574019a8a681aa443e392d1ea8661a5649194be92421",
+      "size": 22278,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md.original",
+      "before_sha256": null,
+      "after_sha256": "c6fb98e503b445e9fd9ddb611e0b126bb887fb807100fbba80f8be9c38a22755",
+      "size": 12149,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-09.md.original",
+      "before_sha256": null,
+      "after_sha256": "005157a4533cc0ba3d8ff21d88e1d67cd2ca621f1f9476a5c2449a206e5786e0",
+      "size": 9578,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/index.md.original",
+      "before_sha256": null,
+      "after_sha256": "dc093c86c20a9321a67209da078be751e230512a1e380197ce6b132b3195e9ed",
+      "size": 3148,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/README.md.original",
+      "before_sha256": null,
+      "after_sha256": "bd9a217a9c32118f92cbfebd163cf6e450670cf58d87b29a5a0a04e8292f4ef9",
+      "size": 15922,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/before/weekly-before-write.md.original",
+      "before_sha256": null,
+      "after_sha256": "005157a4533cc0ba3d8ff21d88e1d67cd2ca621f1f9476a5c2449a206e5786e0",
+      "size": 9578,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/current-docs-update.json",
+      "before_sha256": null,
+      "after_sha256": "babac43a54b1658b022e31d992ee62c628c0eb25a9d5eaf0f0bbc5212ba6b29c",
+      "size": 1369,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/demo-summary.json",
+      "before_sha256": null,
+      "after_sha256": "89352db839e8be910264904838d3f73c8cc749a718faa250dadcc11656776c3d",
+      "size": 2250,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/existing-mcp-tests.txt",
+      "before_sha256": null,
+      "after_sha256": "5220f3fce3b72cb9c6b6722483e93d7bedaf37049b73941b3f0208d2dd54de01",
+      "size": 1654,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "before_sha256": null,
+      "after_sha256": "251757a1c4eb5a592f900f9e16de911b528fd82e6334ee4f700d88beaf681bc7",
+      "size": 14110,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/independent-review.md",
+      "before_sha256": null,
+      "after_sha256": "5e6f321664c07861b27702cfc67943b74a55316ee54ee48a488f8ad0b5fbf3b2",
+      "size": 7199,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/intake-rounds-notes.md",
+      "before_sha256": null,
+      "after_sha256": "389fd2439c96d68a6bd0ad55f27d891c2a5db93da01041139c5cade2dc9e868f",
+      "size": 5497,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/links.json",
+      "before_sha256": null,
+      "after_sha256": "11cf8bb2c08c75d0a4fa6e717041511f692d62bdbc1ace2829eb21c630af048d",
+      "size": 16376,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/progress.md",
+      "before_sha256": null,
+      "after_sha256": "05a656c5a1c43d620832a72029edb9dcc2964a15b3ee940ae22330f9bf5a4a0e",
+      "size": 1204,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/protected-baseline.json",
+      "before_sha256": null,
+      "after_sha256": "9bf99812434d0c9bf71306621881e84f2eea274f833020feb8b95afdf2fb03bd",
+      "size": 3041,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/protected-check.json",
+      "before_sha256": null,
+      "after_sha256": "f00064d2879907145790d19c3b51cba5dadb61fabb37eae5c6f330f95eacad7a",
+      "size": 1649,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/review.md",
+      "before_sha256": null,
+      "after_sha256": "e711cae2989da53b29f4b825005a4578d2813a86a0e532538c32fbecd6d63b51",
+      "size": 3687,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/sources/implementation-principles.txt",
+      "before_sha256": null,
+      "after_sha256": "a27c4fda32e4fb7ec2d08f67e446b31d985159198d0782efd485ce7350fadee6",
+      "size": 897,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/sources/phase2d-request.txt",
+      "before_sha256": null,
+      "after_sha256": "77e7fc9f44bafb7add91df32018e13af33dc8b9405b3894170f8dd64159ef6cd",
+      "size": 23419,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/test-environment.json",
+      "before_sha256": null,
+      "after_sha256": "9ff070bab80f1376d829300204112daf649a7ab459ecea758be568a1f8307916",
+      "size": 1170,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/tests.txt",
+      "before_sha256": null,
+      "after_sha256": "f7f0d6bf674694ef7fd106c4e20a58f6de3469506396ca47db29e32d01a6e76d",
+      "size": 63884,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2d-2026-11-11/weekly-update.json",
+      "before_sha256": null,
+      "after_sha256": "6849b802a63d38408fb772ef122e6689a53446c0a9a423b2149250b867a7924e",
+      "size": 387,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/README.md",
+      "before_sha256": "bd9a217a9c32118f92cbfebd163cf6e450670cf58d87b29a5a0a04e8292f4ef9",
+      "after_sha256": "774ad9119fdc90ee14c70a917dc06ded23135f94d3b37e13534d2e325a82115c",
+      "size": 16411,
+      "before_snapshot": "knowledge-site/manifests/phase2d-2026-11-11/before/knowledge-site/README.md.original"
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/__init__.py",
+      "before_sha256": null,
+      "after_sha256": "e24c98186615889081dc9febe31ae02bcfe8739e54a166ca46bd30fa02459e6c",
+      "size": 81,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/__main__.py",
+      "before_sha256": null,
+      "after_sha256": "ba5c1b72862696190c5c2def81eaa256c4d3ec3aaaf3c922ad10ea07f9d83801",
+      "size": 7461,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/controller.py",
+      "before_sha256": null,
+      "after_sha256": "40fb6e8a1a339182b7dc21fb1fdd7d5cbe1f31593a3a767c022b3a408347f0db",
+      "size": 18497,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/demo.py",
+      "before_sha256": null,
+      "after_sha256": "85c0e65a6c9de3fd45ac7dc2fbe14bcf20e1da7201ba3a88ce95536161c1c182",
+      "size": 14503,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/evaluation.py",
+      "before_sha256": null,
+      "after_sha256": "346a7ff3c79b480b6d03a6c66c2f4f4044b37044a90af2864ad896e306de3ad8",
+      "size": 16722,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/execution.py",
+      "before_sha256": null,
+      "after_sha256": "9d3e9236c2a2fd652af7777243fdef2fd8e267c2b0c82e535f107379fbf454d6",
+      "size": 21843,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/intake.py",
+      "before_sha256": null,
+      "after_sha256": "9cec315493f10c350fd63b250e7d4ac90bbd913dc353e16e72651c0b41e3e965",
+      "size": 12195,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/journal.py",
+      "before_sha256": null,
+      "after_sha256": "d714e1b67dc18397ef4e1eacc042b65e7396487b928f38c07b40d42b24069127",
+      "size": 5561,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/rounds.py",
+      "before_sha256": null,
+      "after_sha256": "5a93bfcc7feb189de30f022be88a1529a96f9f3c6784dcebfbb1a16326e92b9d",
+      "size": 8340,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/scheduling.py",
+      "before_sha256": null,
+      "after_sha256": "3fe33abfdab280cfb604aaa8392272184d4c02735255bdaec6b4da68539de17c",
+      "size": 4716,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/phase2d_fixtures.py",
+      "before_sha256": null,
+      "after_sha256": "23c92cb0a4455ba4a20088869dd6142b89552809fbf4a3544a5334bc5c67920a",
+      "size": 3920,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_cli.py",
+      "before_sha256": null,
+      "after_sha256": "196a606459b1e56e6a6ca895cb027a849566d353b4a29ac2b1a3b24c5fb98891",
+      "size": 2093,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_controller.py",
+      "before_sha256": null,
+      "after_sha256": "a65384a43a2fcb3b825861b562a48a8ba38255760427d0116b2bece3dd92e908",
+      "size": 14279,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_demo.py",
+      "before_sha256": null,
+      "after_sha256": "e6c1c2f256af4bc2e76dda2d735b42fc593463c1a10257cf0581b6b93bf6c557",
+      "size": 2097,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_execution.py",
+      "before_sha256": null,
+      "after_sha256": "abbe1e738e29c7667838fdbb32f8fae406aacb5577f9e86d4984f1a212a7ed5c",
+      "size": 17215,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_intake.py",
+      "before_sha256": null,
+      "after_sha256": "5de163b3ffda8752f6ca73859e872041ab44496397397d805e3d9930bcc0ed01",
+      "size": 6468,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_journal.py",
+      "before_sha256": null,
+      "after_sha256": "f0453c6872e1062ae5c994904b730ff191ea4533f10bcd9e44c382bacc012e24",
+      "size": 3734,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_recovery.py",
+      "before_sha256": null,
+      "after_sha256": "b54de111f166db4b76748c561de1a41cc9593ab0d35a11eb952bb9d9480c2d42",
+      "size": 13199,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_rounds.py",
+      "before_sha256": null,
+      "after_sha256": "e6a0169fd026c994da8188d68402dc9a0b626c0b76ece5efc10fd73216c97aea",
+      "size": 4681,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_workflow_scheduling.py",
+      "before_sha256": null,
+      "after_sha256": "57f541feeb2934a0b9461bebbb39408b0f7c3d1215036c15ef1208c85ecf9b38",
+      "size": 4314,
+      "before_snapshot": null
+    }
+  ]
+}

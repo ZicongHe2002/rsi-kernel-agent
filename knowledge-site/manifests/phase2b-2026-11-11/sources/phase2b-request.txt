@@ -1,0 +1,272 @@
+# RSI Kernel Agent — Phase 2B: Knowledge and Memory Integration
+
+Phase 2A has been implemented and passed its local acceptance tests.
+
+We are now moving to Phase 2B only.
+
+Do not start Phase 2C, Phase 2D, or Phase 3.
+
+## 1. Main Objective
+
+Connect the existing knowledge-site MCP and the Phase 2A experiment storage into usable Knowledge and Memory capabilities.
+
+The objective is to enable the RSI Agent to:
+
+1. Search and retrieve useful optimization knowledge.
+2. Organize methods with source provenance and applicability.
+3. Read the latest status of all optimization strategies.
+4. Read complete historical snapshots for multiple participating strategies.
+5. Retrieve relevant historical experiments.
+6. Associate knowledge methods with Plans and actual experiments.
+7. Preserve new knowledge references and experiment decisions.
+
+Do not rebuild the existing knowledge-site website or MCP server.
+
+Do not replace the Phase 2A SQLite experiment store.
+
+## 2. Phase 2B-1: Knowledge Integration
+
+First inspect the actual knowledge-site MCP implementation and its available operations:
+
+- search
+- fetch
+- create_note
+- update_note
+
+Verify the actual schemas, revision requirements, permissions, error behavior, and connection configuration.
+
+Reuse the existing MCP capabilities.
+
+Implement a thin integration layer that allows the RSI Agent to:
+
+- Search internal knowledge.
+- Fetch complete relevant documents.
+- Retrieve source references and document revisions.
+- Extract useful optimization methods.
+- Create structured method records when appropriate.
+- Link a method to the document and source that support it.
+- Retrieve methods by keyword, category, hardware, mechanism, and applicability.
+
+A Method Record should contain:
+
+- method_id
+- method_name
+- description
+- source_refs
+- source_revision
+- optimization_category
+- applicable_hardware
+- applicable_workloads
+- preconditions
+- implementation_requirements
+- expected_tradeoffs
+- known_risks
+- unknowns
+- local_experiment_refs
+- validation_status
+
+Distinguish source-supported knowledge from locally verified performance.
+
+Do not automatically treat a method as effective merely because it appears in a paper or official document.
+
+Support targeted retrieval and proactive discovery.
+
+Do not require human approval for every method. Human editing remains optional.
+
+## 3. Phase 2B-2: Memory Integration
+
+Use the Phase 2A SQLite store and its existing contracts.
+
+Do not create another experiment database.
+
+Implement the agreed two-stage Memory retrieval.
+
+### Stage 1: Strategy Status Cards
+
+Read the latest status of all strategies A, B, C, D, E.
+
+Each status card should expose:
+
+- latest_attempt
+- last_correct_candidate
+- branch_best
+- task_best
+- frontier
+- paused
+- deferred
+- current_parent_candidate
+- recent relevant Plans
+- relevant evidence references
+
+The goal is to understand the current state of every optimization route.
+
+### Stage 2: Full History Retrieval
+
+After determining which strategies participate in the current round, retrieve the complete versioned history snapshot for every participating strategy.
+
+For each strategy, retrieve:
+
+- Parent Candidates
+- Plans
+- Candidate implementations
+- All Runs
+- Correctness results
+- Timing results
+- Profile and Evidence references
+- Failed and invalid attempts
+- Repaired Candidates
+- Deferred work
+- Previous decisions and their reasons
+
+Do not retrieve only successful or recent experiments.
+
+Do not silently truncate history.
+
+If history is too large for one model context, use complete paginated retrieval and structured summaries while preserving access to all underlying records.
+
+## 4. Knowledge and Memory Relationship
+
+Keep Knowledge and Memory as separate storage systems.
+
+Knowledge stores:
+
+- External research.
+- Technical documentation.
+- Optimization methods.
+- API and architecture references.
+- Reusable implementation examples.
+
+Memory stores:
+
+- Actual local optimization attempts.
+- Candidate code identities.
+- Run results.
+- Profile and Benchmark evidence.
+- Strategy progress.
+- Decisions and experiment costs.
+
+Link them through explicit references:
+
+- method_id
+- source_ref
+- plan_id
+- candidate_id
+- run_id
+- evidence_id
+
+A source claim must never be rewritten as a locally measured result.
+
+A historical AI hypothesis must never be presented as an established fact without supporting evidence.
+
+## 5. Multi-Strategy Support
+
+Preserve the project's multi-plan exploration principle.
+
+A single round may include multiple strategies.
+
+For example:
+
+Strategy A:
+- Read its complete history.
+- Generate multiple new Plans.
+
+Strategy B:
+- Read its complete history independently.
+- Generate multiple new Plans.
+
+Do not force the system to choose one strategy before generating Plans.
+
+Do not automatically cancel B because A currently has a better score.
+
+Knowledge retrieval may be shared, but each Plan must be associated with the correct parent Candidate and strategy.
+
+## 6. Integration with Phase 2A
+
+Review the actual Phase 2A interfaces before implementing.
+
+Reuse:
+
+- contracts.py
+- artifacts.py
+- store.py
+- existing IDs and relationships
+- versioned snapshots
+- existing idempotency and append-only rules
+
+Do not change the Phase 2A schema without a demonstrated need.
+
+If schema changes are required, propose a migration and backward-compatibility plan first.
+
+Memory reads should return immutable snapshots or explicit read views.
+
+New decisions and experiment records should use the existing append-only mechanisms.
+
+## 7. Tests and Acceptance Criteria
+
+### Knowledge tests
+
+- Internal search returns relevant documents.
+- Fetch retrieves the correct document revision.
+- Method records retain source provenance.
+- Source revisions are traceable.
+- Missing sources are marked unavailable.
+- Knowledge can be retrieved without creating duplicate records.
+- Human edits do not silently overwrite conflicting revisions.
+
+### Memory tests
+
+- All strategy status cards can be retrieved.
+- Multiple strategies can participate in the same round.
+- Each participating strategy retrieves its own full history.
+- Historical failures and deferred attempts are preserved.
+- Snapshot completeness is accurately reported.
+- Memory survives process restart.
+- Concurrent reads do not modify historical records.
+- Decisions link to the correct strategy, Plan, Candidate, and Run.
+
+### Integration tests
+
+Create a synthetic example with:
+
+- Strategy A and Strategy B.
+- Multiple Plans per strategy.
+- Multiple Candidates per Plan.
+- Successful and failed Runs.
+- At least one deferred Candidate.
+- Several source-backed Knowledge methods.
+- Explicit links between methods and Plans.
+
+Verify that the system can reconstruct both strategy histories independently.
+
+All synthetic results must remain labeled as synthetic.
+
+Do not use mock results as TPU performance evidence.
+
+## 8. Restrictions
+
+- Do not modify the MLA Kernel repository.
+- Do not access or execute the Colab CLI.
+- Do not run TPU jobs.
+- Do not modify `.auth`.
+- Do not change account permissions.
+- Do not install new Skills or dependencies without approval.
+- Do not replace existing MCP authentication.
+- Do not delete historical documents.
+- Do not overwrite Phase 2A records or schemas.
+
+## 9. Completion Report
+
+When Phase 2B is complete, report:
+
+1. Existing capabilities reused.
+2. Files changed and new interfaces.
+3. Knowledge Method Record schema.
+4. Memory retrieval interfaces.
+5. Strategy status card example.
+6. Full history retrieval example.
+7. Knowledge-to-Plan linking example.
+8. Unit and integration test results.
+9. Remaining limitations.
+10. Recommended Phase 2C implementation plan.
+
+Stop after Phase 2B and wait for review.

@@ -1,0 +1,1417 @@
+{
+  "documents": 29,
+  "links": 282,
+  "missing": [],
+  "results": [
+    {
+      "file": "docs/phase3/failed-experiments.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/mla-decode-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/mla-forward-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/optimization-methods.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/optimization-methods.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-knowledge-import.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/independent-baseline-verification.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/verify_baseline_locally.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/baseline-evidence-summary.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/baseline-result.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/baseline-repair-result.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/candidates/baseline-repair-1/change.diff",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/candidates/baseline-repair-1/repair-analysis.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/runtime2-baseline-verification.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/verify_runtime2_baselines_locally.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/trace-mode-verification.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/oracle-negative-attention-runtime2-result.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-baseline-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/oracle-negative-cache-runtime2-result.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-colab-connectivity-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/connectivity-probe.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-colab-connectivity-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/isolated-probe.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-colab-connectivity-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/environment.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-colab-connectivity-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/environment-isolated.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-colab-connectivity-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/isolated-environment-setup.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-colab-connectivity-audit.md",
+      "target": "../../.artifacts/phase3-2026-11-12/archive_connectivity_probes.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-colab-connectivity-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/probe-evidence.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/environment.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/environment-isolated.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/isolated-environment-setup.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/probe-evidence.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/runtime-baseline.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/pallaskernels-source-inventory.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "phase3-project-integration-audit.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "phase3-pallaskernels-audit.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "phase3-project2-history.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "phase3-colab-connectivity-audit.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-environment-audit.md",
+      "target": "phase3-implementation-plan.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-implementation-plan.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/phase3-request.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/manifest.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-source-manifest.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-tpu-pipelining.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-async-dispatch.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-benchmarking.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-profiling.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/xprof-kernel-profiling.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/xprof-custom-call-profiling.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-profiler.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-profiling.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-pipeline.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-tpu.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/trace-mode-verification.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "phase3-profiler-report.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/official-knowledge-import.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-official-reference-audit.md",
+      "target": "phase3-baseline-report.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "phase3-baseline-report.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "phase3-profiler-report.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/result.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/candidate-artifacts.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/variants.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/controller-status.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/runtime2-idle-before-round1.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/local-verifications/20261112T084653210802Z-r17.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/blocked-lookup-1.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/user-pause-20261112.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/runtime2-idle-user-handoff.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/runtime2-idle-user-resume.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/local-verifications/20261112T091839031473Z-r34.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/local-verifications/20261112T093258885137Z-r56.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/local-verifications/20261112T140159968103Z-r78.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-optimization-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/real-round-1/completed.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-pallaskernels-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/pallaskernels-source-inventory.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-pallaskernels-audit.md",
+      "target": "phase3-workload-and-correctness.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-pallaskernels-audit.md",
+      "target": "phase3-profiler-capability-audit.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-capability-audit.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/pallaskernels-source-inventory.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "phase3-baseline-report.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/runtime2-baseline-verification.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/independent-baseline-verification.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/real-profile-analysis-smoke.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "phase3-official-reference-audit.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/runtime2-baseline-verification.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/trace-mode-diagnostic-collected.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/trace-mode-verification.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-profiler-report.md",
+      "target": "../../.artifacts/phase3-2026-11-12/runtime2-idle-after-trace.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../AGENTS.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/contracts.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/store.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/artifacts.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/knowledge.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/memory.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/associations.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/profiler/inputs.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/profiler/profiles.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/workflow/execution.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/workflow/evaluation.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/workflow/intake.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/workflow/controller.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/workflow/journal.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/workflow/rounds.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../src/rsi_kernel_agent/workflow/__main__.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../phase2c-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../superpowers/plans/2026-11-11-phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project-integration-audit.md",
+      "target": "../../knowledge-site/manifests/phase2d-2026-11-11/independent-review.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project2-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/project2-inventory.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project2-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-experiments.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project2-history.md",
+      "target": "mla-forward-history.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project2-history.md",
+      "target": "mla-decode-history.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project2-history.md",
+      "target": "optimization-methods.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project2-history.md",
+      "target": "failed-experiments.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-project2-history.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/history-knowledge-import.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../.artifacts/phase3-2026-11-12/baseline-result.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "phase3-baseline-report.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/colab_bridge.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/colab_bridge_call.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/colab_remote.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/colab.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/colab_worker.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/mla_runner.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/real_protocol.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/mla_baseline.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../src/rsi_kernel_agent/workflow/__main__.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../.artifacts/phase3-2026-11-12/start_baseline.py",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "phase3-worker-recovery.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/environment.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/environment-isolated.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/isolated-environment-setup.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "phase3-colab-connectivity-audit.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/test-environment.json",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/tests.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-real-execution.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/existing-mcp-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-worker-recovery.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/worker-windows-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-worker-recovery.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/worker-linux-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-workload-and-correctness.md",
+      "target": "phase3-pallaskernels-audit.md",
+      "exists": true
+    },
+    {
+      "file": "docs/phase3/phase3-workload-and-correctness.md",
+      "target": "../../knowledge-site/manifests/phase3-2026-11-12/pallaskernels-source-inventory.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-kernel-agent.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-knowledge-search.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-optimization-workflow.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-profiler.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-multi-plan-exploration.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "rsi-evidence-contract.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-phase2-roadmap.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "RSI实践/rsi-method-search-and-selection.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "target": "../归档/已合并/已合并-TPU评测规范-2026-10-31.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-knowledge-search.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-optimization-workflow.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-profiler.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-multi-plan-exploration.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-document-index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-evidence-contract.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "target": "RSI实践/rsi-phase2-roadmap.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-kernel-agent.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-knowledge-search.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-benchmark.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-evidence-contract.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/rsi-optimization-workflow.md",
+      "target": "rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "target": "../rsi-evidence-contract.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "target": "../rsi-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "content/学习方法/rsi-document-index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "content/学习方法/rsi-kernel-agent.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase3-2026-11-12/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase3/phase3-implementation-plan.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase2d-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase2c-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase2c-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase2b-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase2b-knowledge-memory.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase2a-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "../docs/phase2a-core-foundation.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/mla-integration-audit.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/mla-source-manifest.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/colab-cli-audit.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/colab-source-manifest.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase1-validation.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase1-change-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase1-changes.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/site-inventory.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/source-manifest.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "access/ACCESS_POLICY.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "access/AUTH_STATE_MIGRATION_PLAN.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "access/gitignore.proposed",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "connections/README.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "manifests/phase1-2026-11-11/before.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/index.md",
+      "target": "README.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "status-at-report-2026-11-13.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "sources/phase3-request.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/colab_bridge.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/colab_bridge_call.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/colab_remote.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/colab.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/colab_worker.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/real_protocol.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/mla_baseline.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/mla_runner.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/execution.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/intake.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/controller.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/evaluation.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../src/rsi_kernel_agent/workflow/__main__.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../tests/phase3_fixtures.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-real-execution.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-worker-recovery.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-implementation-plan.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "changes.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "runtime-current-check.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-project-integration-audit.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-pallaskernels-audit.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-colab-connectivity-audit.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-project2-history.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "history-verification.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "history-knowledge-import.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "official-knowledge-import.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "environment-isolated-runtime2.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "isolated-probe-runtime2.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-baseline-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "runtime2-baseline-verification.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "oracle-negative-verification.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-profiler-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "trace-mode-verification.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "real-profile-analysis-smoke.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-official-reference-audit.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../docs/phase3/phase3-optimization-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/real-round-1/result.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/real-round-1/candidate-artifacts.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/real-round-1/completed.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/real-round-1/local-verifications/20261112T140159968103Z-r78.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/runtime2-loss-after-round1.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/allocation-attempts.jsonl",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "status-at-report-2026-11-13.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/runtime3-recovery-notes.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "tests-runtime3-preparation.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "tests-runtime3-preparation-result.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "test-environment.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "runtime3-preparation-tests.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "existing-mcp-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/implementation-report.md",
+      "target": "independent-review.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "independent-review-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "independent-review-rerun.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "independent-review-incremental.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "worker-windows-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "worker-linux-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "independent-review-chunks.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "independent-review-parallel.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "review_shared_chunk_cache.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "independent-review-shared-chunks.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "independent-review-shared-symlink-linux.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "verify_oracle_negatives_locally.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "oracle-negative-verification.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "independent-review-real-round-aux-tests.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "verify_runtime2_baselines_locally.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "runtime2-baseline-verification.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/confirmation-tests-final.txt",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "../../../.artifacts/phase3-2026-11-12/confirmation-test-result.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/independent-review.md",
+      "target": "runtime3-preparation-tests.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/round1-candidate-review.md",
+      "target": "round1-candidate-static-verification.json",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/manifests/phase3-2026-11-12/round1-candidate-review.md",
+      "target": "verify_round1_candidates_locally.py",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "content/学习方法/rsi-document-index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "access/AUTH_STATE_MIGRATION_PLAN.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "CHATGPT_SETUP.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "manifests/phase2a-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "manifests/phase2b-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "../docs/phase2c-profiler-analyzer.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "manifests/phase2c-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "../docs/phase2d-workflow-controller.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "manifests/phase2d-2026-11-11/implementation-report.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "index.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "access/ACCESS_POLICY.md",
+      "exists": true
+    },
+    {
+      "file": "knowledge-site/README.md",
+      "target": "connections/README.md",
+      "exists": true
+    }
+  ]
+}

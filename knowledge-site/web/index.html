@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>知序 · 知识库</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/vendor/marked.js"></script>
+  <script defer src="/vendor/purify.js"></script>
+  <script defer src="/note-links.js"></script>
+  <script defer src="/auth.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body class="auth-locked">
+  <section id="login-view" class="login-view" aria-label="登录知识库">
+    <form id="login-form" class="login-card">
+      <span class="login-brand">知序</span><h1>进入风落的知识库</h1>
+      <p>填写你的 ID，风落批准当前设备后即可访问为你开放的文档。</p>
+      <label for="login-id">你的 ID<input id="login-id" name="username" autocomplete="username" placeholder="例如：xiaoyu" maxlength="40" pattern="[a-zA-Z0-9_-]+" title="英文字母、数字、下划线或短横线" required></label>
+      <button id="login-submit" class="button primary" type="submit">申请访问</button>
+      <p id="login-status" class="login-status" role="status" aria-live="polite">正在检查登录状态…</p>
+      <p class="login-owner-hint">Owner：风落（fl）。请在知识库所在电脑打开 owner 入口。</p>
+    </form>
+  </section>
+  <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Zm0 0v15"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7V5h7l2 3h9v12H3V7Z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H5v18h14V8l-5-5Zm0 0v6h5M8 13h8M8 17h6"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m15 4 5 5M4 20l5-1L21 7a2 2 0 0 0-4-4L5 15l-1 5Z"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v6h16v-6"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
+  </defs></svg>
+
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="知序首页"><span class="brand-mark"><svg><use href="#i-book"/></svg></span><span>知序<small>个人知识库</small></span></a>
+    <button class="button primary new-note"><svg><use href="#i-plus"/></svg>新建文档<span class="key-hint">N</span></button>
+    <button id="new-weekly" class="button outline weekly-button task-shortcut"><svg><use href="#i-check"/></svg>本周待办</button>
+    <button id="open-general-tasks" class="button outline task-shortcut"><svg><use href="#i-file"/></svg>长期待办</button>
+    <nav aria-label="知识分类">
+      <button id="all-notes" class="nav-item active"><svg><use href="#i-grid"/></svg><span>全部文档</span><span id="total-count" class="count">0</span></button>
+      <div class="section-label"><span>知识分类</span><button id="add-category" class="icon-button" title="新建分类" aria-label="新建分类"><svg><use href="#i-plus"/></svg></button></div>
+      <div id="categories"></div>
+      <button id="deleted-notes" class="nav-item"><svg><use href="#i-trash"/></svg><span>已删除</span></button>
+    </nav>
+    <button id="open-drafts" class="nav-item" hidden><svg><use href="#i-file"/></svg><span>本机草稿</span><span id="draft-count" class="count">0</span></button>
+    <div class="sidebar-bottom account-summary"><span class="local-dot"></span><div><strong id="account-name"></strong><small id="account-id"></small><button id="manage-access" class="text-button" hidden>账号与权限</button><button id="logout" class="text-button">退出</button></div></div>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar"><div class="topbar-heading"><button id="toggle-note-list" class="button outline" type="button" aria-controls="notes-panel" aria-expanded="true"><svg aria-hidden="true"><use href="#i-arrow"/></svg><span id="note-list-toggle-label">收起列表</span></button><div class="breadcrumb"><span>我的知识库</span><svg><use href="#i-arrow"/></svg><strong id="current-category">全部文档</strong></div></div><div class="topbar-actions"><button id="import-note" class="button subtle"><svg><use href="#i-upload"/></svg>导入 Markdown</button></div><input id="import-file" type="file" accept=".md,.markdown,text/markdown,text/plain" hidden></header>
+    <div id="draft-banner" class="draft-banner" hidden><span id="draft-banner-text"></span><button id="review-drafts" class="text-button">查看草稿</button></div>
+    <div class="panels">
+      <section id="notes-panel" class="notes-panel" aria-label="文档列表">
+        <div class="list-heading"><h1 id="list-title">全部文档</h1><span id="list-count">0 篇</span></div>
+        <label class="search-box"><svg><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索标题或正文…" aria-label="搜索文档"><kbd>/</kbd></label>
+        <div class="list-meta"><span id="list-subtitle">最近更新</span><span>Markdown</span></div>
+        <div id="note-list" class="note-list"><p class="muted loading">正在读取文档…</p></div>
+        <div class="list-footer">每一篇记录，都让知识更有序。</div>
+      </section>
+
+      <main id="main-panel" class="main-panel">
+        <section id="empty-view" class="empty-view" hidden><span class="empty-mark"><svg><use href="#i-book"/></svg></span><h2>从一篇笔记开始</h2><p>记录一个想法，整理一段知识。<br>你的文档会保存在这台电脑上。</p><button class="button primary new-note"><svg><use href="#i-plus"/></svg>新建文档</button></section>
+        <section id="reader" hidden>
+          <div class="document-toolbar"><span id="reader-save-state" class="document-status"><svg><use href="#i-check"/></svg>已保存到本地</span><div><button id="restore-note" class="button primary" hidden>恢复文档</button><button id="reader-add-task" class="button outline">＋ 新增待办</button><button id="export-note" class="button subtle"><svg><use href="#i-download"/></svg>导出</button><button id="reader-edit-body" class="button outline">就地编辑正文</button><button id="edit-note" class="button outline"><svg><use href="#i-edit"/></svg>编辑文档</button><button id="delete-note" class="button subtle danger"><svg><use href="#i-trash"/></svg>删除</button></div></div>
+          <div id="deleted-banner" class="deleted-banner" hidden>这篇文档在「已删除」中，恢复后可以继续编辑。</div>
+          <div class="reading-layout"><div class="document"><div class="document-meta"><span id="note-category" class="category-pill"></span><span id="note-date"></span></div><div id="task-progress" class="task-progress" hidden></div><article id="article" class="markdown"></article><div id="document-footer" class="document-footer"></div></div><aside id="toc" class="toc" aria-label="本文目录"></aside></div>
+        </section>
+        <section id="editor" hidden>
+          <div class="document-toolbar"><span id="save-state" class="document-status">编辑文档</span><div><button id="cancel-edit" class="button subtle">取消</button><button id="save-note" class="button primary"><svg><use href="#i-check"/></svg>保存文档</button></div></div>
+          <div class="editor-fields"><label>文档标题<input id="edit-title" placeholder="给这篇文档起个名字" maxlength="100" autocomplete="off"></label><label>知识分类<input id="edit-category" list="category-options" placeholder="例如：编程 / Python" autocomplete="off"><datalist id="category-options"></datalist></label></div>
+          <div class="editor-tabs" role="tablist" aria-label="编辑视图"><button role="tab" data-view="split" aria-selected="true">分屏预览</button><button role="tab" data-view="write" aria-selected="false">Markdown</button><button role="tab" data-view="preview" aria-selected="false">阅读预览</button><span>Ctrl / ⌘ + S 保存</span></div>
+          <div class="editor-tools"><button id="insert-task" class="text-button">＋ 插入待办</button><span>预览中可勾选，保存文档后生效。</span></div>
+          <div id="editor-panes" class="editor-panes" data-view="split"><label class="source-pane"><span class="sr-only">Markdown 正文</span><textarea id="edit-content" spellcheck="false" placeholder="从这里开始记录，支持 Markdown…"></textarea></label><div id="preview" class="markdown preview"></div></div>
+          <div class="editor-footer"><span id="word-count">0 字</span><span id="draft-status">修改会保留为本机草稿；点击保存后写入知识库。</span></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <dialog id="category-dialog"><form id="category-form"><h2>新建知识分类</h2><p>用分类整理相关文档，支持多级目录。</p><label>分类名称<input id="new-category" placeholder="例如：编程 / Python" required maxlength="180"></label><div class="dialog-actions"><button type="button" class="button subtle" id="close-category">取消</button><button class="button primary" type="submit">创建分类</button></div></form></dialog>
+  <dialog id="drafts-dialog" class="wide-dialog"><div class="dialog-heading"><h2>本机草稿</h2><button id="close-drafts" class="text-button">关闭</button></div><p>这些修改尚未写入知识库，仅保留在当前浏览器。恢复后点击「保存文档」，才能正式保存。</p><div id="draft-list"></div></dialog>
+  <dialog id="access-dialog" class="access-dialog">
+    <div class="dialog-heading"><h2>账号与权限</h2><button id="close-access" class="text-button" type="button">关闭</button></div>
+    <p>按全部文档、分类或具体文档分配权限。编辑权限包含阅读；没有授权的文档不会出现在对方的网站中。</p>
+    <section class="access-section"><h3>设备访问申请</h3><p class="access-hint">确认是本人申请后再批准。新浏览器或新设备都需要单独批准。</p><div id="access-requests"></div></section>
+    <div class="access-columns"><section class="access-section"><div class="dialog-heading"><h3>账号</h3><button id="access-new-user" class="text-button" type="button">＋ 新建账号</button></div><div id="access-users"></div></section>
+      <form id="access-user-form" class="access-user-form">
+        <h3 id="access-form-title">新建账号</h3><div class="access-fields"><label>ID<input id="access-user-id" maxlength="40" pattern="[a-zA-Z0-9_-]+" title="英文字母、数字、下划线或短横线" required autocomplete="off" placeholder="例如：xiaoyu"></label><label>显示名称<input id="access-user-name" maxlength="80" placeholder="例如：小雨" autocomplete="off"></label></div>
+        <label class="access-enabled"><input id="access-user-enabled" type="checkbox" checked>账号可用</label>
+        <div class="dialog-heading"><h4>可访问范围</h4><button id="access-add-grant" class="text-button" type="button">＋ 添加权限</button></div>
+        <p class="access-hint">全部文档包含以后新增的文档；分类权限包含其子分类；单篇文档权限只适用于所选文档。未添加权限时，该账号看不到文档。</p><div id="access-grants"></div>
+        <p id="access-status" role="status" class="access-status"></p><div class="dialog-actions"><button id="access-save-user" class="button primary" type="submit">创建账号</button></div>
+      </form>
+    </div>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+--- a/pallas_kernels/kernels/mla_decode.py
++++ b/pallas_kernels/kernels/mla_decode.py
+@@ -2900,15 +2900,16 @@
+       raise ValueError("Invalid contiguous MLA decode shapes or dtypes")
+ 
+     def prepare(q_ref, new_ref, len_ref, qp_ref, np_ref, lp_ref):
+-      new_rows = new_ref[...]
++      # Pad before slicing so concatenate sees matching row offsets.
++      new_rows = jnp.concatenate(
++        (new_ref[...], jnp.zeros((batch, padded_dim - dim), new.dtype)), axis=1
++      )
+       lens = len_ref[...]
+       for b in range(batch):
+         qp_ref[b] = jnp.concatenate(
+           (q_ref[b], jnp.zeros((heads, padded_dim - dim), q.dtype)), axis=1
+         )
+-        row = jnp.concatenate(
+-          (new_rows[b : b + 1], jnp.zeros((1, padded_dim - dim), new.dtype)), axis=1
+-        )
++        row = new_rows[b : b + 1]
+         np_ref[b] = jnp.broadcast_to(row, (block_size, padded_dim))
+         lp_ref[b] = jnp.broadcast_to(lens[b : b + 1], (heads, block_size))
+ 

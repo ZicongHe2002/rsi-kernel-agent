@@ -1,0 +1,225 @@
+{
+    "schema_version":  1,
+    "audit_date":  "2026-11-11",
+    "timezone":  "Asia/Shanghai",
+    "root":  "C:/Users/fengluo/Desktop/colab/google-colab-cli",
+    "branch":  "fix-assignment-timeout-recovery",
+    "head_commit":  "a41650a15e80ced719650295691cbb4a61e3656b",
+    "git_status":  "unverified; HEAD and branch metadata read without running Git",
+    "validation":  "read-only source inspection; no CLI or remote execution",
+    "exclusions":  [
+                       "authentication caches",
+                       "session state and settings",
+                       "logs and history",
+                       "oauth_config.json",
+                       "external runtime metadata"
+                   ],
+    "files":  [
+                  {
+                      "path":  "pyproject.toml",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/pyproject.toml",
+                      "bytes":  2424,
+                      "sha256":  "b7abf51d09882475a4ad122ffddbbf5359bfa483a32f8043898d48aae258e262",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "uv.lock",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/uv.lock",
+                      "bytes":  200930,
+                      "sha256":  "9dcdb37e3d962b207e9d457d847fb83f80c1fd9386d8e4e469cec3ae8f23e865",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "README.md",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/README.md",
+                      "bytes":  9205,
+                      "sha256":  "1c0ad533d21d45362f5d7ee6b2fa2ed676fc8a095461d80ed69682869208153e",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "AGENTS.md",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/AGENTS.md",
+                      "bytes":  21246,
+                      "sha256":  "a45a4c961f113d98612f4c222731eb84d55155549de0540660fa61a915f18e67",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/cli.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/cli.py",
+                      "bytes":  4761,
+                      "sha256":  "f9c2291c7981844df1f9c7ae3346f866fd0a5ce76187df1eef4003fb37687a97",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/commands/execution.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/commands/execution.py",
+                      "bytes":  13113,
+                      "sha256":  "6de08e5588c7dc4f7862154861eb36f0c045e66e2b1f46bc0bc94aca96f98d3d",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/commands/files.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/commands/files.py",
+                      "bytes":  6197,
+                      "sha256":  "ccba39b76618f707b29236021745341c28bfa57738fb8be98798bbe813317e5a",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/commands/session.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/commands/session.py",
+                      "bytes":  11731,
+                      "sha256":  "d1ec248b44bb6a8ada31c9e7cd382cecaa9b67d636de4ab8f0770bec7d7b7d52",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/commands/run.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/commands/run.py",
+                      "bytes":  17449,
+                      "sha256":  "cd744115c1c9545f27d6c206a0e79935dcebd5f58c2f81facbdf8b0a406f1d2f",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/commands/utility.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/commands/utility.py",
+                      "bytes":  14704,
+                      "sha256":  "33e35e33f6805b82fb8e584aed046605ad785a36f591df925e47cc460b25769a",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/runtime.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/runtime.py",
+                      "bytes":  12002,
+                      "sha256":  "f45bf49b548fad37011bf9e921d0387abfd88425ed2802c948a1e952b7404fba",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/contents.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/contents.py",
+                      "bytes":  3119,
+                      "sha256":  "fb08edde5fea62a89b006c60f00c1b83d046ce3d99638941363baac29d6bcf37",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/common.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/common.py",
+                      "bytes":  7601,
+                      "sha256":  "2e41ee0f558304a9952b1a64d2f66c5edfe1fe495045e5a9385c2351f9682016",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/state.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/state.py",
+                      "bytes":  5535,
+                      "sha256":  "c10b22e95bae7b83b03ce6a31a359bca8eacfab535387e308b9ba144821d8a9e",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/history.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/history.py",
+                      "bytes":  2397,
+                      "sha256":  "a858cf4287419240e377bd0c5b60bc3c67951d8c12ea9577d6b260d10d2e02f0",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/client.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/client.py",
+                      "bytes":  12132,
+                      "sha256":  "171072480d5b3728106b0b22492c89585caa35ff0a5d0d4753a61f196707977c",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "src/colab_cli/auto_update.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/src/colab_cli/auto_update.py",
+                      "bytes":  8640,
+                      "sha256":  "4cb96726b363b919d4a26247757189c6e794a6b5a6a44a39da3190dfd44fcd3a",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "skills/colab-operator/SKILL.md",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/skills/colab-operator/SKILL.md",
+                      "bytes":  9072,
+                      "sha256":  "791ec1c3e232698ebefd1d8e0af1b9f137b7ecd209d162ab0300e90af92bb96c",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "tests/test_exec.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/tests/test_exec.py",
+                      "bytes":  10830,
+                      "sha256":  "c4086f027cb2e0bd72cff6d40f0a499affe259845905137e78fb46ad51ea065b",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "tests/test_contents.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/tests/test_contents.py",
+                      "bytes":  4576,
+                      "sha256":  "a834197ed7f4a8d4cf60abd5c9d685d9e7316a230f23a2cb92fa561faec67b11",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "tests/test_client.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/tests/test_client.py",
+                      "bytes":  13413,
+                      "sha256":  "f2717d4085193d32451f7e515c7447b9eb4bc06eecfe080861344d35ed520d11",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "tests/test_resolution_logic.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/tests/test_resolution_logic.py",
+                      "bytes":  4259,
+                      "sha256":  "4d07d3251224eba0f5e4909ef278a32e52a6aeaff4e8f0ab202e94de36c964fc",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "tests/test_run.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/tests/test_run.py",
+                      "bytes":  24078,
+                      "sha256":  "89eb44b3841f7468b7e4d5dc07b5241e6193b1a7c3dfa030a7f19e0ed0136255",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "tests/test_runtime.py",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/tests/test_runtime.py",
+                      "bytes":  7926,
+                      "sha256":  "9747dd2384b331225efe6cf6f984fd61cbf6f6e89d23dd135b4f43d09d5c8b7e",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  },
+                  {
+                      "path":  "docs/03_file_management.md",
+                      "absolute_path":  "C:/Users/fengluo/Desktop/colab/google-colab-cli/docs/03_file_management.md",
+                      "bytes":  3197,
+                      "sha256":  "dafaed7a43a65b68eb7149f7ff09d993d6b4c472202554dc6cf9e842e9560977",
+                      "validation":  "inspected_only",
+                      "mutated":  false
+                  }
+              ],
+    "additional_source":  {
+                              "path":  "C:/Users/fengluo/Desktop/colab/WINDOWS-COLAB.md",
+                              "bytes":  6012,
+                              "sha256":  "0244a906ce855168cc34a1908b80e502845fe855ad42c7135d4a6b0c31ab0fe6",
+                              "validation":  "inspected_only; historical claims not rerun"
+                          }
+}

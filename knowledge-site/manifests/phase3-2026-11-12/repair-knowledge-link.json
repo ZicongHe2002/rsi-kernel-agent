@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "provenance": "real_compile_failure_plus_sourced_historical_knowledge",
+  "decision_id": "knowledge-link:c44272cc1ab70ab90ec6d723b870322a5c9a233a0fe687ae38ea7f7707b4654e",
+  "idempotency_key": "phase3:repair-knowledge:f9b3c9a0e79de72194c8a6675c687fb8238b11e411a669508aea3f179fc9ad5e",
+  "duplicate_call_same_decision": true,
+  "task_id": "mla-decode-v1",
+  "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+  "plan_id": "mla-plan:53cd73eebf52d6de024b9d9a5e6de5ee962d188f3b4a6714d4bfb1b83946fa40",
+  "plan_parent_id": "mla-import:f5ec2da743ac4a8467f6e8e9afb7debfcb0718a7a7bdcc81a07d1115e4c9c388",
+  "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+  "candidate_parent_id": "baseline-repair-parent:3ecae97ffb54e7d0bb3ee973e838056a555f5683c6f8efc4bb1ad8795f1826ff",
+  "run_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9",
+  "original_failed_candidate_id": "mla-candidate:67a184c0efc2b33ca14073c486f0cb4421a5efd0fcfa80d53fe4b62b59e8f231",
+  "original_failed_run_id": "mla-run:02c54a047534c109da0fab01ffd7629dcde9fb73dc494f975f27e48cfd8409ac",
+  "original_failure_evidence_id": "stage-evidence:edacac95206fe334fad86013446000a4cf996238ffda5cf692855ca5027b2091",
+  "original_failure_receipt_ref": {
+    "digest": "43ba495153a5c701872273826704cb0083a89f19b824a75fe02d8b4256a5e160",
+    "size": 3148
+  },
+  "method_id": "hist-decode-prepare-padding",
+  "method_note_id": "RSI/Methods/method-9d13e92d6a08fe23d534ce26905d95c29b326749c802b6c5e9104192a47f3038.md",
+  "method_note_revision": "8169a9a74469f23bf9d5d9e00449842e75130f6722191e0f50b4252b39df6c3c",
+  "source_refs": [
+    {
+      "availability": "available",
+      "document_id": "RSI/History/phase3-project2-2026-11-12.md",
+      "excerpt": "| hist-decode-prepare-padding / layout correctness | 先整批pad再选择batch行，避免非concat维offset mismatch | JAX/Mosaic版本相关；cache和数值语义不能改 | 11-04明确原失败→修复通过对照；当前源码不同需重验 |",
+      "locator": "optimization-methods / hist-decode-prepare-padding",
+      "reason": null,
+      "revision": "691a21c5eac34ad28638ae7c24b487b3280dad71230e8a5362c970e74dd2e6f5"
+    }
+  ],
+  "source_status": [
+    {
+      "document_id": "RSI/History/phase3-project2-2026-11-12.md",
+      "captured_revision": "691a21c5eac34ad28638ae7c24b487b3280dad71230e8a5362c970e74dd2e6f5",
+      "current_revision": "691a21c5eac34ad28638ae7c24b487b3280dad71230e8a5362c970e74dd2e6f5",
+      "availability": "available",
+      "reason": null
+    }
+  ],
+  "historical_patch": {
+    "path": "C:/Users/fengluo/Desktop/project2/result/mla_decode_fix_20261104/mla_decode_fix.patch",
+    "sha256": "b729544e2f9479a4d3d58584663035bd6baedf68241a62b7cef7d00d4d99412a",
+    "artifact_ref": {
+      "digest": "b729544e2f9479a4d3d58584663035bd6baedf68241a62b7cef7d00d4d99412a",
+      "size": 3285
+    }
+  },
+  "repair_response_ref": {
+    "digest": "1d0cf3466b1b215276434c4606ee2800ac025035b7d4c97544fa0bdf4fe7a3bf",
+    "size": 1641
+  },
+  "repair_diff_ref": {
+    "digest": "0b599807265bd3d2406231cc86fe39432e16163653d0756afb20741dc42f61b9",
+    "size": 993
+  },
+  "repair_intent_id": "baseline-repair-intent:3ecae97ffb54e7d0bb3ee973e838056a555f5683c6f8efc4bb1ad8795f1826ff",
+  "reason": "Historical Knowledge applied to baseline compatibility repair, not a performance claim. Original Run mla-run:02c54a047534c109da0fab01ffd7629dcde9fb73dc494f975f27e48cfd8409ac actually failed compilation in decode-boundary; bound Evidence stage-evidence:edacac95206fe334fad86013446000a4cf996238ffda5cf692855ca5027b2091, receipt SHA256 43ba495153a5c701872273826704cb0083a89f19b824a75fe02d8b4256a5e160. The explicit response 1d0cf3466b1b215276434c4606ee2800ac025035b7d4c97544fa0bdf4fe7a3bf cites historical patch C:/Users/fengluo/Desktop/project2/result/mla_decode_fix_20261104/mla_decode_fix.patch SHA256 b729544e2f9479a4d3d58584663035bd6baedf68241a62b7cef7d00d4d99412a: pad the full new-KV batch before selecting each row to avoid the non-concatenation row-offset mismatch. The fixed Oracle, tolerance and benchmark contract are unchanged. This link records the repair rationale and exact descendant; it does not establish repair correctness, speedup or Best.",
+  "repair_evidence_ids": [],
+  "performance_claim": false,
+  "promotion_calls": 0,
+  "parent_selection_changed": false,
+  "knowledge_notes_written": 0,
+  "limitation": "The triggering failure belongs to the original Run and is not relabeled as repair-Run Evidence."
+}

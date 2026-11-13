@@ -1,0 +1,38 @@
+# Proposed repository-root .gitignore. Not activated during Phase 1.
+# Never untrack or remove files automatically; inspect the index first.
+.env
+.env.*
+!.env.example
+.auth/
+.tunnel/
+auth.json
+credentials.json
+service-account*.json
+*.key
+*.pem
+*.p12
+*.pfx
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+__pycache__/
+*.py[cod]
+.venv/
+.venv-mcp/
+.pytest_cache/
+.coverage
+.coverage.*
+/runs/
+/artifacts/
+/candidate-workspaces/
+/knowledge-site/logs/
+/knowledge-site/.artifacts/
+/knowledge-site/tools/
+/knowledge-site/qa/
+*.xplane.pb
+*.trace.json
+*.trace.json.gz
+*.hlo
+*.llo
+# Keep authored documents, images, Mermaid sources and sanitized manifests.
+# A future committed trace/IR fixture needs an explicit reviewed exception.

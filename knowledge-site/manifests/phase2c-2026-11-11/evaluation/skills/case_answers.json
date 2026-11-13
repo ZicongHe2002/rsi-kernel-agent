@@ -1,0 +1,133 @@
+{
+    "dma-count":  {
+                      "verdict":  "undetermined",
+                      "category":  "unknown",
+                      "refs":  [
+                                   "case:dma-count"
+                               ],
+                      "reason":  "The supplied count is 1000 DMA events during a reported 50 us execution, but bytes, wait time and the dependency critical path are null. Event frequency cannot establish whether transfers delay completion: events may be small, overlapped or off the critical path. DMA being a bottleneck remains undetermined, and the assertion that the count proves it is unjustified. Collect a correctly bound trace with transfer sizes, durations, dependencies and waits, then test whether reducing exposed transfer work reduces completion time. Do not invent transfer rates or replace missing metrics with zero.",
+                      "controls":  [
+                                       "critical_path_trace",
+                                       "collect_missing_metric"
+                                   ],
+                      "numeric_result":  null
+                  },
+    "profile-mismatch":  {
+                             "verdict":  "contradicted",
+                             "category":  "observed_fact",
+                             "refs":  [
+                                          "case:profile-mismatch"
+                                      ],
+                             "reason":  "The profile explicitly belongs to A-current under strategy A, whereas the request is for B-current under strategy B. A matching workload does not repair this identity mismatch. Its 10 us may describe A-current in the scenario but cannot be relabeled as B-current\u0027s measured evidence. Obtain or correctly rebind a B-current profile and check candidate, strategy, source/config/build identity, run, workload and evaluation context. The main manifest\u0027s separately bound B-profile is a different reference and must not be confused with this mismatched scenario.",
+                             "controls":  [
+                                              "identity_rebind"
+                                          ],
+                             "numeric_result":  null
+                         },
+    "tile-dtype-confound":  {
+                                "verdict":  "undetermined",
+                                "category":  "hypothesis",
+                                "refs":  [
+                                             "case:tile-dtype-confound"
+                                         ],
+                                "reason":  "The reported latency changes from 20 us to 12 us while both tile shape and dtype change, and there are no isolated variants. Tile-only causation is unestablished; dtype effects and tile-by-dtype interaction remain competing explanations. Under identical hardware, workload, timing protocol and other settings, test old tile/old dtype, new tile/old dtype, old tile/new dtype and new tile/new dtype. Because float32 becomes bfloat16 and tolerance was not tested, validate input conversion, accumulation semantics and task-required error bounds against a trusted reference, including cancellation and dynamic-range cases. A lower timing alone does not establish an acceptable numerical implementation.",
+                                "controls":  [
+                                                 "one_variable_ablation",
+                                                 "correctness_tolerances"
+                                             ],
+                                "numeric_result":  null
+                            },
+    "different-history":  {
+                              "verdict":  "undetermined",
+                              "category":  "historical_claim",
+                              "refs":  [
+                                           "case:different-history"
+                                       ],
+                              "reason":  "The historical observation is that double buffering was slower for 32x32 float32 on synthetic-H1. The current scenario is 4096x4096 bfloat16 on synthetic-H2, with no retest. Changes in hardware, shape and dtype alter the balance of transfer, compute, buffer pressure and fill/drain costs, so the old outcome does not establish the current outcome. Preserve the historical result and its conditions as a risk, while treating any prediction for the current workload as unverified. Compare single- and double-buffer variants under the current matched conditions with correctness and repeated timings, isolating buffering from other changes.",
+                              "controls":  [
+                                               "condition_matched_retest"
+                                           ],
+                              "numeric_result":  null
+                          },
+    "prediction-not-measurement":  {
+                                       "verdict":  "contradicted",
+                                       "category":  "mathematical_prediction",
+                                       "refs":  [
+                                                    "case:prediction-not-measurement"
+                                                ],
+                                       "reason":  "The inputs are explicitly hypothetical and the real_hardware_measurements list is empty. For four tiles through independent transfer and compute stages, ideal duration is transfer+compute+(stages-1)*max(transfer,compute) = 3+2+3*3 = 14 s. This assumes overlap across tiles, a transfer stage processing one tile at a time, a compute stage processing one tile at a time, ready inputs, sufficient buffers and no extra synchronization, resource-contention or scheduling overhead. It includes initial fill and final drain. The result is a model prediction, not a TPU measurement. Validate a correctly identified implementation\u0027s correctness and collect repeated actual target timings and overlap traces before making a hardware performance claim.",
+                                       "controls":  [
+                                                        "real_measurement_required"
+                                                    ],
+                                       "numeric_result":  {
+                                                              "value":  14,
+                                                              "unit":  "s"
+                                                          }
+                                   },
+    "multi-strategy-plans":  {
+                                 "verdict":  "contradicted",
+                                 "category":  "observed_fact",
+                                 "refs":  [
+                                              "case:multi-strategy-plans",
+                                              "source:B",
+                                              "history:B"
+                                          ],
+                                 "reason":  "The policy explicitly says no route cancelled and requires at least two materially distinct Plans for both exact parents. A\u0027s reported 10 us versus B\u0027s 12 us and synthetic correctness do not authorize ending B exploration or choosing a winner. Retain A tile reuse and A pipeline overlap as separate Plans parented by A-parent, and B layout conversion and B tile reuse as separate Plans parented by B-parent. Each needs concrete isolated modifications, risks, tradeoffs, unknowns, variants and correctness/performance experiments. Do not use the candidates\u0027 historical baseline as the requested Plan parent, and do not change best.",
+                                 "controls":  [
+                                                  "retain_both_strategies"
+                                              ],
+                                 "numeric_result":  null
+                             },
+    "faster-unknown-cause":  {
+                                 "verdict":  "undetermined",
+                                 "category":  "observed_fact",
+                                 "refs":  [
+                                              "case:faster-unknown-cause"
+                                          ],
+                                 "reason":  "Confirmed same-context timing supports the observation that latency fell from 20 to 16 us. It does not establish that memory bandwidth improved. Multiple scheduling and layout changes are confounded and no profile is available; reduced work, better locality, scheduling or other effects could explain the timing. Retain the speed observation while marking the bandwidth explanation unverified. Revert or enable individual changes in otherwise matched variants, then measure bytes and time over consistent boundaries and inspect dependency-aware traces to determine which exposed costs changed. A higher effective byte/time ratio alone would still need interpretation rather than proving a hardware bandwidth change.",
+                                 "controls":  [
+                                                  "causal_ablation",
+                                                  "critical_path_trace"
+                                              ],
+                                 "numeric_result":  null
+                             },
+    "stale-knowledge":  {
+                            "verdict":  "contradicted",
+                            "category":  "source_claim",
+                            "refs":  [
+                                         "case:stale-knowledge"
+                                     ],
+                            "reason":  "The method pins revision aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa while the live source is bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb. Substituting the live source changes the analysis input and cannot silently preserve reproducibility. Retain the supplied excerpt, \u0027Overlap independent transfers; verify buffer lifetimes.\u0027, labeled with the old pinned revision and stale status. State that the complete old document is not archived and local validation is absent; do not reconstruct missing content or label the claim current or locally validated. Any new-source inspection should be recorded as a separate revision and explicitly reconciled before a fresh applicability test.",
+                            "controls":  [
+                                             "preserve_revision_and_mark_stale"
+                                         ],
+                            "numeric_result":  null
+                        },
+    "missing-not-zero":  {
+                             "verdict":  "undetermined",
+                             "category":  "unknown",
+                             "refs":  [
+                                          "case:missing-not-zero"
+                                      ],
+                             "reason":  "wait_us is null with availability unavailable because the parser does not expose wait counters. The reported 20 us execution duration does not determine how much time was spent waiting. Exactly zero is neither demonstrated nor numerically implied; preserve the missing value and reason instead of using a zero default. Obtain a parser or trace/counter source that exposes the relevant wait metric and defines its timing scope before making a waiting claim.",
+                             "controls":  [
+                                              "collect_missing_metric"
+                                          ],
+                             "numeric_result":  null
+                         },
+    "nested-overlap":  {
+                           "verdict":  "contradicted",
+                           "category":  "derived_measurement",
+                           "refs":  [
+                                        "case:nested-overlap"
+                                    ],
+                           "reason":  "For device 0/clock c0, [2,5] is wholly inside [0,10], while [8,12] overlaps [0,10] and extends its covered endpoint to 12. Their union is [0,12], so occupied interval coverage is 12 us. Adding 10+3+4 gives 17 us only by double-counting nested and overlapping coverage. Device 1/clock c1\u0027s [0,7] interval is excluded because the clocks are not established as aligned. This is a derived duration from supplied synthetic intervals, not exclusive kernel time, causal critical-path length or an additive cross-device total.",
+                           "controls":  [
+                                            "interval_union_by_clock"
+                                        ],
+                           "numeric_result":  {
+                                                  "value":  12,
+                                                  "unit":  "us"
+                                              }
+                       }
+}

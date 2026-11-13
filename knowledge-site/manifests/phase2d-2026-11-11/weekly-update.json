@@ -1,0 +1,8 @@
+{
+  "path": "knowledge-site/content/待办清单/一周待办 · 2026-11-09.md",
+  "api_status": 401,
+  "authentication_read": false,
+  "method": "reread, merge append, SHA guard, fsync and atomic replace",
+  "before_sha256": "005157a4533cc0ba3d8ff21d88e1d67cd2ca621f1f9476a5c2449a206e5786e0",
+  "after_sha256": "bc8c23434fdeb36be2d1bf4fb296eb1f4f0680256142429884821630a4a00997"
+}

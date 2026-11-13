@@ -1,0 +1,30 @@
+{
+  "runtime_session_id": "tpu-v6e1-s-euw4a0-xyzyx7kofigt",
+  "python": "3.13.18",
+  "jax": "0.11.2",
+  "jaxlib": "0.11.2",
+  "libtpu": "0.0.50",
+  "tensorflow": null,
+  "xprof": null,
+  "tpu_model": "TPU v6 lite",
+  "device_count": 1,
+  "process_count": 1,
+  "devices": [
+    {
+      "id": 0,
+      "platform": "tpu",
+      "device_kind": "TPU v6 lite",
+      "process_index": 0,
+      "coords": [
+        0,
+        0,
+        0
+      ],
+      "core_on_chip": 0
+    }
+  ],
+  "xla": {
+    "jaxlib_version": "0.11.2",
+    "backend_platform_version": "TFRT TPU v6 lite\nBuilt on Oct 7 2026 00:47:01 (1791359221) cl/994787025"
+  }
+}

@@ -1,0 +1,1364 @@
+{
+  "provenance": "synthetic",
+  "snapshot": {
+    "id": "snapshot:e6cd8436c8064ea7a4f98d957a3a1e87",
+    "schema_version": 1,
+    "task_id": "task",
+    "version": 1,
+    "high_watermark": 53,
+    "record_count": 53,
+    "strategy_counts": {
+      "A": 21,
+      "B": 24,
+      "C": 1,
+      "D": 1,
+      "E": 2
+    },
+    "digest": "62b85c9c4c0d5230fb0a78af841f59fdbce5b2b0e869069b3e65a38fd8501f29"
+  },
+  "status_cards": [
+    {
+      "snapshot_id": "snapshot:e6cd8436c8064ea7a4f98d957a3a1e87",
+      "snapshot_version": 1,
+      "strategy_id": "A",
+      "context_id": "context",
+      "provenance": "synthetic",
+      "latest_attempt": {
+        "candidate_id": "A12",
+        "run_id": "A-failure",
+        "execution_status": "failed",
+        "scheduling_status": "finished",
+        "event_id": "A-failure:end"
+      },
+      "last_correct_candidate": {
+        "candidate_id": "A11",
+        "run_id": "A-success",
+        "evaluation_id": "A-success:eval"
+      },
+      "branch_best": {
+        "candidate_id": "A11",
+        "run_id": "A-success",
+        "evaluation_id": "A-success:eval",
+        "latency_ms": 10,
+        "strategy_id": "A",
+        "context_id": "context"
+      },
+      "task_best": {
+        "candidate_id": "A11",
+        "run_id": "A-success",
+        "evaluation_id": "A-success:eval",
+        "latency_ms": 10,
+        "strategy_id": "A",
+        "context_id": "context"
+      },
+      "frontier": [],
+      "paused": false,
+      "pause_decision": null,
+      "deferred": [],
+      "current_parent_candidate": {
+        "parent_id": "baseline",
+        "candidate_id": null,
+        "identity": {
+          "build_digest": "f2e22505fd9a8932d4a1c03c9cfad55e86f2ee1f086cde3d0536e2673b1018af",
+          "config_digest": "14157b32d526070d2c8840f1a39cb8595c67396bf8e6c01d37d92846f0720edf",
+          "source_digest": "f45de16c13ce87799c6a7d77a365772f4f32e83aec18fb5b0ac4a5404e7c8dd5"
+        },
+        "decision_id": "parent-select:ad2aafa5e3e56418a158c84dce5fdf6c798f1b78520ee10cc433ae49a1f17b74"
+      },
+      "recent_plans": [
+        {
+          "description": "Synthetic exploration 2",
+          "id": "A2",
+          "strategy_id": "A"
+        },
+        {
+          "description": "Synthetic exploration 1",
+          "id": "A1",
+          "strategy_id": "A"
+        }
+      ],
+      "recent_plans_total": 2,
+      "recent_plans_complete": true,
+      "evidence_refs": [
+        "A-success:timing"
+      ]
+    },
+    {
+      "snapshot_id": "snapshot:e6cd8436c8064ea7a4f98d957a3a1e87",
+      "snapshot_version": 1,
+      "strategy_id": "B",
+      "context_id": "context",
+      "provenance": "synthetic",
+      "latest_attempt": {
+        "candidate_id": "B12",
+        "run_id": "B-invalid",
+        "execution_status": "invalid",
+        "scheduling_status": "finished",
+        "event_id": "B-invalid:end"
+      },
+      "last_correct_candidate": {
+        "candidate_id": "B11",
+        "run_id": "B-success",
+        "evaluation_id": "B-success:eval"
+      },
+      "branch_best": {
+        "candidate_id": "B11",
+        "run_id": "B-success",
+        "evaluation_id": "B-success:eval",
+        "latency_ms": 12,
+        "strategy_id": "B",
+        "context_id": "context"
+      },
+      "task_best": {
+        "candidate_id": "A11",
+        "run_id": "A-success",
+        "evaluation_id": "A-success:eval",
+        "latency_ms": 10,
+        "strategy_id": "A",
+        "context_id": "context"
+      },
+      "frontier": [
+        "B21"
+      ],
+      "paused": false,
+      "pause_decision": null,
+      "deferred": [
+        {
+          "record_id": "B22",
+          "kind": "Candidate",
+          "reason": "Synthetic budget exhausted",
+          "decision_id": "defer-B22"
+        }
+      ],
+      "current_parent_candidate": {
+        "parent_id": "baseline",
+        "candidate_id": null,
+        "identity": {
+          "build_digest": "f2e22505fd9a8932d4a1c03c9cfad55e86f2ee1f086cde3d0536e2673b1018af",
+          "config_digest": "14157b32d526070d2c8840f1a39cb8595c67396bf8e6c01d37d92846f0720edf",
+          "source_digest": "f45de16c13ce87799c6a7d77a365772f4f32e83aec18fb5b0ac4a5404e7c8dd5"
+        },
+        "decision_id": "parent-select:712d5fd8e5e655784d7c98ba13ab23366682b16b9db421b9cec45c0fb5ba78f3"
+      },
+      "recent_plans": [
+        {
+          "description": "Synthetic exploration 2",
+          "id": "B2",
+          "strategy_id": "B"
+        },
+        {
+          "description": "Synthetic exploration 1",
+          "id": "B1",
+          "strategy_id": "B"
+        }
+      ],
+      "recent_plans_total": 2,
+      "recent_plans_complete": true,
+      "evidence_refs": [
+        "B-success:timing"
+      ]
+    },
+    {
+      "snapshot_id": "snapshot:e6cd8436c8064ea7a4f98d957a3a1e87",
+      "snapshot_version": 1,
+      "strategy_id": "C",
+      "context_id": "context",
+      "provenance": "synthetic",
+      "latest_attempt": null,
+      "last_correct_candidate": null,
+      "branch_best": null,
+      "task_best": {
+        "candidate_id": "A11",
+        "run_id": "A-success",
+        "evaluation_id": "A-success:eval",
+        "latency_ms": 10,
+        "strategy_id": "A",
+        "context_id": "context"
+      },
+      "frontier": [],
+      "paused": false,
+      "pause_decision": null,
+      "deferred": [],
+      "current_parent_candidate": null,
+      "recent_plans": [],
+      "recent_plans_total": 0,
+      "recent_plans_complete": true,
+      "evidence_refs": []
+    },
+    {
+      "snapshot_id": "snapshot:e6cd8436c8064ea7a4f98d957a3a1e87",
+      "snapshot_version": 1,
+      "strategy_id": "D",
+      "context_id": "context",
+      "provenance": "synthetic",
+      "latest_attempt": null,
+      "last_correct_candidate": null,
+      "branch_best": null,
+      "task_best": {
+        "candidate_id": "A11",
+        "run_id": "A-success",
+        "evaluation_id": "A-success:eval",
+        "latency_ms": 10,
+        "strategy_id": "A",
+        "context_id": "context"
+      },
+      "frontier": [],
+      "paused": false,
+      "pause_decision": null,
+      "deferred": [],
+      "current_parent_candidate": null,
+      "recent_plans": [],
+      "recent_plans_total": 0,
+      "recent_plans_complete": true,
+      "evidence_refs": []
+    },
+    {
+      "snapshot_id": "snapshot:e6cd8436c8064ea7a4f98d957a3a1e87",
+      "snapshot_version": 1,
+      "strategy_id": "E",
+      "context_id": "context",
+      "provenance": "synthetic",
+      "latest_attempt": null,
+      "last_correct_candidate": null,
+      "branch_best": null,
+      "task_best": {
+        "candidate_id": "A11",
+        "run_id": "A-success",
+        "evaluation_id": "A-success:eval",
+        "latency_ms": 10,
+        "strategy_id": "A",
+        "context_id": "context"
+      },
+      "frontier": [],
+      "paused": true,
+      "pause_decision": {
+        "details": {},
+        "id": "pause-E",
+        "kind": "paused",
+        "reason": "Synthetic pause",
+        "target_id": "E",
+        "task_id": "task"
+      },
+      "deferred": [],
+      "current_parent_candidate": null,
+      "recent_plans": [],
+      "recent_plans_total": 0,
+      "recent_plans_complete": true,
+      "evidence_refs": []
+    }
+  ],
+  "histories": {
+    "A": {
+      "snapshot": {
+        "digest": "62b85c9c4c0d5230fb0a78af841f59fdbce5b2b0e869069b3e65a38fd8501f29",
+        "high_watermark": 53,
+        "id": "snapshot:e6cd8436c8064ea7a4f98d957a3a1e87",
+        "record_count": 53,
+        "schema_version": 1,
+        "strategy_counts": {
+          "A": 21,
+          "B": 24,
+          "C": 1,
+          "D": 1,
+          "E": 2
+        },
+        "task_id": "task",
+        "version": 1
+      },
+      "strategy_id": "A",
+      "records": [
+        {
+          "kind": "Task",
+          "payload": {
+            "contract_revision": "v1",
+            "id": "task",
+            "name": "Synthetic 2B integration"
+          }
+        },
+        {
+          "kind": "Workload",
+          "payload": {
+            "id": "workload",
+            "spec": {
+              "shape": [
+                4,
+                8
+              ]
+            },
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "EvaluationContext",
+          "payload": {
+            "environment": {
+              "device": "synthetic"
+            },
+            "id": "context",
+            "protocol": {
+              "timer": "fixture-ms"
+            },
+            "provenance": "synthetic",
+            "task_id": "task",
+            "workload_id": "workload"
+          }
+        },
+        {
+          "kind": "ParentCandidate",
+          "payload": {
+            "candidate_id": null,
+            "id": "baseline",
+            "identity": {
+              "build_digest": "f2e22505fd9a8932d4a1c03c9cfad55e86f2ee1f086cde3d0536e2673b1018af",
+              "config_digest": "14157b32d526070d2c8840f1a39cb8595c67396bf8e6c01d37d92846f0720edf",
+              "source_digest": "f45de16c13ce87799c6a7d77a365772f4f32e83aec18fb5b0ac4a5404e7c8dd5"
+            },
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Strategy",
+          "payload": {
+            "id": "A",
+            "name": "Route A",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Plan",
+          "payload": {
+            "description": "Synthetic exploration 1",
+            "id": "A1",
+            "strategy_id": "A"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "parent_id": "baseline",
+              "plan_id": "A1",
+              "strategy_id": "A",
+              "type": "plan_parent.v1"
+            },
+            "id": "plan-parent:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648",
+            "kind": "note",
+            "reason": "Explicit Plan parent binding",
+            "target_id": "A1",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "A11",
+            "identity": {
+              "build_digest": "57b88013dee822b0d115907a3864b0a924ac666fabfbaf213dc085b44defeb90",
+              "config_digest": "24b71485ced57d7fd0490ef405d693e08d3f3cc8b52f9fdc098c9704d37931e8",
+              "source_digest": "e780daf94bebbcd8fee659e7c6c895cea221a170495d9fe79aac55f269fc87bc"
+            },
+            "parent_id": "baseline",
+            "plan_id": "A1"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "A12",
+            "identity": {
+              "build_digest": "3d6c1a9caa20050aa33fc6a2f3fe6573dce574a1a9a2754f3c7fe8c1e1de6b27",
+              "config_digest": "cbb97cba23d100b141277257b2479107d0eb0374efb91476d626d089c94686ab",
+              "source_digest": "2b3c3a0df985d4760ca54680fb6f76740993a69a9cec44ff7cc81e519a5d25c0"
+            },
+            "parent_id": "baseline",
+            "plan_id": "A1"
+          }
+        },
+        {
+          "kind": "Plan",
+          "payload": {
+            "description": "Synthetic exploration 2",
+            "id": "A2",
+            "strategy_id": "A"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "parent_id": "baseline",
+              "plan_id": "A2",
+              "strategy_id": "A",
+              "type": "plan_parent.v1"
+            },
+            "id": "plan-parent:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56",
+            "kind": "note",
+            "reason": "Explicit Plan parent binding",
+            "target_id": "A2",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "A21",
+            "identity": {
+              "build_digest": "5b91190005064afbdc7d58daa9c9b5af038a9a2346ebeed52fa2d56d5b533515",
+              "config_digest": "f1366d6f31cbc403c89af5e8d431557a734c7a5d0113890b1debc09ec2b37b4f",
+              "source_digest": "0fd21c989b62ab98f90889f058680bd01640411d21b65aa353ab1f1de46810f6"
+            },
+            "parent_id": "baseline",
+            "plan_id": "A2"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "A22",
+            "identity": {
+              "build_digest": "44157dc2fe59eeca3e66069514684150912ef613c998fa8506686705c4d4b728",
+              "config_digest": "e8330365194e4f295b899a1add6de2fb3358f66548998eb2c20755e9169fa142",
+              "source_digest": "dcbe9744cded9fea9c5c5619a6814672b6291010a08fc51f966a7df45776711d"
+            },
+            "parent_id": "baseline",
+            "plan_id": "A2"
+          }
+        },
+        {
+          "kind": "Run",
+          "payload": {
+            "candidate_id": "A11",
+            "context_id": "context",
+            "id": "A-success"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "running",
+            "id": "A-success:start",
+            "reason": "synthetic",
+            "run_id": "A-success",
+            "scheduling_status": "active"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "succeeded",
+            "id": "A-success:end",
+            "reason": "synthetic",
+            "run_id": "A-success",
+            "scheduling_status": "finished"
+          }
+        },
+        {
+          "kind": "Evidence",
+          "payload": {
+            "artifacts": [
+              {
+                "digest": "a7de225b7da0796fdaab9bb4d227514a714382c12c5d13473ca841f468010b13",
+                "size": 28
+              }
+            ],
+            "availability": "available",
+            "claim_status": "supported",
+            "evidence_kind": "measured_timing",
+            "id": "A-success:timing",
+            "input_ids": [],
+            "request_status": "completed",
+            "run_id": "A-success",
+            "source": {
+              "provenance": "synthetic"
+            },
+            "unit": "ms",
+            "value": 10
+          }
+        },
+        {
+          "kind": "EvaluationBundle",
+          "payload": {
+            "confirmed": true,
+            "correctness": "passed",
+            "evidence_ids": [
+              "A-success:timing"
+            ],
+            "id": "A-success:eval",
+            "latency_ms": 10,
+            "run_id": "A-success",
+            "timing_validity": "valid"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "branch_promoted": true,
+              "context_id": "context",
+              "eligible": true,
+              "reason": "confirmed_by_producer",
+              "task_promoted": true
+            },
+            "id": "decision:accf7d3a31504cc78621e09adf103027",
+            "kind": "promotion",
+            "reason": "confirmed_by_producer",
+            "target_id": "A-success:eval",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Run",
+          "payload": {
+            "candidate_id": "A12",
+            "context_id": "context",
+            "id": "A-failure"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "running",
+            "id": "A-failure:start",
+            "reason": "synthetic",
+            "run_id": "A-failure",
+            "scheduling_status": "active"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "failed",
+            "id": "A-failure:end",
+            "reason": "synthetic",
+            "run_id": "A-failure",
+            "scheduling_status": "finished"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "context_id": "context",
+              "parent_id": "baseline",
+              "strategy_id": "A",
+              "type": "parent_selection.v1"
+            },
+            "id": "parent-select:ad2aafa5e3e56418a158c84dce5fdf6c798f1b78520ee10cc433ae49a1f17b74",
+            "kind": "note",
+            "reason": "Explicit baseline",
+            "target_id": "A",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "candidate_id": null,
+              "candidate_parent_id": null,
+              "evidence_ids": [],
+              "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+              "method_note_id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+              "method_note_revision": "6910331aeae42ba60641bed282d158efb64a675a558b86afef50942d4dee6697",
+              "method_snapshot": {
+                "applicable_hardware": [
+                  "synthetic CPU"
+                ],
+                "applicable_workloads": [
+                  "matrix"
+                ],
+                "description": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+                "expected_tradeoffs": [],
+                "implementation_requirements": [],
+                "known_risks": [],
+                "local_experiment_refs": [],
+                "mechanism": "overlap",
+                "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+                "method_name": "Overlap",
+                "optimization_category": "unclassified",
+                "preconditions": [],
+                "source_refs": [
+                  {
+                    "availability": "available",
+                    "document_id": "Research/Pipelining.md",
+                    "excerpt": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+                    "locator": "heading:Overlap",
+                    "reason": null,
+                    "revision": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+                  }
+                ],
+                "source_revision": {
+                  "Research/Pipelining.md": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+                },
+                "unknowns": [
+                  "Applicability and local performance require experiment evidence."
+                ],
+                "validation_status": "source_supported"
+              },
+              "parent_id": "baseline",
+              "plan_id": "A1",
+              "run_id": null,
+              "source_refs": [
+                {
+                  "availability": "available",
+                  "document_id": "Research/Pipelining.md",
+                  "excerpt": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+                  "locator": "heading:Overlap",
+                  "reason": null,
+                  "revision": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+                }
+              ],
+              "strategy_id": "A",
+              "type": "knowledge_link.v1"
+            },
+            "id": "knowledge-link:a3806a050ee18f54cbfcb6e62ca65a0bfdfa67ac29bebce1a357a34054d1832b",
+            "kind": "note",
+            "reason": "Explore source mechanism",
+            "target_id": "A1",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "candidate_id": null,
+              "candidate_parent_id": null,
+              "evidence_ids": [],
+              "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+              "method_note_id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+              "method_note_revision": "6910331aeae42ba60641bed282d158efb64a675a558b86afef50942d4dee6697",
+              "method_snapshot": {
+                "applicable_hardware": [
+                  "synthetic CPU"
+                ],
+                "applicable_workloads": [
+                  "matrix"
+                ],
+                "description": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+                "expected_tradeoffs": [],
+                "implementation_requirements": [],
+                "known_risks": [],
+                "local_experiment_refs": [],
+                "mechanism": "overlap",
+                "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+                "method_name": "Overlap",
+                "optimization_category": "unclassified",
+                "preconditions": [],
+                "source_refs": [
+                  {
+                    "availability": "available",
+                    "document_id": "Research/Pipelining.md",
+                    "excerpt": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+                    "locator": "heading:Overlap",
+                    "reason": null,
+                    "revision": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+                  }
+                ],
+                "source_revision": {
+                  "Research/Pipelining.md": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+                },
+                "unknowns": [
+                  "Applicability and local performance require experiment evidence."
+                ],
+                "validation_status": "source_supported"
+              },
+              "parent_id": "baseline",
+              "plan_id": "A2",
+              "run_id": null,
+              "source_refs": [
+                {
+                  "availability": "available",
+                  "document_id": "Research/Pipelining.md",
+                  "excerpt": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+                  "locator": "heading:Overlap",
+                  "reason": null,
+                  "revision": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+                }
+              ],
+              "strategy_id": "A",
+              "type": "knowledge_link.v1"
+            },
+            "id": "knowledge-link:db85333bdd9857780fb104d777cbb73a55701ccddc09c33333e27f040c3dd6bd",
+            "kind": "note",
+            "reason": "Explore source mechanism",
+            "target_id": "A2",
+            "task_id": "task"
+          }
+        }
+      ],
+      "total": 25,
+      "owned_total": 21,
+      "dependency_total": 4,
+      "owned_ids": [
+        "A",
+        "A1",
+        "plan-parent:16a36e86f6fed5d465ff332511a0ce1a863b55d364b25a7cdaa25db19abf9648",
+        "A11",
+        "A12",
+        "A2",
+        "plan-parent:c8361f9b468e68c86da024270e0949ce139cb704b8d7cce586681b99f3a7ea56",
+        "A21",
+        "A22",
+        "A-success",
+        "A-success:start",
+        "A-success:end",
+        "A-success:timing",
+        "A-success:eval",
+        "decision:accf7d3a31504cc78621e09adf103027",
+        "A-failure",
+        "A-failure:start",
+        "A-failure:end",
+        "parent-select:ad2aafa5e3e56418a158c84dce5fdf6c798f1b78520ee10cc433ae49a1f17b74",
+        "knowledge-link:a3806a050ee18f54cbfcb6e62ca65a0bfdfa67ac29bebce1a357a34054d1832b",
+        "knowledge-link:db85333bdd9857780fb104d777cbb73a55701ccddc09c33333e27f040c3dd6bd"
+      ],
+      "dependency_ids": [
+        "task",
+        "workload",
+        "context",
+        "baseline"
+      ],
+      "offset": 0,
+      "next_offset": null,
+      "complete": true
+    },
+    "B": {
+      "snapshot": {
+        "digest": "62b85c9c4c0d5230fb0a78af841f59fdbce5b2b0e869069b3e65a38fd8501f29",
+        "high_watermark": 53,
+        "id": "snapshot:e6cd8436c8064ea7a4f98d957a3a1e87",
+        "record_count": 53,
+        "schema_version": 1,
+        "strategy_counts": {
+          "A": 21,
+          "B": 24,
+          "C": 1,
+          "D": 1,
+          "E": 2
+        },
+        "task_id": "task",
+        "version": 1
+      },
+      "strategy_id": "B",
+      "records": [
+        {
+          "kind": "Task",
+          "payload": {
+            "contract_revision": "v1",
+            "id": "task",
+            "name": "Synthetic 2B integration"
+          }
+        },
+        {
+          "kind": "Workload",
+          "payload": {
+            "id": "workload",
+            "spec": {
+              "shape": [
+                4,
+                8
+              ]
+            },
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "EvaluationContext",
+          "payload": {
+            "environment": {
+              "device": "synthetic"
+            },
+            "id": "context",
+            "protocol": {
+              "timer": "fixture-ms"
+            },
+            "provenance": "synthetic",
+            "task_id": "task",
+            "workload_id": "workload"
+          }
+        },
+        {
+          "kind": "ParentCandidate",
+          "payload": {
+            "candidate_id": null,
+            "id": "baseline",
+            "identity": {
+              "build_digest": "f2e22505fd9a8932d4a1c03c9cfad55e86f2ee1f086cde3d0536e2673b1018af",
+              "config_digest": "14157b32d526070d2c8840f1a39cb8595c67396bf8e6c01d37d92846f0720edf",
+              "source_digest": "f45de16c13ce87799c6a7d77a365772f4f32e83aec18fb5b0ac4a5404e7c8dd5"
+            },
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Strategy",
+          "payload": {
+            "id": "B",
+            "name": "Route B",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Plan",
+          "payload": {
+            "description": "Synthetic exploration 1",
+            "id": "B1",
+            "strategy_id": "B"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "parent_id": "baseline",
+              "plan_id": "B1",
+              "strategy_id": "B",
+              "type": "plan_parent.v1"
+            },
+            "id": "plan-parent:5b950e77941d01cdf246d00b1ece546bc95234b77d98b44c9187e2733afa696a",
+            "kind": "note",
+            "reason": "Explicit Plan parent binding",
+            "target_id": "B1",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "B11",
+            "identity": {
+              "build_digest": "31958d3a597ae25cef2807b638381a75227bfa92ea8d2f22950bfa58e1db828c",
+              "config_digest": "368adcba6a6447c5c1bea700c4b704cc06add512cebd0496b72982a3a24beddd",
+              "source_digest": "b498521c33c818b432cc044713344da5b9a25c7b8941b57dfec5b90f1cdce0bf"
+            },
+            "parent_id": "baseline",
+            "plan_id": "B1"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "B12",
+            "identity": {
+              "build_digest": "d5d6ae4b35040d1642124926e40da4f801b0df355eec2503b1acccfa3016e9fd",
+              "config_digest": "2988a161bf800386687f1c534022698b8a1520016cbfd168982ce45c102d99e8",
+              "source_digest": "84124406fa7827c6076ede0758e0315686ca19c23cb0e58d9b44a882bc08dccb"
+            },
+            "parent_id": "baseline",
+            "plan_id": "B1"
+          }
+        },
+        {
+          "kind": "Plan",
+          "payload": {
+            "description": "Synthetic exploration 2",
+            "id": "B2",
+            "strategy_id": "B"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "parent_id": "baseline",
+              "plan_id": "B2",
+              "strategy_id": "B",
+              "type": "plan_parent.v1"
+            },
+            "id": "plan-parent:abdbc2b5cc2c7a519b72bf7a164c58ebf892ab0c2df6468213705cc2f0da8561",
+            "kind": "note",
+            "reason": "Explicit Plan parent binding",
+            "target_id": "B2",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "B21",
+            "identity": {
+              "build_digest": "fbf598875736d421dd20cd9e5c490fd2ab818b78c5e4808cc5ee4c018ec9af52",
+              "config_digest": "59d005450b28701c702d4143a4609d3ecf7ddea5934f1a1b310f90d0bcabf859",
+              "source_digest": "889f119796bfa8b0b20851d80b4de408273a2a7eb2ce9caa1c1fc28fb318b514"
+            },
+            "parent_id": "baseline",
+            "plan_id": "B2"
+          }
+        },
+        {
+          "kind": "Candidate",
+          "payload": {
+            "change_kind": "proposal",
+            "id": "B22",
+            "identity": {
+              "build_digest": "ca60d51388248ce2e93a3b217860acede6e9ef8ad2f551f8f808fc4fd8cbfdaf",
+              "config_digest": "7767695272dfc015a7d19f24e0cf4b2faa5c2982024a5c9cb3941fea0a1e7517",
+              "source_digest": "340fdb7bbd774b589ec6fd2d008405998f7ecf3bad4ab6ae63a76497aa4716b2"
+            },
+            "parent_id": "baseline",
+            "plan_id": "B2"
+          }
+        },
+        {
+          "kind": "Run",
+          "payload": {
+            "candidate_id": "B11",
+            "context_id": "context",
+            "id": "B-success"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "running",
+            "id": "B-success:start",
+            "reason": "synthetic",
+            "run_id": "B-success",
+            "scheduling_status": "active"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "succeeded",
+            "id": "B-success:end",
+            "reason": "synthetic",
+            "run_id": "B-success",
+            "scheduling_status": "finished"
+          }
+        },
+        {
+          "kind": "Evidence",
+          "payload": {
+            "artifacts": [
+              {
+                "digest": "db8d4f8fd4826cf7560bbc7d71d7dd9b4c749156a5ec78885c960066e517b529",
+                "size": 28
+              }
+            ],
+            "availability": "available",
+            "claim_status": "supported",
+            "evidence_kind": "measured_timing",
+            "id": "B-success:timing",
+            "input_ids": [],
+            "request_status": "completed",
+            "run_id": "B-success",
+            "source": {
+              "provenance": "synthetic"
+            },
+            "unit": "ms",
+            "value": 12
+          }
+        },
+        {
+          "kind": "EvaluationBundle",
+          "payload": {
+            "confirmed": true,
+            "correctness": "passed",
+            "evidence_ids": [
+              "B-success:timing"
+            ],
+            "id": "B-success:eval",
+            "latency_ms": 12,
+            "run_id": "B-success",
+            "timing_validity": "valid"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "branch_promoted": true,
+              "context_id": "context",
+              "eligible": true,
+              "reason": "confirmed_by_producer",
+              "task_promoted": false
+            },
+            "id": "decision:cfb3cb5de5d24d81854ef4f582bc6656",
+            "kind": "promotion",
+            "reason": "confirmed_by_producer",
+            "target_id": "B-success:eval",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Run",
+          "payload": {
+            "candidate_id": "B12",
+            "context_id": "context",
+            "id": "B-invalid"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "running",
+            "id": "B-invalid:start",
+            "reason": "synthetic",
+            "run_id": "B-invalid",
+            "scheduling_status": "active"
+          }
+        },
+        {
+          "kind": "RunEvent",
+          "payload": {
+            "execution_status": "invalid",
+            "id": "B-invalid:end",
+            "reason": "synthetic",
+            "run_id": "B-invalid",
+            "scheduling_status": "finished"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {},
+            "id": "defer-B22",
+            "kind": "deferred",
+            "reason": "Synthetic budget exhausted",
+            "target_id": "B22",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "context_id": "context",
+              "included": true
+            },
+            "id": "decision:6d42b169456f40ffb53dc6725200ad72",
+            "kind": "frontier",
+            "reason": "Keep B exploring",
+            "target_id": "B21",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "context_id": "context",
+              "parent_id": "baseline",
+              "strategy_id": "B",
+              "type": "parent_selection.v1"
+            },
+            "id": "parent-select:712d5fd8e5e655784d7c98ba13ab23366682b16b9db421b9cec45c0fb5ba78f3",
+            "kind": "note",
+            "reason": "Explicit baseline",
+            "target_id": "B",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "candidate_id": null,
+              "candidate_parent_id": null,
+              "evidence_ids": [],
+              "method_id": "method-cb336868184ba10558e90dd84f9ba09f56d6dfde6586be16606df67fe9ce768a",
+              "method_note_id": "RSI/Methods/method-32f1466351537d1101c94e0e62efd04d7d17666501a326bc6705d2440a16ee75.md",
+              "method_note_revision": "b69cc0bdbef6972fdce14f4335a25ecac520bd401becad419b79f0bad28f898e",
+              "method_snapshot": {
+                "applicable_hardware": [
+                  "synthetic CPU"
+                ],
+                "applicable_workloads": [
+                  "matrix"
+                ],
+                "description": "## Reuse\nReuse local tiles; boundary padding costs extra work.",
+                "expected_tradeoffs": [],
+                "implementation_requirements": [],
+                "known_risks": [],
+                "local_experiment_refs": [],
+                "mechanism": "reuse",
+                "method_id": "method-cb336868184ba10558e90dd84f9ba09f56d6dfde6586be16606df67fe9ce768a",
+                "method_name": "Reuse",
+                "optimization_category": "unclassified",
+                "preconditions": [],
+                "source_refs": [
+                  {
+                    "availability": "available",
+                    "document_id": "Research/Tiling.md",
+                    "excerpt": "## Reuse\nReuse local tiles; boundary padding costs extra work.",
+                    "locator": "heading:Reuse",
+                    "reason": null,
+                    "revision": "723a919233f0a3dc598c6a6b8558e1247ddfadf409003f71f7725b7bd02ebdf5"
+                  }
+                ],
+                "source_revision": {
+                  "Research/Tiling.md": "723a919233f0a3dc598c6a6b8558e1247ddfadf409003f71f7725b7bd02ebdf5"
+                },
+                "unknowns": [
+                  "Applicability and local performance require experiment evidence."
+                ],
+                "validation_status": "source_supported"
+              },
+              "parent_id": "baseline",
+              "plan_id": "B1",
+              "run_id": null,
+              "source_refs": [
+                {
+                  "availability": "available",
+                  "document_id": "Research/Tiling.md",
+                  "excerpt": "## Reuse\nReuse local tiles; boundary padding costs extra work.",
+                  "locator": "heading:Reuse",
+                  "reason": null,
+                  "revision": "723a919233f0a3dc598c6a6b8558e1247ddfadf409003f71f7725b7bd02ebdf5"
+                }
+              ],
+              "strategy_id": "B",
+              "type": "knowledge_link.v1"
+            },
+            "id": "knowledge-link:ebd25f62cd38008d4fa97b468a7fd00de734fadfd83bcb6ea427c8f13df98ca3",
+            "kind": "note",
+            "reason": "Explore source mechanism",
+            "target_id": "B1",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "candidate_id": null,
+              "candidate_parent_id": null,
+              "evidence_ids": [],
+              "method_id": "method-cb336868184ba10558e90dd84f9ba09f56d6dfde6586be16606df67fe9ce768a",
+              "method_note_id": "RSI/Methods/method-32f1466351537d1101c94e0e62efd04d7d17666501a326bc6705d2440a16ee75.md",
+              "method_note_revision": "b69cc0bdbef6972fdce14f4335a25ecac520bd401becad419b79f0bad28f898e",
+              "method_snapshot": {
+                "applicable_hardware": [
+                  "synthetic CPU"
+                ],
+                "applicable_workloads": [
+                  "matrix"
+                ],
+                "description": "## Reuse\nReuse local tiles; boundary padding costs extra work.",
+                "expected_tradeoffs": [],
+                "implementation_requirements": [],
+                "known_risks": [],
+                "local_experiment_refs": [],
+                "mechanism": "reuse",
+                "method_id": "method-cb336868184ba10558e90dd84f9ba09f56d6dfde6586be16606df67fe9ce768a",
+                "method_name": "Reuse",
+                "optimization_category": "unclassified",
+                "preconditions": [],
+                "source_refs": [
+                  {
+                    "availability": "available",
+                    "document_id": "Research/Tiling.md",
+                    "excerpt": "## Reuse\nReuse local tiles; boundary padding costs extra work.",
+                    "locator": "heading:Reuse",
+                    "reason": null,
+                    "revision": "723a919233f0a3dc598c6a6b8558e1247ddfadf409003f71f7725b7bd02ebdf5"
+                  }
+                ],
+                "source_revision": {
+                  "Research/Tiling.md": "723a919233f0a3dc598c6a6b8558e1247ddfadf409003f71f7725b7bd02ebdf5"
+                },
+                "unknowns": [
+                  "Applicability and local performance require experiment evidence."
+                ],
+                "validation_status": "source_supported"
+              },
+              "parent_id": "baseline",
+              "plan_id": "B2",
+              "run_id": null,
+              "source_refs": [
+                {
+                  "availability": "available",
+                  "document_id": "Research/Tiling.md",
+                  "excerpt": "## Reuse\nReuse local tiles; boundary padding costs extra work.",
+                  "locator": "heading:Reuse",
+                  "reason": null,
+                  "revision": "723a919233f0a3dc598c6a6b8558e1247ddfadf409003f71f7725b7bd02ebdf5"
+                }
+              ],
+              "strategy_id": "B",
+              "type": "knowledge_link.v1"
+            },
+            "id": "knowledge-link:d265ac585534516a4228e6977c9e9a584b8af9e3a06be2613e76ab056c8bebf6",
+            "kind": "note",
+            "reason": "Explore source mechanism",
+            "target_id": "B2",
+            "task_id": "task"
+          }
+        },
+        {
+          "kind": "Decision",
+          "payload": {
+            "details": {
+              "candidate_id": null,
+              "candidate_parent_id": null,
+              "evidence_ids": [],
+              "method_id": "method-b2c8bad69461a22f44c4df383fc025a801b8c9182c13224a32e69de73ba13b12",
+              "method_note_id": "RSI/Methods/method-c0d12365416609c1b49883048d1d58e712ff5db3bf7bba1dc394ae742296d0fc.md",
+              "method_note_revision": "4f43c429841089ec1abe96379fdd8aee13dfecc9b54c8227ae57c10f532def0a",
+              "method_snapshot": {
+                "applicable_hardware": [
+                  "synthetic CPU"
+                ],
+                "applicable_workloads": [
+                  "matrix"
+                ],
+                "description": "## Contiguity\nArrange contiguous accesses; conversion costs extra work.",
+                "expected_tradeoffs": [],
+                "implementation_requirements": [],
+                "known_risks": [],
+                "local_experiment_refs": [],
+                "mechanism": "layout",
+                "method_id": "method-b2c8bad69461a22f44c4df383fc025a801b8c9182c13224a32e69de73ba13b12",
+                "method_name": "Contiguity",
+                "optimization_category": "unclassified",
+                "preconditions": [],
+                "source_refs": [
+                  {
+                    "availability": "available",
+                    "document_id": "Research/Layout.md",
+                    "excerpt": "## Contiguity\nArrange contiguous accesses; conversion costs extra work.",
+                    "locator": "heading:Contiguity",
+                    "reason": null,
+                    "revision": "cc5733fb95ba1a0a6a51fe979948a2144030f5d76b4e5c8fca97bf5adad3d98c"
+                  }
+                ],
+                "source_revision": {
+                  "Research/Layout.md": "cc5733fb95ba1a0a6a51fe979948a2144030f5d76b4e5c8fca97bf5adad3d98c"
+                },
+                "unknowns": [
+                  "Applicability and local performance require experiment evidence."
+                ],
+                "validation_status": "source_supported"
+              },
+              "parent_id": "baseline",
+              "plan_id": "B2",
+              "run_id": null,
+              "source_refs": [
+                {
+                  "availability": "available",
+                  "document_id": "Research/Layout.md",
+                  "excerpt": "## Contiguity\nArrange contiguous accesses; conversion costs extra work.",
+                  "locator": "heading:Contiguity",
+                  "reason": null,
+                  "revision": "cc5733fb95ba1a0a6a51fe979948a2144030f5d76b4e5c8fca97bf5adad3d98c"
+                }
+              ],
+              "strategy_id": "B",
+              "type": "knowledge_link.v1"
+            },
+            "id": "knowledge-link:629365ef65b8f97258c39a155ed00e44d91852ba432c86ee984c98af99688089",
+            "kind": "note",
+            "reason": "Explore source mechanism",
+            "target_id": "B2",
+            "task_id": "task"
+          }
+        }
+      ],
+      "total": 28,
+      "owned_total": 24,
+      "dependency_total": 4,
+      "owned_ids": [
+        "B",
+        "B1",
+        "plan-parent:5b950e77941d01cdf246d00b1ece546bc95234b77d98b44c9187e2733afa696a",
+        "B11",
+        "B12",
+        "B2",
+        "plan-parent:abdbc2b5cc2c7a519b72bf7a164c58ebf892ab0c2df6468213705cc2f0da8561",
+        "B21",
+        "B22",
+        "B-success",
+        "B-success:start",
+        "B-success:end",
+        "B-success:timing",
+        "B-success:eval",
+        "decision:cfb3cb5de5d24d81854ef4f582bc6656",
+        "B-invalid",
+        "B-invalid:start",
+        "B-invalid:end",
+        "defer-B22",
+        "decision:6d42b169456f40ffb53dc6725200ad72",
+        "parent-select:712d5fd8e5e655784d7c98ba13ab23366682b16b9db421b9cec45c0fb5ba78f3",
+        "knowledge-link:ebd25f62cd38008d4fa97b468a7fd00de734fadfd83bcb6ea427c8f13df98ca3",
+        "knowledge-link:d265ac585534516a4228e6977c9e9a584b8af9e3a06be2613e76ab056c8bebf6",
+        "knowledge-link:629365ef65b8f97258c39a155ed00e44d91852ba432c86ee984c98af99688089"
+      ],
+      "dependency_ids": [
+        "task",
+        "workload",
+        "context",
+        "baseline"
+      ],
+      "offset": 0,
+      "next_offset": null,
+      "complete": true
+    }
+  },
+  "knowledge_link_example": {
+    "candidate_id": null,
+    "candidate_parent_id": null,
+    "evidence_ids": [],
+    "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+    "method_note_id": "RSI/Methods/method-c9fb512300d60a8abc667dbd468a156c66598497f616a5a85cb1109d972a017f.md",
+    "method_note_revision": "6910331aeae42ba60641bed282d158efb64a675a558b86afef50942d4dee6697",
+    "method_snapshot": {
+      "applicable_hardware": [
+        "synthetic CPU"
+      ],
+      "applicable_workloads": [
+        "matrix"
+      ],
+      "description": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+      "expected_tradeoffs": [],
+      "implementation_requirements": [],
+      "known_risks": [],
+      "local_experiment_refs": [],
+      "mechanism": "overlap",
+      "method_id": "method-684d12f08e6f02a6e8a6ff7914fe7a9e01de3168bab79e225283d95e0684cd07",
+      "method_name": "Overlap",
+      "optimization_category": "unclassified",
+      "preconditions": [],
+      "source_refs": [
+        {
+          "availability": "available",
+          "document_id": "Research/Pipelining.md",
+          "excerpt": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+          "locator": "heading:Overlap",
+          "reason": null,
+          "revision": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+        }
+      ],
+      "source_revision": {
+        "Research/Pipelining.md": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+      },
+      "unknowns": [
+        "Applicability and local performance require experiment evidence."
+      ],
+      "validation_status": "source_supported"
+    },
+    "parent_id": "baseline",
+    "plan_id": "A1",
+    "run_id": null,
+    "source_refs": [
+      {
+        "availability": "available",
+        "document_id": "Research/Pipelining.md",
+        "excerpt": "## Overlap\nOverlap independent buffer transfers; use more memory.",
+        "locator": "heading:Overlap",
+        "reason": null,
+        "revision": "464824fb5b6f725637cc30372a28e476725f8ea588a42c9af8faf9fa0c632762"
+      }
+    ],
+    "strategy_id": "A",
+    "type": "knowledge_link.v1"
+  }
+}

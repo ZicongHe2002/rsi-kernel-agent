@@ -1,0 +1,78 @@
+[
+  {
+    "path": "src/rsi_kernel_agent/artifacts.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/associations.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/contracts.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/knowledge.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/knowledge_mcp.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/memory.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/store.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/__init__.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/analyzer.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/evaluation.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/inputs.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/models.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/outputs.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/profiles.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/session.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/tools.py",
+    "unchanged": true
+  },
+  {
+    "path": "src/rsi_kernel_agent/profiler/__init__.py",
+    "unchanged": true
+  },
+  {
+    "path": "knowledge-site/server.py",
+    "unchanged": true
+  },
+  {
+    "path": "knowledge-site/mcp_server.py",
+    "unchanged": true
+  }
+]

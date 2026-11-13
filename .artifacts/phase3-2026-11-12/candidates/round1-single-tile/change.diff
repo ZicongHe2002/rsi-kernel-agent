@@ -1,0 +1,31 @@
+--- a/pallas_kernels/kernels/mla_decode.py
++++ b/pallas_kernels/kernels/mla_decode.py
+@@ -2975,13 +2975,21 @@
+         if soft_cap > 0:
+           scores = soft_cap * jnp.tanh(scores / soft_cap)
+         scores = jnp.where(valid, scores, jnp.finfo(jnp.float32).min)
+-        m_next = jnp.maximum(m, jnp.max(scores, axis=1, keepdims=True))
+-        alpha = jnp.exp(m - m_next)
+-        p = jnp.where(valid, jnp.exp(scores - m_next), 0.0)
+-        total = total * alpha + jnp.sum(p, axis=1, keepdims=True)
+-        acc = acc * alpha + lax.dot(
+-          p.astype(q.dtype), kv[:, :lkv_dim], preferred_element_type=jnp.float32
+-        )
++        if capacity == block_size:
++          m_next = jnp.max(scores, axis=1, keepdims=True)
++          p = jnp.where(valid, jnp.exp(scores - m_next), 0.0)
++          total = jnp.sum(p, axis=1, keepdims=True)
++          acc = lax.dot(
++            p.astype(q.dtype), kv[:, :lkv_dim], preferred_element_type=jnp.float32
++          )
++        else:
++          m_next = jnp.maximum(m, jnp.max(scores, axis=1, keepdims=True))
++          alpha = jnp.exp(m - m_next)
++          p = jnp.where(valid, jnp.exp(scores - m_next), 0.0)
++          total = total * alpha + jnp.sum(p, axis=1, keepdims=True)
++          acc = acc * alpha + lax.dot(
++            p.astype(q.dtype), kv[:, :lkv_dim], preferred_element_type=jnp.float32
++          )
+         return m_next, total, acc
+ 
+       # Visit every cache block to preserve the full tail in the separate output.

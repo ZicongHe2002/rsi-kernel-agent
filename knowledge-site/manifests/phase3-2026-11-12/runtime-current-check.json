@@ -1,0 +1,216 @@
+{
+  "phase_complete": false,
+  "protected_2abc_unchanged": true,
+  "files": [
+    {
+      "path": "src/rsi_kernel_agent/__init__.py",
+      "before_sha256": "8f6f8953f91e517572eee55f79888200614ccf85835f5a520a65c95542f08e76",
+      "after_sha256": "8f6f8953f91e517572eee55f79888200614ccf85835f5a520a65c95542f08e76",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/artifacts.py",
+      "before_sha256": "fd8fe272278132eb487c998c382e039ef6e0853ba1a7043baf8302d1ca1bf9e2",
+      "after_sha256": "fd8fe272278132eb487c998c382e039ef6e0853ba1a7043baf8302d1ca1bf9e2",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/associations.py",
+      "before_sha256": "3701a63145718f2a87c590a0330c912d5d56421a788facde6d7d5f1cb991bc0f",
+      "after_sha256": "3701a63145718f2a87c590a0330c912d5d56421a788facde6d7d5f1cb991bc0f",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/contracts.py",
+      "before_sha256": "85959babf27a5b76cc6cab189e7586c048623a34613760bc33e60a564868da8b",
+      "after_sha256": "85959babf27a5b76cc6cab189e7586c048623a34613760bc33e60a564868da8b",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/knowledge.py",
+      "before_sha256": "f3d2cf030d213d02b309e05d319f6a325c959b714b1264793f7bfcec631e5db5",
+      "after_sha256": "f3d2cf030d213d02b309e05d319f6a325c959b714b1264793f7bfcec631e5db5",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/knowledge_mcp.py",
+      "before_sha256": "e692cf83bb390f9da181f6d0ff226df82a9d26cb37daddd70bf432c02b806ef4",
+      "after_sha256": "e692cf83bb390f9da181f6d0ff226df82a9d26cb37daddd70bf432c02b806ef4",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/memory.py",
+      "before_sha256": "e2e0375c186d1d777d6d4ba04fb8eeb8633c525ff40fc33f99cea0cdb425d12e",
+      "after_sha256": "e2e0375c186d1d777d6d4ba04fb8eeb8633c525ff40fc33f99cea0cdb425d12e",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/__init__.py",
+      "before_sha256": "e592d25147517d36fd0179d10e81f27eeffded3b901c144451c6112e2489a596",
+      "after_sha256": "e592d25147517d36fd0179d10e81f27eeffded3b901c144451c6112e2489a596",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/analyzer.py",
+      "before_sha256": "33b11310cb87b46680f4c2b7403b30ee318d578f29622c8a7d4cef41902f8db1",
+      "after_sha256": "33b11310cb87b46680f4c2b7403b30ee318d578f29622c8a7d4cef41902f8db1",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/evaluation.py",
+      "before_sha256": "0ae22eb5b2e15b7b506be250de9a873fad805195ac72134570aeff403294ebb3",
+      "after_sha256": "0ae22eb5b2e15b7b506be250de9a873fad805195ac72134570aeff403294ebb3",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/inputs.py",
+      "before_sha256": "497bbb85a5c53935123a45648bfcaa38416fbe5fe927e417c1dab18d876f95cc",
+      "after_sha256": "497bbb85a5c53935123a45648bfcaa38416fbe5fe927e417c1dab18d876f95cc",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/models.py",
+      "before_sha256": "6e4bc6319f6885e008af08c32cdfd962c50e0446a9eec5d4d45e51294bc80e16",
+      "after_sha256": "6e4bc6319f6885e008af08c32cdfd962c50e0446a9eec5d4d45e51294bc80e16",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/outputs.py",
+      "before_sha256": "c2f6b03639a5413be097746d108f793253817eb9e9ee59b9c1a979bea1c899c4",
+      "after_sha256": "c2f6b03639a5413be097746d108f793253817eb9e9ee59b9c1a979bea1c899c4",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/profiles.py",
+      "before_sha256": "0ab672dc8a6a4791c8173d8747ddd31f4a410ae573aab0951ac999d47a03f536",
+      "after_sha256": "0ab672dc8a6a4791c8173d8747ddd31f4a410ae573aab0951ac999d47a03f536",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/session.py",
+      "before_sha256": "e20abd0c769ad9a4ccd03182e950d2da9e40e85413c591cbf2f7e47874e490f3",
+      "after_sha256": "e20abd0c769ad9a4ccd03182e950d2da9e40e85413c591cbf2f7e47874e490f3",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/tools.py",
+      "before_sha256": "2ae0cba68c340981575c998ab2030315d87fbec65b77d54eb53d914ee78f2d6c",
+      "after_sha256": "2ae0cba68c340981575c998ab2030315d87fbec65b77d54eb53d914ee78f2d6c",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/store.py",
+      "before_sha256": "da735f1f8ba1908df9392a8ab50e77114588c9188adb3b1c7811c26e4732bd0b",
+      "after_sha256": "da735f1f8ba1908df9392a8ab50e77114588c9188adb3b1c7811c26e4732bd0b",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/__init__.py",
+      "before_sha256": "e24c98186615889081dc9febe31ae02bcfe8739e54a166ca46bd30fa02459e6c",
+      "after_sha256": "e24c98186615889081dc9febe31ae02bcfe8739e54a166ca46bd30fa02459e6c",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/__main__.py",
+      "before_sha256": "ba5c1b72862696190c5c2def81eaa256c4d3ec3aaaf3c922ad10ea07f9d83801",
+      "after_sha256": "da4efc182e3b37e3e9e8ca50d83f14182e7fe5d5bee2cdfc432ee7319baedc8e",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/colab.py",
+      "before_sha256": null,
+      "after_sha256": "6d40a8d152e1c6f0289abf2048021a33ed8d3ff6a6c9b4ca03653b57fcb340b6",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/colab_bridge.py",
+      "before_sha256": null,
+      "after_sha256": "59258e47a6eeba27b19115cfb8eeb628bdd7beab7bfbf9f7201cb2435e645972",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/colab_bridge_call.py",
+      "before_sha256": null,
+      "after_sha256": "08c063c66dfeaf2ce545281cf246245b52abd50e7a6f3b3d33bfebffa148be15",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/colab_remote.py",
+      "before_sha256": null,
+      "after_sha256": "103991f93e17bf5749bd89d5250f181ab187585018f5299c848f3e4a8fad03b9",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/colab_worker.py",
+      "before_sha256": null,
+      "after_sha256": "f254b9153f2b2aa91d68cf7c90889dc40559382447baa8c6676e7308c59f1c14",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/controller.py",
+      "before_sha256": "40fb6e8a1a339182b7dc21fb1fdd7d5cbe1f31593a3a767c022b3a408347f0db",
+      "after_sha256": "66c8af15bf3c8c0dac2ff0ced71e03e18a67d6b6ae84960590658c4fadce0fd3",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/demo.py",
+      "before_sha256": "85c0e65a6c9de3fd45ac7dc2fbe14bcf20e1da7201ba3a88ce95536161c1c182",
+      "after_sha256": "85c0e65a6c9de3fd45ac7dc2fbe14bcf20e1da7201ba3a88ce95536161c1c182",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/evaluation.py",
+      "before_sha256": "346a7ff3c79b480b6d03a6c66c2f4f4044b37044a90af2864ad896e306de3ad8",
+      "after_sha256": "5331935fd842fd13a73206a98cf131658a1bb00d6de43b69c31fed5afac5c607",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/execution.py",
+      "before_sha256": "9d3e9236c2a2fd652af7777243fdef2fd8e267c2b0c82e535f107379fbf454d6",
+      "after_sha256": "416c5103e5f71d4cddbe047f4c07c6e822df83aedc66b941a4a6c973a3ad5233",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/intake.py",
+      "before_sha256": "9cec315493f10c350fd63b250e7d4ac90bbd913dc353e16e72651c0b41e3e965",
+      "after_sha256": "93fc23afbda445269f3a0cc626de95424da5d913460285ded4322b19fb0e9e7f",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/journal.py",
+      "before_sha256": "d714e1b67dc18397ef4e1eacc042b65e7396487b928f38c07b40d42b24069127",
+      "after_sha256": "d714e1b67dc18397ef4e1eacc042b65e7396487b928f38c07b40d42b24069127",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/mla_baseline.py",
+      "before_sha256": null,
+      "after_sha256": "8166abc95a2edbbf414391d61dc7999129a77cf55cf4130c4814cc4186856ecf",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/mla_runner.py",
+      "before_sha256": null,
+      "after_sha256": "f3de4fa2e1c9ddadd15bbb12f2617a3957dfa74c3119777a0cc12478ff9a72f2",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/real_protocol.py",
+      "before_sha256": null,
+      "after_sha256": "41b2d27f554991b10cb756b3ad3c6a1a518485c8ac054f96fa3ab84ddf3ebebe",
+      "changed": true
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/rounds.py",
+      "before_sha256": "5a93bfcc7feb189de30f022be88a1529a96f9f3c6784dcebfbb1a16326e92b9d",
+      "after_sha256": "5a93bfcc7feb189de30f022be88a1529a96f9f3c6784dcebfbb1a16326e92b9d",
+      "changed": false
+    },
+    {
+      "path": "src/rsi_kernel_agent/workflow/scheduling.py",
+      "before_sha256": "3fe33abfdab280cfb604aaa8392272184d4c02735255bdaec6b4da68539de17c",
+      "after_sha256": "3fe33abfdab280cfb604aaa8392272184d4c02735255bdaec6b4da68539de17c",
+      "changed": false
+    }
+  ]
+}

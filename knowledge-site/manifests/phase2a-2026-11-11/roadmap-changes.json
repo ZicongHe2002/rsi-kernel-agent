@@ -1,0 +1,40 @@
+{
+    "scope":  "Roadmap and pre-implementation plan only; later Phase 2A implementation manifest must capture final document state",
+    "date":  "2026-11-11",
+    "source":  "sources/phase2-roadmap-adjustment.txt",
+    "source_sha256":  "e431bd5f153c8e7c65fe051ff4f306165f5d9fbdfc669a9ec8739dbeceb42ca7",
+    "relative_links_checked":  48,
+    "missing_links":  0,
+    "files":  [
+                  {
+                      "path":  "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+                      "before_sha256":  "30f66234560be41a56da41f0f7b25db5f5cf50d596827e0b8bb866b3fca842e6",
+                      "after_sha256":  "74c1953d5781b068da316d62e4788fd3581cc9bb0c90a2f9eda5d7ec5c8965fa",
+                      "snapshot":  "knowledge-site/manifests/phase2a-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md"
+                  },
+                  {
+                      "path":  "knowledge-site/index.md",
+                      "before_sha256":  "4110bb85d1c5ff12cf927301e4badbf28a98c70e25312964045eb8a85f96cbb5",
+                      "after_sha256":  "3dc55f8125dff62145d918b64e311402206ab681795e31179fb0ea7754894e36",
+                      "snapshot":  "knowledge-site/manifests/phase2a-2026-11-11/before/knowledge-site/index.md"
+                  },
+                  {
+                      "path":  "knowledge-site/content/学习方法/rsi-document-index.md",
+                      "before_sha256":  "31883d67481f7c07c9388607876864e657793fadee07dd668c7deac4460d6f8d",
+                      "after_sha256":  "f6e45ba268d616fcd474b7f3e5dab363432aa995a91443518de57e0669e77ca0",
+                      "snapshot":  "knowledge-site/manifests/phase2a-2026-11-11/before/knowledge-site/content/学习方法/rsi-document-index.md"
+                  },
+                  {
+                      "path":  "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+                      "before_sha256":  "aec584c298344bf7149d8617f8eb2985fd8c5354e7670b81bc099ab6ca24adf7",
+                      "after_sha256":  "c734f3e7751c1de5a65fdf32c8cf94fcf5bd28c5c4f9ca5ca1e9f66f8ad1b445",
+                      "snapshot":  "knowledge-site/manifests/phase2a-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md"
+                  },
+                  {
+                      "path":  "docs/superpowers/plans/2026-11-11-phase2a-core-foundation.md",
+                      "before_sha256":  null,
+                      "after_sha256":  "3000d312385297fab189cd0ff78eac9fa8955997be26fc6479b39b3fee16fea4",
+                      "snapshot":  null
+                  }
+              ]
+}

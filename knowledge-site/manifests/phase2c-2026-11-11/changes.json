@@ -1,0 +1,1155 @@
+{
+  "phase": "2C",
+  "schema_version": 1,
+  "entries": [
+    {
+      "path": ".artifacts/phase2c-2026-11-11/eval_turn.py",
+      "before_sha256": null,
+      "after_sha256": "76c4a6f13179bb9a5a0e14cf31f1d7224bad70bb220e644af7a2a17c3b33019f",
+      "size": 1564,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/base/accepted.json",
+      "before_sha256": null,
+      "after_sha256": "e1d622c21fd052650f41826392c51b9d09e5e798fede19fd2f9513138ae03ad1",
+      "size": 27657,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/base/case_answers-initial.json",
+      "before_sha256": null,
+      "after_sha256": "aa3ecc7da75ac9075de83e2d7b9b6e082a9d404326a6688f9fa07e84701c3763",
+      "size": 8358,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/base/case_answers.json",
+      "before_sha256": null,
+      "after_sha256": "1715cb76a578336e8076cff155e1cfcb661c9872e2ce959c29bc64da788ab206",
+      "size": 12945,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/base/packet.json",
+      "before_sha256": null,
+      "after_sha256": "c5c6fd42463763cc7868273072d7734d5c9c6f650142587ae661ae822664858b",
+      "size": 77863,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/base/protocol-notes.json",
+      "before_sha256": null,
+      "after_sha256": "8b7bebc623acf09750cfdaa77412f9443b683226d04224e2bd4b21041356d26c",
+      "size": 1013,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/base/response-1.json",
+      "before_sha256": null,
+      "after_sha256": "ddc012f401221f18c9ccbb8a0c1c7ebad2e0e0778913d272af8ffad29f75c590",
+      "size": 30276,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/base/response-2.json",
+      "before_sha256": null,
+      "after_sha256": "39c0fa1d4a193d85fbcc80b3d0facf8af3cbf0d006665eeaa4a42337898fa156",
+      "size": 58970,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/base/result.json",
+      "before_sha256": null,
+      "after_sha256": "257c99e6369e89d189094973be639cc66239c55e808327d7cdb05c4b6af7ddfc",
+      "size": 105426,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/manifest.json",
+      "before_sha256": null,
+      "after_sha256": "f875de69ebd013b4ae4f89bcdfc5641f13d5ca33b391e7ec3f339b9557da5306",
+      "size": 39863,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/accepted.json",
+      "before_sha256": null,
+      "after_sha256": "8021fb1abb770ffe02fd36c00524f0d759dee18b9e6a9a853b8effc3bf62c267",
+      "size": 31138,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/case_answers-initial.json",
+      "before_sha256": null,
+      "after_sha256": "8654cc57598f731ff76ac8c9f38016f9501d1cf4fea4629fff6e7862cdc04ee7",
+      "size": 6513,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/case_answers.json",
+      "before_sha256": null,
+      "after_sha256": "e4d4dd8868fd33af62266ae1fab61cfa0dc17c192843c20aa573fdae6450b5fe",
+      "size": 6502,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/packet.json",
+      "before_sha256": null,
+      "after_sha256": "ac4b73e7c72ebeeb21c440f297b069cfc4a1324e07d06e16dd5cd84182a1fa21",
+      "size": 94914,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/protocol-notes.json",
+      "before_sha256": null,
+      "after_sha256": "57bfaee27d24a0b65575ae75b0f6ff7e080f2cf6cf3ba6cc522870cda3fdd1a3",
+      "size": 640,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/response-1.json",
+      "before_sha256": null,
+      "after_sha256": "009b55fbf1e46f3ca51fc8ad5910d38885403a0c0766630d54decafe0ba2e088",
+      "size": 1135,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/response-2.json",
+      "before_sha256": null,
+      "after_sha256": "6a714b76fd50e28476ff403193a356d43a6903cdd9bf96c714189bf689ab7b70",
+      "size": 898,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/response-3.json",
+      "before_sha256": null,
+      "after_sha256": "d8c88fd2e04bb4f979f5f42d9546f34dfc90a3edef59d7389c200cb4b4e3e884",
+      "size": 30150,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/response-4.json",
+      "before_sha256": null,
+      "after_sha256": "f06c0482edc915c119f65092317a6d16ecfd3a52c17bb6bad6b316b5c4ff05bb",
+      "size": 66880,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/result.json",
+      "before_sha256": null,
+      "after_sha256": "754113256d91d5cb8a4932e49d09e50c28723cae5160c43503246f2aa8d4dac8",
+      "size": 198408,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/review/tool-results.json",
+      "before_sha256": null,
+      "after_sha256": "f2386d887bd648afcb880f0e14ea968c7706e9c203b36c4df713e3333caae6d4",
+      "size": 21118,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/skills/accepted.json",
+      "before_sha256": null,
+      "after_sha256": "9ff59a17e3cf71d860671aee7e7d10afb1f4ef40625cff2ebea91a02aacfcedf",
+      "size": 34862,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/skills/case_answers-initial.json",
+      "before_sha256": null,
+      "after_sha256": "149e535358d94871daf7511b35371c1d4e68e9496068b27b922e23c8c1887bb3",
+      "size": 8679,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/skills/case_answers.json",
+      "before_sha256": null,
+      "after_sha256": "beb1301e3d929324f0189382a915a20402b5b95df3f29086f991df333ea02678",
+      "size": 13068,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/skills/packet.json",
+      "before_sha256": null,
+      "after_sha256": "18bb6cc3bb0847ed009e54774af5d3e241f4478aa780e35ccac0661102bdd491",
+      "size": 94290,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/skills/protocol-notes.json",
+      "before_sha256": null,
+      "after_sha256": "d1b7013ad86757342dd8647d1040535a929f74a8cb7113c0efedb00f443bedc8",
+      "size": 1330,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/skills/response-1.json",
+      "before_sha256": null,
+      "after_sha256": "24b4dd7e09f9387157d0e4cc86fb528ef8871b5c6394fddc902768bdf95c4c6e",
+      "size": 36681,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/skills/response-2.json",
+      "before_sha256": null,
+      "after_sha256": "87d929abb3c2bbfc8588047327cb9bbd337ef5ce67039b1389504f8ce10afc48",
+      "size": 69656,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/skills/result.json",
+      "before_sha256": null,
+      "after_sha256": "2cac5d82441014bcce8561845a08c12c1adb4d5292e2467e084c4dda4442e36d",
+      "size": 146127,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/accepted.json",
+      "before_sha256": null,
+      "after_sha256": "1887771fcb24360cf2e69a54213622f4cf12f3bb20524343b0dab19e01fc5219",
+      "size": 31811,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/case_answers.json",
+      "before_sha256": null,
+      "after_sha256": "08ae5c65c1fa8adceef80de7a9b910e126c5c551019a81eff1e25bf9ce897993",
+      "size": 6137,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/packet.json",
+      "before_sha256": null,
+      "after_sha256": "cb3de67d651cf921aff33de7c779a6f88e6df25372f70c836e39866312a898e2",
+      "size": 94913,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/response-1.json",
+      "before_sha256": null,
+      "after_sha256": "296c07b26b5808bb72d6cecc2bdf6cdad3feb5db9a7195d089d9d8c4bd7bfe6e",
+      "size": 374,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/response-2.json",
+      "before_sha256": null,
+      "after_sha256": "14a2b87ce6cfc9b94edabcd65c828d7b81581326a837e4c758116130cd7d31cc",
+      "size": 2957,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/response-3.json",
+      "before_sha256": null,
+      "after_sha256": "d15642b1e838681f1953fe2b1844f7e3cd343dcfd041aa9655b398628ab515b0",
+      "size": 1257,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/response-4.json",
+      "before_sha256": null,
+      "after_sha256": "1148bc9e74c6aad14f0ac98ac17cb6fc38aa375c5547896f1b117098862a81b6",
+      "size": 28229,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/result.json",
+      "before_sha256": null,
+      "after_sha256": "9293e8c169db9974619d2a9dba40d54882fd8b6eb36c862caa0a61dae1c27df1",
+      "size": 189338,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/evaluation/tools/tool-results.json",
+      "before_sha256": null,
+      "after_sha256": "c1d7fb278a8a8379528b40e9df30ab916075665b2ad4d6ff1789e49cf23344a2",
+      "size": 8650,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-response-1.json",
+      "before_sha256": null,
+      "after_sha256": "fb8c31ad734fe5f589145a90290c5f52b5761ca0a7e607fe452b14bf24a8305a",
+      "size": 1082,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-response-2.json",
+      "before_sha256": null,
+      "after_sha256": "26fdbf97d114c7e2b2924c9d82f46de5147990776d819afdf9897950b48e48c8",
+      "size": 1323,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-response-3.json",
+      "before_sha256": null,
+      "after_sha256": "d086b16dd93568dd97616ea66b613ed2ff8899fc27269827d07811732738e3dd",
+      "size": 160,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-response-final.json",
+      "before_sha256": null,
+      "after_sha256": "32ba538cdc82259b8417b3744e4e3abf31aa7205dc066d05d52094410e335c3d",
+      "size": 9258,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-session/packet.json",
+      "before_sha256": null,
+      "after_sha256": "c4342a7c1491e93f4aefff993c413af0dfd0093ee53f10a73a14ec8c5fa760ee",
+      "size": 120,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-session/result.json",
+      "before_sha256": null,
+      "after_sha256": "8fedddaf88a1f156f96a9c45f8e7e8ec30d7d9c3c8fbf20ff09006fd3cc5743e",
+      "size": 87030,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-session/session.json",
+      "before_sha256": null,
+      "after_sha256": "0ce70d37c5eb6c6fba270024b1ee2cfb7d0cf3d58edde143cd79f4a840d95710",
+      "size": 28548,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/19/192b73be479994acb9a9cb86acfbf6eb4de207e7e25f2e6c1409323cc1c444ab",
+      "before_sha256": null,
+      "after_sha256": "192b73be479994acb9a9cb86acfbf6eb4de207e7e25f2e6c1409323cc1c444ab",
+      "size": 648,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/1c/1c3eb79542175bc16e95b46721276c18af06dbe49aa180770741a976e81816bb",
+      "before_sha256": null,
+      "after_sha256": "1c3eb79542175bc16e95b46721276c18af06dbe49aa180770741a976e81816bb",
+      "size": 648,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/2b/2bcbdd51aec3dcaee3e63530d44fd6eedf94b92e2bdd4645b1fb0e370db54835",
+      "before_sha256": null,
+      "after_sha256": "2bcbdd51aec3dcaee3e63530d44fd6eedf94b92e2bdd4645b1fb0e370db54835",
+      "size": 34,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/48/48d9e7da579ed10411ca8f0d6dcc61ffbb7d27580712dd2bda0a6f5110ad849c",
+      "before_sha256": null,
+      "after_sha256": "48d9e7da579ed10411ca8f0d6dcc61ffbb7d27580712dd2bda0a6f5110ad849c",
+      "size": 34185,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/77/773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e",
+      "before_sha256": null,
+      "after_sha256": "773c4195fff0162a8933dbdc4c2c3dcb1337a317acadd3dc43f906d76f54e33e",
+      "size": 448,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/8c/8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5",
+      "before_sha256": null,
+      "after_sha256": "8cf9568bc0dffed3b586004f6404b3e18c00744aac7a6e5cdd66fe8620ce57e5",
+      "size": 448,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/8f/8fedddaf88a1f156f96a9c45f8e7e8ec30d7d9c3c8fbf20ff09006fd3cc5743e",
+      "before_sha256": null,
+      "after_sha256": "8fedddaf88a1f156f96a9c45f8e7e8ec30d7d9c3c8fbf20ff09006fd3cc5743e",
+      "size": 87030,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/95/9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+      "before_sha256": null,
+      "after_sha256": "9529e051dc77f9aeef16abdd87e2470d037e2ea9ce4de0c68128ec0970efd47c",
+      "size": 28,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/a0/a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+      "before_sha256": null,
+      "after_sha256": "a03eda49245cb18ebd7f01c5f2d2ff3e6888724b5f534fa78288c3edc5a7845f",
+      "size": 1064,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/bd/bdd73a6a9b71f7b821391e3e3024a64544a3a9f1ab05a595fb82f0878aef3774",
+      "before_sha256": null,
+      "after_sha256": "bdd73a6a9b71f7b821391e3e3024a64544a3a9f1ab05a595fb82f0878aef3774",
+      "size": 103,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/d1/d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+      "before_sha256": null,
+      "after_sha256": "d1f360bcdf89b703a2da1bac03512ace9ae2321acdaf7649f5200cdf620e0b9f",
+      "size": 29,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/artifacts/sha256/f2/f28b66e92e520f050158b1e5633e0023566396d21812631d2abd82d663ce4778",
+      "before_sha256": null,
+      "after_sha256": "f28b66e92e520f050158b1e5633e0023566396d21812631d2abd82d663ce4778",
+      "size": 34,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/example-store/experiments.sqlite3",
+      "before_sha256": null,
+      "after_sha256": "300675624e020decc074acd07074421f58689e5c9b1b194c1ecdd9e3008700d9",
+      "size": 98304,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/final_inventory.py",
+      "before_sha256": null,
+      "after_sha256": "e76d0da67ede39f2e84fc61df4f07d2719ae906b2567958392167abb21a1066f",
+      "size": 3078,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/finalize_docs.py",
+      "before_sha256": null,
+      "after_sha256": "a264a9f6652e337a71b361de3e195d022686424e37a09df56caeb17b176e97aa",
+      "size": 6137,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/prepare_evaluation.py",
+      "before_sha256": null,
+      "after_sha256": "1c4e0fdf88d4a88be5bcf183784ae458eb57e9eaec71796162e0e94e0f5bc900",
+      "size": 2499,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/prepare_example.py",
+      "before_sha256": null,
+      "after_sha256": "f175f99f6716f38e33c9c8859b92ef32ff59ed5551cb02483aaed23b72ed3f45",
+      "size": 1864,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/publish_example.py",
+      "before_sha256": null,
+      "after_sha256": "cbd6a79cb8bdbe3fefb803ee81ec0229d731a5a9fbe9952af4d183eb945ee2e0",
+      "size": 1485,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/score_evaluation.py",
+      "before_sha256": null,
+      "after_sha256": "5e8dc36cdf3a53df1bbf6dc2eb0e058c6033e39055b3a842a7cb207038d21105",
+      "size": 2233,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/submit_example.py",
+      "before_sha256": null,
+      "after_sha256": "26a742941408e03546f76a1f08666c0fe9cb532326a6089126176585bfe4d7e3",
+      "size": 737,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/update_docs.py",
+      "before_sha256": null,
+      "after_sha256": "6e508a9fe72cf959b2bf57df1667cd999e58ac655495999c410f253deb4728ec",
+      "size": 6702,
+      "before_snapshot": null
+    },
+    {
+      "path": ".artifacts/phase2c-2026-11-11/verify.py",
+      "before_sha256": null,
+      "after_sha256": "fd3ddae08e5bf0f0a3b5d0a747e666821495cbba1f4857df72e2a1d3d47cb317",
+      "size": 1738,
+      "before_snapshot": null
+    },
+    {
+      "path": "docs/phase2c-profiler-analyzer.md",
+      "before_sha256": null,
+      "after_sha256": "ae56ec7cc65b4f7dc1553883e95aa5724017e756b79b80e6486b67fa1238bd3c",
+      "size": 11417,
+      "before_snapshot": null
+    },
+    {
+      "path": "docs/superpowers/plans/2026-11-11-phase2c-profiler-analyzer.md",
+      "before_sha256": null,
+      "after_sha256": "4d36c77fd8e0875899093cae9a19338f4613f0e302eadbda9f6eac9ad25001f3",
+      "size": 7071,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-document-index.md",
+      "before_sha256": "7e387a019323895bc2015386293b4c44fad0c73a6ad4beb3f2d20c43a2495b8d",
+      "after_sha256": "5a4bfebf3750975bd3f127475f6cc2c023ed4f470665e212e6b1bf55711a1332",
+      "size": 3142,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/content/学习方法/rsi-document-index.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-evidence-contract.md",
+      "before_sha256": "5162947e0024070cbc38411521f4b99bc78ad44b2c5251e76fc8e74b631fad2b",
+      "after_sha256": "5aff0d7cb1b8b57c09ecd97ed63caa7bdce129c71b390d853845152083f9ac41",
+      "size": 4495,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/content/学习方法/rsi-evidence-contract.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-kernel-agent.md",
+      "before_sha256": "594cacdfdf648006c206e5cb97d90b10bd425e44d1f1045c6cfa11c23d7409ab",
+      "after_sha256": "32240ebabe4febcfe3ba70490f4f1cadf7edc10736dd507dbfb0475c1362c768",
+      "size": 14188,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/content/学习方法/rsi-kernel-agent.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/rsi-profiler.md",
+      "before_sha256": "8306125247f66d764c73604a9789814f1ef2ebed831eb541600306575d38e3ef",
+      "after_sha256": "a87c1efd6e05c9c79f3bdeac5a46115c61febc1184b4020aa33354dd5a9b92cc",
+      "size": 22561,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/content/学习方法/rsi-profiler.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md",
+      "before_sha256": "6f5cfacc7f1dcc7a7b48a0442d3e0c891fd7cea9f7c276297155332dcd0f8e9a",
+      "after_sha256": "c6fb98e503b445e9fd9ddb611e0b126bb887fb807100fbba80f8be9c38a22755",
+      "size": 12149,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-phase2-roadmap.md"
+    },
+    {
+      "path": "knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md",
+      "before_sha256": "4504834250b64f73399e5b0551b7349858deddf2db65e201d3bbf1dc714b3e29",
+      "after_sha256": "4ba159bc5d03c732a3d18dd39c025317b6d0a883a793006853b23d3611f6dd15",
+      "size": 28646,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/content/学习方法/RSI实践/rsi-profiler-analyzer.md"
+    },
+    {
+      "path": "knowledge-site/content/待办清单/一周待办 · 2026-11-09.md",
+      "before_sha256": "3d369f4602d9bb634c14b76681665514fc0dac9f5bb3739b8b035156aa6ce430",
+      "after_sha256": "005157a4533cc0ba3d8ff21d88e1d67cd2ca621f1f9476a5c2449a206e5786e0",
+      "size": 9578,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/content/待办清单/一周待办 · 2026-11-09.md"
+    },
+    {
+      "path": "knowledge-site/index.md",
+      "before_sha256": "9431ca1cb0fa088b86c560d4b086597f8622e27cb39355ac4a8e6fd7eee33b1a",
+      "after_sha256": "dc093c86c20a9321a67209da078be751e230512a1e380197ce6b132b3195e9ed",
+      "size": 3148,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/index.md"
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/analysis-input-manifest.json",
+      "before_sha256": null,
+      "after_sha256": "dd67beb4f471c237c58aca7dddb62f73241514a06ca1e41bad2ebd592261119a",
+      "size": 55507,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/analysis-request.json",
+      "before_sha256": null,
+      "after_sha256": "c24d5aa36da21c65676612e3a4255a7434cf1e180a006dbaa9aa33a69ee37e10",
+      "size": 1795,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/accepted.json",
+      "before_sha256": null,
+      "after_sha256": "e1d622c21fd052650f41826392c51b9d09e5e798fede19fd2f9513138ae03ad1",
+      "size": 27657,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/case_answers-initial.json",
+      "before_sha256": null,
+      "after_sha256": "aa3ecc7da75ac9075de83e2d7b9b6e082a9d404326a6688f9fa07e84701c3763",
+      "size": 8358,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/case_answers.json",
+      "before_sha256": null,
+      "after_sha256": "1715cb76a578336e8076cff155e1cfcb661c9872e2ce959c29bc64da788ab206",
+      "size": 12945,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/metrics.json",
+      "before_sha256": null,
+      "after_sha256": "befc272e4a52a1dfee32a76af76b00f2cab8717a6af3d2ece1646dbb10a42c5d",
+      "size": 18581,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/packet.json",
+      "before_sha256": null,
+      "after_sha256": "c5c6fd42463763cc7868273072d7734d5c9c6f650142587ae661ae822664858b",
+      "size": 77863,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/protocol-notes.json",
+      "before_sha256": null,
+      "after_sha256": "8b7bebc623acf09750cfdaa77412f9443b683226d04224e2bd4b21041356d26c",
+      "size": 1013,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/response-1.json",
+      "before_sha256": null,
+      "after_sha256": "ddc012f401221f18c9ccbb8a0c1c7ebad2e0e0778913d272af8ffad29f75c590",
+      "size": 30276,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/response-2.json",
+      "before_sha256": null,
+      "after_sha256": "39c0fa1d4a193d85fbcc80b3d0facf8af3cbf0d006665eeaa4a42337898fa156",
+      "size": 58970,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/base/result.json",
+      "before_sha256": null,
+      "after_sha256": "257c99e6369e89d189094973be639cc66239c55e808327d7cdb05c4b6af7ddfc",
+      "size": 105426,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/accepted.json",
+      "before_sha256": null,
+      "after_sha256": "8021fb1abb770ffe02fd36c00524f0d759dee18b9e6a9a853b8effc3bf62c267",
+      "size": 31138,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/case_answers-initial.json",
+      "before_sha256": null,
+      "after_sha256": "8654cc57598f731ff76ac8c9f38016f9501d1cf4fea4629fff6e7862cdc04ee7",
+      "size": 6513,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/case_answers.json",
+      "before_sha256": null,
+      "after_sha256": "e4d4dd8868fd33af62266ae1fab61cfa0dc17c192843c20aa573fdae6450b5fe",
+      "size": 6502,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/metrics.json",
+      "before_sha256": null,
+      "after_sha256": "06ae6063c26dae91df1d4d8381e7e2340a0c27a4fd1d447a014efbd0c2597405",
+      "size": 18549,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/packet.json",
+      "before_sha256": null,
+      "after_sha256": "ac4b73e7c72ebeeb21c440f297b069cfc4a1324e07d06e16dd5cd84182a1fa21",
+      "size": 94914,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/protocol-notes.json",
+      "before_sha256": null,
+      "after_sha256": "57bfaee27d24a0b65575ae75b0f6ff7e080f2cf6cf3ba6cc522870cda3fdd1a3",
+      "size": 640,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/response-1.json",
+      "before_sha256": null,
+      "after_sha256": "009b55fbf1e46f3ca51fc8ad5910d38885403a0c0766630d54decafe0ba2e088",
+      "size": 1135,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/response-2.json",
+      "before_sha256": null,
+      "after_sha256": "6a714b76fd50e28476ff403193a356d43a6903cdd9bf96c714189bf689ab7b70",
+      "size": 898,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/response-3.json",
+      "before_sha256": null,
+      "after_sha256": "d8c88fd2e04bb4f979f5f42d9546f34dfc90a3edef59d7389c200cb4b4e3e884",
+      "size": 30150,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/response-4.json",
+      "before_sha256": null,
+      "after_sha256": "f06c0482edc915c119f65092317a6d16ecfd3a52c17bb6bad6b316b5c4ff05bb",
+      "size": 66880,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/result.json",
+      "before_sha256": null,
+      "after_sha256": "754113256d91d5cb8a4932e49d09e50c28723cae5160c43503246f2aa8d4dac8",
+      "size": 198408,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/review/tool-results.json",
+      "before_sha256": null,
+      "after_sha256": "f2386d887bd648afcb880f0e14ea968c7706e9c203b36c4df713e3333caae6d4",
+      "size": 21118,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/accepted.json",
+      "before_sha256": null,
+      "after_sha256": "9ff59a17e3cf71d860671aee7e7d10afb1f4ef40625cff2ebea91a02aacfcedf",
+      "size": 34862,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/case_answers-initial.json",
+      "before_sha256": null,
+      "after_sha256": "149e535358d94871daf7511b35371c1d4e68e9496068b27b922e23c8c1887bb3",
+      "size": 8679,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/case_answers.json",
+      "before_sha256": null,
+      "after_sha256": "beb1301e3d929324f0189382a915a20402b5b95df3f29086f991df333ea02678",
+      "size": 13068,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/metrics.json",
+      "before_sha256": null,
+      "after_sha256": "a98dd09f6e76eed4ce726ca02339245b53539d8325481942e133bec5c160ff9e",
+      "size": 18632,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/packet.json",
+      "before_sha256": null,
+      "after_sha256": "18bb6cc3bb0847ed009e54774af5d3e241f4478aa780e35ccac0661102bdd491",
+      "size": 94290,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/protocol-notes.json",
+      "before_sha256": null,
+      "after_sha256": "d1b7013ad86757342dd8647d1040535a929f74a8cb7113c0efedb00f443bedc8",
+      "size": 1330,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/response-1.json",
+      "before_sha256": null,
+      "after_sha256": "24b4dd7e09f9387157d0e4cc86fb528ef8871b5c6394fddc902768bdf95c4c6e",
+      "size": 36681,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/response-2.json",
+      "before_sha256": null,
+      "after_sha256": "87d929abb3c2bbfc8588047327cb9bbd337ef5ce67039b1389504f8ce10afc48",
+      "size": 69656,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/skills/result.json",
+      "before_sha256": null,
+      "after_sha256": "2cac5d82441014bcce8561845a08c12c1adb4d5292e2467e084c4dda4442e36d",
+      "size": 146127,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/accepted.json",
+      "before_sha256": null,
+      "after_sha256": "1887771fcb24360cf2e69a54213622f4cf12f3bb20524343b0dab19e01fc5219",
+      "size": 31811,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/case_answers.json",
+      "before_sha256": null,
+      "after_sha256": "08ae5c65c1fa8adceef80de7a9b910e126c5c551019a81eff1e25bf9ce897993",
+      "size": 6137,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/metrics.json",
+      "before_sha256": null,
+      "after_sha256": "595464d513b5fbb98bdd317fdb6dc5da21fca47db71ff0f85125ac44be60bf3f",
+      "size": 19055,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/packet.json",
+      "before_sha256": null,
+      "after_sha256": "cb3de67d651cf921aff33de7c779a6f88e6df25372f70c836e39866312a898e2",
+      "size": 94913,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/response-1.json",
+      "before_sha256": null,
+      "after_sha256": "296c07b26b5808bb72d6cecc2bdf6cdad3feb5db9a7195d089d9d8c4bd7bfe6e",
+      "size": 374,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/response-2.json",
+      "before_sha256": null,
+      "after_sha256": "14a2b87ce6cfc9b94edabcd65c828d7b81581326a837e4c758116130cd7d31cc",
+      "size": 2957,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/response-3.json",
+      "before_sha256": null,
+      "after_sha256": "d15642b1e838681f1953fe2b1844f7e3cd343dcfd041aa9655b398628ab515b0",
+      "size": 1257,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/response-4.json",
+      "before_sha256": null,
+      "after_sha256": "1148bc9e74c6aad14f0ac98ac17cb6fc38aa375c5547896f1b117098862a81b6",
+      "size": 28229,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/result.json",
+      "before_sha256": null,
+      "after_sha256": "9293e8c169db9974619d2a9dba40d54882fd8b6eb36c862caa0a61dae1c27df1",
+      "size": 189338,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation/tools/tool-results.json",
+      "before_sha256": null,
+      "after_sha256": "c1d7fb278a8a8379528b40e9df30ab916075665b2ad4d6ff1789e49cf23344a2",
+      "size": 8650,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation-green.txt",
+      "before_sha256": null,
+      "after_sha256": "b6a7f371adead2cbfd5946bd2cae7b754f2fa255a075bdd15ad8d281f6f4a179",
+      "size": 4902,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation-initial-results.json",
+      "before_sha256": null,
+      "after_sha256": "045c7b5d2ae584f44bc06d2b5e30605486da1a302bd3844677052dcad4b969f2",
+      "size": 80033,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation-protocol.json",
+      "before_sha256": null,
+      "after_sha256": "a0acd30fcdbc6cb601a53528c905126242a720bcce3cf8efce1eec4b9569a05e",
+      "size": 766,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation-red.txt",
+      "before_sha256": null,
+      "after_sha256": "20828aa7a582a0c4e2850818b183e3727874e0ecf42caed5b68563be7a6920ed",
+      "size": 18594,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/evaluation-results.json",
+      "before_sha256": null,
+      "after_sha256": "e9e784e2192e2961e2fdd27965ab468c24be04a02e08ac8a7a633742becf05ce",
+      "size": 79863,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/existing-mcp-tests.txt",
+      "before_sha256": null,
+      "after_sha256": "7f7507d7f91b7a1584f1de180df8134a26cdd1922bd3f7d0e0274312c601be14",
+      "size": 1654,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/implementation-report.md",
+      "before_sha256": null,
+      "after_sha256": "3715918365ccdbce9b981da941e15f88ed09fd532758ca08200557f5963b6f40",
+      "size": 12803,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/links.json",
+      "before_sha256": null,
+      "after_sha256": "aaaad8e5d14d2128c51c85a7e4a8672e4f793cfbf8108245689b4e319cc451c2",
+      "size": 19668,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/manifest-ref.json",
+      "before_sha256": null,
+      "after_sha256": "8ae84ccd677a5d943f4eb2922e276ab1ed9ccd3a54ba813fcb0478770b7abf9e",
+      "size": 102,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/models-green.txt",
+      "before_sha256": null,
+      "after_sha256": "fa70ec77931542f06810aea9afc46021a70f139055ff830cc53ce8bfb81fa474",
+      "size": 5036,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/models-red.txt",
+      "before_sha256": null,
+      "after_sha256": "2c434189294941da6ae1977df47ae7bcc0a09e6b5d9d556c68e7f68e6a715036",
+      "size": 22452,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/models-stage-suite.txt",
+      "before_sha256": null,
+      "after_sha256": "d5f573d877251c72c4c8e536982793aca399c95c93026287a587c3104863e61a",
+      "size": 69336,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/parser-audit.md",
+      "before_sha256": null,
+      "after_sha256": "2f0669e0f985594c0bd12f5c6c97c4940cbeaea8df2817d2e7b8f329351e5247",
+      "size": 9229,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/profile-stage-suite.txt",
+      "before_sha256": null,
+      "after_sha256": "05f95a201fc73480f6cef58fcbb296f76b8f98a121f9be9334896d5d48250bc9",
+      "size": 27922,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/profile-tests.txt",
+      "before_sha256": null,
+      "after_sha256": "da0d321109d7cecd6df11fedfb2baef14fa65be803111cd7bb32de783d6c7a0d",
+      "size": 2628,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/progress-report.md",
+      "before_sha256": null,
+      "after_sha256": "a4867ef98d41dffdfdf117ce663992341aa55f309bac978aabc86bf8e35e8fc3",
+      "size": 649,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/protected-baseline.json",
+      "before_sha256": null,
+      "after_sha256": "a029daf60f35e2b04d64963f7088ec33e66f7f11604b25cf945d9ffc5c2beda0",
+      "size": 1563,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/protected-verification.json",
+      "before_sha256": null,
+      "after_sha256": "c86fe3e2c59558e4f9f2cff07cf045ef9911837476b12da0e7330ad1ae25146a",
+      "size": 2568,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/publication-example.json",
+      "before_sha256": null,
+      "after_sha256": "3ab495189e5c6ac78d781ec3287e914ab21fc774b836730a16804da9de0e3a17",
+      "size": 1945,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/review.md",
+      "before_sha256": null,
+      "after_sha256": "f41fe0d51e84b6aba1a3934e5d3e58a1b6ec24b355626d8af3b9a9f4872f0051",
+      "size": 13454,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/sources/phase2c-request.txt",
+      "before_sha256": null,
+      "after_sha256": "d6cc84a75c0a1db89f20fd56c73652aada081994c6d96d66d5c9bb5df30eb3fb",
+      "size": 11968,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/synthetic-example.json",
+      "before_sha256": null,
+      "after_sha256": "0b63293c96caf2f0838d4635aa5623ddceb82137c29768855d34cbc1a3d77033",
+      "size": 129371,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/test-environment.json",
+      "before_sha256": null,
+      "after_sha256": "224d92db6dc9dd18f5a71165bfbcb60a701007f861837ec1f9c37712ac4ab48a",
+      "size": 942,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/tests.txt",
+      "before_sha256": null,
+      "after_sha256": "92680fad03edd69448deff99e67a838f3ef78cad1e04b0b200770b22f56df288",
+      "size": 39866,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/tool-calls.json",
+      "before_sha256": null,
+      "after_sha256": "5490b232c293259075d36a507f846c2b00f47ae53246f79cb18bfca765b66a0b",
+      "size": 46163,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/manifests/phase2c-2026-11-11/weekly-update.json",
+      "before_sha256": null,
+      "after_sha256": "b678894600bfb5029f34f276748a56c035453405d509912a86d58b394ef2c119",
+      "size": 98,
+      "before_snapshot": null
+    },
+    {
+      "path": "knowledge-site/README.md",
+      "before_sha256": "02d773f3e52489e01e6490e6a5c200af24d60311cf5d757c20ec7a53176cafc4",
+      "after_sha256": "bd9a217a9c32118f92cbfebd163cf6e450670cf58d87b29a5a0a04e8292f4ef9",
+      "size": 15922,
+      "before_snapshot": "knowledge-site/manifests/phase2c-2026-11-11/before/knowledge-site/README.md"
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/__init__.py",
+      "before_sha256": null,
+      "after_sha256": "e592d25147517d36fd0179d10e81f27eeffded3b901c144451c6112e2489a596",
+      "size": 109,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/analyzer.py",
+      "before_sha256": null,
+      "after_sha256": "33b11310cb87b46680f4c2b7403b30ee318d578f29622c8a7d4cef41902f8db1",
+      "size": 7853,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/evaluation.py",
+      "before_sha256": null,
+      "after_sha256": "0ae22eb5b2e15b7b506be250de9a873fad805195ac72134570aeff403294ebb3",
+      "size": 14701,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/inputs.py",
+      "before_sha256": null,
+      "after_sha256": "497bbb85a5c53935123a45648bfcaa38416fbe5fe927e417c1dab18d876f95cc",
+      "size": 26948,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/models.py",
+      "before_sha256": null,
+      "after_sha256": "6e4bc6319f6885e008af08c32cdfd962c50e0446a9eec5d4d45e51294bc80e16",
+      "size": 12898,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/outputs.py",
+      "before_sha256": null,
+      "after_sha256": "c2f6b03639a5413be097746d108f793253817eb9e9ee59b9c1a979bea1c899c4",
+      "size": 11915,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/profiles.py",
+      "before_sha256": null,
+      "after_sha256": "0ab672dc8a6a4791c8173d8747ddd31f4a410ae573aab0951ac999d47a03f536",
+      "size": 16976,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/session.py",
+      "before_sha256": null,
+      "after_sha256": "e20abd0c769ad9a4ccd03182e950d2da9e40e85413c591cbf2f7e47874e490f3",
+      "size": 3856,
+      "before_snapshot": null
+    },
+    {
+      "path": "src/rsi_kernel_agent/profiler/tools.py",
+      "before_sha256": null,
+      "after_sha256": "2ae0cba68c340981575c998ab2030315d87fbec65b77d54eb53d914ee78f2d6c",
+      "size": 5402,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/fixtures/analyzer_cases.json",
+      "before_sha256": null,
+      "after_sha256": "8327a4c5f368693f67b49d95589f0028c6ba7db0ebd869fe69be4bd3d2cab2ec",
+      "size": 7557,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/phase2c_fixtures.py",
+      "before_sha256": null,
+      "after_sha256": "e93650ed0f3fe37ed84d6fc8fb5735cee752499eedef75c6a9f43898fdfb0c79",
+      "size": 7865,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_analysis_inputs.py",
+      "before_sha256": null,
+      "after_sha256": "09308d667e2c2ce7022df2163f66f03150f6da652962b7de7617e7ee7a65c1d6",
+      "size": 14810,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_analyzer.py",
+      "before_sha256": null,
+      "after_sha256": "554dba8b47212b68e29c6566fb4975bb69a9657f6ccfece25255979761ff2d1a",
+      "size": 8689,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_analyzer_evaluation.py",
+      "before_sha256": null,
+      "after_sha256": "1bf8d29fd2064028afa0db8f925ed0798a46b23515a9869c255501d325047d44",
+      "size": 10406,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_models.py",
+      "before_sha256": null,
+      "after_sha256": "f594d25a30db2e016f556ee9ef3dcabbff347b6c3feb5ba70e04868ff76572e8",
+      "size": 9636,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_phase2c_integration.py",
+      "before_sha256": null,
+      "after_sha256": "4313ac284eb0d556b40a6471849924af887dcfa5e3c2f4630582b835cb820be3",
+      "size": 8464,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_phase2c_mcp.py",
+      "before_sha256": null,
+      "after_sha256": "a4ae37828b4e600ab69efc4f5349816b323a2afd8c33c6ce804b255a39a008fe",
+      "size": 3470,
+      "before_snapshot": null
+    },
+    {
+      "path": "tests/test_profiles.py",
+      "before_sha256": null,
+      "after_sha256": "bd39cef40dab4dc71f844e3e30f192f5c75e27f9eda3f64a0078df23fb4b4e2c",
+      "size": 12284,
+      "before_snapshot": null
+    }
+  ],
+  "note": "Includes local auxiliary scripts, evaluation raw exchanges and isolated synthetic store; excludes changes.json itself and original-byte before copies. No Git cleanliness assertion."
+}

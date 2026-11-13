@@ -1,0 +1,24 @@
+test_artifact_download_rejects_paths_outside_pinned_spool (test_phase3_remote.RemoteTests.test_artifact_download_rejects_paths_outside_pinned_spool) ... ok
+test_artifact_download_uses_digest_named_local_path (test_phase3_remote.RemoteTests.test_artifact_download_uses_digest_named_local_path) ... ok
+test_bootstrap_pins_worker_and_runner_content_hash (test_phase3_remote.RemoteTests.test_bootstrap_pins_worker_and_runner_content_hash) ... ok
+test_corrupt_cached_chunk_is_retrieved_again_before_assembly (test_phase3_remote.RemoteTests.test_corrupt_cached_chunk_is_retrieved_again_before_assembly) ... ok
+test_corrupt_downloaded_chunk_cannot_publish_full_artifact (test_phase3_remote.RemoteTests.test_corrupt_downloaded_chunk_cannot_publish_full_artifact) ... ok
+test_explicit_remote_python_runs_worker_outside_notebook_process (test_phase3_remote.RemoteTests.test_explicit_remote_python_runs_worker_outside_notebook_process) ... ok
+test_invalid_chunk_manifest_is_rejected_before_download (test_phase3_remote.RemoteTests.test_invalid_chunk_manifest_is_rejected_before_download) ... ok
+test_invalid_remote_root_is_rejected (test_phase3_remote.RemoteTests.test_invalid_remote_root_is_rejected) ... ok
+test_large_artifact_resumes_verified_chunks_and_checks_whole_digest (test_phase3_remote.RemoteTests.test_large_artifact_resumes_verified_chunks_and_checks_whole_digest) ... ok
+test_lookup_never_recreates_a_missing_ledger (test_phase3_remote.RemoteTests.test_lookup_never_recreates_a_missing_ledger) ... ok
+test_tool_updates_install_distinct_paths_without_overwriting_pending_workers (test_phase3_remote.RemoteTests.test_tool_updates_install_distinct_paths_without_overwriting_pending_workers) ... ok
+test_valid_chunk_hashes_cannot_mask_a_wrong_whole_artifact (test_phase3_remote.RemoteTests.test_valid_chunk_hashes_cannot_mask_a_wrong_whole_artifact) ... ok
+test_all_remote_logs_are_bound_and_reverified_on_local_recovery (test_phase3_backend.BackendTests.test_all_remote_logs_are_bound_and_reverified_on_local_recovery) ... ok
+test_all_source_and_oracle_bytes_are_in_payload (test_phase3_backend.BackendTests.test_all_source_and_oracle_bytes_are_in_payload) ... ok
+test_changed_runtime_mapping_is_rejected (test_phase3_backend.BackendTests.test_changed_runtime_mapping_is_rejected) ... ok
+test_lost_response_recovers_durable_remote_result_without_reexecution (test_phase3_backend.BackendTests.test_lost_response_recovers_durable_remote_result_without_reexecution) ... ok
+test_partial_chunk_transfer_does_not_publish_receipt_or_repeat_execution (test_phase3_backend.BackendTests.test_partial_chunk_transfer_does_not_publish_receipt_or_repeat_execution) ... ok
+test_remote_receipt_for_wrong_source_is_rejected_before_publication (test_phase3_backend.BackendTests.test_remote_receipt_for_wrong_source_is_rejected_before_publication) ... ok
+test_unknown_lookup_never_causes_a_submit (test_phase3_backend.BackendTests.test_unknown_lookup_never_causes_a_submit) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 1.669s
+
+OK

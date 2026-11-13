@@ -1,0 +1,15 @@
+test_create_baseline_requires_observed_real_environment_and_separates_task (test_phase3_baseline.BaselineTests.test_create_baseline_requires_observed_real_environment_and_separates_task) ... ok
+test_matrix_contains_small_boundary_and_default_with_explicit_outputs (test_phase3_baseline.BaselineTests.test_matrix_contains_small_boundary_and_default_with_explicit_outputs) ... ok
+test_source_audit_rejects_wrong_root_and_records_digest (test_phase3_baseline.BaselineTests.test_source_audit_rejects_wrong_root_and_records_digest) ... ok
+test_artifact_download_rejects_paths_outside_pinned_spool (test_phase3_remote.RemoteTests.test_artifact_download_rejects_paths_outside_pinned_spool) ... ok
+test_artifact_download_uses_digest_named_local_path (test_phase3_remote.RemoteTests.test_artifact_download_uses_digest_named_local_path) ... ok
+test_bootstrap_pins_worker_and_runner_content_hash (test_phase3_remote.RemoteTests.test_bootstrap_pins_worker_and_runner_content_hash) ... ok
+test_explicit_remote_python_runs_worker_outside_notebook_process (test_phase3_remote.RemoteTests.test_explicit_remote_python_runs_worker_outside_notebook_process) ... ok
+test_invalid_remote_root_is_rejected (test_phase3_remote.RemoteTests.test_invalid_remote_root_is_rejected) ... ok
+test_lookup_never_recreates_a_missing_ledger (test_phase3_remote.RemoteTests.test_lookup_never_recreates_a_missing_ledger) ... ok
+test_tool_updates_install_distinct_paths_without_overwriting_pending_workers (test_phase3_remote.RemoteTests.test_tool_updates_install_distinct_paths_without_overwriting_pending_workers) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.544s
+
+OK

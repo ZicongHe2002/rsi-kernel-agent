@@ -1,0 +1,535 @@
+TPU Pipelining — JAX documentation
+Skip to main content
+Back to top
+Ctrl+K
+Search
+Ctrl+K
+Getting started
+Installation
+Documentation
+Newly documented
+JAX 101: expressing computations
+Arrays and jax.numpy
+Transformations: grad and vmap
+Pytrees
+Pseudorandom numbers
+Stateful computations
+Errors
+Convolutions
+Default dtypes and the X64 flag
+Type promotion semantics
+Rank promotion warning
+JAX 201: performance and scaling
+Just-in-time compilation
+Ahead-of-time lowering and compilation
+Control flow and logical operators with jit
+Data placement
+Distributed arrays and automatic parallelization
+Manual parallelism with shard_map
+External callbacks
+Benchmarking and profiling
+Debugging runtime values
+Debugging slow JAX tracing and XLA compilation
+Matmul precision
+Controlling XLA from JAX
+GPU memory allocation
+Memory spaces and host offloading
+JAX 301: advanced autodiff and extending JAX
+The autodiff cookbook: JVPs and VJPs
+First-class VJPs
+Autodiff and sharding
+Custom derivative rules with hijax primitives
+Custom JVPs or VJPs with custom_jvp and custom_vjp
+Autodiff with refs
+Gradient checkpointing with jax.checkpoint (jax.remat)
+Defining new JAX types with hijax
+JAX 401: kernels and FFI
+Pallas: custom kernels in JAX
+Writing high-performance GPU kernels with CuTe DSL and JAX
+Foreign function interface (FFI)
+JAX 501: systems topics
+Introduction to multi-controller JAX (aka multi-process/multi-host JAX)
+Distributed data loading
+Fault-tolerant distributed JAX
+Security considerations
+Exporting and serializing staged-out computations
+Shape polymorphism
+Persistent compilation cache
+Transfer guard
+JAX 601: internals
+The jaxpr language
+Primitives
+Autodidax: JAX core from scratch
+Autodidax2, part 1: JAX from scratch, again
+🔪 JAX - The Sharp Bits 🔪
+Pallas: a JAX kernel language
+Pallas TPU
+Quickstart: TPU
+Writing TPU kernels with Pallas
+TPU Pipelining
+Matrix Multiplication
+Scalar Prefetch and Block-Sparse Computation
+Distributed Computing in Pallas for TPUs
+Pallas Core-specific Programming
+SparseCore Kernel Writing
+Fuser API: Fuse operations around kernels
+Pseudo-Random Number Generation
+TPU Hardware Reference
+Pallas Mosaic GPU
+Quickstart: GPU
+Mosaic GPU Pipelining
+Writing high-performance matrix multiplication kernels for Blackwell
+Collective matrix multiplication
+Writing Mosaic GPU kernels with Pallas
+Working with Refs
+Grids and BlockSpecs
+Software Pipelining
+API reference
+Pallas TPU (TensorCore)
+Pallas TPU (SparseCore)
+Pallas MGPU
+Fuser
+Pallas Design Notes
+Pallas Design
+Pallas Async Operations
+Pallas Changelog
+Resources
+Additional guides
+Colocated Python
+The Training Cookbook
+GPU performance tips
+Numerical accuracy
+API Reference
+jax.numpy module
+jax.numpy.fft.fft
+jax.numpy.fft.fft2
+jax.numpy.fft.fftfreq
+jax.numpy.fft.fftn
+jax.numpy.fft.fftshift
+jax.numpy.fft.hfft
+jax.numpy.fft.ifft
+jax.numpy.fft.ifft2
+jax.numpy.fft.ifftn
+jax.numpy.fft.ifftshift
+jax.numpy.fft.ihfft
+jax.numpy.fft.irfft
+jax.numpy.fft.irfft2
+jax.numpy.fft.irfftn
+jax.numpy.fft.rfft
+jax.numpy.fft.rfft2
+jax.numpy.fft.rfftfreq
+jax.numpy.fft.rfftn
+jax.scipy module
+jax.scipy.special.i0
+jax.scipy.special.i0e
+jax.scipy.special.i1
+jax.scipy.special.i1e
+jax.scipy.special.iv
+jax.scipy.special.jn
+jax.scipy.special.kn
+jax.scipy.special.yn
+jax.scipy.stats.bernoulli.logpmf
+jax.scipy.stats.bernoulli.pmf
+jax.scipy.stats.bernoulli.cdf
+jax.scipy.stats.bernoulli.ppf
+jax.lax module
+jax.random module
+jax.sharding module
+jax.ad_checkpoint module
+jax.debug module
+jax.dlpack module
+jax.distributed module
+jax.dtypes module
+jax.ffi module
+jax.flatten_util module
+jax.image module
+jax.nn module
+jax.nn.initializers module
+jax.ops module
+jax.profiler module
+jax.ref module
+jax.stages module
+jax.test_util module
+jax.tree module
+jax.tree_util module
+jax.typing module
+jax.export module
+jax.extend module
+jax.extend.backend module
+jax.extend.core module
+jax.extend.linear_util module
+jax.extend.lowering module
+jax.extend.mlir module
+jax.extend.pallas module
+jax.extend.random module
+jax.extend.xla module
+jax.example_libraries module
+jax.example_libraries.optimizers module
+jax.example_libraries.stax module
+jax.experimental module
+jax.experimental.checkify module
+jax.experimental.compilation_cache module
+jax.experimental.custom_partitioning module
+jax.experimental.jet module
+jax.experimental.key_reuse module
+jax.experimental.mesh_utils module
+jax.experimental.multihost_utils module
+jax.experimental.pallas module
+Pallas TPU (TensorCore)
+Pallas TPU (SparseCore)
+Pallas MGPU
+Fuser
+jax.experimental.random module
+jax.experimental.serialize_executable module
+jax.experimental.sparse module
+jax.experimental.sparse.BCOO
+jax.experimental.sparse.bcoo_broadcast_in_dim
+jax.experimental.sparse.bcoo_concatenate
+jax.experimental.sparse.bcoo_dot_general
+jax.experimental.sparse.bcoo_dot_general_sampled
+jax.experimental.sparse.bcoo_dynamic_slice
+jax.experimental.sparse.bcoo_extract
+jax.experimental.sparse.bcoo_fromdense
+jax.experimental.sparse.bcoo_gather
+jax.experimental.sparse.bcoo_multiply_dense
+jax.experimental.sparse.bcoo_multiply_sparse
+jax.experimental.sparse.bcoo_update_layout
+jax.experimental.sparse.bcoo_reduce_sum
+jax.experimental.sparse.bcoo_reshape
+jax.experimental.sparse.bcoo_slice
+jax.experimental.sparse.bcoo_sort_indices
+jax.experimental.sparse.bcoo_squeeze
+jax.experimental.sparse.bcoo_sum_duplicates
+jax.experimental.sparse.bcoo_todense
+jax.experimental.sparse.bcoo_transpose
+jax.experimental.xla_metadata module
+jax.Array.addressable_shards
+jax.Array.all
+jax.Array.any
+jax.Array.argmax
+jax.Array.argmin
+jax.Array.argpartition
+jax.Array.argsort
+jax.Array.astype
+jax.Array.at
+jax.Array.byteswap
+jax.Array.choose
+jax.Array.clip
+jax.Array.compress
+jax.Array.committed
+jax.Array.conj
+jax.Array.conjugate
+jax.Array.copy
+jax.Array.copy_to_host_async
+jax.Array.cumprod
+jax.Array.cumsum
+jax.Array.device
+jax.Array.diagonal
+jax.Array.dot
+jax.Array.dtype
+jax.Array.flat
+jax.Array.flatten
+jax.Array.global_shards
+jax.Array.imag
+jax.Array.is_fully_addressable
+jax.Array.is_fully_replicated
+jax.Array.item
+jax.Array.itemsize
+jax.Array.max
+jax.Array.mean
+jax.Array.min
+jax.Array.nbytes
+jax.Array.ndim
+jax.Array.nonzero
+jax.Array.prod
+jax.Array.ptp
+jax.Array.ravel
+jax.Array.real
+jax.Array.repeat
+jax.Array.reshape
+jax.Array.round
+jax.Array.searchsorted
+jax.Array.shape
+jax.Array.sharding
+jax.Array.size
+jax.Array.sort
+jax.Array.squeeze
+jax.Array.std
+jax.Array.sum
+jax.Array.swapaxes
+jax.Array.take
+jax.Array.to_device
+jax.Array.trace
+jax.Array.transpose
+jax.Array.var
+jax.Array.view
+jax.Array.T
+jax.Array.mT
+API compatibility
+Python and NumPy version support policy
+Developer notes
+Contributing to JAX
+Building from source
+Investigating a regression
+JAX Enhancement Proposals (JEPs)
+263: JAX PRNG Design
+2026: Custom JVP/VJP rules for JAX-transformable functions
+4008: Custom VJP and `nondiff_argnums` update
+4410: Omnistaging
+9263: Typed keys & pluggable RNGs
+9407: Design of Type Promotion Semantics for JAX
+9419: Jax and Jaxlib versioning
+10657: Sequencing side-effects in JAX
+11830: `jax.remat` / `jax.checkpoint` new implementation
+12049: Type Annotation Roadmap for JAX
+14273: `shard_map` (`shmap`) for simple per-device code
+15856: `jax.extend`, an extensions module
+17111: Efficient transposition of `shard_map` (and other maps)
+18137: Scope of JAX NumPy & SciPy Wrappers
+25516: Effort-based versioning
+28661: Supporting the `__jax_array__` protocol
+28845: Stateful Randomness in JAX
+JAX Internal Implementation Notes
+Handling of closed-over constants
+Extension guides
+Writing custom Jaxpr interpreters in JAX
+jax.extend module
+jax.extend.backend module
+jax.extend.core module
+jax.extend.linear_util module
+jax.extend.lowering module
+jax.extend.mlir module
+jax.extend.pallas module
+jax.extend.random module
+jax.extend.xla module
+Building on JAX
+About the project
+Frequently asked questions (FAQ)
+Change log
+Glossary of terms
+Configuration Options
+Pallas: a JAX kernel language
+Pallas TPU
+TPU Pipelining
+.ipynb
+.pdf
+TPU Pipelining
+Contents
+TPU and its memory spaces
+TPU-specific Pipelining Features
+TPU Memory Spaces
+Copy semaphores
+Multiple Buffering
+pltpu.emit_pipeline
+Lookahead Prefetch
+Dynamic Block Shapes
+TPUs in Megacore configuration
+TPU Pipelining#
+This guide serves as a reference for TPU-specific pipelining concerns.
+We’ll review the memory hierarchy and compute units on TPUs, and TPU-specific features of the pipelining API. For a more general-purpose overview of pipelining, see the Software Pipelining.
+#@title Imports
+import jax
+from jax.experimental import pallas as pl
+from jax.experimental.pallas import tpu as pltpu
+import jax.numpy as jnp
+import numpy as np
+TPU and its memory spaces#
+A TPU and its TensorCore consist of memory spaces (where arrays can reside),
+registers (which temporarily store scalar and array values) and compute units
+(that do computation with values in registers).
+Below is a diagram of a TPU in which x and y are arrays that live in
+high-bandwidth memory (HBM):
+Let’s talk about the components of this diagram in more detail:
+Memory spaces: A TPU has high-bandwidth memory (HBM) which is what we
+often think of as “device memory”.
+There is also vector memory (VMEM),
+a cache meant for storing vector and array values, and scalar memory (SMEM),
+a cache designed to store scalar values.
+Registers: A TensorCore has two main types of registers: vector
+registers (VREGs) store array values, and scalar registers (SREGs) store
+scalar values.
+Values can be loaded into memory from their respective caches (VMEM for
+VREGs and SMEM for SREGs).
+Compute units: A TensorCore has a scalar unit, vector unit (VPU) and
+matrix unit (MXU) that can do numerical computation. Each of these compute units can operate asynchronously, but this is managed by the TPU compiler and thus from the programmer’s perspective a TPU program is single-threaded.
+Compute units operate on values that live in SREGs and VREGs and output
+values into those registers as well.
+TPU-specific Pipelining Features#
+Pallas TPU supports the following platform-specific features.
+TPU Memory Spaces#
+Pallas exposes all levels of the TPU memory hierarchy to users. The following table maps from Pallas TPU memory spaces to their standard memory types (DRAM/SRAM):
+Pallas Enum
+TPU Memory Space
+Type (DRAM/SRAM)
+pl.ANY
+HBM (usually) or VMEM
+DRAM
+pltpu.VMEM
+VMEM
+SRAM
+pltpu.SMEM
+SMEM
+SRAM
+pltpu.SEMAPHORE
+Semaphore
+SRAM
+MemorySpace.VMEM denotes vector SRAM. It is the default memory space if nothing is specified.
+MemorySpace.SMEM denotes scalar SRAM. Only scalar loads and stores can be performed to/from SMEM.
+MemorySpace.ANY is a hint to the compiler that the memory space is unconstrained. In most cases, XLA will place this buffer in HBM. A buffer assigned to the ANY memory space cannot be dereferenced normally using array indexing syntax (e.g. x[...]). Instead, we must first copy the values into a VMEM or SMEM buffer using pltpu.sync_copy or pltpu.async_copy.
+MemorySpace.SEMAPHORE is used to allocate semaphores for constructing barriers or tracking asynchronous operations. It is also possible to return semaphores from the kernel for building asynchronous kernels - this is an experimental feature; see Pallas Async Operations for more details.
+Pipelining on TPUs is typically done between HBM (DRAM) to VMEM (Vector SRAM). The default behavior for pallas_call on TPU is that arguments to pallas_call are assumed to live in HBM, and inputs to the user kernel body are stored in VMEM.
+While not specific to pipelining, it is possible to gain manual control over the memory space of input and output buffers, you can specify the memory_space argument on a BlockSpec. Note that pipelining is not allowed unless the memory_space is marked as VMEM. Memory spaces can also be used to specify scratch arguments to a kernel via the scratch_shapes argument on pallas_call. Scratch buffers are persistent across kernel iterations and are useful for storing intermediate results such as partial accumulations and reductions. A scratch buffer must reside in VMEM, SMEM, or SEMAPHORE.
+As an example for using multiple manual memory space assignments in a kernel, the following program copies a slice of an HBM buffer x_hbm_ref into a scratch VMEM buffer scratch_vmem_ref before using it for arithmetic and storing the result into an output VMEM buffer:
+def hbm_vmem_kernel(x_hbm_ref, out_vmem_ref, scratch_vmem_ref):
+pltpu.sync_copy(x_hbm_ref.at[0:1], scratch_vmem_ref)
+out_vmem_ref[...] = scratch_vmem_ref[...] + 1
+x = jax.random.uniform(jax.random.key(0), (8, 128), jnp.float32)
+out = pl.pallas_call(hbm_vmem_kernel,
+in_specs=[pl.BlockSpec(memory_space=pl.ANY)],
+out_shape=jax.ShapeDtypeStruct((1, 128), jnp.float32),
+scratch_shapes=(pltpu.VMEM(shape=(1, 128), dtype=jnp.float32),)
+)(x)
+np.testing.assert_allclose(out, x[0:1] + 1)
+Copy semaphores#
+pltpu.async_copy starts a copy and returns a descriptor to await later. Its DMA semaphore follows two rules:
+If you pass a semaphore, you must await it.
+If you pass sem=None, the copy will be tracked in bulk (if hardware supported): awaiting the copy performs a bulk wait rather than awaiting that copy alone, as with SparseCore streams.
+Multiple Buffering#
+Multiple buffering can be specified on a per-argument basis to the pipeline via the pipeline_mode option on pl.BlockSpec. To do so, pass a pl.Buffered object to pl.BlockSpec specifying the number of buffers to allocate for this particular argument:
+pl.BlockSpec(
+pipeline_mode=pl.Buffered(buffer_count=buffer_count)
+)
+The default buffer count is 2 for all inputs and outputs.
+pltpu.emit_pipeline#
+pltpu.emit_pipeline is a pipelining API implemented in Pallas that allows you to construct pipelines inside of a kernel rather than only on kernel entry. This several use-cases over using pl.pallas_call, such as:
+For constructing nested pipelines. For example, an outer pipeline that communicates between chips, and an inner pipeline that performs HBM-VMEM pipelining.
+For using emit_pipeline specific features such as lookahead prefetch and dynamic block shapes (covered below).
+pltpu.emit_pipeline follows a similar signature to pl.pallas_call and requires you to specify a body kernel, a grid, and block specs for inputs and outputs:
+def emit_pipeline(
+kernel: Callable,
+grid: tuple[int],
+in_specs: PyTree[BlockSpec] = None,
+out_specs: PyTree[BlockSpec] = None,
+dimension_semantics: tuple[GridDimensionSemantics] = None,
+core_axis: int | None = None,
+) -> Callable:
+... # Returns a custom pipeline given an inner kernel and BlockSpecs.
+The dimension_semantics and core_axis arguments are used for partitioning the kernel grid over Megacore (see below).
+Lookahead Prefetch#
+Lookahead prefetch is a pipelining feature where the pipeline will attempt to prefetch the next input block as soon as a buffering slot is available, rather than the iteration directly before it would be used. For example, if the kernel had a grid of (8,) and the block indices to fetch on each iteration were 0, 0, 0, 0, 1, 1, 1, 1, then lookahead prefetch will begin fetching both blocks 0 and 1 on iteration 0, whereas the standard pipeline schedule would fetch block 0 on iteration 0 but not begin fetching block 1 until iteration 3. There is a small amount of control flow overhead in performing lookahead so it is disabled by default.
+Lookahead is primarily useful when there is a variable amount of compute work in each block, such as when some blocks contain skipped or a reduced amount of work. In these cases, there may not be enough compute work in the iteration immediately preceding the step when the block is needed to fully overlap with the memory transfer. Therefore, we would like to begin fetching blocks earlier in the pipeline.
+Lookahead prefetch can be used in conjunction with multiple buffering and can likewise be enabled by passing pl.Buffered into the pipeline_mode argument:
+pl.BlockSpec(
+pipeline_mode=pl.Buffered(buffer_count=buffer_count, use_lookahead=True)
+)
+Dynamic Block Shapes#
+pltpu.emit_pipeline supports pipelining over blocks with dynamic but bounded shapes. In order to specify such an block shape, the dynamic-sized dimension in the block should be marked with pl.BoundedSlice(max_size) rather than a static integer size, where max_size is the maximum size of the block. In addition, the corresponding index returned by index_map should be a dynamic slice constructed via pl.ds(start, size) where both start and size are element indices (not block indices) and can be dynamic.
+The following is an example for a block spec with a dynamic first dimension:
+pl.BlockSpec(
+block_shape=(pl.BoundedSlice(32), 256),
+index_map=lambda *grid_idxs: (pl.ds(start, end), 0),
+)
+# The following kernel copies `x` to the output in dynamic-sized chunks
+# passed in via `slices`.
+def dynamic_block_example_kernel(x_hbm, slices_hbm, o_hbm, slices_smem):
+pltpu.sync_copy(slices_hbm, slices_smem) # Copy slices into SMEM.
+def pipeline_body(x_vmem, o_vmem):
+o_vmem[...] = x_vmem[...]
+def index_map(i):
+start = slices_smem[i, 0]
+size = slices_smem[i, 1] - slices_smem[i, 0]
+return (pl.ds(start, size), 0)
+block_spec = pl.BlockSpec(block_shape=(pl.BoundedSlice(8), 128),
+index_map=index_map)
+pltpu.emit_pipeline(
+pipeline_body,
+grid=(slices.shape[0],),
+in_specs=[block_spec],
+out_specs=block_spec
+)(x_hbm, o_hbm)
+x = jax.random.uniform(jax.random.key(0), (8, 128), jnp.float32)
+slices = jnp.array([[0, 2], [2, 3], [3, 5], [5, 8]], dtype=jnp.int32)
+hbm_block_spec = pl.BlockSpec(memory_space=pl.ANY)
+out = pl.pallas_call(dynamic_block_example_kernel,
+in_specs=[hbm_block_spec, hbm_block_spec],
+out_specs=hbm_block_spec,
+out_shape=jax.ShapeDtypeStruct((8, 128), jnp.float32),
+scratch_shapes=(pltpu.SMEM(slices.shape, jnp.int32),)
+)(x, slices)
+np.testing.assert_allclose(x, out)
+TPUs in Megacore configuration#
+Some TPU chips have two TensorCores but appear as one device to JAX users.
+This is called “megacore”.
+The separate TensorCores have their own separate VMEM, VREGs, SMEM, SREGs
+and compute units but share HBM.
+Conceptually, TPUs in Megacore behave like very simple GPUs, i.e. they have
+only two threads.
+How do we modify our kernels to utilize both TensorCores simultaneously?
+The basic idea is that if we have embarrassingly parallel dimensions in our
+computation, we can split up those dimensions across the TensorCores.
+We can indicate which dimensions are parallelizable by providing an
+annotation to pallas_call called dimension_semantics.
+def add_matrices_kernel(x_vmem_ref, y_vmem_ref, z_vmem_ref):
+# Load x and y from VMEM into VREGs
+x_vregs = x_vmem_ref[:, :]
+y_vregs = y_vmem_ref[:, :]
+# Execute a vectorized add
+z_vregs = x_vregs + y_vregs
+# Store the output values in VREGs back into VMEM
+z_vmem_ref[:, :] = z_vregs
+def add_matrices_pipelined_megacore(x: jax.Array, y: jax.Array) -> jax.Array:
+block_spec = pl.BlockSpec((256, 512), lambda i: (i, 0))
+return pl.pallas_call(
+add_matrices_kernel,
+out_shape=jax.ShapeDtypeStruct.like(x),
+in_specs=[block_spec, block_spec],
+out_specs=block_spec,
+grid=(2,),
+compiler_params=pltpu.CompilerParams(
+dimension_semantics=("parallel",))
+)(x, y)
+x, y = jnp.ones((512, 512)), jnp.ones((512, 512))
+add_matrices_pipelined_megacore(x, y)
+Array([[2., 2., 2., ..., 2., 2., 2.],
+[2., 2., 2., ..., 2., 2., 2.],
+[2., 2., 2., ..., 2., 2., 2.],
+...,
+[2., 2., 2., ..., 2., 2., 2.],
+[2., 2., 2., ..., 2., 2., 2.],
+[2., 2., 2., ..., 2., 2., 2.]], dtype=float32)
+dimension_semantics should be a tuple of same length as grid where each
+entry is either "parallel" or "arbitrary". "parallel" indicates to Pallas that the iterations of the for loop corresponding to that dimension can be executed independently without affecting the correctness of the program. "arbitrary" indicates to Pallas that there can be no assumptions made about this grid dimension and it therefore cannot be parallelized.
+By specifying dimension_semantics, we now execute the kernel
+simultaneously on each TensorCore. Pallas will handle splitting up the grid
+automatically.
+Note that Megacore is only currently available on TPU v4 and TPU v5p. Supplying dimension_semantics annotations is a no-op on other platforms, but not specifying it will result in only one TensorCore being used (even if there are more than one available).
+When using pltpu.emit_pipeline, core_axis should be passed into emit_pipeline. core_axis should be the index of a parallel grid axis to partition the grid on. For example, the following template can be used to partition the kernel over a leading parallel grid dimension:
+def kernel_body(...):
+def inner_pipeline_body(...):
+...
+pltpu.emit_pipeline(inner_pipeline_body,
+grid=(4, 4),
+core_axis=0,
+dimension_semantics=("parallel", "sequential"))
+pl.pallas_call(
+kernel_body,
+grid=(num_cores,),
+compiler_params=pltpu.CompilerParams(
+dimension_semantics=("parallel",))
+)
+previous
+Writing TPU kernels with Pallas
+next
+Matrix Multiplication
+Contents
+TPU and its memory spaces
+TPU-specific Pipelining Features
+TPU Memory Spaces
+Copy semaphores
+Multiple Buffering
+pltpu.emit_pipeline
+Lookahead Prefetch
+Dynamic Block Shapes
+TPUs in Megacore configuration
+By The JAX authors
+© Copyright 2024, The JAX Authors.

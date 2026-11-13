@@ -1,0 +1,39 @@
+{
+  "python": "3.13.14",
+  "sqlite": "3.53.1",
+  "packages": {
+    "mcp": "1.30.0",
+    "pydantic": "2.14.2"
+  },
+  "checks": [
+    {
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent",
+      "exit_code": 0,
+      "log": "tests.txt"
+    },
+    {
+      "command": [
+        "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "unittest",
+        "test_mcp.MCPTests",
+        "-v"
+      ],
+      "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site",
+      "exit_code": 0,
+      "log": "existing-mcp-tests.txt"
+    }
+  ],
+  "protected_unchanged": true
+}

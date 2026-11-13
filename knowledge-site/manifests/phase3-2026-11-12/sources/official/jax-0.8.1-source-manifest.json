@@ -1,0 +1,56 @@
+{
+  "files": [
+    {
+      "name": "jax-0.8.1-profiler.py",
+      "url": "https://raw.githubusercontent.com/jax-ml/jax/jax-v0.8.1/jax/_src/profiler.py",
+      "tag": "jax-v0.8.1",
+      "retrieved_utc": "2026-11-12T05:52:47.728103+00:00",
+      "classification": "Official source audit; not execution or binary capability proof",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/jax-ml/jax/jax-v0.8.1/jax/_src/profiler.py",
+      "content_type": "text/plain; charset=utf-8",
+      "path": "knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-profiler.py",
+      "sha256": "93965873e08b4b24dde05dabeb6aafb380301b1f9046f7615b77220960f35b13",
+      "size": 17446
+    },
+    {
+      "name": "jax-0.8.1-profiling.md",
+      "url": "https://raw.githubusercontent.com/jax-ml/jax/jax-v0.8.1/docs/profiling.md",
+      "tag": "jax-v0.8.1",
+      "retrieved_utc": "2026-11-12T05:52:47.728824+00:00",
+      "classification": "Official source audit; not execution or binary capability proof",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/jax-ml/jax/jax-v0.8.1/docs/profiling.md",
+      "content_type": "text/plain; charset=utf-8",
+      "path": "knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-profiling.md",
+      "sha256": "39213b8ff74c1727e9aed1772792f4f22c37d267ffe4fae518b9490ebc13f47e",
+      "size": 18074
+    },
+    {
+      "name": "jax-0.8.1-pipeline.py",
+      "url": "https://raw.githubusercontent.com/jax-ml/jax/jax-v0.8.1/jax/_src/pallas/mosaic/pipeline.py",
+      "tag": "jax-v0.8.1",
+      "retrieved_utc": "2026-11-12T05:52:47.729344+00:00",
+      "classification": "Official source audit; not execution or binary capability proof",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/jax-ml/jax/jax-v0.8.1/jax/_src/pallas/mosaic/pipeline.py",
+      "content_type": "text/plain; charset=utf-8",
+      "path": "knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-pipeline.py",
+      "sha256": "2d0580bcf42d2afd45b069d746da2dd95c8905c6962b7f2fba0540a97d57107e",
+      "size": 81973
+    },
+    {
+      "name": "jax-0.8.1-tpu.py",
+      "url": "https://raw.githubusercontent.com/jax-ml/jax/jax-v0.8.1/jax/experimental/pallas/tpu.py",
+      "tag": "jax-v0.8.1",
+      "retrieved_utc": "2026-11-12T05:52:48.411526+00:00",
+      "classification": "Official source audit; not execution or binary capability proof",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/jax-ml/jax/jax-v0.8.1/jax/experimental/pallas/tpu.py",
+      "content_type": "text/plain; charset=utf-8",
+      "path": "knowledge-site/manifests/phase3-2026-11-12/sources/official/jax-0.8.1-tpu.py",
+      "sha256": "5f32cd731f74a7636816a92c00d6200b46efe51b1efb3cab42fdc719032def94",
+      "size": 6181
+    }
+  ]
+}

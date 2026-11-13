@@ -1,0 +1,7 @@
+{
+  "source_digest": "672bb2a7b01a94b2a4b92a07437ec6d8144a6cf31e89e0026a95d61eec980fc0",
+  "runtime_id": "tpu-v6e1-s-euw4a0-xyzyx7kofigt",
+  "returncode": 0,
+  "stdout": "RSI_PROBE:{\"provenance\": \"real_tpu_execution\", \"synchronized\": true, \"result\": [[14.0, 38.0, 62.0, 86.0], [38.0, 126.0, 214.0, 302.0], [62.0, 214.0, 366.0, 518.0], [86.0, 302.0, 518.0, 734.0]], \"environment\": {\"runtime_session_id\": \"tpu-v6e1-s-euw4a0-xyzyx7kofigt\", \"python\": \"3.13.18\", \"jax\": \"0.11.2\", \"jaxlib\": \"0.11.2\", \"libtpu\": \"0.0.50\", \"tensorflow\": null, \"xprof\": null, \"tpu_model\": \"TPU v6 lite\", \"device_count\": 1, \"process_count\": 1, \"devices\": [{\"id\": 0, \"platform\": \"tpu\", \"device_kind\": \"TPU v6 lite\", \"process_index\": 0, \"coords\": [0, 0, 0], \"core_on_chip\": 0}], \"xla\": {\"jaxlib_version\": \"0.11.2\", \"backend_platform_version\": \"TFRT TPU v6 lite\\nBuilt on Oct 7 2026 00:47:01 (1791359221) cl/994787025\"}}}\n",
+  "stderr": "/usr/local/lib/python3.13/dist-packages/jax/_src/cloud_tpu_init.py:90: UserWarning: Transparent hugepages are not enabled. TPU runtime startup and shutdown time should be significantly improved on TPU v5e and newer. If not already set, you may need to enable transparent hugepages in your VM image (sudo sh -c \"echo always > /sys/kernel/mm/transparent_hugepage/enabled\")\n  warnings.warn(\n"
+}

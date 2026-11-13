@@ -1,0 +1,908 @@
+# Phase 2D+：Workflow / Controller 实现与端到端软件闭环
+
+## 0. 项目背景与本次目标
+
+我们正在实现 RSI-Kernel-Agent，一个能够通过 Profile、Knowledge、Memory 和真实实验不断改进 Kernel 的自我优化系统。
+
+目前已经完成以下阶段：
+
+- Phase 2A：Core Foundation
+- Phase 2B：Knowledge / Memory
+- Phase 2C：Profiler / Analyzer
+
+三个阶段均已完成本地实现与验收，具体实现、接口、测试和审查结果以仓库中的实际代码及 Phase 2A/2B/2C 报告为准。
+
+现在开始 Phase 2D+。
+
+本次不是简单地实现一个 Workflow 模块，而是希望在 2D 阶段完成整个软件层面的端到端集成，让以下流程真正运行起来：
+
+**Memory + Knowledge → Profiler → Analyzer → PlanSet → Controller → Experiment Execution → Verification → Memory Update**
+
+最终目标：
+
+1. 打通 2A、2B、2C 的现有接口。
+2. 实现 Workflow / Controller。
+3. 支持一个 Analyzer 产生多个 Plan，并将它们分别交给 Controller。
+4. 支持多个长期 Strategy、多 Plan、多 Candidate 的独立实验调度。
+5. 实现候选执行、失败分类、有限 Repair、结果验证和归档。
+6. 支持中断恢复、幂等和历史状态重建。
+7. 通过完整的端到端合成测试，证明整个软件闭环可以运行。
+
+**本阶段不接入真实 MLA Kernel，不运行真实 TPU，不开展 Phase 3 工作。**
+
+---
+
+## 1. 必须遵守的现有架构约束
+
+开始编码前，必须先读取并理解：
+
+- Phase 2A Core Foundation 实现与验收报告
+- Phase 2B Knowledge / Memory 实现与验收报告
+- Phase 2C Profiler / Analyzer 实现与验收报告
+- `docs/phase2a-core-foundation.md`
+- `docs/phase2b-knowledge-memory.md`
+- `docs/phase2c-profiler-analyzer.md`
+- `docs/superpowers/plans/` 下对应实施计划
+- 当前项目路线图
+- 现有 schema、API、测试和工程约定
+
+必须以实际源码为准，不允许只根据历史报告推断接口。
+
+### 1.1 保留现有系统
+
+以下内容必须优先复用：
+
+- Phase 2A：ExperimentStore、ArtifactStore、Schema v1、Snapshots、Best、Frontier。
+- Phase 2B：KnowledgeClient、MemoryReader、MemoryWriter、原 MCP。
+- Phase 2C：AnalysisRequest、AnalysisInputManifest、Profile Parser、Math Models、Analyzer、PlanSet、Output Validation、Evaluation。
+
+不要重复实现已经存在的能力。
+
+不要为了方便引入第二个数据库、第二套 Memory、第二个 Knowledge 系统或新的模型服务。
+
+原则上不修改已经验收的 2A/2B/2C 实现及 schema v1。如果确实发现接口无法支持 2D，先提出最小兼容扩展方案、影响分析和迁移测试，再实施；不得静默修改历史数据语义。
+
+### 1.2 推理模型约束
+
+**推理由当前对话模型承担，不使用独立模型 API。**
+
+不要引入新的 LLM Provider、模型 API Key、独立推理服务或额外模型调用框架。
+
+Analyzer 仍沿用 Phase 2C 已有的 session / packet / response 工具调用方式。
+
+Controller 本身采用确定性的程序控制流程。模型负责分析和生成 Plan，不负责自行修改数据库中的最佳版本、状态指针或晋升结果。
+
+---
+
+## 2. 目标架构
+
+希望最终形成以下结构：
+
+```text
+                    RSI Task
+                        |
+                        v
+               +----------------+
+               |   Controller   |
+               |  Orchestrator  |
+               +----------------+
+                        |
+          +-------------+-------------+
+          |                           |
+          v                           v
+      Memory                      Knowledge
+          |                           |
+          +-------------+-------------+
+                        |
+                        v
+                 Profile / Inputs
+                        |
+                        v
+                    Analyzer
+                        |
+                        v
+                    PlanSet
+                        |
+                        v
+              +------------------+
+              |    Scheduler     |
+              +------------------+
+                        |
+                 Multiple Plans
+                        |
+             +----------+----------+
+             |          |          |
+             v          v          v
+           Plan A     Plan B     Plan C
+             |          |          |
+             v          v          v
+         Candidate  Candidate  Candidate
+             |          |          |
+             +----------+----------+
+                        |
+                        v
+                Execution Backend
+                        |
+                        v
+                 Fixed Evaluator
+                        |
+                        v
+                 Result Integration
+                        |
+              +---------+---------+
+              |                   |
+              v                   v
+          Memory Update       Best / Frontier
+              |                   |
+              +---------+---------+
+                        |
+                        v
+                  Next Round
+```
+
+Controller 负责协调整个过程，而不是将所有业务逻辑放入一个巨大的 Agent。
+
+建议采用以下职责：
+
+- Controller：流程调度、状态推进、预算控制。
+- Scheduler：管理多个 Plan 和 Candidate 的执行队列。
+- Candidate Manager：管理 Candidate 生命周期。
+- Execution Adapter：统一执行接口。
+- Evaluator：正确性和性能结果验证。
+- Repair Manager：处理失败与有限修复。
+- Result Integrator：将结果写回原有 Store。
+- Recovery Manager：恢复中断的任务。
+
+以上是逻辑职责，不代表必须建立八个独立 Python 模块。根据现有项目规模合理组织代码。
+
+---
+
+## 3. 第一部分：PlanSet Intake
+
+首先实现 2C 到 2D 的接口。
+
+Controller 必须能够接收 2C 输出的 PlanSet，并完成以下检查：
+
+1. PlanSet 是否来自有效的 AnalysisBundle。
+2. Strategy ID 是否存在。
+3. ParentCandidate 是否准确。
+4. Plan 是否绑定正确的 Task / Workload / Context。
+5. Plan 是否具有合法的 Candidate Variants。
+6. 是否存在重复 Plan。
+7. 是否符合原有 Correctness 和 Benchmark Contract。
+8. 所引用的知识、Profile、Memory 和 Evidence 是否仍然有效。
+
+不能因为一个 Plan 不合法就静默丢弃整个 PlanSet。
+
+需要逐项保存接受、拒绝或等待处理的结果及原因。
+
+特别注意：
+
+**一个 AnalysisBundle 可以汇总多个 Strategy 的分析，但原有 2A AnalysisBundle 的单 Run 归属约束必须保留。**
+
+不能为了方便把 A、B 两条路线的不同 Run 混成一个 Bundle。
+
+输出一个可调度的 PlanSet Intake Result。
+
+---
+
+## 4. 第二部分：Scheduler —— 多方案调度
+
+这是本阶段最重要的部分之一。
+
+我们之前已经明确了 Multi-Plan Exploration 的设计原则：
+
+不是让 AI 预先选出唯一最优方案，而是让 AI 找到多个有依据、值得尝试的方案，然后通过实际实验决定它们的价值。
+
+因此：
+
+- 可以同时探索多个 Strategy。
+- 每个 Strategy 可以产生多个 Plan。
+- 每个 Plan 可以生成多个 Candidate。
+- 不同 Plan 不需要生成相同数量的 Candidate。
+- 不允许因为某个 Strategy 当前性能最好，就自动取消其他 Strategy。
+
+例如：
+
+```text
+Strategy A
+    A-P1
+        A-P1-C1
+        A-P1-C2
+    A-P2
+        A-P2-C1
+
+Strategy B
+    B-P1
+        B-P1-C1
+    B-P2
+        B-P2-C1
+        B-P2-C2
+
+Strategy C
+    C-P1
+        C-P1-C1
+```
+
+所有合法 Candidate 进入统一的实验调度体系。
+
+### 4.1 调度能力
+
+需要实现：
+
+- Candidate 排队。
+- 执行优先级。
+- 并发数量限制。
+- 设备资源限制。
+- Budget 管理。
+- Deferred / Paused 状态。
+- 失败重试限制。
+- 任务取消。
+- 剩余预算计算。
+- 多 Strategy 之间的公平性。
+
+需要明确区分：
+
+逻辑并行不等于物理并行。
+
+例如，同一张 TPU 上可以同时管理 A、B、C 三条探索路线，但正式性能计时需要按照受控资源队列执行，避免多个任务互相干扰。
+
+不要硬编码某个固定的 A:B:C 调度比例。将调度策略设计成可配置、可测试的策略。
+
+### 4.2 保留潜力路线
+
+必须保留：
+
+- Branch Best
+- Task Best
+- Frontier
+- Latest Attempt
+- Last Correct Candidate
+- Current Parent
+- Paused
+- Deferred
+
+这些状态不能混为一谈。
+
+尤其是：
+
+一个 Strategy 当前不是 Task Best，不代表它没有继续探索的价值。
+
+Scheduler 不能自动删除或淘汰仍有探索资格的路线。
+
+---
+
+## 5. 第三部分：Candidate Lifecycle
+
+实现 Candidate 的完整生命周期。
+
+建议先定义状态机，再根据现有 2A Record 和 Run 状态设计映射。
+
+```text
+PLANNED
+   |
+   v
+QUEUED
+   |
+   v
+GENERATING
+   |
+   +------> GENERATION_FAILED
+   |
+   v
+GENERATED
+   |
+   v
+COMPILING
+   |
+   +------> COMPILE_FAILED
+   |
+   v
+CORRECTNESS_CHECK
+   |
+   +------> CORRECTNESS_FAILED
+   |
+   v
+BENCHMARK_READY
+   |
+   v
+RUNNING
+   |
+   +------> INVALID
+   +------> INCOMPLETE
+   +------> EXECUTION_FAILED
+   |
+   v
+EVALUATING
+   |
+   +------> INVALID_RESULT
+   |
+   v
+COMPLETED
+```
+
+具体状态名称可以根据现有 Schema 调整，避免重复创建已有状态。
+
+每个 Candidate 必须具有：
+
+- 唯一 ID。
+- Strategy ID。
+- Plan ID。
+- Parent Candidate ID。
+- Source / Config / Build Identity。
+- 对应的 Run。
+- Correctness Evidence。
+- Benchmark Evidence。
+- 失败或修复记录。
+
+每次代码修改必须产生新的 Candidate。
+
+不能覆盖之前的 Candidate，也不能让不同 Plan 修改同一个工作区而互相污染。
+
+---
+
+## 6. 第四部分：Execution Adapter
+
+2D 必须实现统一的执行抽象。
+
+建议设计清晰的接口，使 Controller 不依赖具体执行环境。
+
+例如：
+
+```python
+class ExecutionBackend:
+
+    def materialize_candidate(self, plan, variant):
+        ...
+
+    def compile(self, candidate):
+        ...
+
+    def check_correctness(self, candidate):
+        ...
+
+    def benchmark(self, candidate, contract):
+        ...
+
+    def collect_evidence(self, candidate):
+        ...
+```
+
+以上仅为接口示意，最终 API 需要结合实际代码设计。
+
+### 6.1 本阶段执行后端
+
+本阶段使用 Synthetic / Mock Execution Backend。
+
+它必须能够模拟：
+
+- Candidate 生成成功。
+- 生成失败。
+- 编译失败。
+- 正确性失败。
+- 正常执行。
+- 性能退化。
+- 性能改善。
+- Timeout。
+- Invalid Measurement。
+- Deferred。
+- Incomplete Run。
+
+所有合成数据必须带有明确的 `synthetic` provenance。
+
+不能将合成的 latency、MFU、Profile 或正确性结果当成真实硬件数据。
+
+### 6.2 为 Phase 3 预留真实执行接口
+
+未来需要能够接入：
+
+- 本地 CPU 测试。
+- Colab。
+- TPU v6e。
+- 真实 Kernel Repository。
+- 真实 Profile / XPlane。
+- 真实 Benchmark。
+
+但是本阶段不要连接真实 TPU，不要运行 MLA。
+
+---
+
+## 7. 第五部分：Fixed Evaluator
+
+Evaluator 是一个非常重要的边界。
+
+Analyzer 可以提出方案，但不能判断一个方案是否真正获得了性能收益。
+
+必须由固定的 Evaluator 执行：
+
+1. Candidate Identity 校验。
+2. Parent Identity 校验。
+3. Correctness 验证。
+4. Benchmark Contract 验证。
+5. Timing Evidence 验证。
+6. Profile / Run 关联验证。
+7. Benchmark 比较。
+8. Result Classification。
+
+必须区分：
+
+| 结果 | 含义 |
+|---|---|
+| Correct + Faster | 正确且性能改善 |
+| Correct + Slower | 正确但性能退化 |
+| Correct + Inconclusive | 正确但测量不足以判断 |
+| Incorrect | 正确性失败 |
+| Invalid Measurement | 测量不可信 |
+| Execution Failed | 执行失败 |
+| Deferred | 尚未执行 |
+| Incomplete | 执行未完成 |
+
+只有满足原有 2A 晋升规则和可信 Evidence 要求的结果才能参与 Best 更新。
+
+**不要重新实现 Best 晋升逻辑。复用 2A 已有的 Store 和 Promotion 机制。**
+
+LLM 不能自行决定：
+
+- Task Best。
+- Branch Best。
+- Current Parent。
+- Frontier。
+- 是否晋升。
+
+这些都必须由确定性程序根据真实记录和固定规则处理。
+
+---
+
+## 8. 第六部分：Repair Loop
+
+实现有限 Repair。
+
+当某个 Candidate 失败时，Controller 根据失败类型决定下一步。
+
+例如：
+
+```text
+Candidate Failed
+       |
+       v
+Failure Classification
+       |
+       +---- Compile Error
+       |
+       +---- Correctness Error
+       |
+       +---- Runtime Error
+       |
+       +---- Invalid Benchmark
+       |
+       v
+Repair Eligibility Check
+       |
+       +---- Budget Exhausted
+       |          |
+       |          v
+       |        PAUSED
+       |
+       +---- Eligible
+                  |
+                  v
+             Generate Repair
+                  |
+                  v
+             New Candidate
+                  |
+                  v
+             Re-enter Queue
+```
+
+要求：
+
+- 每次 Repair 都是新的 Candidate。
+- 保留原始失败 Candidate。
+- 保留 Repair 前后的父子关系。
+- 有最大 Repair 次数。
+- 有最大 Token / 时间 / 执行成本预算（适用时）。
+- 不允许无限修复。
+- 不允许把 correctness failure 当成性能退化。
+- 不允许通过放宽 Correctness Contract 让测试通过。
+
+Repair 的具体推理仍由当前模型承担，不建立独立模型 API。
+
+对于不适合自动修复的问题，可以记录原因并暂停，不必强行修复。
+
+---
+
+## 9. 第七部分：Result Integration 与 Memory Update
+
+所有实验完成后，Controller 需要将结果写回原有 ExperimentStore。
+
+这里必须区分三个层次：
+
+### 9.1 实验事实
+
+保存所有实际发生的事情：
+
+- 成功 Candidate。
+- 失败 Candidate。
+- Repair。
+- Deferred。
+- Invalid Run。
+- Benchmark Evidence。
+- Correctness Evidence。
+- Profile Evidence。
+- 执行成本。
+
+不能只保存成功的优化。
+
+### 9.2 状态更新
+
+根据已有 Store 机制更新：
+
+- Latest Attempt。
+- Branch Best。
+- Task Best。
+- Last Correct Candidate。
+- Frontier。
+- Current Parent。
+- Paused / Deferred。
+
+### 9.3 Memory 回写
+
+使用现有 MemoryReader / MemoryWriter 及 ExperimentStore。
+
+下一轮能够重新读取：
+
+1. A、B、C、D、E 全部最新状态卡。
+2. 本轮参与的 Strategy 完整历史。
+3. 新产生的 Plan。
+4. 所有 Candidate 和 Run。
+5. 新产生的 Evidence。
+6. 相关 Knowledge Method。
+
+确保下一轮能够从已有历史中恢复，不需要重新猜测上一次发生了什么。
+
+---
+
+## 10. 第八部分：Recovery / Idempotency
+
+这是 2D 不能遗漏的部分。
+
+模拟以下情况：
+
+1. Candidate 已创建，但 Controller 崩溃。
+2. Candidate 正在编译时进程退出。
+3. TPU 执行已经完成，但结果尚未写回。
+4. Store 写入成功，但调用方没有收到响应。
+5. Repair 已创建，但调度尚未开始。
+6. 多个 Candidate 的结果乱序返回。
+7. 同一个 PlanSet 重复提交。
+8. Controller 重启后重新读取历史。
+
+必须确保：
+
+- 相同请求不会重复创建实验。
+- 已经完成的步骤不会无故重新执行。
+- 未完成的任务能够恢复。
+- 失败任务不会被错误标记为成功。
+- 晚到的结果不会覆盖更新的状态。
+- 重试不会破坏已有 Best。
+- 所有状态变化都可以追溯。
+
+优先复用 2A 的幂等、追加记录和 Snapshot 机制。
+
+如果需要额外的 Workflow Checkpoint，先确认能否从现有记录重建；只有确实需要时才添加最小持久化结构。
+
+不要仅在内存中保存 Controller 状态。
+
+---
+
+## 11. 第九部分：完整 End-to-End Integration
+
+这是本次 2D+ 最终必须通过的验收目标。
+
+不允许只分别测试 Controller、Scheduler 和 Repair Manager，然后就宣称集成完成。
+
+需要真正串起：
+
+```text
+1. Create RSI Task
+        |
+        v
+2. Read Memory Status Cards
+        |
+        v
+3. Select Multiple Strategies
+        |
+        v
+4. Read Complete Strategy Histories
+        |
+        v
+5. Retrieve Knowledge
+        |
+        v
+6. Build AnalysisInputManifest
+        |
+        v
+7. Load Profile Evidence
+        |
+        v
+8. Run Analyzer
+        |
+        v
+9. Generate Multiple Plans
+        |
+        v
+10. Validate PlanSet
+        |
+        v
+11. Controller Intake
+        |
+        v
+12. Generate Multiple Candidates
+        |
+        v
+13. Schedule Candidates
+        |
+        v
+14. Execute Synthetic Backend
+        |
+        v
+15. Correctness + Benchmark Evaluation
+        |
+        v
+16. Failure Classification / Repair
+        |
+        v
+17. Update ExperimentStore
+        |
+        v
+18. Update Memory State
+        |
+        v
+19. Start Next Round from New Snapshot
+```
+
+注意：第 8 步的模型推理沿用现有 2C session 模型接口。自动化测试通过固定响应、Recorded Session 或可控测试替身运行，不要求测试环境调用外部模型 API。
+
+### 11.1 必须设计的端到端测试案例
+
+**Case A：多路线正常执行**
+
+- A、B 两条 Strategy。
+- A 有两个 Plan。
+- B 有两个 Plan。
+- 每个 Plan 有不同数量的 Candidate。
+- 所有合法 Candidate 进入调度。
+- 分别完成执行和评测。
+- 更新各自 Branch Best 和全局 Task Best。
+
+**Case B：某条路线领先，另一条路线仍然继续**
+
+- A 最终性能更好。
+- B 也取得了相对于自己历史的进展。
+- B 不是 Task Best。
+- B 仍然保留在 Frontier，允许继续探索。
+
+**Case C：混合失败**
+
+同一轮包含：
+
+- 一个 Compile Failure。
+- 一个 Correctness Failure。
+- 一个 Execution Timeout。
+- 一个 Invalid Measurement。
+- 一个正常成功的 Candidate。
+
+验证失败分类和状态更新正确。
+
+**Case D：Repair**
+
+- 一个 Candidate 编译失败。
+- 创建新的 Repair Candidate。
+- 新 Candidate 成功。
+- 原失败记录仍然存在。
+- 父子关系正确。
+- Repair 次数没有超出限制。
+
+**Case E：中断恢复**
+
+- 执行到一半时模拟进程退出。
+- 重新创建 Controller。
+- 从 Store 恢复未完成任务。
+- 不重复执行已完成且已有可靠结果的任务。
+- 最终结果与不中断的执行一致。
+
+**Case F：多轮递归**
+
+- 第一轮读取 A、B 历史。
+- 生成多个 Plan。
+- 执行并保存结果。
+- 形成新的 Snapshot。
+- 第二轮重新读取全部最新状态卡。
+- 再选择多个 Strategy。
+- 读取对应完整历史。
+- 生成第二轮 Plan。
+
+验证系统确实形成了递归优化闭环。
+
+**Case G：幂等和乱序**
+
+- 重复提交相同 PlanSet。
+- 重复提交同一个 Candidate 结果。
+- 多个 Candidate 乱序完成。
+- 较旧结果不能覆盖更好的已确认结果。
+
+---
+
+## 12. 第十部分：统一入口与可运行 Demo
+
+本阶段需要提供一个统一的 RSI Task 执行入口。
+
+先审查项目当前 CLI / API 设计，再确定最合理的入口，不要为了展示创建重复入口。
+
+最终至少支持：
+
+- 创建 Task。
+- 启动一次 RSI Round。
+- 查看当前 Workflow 状态。
+- 查看各 Strategy 状态。
+- 查看 Plan / Candidate 队列。
+- 查看执行结果。
+- 查看失败和 Repair 历史。
+- 中断后恢复任务。
+- 启动下一轮。
+
+同时提供一个可以独立运行的完整 Synthetic Demo。
+
+Demo 必须真正调用现有 2A、2B、2C 和新实现的 2D 接口，而不是另外写一份与生产代码无关的模拟流程。
+
+Demo 输出至少包含：
+
+- Task ID。
+- Round ID。
+- Strategy 列表。
+- Memory Snapshot。
+- Knowledge References。
+- Analysis Manifest。
+- AnalysisBundle。
+- PlanSet。
+- Candidate 列表。
+- Run 列表。
+- Correctness Results。
+- Benchmark Results。
+- Branch Best。
+- Task Best。
+- Frontier。
+- Repair History。
+- Final Workflow State。
+
+所有合成结果必须明确标记 synthetic。
+
+---
+
+## 13. 测试与实施方法
+
+严格遵循现有项目测试风格。
+
+推荐按以下顺序实施：
+
+### Step 1：审计
+
+检查 2A/2B/2C 实际 API、数据结构和调用关系。
+
+找出当前缺失的接口，确认 2D 必须新增的最小能力。
+
+### Step 2：设计
+
+先给出：
+
+- 2D 架构图。
+- 模块职责。
+- PlanSet 到 Controller 的数据流。
+- 状态机。
+- Candidate 生命周期。
+- Execution Adapter 接口。
+- Repair 逻辑。
+- Recovery 设计。
+- 端到端测试矩阵。
+
+### Step 3：实现基础状态机
+
+先实现 PlanSet Intake、Scheduler、Candidate Lifecycle 和 Budget。
+
+### Step 4：实现执行与评测
+
+实现 Synthetic Execution Backend、Fixed Evaluator 和 Result Integration。
+
+### Step 5：实现 Repair / Recovery
+
+完成有限修复、幂等、断点恢复。
+
+### Step 6：打通 2A + 2B + 2C + 2D
+
+通过真实的模块 API 和持久化 Store 运行端到端 Demo。
+
+### Step 7：验收
+
+运行完整现有测试及新增测试。
+
+每个新功能先写测试，观察失败，再实现并验证。
+
+不得删除或降低现有测试门槛。
+
+不得通过修改旧测试的预期结果来制造通过。
+
+---
+
+## 14. 本阶段明确不做的事情
+
+以下属于 Phase 3，不要提前实施：
+
+- 真实 MLA FWD Kernel。
+- 真实 MLA Decode Kernel。
+- 真实 TPU v6e 执行。
+- 真实 XPlane 解码集成。
+- 真实 Colab CLI 执行。
+- 实际硬件 MFU / Latency 优化验证。
+- 生产环境自动 Kernel 修改和部署。
+
+2D 只需要通过抽象接口为这些能力做好准备。
+
+同时不需要：
+
+- 新的独立 LLM API。
+- 第二套 Knowledge MCP。
+- 第二个 Memory 数据库。
+- 第二套 Benchmark 体系。
+- 额外的独立 Agent 服务。
+- 为了形式完整而引入复杂分布式系统。
+
+---
+
+## 15. 最终交付要求
+
+完成后提供完整的 Phase 2D+ 实现与验收报告，包含：
+
+1. 总体架构和流程图。
+2. 修改文件清单。
+3. 每个模块的职责。
+4. 新增接口和数据结构。
+5. 与 2A/2B/2C 的实际调用关系。
+6. PlanSet 到 Candidate 的完整生命周期。
+7. Scheduler 和 Budget 设计。
+8. Repair / Recovery / Idempotency 设计。
+9. 端到端 Demo 运行结果。
+10. 全量测试结果和命令。
+11. 失败案例和修复记录。
+12. 代码审查结果。
+13. 尚未解决的问题。
+14. Phase 3 的接入建议。
+
+明确区分：
+
+- 真实实现。
+- 本地软件测试。
+- Synthetic 实验数据。
+- 真实硬件验证。
+
+不能把 Synthetic 测试描述成真实 TPU 性能收益。
+
+完成后更新项目路线图、工程文档、知识索引和本周完成记录。
+
+**最终停止点：Phase 2D+ 完成并通过本地端到端软件验收，等待用户审查。Phase 3 保持未开始。**
+
+---
+
+## 16. 开始执行
+
+现在开始 Phase 2D+。
+
+不要只给我一份设计文档就停止，也不要一次性盲目修改大量代码。
+
+首先审计现有仓库，理解 2A/2B/2C 的实际实现，形成差距分析和实施计划。
+
+然后按照测试先行、分阶段实现、持续回归的方式推进，直到完整的 Synthetic End-to-End RSI Software Loop 通过验收。
+
+**本次最重要的验收标准：我们能够真正运行一个 RSI Round，让系统读取历史和知识、生成多个有依据的 Plan、调度多个 Candidate、执行实验、处理失败、保存结果，再从新的 Memory Snapshot 开始下一轮。**
+
+这才算 Phase 2D+ 完成。

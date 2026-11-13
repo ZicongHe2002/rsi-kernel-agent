@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "purpose": "P3.2 known-wrong Oracle validation preparation",
+  "task_id": "mla-decode-v1",
+  "scope": [
+    "decode-small",
+    "decode-boundary"
+  ],
+  "candidates": [
+    {
+      "kind": "attention",
+      "job_file": ".artifacts\\phase3-2026-11-12\\oracle-negative-attention-job.json",
+      "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+      "plan_id": "oracle-negative-plan:14402d4e53a2eba9f9d29d6a40ee0d45daf7126f2311412b4f2452e5cdc49d43",
+      "plan_binding_id": "plan-parent:72e0b64699db38e476dc027ae4cc08a7eeb165852c10d6cff8be4c95e5e7f136",
+      "parent_id": "oracle-negative-parent:80008b80a391b28e5502eafdfe88b7f8191cdd043b1d65dea7e11eef55cd7b87",
+      "parent_candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+      "candidate_id": "oracle-negative-candidate:54fba11bbe506e328cf12f6f96ccb9f97550153ba56e1e37f369292567a2d73e",
+      "run_id": "oracle-negative-run:0f7138cbaacef8c3afd41f8443f25e11ef49f4e921e9324d910eb2c7cdd9d7ba",
+      "run_state": {
+        "execution_status": "not_run",
+        "scheduling_status": "ready",
+        "event_id": null
+      },
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "context_id": "oracle-negative-context:8704c7f083ed7d879536c716c2c0550154d5410332a5a15cb1f55f94ac55b616",
+      "source_ref": {
+        "digest": "2aa9feef6ca1dd722d1c52ae5451f5be2b46c70e8b9ece0278e115dac4d8ffc4",
+        "size": 113364
+      },
+      "source_bundle_ref": {
+        "digest": "26a51116ad211349233dc44c58cc8508e4bf08834bf0ac333095252a3790be4e",
+        "size": 67014
+      },
+      "build_ref": {
+        "digest": "92454664e282f75c7f4bfeeeb7798a7d9bdf21ac61916759387a3ae2e727adc6",
+        "size": 366
+      },
+      "response_ref": {
+        "digest": "be35433ebd8ae1818c18d366a09fa26b2b49eca3e2a80b199de66a39deb459dd",
+        "size": 1858
+      },
+      "diff_ref": {
+        "digest": "aeb35180c7922be4228866ccea67158cefc25c24aa8b7ebb027fc84ffa007238",
+        "size": 672
+      },
+      "admission_id": "oracle-negative-admission:905f06045c2564aa7458a58779cc9d2b07da7e550ed5c68ae4e478412404769e"
+    },
+    {
+      "kind": "cache",
+      "job_file": ".artifacts\\phase3-2026-11-12\\oracle-negative-cache-job.json",
+      "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+      "plan_id": "oracle-negative-plan:fb072ef050a93071bcab62ab6316eb482a87dee5afd500963b750a51bd5a2c8b",
+      "plan_binding_id": "plan-parent:a68d8907dd10434cf53d9720ae5dd5d44592ce37fedc39213c3a5ead6a68d70b",
+      "parent_id": "oracle-negative-parent:80008b80a391b28e5502eafdfe88b7f8191cdd043b1d65dea7e11eef55cd7b87",
+      "parent_candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+      "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+      "run_id": "oracle-negative-run:eba70c035655ed3c46e11c3be29ed3db88af13f8e74450845db16a807b305a5d",
+      "run_state": {
+        "execution_status": "not_run",
+        "scheduling_status": "ready",
+        "event_id": null
+      },
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "context_id": "oracle-negative-context:8704c7f083ed7d879536c716c2c0550154d5410332a5a15cb1f55f94ac55b616",
+      "source_ref": {
+        "digest": "4aa9cd1c3342e861e46927e834b9ecccb78e5ce6832125c39df0bc18988f901b",
+        "size": 113497
+      },
+      "source_bundle_ref": {
+        "digest": "72e0e714140562de9acc4467e23f044ac1a6dca56a9f16922eda35a2b1981196",
+        "size": 67014
+      },
+      "build_ref": {
+        "digest": "1a8514573f1835b957806a26093c6c052931f1d4cd3795dd6931f9b1739e2b87",
+        "size": 366
+      },
+      "response_ref": {
+        "digest": "69493787daf5ed176548db14ce6cf9fdfca7792bd9e02466b9fb2e6253a6c594",
+        "size": 1862
+      },
+      "diff_ref": {
+        "digest": "b495ec92701f52934a9a1233d0109b969feddd339c331ac21dd6c5acac98d8f3",
+        "size": 807
+      },
+      "admission_id": "oracle-negative-admission:4276ae5fd7c11bcfa31f7b18578a787128b2cf6c9920265361c18f5e356864de"
+    }
+  ],
+  "remote_calls": 0,
+  "execution_calls": 0,
+  "consider_calls": 0,
+  "parent_selection_changes": 0,
+  "oracle_validation_complete": false,
+  "is_optimization_round": false,
+  "required_host_action": "Advance only generate/compile/correctness; expect failed. If passed, stop and fail the Gate. Never benchmark."
+}

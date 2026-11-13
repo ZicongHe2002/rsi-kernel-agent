@@ -1,0 +1,82 @@
+{
+  "dma-count": {
+    "verdict": "undetermined",
+    "category": "unknown",
+    "refs": ["case:dma-count"],
+    "reason": "The bottleneck is undetermined: 1000 DMA events do not establish a dependency critical path. Bytes, wait duration and critical path are missing. DMA might matter or might overlap other work; neither a count nor total execution time settles causality. The proposition's claim of proof is unjustified.",
+    "controls": ["critical_path_trace", "collect_missing_metric", "causal_ablation"],
+    "numeric_result": null
+  },
+  "profile-mismatch": {
+    "verdict": "contradicted",
+    "category": "observed_fact",
+    "refs": ["case:profile-mismatch"],
+    "reason": "The supplied profile explicitly belongs to A-current/strategy A, whereas the request is for B-current/strategy B. Matching workload does not make it B's measured evidence. Obtain a correctly bound B profile, or correct metadata only after independently verifying identity; do not silently relabel A's measurements.",
+    "controls": ["identity_rebind"],
+    "numeric_result": null
+  },
+  "tile-dtype-confound": {
+    "verdict": "undetermined",
+    "category": "unknown",
+    "refs": ["case:tile-dtype-confound"],
+    "reason": "The supplied latency decreases, but tile and dtype change together and there are no isolated variants. Tile's independent causal effect is unknown, as are dtype effects and their interaction. Changing float32 to bfloat16 changes numerical semantics and tolerance has not been tested. Compare tiles at fixed dtype and dtypes at fixed tile, then inspect interaction and reference correctness.",
+    "controls": ["one_variable_ablation", "correctness_tolerances"],
+    "numeric_result": null
+  },
+  "different-history": {
+    "verdict": "undetermined",
+    "category": "historical_claim",
+    "refs": ["case:different-history"],
+    "reason": "Double buffering was slower in the stated historical synthetic-H1/float32/32x32 setting. This is a historical outcome with explicit conditions, not evidence that it is slower on current synthetic-H2/bfloat16/4096x4096. Current behavior remains unknown without a matched retest, including numerical correctness and resource/overlap costs.",
+    "controls": ["condition_matched_retest", "correctness_tolerances"],
+    "numeric_result": null
+  },
+  "prediction-not-measurement": {
+    "verdict": "contradicted",
+    "category": "mathematical_prediction",
+    "refs": ["case:prediction-not-measurement", "calculation:calc-hypothetical-pipeline"],
+    "reason": "The allowlisted calculation gives ideal pipeline duration 14 seconds from transfer+compute+(stages-1)*max(transfer,compute), using four items with hypothetical transfer=3 s and compute=2 s. It assumes independent resources, legal overlap and sufficient buffers, and omits synchronization, allocation and contention. No real hardware measurements exist, so this is a mathematical prediction rather than a TPU measurement; validate on the actual target with correctly bound timing and dependency evidence.",
+    "controls": ["real_measurement_required", "critical_path_trace"],
+    "numeric_result": {"value": 14, "unit": "s"}
+  },
+  "multi-strategy-plans": {
+    "verdict": "contradicted",
+    "category": "observed_fact",
+    "refs": ["case:multi-strategy-plans"],
+    "reason": "The explicit exploration policy says no route cancelled. A lower supplied latency does not authorize cancelling B or selecting a winner. The PlanSet retains A reuse and overlap Plans with A-parent, and B layout conversion and reuse Plans with B-parent, each with risks, controls and experiments.",
+    "controls": ["retain_both_strategies"],
+    "numeric_result": null
+  },
+  "faster-unknown-cause": {
+    "verdict": "undetermined",
+    "category": "observed_fact",
+    "refs": ["case:faster-unknown-cause"],
+    "reason": "Confirmed same-context timing establishes that the supplied candidate is faster, from 20 us to 16 us. It does not establish improved memory bandwidth: multiple scheduling/layout changes and no profile leave the mechanism unknown. Isolate each change, repeat matched timing, and collect transferred bytes, waits and dependency intervals before a bandwidth explanation.",
+    "controls": ["causal_ablation", "critical_path_trace", "collect_missing_metric"],
+    "numeric_result": null
+  },
+  "stale-knowledge": {
+    "verdict": "contradicted",
+    "category": "source_claim",
+    "refs": ["case:stale-knowledge"],
+    "reason": "Pinned source revision aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa differs from live bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb. Silent replacement changes the reproducible analysis input. Preserve the pinned excerpt with its original revision and mark it stale, record that the old full document is unavailable, and retain absence of local validation. A refreshed document requires a new recorded revision and subsequent local validation before performance claims.",
+    "controls": ["preserve_revision_and_mark_stale", "real_measurement_required"],
+    "numeric_result": null
+  },
+  "missing-not-zero": {
+    "verdict": "undetermined",
+    "category": "unknown",
+    "refs": ["case:missing-not-zero"],
+    "reason": "wait_us is unavailable because the parser exposes no wait counters. It might be zero or nonzero; execution_us=20 cannot establish either. Preserve null/unavailable with the reason and collect a suitable wait metric instead of substituting a numeric default.",
+    "controls": ["collect_missing_metric"],
+    "numeric_result": null
+  },
+  "nested-overlap": {
+    "verdict": "contradicted",
+    "category": "derived_measurement",
+    "refs": ["case:nested-overlap"],
+    "reason": "For device 0/clock c0, [2,5] is nested within [0,10] and [8,12] overlaps the latter, so their union is [0,12] and occupied time is 12 us. Summing durations double-counts overlap. Device 1/clock c1 is excluded; clock alignment is not supplied. This is same-clock interval occupancy derived from the synthetic inputs, not a dependency critical path.",
+    "controls": ["interval_union_by_clock"],
+    "numeric_result": {"value": 12, "unit": "us"}
+  }
+}

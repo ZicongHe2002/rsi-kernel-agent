@@ -1,0 +1,62 @@
+[
+  {
+    "sha256": "fd8fe272278132eb487c998c382e039ef6e0853ba1a7043baf8302d1ca1bf9e2",
+    "path": "src/rsi_kernel_agent/artifacts.py",
+    "current_sha256": "fd8fe272278132eb487c998c382e039ef6e0853ba1a7043baf8302d1ca1bf9e2",
+    "unchanged": true
+  },
+  {
+    "sha256": "3701a63145718f2a87c590a0330c912d5d56421a788facde6d7d5f1cb991bc0f",
+    "path": "src/rsi_kernel_agent/associations.py",
+    "current_sha256": "3701a63145718f2a87c590a0330c912d5d56421a788facde6d7d5f1cb991bc0f",
+    "unchanged": true
+  },
+  {
+    "sha256": "85959babf27a5b76cc6cab189e7586c048623a34613760bc33e60a564868da8b",
+    "path": "src/rsi_kernel_agent/contracts.py",
+    "current_sha256": "85959babf27a5b76cc6cab189e7586c048623a34613760bc33e60a564868da8b",
+    "unchanged": true
+  },
+  {
+    "sha256": "f3d2cf030d213d02b309e05d319f6a325c959b714b1264793f7bfcec631e5db5",
+    "path": "src/rsi_kernel_agent/knowledge.py",
+    "current_sha256": "f3d2cf030d213d02b309e05d319f6a325c959b714b1264793f7bfcec631e5db5",
+    "unchanged": true
+  },
+  {
+    "sha256": "e692cf83bb390f9da181f6d0ff226df82a9d26cb37daddd70bf432c02b806ef4",
+    "path": "src/rsi_kernel_agent/knowledge_mcp.py",
+    "current_sha256": "e692cf83bb390f9da181f6d0ff226df82a9d26cb37daddd70bf432c02b806ef4",
+    "unchanged": true
+  },
+  {
+    "sha256": "e2e0375c186d1d777d6d4ba04fb8eeb8633c525ff40fc33f99cea0cdb425d12e",
+    "path": "src/rsi_kernel_agent/memory.py",
+    "current_sha256": "e2e0375c186d1d777d6d4ba04fb8eeb8633c525ff40fc33f99cea0cdb425d12e",
+    "unchanged": true
+  },
+  {
+    "sha256": "da735f1f8ba1908df9392a8ab50e77114588c9188adb3b1c7811c26e4732bd0b",
+    "path": "src/rsi_kernel_agent/store.py",
+    "current_sha256": "da735f1f8ba1908df9392a8ab50e77114588c9188adb3b1c7811c26e4732bd0b",
+    "unchanged": true
+  },
+  {
+    "sha256": "8f6f8953f91e517572eee55f79888200614ccf85835f5a520a65c95542f08e76",
+    "path": "src/rsi_kernel_agent/__init__.py",
+    "current_sha256": "8f6f8953f91e517572eee55f79888200614ccf85835f5a520a65c95542f08e76",
+    "unchanged": true
+  },
+  {
+    "sha256": "271448e3a7aead17b38e54f4d27eae09a33e0c4812a3fbcb567decc2d0726d66",
+    "path": "knowledge-site/server.py",
+    "current_sha256": "271448e3a7aead17b38e54f4d27eae09a33e0c4812a3fbcb567decc2d0726d66",
+    "unchanged": true
+  },
+  {
+    "sha256": "f634c9ab6ff90fa9d63d7fe3938fd30c8019cd7de332aba02ec01c0f4a6afad2",
+    "path": "knowledge-site/mcp_server.py",
+    "current_sha256": "f634c9ab6ff90fa9d63d7fe3938fd30c8019cd7de332aba02ec01c0f4a6afad2",
+    "unchanged": true
+  }
+]

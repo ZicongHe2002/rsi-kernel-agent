@@ -1,0 +1,31 @@
+[
+  {
+    "package": "marked",
+    "version": "18.1.2",
+    "source": "https://registry.npmjs.org/marked/-/marked-18.1.2.tgz",
+    "integrity": "sha512-DfOnvLAQ6WYeWxWO1u4RyFOeqyHup6dks5PPqnoFiooU7ipRvidO/2j8plhAHIiZg574E9ZlzSjUiPMLAzFkgg==",
+    "file": "marked.js",
+    "sha256": "9eb730d2362ae1a8c6201698f17009e16671be6946d3d06503ddc0575283db7c"
+  },
+  {
+    "package": "dompurify",
+    "version": "3.4.17",
+    "source": "https://registry.npmjs.org/dompurify/-/dompurify-3.4.17.tgz",
+    "integrity": "sha512-B/pSlYVHQ58kqISD/yDjuJ1yfzI34m1gF4lAod2bwSRhiN4K5Cl3H8Af7hqB2PmTL911tdEudnnXn5FnhRoz0w==",
+    "file": "purify.js",
+    "sha256": "cd37898f9782adf54820c413191b5691803f0f137c799d6edcfd38523b4c2c31"
+  },
+  {
+    "package": "mermaid",
+    "version": "11.17.2",
+    "source": "https://registry.npmjs.org/mermaid/-/mermaid-11.17.2.tgz",
+    "integrity": "sha512-V6K3C8EBdEsPFZXSKMJe6ppQOENxuHARr9GvHX4hh47lAbhMRD9qf4oEK7LoaRQxULMa80/qt5gHO73aCleBBg==",
+    "file": "mermaid.js",
+    "sha256": "0913d9d0e6f93075641b3e7b8fc389f8019a5069185bc2d888b05147b09a8b27",
+    "distribution": "official minified ESM; all 104 upstream .mjs files unmodified",
+    "manifest": "mermaid-11.17.2/manifest.json",
+    "entry_wrapper": "static default import + 26 side-effect imports for flowchart/Dagre; exports window.mermaid",
+    "fallback_file": "mermaid-full.js",
+    "fallback_sha256": "581ed7d74bd9048d0e3a91363927d72ef22942d7722546b27f7cc29e35390eb8"
+  }
+]

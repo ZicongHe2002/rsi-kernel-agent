@@ -1,0 +1,1567 @@
+# Phase P3.5 — Multi-Round Real Hardware RSI Validation
+
+> 项目：RSI-Kernel-Agent
+>
+> 日期：2026-11-13
+>
+> 目标：完成真实 TPU v6e 上的第二轮 RSI 优化、独立性能复测和 Phase 3 最终验收。
+>
+> 当前状态：P3.0–P3.4 已在指定范围内完成，P3.5 尚未完成。
+>
+> 注意：本任务是继续已有实验，不是重新启动 Phase 3。
+
+---
+
+# 0. 本次任务目标
+
+我们正在开发 RSI-Kernel-Agent。
+
+当前系统已经完成：
+
+- Phase 2A：Core Foundation
+- Phase 2B：Knowledge / Memory
+- Phase 2C：Profiler / Analyzer
+- Phase 2D+：Workflow / Controller / Synthetic E2E
+- P3.0：环境审计和历史知识恢复
+- P3.1：真实 Colab TPU v6e 接入
+- P3.2：MLA Decode Baseline
+- P3.3：真实 XPlane / Profiler
+- P3.4：第一轮真实 Kernel 优化
+
+目前已经真正完成了：
+
+```text
+Memory + Knowledge
+        |
+        v
+Real Profiler
+        |
+        v
+Analyzer
+        |
+        v
+Multi-Plan
+        |
+        v
+Controller
+        |
+        v
+Colab TPU v6e
+        |
+        v
+Real Kernel Experiments
+        |
+        v
+Evaluator
+        |
+        v
+ExperimentStore / Memory
+```
+
+第一轮已经在真实 TPU 上执行了多个 Candidate，并将结果写入原有 ExperimentStore。
+
+现在继续 P3.5。
+
+## 0.1 本次核心目标
+
+这次必须解决三个问题。
+
+### 问题一：性能收益是否真实且稳定？
+
+第一轮中，`delayed-store-wait` 的单次测量比父版本更快。
+
+但由于 Baseline 自身存在较大 Host Latency 波动，我们还不能确认该优化具有稳定收益。
+
+需要通过受控 ABBA / Interleaved Benchmark 进行独立复测。
+
+### 问题二：RSI 是否真正能够利用上一轮历史？
+
+第一轮已经完成：
+
+- 多 Plan 生成。
+- 多 Candidate 实验。
+- 正确性验证。
+- Benchmark。
+- Profile。
+- Memory 更新。
+
+但尚未完成第二轮。
+
+需要读取第一轮产生的新 Memory Snapshot、真实 Benchmark 和 Profile，再次运行 Analyzer，生成新的优化 Plan，执行真实 TPU 实验。
+
+第二轮不能简单重复第一轮。
+
+### 问题三：Phase 3 是否达到最终验收标准？
+
+必须完成：
+
+1. 新 TPU Runtime 准入。
+2. 可信性能复测。
+3. 第二轮真实 Analyzer。
+4. 第二轮 Multi-Plan。
+5. 第二轮 Candidate 执行。
+6. 正确性和性能验证。
+7. Memory 更新。
+8. Branch Best / Task Best / Frontier 核验。
+9. 完整测试和最终报告。
+
+**本轮重点是完成 P3.5，不要重新实现 P3.0–P3.4。**
+
+---
+
+# 1. 项目目录与已有系统
+
+## 1.1 RSI 主项目
+
+路径：
+
+`C:\Users\fengluo\Desktop\rsi-kernel-agent`
+
+这是唯一正式的 RSI-Kernel-Agent 项目。
+
+其中已有：
+
+- ExperimentStore。
+- ArtifactStore。
+- Knowledge / Memory。
+- Profiler / Analyzer。
+- Workflow / Controller。
+- Colab Backend。
+- 真实 MLA Runner。
+- 正确性验证。
+- Benchmark。
+- XPlane Parser。
+- 测试和历史报告。
+
+本轮继续在此项目中工作。
+
+## 1.2 当前 Pallas Kernel
+
+路径：
+
+`C:\Users\fengluo\Desktop\training\PallasKernels`
+
+这是权威 Kernel 仓库。
+
+当前 Phase 3 的真实优化目标是：
+
+**MLA Decode contiguous BF16。**
+
+MLA Forward 已经审计，但不是本轮必须完成的优化任务。
+
+不要擅自扩大本轮范围。
+
+## 1.3 Colab 连接工具
+
+路径：
+
+`C:\Users\fengluo\Desktop\colab`
+
+继续使用已有的 `google-colab-cli` / 原 Colab Bridge。
+
+不得重新实现第二套连接工具。
+
+不得将现有连接方式改成普通 Colab Local Runtime。
+
+## 1.4 历史资料
+
+路径：
+
+`C:\Users\fengluo\Desktop\project2`
+
+目前已经完成历史扫描和初步知识恢复。
+
+此前报告中：
+
+- 索引 74,382 个相关路径。
+- 结构化恢复 136 条历史实验记录。
+- 保存 10 项历史 Knowledge 方法。
+- 保存 2 项官方来源方法。
+
+这些结果已经归档。
+
+本轮允许查询历史知识，但**不要重新执行完整历史恢复**。
+
+仅在第二轮需要某个特定历史方法时，按需读取相关文件。
+
+---
+
+# 2. 必须读取的当前真实状态
+
+在执行任何新 TPU 实验前，必须先检查当前项目状态。
+
+重点读取：
+
+- 最新 Phase 3 总体进展报告。
+- Phase 3 Baseline Report。
+- Phase 3 Optimization Report。
+- Phase 3 Profiler Report。
+- Phase 3 Worker Recovery Guide。
+- Phase 3 Implementation Plan。
+- 第一轮真实实验的完成记录。
+- 最新 Memory Snapshot。
+- Runtime 恢复说明。
+- Colab Bridge 当前状态。
+- Controller Journal。
+- Execution Budget。
+
+已知报告日期为 2026-11-13。
+
+报告中的第一轮为：
+
+`real-runtime2-round:1`
+
+Task：
+
+`mla-decode-v1`
+
+第一轮完成后：
+
+- Snapshot version：5。
+- Records：443。
+- High-watermark：468。
+- 五个 Candidate 均已完成验证。
+- 无待归档的第一轮 Candidate。
+- 尚未启动第二轮。
+
+这些数值是此前报告中的状态。
+
+**必须重新从当前 Store 和实际工件读取，不能直接将上述数值视为现在的最新状态。**
+
+## 2.1 检查是否已经有其他进展
+
+特别检查：
+
+1. 是否已经产生 Round 2。
+2. 是否已经有新的 TPU Runtime。
+3. 是否有新的 Baseline。
+4. 是否有新的 ABBA 结果。
+5. 是否有待恢复的 Operation。
+6. 是否有新的 Candidate。
+7. 是否有其他 Agent 或进程正在运行任务。
+
+如果已经发生新的实验，优先恢复现有工作，不能重复创建。
+
+不要因为当前任务重新启动而覆盖已有 Journal。
+
+---
+
+# 3. 第一轮真实实验结果
+
+这是本轮最重要的历史输入。
+
+## 3.1 Baseline
+
+Runtime 2 的真实环境：
+
+```text
+Hardware:
+    TPU v6 lite / v6e
+    Device Count: 1
+
+Runtime:
+    Python: 3.11.17
+    JAX: 0.8.1
+    jaxlib: 0.8.1
+    libtpu: 0.0.30
+    TensorFlow: 2.20.0
+    xprof: 2.22.1
+```
+
+上述是历史 Runtime 2 的实际记录。
+
+新 Runtime 必须重新读取自己的环境信息。
+
+### Baseline A
+
+```text
+Small Host Median:
+    0.193195 ms
+
+Small Host Mean:
+    0.195683 ms
+
+Program Median:
+    6.624375 us
+```
+
+### Baseline B
+
+```text
+Small Host Median:
+    0.215365 ms
+
+Small Host Mean:
+    0.218733 ms
+
+Program Median:
+    6.615000 us
+```
+
+两次 Baseline：
+
+- Source 相同。
+- Config 相同。
+- Build 相同。
+- 正确性全部通过。
+- 都是独立真实运行。
+
+但是 Host Median 存在明显差异。
+
+**这意味着 Host Public-Call Latency 存在较大波动。**
+
+必须在新 Runtime 重新建立配对 Baseline。
+
+不能把 Runtime 2 的旧数字当成新 Runtime 的对照。
+
+## 3.2 第一轮五个 Candidate
+
+| Plan | Candidate | Host Median | Program Median | 结果 |
+|---|---|---:|---:|---|
+| R1-A-tile | Tile 512 | 0.225485 ms | 8.090000 us | correct_slower |
+| R1-A-tile | Tile 256 | 0.202570 ms | 11.127500 us | correct_slower |
+| R1-A-single | Single Tile | 0.193550 ms | 6.580625 us | correct_slower |
+| R1-B-store | Delayed Store Wait | 0.183795 ms | 6.190000 us | correct_faster |
+| R1-B-compact | Compact New Row | 0.221875 ms | 6.588750 us | correct_slower |
+
+全部通过：
+
+- 编译。
+- 三组正确性。
+- Benchmark。
+- Profile。
+- Evaluation。
+- Memory 归档。
+
+但目前没有独立 Run 确认的稳定加速。
+
+## 3.3 Delayed Store Wait
+
+这是当前最值得独立复测的候选。
+
+优化方向：
+
+**将同一 Tile 中的 `store.wait` 推迟到 body 返回前。**
+
+该 Candidate 在第一轮中：
+
+```text
+Host Median:
+    0.183795 ms
+
+Program Median:
+    6.190000 us
+```
+
+原 Evaluator 分类：
+
+`correct_faster`
+
+原 Store 已按对应 Context 的规则完成晋升。
+
+但是：
+
+- 只有一次候选 Run。
+- Host 计时存在跨 Run 波动。
+- 尚未进行 ABBA / Interleaved 复测。
+- 不能证明所有变化均来自 DMA overlap。
+- 不能证明在不同 Runtime 或 Workload 下仍然更快。
+
+本轮应该优先验证这个优化。
+
+---
+
+# 4. 第一阶段：恢复真实 Colab Runtime
+
+## 4.1 查询现有 Runtime
+
+先使用原 Colab Bridge 进行只读查询。
+
+检查：
+
+- 当前 Runtime Assignment。
+- Runtime ID。
+- Runtime 状态。
+- TPU 类型。
+- Worker 状态。
+- 远端 Operation。
+- 本地 Journal。
+- 是否有其他执行中的实验。
+
+此前报告中：
+
+- Runtime 2 已经消失。
+- Runtime 3 曾经分配成功。
+- Runtime 3 后来不在 Assignment 列表。
+- 最后一次查询时没有可用 Runtime。
+
+这些都是历史状态。
+
+不能假设现在仍然没有 Runtime。
+
+## 4.2 申请新 TPU
+
+如果没有 Runtime：
+
+优先使用用户已有的 Colab CLI 分配流程。
+
+要求：
+
+1. 不创建无限申请循环。
+2. 不重复申请已经分配成功的 Runtime。
+3. 不重置已有预算。
+4. 不修改认证文件。
+5. 不升级全局环境。
+6. 不强杀用户已有任务。
+7. 不自动购买额外资源。
+
+只允许在已有授权和预算范围内进行有界申请。
+
+如果无法获取 TPU，记录当前状态和具体阻塞项，完成不依赖 TPU 的准备工作。
+
+**不能将 Runtime 申请中或工具就绪写成已完成真实执行。**
+
+## 4.3 环境准入
+
+取得新的 Runtime 后必须：
+
+- 识别真实 TPU。
+- 检查 Device Count。
+- 检查 Python。
+- 检查 JAX。
+- 检查 jaxlib。
+- 检查 libtpu。
+- 检查 TensorFlow。
+- 检查 xprof。
+- 检查 Worker。
+- 执行最小同步 JAX 运算。
+- 保存真实环境指纹。
+
+优先复用原隔离环境和已有依赖。
+
+不要为了使用新的 Profiler 功能升级 JAX / libtpu。
+
+## 4.4 新 Runtime 不等于旧 Runtime
+
+新 Runtime 必须建立新的 Evaluation Context。
+
+不能：
+
+- 修改 Runtime 2 的历史 Environment。
+- 将旧 Run 改标成新 Runtime。
+- 把旧 Benchmark 直接作为新 Runtime Baseline。
+- 直接复制旧 Profile 后宣称新环境采集成功。
+
+新的结果必须有新的 Run 和实际环境绑定。
+
+源码内容可以复用，但实际执行身份必须重新核实。
+
+---
+
+# 5. 第二阶段：重新准入 Baseline 和 Candidate
+
+这是本轮正式性能复测之前的 Gate。
+
+## 5.1 重新确认源码身份
+
+必须恢复并核对以下代码：
+
+1. 当前兼容修复后的 MLA Decode Baseline。
+2. `delayed-store-wait` Candidate。
+3. 用于验证 Oracle 的错误负例。
+
+从原 ArtifactStore 和 Candidate 记录读取准确源码。
+
+不要手工根据旧报告重新写一个看起来相同的 Kernel。
+
+检查：
+
+- Source Digest。
+- Config Digest。
+- Build Identity。
+- Parent Candidate。
+- Workload。
+- Runtime 加载路径。
+- 实际导入模块。
+- 编译入口。
+
+不得仅检查上传文件是否存在。
+
+必须确认远端实际加载的是对应 Candidate。
+
+## 5.2 正确性重新准入
+
+使用原冻结 Correctness Contract。
+
+当前已验证范围为：
+
+| Case | Batch | Heads | Capacity |
+|---|---:|---:|---:|
+| decode-small | 1 | 16 | 1024 |
+| decode-boundary | 3 | 16 | 256 |
+| decode-default | 8 | 16 | 16384 |
+
+必须根据原始测试配置读取其他参数，不要只用表中的简化字段。
+
+原 Oracle 包括：
+
+- attention 输出。
+- 完整 updated cache。
+- 输入 cache 不可被意外修改。
+- BF16 bitwise cache 比较。
+- NaN tail / padding。
+- 边界 lengths。
+- 既有容差。
+
+原 attention 容差：
+
+```text
+atol = 0.01
+rtol = 0.01
+```
+
+这只是当前已冻结协议，不得为复测结果放宽。
+
+重新检查：
+
+- Baseline 正确性。
+- Delayed Store Wait 正确性。
+- 错误 attention 负例。
+- 错误 cache 负例。
+
+错误负例必须被 Oracle 拒绝。
+
+负例拒绝不能仅依据报告中的旧结果。
+
+## 5.3 新 Context
+
+只有在：
+
+- Runtime 身份有效。
+- Source 身份有效。
+- 正确性通过。
+- 错误负例按预期失败。
+- Benchmark Contract 一致。
+
+之后，才能进入新 Context 的正式性能比较。
+
+重新准入产生新的 Run / Evidence。
+
+旧轮次的事实和 Best 必须保留。
+
+如果现有 Store 对跨 Context 的 Best 和 Parent 有额外约束，必须按照原 schema / API 执行，不能绕过。
+
+---
+
+# 6. 第三阶段：ABBA / Interleaved 性能确认
+
+这是本轮的第一个核心验收目标。
+
+## 6.1 目的
+
+验证：
+
+`delayed-store-wait`
+
+相对于原修复 Baseline 是否具有稳定性能收益。
+
+为了避免与长期 Strategy A/B 混淆，本节使用：
+
+```text
+Control:
+    原兼容修复 Baseline
+
+Treatment:
+    delayed-store-wait Candidate
+```
+
+所有比较必须在相同：
+
+- Workload。
+- dtype。
+- Evaluation Context。
+- TPU。
+- Runtime。
+- Benchmark Protocol。
+- 正确性标准。
+
+下进行。
+
+## 6.2 保持原计时协议
+
+原协议：
+
+`mla-contiguous-host-sync-v1`
+
+原设置：
+
+```text
+Warmup:
+    5
+
+Measurements:
+    20
+
+Outlier Removal:
+    None
+```
+
+必须保留：
+
+- 全部原始样本。
+- Median。
+- Mean。
+- Std。
+- Min / Max。
+- P25 / P75。
+- Environment Fingerprint。
+- Source Identity。
+- Run Identity。
+
+原指标为：
+
+**Host Synchronized Public-Call Latency。**
+
+它包含：
+
+- Prepare。
+- Attention。
+- 完整 Cache Output。
+- Host Dispatch / Wait。
+
+它不包含预先准备输入的 Host-to-Device 传输和编译。
+
+不能将该指标称为纯 TPU Kernel Duration。
+
+## 6.3 ABBA 执行
+
+在资源和预算允许时，采用：
+
+```text
+A = Control Baseline
+B = Delayed Store Wait
+
+Run 1: A
+Run 2: B
+Run 3: B
+Run 4: A
+```
+
+也可以根据现有确认工具执行顺序反转的交错批次：
+
+```text
+B
+A
+A
+B
+```
+
+需要注意：
+
+- A 和 B 都是独立真实执行。
+- 使用相同输入和计时协议。
+- 不在测试中修改 Kernel。
+- 避免其他 TPU 工作干扰。
+- 不将编译时间混入正式计时。
+- 每个 Run 具有独立证据。
+- 保存完整执行顺序和时间。
+
+不要把 20 个同一 Run 内的样本简单当成 20 次独立跨 Run 实验。
+
+## 6.4 统计与稳定性分析
+
+必须分别比较：
+
+### Host Latency
+
+- A/B Median。
+- A/B Mean。
+- Run-to-Run Variance。
+- Within-Run Variance。
+- 配对差异。
+- Speedup。
+- Latency Reduction。
+
+### Profile Program Duration
+
+- Program Duration。
+- Prepare Duration。
+- Attention Duration。
+- 同一采集口径下的变化。
+- 是否存在可重复的 Program 改善。
+
+如果计算置信区间，必须说明统计单位、配对方式和样本独立性假设，不得把存在相关性的单 Run 样本当成独立实验夸大可信度。
+
+需要区分：
+
+1. Host 改善，Program 也改善。
+2. Host 改善，但 Program 不明显。
+3. Program 改善，但 Host 没有明显改善。
+4. 两者都不稳定。
+5. 数据不足，无法判断。
+
+不能因为某一次 Host Latency 更快就宣称稳定收益。
+
+## 6.5 预先固定判断规则
+
+在查看新结果前，读取已有 Benchmark / Promotion Contract。
+
+如果已有稳定性判断阈值，使用原规则。
+
+如果没有，先形成明确的独立确认规则，记录版本和适用范围，然后执行复测。
+
+不能看到 Candidate 更快后再调整阈值。
+
+不要擅自改写 Store 已完成的历史晋升。
+
+需要区分：
+
+- 本轮按现有 `consider` 规则的晋升。
+- 跨独立 Run 的稳定收益确认。
+
+两者可以有不同结论。
+
+## 6.6 ABBA 结果处理
+
+若确认稳定改善：
+
+- 保存原始测量。
+- 保存统计。
+- 保存 Profile。
+- 更新相应证据。
+- 标记已完成独立确认。
+
+若没有确认：
+
+- 保留原始 Result。
+- 保留历史 Best。
+- 保存无稳定收益的结论。
+- 不删除或改写旧 Run。
+- 允许未来有依据地重新探索。
+
+若结果不确定：
+
+- 明确标记 inconclusive。
+- 不能宣称成功。
+- 根据剩余预算判断是否进行有限追加测量。
+
+---
+
+# 7. 第四阶段：启动第二轮 RSI
+
+这是本次最重要的工作。
+
+必须继续原有真实 RSI 流程：
+
+```text
+prepare_round
+      |
+      v
+AnalysisInputManifest
+      |
+      v
+Analyzer Session
+      |
+      v
+publish_result
+      |
+      v
+PlanSet Intake
+      |
+      v
+Controller
+      |
+      v
+Real Colab Backend
+      |
+      v
+Correctness / Benchmark / Profile
+      |
+      v
+Evaluator
+      |
+      v
+Memory Update
+```
+
+不要为第二轮建立另外一套手工实验系统。
+
+## 7.1 第二轮读取 Memory
+
+第一轮完成 Snapshot 为：
+
+```text
+Version:
+    5
+
+Records:
+    443
+
+High Watermark:
+    468
+```
+
+这是原报告中的状态。
+
+现在应从 Store 重新读取最新 Snapshot。
+
+首先读取：
+
+- 全部 Strategy Status Cards。
+- Task Best。
+- Branch Best。
+- Frontier。
+- Latest Attempt。
+- Last Correct Candidate。
+- Current Parent。
+- Deferred。
+- Paused。
+
+然后选出本轮值得继续探索的 Strategy。
+
+允许同时选择多条路线。
+
+## 7.2 完整历史
+
+对于参与第二轮的 Strategy，读取完整历史。
+
+至少包含：
+
+- 第一轮 Plan。
+- 第一轮 Candidate。
+- 第一轮 Correctness。
+- 第一轮 Benchmark。
+- 第一轮 Profile。
+- 第一轮失败和退化。
+- 第一轮 Memory Decision。
+- ABBA 复测结果。
+- 历史 Knowledge。
+- 原始源码与配置引用。
+
+不能只读取第一轮最快 Candidate。
+
+尤其不能因为 A 的 Tile 调整退化，就直接删除所有与 A 相关的探索方向。
+
+## 7.3 Analyzer 必须使用新证据
+
+第二轮 Analyzer 必须真正读取：
+
+- 当前 Candidate 源码。
+- 当前真实 Profile。
+- 第一轮 Benchmark。
+- 第一轮数学计算。
+- 历史方法。
+- 最新 Memory。
+- ABBA 复测结论。
+
+分析至少回答：
+
+1. 第一轮哪些方向失败了？
+2. 为什么可能失败？
+3. 哪些结论有真实证据？
+4. 哪些只是推测？
+5. `delayed-store-wait` 是否具有稳定收益？
+6. Tile 256 / 512 退化提供了什么信息？
+7. Single Tile 是否还有值得验证的条件？
+8. Compact New Row 的数据搬运变化是否值得进一步拆分？
+9. 下一轮应该尝试哪些有区别的方向？
+
+不得把“Program Duration 有所降低”直接推断成“DMA overlap 已被证明”。
+
+如果证据不足，必须写明 Unknown。
+
+## 7.4 第二轮 Multi-Plan
+
+继续遵守正式设计原则：
+
+**不要求模型在实验前选出唯一最优方法。**
+
+应提出多个有依据的 Plan。
+
+每个 Plan：
+
+- 有明确 Strategy。
+- 有精确 Parent。
+- 有真实代码映射。
+- 有具体改动。
+- 有 Evidence。
+- 有数学或机制依据。
+- 有资源成本。
+- 有风险。
+- 有未知项。
+- 有 Correctness Test。
+- 有 Benchmark Protocol。
+
+不能为了满足数量要求生成重复 Plan。
+
+不能把第一轮的 Plan 简单改名后重新执行。
+
+必须体现第一轮实验结果对第二轮方法选择的影响。
+
+## 7.5 可能的研究方向
+
+以下仅供 Analyzer 分析，**不是必须执行的 Plan**。
+
+### 方向一：Store Wait 调度
+
+研究：
+
+- 延迟 store.wait 的合法同步位置。
+- 不同 Tile 下的依赖关系。
+- 是否存在其他 Wait 可以合法后移。
+- 额外控制开销。
+- 潜在 DMA overlap。
+- 正确性风险。
+
+不能未经证明地继续移动同步点。
+
+### 方向二：Single Tile
+
+第一轮 Single Tile 接近 Baseline。
+
+需要进一步理解：
+
+- 哪些 Shape 真正是单 Tile。
+- 是否适用于特定 Decode 配置。
+- 零长度边界。
+- Online Softmax 状态初始化。
+- Mask / Length 特殊情况。
+
+### 方向三：Tile Size
+
+第一轮：
+
+```text
+Tile 512:
+    slower
+
+Tile 256:
+    slower
+```
+
+分析：
+
+- Program Duration 增加。
+- Tile 数量增加。
+- 计算/搬运调度变化。
+- 调用开销。
+- Live Memory。
+- 其他可能因素。
+
+不要仅因为较小 Tile 在当前 Shape 下退化，就断言所有 Shape 下都必然退化。
+
+### 方向四：Compact New Row
+
+第一轮：
+
+```text
+compact-new-row:
+    slower
+```
+
+可以分析：
+
+- Prepare 减少的数据量。
+- Attention 广播开销。
+- Layout Conversion。
+- 不同 Shape 的影响。
+- 额外控制逻辑。
+
+该方向不要求必须继续执行。
+
+### 方向五：Knowledge 中其他方法
+
+允许从已有 Knowledge 和 project2 历史实验中提出新的方法。
+
+但每个方法必须有代码映射与合理依据。
+
+不能仅仅引用论文标题就执行代码修改。
+
+---
+
+# 8. 第五阶段：第二轮真实 Candidate 执行
+
+## 8.1 Candidate Generation
+
+模型生成的 Plan 必须落实为真实源码修改。
+
+每个 Candidate：
+
+- 独立工作区。
+- 独立源码。
+- 精确 Parent。
+- Source Digest。
+- Config Digest。
+- Build Identity。
+- Diff。
+- Workload。
+- 正确性契约。
+- Benchmark 契约。
+
+不能覆盖原始 Kernel。
+
+不能修改 Oracle、Benchmark 或 Evaluation Contract 来提高通过率。
+
+## 8.2 真实执行流程
+
+```text
+Candidate
+    |
+    v
+Source Validation
+    |
+    v
+Compile
+    |
+    v
+Correctness
+    |
+    +---- Failure
+    |       |
+    |       v
+    |    Repair / Pause
+    |
+    v
+Benchmark
+    |
+    v
+Profile
+    |
+    v
+Evidence Validation
+    |
+    v
+Store Integration
+```
+
+所有 Candidate 应分别获得明确状态：
+
+- completed。
+- failed。
+- incorrect。
+- invalid_measurement。
+- incomplete。
+- deferred。
+- cancelled。
+- blocked。
+
+未执行不等于失败。
+
+资源不足时保留延期，不无声删除合法 Plan。
+
+## 8.3 预算
+
+第一轮报告中的剩余探索预算为：
+
+```text
+Executions:
+    11
+
+Declared Time:
+    19800 seconds
+```
+
+不能直接假设当前预算没有变化。
+
+必须首先读取 Controller 当前预算和 Journal。
+
+要求：
+
+1. 不重置原 Budget。
+2. 不重复扣费。
+3. 不将旧 Run 当成新实验。
+4. 不无限 Repair。
+5. 不无限 Runtime 申请。
+6. 预留第二轮真实 Candidate 的预算。
+
+ABBA 复测、重新准入和第二轮优化的执行成本必须根据现有 Budget Contract 正确归类。
+
+不要自行假设它们全部免费，也不要重复记账。
+
+建议先输出本轮 Budget Plan：
+
+```text
+Runtime Admission
+Baseline / Oracle Revalidation
+ABBA Confirmation
+Round 2 Candidates
+Repair Reserve
+Final Validation
+```
+
+根据真实剩余预算确定各部分执行数量。
+
+如果无法同时完成所有工作，优先保证：
+
+- 新环境可信准入。
+- 最小有效独立性能确认。
+- 至少一个真正依据新历史生成的 Round 2 Candidate。
+- 全部原始结果归档。
+
+不要通过削弱正确性来节省预算。
+
+## 8.4 Repair
+
+继续复用 2D+ 的 Repair。
+
+要求：
+
+- 每次 Repair 产生新 Candidate。
+- 旧失败 Candidate 保留。
+- 新 Candidate 精确绑定父版本。
+- 不修改正确性容差。
+- 不重复消费已完成 Operation。
+- 遵守原有 Repair 深度和 Retry 限制。
+
+---
+
+# 9. 特殊正确性问题：Single Tile Zero-Length
+
+报告明确指出：
+
+第一轮现有 boundary case 是多 Tile。
+
+因此即使三组正确性通过，也不能声称 Single Tile 新分支已经覆盖零长度情况。
+
+本轮需要补充独立诊断。
+
+## 9.1 测试重点
+
+针对新增 Single Tile 分支检查：
+
+- Sequence Length = 0。
+- 全无效位置。
+- Mask 全 False。
+- Softmax 初始化。
+- LSE。
+- Updated Cache。
+- NaN / Inf。
+- 输入 Cache 保持不变。
+
+具体输入必须符合真实 Kernel 接口。
+
+不能构造不合法 Shape 后将报错误判为 Kernel 缺陷。
+
+## 9.2 独立 Workload
+
+如果需要新的 Workload 或 Correctness Context：
+
+- 创建独立合法记录。
+- 保留旧冻结结果。
+- 不修改第一轮的 Correctness Contract。
+- 不把新测试结果追溯写成旧 Run 已验证范围。
+
+若发现真实错误，应保留失败 Candidate 和诊断，经过独立 Repair 再验证。
+
+---
+
+# 10. 第六阶段：Memory Update 与 P3.5 验收
+
+第二轮实验完成后，必须继续使用原 ExperimentStore / MemoryWriter。
+
+保存：
+
+- Round 2 AnalysisInputManifest。
+- Analyzer Tool Calls。
+- PlanSet。
+- Candidate。
+- Diff。
+- Correctness。
+- Benchmark。
+- Profile。
+- Evaluator Decision。
+- Repair。
+- Execution Cost。
+- Memory Snapshot。
+
+## 10.1 Best / Frontier
+
+必须分别核实：
+
+- Branch Best。
+- Task Best。
+- Frontier。
+- Latest Attempt。
+- Last Correct Candidate。
+- Current Parent。
+
+注意：
+
+- 不是所有 correct_faster 都自动意味着稳定确认。
+- 非 Task Best 仍可以保留 Frontier。
+- Candidate 相对 Parent 改善，不一定超过 Branch Best。
+- Runtime 不同的结果不能直接合并排名。
+- 不允许跨 Context 偷换比较范围。
+
+所有晋升必须调用原 `consider`。
+
+不要让 LLM 直接修改 Best 指针。
+
+## 10.2 第二轮是否真实利用了历史
+
+这是最重要的验收条件之一。
+
+最终报告需要明确给出：
+
+```text
+Round 1 Evidence
+       |
+       v
+Round 2 Observation
+       |
+       v
+Round 2 Hypothesis
+       |
+       v
+Round 2 Plan
+       |
+       v
+Actual Code Change
+       |
+       v
+Real TPU Result
+```
+
+例如：
+
+- 第一轮较小 Tile 退化。
+- Analyzer 根据该结果改变了第二轮的 Tile 探索范围。
+- 某个新的调度方法基于真实 Program Profile 提出。
+- 某个历史方法因不适用被排除。
+
+这些只是示例，必须以真实模型调用记录为准。
+
+不能事后编造“第二轮为什么选择这个方法”。
+
+---
+
+# 11. 本轮新增测试与回归
+
+继续保留原项目全部测试。
+
+上一份报告中的完整套件为：
+
+```text
+Ran 321 tests in 615.025s
+OK (skipped=3)
+```
+
+该测试实际运行于 2026-11-12。
+
+本轮必须在必要修改完成后重新运行，并报告新的测试总数、通过数、跳过数与失败数。
+
+## 11.1 本地测试
+
+至少覆盖：
+
+- Runtime 新环境绑定。
+- 旧 Context 不变。
+- 新 Run 身份。
+- ABBA 执行顺序。
+- 原始计时保存。
+- Budget 不重复扣费。
+- 远程 Operation 幂等。
+- Round 2 新 Snapshot。
+- Round 2 PlanSet。
+- Candidate 父链。
+- Best / Frontier。
+- Controller Recovery。
+- Single Tile 边界诊断的本地部分。
+
+## 11.2 真实硬件验证
+
+单独报告：
+
+- Colab Runtime。
+- TPU v6e。
+- Baseline Re-admission。
+- Wrong Candidate Oracle。
+- ABBA。
+- Round 2 Candidate。
+- Correctness。
+- Benchmark。
+- Profile。
+- Memory Update。
+
+不能把本地 Mock / Synthetic 测试统计成 TPU 验收。
+
+## 11.3 独立复核
+
+尽可能复核：
+
+- 工件 SHA256。
+- 原始 NPZ。
+- Correctness。
+- 输入 Cache 不可变性。
+- 原始 Latency Sample。
+- 统计结果。
+- Profile Parser。
+- Evidence Closure。
+- Candidate Parent Identity。
+- Decision。
+- Budget。
+
+有实际独立 Reviewer 时记录其审查范围和结果。
+
+没有独立审查时不能虚称完成。
+
+---
+
+# 12. 最终报告
+
+请交付：
+
+`docs/phase3/phase3-p35-final-validation.md`
+
+其中至少包含以下部分。
+
+## 12.1 Runtime
+
+- Runtime ID。
+- TPU Model。
+- JAX / libtpu。
+- Environment Fingerprint。
+- Colab Bridge。
+- 是否发生 Runtime 迁移。
+
+## 12.2 Baseline Re-admission
+
+- Source Identity。
+- Correctness。
+- Oracle Negative Tests。
+- Evaluation Context。
+- Benchmark Contract。
+
+## 12.3 ABBA Performance Confirmation
+
+- 实际 A/B 执行顺序。
+- 全部原始样本。
+- Host Latency。
+- Program Duration。
+- 统计分析。
+- 是否稳定改善。
+- 是否存在 Host 波动。
+- 结论限制。
+
+## 12.4 Round 2 Analyzer
+
+- 输入 Snapshot。
+- Memory History。
+- Knowledge。
+- Profile。
+- Observation。
+- Hypothesis。
+- PlanSet。
+- 如何利用 Round 1 结果。
+
+## 12.5 Round 2 Experiments
+
+对每个 Candidate：
+
+- Plan。
+- Parent。
+- Diff。
+- Correctness。
+- Benchmark。
+- Profile。
+- Evaluation。
+- Decision。
+- Budget。
+
+## 12.6 Memory
+
+- 新 Snapshot。
+- Branch Best。
+- Task Best。
+- Frontier。
+- Latest Attempt。
+- Deferred。
+- Paused。
+
+## 12.7 测试与审查
+
+- 本地完整测试。
+- 真实 TPU 测试。
+- 原始日志。
+- 独立核验。
+- 未解决问题。
+
+## 12.8 Phase 3 最终状态
+
+明确说明：
+
+- 哪些 Gate 已完成。
+- 哪些只完成特定 Workload。
+- 是否获得稳定性能收益。
+- 是否完成两轮真实 RSI。
+- 哪些仍然未验证。
+
+不能将 MLA Decode contiguous BF16 的结果扩大成整个 MLA Forward / Decode 都已经完成。
+
+---
+
+# 13. P3.5 最终验收标准
+
+只有满足下列要求，才能宣布 P3.5 完成：
+
+- [ ] 重新获取并验证真实 TPU v6e。
+- [ ] 新 Runtime 环境身份可靠。
+- [ ] Baseline / Candidate 重新准入。
+- [ ] 原 Correctness Oracle 通过。
+- [ ] 错误负例按预期被拒绝。
+- [ ] 完成受控 ABBA / Interleaved 复测。
+- [ ] 保存全部原始性能数据。
+- [ ] 对性能稳定性给出有证据的结论。
+- [ ] 从新 Snapshot 读取 Memory。
+- [ ] 第二轮 Analyzer 实际读取第一轮结果。
+- [ ] 第二轮生成新的有依据 Plan。
+- [ ] 第二轮至少执行一个新的真实 TPU Candidate。
+- [ ] 第二轮正确性和性能验证完成。
+- [ ] 第二轮 Evidence 写回原 Store。
+- [ ] Branch Best / Task Best / Frontier 核验通过。
+- [ ] 原有软件回归测试仍通过。
+- [ ] 最终报告明确验收范围和未完成项。
+
+注意：
+
+**获得稳定加速不是宣布 P3.5 系统闭环完成的必要条件。**
+
+如果受控复测证明没有稳定收益，但系统正确完成真实多轮实验、可靠验证并保存失败经验，也可以验收为：
+
+`P3.5 System Workflow Validated, Performance Improvement Not Confirmed`
+
+不能虚构性能提升。
+
+若真实第二轮未完成，则只能标记 Partial / Blocked。
+
+---
+
+# 14. 技术参考
+
+以下资料用于当前 P3.5，不需要重新开展大规模调研。
+
+## JAX Benchmark
+
+https://docs.jax.dev/en/latest/benchmarking.html
+
+重点：
+
+- JIT Compilation。
+- Warmup。
+- Asynchronous Dispatch。
+- block_until_ready。
+- Host / Device Timing Boundary。
+
+## JAX Profiling
+
+https://docs.jax.dev/en/latest/profiling.html
+
+重点：
+
+- XPlane。
+- TPU Trace。
+- Capture。
+- Trace Mode。
+- Sync Events。
+
+## OpenXLA Custom Call Profiling
+
+https://openxla.org/xprof/custom_call_profiling
+
+重点：
+
+- Custom Call Duration。
+- LLO Static Analysis。
+- Runtime Tracing。
+- Event Drop。
+- 工具版本和 TPU 支持边界。
+
+注意：
+
+原 Runtime 2 使用：
+
+```text
+JAX 0.8.1
+libtpu 0.0.30
+xprof 2.22.1
+```
+
+不要为了使用较新的 LLO 工具而直接升级运行环境。
+
+如果后续需要测试新 Profiler 功能，请另建隔离环境和独立验证任务，不要污染本次 Benchmark。
+
+## TPU v6e
+
+https://docs.cloud.google.com/tpu/docs/v6e
+
+硬件规格可以用于理论分析。
+
+实际设备、可用资源和运行状态必须从 Colab 真实读取。
+
+---
+
+# 15. 立即执行
+
+现在开始 P3.5。
+
+**不要重新实现 Phase 3。**
+
+先读取当前真实项目状态、Journal、Memory Snapshot 和 Colab Runtime。
+
+然后依次执行：
+
+```text
+1. Inspect Current State
+        |
+        v
+2. Recover / Acquire TPU Runtime
+        |
+        v
+3. New Environment Admission
+        |
+        v
+4. Baseline + Candidate Revalidation
+        |
+        v
+5. ABBA Performance Confirmation
+        |
+        v
+6. New Memory Snapshot
+        |
+        v
+7. Round 2 Analyzer
+        |
+        v
+8. Round 2 Multi-Plan
+        |
+        v
+9. Real TPU Candidate Execution
+        |
+        v
+10. Correctness / Benchmark / Profile
+        |
+        v
+11. Evaluator / Store Integration
+        |
+        v
+12. Memory Update
+        |
+        v
+13. P3.5 Final Validation
+```
+
+严格复用当前代码和已有恢复工具。
+
+优先使用已经准备好的 Runtime 恢复和 ABBA 确认工具，不要重写一套。
+
+如果没有 Runtime，不要无限申请或伪造执行。
+
+如果已经有新 Runtime，先查询和恢复它，不要重复分配。
+
+如果已有部分 Round 2 结果，继续原 Journal，不重新创建轮次。
+
+如果某个 Gate 阻塞，只停止依赖该 Gate 的后续工作，继续完成可独立执行的代码核验、测试和文档。
+
+不要等待没有明确恢复条件的后台任务，也不要承诺稍后自动交付。
+
+**最终目标：完成真实 MLA Decode 的第二轮 RSI，获得可信的性能复测结论，并对 Phase 3 做出有证据支持的最终验收判断。**

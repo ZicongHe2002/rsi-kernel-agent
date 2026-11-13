@@ -1,0 +1,39 @@
+--- a/pallas_kernels/kernels/mla_decode.py
++++ b/pallas_kernels/kernels/mla_decode.py
+@@ -2910,7 +2910,7 @@
+           (q_ref[b], jnp.zeros((heads, padded_dim - dim), q.dtype)), axis=1
+         )
+         row = new_rows[b : b + 1]
+-        np_ref[b] = jnp.broadcast_to(row, (block_size, padded_dim))
++        np_ref[b] = row
+         lp_ref[b] = jnp.broadcast_to(lens[b : b + 1], (heads, block_size))
+ 
+     vmem = pl.BlockSpec(memory_space=pltpu.VMEM)
+@@ -2920,7 +2920,7 @@
+       out_specs=(vmem, vmem, vmem),
+       out_shape=(
+         jax.ShapeDtypeStruct((batch, heads, padded_dim), q.dtype),
+-        jax.ShapeDtypeStruct((batch, block_size, padded_dim), new.dtype),
++        jax.ShapeDtypeStruct((batch, 1, padded_dim), new.dtype),
+         jax.ShapeDtypeStruct((batch, heads, block_size), lengths.dtype),
+       ),
+       compiler_params=pltpu.CompilerParams(vmem_limit_bytes=vmem_limit_bytes),
+@@ -2930,7 +2930,8 @@
+ 
+     def attention(q_ref, new_ref, len_ref, cache_ref, out_ref, updated_ref, tile, sem):
+       b = pl.program_id(0)
+-      query, new_tile, lens = q_ref[0], new_ref[0], len_ref[0]
++      query, new_row, lens = q_ref[0], new_ref[0], len_ref[0]
++      new_tile = jnp.broadcast_to(new_row, (block_size, padded_dim))
+       # Encode clipped lengths in masks; Proton signed min/max lowering fails.
+       offsets = lax.broadcasted_iota(jnp.int32, (heads, block_size), 1)
+       # Proton transpose supports int32, but not boolean vectors.
+@@ -3006,7 +3007,7 @@
+       grid=(batch,),
+       in_specs=(
+         pl.BlockSpec((1, heads, padded_dim), index),
+-        pl.BlockSpec((1, block_size, padded_dim), index),
++        pl.BlockSpec((1, 1, padded_dim), index),
+         pl.BlockSpec((1, heads, block_size), index),
+         hbm,
+       ),
