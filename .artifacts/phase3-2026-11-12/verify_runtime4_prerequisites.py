@@ -14,16 +14,18 @@ import uuid
 from verify_runtime3_prerequisites import ERRORS, terminal_view
 from verify_real_round import ReadOnlyStore, require, verify_job
 from real_round_aux import read_json, require_gates, write_once
+from p35_runtime_generations import generation_number
 
 
 NAMES = ('oracle-negative-attention', 'oracle-negative-cache', 'baseline-repair', 'baseline-b')
 
 
-def verify_prerequisites(directory):
+def verify_prerequisites(directory, *, generation='runtime4'):
+    generation_number(generation, minimum=4)
     directory = Path(directory)
     report = {
         'schema_version': 1, 'verified_at_utc': datetime.now(timezone.utc).isoformat(),
-        'generation': 'runtime4', 'network_calls': 0, 'store_writes': 0, 'binding_writes': 0,
+        'generation': generation, 'network_calls': 0, 'store_writes': 0, 'binding_writes': 0,
         'expected_names': list(NAMES), 'jobs': [], 'recompute_npz_requested': True,
         'aggregate_gate_verification': 'pending_all_four_results',
         'limitations': [
@@ -34,7 +36,7 @@ def verify_prerequisites(directory):
             'Missing completion markers remain pending; concurrent work may finish after observation.'],
     }
     store, runtime, preflight_error = None, None, None
-    config_path = directory / 'colab-config-runtime4.json'
+    config_path = directory / ('colab-config-' + generation + '.json')
     try:
         if config_path.is_file():
             runtime = read_json(config_path)['runtime_id']
@@ -47,7 +49,7 @@ def verify_prerequisites(directory):
     cache = {}
     completed = 0
     for name in NAMES:
-        path = directory / (name + '-runtime4-job.json')
+        path = directory / (name + '-' + generation + '-job.json')
         row = {'name': name, 'verification': 'pending'}
         try:
             if not path.is_file():
@@ -81,7 +83,7 @@ def verify_prerequisites(directory):
     report['completed_views'] = completed
     if completed == len(NAMES) and report['counts']['verified'] == len(NAMES):
         try:
-            jobs, results = require_gates(store, directory, {'generation': 'runtime4'})
+            jobs, results = require_gates(store, directory, {'generation': generation})
             require(set(jobs) == set(results) == set(NAMES), 'Aggregate gates omit a Runtime 4 prerequisite')
             report['aggregate_gate_verification'] = 'all_four_original_gates_verified'
         except ERRORS as error:
@@ -90,7 +92,7 @@ def verify_prerequisites(directory):
     report['status'] = (
         'verification_failed' if preflight_error or report['counts']['failed_verification']
         or report['aggregate_gate_verification'] == 'failed' else
-        'runtime4_prerequisites_verified' if report['aggregate_gate_verification']
+        generation + '_prerequisites_verified' if report['aggregate_gate_verification']
         == 'all_four_original_gates_verified' else 'partial_pending')
     checked = store.artifacts.checked if store is not None else {}
     report['verified_unique_artifacts'] = len(checked)
@@ -102,9 +104,10 @@ def verify_prerequisites(directory):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--directory', type=Path, default=Path(__file__).resolve().parent)
+    parser.add_argument('--generation', default='runtime4')
     args = parser.parse_args(argv)
-    report = verify_prerequisites(args.directory)
-    target = args.directory / 'runtime4-local-verifications'
+    report = verify_prerequisites(args.directory, generation=args.generation)
+    target = args.directory / (args.generation + '-local-verifications')
     target.mkdir(exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     output = target / (stamp + '-' + uuid.uuid4().hex + '.json')

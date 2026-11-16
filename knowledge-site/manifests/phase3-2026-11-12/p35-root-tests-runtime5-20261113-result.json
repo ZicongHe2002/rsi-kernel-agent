@@ -1,0 +1,9 @@
+{
+    "command":  "python -B -X utf8 -m unittest discover -s tests -v",
+    "started_at_utc":  "2026-11-13T12:49:19.5028804Z",
+    "finished_at_utc":  "2026-11-13T12:59:29.8963565Z",
+    "elapsed_wall_s":  610.38473279999994,
+    "exit_code":  0,
+    "log":  ".artifacts/phase3-2026-11-12/p35-root-tests-runtime5-20261113.txt",
+    "scope":  "Local CPU/Synthetic regression; not TPU acceptance"
+}

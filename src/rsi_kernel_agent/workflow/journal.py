@@ -86,6 +86,8 @@ class WorkflowJournal:
                      and data.get('state_digest') == _digest(data['state']))
             if not valid:
                 raise ValueError('Malformed workflow state or broken journal chain')
+            from .budget import validate_transition
+            validate_transition(self.store, events[-1].details['state'] if events else None, data['state'])
             events.append(record)
             previous = record.id
         return events
@@ -120,5 +122,7 @@ class WorkflowJournal:
             if prior_revision + 1 == len(events) and events[-1] == record:
                 return _detach(payload)
             raise ConflictError('Workflow state changed; reload before saving')
+        from .budget import validate_transition
+        validate_transition(self.store, events[-1].details['state'] if events else None, payload)
         self.store.append(record, identity)
         return _detach(payload)

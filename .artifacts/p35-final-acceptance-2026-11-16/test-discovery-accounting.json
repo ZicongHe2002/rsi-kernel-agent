@@ -1,0 +1,24 @@
+{
+  "root": {
+    "executed_entries": 343,
+    "distinct_test_ids": 343,
+    "duplicate_extra_executions": 0,
+    "duplicates": {},
+    "exit_code": 0
+  },
+  "auxiliary": {
+    "executed_entries": 383,
+    "distinct_test_ids": 376,
+    "duplicate_extra_executions": 7,
+    "duplicates": {
+      "test_resume_p35_diagnostic.DiagnosticResumeTests.test_config_change_during_polling_blocks_next_step": 2,
+      "test_resume_p35_diagnostic.DiagnosticResumeTests.test_coordinated_local_variant_and_input_edits_do_not_bypass_original_intake": 2,
+      "test_resume_p35_diagnostic.DiagnosticResumeTests.test_frozen_file_or_artifact_tampering_rejects_before_backend_or_store_writes": 2,
+      "test_resume_p35_diagnostic.DiagnosticResumeTests.test_frozen_prerequisite_intent_uses_original_completed_marker": 2,
+      "test_resume_p35_diagnostic.DiagnosticResumeTests.test_intake_digest_and_checkpoint_parent_bindings_are_required": 2,
+      "test_resume_p35_diagnostic.DiagnosticResumeTests.test_paused_pair_does_not_resume_and_changed_parent_context_is_rejected": 2,
+      "test_resume_p35_diagnostic.DiagnosticResumeTests.test_unknown_recovery_keeps_original_operations_two_charges_and_idempotent_completion": 2
+    },
+    "exit_code": 0
+  }
+}

@@ -1,0 +1,5 @@
+﻿{
+    "exit_code":  0,
+    "command":  "python -B -X utf8 -m unittest -v test_p35_round2_gate test_p35_publish_confirmation",
+    "phase":  "after_fix"
+}

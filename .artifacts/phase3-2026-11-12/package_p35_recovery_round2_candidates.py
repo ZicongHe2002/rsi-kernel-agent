@@ -1,4 +1,5 @@
-"""Package four reviewed entry-only changes; original Intake creates records."""
+"""Package reviewed entry-only changes; original Intake creates records."""
+import argparse
 import ast
 from copy import deepcopy
 from dataclasses import asdict
@@ -12,16 +13,22 @@ sys.path.insert(0, str(ROOT / 'src'))
 from rsi_kernel_agent.contracts import ArtifactRef, canonical_json
 from rsi_kernel_agent.store import ExperimentStore
 from real_round_aux import read_json, write_once
+from p35_recovery_round import recovery_identity
 
 d = Path(__file__).resolve().parent
-t = d / 'real-round-2-runtime4'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--generation', default='runtime4')
+args = parser.parse_args()
+t, _ = recovery_identity(d, args.generation)
 result = read_json(t / 'result.json')
 assert result['winner_selected'] is False and result['analysis']['review'] == []
 plans = result['plan_set']['plans']
-assert len(plans) == 4 and {p['id'] for p in plans} == {
-    'R2-A-length-row','R2-A-length-smem','R2-B-query','R2-B-b1-fusion'}
+expected_plans = {'R2-A-length-row','R2-A-length-smem'}
+if int(args.generation[7:]) < 6:
+    expected_plans |= {'R2-B-query','R2-B-b1-fusion'}
+assert len(plans) == len(expected_plans) and {p['id'] for p in plans} == expected_plans
 origins = {role:read_json(d / name) for role,name in {
-    'A':'baseline-repair-runtime4-job.json','B':'baseline-b-runtime4-job.json'}.items()}
+    'A':'baseline-repair-'+args.generation+'-job.json','B':'baseline-b-'+args.generation+'-job.json'}.items()}
 parent_dirs = {'A':'baseline-repair-1','B':'round1-delayed-store-wait'}
 labels = {'R2-A-length-row':'length-row','R2-A-length-smem':'length-smem',
           'R2-B-query':'query-in-attention','R2-B-b1-fusion':'b1-fused-prepare'}
@@ -82,10 +89,10 @@ for plan in plans:
           'changed_bundle_paths':changed,'config':config,
           'oracle_bundle_ref':origin['contract']['context']['protocol']['oracle_bundle_ref'],
           'classification':'conversation-generated Round2 candidate; real validation pending'}
-    write_once(path / 'packaged-runtime4.json',note)
+    write_once(path / ('packaged-' + args.generation + '.json'),note)
     summary.append(note)
     specs[plan['id']]=[value]
-assert sum(len(v) for v in specs.values())==4
+assert sum(len(v) for v in specs.values()) == len(expected_plans)
 write_once(t / 'variants.json',specs)
 write_once(t / 'candidate-artifacts.json',summary)
 print(canonical_json({'plans':len(specs),'variants':len(summary),

@@ -53,6 +53,16 @@ class Controller:
     def _save(self, state, reason, job=None):
         return self.journal.save(state, reason, target_id=job['plan_id'] if job else None)
 
+    def extend_budget(self, grant, key):
+        """Append an explicit cumulative grant without submitting or resuming work."""
+        from .budget import apply_grant
+        with self.journal.lock():
+            state = self.journal.load()
+            entry, changed = apply_grant(self.store, state, grant, key)
+            if changed:
+                self._save(state, 'Explicit authorized cumulative budget grant')
+            return detached(entry)
+
     def _ensure_records(self, job):
         variant = job['variant']
         provenance = job['contract']['context']['provenance']

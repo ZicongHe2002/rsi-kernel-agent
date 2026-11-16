@@ -1,0 +1,22 @@
+{
+  "tests": [
+    "test_resume_p35_diagnostic_independent.DiagnosticResumeOutputTests",
+    "test_verify_p35_continuation_independent.IndependentIntakeBindingTests"
+  ],
+  "tests_run": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "seconds": 67.89099690003786,
+  "cleanup_calls": 4,
+  "cleanup_unsuccessful_returns": [],
+  "require_recovery_context_restored": true,
+  "test_file_sha256": {
+    "test_p35_diagnostic_dispatch.py": "61d3769a895b2a253e040ab10b50177a44644cafad34b22f2c43b58af0931d15",
+    "test_resume_p35_diagnostic.py": "a464e70e5b9e547aa936c3e08018dd11a7667a20e0ff99b3af5c62e467119c8f",
+    "test_resume_p35_diagnostic_independent.py": "954bcf51f35ba9087709b0b0ea9d3e40aa78cc5705f8255ccd8357f15f653202",
+    "test_verify_p35_continuation.py": "d685995baa52a9327c690388147bdd7930d77511603ebea3c992ac038733e2c0",
+    "test_verify_p35_continuation_independent.py": "90f7d4f2469f0b8c2f63cd78877fa63ef3344a6c1b01500e44031b3f34c44170"
+  },
+  "exit_code": 0
+}

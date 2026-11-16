@@ -1,0 +1,1464 @@
+{
+  "status": "verified",
+  "checked_at_utc": "2026-11-16T02:28:54.078916+00:00",
+  "store_writes": 0,
+  "network_calls": 0,
+  "schema_v1_exact_match": true,
+  "foreign_key_check": "passed",
+  "run_event_transition_replay": "passed",
+  "run_states": {
+    "failed": 11,
+    "succeeded": 27,
+    "incomplete": 4,
+    "not_run": 10
+  },
+  "separate_reservations": {
+    "baseline_reservation.v1": {
+      "records": 2,
+      "cost": {
+        "executions": 2,
+        "time_s": 3600.0,
+        "tokens": 0
+      }
+    },
+    "oracle_negative_reservation.v1": {
+      "records": 1,
+      "cost": {
+        "executions": 1,
+        "time_s": 1800.0,
+        "tokens": 0
+      }
+    },
+    "prerequisite_reservation.v1": {
+      "records": 22,
+      "cost": {
+        "executions": 22,
+        "time_s": 39600.0,
+        "tokens": 0
+      }
+    }
+  },
+  "durable_request_count": 170,
+  "durable_receipt_count": 169,
+  "requests_without_receipts": [
+    {
+      "operation_id": "operation:079d2d129595c886b74f35bdc44630a39e7ab03cc9817e67719659c733f64c3a",
+      "request_id": "execution-request:75f825f7a2d589ab3c1bda98afb9854abfa6408f5fa7608bda674e30c48138b4",
+      "run_id": "runtime-run:c9e383063a3da8b8500b2a36596049ea28b0920595d66d4c229133f5626699a1",
+      "stage": "correctness",
+      "runtime_id": "tpu-v6e1-s-euw4a0-1xqzeyr91qwmg",
+      "local_run_state": "incomplete"
+    }
+  ],
+  "all_operation_ids_unique": true,
+  "all_request_digests_verified": true,
+  "all_receipt_artifact_hashes_verified": true,
+  "all_request_receipt_runtime_context_candidate_bindings_verified": true,
+  "archives": [
+    {
+      "generation": "runtime3",
+      "path": ".artifacts\\phase3-2026-11-12\\real-round-2\\runtime-loss-archive.json",
+      "sha256": "76c269734ffe6c7d52efb311f1f755164848b7b53e007c356b5e26edd4711251",
+      "decision_id": "p35-loss-result:cf1ceaed21b624b7bae85dc4e467eb591c3e431f22267e1eaa6676bea6a66e6d",
+      "intent_id": "p35-loss-intent:fe23b942a082b270ee4d9a984e5e7e487fbaa7801cc6db6476cd25573012bef7",
+      "round_id": "real-runtime2-round:2",
+      "run_ids": [
+        "wf-r:63976dbead7e092c9998f9c9de5a2e3d",
+        "wf-r:b817f0f0b1458e058d3b64e256b6d261",
+        "wf-r:b8d341173c97bcf3d95d00df293e7a7d",
+        "wf-r:e52b74e97248ccfb03ee6e8170494b3d"
+      ],
+      "durable_requests": 0,
+      "durable_receipts": 0,
+      "started_run": "wf-r:63976dbead7e092c9998f9c9de5a2e3d",
+      "started_status": "incomplete / cancelled",
+      "not_started_runs": [
+        "wf-r:b817f0f0b1458e058d3b64e256b6d261",
+        "wf-r:b8d341173c97bcf3d95d00df293e7a7d",
+        "wf-r:e52b74e97248ccfb03ee6e8170494b3d"
+      ],
+      "spent_preserved": {
+        "executions": 10,
+        "time_s": 18000.0,
+        "tokens": 0
+      },
+      "retained_operation_id": "operation:0c216652c07de82f0a48780e00ec4eef5dd8e136c826dd3178812e434a8005e5"
+    },
+    {
+      "generation": "runtime5",
+      "path": ".artifacts\\phase3-2026-11-12\\real-round-2-runtime5\\runtime-loss-archive.json",
+      "sha256": "7b579ac7300ef3c59b76b958b7e6aba33757518ee02bbfb4a45fc7895c2339e3",
+      "decision_id": "p35-r5-loss-result:3b9e87c294ff65d245feff0623df903c40a096a3a3ace47244a1fe5e277e0aa0",
+      "intent_id": "p35-r5-loss-intent:09580ab0ffdd3447f4b60b0f976c3d7400e2e762ce1403fe301190ddd4452419",
+      "round_id": "real-runtime5-recovery-round:2",
+      "run_ids": [
+        "wf-r:86fc0e8b32f639f2d68ee9602734c490",
+        "wf-r:9df6303f89a697e5a5ba20cde1c7b0c3",
+        "wf-r:e7783383d50b92ffea9a95e6cef4ecb1",
+        "wf-r:efee39a8e41338cc230eab5e4c25a843"
+      ],
+      "durable_requests": 0,
+      "durable_receipts": 0,
+      "started_run": "wf-r:86fc0e8b32f639f2d68ee9602734c490",
+      "started_status": "incomplete / cancelled",
+      "not_started_runs": [
+        "wf-r:9df6303f89a697e5a5ba20cde1c7b0c3",
+        "wf-r:e7783383d50b92ffea9a95e6cef4ecb1",
+        "wf-r:efee39a8e41338cc230eab5e4c25a843"
+      ],
+      "spent_preserved": {
+        "executions": 11,
+        "time_s": 19800.0,
+        "tokens": 0
+      },
+      "retained_operation_id": "operation:6f715c2df6c5a2b9efa7afac5e1491c2a7b9a1a0de9efabdb20c9700e60418c6"
+    },
+    {
+      "generation": "runtime6",
+      "path": ".artifacts\\phase3-2026-11-12\\runtime6-completed-prerequisite-loss-archive.json",
+      "sha256": "7d7be1daaf1e44495aabaf7595a543a1b3f36362659295569d5d99aac6ef754e",
+      "decision_id": "p35-completed-loss-result:0db55af265224f30c701da9edc6aa89ef3d7328c54900f8e7aed22bd7a57b462",
+      "intent_id": "p35-completed-loss-intent:20e728fcf147d1f2bfbac6cf7ecdb607f70fd002bb4830ff8c85187f6cafdc57",
+      "context_ids": [
+        "runtime-context:82d817b7732a0a37c3ae8d2b8468160c3514136004635c75645e09361f7d3ddf",
+        "runtime-context:996279e1f5b359d00eea8fc994675b9367e4a21e04bd71ba4c3c8c2572e90e01"
+      ],
+      "gate_run_ids": [
+        "runtime-run:33cdf2ea5137961940d90fe260d52cc0af55a95e344172eea8570a261222097d",
+        "runtime-run:9996215ef1a749fb3247c233436cb3c737a0727f967d6a6c6426dbca1bf0e020",
+        "runtime-run:a77f578874dc23a82827dd5e3d9f89ae16360fb05e175ce8f86ecd56806cb598",
+        "runtime-run:ad643133bb2e1199ff5abef76b567dbd93326440387c3c25d90f91efa52c39d2"
+      ],
+      "exploration_runs": 0,
+      "exploration_requests": 0,
+      "exploration_receipts": 0,
+      "spent_preserved": {
+        "executions": 11,
+        "time_s": 19800.0,
+        "tokens": 0
+      }
+    },
+    {
+      "generation": "runtime4",
+      "path": ".artifacts\\phase3-2026-11-12\\runtime4-prerequisite-loss-archive.json",
+      "sha256": "932f602e8a63884573e6178e954c6acb18b87d9c17b20fcb5dfe591131a73e82",
+      "decision_id": "p35-runtime4-unknown-loss-result:27af3fed5690d1519156e4b1951ed2ef050fd39ba83a3d6f153a911b5b162728",
+      "run_id": "runtime-run:c9e383063a3da8b8500b2a36596049ea28b0920595d66d4c229133f5626699a1",
+      "operation_id": "operation:079d2d129595c886b74f35bdc44630a39e7ab03cc9817e67719659c733f64c3a",
+      "run_status": "incomplete",
+      "remote_correctness_outcome": "unknown",
+      "durable_request_stages": [
+        "compile",
+        "correctness",
+        "generate"
+      ],
+      "receipt_stages": [
+        "compile",
+        "generate"
+      ],
+      "evaluation_created": false,
+      "remote_cancelled": false,
+      "budget_refunded": false
+    }
+  ],
+  "context_summary": [
+    {
+      "context_id": "mla-context:c86eb2d3aeeb66d7e174a2029d9f422d1848432b5a1c98690198fd06634866c3",
+      "runtime_id": "tpu-v6e1-s-euw4a0-xyzyx7kofigt",
+      "workload_id": "mla-workload:9b54967173a4302d81eb956f8bdecb44bf807077d43eaf29d0b5c95977227c4a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9",
+            "evaluation_id": "evaluation:da254618f822e70e11b5d39ab52dfdf2517a8e1cab5f8328be4cec748ae49178",
+            "latency_ms": 0.2207150005233416,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "mla-context:c86eb2d3aeeb66d7e174a2029d9f422d1848432b5a1c98690198fd06634866c3",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "task_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9",
+            "evaluation_id": "evaluation:da254618f822e70e11b5d39ab52dfdf2517a8e1cab5f8328be4cec748ae49178",
+            "latency_ms": 0.2207150005233416,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "mla-context:c86eb2d3aeeb66d7e174a2029d9f422d1848432b5a1c98690198fd06634866c3",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "latest_attempt": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9",
+            "execution_status": "succeeded",
+            "scheduling_status": "finished",
+            "event_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9:finish",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9",
+            "evaluation_id": "evaluation:da254618f822e70e11b5d39ab52dfdf2517a8e1cab5f8328be4cec748ae49178",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:a37a1b7abd28b0681f9fd736f13eb97e37f15612",
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "identity": {
+              "build_digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae"
+            },
+            "decision_id": "parent-select:b2f1d77750d752aed056e0a7438b780f76cf2711e490239b20f7944642330d27",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9",
+            "evaluation_id": "evaluation:da254618f822e70e11b5d39ab52dfdf2517a8e1cab5f8328be4cec748ae49178",
+            "latency_ms": 0.2207150005233416,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "mla-context:c86eb2d3aeeb66d7e174a2029d9f422d1848432b5a1c98690198fd06634866c3",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "baseline-repair-run:22398773cfc39fbfd571714a9578835e2add586ab10b873cf017fa9ee750a8f9",
+            "evaluation_id": "evaluation:da254618f822e70e11b5d39ab52dfdf2517a8e1cab5f8328be4cec748ae49178",
+            "latency_ms": 0.2207150005233416,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "mla-context:c86eb2d3aeeb66d7e174a2029d9f422d1848432b5a1c98690198fd06634866c3",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "oracle-negative-context:8704c7f083ed7d879536c716c2c0550154d5410332a5a15cb1f55f94ac55b616",
+      "runtime_id": "tpu-v6e1-s-euw4a0-xyzyx7kofigt",
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+            "run_id": "oracle-negative-run:eba70c035655ed3c46e11c3be29ed3db88af13f8e74450845db16a807b305a5d",
+            "execution_status": "not_run",
+            "scheduling_status": "ready",
+            "event_id": null,
+            "candidate_label": "Known-wrong cache Oracle validation only"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+      "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+      "workload_id": "mla-workload:9b54967173a4302d81eb956f8bdecb44bf807077d43eaf29d0b5c95977227c4a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:4686bd6eb923d2ce96be095360d34f0c3f533a30c4cf64c8e0bf70c3d275f223",
+            "evaluation_id": "evaluation:3bf65cc359132ac5af087bc4f7147a524add9b09551d8d525a41110db8608abb",
+            "latency_ms": 0.19319499995162914,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "wf-r:9693f8c2c46382039b4386db7c6ddbe1",
+            "evaluation_id": "evaluation:281f8872a2e22a26845fbd9fda96d97108f8d1f11b006c083fdb45c74b6061cc",
+            "latency_ms": 0.18379500011178607,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:831ba6c3985e8879dd6a16dcc33cead6",
+            "run_id": "wf-r:44028b3ac9bd4026c7961396e3a67ab8",
+            "execution_status": "succeeded",
+            "scheduling_status": "finished",
+            "event_id": "wf-r:44028b3ac9bd4026c7961396e3a67ab8:finish",
+            "candidate_label": "single-tile"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "wf-c:831ba6c3985e8879dd6a16dcc33cead6",
+            "run_id": "wf-r:44028b3ac9bd4026c7961396e3a67ab8",
+            "evaluation_id": "evaluation:a912df91f6d2f5ba18964f61e1c7843f575d3137595c91644111ee659ad0f211",
+            "candidate_label": "single-tile"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:a37a1b7abd28b0681f9fd736f13eb97e37f15612",
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "identity": {
+              "build_digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae"
+            },
+            "decision_id": "parent-select:25ddb6b51ec450a2c56e73bc6e8e3bfca2f1f39ed3f0a656fa872bf78829f1fb",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "frontier": [
+            {
+              "candidate_id": "wf-c:239b6f1dc10992bb635b12152bf963a6",
+              "label": "tile512"
+            },
+            {
+              "candidate_id": "wf-c:816b5cb982414a8f1a4a0283a554bbc8",
+              "label": "tile256"
+            },
+            {
+              "candidate_id": "wf-c:831ba6c3985e8879dd6a16dcc33cead6",
+              "label": "single-tile"
+            }
+          ]
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "wf-r:9693f8c2c46382039b4386db7c6ddbe1",
+            "evaluation_id": "evaluation:281f8872a2e22a26845fbd9fda96d97108f8d1f11b006c083fdb45c74b6061cc",
+            "latency_ms": 0.18379500011178607,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "wf-r:9693f8c2c46382039b4386db7c6ddbe1",
+            "evaluation_id": "evaluation:281f8872a2e22a26845fbd9fda96d97108f8d1f11b006c083fdb45c74b6061cc",
+            "latency_ms": 0.18379500011178607,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+            "candidate_label": "delayed-store-wait"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "wf-r:9693f8c2c46382039b4386db7c6ddbe1",
+            "evaluation_id": "evaluation:281f8872a2e22a26845fbd9fda96d97108f8d1f11b006c083fdb45c74b6061cc",
+            "latency_ms": 0.18379500011178607,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:89820a7b421896bf463bb70f671ed7ce4c827086a4e37227ed7c1fc34d34d8b8",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:77014d402daf890f724cb8be8220b97f",
+            "run_id": "wf-r:fc2da20b2a1679868f21869279e90949",
+            "execution_status": "succeeded",
+            "scheduling_status": "finished",
+            "event_id": "wf-r:fc2da20b2a1679868f21869279e90949:finish",
+            "candidate_label": "compact-new-row"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "wf-c:77014d402daf890f724cb8be8220b97f",
+            "run_id": "wf-r:fc2da20b2a1679868f21869279e90949",
+            "evaluation_id": "evaluation:d1c3ae57ec9b5dda09155c8f96869fd6e6816404859e7248828657609e09a33e",
+            "candidate_label": "compact-new-row"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:2ceae14208b284845423989d29e280295b3cdd5e",
+            "candidate_id": "strategy-seed-candidate:c642e60add3890d7092175549edd57a26ea1441a5dd4f54f54195cd8cb036270",
+            "identity": {
+              "build_digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae"
+            },
+            "decision_id": "parent-select:218bfe3ee23a2e5d383c294ef3d15a7ee219bb0080fad1e859252a6f1e5cc577",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "frontier": [
+            {
+              "candidate_id": "wf-c:77014d402daf890f724cb8be8220b97f",
+              "label": "compact-new-row"
+            },
+            {
+              "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+              "label": "delayed-store-wait"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:1f262bee28366383c5ea39851fc84e52f48178a855a57acd65a2276d37449886",
+      "runtime_id": "tpu-v6e1-s-euw4a1-344ww12q09usn",
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+            "run_id": "runtime-run:e2a2ecf56d89101d8439099cb38ef1925d98f75bb5b429169dd3755b7fcb9ed0",
+            "execution_status": "failed",
+            "scheduling_status": "finished",
+            "event_id": "runtime-run:e2a2ecf56d89101d8439099cb38ef1925d98f75bb5b429169dd3755b7fcb9ed0:finish",
+            "candidate_label": "Known-wrong cache Oracle validation only"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:b120fd7feb894e6931bfd2cecae4b0b8e17d5d045f2ae80988f170a1a27af992",
+      "runtime_id": "tpu-v6e1-s-euw4a1-39sjw4nm2h4b9",
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+            "run_id": "runtime-run:a981e964ac5444ab1c1d6e3841de5f9d49b125cc9c55aa768eeed179b10d75d6",
+            "execution_status": "failed",
+            "scheduling_status": "finished",
+            "event_id": "runtime-run:a981e964ac5444ab1c1d6e3841de5f9d49b125cc9c55aa768eeed179b10d75d6:finish",
+            "candidate_label": "Known-wrong cache Oracle validation only"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:559e042239cb327b2d894d6535b09b9a7b406dbfff2dc55e5852311c430ccab3",
+      "runtime_id": "tpu-v6e1-s-euw4a1-39sjw4nm2h4b9",
+      "workload_id": "mla-workload:9b54967173a4302d81eb956f8bdecb44bf807077d43eaf29d0b5c95977227c4a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:f96b017921053494eeb566757c4360bf3ad9b1dba7e8cb6d787dd15c711fed63",
+            "evaluation_id": "evaluation:eaba0ecc27d69941a69ea3e6f67d0e0090e984d19deb193e807dc11fb386f41e",
+            "latency_ms": 0.23240000007263006,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:559e042239cb327b2d894d6535b09b9a7b406dbfff2dc55e5852311c430ccab3",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:a6edb49816560c20fd9b88c5bf6879163af7eef9dfeff05d6178eda87489b6cc",
+            "evaluation_id": "evaluation:8a55115d713750fd00c56448ae00906b56c0440fbc5821779b5a84da8976b762",
+            "latency_ms": 0.21720500001265464,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:559e042239cb327b2d894d6535b09b9a7b406dbfff2dc55e5852311c430ccab3",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:1e55b882c01a11eb315d2857fb465433",
+            "run_id": "wf-r:e52b74e97248ccfb03ee6e8170494b3d",
+            "execution_status": "not_run",
+            "scheduling_status": "ready",
+            "event_id": null,
+            "candidate_label": "length-smem"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:f96b017921053494eeb566757c4360bf3ad9b1dba7e8cb6d787dd15c711fed63",
+            "evaluation_id": "evaluation:eaba0ecc27d69941a69ea3e6f67d0e0090e984d19deb193e807dc11fb386f41e",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:a37a1b7abd28b0681f9fd736f13eb97e37f15612",
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "identity": {
+              "build_digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae"
+            },
+            "decision_id": "parent-select:312b478417542ec909bd14cab2787d161420db8a18b52dc7ba14ac860e0018c0",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:a6edb49816560c20fd9b88c5bf6879163af7eef9dfeff05d6178eda87489b6cc",
+            "evaluation_id": "evaluation:8a55115d713750fd00c56448ae00906b56c0440fbc5821779b5a84da8976b762",
+            "latency_ms": 0.21720500001265464,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:559e042239cb327b2d894d6535b09b9a7b406dbfff2dc55e5852311c430ccab3",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:a6edb49816560c20fd9b88c5bf6879163af7eef9dfeff05d6178eda87489b6cc",
+            "evaluation_id": "evaluation:8a55115d713750fd00c56448ae00906b56c0440fbc5821779b5a84da8976b762",
+            "latency_ms": 0.21720500001265464,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:559e042239cb327b2d894d6535b09b9a7b406dbfff2dc55e5852311c430ccab3",
+            "candidate_label": "delayed-store-wait"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:a6edb49816560c20fd9b88c5bf6879163af7eef9dfeff05d6178eda87489b6cc",
+            "evaluation_id": "evaluation:8a55115d713750fd00c56448ae00906b56c0440fbc5821779b5a84da8976b762",
+            "latency_ms": 0.21720500001265464,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:559e042239cb327b2d894d6535b09b9a7b406dbfff2dc55e5852311c430ccab3",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:a3aa2ad6a05bcd5c4c4ae5f60bfbc80b",
+            "run_id": "wf-r:b817f0f0b1458e058d3b64e256b6d261",
+            "execution_status": "not_run",
+            "scheduling_status": "ready",
+            "event_id": null,
+            "candidate_label": "query-in-attention"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "wf-c:73f61cad427a1b9762fbdfa349700516",
+            "run_id": "wf-r:8395d67f949b364daf53a8197620bef7",
+            "evaluation_id": "evaluation:d8d08faf6f403c1f6acb97b009c79a82e547a2d6eaee5cf0d46c031fff5c4ec3",
+            "candidate_label": "p35-control-after"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:88fc2af19b8d773ad8ce15664ff31573f958e8a3",
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "identity": {
+              "build_digest": "c83a19210cad11dd991d700629b4a83695af0409dd4312f66eb13788f1a829a1",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "0579beaa21cbf1119b64585c11334ab7051976a0f4b22400997fa510bd3b3a34"
+            },
+            "decision_id": "parent-select:7aeb53eae5c5562db02e8513484c245aa65423333b6fe005ccdfea5f4d90d292",
+            "candidate_label": "delayed-store-wait"
+          },
+          "frontier": [
+            {
+              "candidate_id": "wf-c:07861f14cc96cced1fc64f4fc26fd589",
+              "label": "p35-control-before"
+            },
+            {
+              "candidate_id": "wf-c:5c0fd15da926e4644b7b986e53e49922",
+              "label": "p35-treatment-first"
+            },
+            {
+              "candidate_id": "wf-c:73f61cad427a1b9762fbdfa349700516",
+              "label": "p35-control-after"
+            },
+            {
+              "candidate_id": "wf-c:c864fc271b2913190488f7c250526fb0",
+              "label": "p35-treatment-second"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:c80194af1ca0b02a8c98de303baddf8e560cea1a0dce5ebfea8234850ea77ace",
+      "runtime_id": "tpu-v6e1-s-euw4a0-1xqzeyr91qwmg",
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+            "run_id": "runtime-run:5790bd420b306b43ebd0bdf91e5913e0e046125ab529d0c5cab2ef9b222c7ae2",
+            "execution_status": "not_run",
+            "scheduling_status": "ready",
+            "event_id": null,
+            "candidate_label": "Known-wrong cache Oracle validation only"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:b258736e3702fbc2bb2bd752dd491fea6288c978ecaf881bc0644ed2ed1aad75",
+      "runtime_id": "tpu-v6e1-s-euw4a0-1xqzeyr91qwmg",
+      "workload_id": "mla-workload:9b54967173a4302d81eb956f8bdecb44bf807077d43eaf29d0b5c95977227c4a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:45e442783a9b42f24edb76d34aa69053035f87b264e1ca12dfe425f17122e234",
+            "execution_status": "not_run",
+            "scheduling_status": "ready",
+            "event_id": null,
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:663c7612c2400263c8ba9bf44deaaf17e79f54c94e1f248eba6d95ea58efe8a8",
+            "execution_status": "not_run",
+            "scheduling_status": "ready",
+            "event_id": null,
+            "candidate_label": "delayed-store-wait"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:d54585b7a32725dbbc89b51a00803e7020289079034f1a4cec5087fba3599315",
+      "runtime_id": "tpu-v6e1-s-euw4a0-2u7r1pvl8i4i8",
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+            "run_id": "runtime-run:de2e96de0e7b96afc544464ddf49aac5a9232660061d25477555fa34f6f54cb5",
+            "execution_status": "failed",
+            "scheduling_status": "finished",
+            "event_id": "runtime-run:de2e96de0e7b96afc544464ddf49aac5a9232660061d25477555fa34f6f54cb5:finish",
+            "candidate_label": "Known-wrong cache Oracle validation only"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:bac61391584c500438dd688dd00965977b0232b5994dbf9449f8a0b39ac23f72",
+      "runtime_id": "tpu-v6e1-s-euw4a0-2u7r1pvl8i4i8",
+      "workload_id": "mla-workload:9b54967173a4302d81eb956f8bdecb44bf807077d43eaf29d0b5c95977227c4a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:23ca51b489ac2a3e9061b1128e578346e15346c91a48127a98d7352b56fd56b7",
+            "evaluation_id": "evaluation:e6280c9973b1439458be6c770457768bf88301a81d321ca2a09c926719246143",
+            "latency_ms": 0.21370000001752487,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:bac61391584c500438dd688dd00965977b0232b5994dbf9449f8a0b39ac23f72",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "task_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:23ca51b489ac2a3e9061b1128e578346e15346c91a48127a98d7352b56fd56b7",
+            "evaluation_id": "evaluation:e6280c9973b1439458be6c770457768bf88301a81d321ca2a09c926719246143",
+            "latency_ms": 0.21370000001752487,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:bac61391584c500438dd688dd00965977b0232b5994dbf9449f8a0b39ac23f72",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:dcf190d9ab73ee39adefc575534ed711",
+            "run_id": "wf-r:86fc0e8b32f639f2d68ee9602734c490",
+            "execution_status": "incomplete",
+            "scheduling_status": "finished",
+            "event_id": "wf-r:86fc0e8b32f639f2d68ee9602734c490:finish",
+            "candidate_label": "length-row"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:23ca51b489ac2a3e9061b1128e578346e15346c91a48127a98d7352b56fd56b7",
+            "evaluation_id": "evaluation:e6280c9973b1439458be6c770457768bf88301a81d321ca2a09c926719246143",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:a37a1b7abd28b0681f9fd736f13eb97e37f15612",
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "identity": {
+              "build_digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae"
+            },
+            "decision_id": "parent-select:1f6faaf0e3fdbfa846ab75141672c3ad895ca89e11749b69bbe20b516505b0ee",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:23ca51b489ac2a3e9061b1128e578346e15346c91a48127a98d7352b56fd56b7",
+            "evaluation_id": "evaluation:e6280c9973b1439458be6c770457768bf88301a81d321ca2a09c926719246143",
+            "latency_ms": 0.21370000001752487,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:bac61391584c500438dd688dd00965977b0232b5994dbf9449f8a0b39ac23f72",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:436f27dbc953025391e35962e0b9644576a329d47454c65979d77cf77814d846",
+            "evaluation_id": "evaluation:bca481a53e731b51c1c497b12dd3edf685205cdf00df4b79e68eee165b15d3cc",
+            "latency_ms": 0.22525999997924373,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:bac61391584c500438dd688dd00965977b0232b5994dbf9449f8a0b39ac23f72",
+            "candidate_label": "delayed-store-wait"
+          },
+          "task_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:23ca51b489ac2a3e9061b1128e578346e15346c91a48127a98d7352b56fd56b7",
+            "evaluation_id": "evaluation:e6280c9973b1439458be6c770457768bf88301a81d321ca2a09c926719246143",
+            "latency_ms": 0.21370000001752487,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:bac61391584c500438dd688dd00965977b0232b5994dbf9449f8a0b39ac23f72",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:26cafcb80ba0138c77cdfad21437c5f5",
+            "run_id": "wf-r:9df6303f89a697e5a5ba20cde1c7b0c3",
+            "execution_status": "not_run",
+            "scheduling_status": "ready",
+            "event_id": null,
+            "candidate_label": "b1-fused-prepare"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:436f27dbc953025391e35962e0b9644576a329d47454c65979d77cf77814d846",
+            "evaluation_id": "evaluation:bca481a53e731b51c1c497b12dd3edf685205cdf00df4b79e68eee165b15d3cc",
+            "candidate_label": "delayed-store-wait"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:88fc2af19b8d773ad8ce15664ff31573f958e8a3",
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "identity": {
+              "build_digest": "c83a19210cad11dd991d700629b4a83695af0409dd4312f66eb13788f1a829a1",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "0579beaa21cbf1119b64585c11334ab7051976a0f4b22400997fa510bd3b3a34"
+            },
+            "decision_id": "parent-select:6750b2e7370996ccbdc61443c5aaaabe8108dcdc2ede0f0b71334acbe25d5e63",
+            "candidate_label": "delayed-store-wait"
+          },
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:996279e1f5b359d00eea8fc994675b9367e4a21e04bd71ba4c3c8c2572e90e01",
+      "runtime_id": "tpu-v6e1-s-euw4a0-1q01sb2h5jte9",
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+            "run_id": "runtime-run:9996215ef1a749fb3247c233436cb3c737a0727f967d6a6c6426dbca1bf0e020",
+            "execution_status": "failed",
+            "scheduling_status": "finished",
+            "event_id": "runtime-run:9996215ef1a749fb3247c233436cb3c737a0727f967d6a6c6426dbca1bf0e020:finish",
+            "candidate_label": "Known-wrong cache Oracle validation only"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:82d817b7732a0a37c3ae8d2b8468160c3514136004635c75645e09361f7d3ddf",
+      "runtime_id": "tpu-v6e1-s-euw4a0-1q01sb2h5jte9",
+      "workload_id": "mla-workload:9b54967173a4302d81eb956f8bdecb44bf807077d43eaf29d0b5c95977227c4a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:ad643133bb2e1199ff5abef76b567dbd93326440387c3c25d90f91efa52c39d2",
+            "evaluation_id": "evaluation:183f721dc8b5e2b0f64a6125355511fa7b60c6abca685194a3ca31db271347b0",
+            "latency_ms": 0.2555300002313743,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:82d817b7732a0a37c3ae8d2b8468160c3514136004635c75645e09361f7d3ddf",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:33cdf2ea5137961940d90fe260d52cc0af55a95e344172eea8570a261222097d",
+            "evaluation_id": "evaluation:d1357e0a1842d5499c886d71d3253f01666944caf00ef6d6118534a47cadf8b6",
+            "latency_ms": 0.2025999999659689,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:82d817b7732a0a37c3ae8d2b8468160c3514136004635c75645e09361f7d3ddf",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:ad643133bb2e1199ff5abef76b567dbd93326440387c3c25d90f91efa52c39d2",
+            "execution_status": "succeeded",
+            "scheduling_status": "finished",
+            "event_id": "runtime-run:ad643133bb2e1199ff5abef76b567dbd93326440387c3c25d90f91efa52c39d2:finish",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "run_id": "runtime-run:ad643133bb2e1199ff5abef76b567dbd93326440387c3c25d90f91efa52c39d2",
+            "evaluation_id": "evaluation:183f721dc8b5e2b0f64a6125355511fa7b60c6abca685194a3ca31db271347b0",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:a37a1b7abd28b0681f9fd736f13eb97e37f15612",
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "identity": {
+              "build_digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae"
+            },
+            "decision_id": "parent-select:2d8f3ee2b43268ba43be54aa06ce056c4dc756206a0aa0b50e0b5f809622ab8d",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:33cdf2ea5137961940d90fe260d52cc0af55a95e344172eea8570a261222097d",
+            "evaluation_id": "evaluation:d1357e0a1842d5499c886d71d3253f01666944caf00ef6d6118534a47cadf8b6",
+            "latency_ms": 0.2025999999659689,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:82d817b7732a0a37c3ae8d2b8468160c3514136004635c75645e09361f7d3ddf",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:33cdf2ea5137961940d90fe260d52cc0af55a95e344172eea8570a261222097d",
+            "evaluation_id": "evaluation:d1357e0a1842d5499c886d71d3253f01666944caf00ef6d6118534a47cadf8b6",
+            "latency_ms": 0.2025999999659689,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:82d817b7732a0a37c3ae8d2b8468160c3514136004635c75645e09361f7d3ddf",
+            "candidate_label": "delayed-store-wait"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:33cdf2ea5137961940d90fe260d52cc0af55a95e344172eea8570a261222097d",
+            "evaluation_id": "evaluation:d1357e0a1842d5499c886d71d3253f01666944caf00ef6d6118534a47cadf8b6",
+            "latency_ms": 0.2025999999659689,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:82d817b7732a0a37c3ae8d2b8468160c3514136004635c75645e09361f7d3ddf",
+            "candidate_label": "delayed-store-wait"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:33cdf2ea5137961940d90fe260d52cc0af55a95e344172eea8570a261222097d",
+            "execution_status": "succeeded",
+            "scheduling_status": "finished",
+            "event_id": "runtime-run:33cdf2ea5137961940d90fe260d52cc0af55a95e344172eea8570a261222097d:finish",
+            "candidate_label": "delayed-store-wait"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "run_id": "runtime-run:33cdf2ea5137961940d90fe260d52cc0af55a95e344172eea8570a261222097d",
+            "evaluation_id": "evaluation:d1357e0a1842d5499c886d71d3253f01666944caf00ef6d6118534a47cadf8b6",
+            "candidate_label": "delayed-store-wait"
+          },
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:a96bc2900e509395742be1304d61978512ba14a06e6748313533c91c4a32a01f",
+      "runtime_id": "tpu-v6e1-s-euw4a0-3qldb90w629mv",
+      "workload_id": "oracle-negative-workload:f36e20a1b5ccda8a09823d37773256882217f59cc3e8ac4d696b7f84971d764a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": {
+            "candidate_id": "oracle-negative-candidate:08ff4786b517f06903dbba91cdb7122b0b4eb23b5928bd32b485ea932046b947",
+            "run_id": "runtime-run:afaeda43f263d58d8ec87ff94f4ebec5333211d9f6018d090e4d3e4d1891e684",
+            "execution_status": "failed",
+            "scheduling_status": "finished",
+            "event_id": "runtime-run:afaeda43f263d58d8ec87ff94f4ebec5333211d9f6018d090e4d3e4d1891e684:finish",
+            "candidate_label": "Known-wrong cache Oracle validation only"
+          },
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": null,
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    },
+    {
+      "context_id": "runtime-context:b60862eb713e457a38d5a704bb3d7f1ceae68a118e919a326b0da13f50689b62",
+      "runtime_id": "tpu-v6e1-s-euw4a0-3qldb90w629mv",
+      "workload_id": "mla-workload:9b54967173a4302d81eb956f8bdecb44bf807077d43eaf29d0b5c95977227c4a",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "wf-c:f41e0805ef28e9468b5dc3c5c8135ea0",
+            "run_id": "wf-r:2a1f9801ce722ab6f2a0e491571b4f5c",
+            "evaluation_id": "evaluation:fca064928f4023adaf1b44ca6c46dbc32ee2f42bb6f137efa32a5f5928af2858",
+            "latency_ms": 0.20482499940044363,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:b60862eb713e457a38d5a704bb3d7f1ceae68a118e919a326b0da13f50689b62",
+            "candidate_label": "length-row"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:f41e0805ef28e9468b5dc3c5c8135ea0",
+            "run_id": "wf-r:2a1f9801ce722ab6f2a0e491571b4f5c",
+            "evaluation_id": "evaluation:fca064928f4023adaf1b44ca6c46dbc32ee2f42bb6f137efa32a5f5928af2858",
+            "latency_ms": 0.20482499940044363,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:b60862eb713e457a38d5a704bb3d7f1ceae68a118e919a326b0da13f50689b62",
+            "candidate_label": "length-row"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:b9dda08453084616e72527b093cb2e44",
+            "run_id": "wf-r:fca16eb0837162a4df980f457c3f26df",
+            "execution_status": "succeeded",
+            "scheduling_status": "finished",
+            "event_id": "wf-r:fca16eb0837162a4df980f457c3f26df:finish",
+            "candidate_label": "length-smem"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "wf-c:b9dda08453084616e72527b093cb2e44",
+            "run_id": "wf-r:fca16eb0837162a4df980f457c3f26df",
+            "evaluation_id": "evaluation:d418c6fb79bcd54e59ce53d447943d31f6bd57f11ee248f24b2d2aae9cbac111",
+            "candidate_label": "length-smem"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:a37a1b7abd28b0681f9fd736f13eb97e37f15612",
+            "candidate_id": "baseline-repair-candidate:f3a6d0550533cde6f8dfb0e2c2c1b67749780cd806213a633c6d74fe543709b2",
+            "identity": {
+              "build_digest": "f224e0eda278e5150d8a592337ced97b1a8009a6d1576475dba618848df52bfd",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "2fc23aa9d0358ea18698f916cbc7ed5e02a4218dec2de2fc955661a8b513ebae"
+            },
+            "decision_id": "parent-select:22459d31a731d188a9c3cfe6a158c7bb3b2ec631d30925d5d3aad6fb8aa1f9f4",
+            "candidate_label": "Baseline repair: pad full batch before row selection"
+          },
+          "frontier": [
+            {
+              "candidate_id": "wf-c:b9dda08453084616e72527b093cb2e44",
+              "label": "length-smem"
+            },
+            {
+              "candidate_id": "wf-c:f41e0805ef28e9468b5dc3c5c8135ea0",
+              "label": "length-row"
+            }
+          ]
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "wf-c:f41e0805ef28e9468b5dc3c5c8135ea0",
+            "run_id": "wf-r:2a1f9801ce722ab6f2a0e491571b4f5c",
+            "evaluation_id": "evaluation:fca064928f4023adaf1b44ca6c46dbc32ee2f42bb6f137efa32a5f5928af2858",
+            "latency_ms": 0.20482499940044363,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:b60862eb713e457a38d5a704bb3d7f1ceae68a118e919a326b0da13f50689b62",
+            "candidate_label": "length-row"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "wf-c:fdbcff9f1c09c22d9e0f86a7cb9c02a8",
+            "run_id": "wf-r:fb51ab1de12a6f5fbb079485c3d73086",
+            "evaluation_id": "evaluation:c2ae8db4bfe56d72f5ba4ba15cc3cb24ec129e69195ea043f91acaf7e7061b83",
+            "latency_ms": 0.21370000467868522,
+            "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+            "context_id": "runtime-context:b60862eb713e457a38d5a704bb3d7f1ceae68a118e919a326b0da13f50689b62",
+            "candidate_label": "b1-fused-prepare"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:f41e0805ef28e9468b5dc3c5c8135ea0",
+            "run_id": "wf-r:2a1f9801ce722ab6f2a0e491571b4f5c",
+            "evaluation_id": "evaluation:fca064928f4023adaf1b44ca6c46dbc32ee2f42bb6f137efa32a5f5928af2858",
+            "latency_ms": 0.20482499940044363,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "runtime-context:b60862eb713e457a38d5a704bb3d7f1ceae68a118e919a326b0da13f50689b62",
+            "candidate_label": "length-row"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:9aaf85a892282afc9f6b6e40db9af8b2",
+            "run_id": "wf-r:bcde96344bd5eacd7e9b35468716156c",
+            "execution_status": "succeeded",
+            "scheduling_status": "finished",
+            "event_id": "wf-r:bcde96344bd5eacd7e9b35468716156c:finish",
+            "candidate_label": "query-in-attention"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "wf-c:fdbcff9f1c09c22d9e0f86a7cb9c02a8",
+            "run_id": "wf-r:fb51ab1de12a6f5fbb079485c3d73086",
+            "evaluation_id": "evaluation:c2ae8db4bfe56d72f5ba4ba15cc3cb24ec129e69195ea043f91acaf7e7061b83",
+            "candidate_label": "b1-fused-prepare"
+          },
+          "current_parent_candidate": {
+            "parent_id": "wf-parent:88fc2af19b8d773ad8ce15664ff31573f958e8a3",
+            "candidate_id": "wf-c:afa5b476cde0e73bb0bedb604b2d5c51",
+            "identity": {
+              "build_digest": "c83a19210cad11dd991d700629b4a83695af0409dd4312f66eb13788f1a829a1",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "0579beaa21cbf1119b64585c11334ab7051976a0f4b22400997fa510bd3b3a34"
+            },
+            "decision_id": "parent-select:615b35c9d80bcdae22c57d5b3a94dbcd6a698a48d602910bc97fde921c094c96",
+            "candidate_label": "delayed-store-wait"
+          },
+          "frontier": [
+            {
+              "candidate_id": "wf-c:9aaf85a892282afc9f6b6e40db9af8b2",
+              "label": "query-in-attention"
+            },
+            {
+              "candidate_id": "wf-c:fdbcff9f1c09c22d9e0f86a7cb9c02a8",
+              "label": "b1-fused-prepare"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "context_id": "p35-zero-context:67d3cd86dd782a7a6b3e0db6c84036a6d66522ee1d6e5c11006ac2cbe95c0bde",
+      "runtime_id": "tpu-v6e1-s-euw4a0-3qldb90w629mv",
+      "workload_id": "p35-zero-workload:f969e1817b4aea4b68c05f893115dbc1f64ed89c232ceff06ab1e35e8a6a32c3",
+      "cards": [
+        {
+          "strategy": "Unmodified baseline validation",
+          "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+          "paused": false,
+          "deferred": [],
+          "branch_best": {
+            "candidate_id": "wf-c:14a48851aed65a5f9769066f2511028b",
+            "run_id": "wf-r:e44749c88a5a2ee48915efa8ca902394",
+            "evaluation_id": "evaluation:f5353a7af55c3d51363a199359d324977e917778432715e65b9822ab07d2a44b",
+            "latency_ms": 0.21911499970883597,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "p35-zero-context:67d3cd86dd782a7a6b3e0db6c84036a6d66522ee1d6e5c11006ac2cbe95c0bde",
+            "candidate_label": "diagnostic-baseline"
+          },
+          "task_best": {
+            "candidate_id": "wf-c:14a48851aed65a5f9769066f2511028b",
+            "run_id": "wf-r:e44749c88a5a2ee48915efa8ca902394",
+            "evaluation_id": "evaluation:f5353a7af55c3d51363a199359d324977e917778432715e65b9822ab07d2a44b",
+            "latency_ms": 0.21911499970883597,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "p35-zero-context:67d3cd86dd782a7a6b3e0db6c84036a6d66522ee1d6e5c11006ac2cbe95c0bde",
+            "candidate_label": "diagnostic-baseline"
+          },
+          "latest_attempt": {
+            "candidate_id": "wf-c:14a48851aed65a5f9769066f2511028b",
+            "run_id": "wf-r:e44749c88a5a2ee48915efa8ca902394",
+            "execution_status": "succeeded",
+            "scheduling_status": "finished",
+            "event_id": "wf-r:e44749c88a5a2ee48915efa8ca902394:finish",
+            "candidate_label": "diagnostic-baseline"
+          },
+          "last_correct_candidate": {
+            "candidate_id": "wf-c:3530fe590e4fcae71a5c5e2a17ca80ae",
+            "run_id": "wf-r:b90a276e24d360cae8938375a797d6fd",
+            "evaluation_id": "evaluation:b666fed9fd9531173600d975cdfe8e76cb168eb7ba2625a8cf85138a0a7c1cca",
+            "candidate_label": "diagnostic-single-tile"
+          },
+          "current_parent_candidate": {
+            "parent_id": "p35-diagnostic-parent:f97627dc2f308b1a4def10878f24c95c1b466a4a255884c10b50903e0e921955",
+            "candidate_id": "wf-c:831ba6c3985e8879dd6a16dcc33cead6",
+            "identity": {
+              "build_digest": "14187af65b1d6b592bafdac1958360e218d141dff01af2cbf9a23a57a7a467f8",
+              "config_digest": "078d6739d75ab25fadee5c0f5b71b6862497d782e2da7295f6d77c00241555f6",
+              "source_digest": "325e0e9098633d625bcac832f9cb043935c7ce205df64a13b53fc84e22133e23"
+            },
+            "decision_id": "parent-select:1490117e3f9af4d262f07df618d6ffca0785e749b69102d75d66a6fa1309b381",
+            "candidate_label": "single-tile"
+          },
+          "frontier": [
+            {
+              "candidate_id": "wf-c:14a48851aed65a5f9769066f2511028b",
+              "label": "diagnostic-baseline"
+            },
+            {
+              "candidate_id": "wf-c:3530fe590e4fcae71a5c5e2a17ca80ae",
+              "label": "diagnostic-single-tile"
+            }
+          ]
+        },
+        {
+          "strategy": "P3.2 independent Oracle negative controls; never optimization or benchmark",
+          "strategy_id": "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "wf-c:14a48851aed65a5f9769066f2511028b",
+            "run_id": "wf-r:e44749c88a5a2ee48915efa8ca902394",
+            "evaluation_id": "evaluation:f5353a7af55c3d51363a199359d324977e917778432715e65b9822ab07d2a44b",
+            "latency_ms": 0.21911499970883597,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "p35-zero-context:67d3cd86dd782a7a6b3e0db6c84036a6d66522ee1d6e5c11006ac2cbe95c0bde",
+            "candidate_label": "diagnostic-baseline"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        },
+        {
+          "strategy": "MLA contiguous data movement and reuse exploration",
+          "strategy_id": "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd",
+          "paused": false,
+          "deferred": [],
+          "branch_best": null,
+          "task_best": {
+            "candidate_id": "wf-c:14a48851aed65a5f9769066f2511028b",
+            "run_id": "wf-r:e44749c88a5a2ee48915efa8ca902394",
+            "evaluation_id": "evaluation:f5353a7af55c3d51363a199359d324977e917778432715e65b9822ab07d2a44b",
+            "latency_ms": 0.21911499970883597,
+            "strategy_id": "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e",
+            "context_id": "p35-zero-context:67d3cd86dd782a7a6b3e0db6c84036a6d66522ee1d6e5c11006ac2cbe95c0bde",
+            "candidate_label": "diagnostic-baseline"
+          },
+          "latest_attempt": null,
+          "last_correct_candidate": null,
+          "current_parent_candidate": null,
+          "frontier": []
+        }
+      ]
+    }
+  ],
+  "scope": "Metadata/receipt envelopes plus recovery archives; full NPZ/Profile verification belongs to raw audit.",
+  "limitations": [
+    "Unique retained requests/receipts and safe code recovery branches do not prove physical exactly-once execution in arbitrary distributed failures.",
+    "Runtime4 historical remote correctness outcome remains unknown; no present remote query was made.",
+    "No live Runtime availability, external Notebook activity or hidden processes are inferred by this offline audit."
+  ]
+}

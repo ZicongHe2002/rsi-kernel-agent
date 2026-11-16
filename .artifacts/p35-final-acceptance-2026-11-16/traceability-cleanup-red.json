@@ -1,0 +1,85 @@
+{
+  "tests": [
+    "test_p35_diagnostic_dispatch.DiagnosticRuntime6FlowTests",
+    "test_p35_recovery_round",
+    "test_p35_generation_recovery",
+    "test_p35_runtime6_scope"
+  ],
+  "tests_run": 17,
+  "failures": 10,
+  "errors": 2,
+  "skipped": 0,
+  "seconds": 29.36745229997905,
+  "cleanup_calls": 18,
+  "cleanup_unsuccessful_returns": [
+    {
+      "test_id": "test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.runTest",
+      "callbacks_before": 2,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": false
+    },
+    {
+      "test_id": "test_p35_recovery_round.RecoveryRoundTests.test_foreign_unfinished_jobs_block_recovery",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    },
+    {
+      "test_id": "test_p35_recovery_round.RecoveryRoundTests.test_historical_abba_keeps_its_context",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    },
+    {
+      "test_id": "test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    },
+    {
+      "test_id": "test_p35_recovery_round.RecoveryRoundTests.test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    },
+    {
+      "test_id": "test_p35_recovery_round.RecoveryRoundTests.test_unarchived_loss_blocks_before_admission_reads",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    },
+    {
+      "test_id": "test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    },
+    {
+      "test_id": "test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime8_requires_both_previous_completed_prerequisite_losses",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    },
+    {
+      "test_id": "test_p35_runtime6_scope.Runtime6ScopeTests.test_new_snapshot_cannot_omit_runtime5_archive",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    },
+    {
+      "test_id": "test_p35_runtime6_scope.Runtime6ScopeTests.test_runtime5_loss_must_be_archived_before_reading_admission",
+      "callbacks_before": 0,
+      "asyncio_runner_initialized": false,
+      "has_own_outcome": true
+    }
+  ],
+  "require_recovery_context_restored": false,
+  "test_file_sha256": {
+    "test_p35_diagnostic_dispatch.py": "56dab1fb9bf1734faa43938b31e638d889a07ce210e001d8c5556af3ace006a8",
+    "test_resume_p35_diagnostic.py": "6c3c6cc24a8821b612c218019967e89cfbc64986d18116450add5ecb73aa51df",
+    "test_resume_p35_diagnostic_independent.py": "80542cec21e1f06976f62166130c66460db51f5ebc09f98b8dd2df18e8dff9ee",
+    "test_verify_p35_continuation.py": "f1aad423c1a9b44404f4e99a38b7effbe60358f4298c21a96b83aa9d582fb09f",
+    "test_verify_p35_continuation_independent.py": "88df5ac83f598d213b158eb6227cc867d326da41b0da91962e18783453931601"
+  },
+  "exit_code": 1
+}

@@ -1,5 +1,7 @@
 # P3.5 Runtime 4 恢复实施计划
 
+> 历史计划。后续 Runtime 7 已完成原第二轮与诊断；当前状态见[最终验收](phase3-final-acceptance-report.md)。本文保留当时的恢复和预算依据，不作为新的执行指令。
+
 2026-11-13。继续原 P3.5 请求；Runtime 3 在第二轮远端提交前消失。ABBA 已完成，原第二轮 Analyzer、四个 Candidate 与旧 Context 永久保留。
 
 目标：在原 Store、Journal、预算和执行协议上恢复真实第二轮，随后完成独立 single-tile 诊断。本文是实施计划，不是硬件成功证据。

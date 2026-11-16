@@ -1,0 +1,70 @@
+--- before/test_p35_diagnostic_dispatch.py
++++ after/test_p35_diagnostic_dispatch.py
+@@ -440,8 +440,8 @@
+         fixture = DiagnosticRuntime4Tests()
+         fixture.generation = self.generation
+         fixture.fixture_admission_round = 'fixture-prerequisite'
++        fixture.addCleanup = self.addCleanup
+         await fixture.asyncSetUp()
+-        self.addCleanup(fixture.doCleanups)
+         original = fixture.origins['baseline']
+         for label in ('length-row', 'length-smem'):
+             job = deepcopy(original)
+--- before/test_resume_p35_diagnostic.py
++++ after/test_resume_p35_diagnostic.py
+@@ -22,8 +22,8 @@
+         f = self.f = dispatch.DiagnosticRuntime4Tests()
+         f.generation = 'runtime7'
+         f.fixture_admission_round = 'fixture-prerequisite'
++        f.addCleanup = self.addCleanup
+         await f.asyncSetUp()
+-        self.addCleanup(f.doCleanups)
+         original = f.origins['baseline']
+         for label in ('length-row', 'length-smem'):
+             job = deepcopy(original)
+--- before/test_resume_p35_diagnostic_independent.py
++++ after/test_resume_p35_diagnostic_independent.py
+@@ -12,8 +12,8 @@
+ class DiagnosticResumeOutputTests(unittest.IsolatedAsyncioTestCase):
+     async def test_config_change_during_admission_cannot_be_accepted_as_new_pin(self):
+         fixture = DiagnosticResumeTests('test_config_change_during_polling_blocks_next_step')
++        fixture.addCleanup = self.addCleanup
+         await fixture.asyncSetUp()
+-        self.addCleanup(fixture.doCleanups)
+         f = fixture.f
+         config_path = f.directory / 'colab-config-runtime7.json'
+         checked = fixture.resume.checked_artifact
+@@ -36,8 +36,8 @@
+ 
+     async def test_terminal_journal_recovers_missing_final_status_before_completion(self):
+         fixture = DiagnosticResumeTests('test_unknown_recovery_keeps_original_operations_two_charges_and_idempotent_completion')
++        fixture.addCleanup = self.addCleanup
+         await fixture.asyncSetUp()
+-        self.addCleanup(fixture.doCleanups)
+         f = fixture.f
+         stale = json.loads((f.target / 'controller-status.json').read_bytes())
+         f.backend.unknown = False
+--- before/test_verify_p35_continuation.py
++++ after/test_verify_p35_continuation.py
+@@ -17,8 +17,8 @@
+ class ContinuationVerificationTests(unittest.IsolatedAsyncioTestCase):
+     async def asyncSetUp(self):
+         self.fx = chain.ContinuationTests()
++        self.fx.addCleanup = self.addCleanup
+         await self.fx.asyncSetUp()
+-        self.addCleanup(self.fx.doCleanups)
+         self.api = importlib.import_module('verify_p35_continuation')
+         original = self.api.TransactionStore
+         reader = patch.object(self.api, 'TransactionStore', side_effect=lambda db, artifacts:
+--- before/test_verify_p35_continuation_independent.py
++++ after/test_verify_p35_continuation_independent.py
+@@ -10,8 +10,8 @@
+ class IndependentIntakeBindingTests(unittest.IsolatedAsyncioTestCase):
+     async def asyncSetUp(self):
+         self.fx = fixtures.ContinuationVerificationTests()
++        self.fx.addCleanup = self.addCleanup
+         await self.fx.asyncSetUp()
+-        self.addCleanup(self.fx.doCleanups)
+ 
+     async def test_changed_valid_variant_is_rejected_before_verification(self):
+         target = await self.fx.finish()

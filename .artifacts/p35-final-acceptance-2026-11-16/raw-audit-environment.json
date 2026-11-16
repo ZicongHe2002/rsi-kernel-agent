@@ -1,0 +1,18 @@
+{
+  "command": "& '.\\knowledge-site\\.venv-mcp\\Scripts\\python.exe' -B -X utf8 '.artifacts/p35-final-acceptance-2026-11-16/raw-audit.py' *> '.artifacts/p35-final-acceptance-2026-11-16/raw-audit.log'",
+  "python": "3.13.14 (main, Jun 23 2026, 15:19:27) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "helper_sha256": "0e854e9bb1ad55b87b8ba7c597e2658ff34e581f697da6b5cc50a4a743a73f4d",
+  "isolated_process_only": true,
+  "store_access": "sqlite mode=ro, query_only=ON, pinned BEGIN",
+  "dependency_installs": 0,
+  "network_calls": 0,
+  "hardware_calls": 0,
+  "exit_code": 0,
+  "started_utc": "2026-11-16T02:18:56.589744+00:00",
+  "finished_utc": "2026-11-16T02:21:41.736881+00:00",
+  "duration_seconds": 165.147137,
+  "results_sha256": "70c0687fba3a8c8a2619b7a512208fc42ccdff7ef7f7d79d9dc64dd75f654d25",
+  "log_sha256": "afb8e46f6c73fbf92b7b628bbf09288b3c918c6c1b225a147449d028f53c47ab"
+}

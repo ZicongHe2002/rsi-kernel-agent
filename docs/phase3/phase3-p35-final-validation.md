@@ -1,5 +1,9 @@
 # P3.5 最终验证记录（进行中，ABBA 已完成，Runtime 4 准入待恢复）
 
+<!-- p35-final-acceptance-20261116 -->
+> **历史验证记录｜2026-11-16 最终验收更新**：本文标题及正文保留此前 Runtime 4 时点。后续 Runtime 7 已完成第二轮四候选与独立诊断；本次原始证据复核、Memory 对账和修复后的完整软件回归均完成。声明范围内 **P3.5 系统闭环 PASS_WITH_LIMITATIONS，稳定端到端性能 NOT_CONFIRMED**，见[最终验收报告](phase3-final-acceptance-report.md)，不再以此页旧停止点恢复执行。
+<!-- /p35-final-acceptance-20261116 -->
+
 <!-- p35-upload-status -->
 **2026-11-13 19:07（Asia/Shanghai），上传前核验**：本地准入驱动已于 18:53:28 退出（exit −1），19:05:41 的进程观察确认没有原驱动或诊断包装驱动。Runtime 4 attention 负例的 generate/compile 成功回执已归档，correctness 有 durable 请求而没有本地最终回执；其他三项为 not_run。最后保存的 running 观察来自 18:53:03，原远端 worker 未停止，本次核验没有查询远端最终状态。恢复需先查询同一 operation，不能重复创建 Run 或盲目重做。
 

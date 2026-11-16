@@ -135,16 +135,22 @@ class DiagnosticVerificationTests(unittest.TestCase):
                 self.api.verify_diagnostic(self.selection_path, directory=self.directory)
 
     def test_v2_verifier_uses_new_runtime_and_preserves_pending_semantics(self):
-        self.selection.update(schema_version=2, runtime_generation='runtime4')
+        self.check_v2_generation('runtime4')
+
+    def test_v2_runtime5_verifier_cannot_use_runtime4_configuration(self):
+        self.check_v2_generation('runtime5')
+
+    def check_v2_generation(self, generation):
+        self.selection.update(schema_version=2, runtime_generation=generation)
         self.selection_path.write_text(json.dumps(self.selection), encoding='utf-8')
         self.target = self.api.target_for(self.directory, self.selection)
         job = self.job('diagnostic-baseline')
         store, _ = self.frozen({job['id']: job})
-        (self.target / 'runtime-binding.json').write_text('{"generation":"runtime4"}')
-        (self.directory / 'colab-config-runtime4.json').write_text('{"runtime_id":"runtime-four"}')
+        (self.target / 'runtime-binding.json').write_text(json.dumps({'generation': generation}))
+        (self.directory / ('colab-config-' + generation + '.json')).write_text('{"runtime_id":"selected-device"}')
         (self.target / 'diagnostic-packet.json').write_text(json.dumps({
             'original_context_id': 'original-context', 'context': {'id': 'diagnostic-context',
-                'environment': {'runtime_session_id': 'runtime-four'}}}))
+                'environment': {'runtime_session_id': 'selected-device'}}}))
         with patch.object(self.api, 'ReadOnlyStore', store):
             report = self.api.verify_diagnostic(self.selection_path, directory=self.directory)
         self.assertEqual(report['status'], 'pending')

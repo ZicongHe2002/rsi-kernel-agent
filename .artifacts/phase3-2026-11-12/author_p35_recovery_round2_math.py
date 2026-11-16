@@ -1,4 +1,5 @@
 """Explicit logical-payload calculations for the current Round 2 conversation."""
+import argparse
 from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
@@ -7,15 +8,21 @@ from rsi_kernel_agent.contracts import canonical_json
 from rsi_kernel_agent.store import ExperimentStore
 from rsi_kernel_agent.profiler.session import submit_response
 from real_round_aux import read_json, write_once
+from p35_recovery_round import recovery_identity
 
 d = Path(__file__).resolve().parent
-t = d / 'real-round-2-runtime4'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--generation', default='runtime4')
+args = parser.parse_args()
+t, _ = recovery_identity(d, args.generation)
 p = read_json(t / 'packet.json')
 A = 'mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e'
 B = 'mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd'
-assert set(p['manifest']['strategies']) == {A, B}
+assert set(p['manifest']['strategies']) == ({A} if int(args.generation[7:]) >= 6 else {A, B})
 calls = []
 def logical(cid, sid, buffers, assumption):
+    if sid not in p['manifest']['strategies']:
+        return
     calls.append({'id': cid, 'name': 'calculate', 'arguments': {
         'model': 'live_memory', 'inputs': {'buffers': [
             {'name': name, 'elements': elements, 'dtype_bytes': width, 'copies': 1, 'start': 0, 'end': 1}

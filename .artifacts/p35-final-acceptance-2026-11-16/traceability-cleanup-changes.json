@@ -1,0 +1,37 @@
+[
+  {
+    "path": ".artifacts\\phase3-2026-11-12\\test_p35_diagnostic_dispatch.py",
+    "sites": 1,
+    "only_expected_cleanup_change": true,
+    "sha256_before": "56dab1fb9bf1734faa43938b31e638d889a07ce210e001d8c5556af3ace006a8",
+    "sha256_after": "61d3769a895b2a253e040ab10b50177a44644cafad34b22f2c43b58af0931d15"
+  },
+  {
+    "path": ".artifacts\\phase3-2026-11-12\\test_resume_p35_diagnostic.py",
+    "sites": 1,
+    "only_expected_cleanup_change": true,
+    "sha256_before": "6c3c6cc24a8821b612c218019967e89cfbc64986d18116450add5ecb73aa51df",
+    "sha256_after": "a464e70e5b9e547aa936c3e08018dd11a7667a20e0ff99b3af5c62e467119c8f"
+  },
+  {
+    "path": ".artifacts\\phase3-2026-11-12\\test_resume_p35_diagnostic_independent.py",
+    "sites": 2,
+    "only_expected_cleanup_change": true,
+    "sha256_before": "80542cec21e1f06976f62166130c66460db51f5ebc09f98b8dd2df18e8dff9ee",
+    "sha256_after": "954bcf51f35ba9087709b0b0ea9d3e40aa78cc5705f8255ccd8357f15f653202"
+  },
+  {
+    "path": ".artifacts\\phase3-2026-11-12\\test_verify_p35_continuation.py",
+    "sites": 1,
+    "only_expected_cleanup_change": true,
+    "sha256_before": "f1aad423c1a9b44404f4e99a38b7effbe60358f4298c21a96b83aa9d582fb09f",
+    "sha256_after": "d685995baa52a9327c690388147bdd7930d77511603ebea3c992ac038733e2c0"
+  },
+  {
+    "path": ".artifacts\\phase3-2026-11-12\\test_verify_p35_continuation_independent.py",
+    "sites": 1,
+    "only_expected_cleanup_change": true,
+    "sha256_before": "88df5ac83f598d213b158eb6227cc867d326da41b0da91962e18783453931601",
+    "sha256_after": "90f7d4f2469f0b8c2f63cd78877fa63ef3344a6c1b01500e44031b3f34c44170"
+  }
+]

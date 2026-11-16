@@ -1,4 +1,5 @@
-"""Serialize this conversation's four new, evidence-driven Round 2 Plans."""
+"""Serialize this conversation's evidence-driven recovery Plans."""
+import argparse
 from pathlib import Path
 import sys
 ROOT = Path(__file__).resolve().parents[2]
@@ -7,9 +8,14 @@ from rsi_kernel_agent.contracts import canonical_json
 from rsi_kernel_agent.store import ExperimentStore
 from rsi_kernel_agent.profiler.session import submit_response
 from real_round_aux import read_json, write_once
+from p35_recovery_round import recovery_identity
 
 d = Path(__file__).resolve().parent
-t = d / 'real-round-2-runtime4'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--generation', default='runtime4')
+args = parser.parse_args()
+t, _ = recovery_identity(d, args.generation)
+runtime_label = 'Runtime' + args.generation[7:]
 assert read_json(t / 'session.json')['result_digest'] is None
 p = read_json(t / 'packet.json')
 m = p['manifest']
@@ -18,8 +24,11 @@ B = 'mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3
 prepared = read_json(t / 'prepared.json')
 assert len(prepared['cards']) == 3 and prepared['snapshot']['version'] > 11
 assert all(not card['paused'] for card in prepared['cards'])
-assert set(p['calculations']) == {'R2-A-length-expanded','R2-A-length-row','R2-A-length-scalar',
-                                'R2-B-query-prepared','R2-B-query-raw','R2-B-prepare-interface','R2-B-raw-interface'}
+expected_calculations = {'R2-A-length-expanded','R2-A-length-row','R2-A-length-scalar'}
+if int(args.generation[7:]) < 6:
+    expected_calculations |= {'R2-B-query-prepared','R2-B-query-raw','R2-B-prepare-interface','R2-B-raw-interface'}
+assert set(p['calculations']) == expected_calculations
+assert set(m['strategies']) == ({A} if int(args.generation[7:]) >= 6 else {A, B})
 assert [c['outputs']['peak_bytes'] for c in p['calculations'].values()]  # actual numeric tool output exists
 r1 = read_json(d / 'real-round-1/controller-status.json')
 r1_jobs = [j for j in r1['jobs'].values() if j['round_id'] == 'real-runtime2-round:1']
@@ -38,6 +47,8 @@ def hist_observation(sid, oid, text, record_id, path, value):
                          'refs':[ref], 'predicate':{'ref':ref,'path':['records',index,'payload',*path],'value':value}})
 
 for label, sid in (('A',A),('B',B)):
+    if sid not in m['strategies']:
+        continue
     row = m['strategies'][sid]
     hist = row['history']
     assert hist['complete'] and hist['next_offset'] is None and len(hist['records']) == hist['total']
@@ -80,7 +91,7 @@ for label, sid in (('A',A),('B',B)):
                 if r['kind']=='Decision' and r['payload'].get('details',{}).get('type')=='workflow_result.v1'
                 and r['payload']['details'].get('result',{}).get('run_id')==j['run_id'])
             hist_observation(sid,label+'-R1-'+j['variant']['label'],
-                'Preserved Round1 '+j['variant']['label']+' outcome is '+j['result']['classification']+'. Its own Runtime2 result remains historical and is not compared numerically to the Runtime4 parent.',
+                'Preserved Round1 '+j['variant']['label']+' outcome is '+j['result']['classification']+'. Its own Runtime2 result remains historical and is not compared numerically to the '+runtime_label+' parent.',
                 recorded_result['id'],['details','result','classification'],j['result']['classification'])
     observations.append({'id':label+'-changed-direction','strategy_id':sid,'category':'hypothesis',
         'text':('R1 tile512/256 increased program duration to 8.09/11.1275 us versus the 6.624375 us A baseline; single-tile was close at 6.580625 us and all three host outcomes were slower. Keep original tiles and recurrence; isolate length representation as a new optimization axis.' if sid==A else
@@ -97,12 +108,15 @@ validation = {'correctness':[
     'Only isolated candidate entry source may change. Keep registry, Oracle, runner, build options, config, workload, benchmark, worker and environment unchanged; source bundle entry and build bundle digest must match the new source.',
     'Failed compilation or correctness remains an archived failed/incorrect Candidate; never drop a case, widen tolerance, retrofit another source or relabel it as an infrastructure failure. Any repair requires a new Candidate and remaining original budget.'],
     'performance':[
-    'Use the original five-stage Controller and same newly admitted Runtime4 Context. Compile separately, five warmups and twenty all-output synchronized host samples, no removal; Profile separately with original parser and save XPlane.',
+    'Use the original five-stage Controller and same newly admitted '+runtime_label+' Context. Compile separately, five warmups and twenty all-output synchronized host samples, no removal; Profile separately with original parser and save XPlane.',
     'Compare each independent Candidate only to its selected current-context parent via original Evaluator/consider; report device program and actual custom-call categories separately. A fused implementation can legitimately lack a separate prepare event; missing is not measured zero.',
-    'Four variants cost four executions/7200 declared seconds. Preserve two executions/3600 seconds for separate single-tile zero-length diagnostic. Current cumulative budget is ten/18000 of sixteen/28800 and is not reset; there is no repair reserve.',
+    ('This '+runtime_label+' A-only sub-batch costs two executions/3600 declared seconds. Preserve two executions/3600 seconds for the independent single-tile diagnostic. Current cumulative budget is eleven/19800 of sixteen/28800; the additional Runtime5 lost-runtime reservation is retained. One execution/1800 remains after these four planned Runs, and is not automatically a repair authorization. The two unchanged B proposals remain pending for a later bounded batch after successful new feedback; this sub-batch is not the entire original four-candidate milestone.' if int(args.generation[7:]) >= 6 else
+     'Four variants cost four executions/7200 declared seconds. Preserve two executions/3600 seconds for separate single-tile zero-length diagnostic. Current cumulative budget is ten/18000 of sixteen/28800 and is not reset; there is no repair reserve.'),
     'ABBA demonstrated host drift; a single Round2 win is exploratory and cannot prove stable host benefit. No winner is selected before measurement and no hardware rates or resource utilization are invented.']}
 
 def plan(pid,sid,mechanism,modification,cids,tradeoffs,risks,unknowns,label):
+    if sid not in m['strategies']:
+        return
     plans.append({'id':pid,'strategy_id':sid,'parent_id':m['strategies'][sid]['parent_id'],
         'mechanism':mechanism,'modification':modification,
         'refs':refs_by_strategy[sid]+['calculation:'+cid for cid in cids],
@@ -135,10 +149,15 @@ plan('R2-B-b1-fusion',B,'Fuse necessary preparation into attention for static ba
      ['No independent DMA/VMEM/MXU measurement or critical path is available; absence of a prepare event must be reported as absent, never fabricated as zero.'],'b1-fused-prepare')
 
 proposal = {'code_understanding':code,'observations':observations,'hypotheses':hypotheses,'plans':plans,
-    'unknowns':['These four source mechanisms were already proposed in the original Round2 analysis, but Runtime3 disappeared before any remote submission. The guarded archive retained its charged reservation and all not-run records. This recovery keeps those untested hypotheses, reads a new snapshot, and obtains new Runtime4 parents; it is not a claim that the abandoned round executed.',
-                'Runtime3 ABBA remains historical and its outcome is inconclusive due host drift despite limited repeated program improvement. None of those times becomes a Runtime4 control or parent denominator; historical Best is not rewritten.',
+    'unknowns':['These four source mechanisms were already proposed in the original Round2 analysis, but Runtime3 disappeared before any remote submission. The guarded archive retained its charged reservation and all not-run records. This recovery keeps those untested hypotheses, reads a new snapshot, and obtains new '+runtime_label+' parents; it is not a claim that the abandoned round executed.',
+                'Runtime3 ABBA remains historical and its outcome is inconclusive due host drift despite limited repeated program improvement. None of those times becomes a '+runtime_label+' control or parent denominator; historical Best is not rewritten.',
                 'Only BF16 contiguous Decode small is benchmarked. Forward, paged, other dtypes/mask/window/cap and broader shape performance remain unvalidated.',
                 'Single-tile zero-length diagnostic is separate and pending. All three original cases are still required for these four candidates.']}
+if int(args.generation[7:]) >= 6:
+    proposal['unknowns'][-1] = 'The independent single-tile zero-length diagnostic is pending. All three original cases remain mandatory for both A candidates. The two B candidates remain unexecuted and are not part of this sub-batch.'
+    proposal['unknowns'].append('Runtime5 also disappeared before any durable recovery-candidate submission. Its four records and eleven-execution cumulative spending are preserved in the new Snapshot. A new '+runtime_label+' parent and Context are required; no old-runtime timing is relabeled as a current denominator. These two A Plans continue the first-round-informed length hypotheses, not evidence of a successful previous second round.')
+    if int(args.generation[7:]) >= 7:
+        proposal['unknowns'].append('Later admitted Runtime generations may have completed source analysis before becoming unavailable prior to publication/intake. Their saved session outputs are preparation history only; no absent candidate Run, hardware result or exploration charge is fabricated. The current recovery gate requires each prior loss record and a fresh admitted Context.')
 path = t / 'response-3-final.json'
 write_once(path, {'final':proposal})
 result = submit_response(ExperimentStore(d / 'experiments.sqlite3', d / 'artifacts'), t, path)

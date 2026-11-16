@@ -15,6 +15,7 @@ from rsi_kernel_agent.workflow.journal import WorkflowJournal
 from rsi_kernel_agent.workflow.mla_baseline import _observed_v6e
 from real_round_aux import read_json, require, require_gates, write_once
 from runtime_readmission import remeasure
+from p35_runtime_generations import generation_number, previous_generation
 
 NAMES = ('oracle-negative-attention', 'oracle-negative-cache', 'baseline-repair', 'baseline-b')
 REMOTE_ROOT = '/content/rsi-kernel-agent/phase3-20261112-runtime4'
@@ -76,42 +77,60 @@ class _ReadmissionPreview:
         self.records[record.id] = record
 
 
-def preflight_jobs(store, directory, environment):
-    require_runtime4_archive(store, directory)
+def require_generation_archive(store, directory, generation):
+    number = generation_number(generation, minimum=4)
+    state = require_runtime4_archive(store, directory)
+    if number >= 5:
+        from p35_archive_runtime4_prerequisite_loss import require_archived_runtime4_loss
+        require_archived_runtime4_loss(store, directory)
+    if number >= 6:
+        from p35_archive_runtime5_round_loss import require_archived_runtime5_loss
+        require_archived_runtime5_loss(store, directory)
+    if number >= 7:
+        from p35_archive_completed_prerequisite_loss import require_completed_prerequisite_loss
+        for prior in range(6, number):
+            require_completed_prerequisite_loss(store, directory, 'runtime' + str(prior))
+    return state
+
+
+def preflight_jobs(store, directory, environment, *, generation='runtime4'):
+    require_generation_archive(store, directory, generation)
     origins = validate_origins(store, directory)
     preview = _ReadmissionPreview(store)
     jobs = {name: remeasure(preview, old, environment) for name, old in origins.items()}
     require(len({job['run_id'] for job in jobs.values()}) == len(NAMES), 'Replacement Runs are not distinct')
     for name, job in jobs.items():
-        path = Path(directory) / (name + '-runtime4-job.json')
+        path = Path(directory) / (name + '-' + generation + '-job.json')
         if path.exists():
             require(read_json(path) == job, 'Saved Runtime 4 job differs: ' + name)
     return origins, jobs
 
 
-def commit_jobs(store, directory, environment, origins, expected):
+def commit_jobs(store, directory, environment, origins, expected, *, generation='runtime4'):
     for name, old in origins.items():
         job = remeasure(store, old, environment)
         require(job == expected[name], 'Readmission changed after preflight')
-        write_once(Path(directory) / (name + '-runtime4-job.json'), job)
+        write_once(Path(directory) / (name + '-' + generation + '-job.json'), job)
     return expected
 
 
-def prepare_prerequisite_jobs(store, directory, environment):
+def prepare_prerequisite_jobs(store, directory, environment, *, generation='runtime4'):
     """Caller holds the original journal lock; all four jobs preflight first."""
-    origins, jobs = preflight_jobs(store, directory, environment)
-    return commit_jobs(store, directory, environment, origins, jobs)
+    origins, jobs = preflight_jobs(store, directory, environment, generation=generation)
+    return commit_jobs(store, directory, environment, origins, jobs, generation=generation)
 
 
-def observed_inputs(directory, manifests):
+def observed_inputs(directory, manifests, *, generation='runtime4'):
+    generation_number(generation, minimum=4)
+    previous = previous_generation(generation, minimum=3)
     directory, manifests = Path(directory), Path(manifests)
-    environment = read_json(manifests / 'environment-isolated-runtime4.json')
+    environment = read_json(manifests / ('environment-isolated-' + generation + '.json'))
     _observed_v6e(environment)
     intent = read_json(directory / 'allocation-intent.json')
-    old = read_json(directory / 'colab-config-runtime3.json')
-    pin = read_json(directory / 'observation-runtime4.json')
-    setup = read_json(manifests / 'isolated-environment-setup-runtime4.json')
-    probe = read_json(manifests / 'isolated-probe-runtime4.json')
+    old = read_json(directory / ('colab-config-' + previous + '.json'))
+    pin = read_json(directory / ('observation-' + generation + '.json'))
+    setup = read_json(manifests / ('isolated-environment-setup-' + generation + '.json'))
+    probe = read_json(manifests / ('isolated-probe-' + generation + '.json'))
     require(intent.get('status') == 'allocated' and type(intent.get('session')) is str and intent['session']
             and pin == {'runtime_id': environment['runtime_session_id']}
             and intent['runtime_id'] == environment['runtime_session_id'] != old['runtime_id'],
@@ -125,32 +144,32 @@ def observed_inputs(directory, manifests):
     require(report['environment'] == environment and report['result'] == 140.0
             and report['synchronized'] is True and report['xplane_parser_import'] is True,
             'Runtime 4 measured probe does not match the saved environment')
-    path = directory / 'colab-config-runtime4.json'
+    path = directory / ('colab-config-' + generation + '.json')
     existing = read_json(path) if path.exists() else None
     nonce = existing.get('nonce') if existing is not None else uuid.uuid4().hex
     require(type(nonce) is str and bool(nonce) and nonce != old['nonce'], 'Runtime 4 needs a new nonce')
     config = {**old, 'runtime_id': environment['runtime_session_id'], 'session': intent['session'],
-              'nonce': nonce, 'remote_root': REMOTE_ROOT}
+              'nonce': nonce, 'remote_root': '/content/rsi-kernel-agent/phase3-20261112-' + generation}
     require(existing is None or existing == config, 'Saved Runtime 4 config differs')
-    admitted = directory / 'runtime4-admitted-environment.json'
+    admitted = directory / (generation + '-admitted-environment.json')
     require(not admitted.exists() or read_json(admitted) == environment, 'Saved Runtime 4 environment differs')
     return environment, config
 
 
-def admit(directory, manifests, *, bootstrap=False):
+def admit(directory, manifests, *, bootstrap=False, generation='runtime4'):
     directory = Path(directory)
-    environment, config = observed_inputs(directory, manifests)
+    environment, config = observed_inputs(directory, manifests, generation=generation)
     require((directory / 'experiments.sqlite3').is_file(), 'Original Store is missing')
     store = ExperimentStore(directory / 'experiments.sqlite3', directory / 'artifacts')
     base = read_json(directory / 'baseline-repair-runtime3-job.json')
     with WorkflowJournal(store, base['task_id']).lock():
-        origins, jobs = preflight_jobs(store, directory, environment)
-        write_once(directory / 'colab-config-runtime4.json', config)
-        write_once(directory / 'runtime4-admitted-environment.json', environment)
-        commit_jobs(store, directory, environment, origins, jobs)
+        origins, jobs = preflight_jobs(store, directory, environment, generation=generation)
+        write_once(directory / ('colab-config-' + generation + '.json'), config)
+        write_once(directory / (generation + '-admitted-environment.json'), environment)
+        commit_jobs(store, directory, environment, origins, jobs, generation=generation)
     if bootstrap:
         from rsi_kernel_agent.workflow.__main__ import colab_remote
-        print(colab_remote(directory / 'colab-config-runtime4.json').bootstrap())
+        print(colab_remote(directory / ('colab-config-' + generation + '.json')).bootstrap())
     return jobs
 
 
@@ -159,6 +178,7 @@ if __name__ == '__main__':
     parser.add_argument('--directory', type=Path, default=Path(__file__).resolve().parent)
     parser.add_argument('--manifests', type=Path, default=ROOT / 'knowledge-site/manifests/phase3-2026-11-12')
     parser.add_argument('--bootstrap', action='store_true')
+    parser.add_argument('--generation', default='runtime4')
     args = parser.parse_args()
-    jobs = admit(args.directory, args.manifests, bootstrap=args.bootstrap)
-    print('Runtime 4 four prerequisite jobs prepared; gates must pass before active binding changes.')
+    jobs = admit(args.directory, args.manifests, bootstrap=args.bootstrap, generation=args.generation)
+    print(args.generation + ' four prerequisite jobs prepared; gates must pass before active binding changes.')

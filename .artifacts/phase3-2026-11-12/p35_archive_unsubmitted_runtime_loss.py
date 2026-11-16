@@ -78,11 +78,12 @@ def identities():
     return intent, result
 
 
-def validate_observation(observation):
+def validate_observation(observation, *, expected_runtime_id=None):
+    runtime_id = EXPECTED['runtime_id'] if expected_runtime_id is None else expected_runtime_id
     require(type(observation) is dict and set(observation) == {
         'schema_version', 'runtime_id', 'observed_at_utc', 'control_plane_reachable',
         'assignments', 'driver_processes_stopped', 'reason'}, 'Invalid loss observation fields')
-    require(observation['schema_version'] == 1 and observation['runtime_id'] == EXPECTED['runtime_id']
+    require(observation['schema_version'] == 1 and observation['runtime_id'] == runtime_id
         and observation['control_plane_reachable'] is True
         and observation['driver_processes_stopped'] is True
         and type(observation['reason']) is str and bool(observation['reason'].strip()),
@@ -95,7 +96,7 @@ def validate_observation(observation):
             and type(row['session_names']) is list
             and all(type(name) is str and bool(name.strip()) for name in row['session_names']),
             'Discovery assignments must contain sanitized runtime/session/accelerator/variant rows')
-        require(row['runtime_id'] != EXPECTED['runtime_id'], 'Old Runtime is still present in discovery assignments')
+        require(row['runtime_id'] != runtime_id, 'Old Runtime is still present in discovery assignments')
     try:
         timestamp = datetime.fromisoformat(observation['observed_at_utc'].replace('Z', '+00:00'))
         require(timestamp.utcoffset() is not None, 'Observation needs an explicit timezone')
@@ -143,11 +144,11 @@ def load_scope(store, directory):
                              'execution_input': digest(inputs), 'prior_checkpoint': digest(prior)}}
 
 
-def no_backend_submission(store, original_jobs):
+def no_backend_submission(store, original_jobs, *, task_id=None):
     runs = {job['run_id'] for job in original_jobs.values()}
     operations = {stable_id('operation', run, stage) for run in runs
                   for stage in ('generate', 'compile', 'correctness', 'benchmark', 'profile')}
-    for record in store.history(EXPECTED['task_id']):
+    for record in store.history(EXPECTED['task_id'] if task_id is None else task_id):
         if type(record) is not Decision:
             continue
         details = record.details

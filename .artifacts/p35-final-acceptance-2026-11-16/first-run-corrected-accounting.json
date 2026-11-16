@@ -1,0 +1,26 @@
+{
+  "root": {
+    "total": 343,
+    "passed": 340,
+    "skipped": 3,
+    "failed_test_methods": 0,
+    "error_test_methods": 0,
+    "failure_entries": 0,
+    "error_entries": 0,
+    "exit_code": 0,
+    "original_wrapper_passed": 340,
+    "original_files_unchanged": true
+  },
+  "auxiliary": {
+    "total": 383,
+    "passed": 353,
+    "skipped": 0,
+    "failed_test_methods": 7,
+    "error_test_methods": 23,
+    "failure_entries": 10,
+    "error_entries": 23,
+    "exit_code": 1,
+    "original_wrapper_passed": 350,
+    "original_files_unchanged": true
+  }
+}

@@ -1,7 +1,8 @@
 # 知序 · 本地 Markdown 知识库
 
 <!-- phase3-current-status -->
-> CURRENT｜2026-11-13 19:07。首轮5候选与四Run ABBA已完成；program有限复测收益约6.50%/5.92%，host漂移，未确认稳定端到端收益。第二轮4个新方案在Runtime3消失前未提交，已归档；Runtime4已取得并通过同步探针，但准入尚未完成，本地驱动已停止，需先回收原operation结果。恢复第二轮与单tile硬件诊断未完成，P3.5仍在进行。最新根回归318通过/3跳过，423.235秒、exit0。以[当前进展报告](manifests/phase3-2026-11-12/implementation-report.md)为准。
+> CURRENT｜2026-11-16。P3.5 在 MLA Decode contiguous BF16 声明范围内完成系统闭环验收：**PASS_WITH_LIMITATIONS**；稳定端到端性能 **NOT_CONFIRMED**。两轮真实多方案实验、ABBA、独立 single-tile 诊断及原始证据/Memory 审计均完成。修复后根回归 340 通过、3 跳过；辅助 383 次执行全部通过（376 个不同测试 ID），均 exit 0。见[最终验收报告](../docs/phase3/phase3-final-acceptance-report.md)及[文档总索引](../docs/README.md)。
+<!-- /phase3-current-status -->
 
 支持 Markdown 阅读、编辑与预览，按知识点分级分类，搜索标题和正文，导入与导出 `.md`。文档保存在本机；账号与权限使用 Python 自带的 SQLite，无需额外安装数据库或 Node.js。
 

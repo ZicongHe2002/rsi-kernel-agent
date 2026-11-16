@@ -1,0 +1,8 @@
+test_config_change_during_admission_cannot_be_accepted_as_new_pin (test_resume_p35_diagnostic_independent.DiagnosticResumeOutputTests.test_config_change_during_admission_cannot_be_accepted_as_new_pin) ... ok
+test_terminal_journal_recovers_missing_final_status_before_completion (test_resume_p35_diagnostic_independent.DiagnosticResumeOutputTests.test_terminal_journal_recovers_missing_final_status_before_completion) ... ok
+test_changed_valid_variant_is_rejected_before_verification (test_verify_p35_continuation_independent.IndependentIntakeBindingTests.test_changed_valid_variant_is_rejected_before_verification) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 67.826s
+
+OK

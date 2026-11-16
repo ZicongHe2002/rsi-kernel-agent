@@ -319,15 +319,17 @@ class DiagnosticDispatchTests(RealProtocolFixture, unittest.IsolatedAsyncioTestC
 
 
 class DiagnosticRuntime4Tests(DiagnosticDispatchTests):
+    generation = 'runtime4'
+
     async def asyncSetUp(self):
-        self.fixture_baseline_round = 'real-runtime4-recovery-round:2'
+        self.fixture_baseline_round = getattr(self, 'fixture_admission_round', 'real-' + self.generation + '-recovery-round:2')
         await super().asyncSetUp()
         self.recovery = importlib.import_module('p35_recovery_round')
-        self.spec.update(schema_version=2, runtime_generation='runtime4', round_id='diagnostic:runtime4-zero')
+        self.spec.update(schema_version=2, runtime_generation=self.generation, round_id='diagnostic:' + self.generation + '-zero')
         self.selection_path.write_text(canonical_json(self.spec), encoding='utf-8')
         # Fixture uses actual real-protocol results while mocking the separately
         # tested archive/ABBA admission gate. No new hardware is represented.
-        (self.directory / 'colab-config-runtime4.json').write_text(canonical_json({
+        (self.directory / ('colab-config-' + self.generation + '.json')).write_text(canonical_json({
             'runtime_id': self.environment['runtime_session_id']}), encoding='utf-8')
         self.notes = {}
         for label in ('archive', 'archive-intent', 'abba-result', 'abba-policy', 'abba-A', 'abba-B'):
@@ -350,16 +352,17 @@ class DiagnosticRuntime4Tests(DiagnosticDispatchTests):
         before = old_path.read_bytes()
         packet = await self.prepare_session()
         self.assertEqual(old_path.read_bytes(), before)
-        self.assertEqual(json.loads((self.directory / 'p35-diagnostic-selection-runtime4.json').read_bytes()), self.spec)
-        self.assertEqual(json.loads((self.target / 'runtime-binding.json').read_bytes()), {'generation': 'runtime4'})
+        self.assertEqual(json.loads((self.directory / ('p35-diagnostic-selection-' + self.generation + '.json')).read_bytes()), self.spec)
+        self.assertEqual(json.loads((self.target / 'runtime-binding.json').read_bytes()), {'generation': self.generation})
         self.assertEqual(packet['context']['environment'], self.environment)
         self.assertNotEqual(self.prep.target_for(self.directory, legacy), self.target)
         self.assertTrue(self.context_gate.call_args_list)
         self.assertTrue(all(call.kwargs['allowed_round_id'] == self.spec['round_id'] for call in self.context_gate.call_args_list))
+        self.assertTrue(all(call.kwargs.get('generation', 'runtime4') == self.generation for call in self.context_gate.call_args_list))
 
     async def test_v2_rejects_other_generation_or_recovery_round_identity_before_writes(self):
         for update in ({'runtime_generation': 'runtime3'}, {'runtime_generation': '../runtime4'},
-                       {'runtime_generation': 'runtime5'}, {'round_id': self.recovery.ROUND_ID}):
+                       {'runtime_generation': 'runtime07'}, {'round_id': self.fixture_baseline_round}):
             changed = {**self.spec, **update}
             self.selection_path.write_text(canonical_json(changed), encoding='utf-8')
             before = len(self.store.history('task'))
@@ -383,12 +386,122 @@ class DiagnosticRuntime4Tests(DiagnosticDispatchTests):
         self.complete_session()
         with patch.object(self.run, 'colab_remote', return_value=None) as remote, redirect_stdout(io.StringIO()):
             await self.run.run(self.selection_path, directory=self.directory, steps=12)
-        remote.assert_called_with(self.directory / 'colab-config-runtime4.json')
+        remote.assert_called_with(self.directory / ('colab-config-' + self.generation + '.json'))
         state = self.controller.status()
         jobs = [j for j in state['jobs'].values() if j['round_id'] == self.spec['round_id']]
         self.assertEqual(len(jobs), 2)
         self.assertTrue(all(j['state'] == 'completed' for j in jobs))
         self.assertEqual(state['spent'], {'executions': 4, 'tokens': 0, 'time_s': 7200.0})
+
+
+class DiagnosticRuntime5Tests(DiagnosticRuntime4Tests):
+    generation = 'runtime5'
+
+    async def test_cancelled_recovery_prefix_cannot_prepare_diagnostic(self):
+        original = self.origins['baseline']
+        for suffix, generated in (('admin', False), ('generated', True)):
+            job = deepcopy(original)
+            job.update(id='cancelled-' + suffix, candidate_id='cancelled-candidate-' + suffix,
+                       run_id='cancelled-run-' + suffix, receipts={}, result=None)
+            identity = self.store.get(original['candidate_id']).identity
+            self.store.append(Candidate(job['candidate_id'], job['plan_id'], job['parent_id'], identity), job['candidate_id'])
+            self.store.append(Run(job['run_id'], job['candidate_id'], job['context_id']), job['run_id'])
+            self.store.transition(RunEvent(job['run_id'] + ':start', job['run_id'], 'running', 'active',
+                'CPU administrative cancellation fixture'), None, job['run_id'] + ':start')
+            receipts = {'generate': self.dynamic_receipt(job, 'generate')} if generated else {}
+            job.update(state='cancelled', receipts=receipts,
+                       result=integrate_result(self.store, job, receipts, cancelled=True))
+            self.origins['baseline'] = job  # completed_round fixture now has only this cancelled R5 result.
+            before = len(self.store.history('task'))
+            with self.subTest(generated=generated), self.assertRaisesRegex(ValueError, 'compile feedback'):
+                await self.prep.prepare(self.selection_path, directory=self.directory)
+            self.assertEqual(len(self.store.history('task')), before)
+            self.assertFalse(self.target_for_if_any().exists())
+        self.origins['baseline'] = original
+
+    async def test_snapshot_must_contain_verified_recovery_compile_publication(self):
+        packet = await self.prepare_session()
+        prepared = self.prep.load_prepared(self.store, 'task', packet['context']['id'], ['A'], self.spec['round_id'])
+        from rsi_kernel_agent.workflow.execution import stable_id
+        missing_id = stable_id('execution-receipt', stable_id('operation', self.origins['baseline']['run_id'], 'compile'))
+        original_page = self.store.snapshot_page
+        def missing_compile(*args, **kwargs):
+            page = original_page(*args, **kwargs)
+            return {**page, 'records': [record for record in page['records'] if record.id != missing_id]}
+        with patch.object(self.store, 'snapshot_page', side_effect=missing_compile):
+            with self.assertRaisesRegex(ValueError, 'compile feedback'):
+                self.prep.require_prepared_history(self.store, self.directory, self.spec, prepared)
+
+
+class DiagnosticRuntime6FlowTests(unittest.IsolatedAsyncioTestCase):
+    generation = 'runtime6'
+
+    async def test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches(self):
+        fixture = DiagnosticRuntime4Tests()
+        fixture.generation = self.generation
+        fixture.fixture_admission_round = 'fixture-prerequisite'
+        fixture.addCleanup = self.addCleanup
+        await fixture.asyncSetUp()
+        original = fixture.origins['baseline']
+        for label in ('length-row', 'length-smem'):
+            job = deepcopy(original)
+            job.update(id='recovery-job-' + label, candidate_id='recovery-candidate-' + label,
+                       run_id='recovery-run-' + label, round_id='real-' + self.generation + '-recovery-round:2')
+            job['variant']['label'] = label
+            fixture.store.append(Candidate(job['candidate_id'], job['plan_id'], job['parent_id'],
+                fixture.store.get(original['candidate_id']).identity), job['candidate_id'])
+            fixture.store.append(Run(job['run_id'], job['candidate_id'], job['context_id']), job['run_id'])
+            fixture.store.transition(RunEvent(job['run_id'] + ':start', job['run_id'], 'running', 'active',
+                'CPU R6 actual feedback fixture'), None, job['run_id'] + ':start')
+            receipts = {stage: fixture.dynamic_receipt(job, stage)
+                        for stage in ('generate', 'compile', 'correctness', 'benchmark', 'profile')}
+            job.update(receipts=receipts, result=integrate_result(fixture.store, job, receipts))
+            fixture.origins[label] = job
+        state = fixture.controller.journal.load()
+        state['jobs'] = {job['id']: job for job in fixture.origins.values()}
+        state['spent'] = {'executions': 4, 'tokens': 0, 'time_s': 7200}
+        fixture.controller.journal.save(state, 'CPU two A feedback completed')
+        from p35_verification_view import VerificationView
+        from rsi_kernel_agent.store import ExperimentStore
+        if self.generation == 'runtime7':
+            for label in ('prior-completed-loss', 'prior-completed-loss-intent'):
+                note = Decision(label, 'task', 'note', 'task', 'CPU prior loss', {'type': 'fixture.v1'})
+                fixture.store.append(note, note.id)
+            fixture.context_gate.return_value['completed_prerequisite_losses'] = [
+                {'generation': 'runtime6', 'archive': {'decision_id': 'prior-completed-loss',
+                                                      'intent_id': 'prior-completed-loss-intent'}}]
+        with patch.object(fixture.prep, 'load_prepared', wraps=fixture.prep.load_prepared) as prepared_reader:
+            await fixture.prepare_session()
+        self.assertIsInstance(prepared_reader.call_args.args[0], VerificationView)
+        if self.generation == 'runtime7':
+            packet = json.loads((fixture.target / 'diagnostic-packet.json').read_bytes())
+            prepared = fixture.prep.load_prepared(fixture.store, 'task', packet['context']['id'], ['A'], fixture.spec['round_id'])
+            original_page = fixture.store.snapshot_page
+            def missing_prior_loss(*args, **kwargs):
+                page = original_page(*args, **kwargs)
+                return {**page, 'records': [r for r in page['records'] if r.id != 'prior-completed-loss-intent']}
+            with patch.object(fixture.store, 'snapshot_page', side_effect=missing_prior_loss):
+                with self.assertRaisesRegex(ValueError, 'completed prerequisite loss'):
+                    fixture.prep.require_prepared_history(fixture.store, fixture.directory, fixture.spec, prepared)
+        fixture.complete_session()
+        with patch.object(fixture.run, 'Controller', wraps=Controller) as constructor, \
+             patch.object(fixture.run, 'prerequisites', wraps=fixture.run.prerequisites) as gates, \
+             redirect_stdout(io.StringIO()):
+            await fixture.run.run(fixture.selection_path, directory=fixture.directory, steps=12)
+        self.assertEqual(gates.call_count, 2)
+        self.assertIsInstance(gates.call_args_list[0].args[0], VerificationView)
+        self.assertIs(type(gates.call_args_list[-1].args[0]), ExperimentStore)
+        self.assertIs(type(constructor.call_args.args[0]), ExperimentStore)
+        completed = fixture.controller.status()
+        jobs = [j for j in completed['jobs'].values() if j['round_id'] == fixture.spec['round_id']]
+        self.assertEqual({j['variant']['label'] for j in jobs}, {'diagnostic-baseline', 'diagnostic-single-tile'})
+        self.assertTrue(all(j['state'] == 'completed' for j in jobs))
+        self.assertEqual(completed['spent']['executions'], 6)
+        self.assertEqual(len(fixture.backend.submissions), 10)
+
+
+class DiagnosticRuntime7FlowTests(DiagnosticRuntime6FlowTests):
+    generation = 'runtime7'
 
 
 if __name__ == '__main__':

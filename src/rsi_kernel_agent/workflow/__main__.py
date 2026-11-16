@@ -117,6 +117,7 @@ async def dispatch(args):
     if args.command=='repair-packet': return controller.repair_packet(args.job)
     if args.command=='repair': return {'job_id':controller.submit_repair(args.job,read_json(args.response),args.key)}
     if args.command=='retry': return {'job_id':controller.retry(args.job,args.key)}
+    if args.command=='extend-budget': return controller.extend_budget(read_json(args.grant),args.key)
     state=controller.status()
     if args.command=='queue':return [j for j in state['jobs'].values() if j['state'] in ('queued','active','evaluating','deferred','blocked')]
     if args.command=='results':return [j for j in state['jobs'].values() if j['result']]
@@ -143,6 +144,8 @@ def main():
     p=sub.add_parser('intake')
     for name in ('publication','round-id','variants','website'):p.add_argument('--'+name,required=True)
     p=sub.add_parser('cards');p.add_argument('--task',required=True);p.add_argument('--context',required=True);p.add_argument('--key')
+    p=sub.add_parser('extend-budget')
+    for name in ('task','grant','key'):p.add_argument('--'+name,required=True)
     for name in ('status','queue','results','failures','run','recover','pause','resume','resume-job','cancel','repair-packet','repair','retry'):
         p=sub.add_parser(name);p.add_argument('--task',required=True)
         if name in ('run','recover'):p.add_argument('--max-steps',type=int,default=1000)

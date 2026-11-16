@@ -1,0 +1,126 @@
+{
+  "spec_digest": "88f541f99c31918649b1d730916a55ccfe37a6e234829e5badb5e0a40209cc55",
+  "round_id": "real-runtime7-b2-continuation-round:2",
+  "context_id": "runtime-context:b60862eb713e457a38d5a704bb3d7f1ceae68a118e919a326b0da13f50689b62",
+  "snapshot": {
+    "id": "snapshot:4aecf683cc9e49089b539dabe10fedd8",
+    "schema_version": 1,
+    "task_id": "mla-decode-v1",
+    "version": 26,
+    "high_watermark": 1530,
+    "record_count": 1505,
+    "strategy_counts": {
+      "mla-strategy:deee0989771642ee8e066be07adb0370a6c7a3bca6be04ebc8ab50e145c5b05e": 576,
+      "oracle-validation-strategy:23027eaf3387f1378a566e02952181c14516c203844db2810b2bd84381178ccf": 251,
+      "mla-strategy:ad3416851dfcc72142373541d6dc1f47121b390cce460b7fa479e9436b97e3cd": 585
+    },
+    "digest": "25c8c6475b595fbd471b15077625a36e1e3a7dbeec04415ac9253c6586cfd372"
+  },
+  "grant_key": "p35-runtime7-b2-after-a2-diagnostic-v1",
+  "results": {
+    "wf-job:6a8709d0ba339d85181feab142c8801750c97efe": {
+      "candidate_id": "wf-c:fdbcff9f1c09c22d9e0f86a7cb9c02a8",
+      "classification": "correct_faster",
+      "confirmed": true,
+      "correctness": "passed",
+      "cost": {
+        "executions": 1,
+        "time_s": 1800.0,
+        "tokens": 0
+      },
+      "evaluation_id": "evaluation:c2ae8db4bfe56d72f5ba4ba15cc3cb24ec129e69195ea043f91acaf7e7061b83",
+      "latency_ms": 0.21370000467868522,
+      "parent_latency_ms": 0.2232250001270586,
+      "profile_id": "profile:c2ae8db4bfe56d72f5ba4ba15cc3cb24ec129e69195ea043f91acaf7e7061b83",
+      "promotion_id": "decision:57a8c8890b704737be6de67af7ee2d47",
+      "provenance": "real",
+      "receipt_refs": {
+        "benchmark": {
+          "digest": "4b87145c78d62dcea1d36a4b28581fbceb6683acd061c15018c2ff04f1f31f7c",
+          "size": 53280
+        },
+        "compile": {
+          "digest": "19709d1beb3223fa3bffee2c033967336c91e8c22c6f3f985f343a69014e3e1f",
+          "size": 53316
+        },
+        "correctness": {
+          "digest": "699e6b62b8a448df5a5ff0dbd1f11bc1519cd60d833495efea2fb002acce1f18",
+          "size": 105875
+        },
+        "generate": {
+          "digest": "8d0e880833d216fade7c415378a8d1abc76d6069872e370a7b0c0ad91057a1e4",
+          "size": 1914
+        },
+        "profile": {
+          "digest": "f7958636e759eef75926c076117b5bf3cb5409e56be2c07c21bc05a5efdadcca",
+          "size": 53244
+        }
+      },
+      "run_id": "wf-r:fb51ab1de12a6f5fbb079485c3d73086",
+      "statistics": {
+        "count": 20,
+        "max_ms": 0.24123000912368298,
+        "mean_ms": 0.2148860010493081,
+        "median_ms": 0.21370000467868522,
+        "min_ms": 0.20495000353548676,
+        "outlier_rule": "none",
+        "p25_ms": 0.2084949956042692,
+        "p75_ms": 0.2185374942200724,
+        "standard_deviation_ms": 0.008216839301392762
+      },
+      "timing_validity": "valid"
+    },
+    "wf-job:b5b216c680c2f06e14da5c422a4794519c542227": {
+      "candidate_id": "wf-c:9aaf85a892282afc9f6b6e40db9af8b2",
+      "classification": "correct_slower",
+      "confirmed": true,
+      "correctness": "passed",
+      "cost": {
+        "executions": 1,
+        "time_s": 1800.0,
+        "tokens": 0
+      },
+      "evaluation_id": "evaluation:975afad094e94421f7f994464066f36270792553eed962235059e56539eb2f6e",
+      "latency_ms": 0.23663000320084393,
+      "parent_latency_ms": 0.2232250001270586,
+      "profile_id": "profile:975afad094e94421f7f994464066f36270792553eed962235059e56539eb2f6e",
+      "promotion_id": "decision:d378b567f5f5482c9138f2ced7ac7a90",
+      "provenance": "real",
+      "receipt_refs": {
+        "benchmark": {
+          "digest": "27cbb9ac87fbfd0c9ab9708794d74b8e9cfe94e444e42e484777079af9d728b4",
+          "size": 53278
+        },
+        "compile": {
+          "digest": "006c4d529c4a4f0a437692a0e9b373e07221051a0ecdd18c815b66ae1eb92606",
+          "size": 53315
+        },
+        "correctness": {
+          "digest": "6b74fc57425355999c29c38644c4e0c9ea888e79c1047aec2b16defd9335d459",
+          "size": 105875
+        },
+        "generate": {
+          "digest": "841e956b5b7e09465eb9fa38ddc611aa274dac64b51ad169e4866437b925ab00",
+          "size": 1914
+        },
+        "profile": {
+          "digest": "f0c0134f637a0127b6ba00ade8afea8e5ff311e8a73a3c8aae71b8890b42546b",
+          "size": 53246
+        }
+      },
+      "run_id": "wf-r:bcde96344bd5eacd7e9b35468716156c",
+      "statistics": {
+        "count": 20,
+        "max_ms": 0.27255999157205224,
+        "mean_ms": 0.23713699920335785,
+        "median_ms": 0.23663000320084393,
+        "min_ms": 0.22005000209901482,
+        "outlier_rule": "none",
+        "p25_ms": 0.22565250037587248,
+        "p75_ms": 0.24725250113988295,
+        "standard_deviation_ms": 0.013407534117504004
+      },
+      "timing_validity": "valid"
+    }
+  }
+}

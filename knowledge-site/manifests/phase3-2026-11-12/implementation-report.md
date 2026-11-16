@@ -1,5 +1,66 @@
 # Phase 3 真实硬件集成与优化实现进展报告
 
+<!-- p35-final-acceptance-20261116 -->
+> **2026-11-16｜P3.5 最终离线验收完成**：在 MLA Decode contiguous BF16 声明范围内，系统闭环 **PASS_WITH_LIMITATIONS**；稳定端到端性能 **NOT_CONFIRMED**。第一轮 4 Plan / 5 Candidate、第二轮 4 Plan / 4 Candidate、ABBA 与两项独立 single-tile 诊断均有原始证据；本次复核 28 个 Run、76 个 correctness case、22 份 XPlane。修复六个辅助测试夹具文件后，根级 **343 项：340 通过、3 跳过**，辅助 **383 次执行全部通过（376 个不同 ID）**，均 exit 0。首次失败及修复证据完整保留。
+>
+> 重新核对的 Snapshot 为 **26 / 1505 records / high-watermark 1530**，Journal **247**，预算仍 **17/18 executions、30600/32400 声明秒**，余 **1 / 1800**。原 Store 未写入，未新增 TPU 申请或执行。设备执行后的输入 cache 缺失、Runtime 4 历史 correctness unknown、有限单 Run 和 workload 范围等限制保留；详见[最终验收报告](../../../docs/phase3/phase3-final-acceptance-report.md)。下文各带时间段落保留为历史检查点，不作为当前恢复起点。
+<!-- /p35-final-acceptance-20261116 -->
+
+<!-- p35-runtime7-b2-complete-20261114T121949 -->
+> **Runtime 7 B2 完成｜2026-11-14（Asia/Shanghai，P3.5 仍进行中）**：`query-in-attention` 与 `b1-fused-prepare` 两项剩余 B 候选均完成真实 generate/compile/correctness/benchmark/profile/evaluate 五阶段，三组正确性通过；原始 NPZ/cache 核验 **2 verified / 0 pending / 0 failed**。`query-in-attention` host median **0.236630 ms**，同 Context 父版本 **0.223225 ms**，`correct_slower`；`b1-fused-prepare` host median **0.213700 ms**，`correct_faster`。每项仅一个 Run，不能据此宣称稳定端到端收益或独立复测完成。
+>
+> B2 完成闭包已写回原 Store/Memory：**Snapshot version 26 / 1505 records / high-watermark 1530**，ID `snapshot:4aecf683cc9e49089b539dabe10fedd8`；Final Memory 为 `status=verified`，`original_second_round_scope_complete=true`。Controller 累计预算 **17/18 executions、30600/32400 声明秒**，剩 **1 execution / 1800 秒**。原四候选第二轮范围现已完成，但 P3.5 最终验收与稳定性能收益仍未宣称；ABBA 的 host 漂移和本轮每候选单 Run 的限制继续有效。
+>
+> 证据：[B2 完成快照](../../../.artifacts/phase3-2026-11-12/continuation-e4b6a0fcf34a6c37d083/completed.json)、[B2 原始核验](../../../.artifacts/phase3-2026-11-12/continuation-e4b6a0fcf34a6c37d083/local-verifications/20261114T121032140454Z.json)、[B2 Final Memory](../../../.artifacts/phase3-2026-11-12/p35-b2-final-memory-20261114T121949131352Z.json)、[B2 规范](../../../.artifacts/phase3-2026-11-12/p35-runtime7-b2-spec.json)。以下历史进展按原时间保留。
+<!-- /p35-runtime7-b2-complete-20261114T121949 -->
+
+<!-- p35-runtime7-diagnostic-complete-20261114T025932 -->
+> **Runtime 7 独立 single-tile 诊断完成｜2026-11-14 02:59（Asia/Shanghai，P3.5 进行中）**：baseline 与原 single-tile 各一项真实五阶段 Run 完成，均为 **correct_inconclusive / passed / valid / confirmed=true**。正式核验 **2 verified / 0 pending / 0 failed_verification**，76 个去重工件、5,828,013 bytes，两项原始 NPZ 重算。固定 small 长度 `[0]`、capacity/block 1024 与 boundary `[0,1,129]`、capacity/block 256 直接补齐本矩阵的单 tile 零长度/合法长度、全无效 attention 与完整 opaque cache 覆盖；不外推所有配置或 LSE。
+>
+> 原结果已写回 Memory，完成 **Snapshot version 23 / 1396 records / high-watermark 1421**；**Controller revision 209**，诊断成本 2 executions / 3600 声明秒，累计 **15/16、27000/28800**，剩 **1 次 / 1800 秒**。随后 **03:03 保存的 final Memory 报告为 verified**，缺失报告/Run 均为空，四个已 NPZ 核验 Run 与 Snapshot 23 绑定，同水位投影一致；**A2＋诊断子里程碑完成**。原四候选目标仍为 `original_second_round_scope_complete=false`，两项 B 未完成；grant/spec 专用 preflight 在进行，尚未实际 apply，预算仍为 15/16。P3.5 不宣布最终验收，也不宣布稳定端到端收益。设备执行时 input cache 不变仍沿用原 runner 检查，未独立重解码 XPlane。
+>
+> 新窄恢复入口本地最终独审 **9/9、158.843 秒、exit 0**，原 scope 兼容 **2/2、16.993 秒、exit 0**；软件测试与上述两个硬件 Run 分开记录。详见[今日报告](../../../docs/phase3/phase3-p35-progress-report-2026-11-14.md)、[正式诊断核验](../../../.artifacts/phase3-2026-11-12/single-tile-diagnostic-e18e6e9bf4a98216/local-verifications/20261113T185932641868Z-r209.json)、[完成 Snapshot](../../../.artifacts/phase3-2026-11-12/single-tile-diagnostic-e18e6e9bf4a98216/completed.json)、[final Memory 对账](../../../.artifacts/phase3-2026-11-12/p35-final-memory-20261113T190339063283Z.json)与[恢复独审](../../../.artifacts/phase3-2026-11-12/p35-diagnostic-resume-independent-review-20261114.md)。以下 A2 及更早段落均为各自时点历史；本次文档更新未推送 GitHub。
+<!-- /p35-runtime7-diagnostic-complete-20261114T025932 -->
+
+<!-- p35-runtime7-a2-complete-20261114T014212 -->
+> **Runtime 7 第二轮 A2 已完成｜2026-11-14 01:42（Asia/Shanghai，P3.5 进行中）**：两项 A 候选完成真实五阶段与三组正确性，默认原始 NPZ 核验 **2 verified / 0 pending / 0 failed_verification**，126 个去重工件、512,419,990 bytes。`length-row` 为 `correct_faster`：host median **0.204825 ms**、program **6.626250 μs**；`length-smem` 为 `correct_slower`：host **0.216060 ms**、program **6.504375 μs**。同 Context 父版本为 **0.211950 ms / 6.638125 μs**；各一个 Run，不宣称稳定收益。
+>
+> 原 Evaluator / Memory 已归档。完成状态 **revision 180**，完成 **Snapshot version 20 / 1296 records / high-watermark 1321**，累计已用 **13/16 executions、23400/28800 声明秒**，余 3 次 / 5400 秒，旧失联成本不退回。此前 Snapshot 19 是 Analyzer 输入；01:08 无派发文件是历史检查点，已由本次实际回执和核验更新。独立 single-tile 诊断正在准备，尚无诊断 Run 成功或 B2 grant；两项 B、最终全任务 Memory/Best/Frontier/Parent 核验与 P3.5 最终验收仍待完成。
+>
+> 详见[今日真实反馈报告](../../../docs/phase3/phase3-p35-progress-report-2026-11-14.md)、[正式原始核验](../../../.artifacts/phase3-2026-11-12/real-round-2-runtime7/local-verifications/20261113T174212998080Z-r180.json)、[原完成 Snapshot](../../../.artifacts/phase3-2026-11-12/real-round-2-runtime7/completed.json)与[Runtime 7 四项准入](runtime7-prerequisite-verification.json)。以下较早日期段落仍为历史；第一轮与 ABBA 的有限 program 收益及 host 漂移边界保留。本次文档更新未另行推送 GitHub。
+<!-- /p35-runtime7-a2-complete-20261114T014212 -->
+
+<!-- p35-runtime5-continuation -->
+<!-- p35-runtime6-continuation-20261113T2301 -->
+> **Runtime 5 归档与 Runtime 6 准入｜2026-11-13 23:01（Asia/Shanghai，进行中）**：Runtime 5 恢复第二轮四项已确认 **零 durable 远端请求/回执**，原 Journal / Evaluator 已完成归档：首项 cancelled / incomplete，其余三项保留 not_run；原 operation、源码、Context 和旧 13 个作业保留，Task 未取消、预算未退回。归档为 **revision 151、Snapshot version 14 / 986 records / high-watermark 1011**，预算仍为 **11/16 executions、19800/28800 声明秒**。独立只读核验通过，包含 1920 条关系闭包；此前 22:33 的“零提交待核验”记录保留为历史。
+>
+> Runtime 6 `tpu-v6e1-s-euw4a0-1q01sb2h5jte9` 已完成固定环境准备，同步 JAX 探针 **140.0**。四项新准入正在执行；本地 checkpoint 显示首项 attention 负例 generate 于 **23:00:20 completed**，compile 从 **23:00:49 running** 推进至 **23:01:40 completed**，尚无首项最终正确性结论或四项全部通过核验。**准入未完成，恢复候选和单 tile 硬件诊断未完成。**
+>
+> 后续先用现有预算执行 **2 个 A 恢复候选 + 2 个独立诊断 Run**，共 4 次 / 7200 秒；若无额外 repair / retry 预留，累计到 **15/16、27000/28800**，留 1 次 / 1800 秒。两项 B 候选仍属原四候选总目标；仅在新 A 取得真实 correct / valid / Profile 完整证据、两项诊断核验和 Memory/Best/Frontier/Current Parent/预算核对完成后，才准备 **2 executions / 3600 声明秒**的明确 grant 批次。**目前没有追加 grant，新 continuation 辅助尚未交付，不能将已有 grant 接口写成自动循环就绪；P3.5 仍未最终验收。**
+>
+> 证据：[R5 归档](../../../.artifacts/phase3-2026-11-12/real-round-2-runtime5/runtime-loss-archive.json)、[归档独立核验](../../../.artifacts/phase3-2026-11-12/runtime5-loss-independent-verification-20261113.json)、[R6 环境](environment-isolated-runtime6.json)、[同步探针](isolated-probe-runtime6.json)、[原准入 checkpoint](../../../.artifacts/phase3-2026-11-12/runtime6-progress.jsonl)、[Runtime 6 继续计划](../../../docs/phase3/phase3-p35-runtime6-continuation-plan.md)。以下 22:33 及更早记录完整保留；本次更新没有另行推送 GitHub。
+<!-- /p35-runtime6-continuation-20261113T2301 -->
+> **Runtime 5 中断与继续申请｜2026-11-13 22:33（Asia/Shanghai，进行中）**：恢复第二轮首项 `length-row` 于 **22:23:39** 在 `generate` 阶段进入 **blocked / unknown**，原驱动随后退出，exit 0；其余三项仍 queued/generate。当前保存的 Controller 为 **revision 150**，四项均无已回收阶段回执或最终结果。**22:26:52** 查询原 operation 的桥接结果为 `Exit`（returncode 1），**22:26:53** 原控制面观察为 `assignments=[]`。这不证明原请求未启动；durable 远端提交是否为零仍在独立核验，本次不宣称零提交或第二轮硬件完成。此前四项重新准入的真实结果保留在原 Context。
+>
+> 原预算已预留首项，现为 **11/16 executions、19800/28800 声明秒**，剩余 **5 次 / 9000 秒**。若仍需完整的 **4 个恢复候选 + 2 个诊断 Run**，需要 6 次 / 10800 秒，存在 **1 次 / 1800 秒**缺口；**尚未处理该缺口，未追加 grant、未退回预算**。不得把未知 operation 另建身份重派，或将本地无回执等同未执行。
+>
+> 原唯一连续申请于 **22:28:26** 启动（PID **39016**）；日志于 **22:28:32** 返回 `allocated`，新 Runtime 为 `tpu-v6e1-s-euw4a0-1q01sb2h5jte9`。本次本地检查已未见该申请进程，但未独立采集其退出码；新分配不等于环境、同步探针或重新准入通过。本次文档更新没有访问新 Runtime，后续继续沿原分配与准入流程核验。
+>
+> 证据：[本地 checkpoint](runtime5-recovery-checkpoint-20261113T143320350Z.json)、[原 Controller 状态](../../../.artifacts/phase3-2026-11-12/real-round-2-runtime5/controller-status.json)、[原 operation 查询](../../../.artifacts/phase3-2026-11-12/real-round-2-runtime5/bridge-inspection-20261113T142652450503Z.json)、[申请启动及控制面观察](../../../.artifacts/phase3-2026-11-12/p35-continuation-launch-20261113T142826457Z.json)、[分配日志](../../../.artifacts/phase3-2026-11-12/p35-allocation-continuing-20261113T142826457Z.txt)。以下 **22:17、21:04 与 19:07 / 19:19** 记录保留为历史；P3.5 仍未最终验收。
+>
+> **恢复第二轮更新｜2026-11-13 22:17（Asia/Shanghai，进行中）**：Runtime 5 原四项重新准入已完成；原驱动于 **21:30:58** 正常结束，exit 0。**21:33:22** 的只读核验为 **4 verified、0 pending、0 failed**，核验 **131 个去重工件、515,870,575 bytes**；两个错误负例被固定 Oracle 拒绝，A 修复基线与 B delayed-store-wait 均取得当前 Context 的真实结果。
+>
+> 恢复第二轮已读取 **Snapshot version 13 / 944 records / high-watermark 969**。原 Analyzer 保存 **3 次 response、18 次工具调用（11 次读取 + 7 次数学计算）**，四个 Plan 的结构审核 `review=[]`、`winner_selected=false`，四项候选源码已打包。原恢复驱动已于 **22:12 启动，启动后观察为前置校验**；本次更新尚未观察到其硬件执行阶段，不能将驱动启动、分析完成或源码打包计为第二轮硬件完成。独立 single-tile 诊断及最终 Memory/Best/Frontier 核验仍待真实完成，P3.5 保持进行中。
+>
+> 派发前原探索预算仍为 **10/16 executions、18000/28800 声明秒**，后续扣费以原 Journal 为准。累计预算 grant 已实现，但**尚未实际追加预算**。根级完整回归于 **22:14:30** 结束：**342 项、339 通过、3 跳过，471.090 秒，exit 0**。该次套件启动时预算专项含 21 项；之后旧 grant 的精确比较调整及新增第 22 项，由最终 **31 项 focused** 与独立 **22 项**专项验证，均通过，未宣称最终源码又完整重跑 343 项。下方 **321 项、609.492 秒、exit 0** 保留为核心预算修改前的历史记录。
+>
+> 证据：[四项准入核验](runtime5-prerequisite-verification.json)、[准入驱动退出码](../../../.artifacts/phase3-2026-11-12/runtime5-prerequisite-execution-20261113-result.json)、[新 Snapshot 与准备输入](../../../.artifacts/phase3-2026-11-12/real-round-2-runtime5/prepared.json)、[Analyzer 结果](../../../.artifacts/phase3-2026-11-12/real-round-2-runtime5/result.json)、[四项源码索引](../../../.artifacts/phase3-2026-11-12/real-round-2-runtime5/candidate-artifacts.json)、[根回归日志](../../../.artifacts/phase3-2026-11-12/p35-root-tests-budget-20261113.txt)、[退出码](../../../.artifacts/phase3-2026-11-12/p35-root-tests-budget-20261113-result.json)、[最终 31 项专项](../../../.artifacts/phase3-2026-11-12/p35-budget-final-focused-tests-20261113.txt)、[独立 22 项专项](../../../.artifacts/phase3-2026-11-12/p35-budget-independent-final-tests-20261113.txt)。以下 **21:04** 记录及 **19:07 / 19:19** 正文保留为历史时点；本次继续执行改动尚未另行推送 GitHub。
+>
+> **P3.5 继续执行｜2026-11-13 21:04（Asia/Shanghai，进行中）**：本次只读核查确认 Runtime 4 不在控制面分配列表，原 correctness 最终结果仍未知。旧 attention 准入已按 unknown / incomplete 归档，三项原请求与两份成功回执保留，其余三项 Run 仍为 not_run；原 Controller revision 146 与探索预算 **10/16、18000/28800 声明秒** 未变。原持续申请循环于 **20:53:28** 取得 Runtime 5 `tpu-v6e1-s-euw4a0-2u7r1pvl8i4i8` 后正常结束，固定隔离环境 ready、单 TPU v6 lite／单进程、同步探针 **140.0**。四项新准入 Run 与 worker 已准备，原驱动已启动，尚未宣布四项通过。
+>
+> 本次根级完整回归 **321 项：318 通过、3 跳过，609.492 秒，exit 0**。恢复第二轮、独立单 tile 诊断及 P3.5 最终验收仍待实际完成；后续按最新授权继续迭代，无设备时持续申请。详见[当前进展](../../../docs/phase3/phase3-p35-progress-report-2026-11-13.md)、[继续计划](../../../docs/phase3/phase3-p35-runtime5-continuation-plan.md)、[新环境](environment-isolated-runtime5.json)、[探针](isolated-probe-runtime5.json)与[测试退出码](p35-root-tests-runtime5-20261113-result.json)。以下旧时点段落保留为历史。
+<!-- /p35-runtime5-continuation -->
+
 <!-- p35-upload-status -->
 > **上传前状态核验｜2026-11-13 19:07（Asia/Shanghai）**：P3.5 仍未完成最终验收。ABBA 已完成，program 有有限复测收益，host 漂移导致联合结论 inconclusive；恢复后的第二轮硬件实验和单 tile 诊断尚未执行。Runtime 4 的 attention 负例已在本地收齐 generate/compile 成功回执，correctness 请求已持久化但最终回执尚未回收；其他三项准入 Run 为 not_run。
 >
@@ -231,4 +292,4 @@ OK (skipped=3)
 
 本次总体报告、当前入口与周记录同步维护，未勾选未完成优化目标。原始Kernel、Oracle、Benchmark规则、认证文件、账号权限和全局配置未修改；未安装或升级本地环境。Git CLI沿用此前不可用状态，未创建提交，不声称工作树干净。
 
-**当前停止点：真实硬件上第一轮完整链路已经运转，第二轮与稳定收益验证尚未完成；当前无可用Runtime，Phase 3保持“进行中、未完成最终验收”。**
+**当前停止点：Runtime 7 已完成四项准入、第二轮四项候选与独立 single-tile 诊断，Snapshot 26 / Final Memory 已核验；B2 每个候选仅有一个 Run，既有 ABBA 的 host 漂移仍限制性能结论。剩余预算为 1 execution / 1800 声明秒，Phase 3 保持“进行中、未完成最终验收”，稳定端到端收益尚未确认。**

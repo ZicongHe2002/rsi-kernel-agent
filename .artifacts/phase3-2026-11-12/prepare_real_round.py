@@ -21,6 +21,7 @@ from rsi_kernel_agent.profiler.outputs import require
 from real_round_aux import (LIMITS, completed_round, load_prepared, read_json, require_gates,
                             require_new_history, validate_session, write_once, runtime_binding)
 from p35_round2_gate import require_confirmation
+from p35_recovery_round import two_candidate_recovery
 
 
 async def prepare(number, directory=None, *, recovery_generation=None):
@@ -28,9 +29,13 @@ async def prepare(number, directory=None, *, recovery_generation=None):
     directory = Path(directory) if directory is not None else Path(__file__).resolve().parent
     require((directory / 'experiments.sqlite3').is_file(), 'Existing Phase 3 Store is required')
     store = ExperimentStore(directory / 'experiments.sqlite3', directory / 'artifacts')
+    raw_store = store
+    if two_candidate_recovery(recovery_generation):
+        from p35_verification_view import VerificationView
+        store = VerificationView(raw_store)
     target = directory / ('real-round-' + str(number))
     if recovery_generation is not None:
-        from p35_recovery_round import recovery_identity, require_recovery_context
+        from p35_recovery_round import recovery_identity, recovery_strategies, require_recovery_context
         require(number == 2, 'Only round 2 has a Runtime recovery path')
         target, recovery_round_id = recovery_identity(directory, recovery_generation)
     binding = runtime_binding(directory, target)
@@ -40,6 +45,8 @@ async def prepare(number, directory=None, *, recovery_generation=None):
     base, other = gates['baseline-repair'], gates['baseline-b']
     task_id, context_id = base['task_id'], base['context_id']
     strategies = [base['strategy_id'], other['strategy_id']]
+    if recovery_generation is not None:
+        strategies = recovery_strategies(gates, recovery_generation)
     round_id = 'real-runtime2-round:' + str(number)
     if recovery_generation is not None:
         round_id = recovery_round_id
@@ -47,10 +54,10 @@ async def prepare(number, directory=None, *, recovery_generation=None):
         if recovery_generation is None:
             require_confirmation(store, directory, task_id, context_id, strategies)
         else:
-            require_recovery_context(store, directory, gates)
+            require_recovery_context(store, directory, gates, generation=recovery_generation)
         completed_round(store, task_id, 'real-runtime2-round:1')
     # Initial budget only; an existing journal must retain the identical limits.
-    Controller(store, task_id, None, limits=LIMITS)
+    Controller(raw_store, task_id, None, limits=LIMITS)
     target.mkdir(exist_ok=True)
     write_once(target / 'runtime-binding.json', binding)
     prepared = load_prepared(store, task_id, context_id, strategies, round_id)
@@ -76,11 +83,12 @@ async def prepare(number, directory=None, *, recovery_generation=None):
                                            round_id, inputs['knowledge'])
         write_once(target / 'knowledge-search.json', inputs['searches'])
     if number == 2:
-        require_new_history(store, task_id, prepared, 'real-runtime2-round:1')
+        if not two_candidate_recovery(recovery_generation):
+            require_new_history(store, task_id, prepared, 'real-runtime2-round:1')
         if recovery_generation is None:
             require_confirmation(store, directory, task_id, context_id, strategies, prepared=prepared)
         else:
-            require_recovery_context(store, directory, gates, prepared=prepared)
+            require_recovery_context(store, directory, gates, prepared=prepared, generation=recovery_generation)
     write_once(target / 'prepared.json', {k: v for k, v in prepared.items() if k != 'manifest'})
     write_once(target / 'manifest-ref.json', asdict(prepared['manifest'].artifact_ref))
     if (target / 'session.json').exists():

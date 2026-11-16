@@ -1,0 +1,1240 @@
+test_invalid_generation_is_rejected_before_any_input_or_store_access (test_author_p35_diagnostic_generations.DiagnosticAuthorGenerationTests.test_invalid_generation_is_rejected_before_any_input_or_store_access) ... ok
+test_omitted_generation_preserves_original_runtime3_selection (test_author_p35_diagnostic_generations.DiagnosticAuthorGenerationTests.test_omitted_generation_preserves_original_runtime3_selection) ... ok
+test_reads_use_exact_generation_session_and_do_not_duplicate_response (test_author_p35_diagnostic_generations.DiagnosticAuthorGenerationTests.test_reads_use_exact_generation_session_and_do_not_duplicate_response) ... ok
+test_selection_accepts_generations_preserves_admitted_identity_and_write_once (test_author_p35_diagnostic_generations.DiagnosticAuthorGenerationTests.test_selection_accepts_generations_preserves_admitted_identity_and_write_once) ... ok
+test_crash_boundaries_and_output_recovery (test_completed_prerequisite_loss.CompletedLossTests.test_crash_boundaries_and_output_recovery) ... ok
+test_extra_run_or_candidate_request_refuses_without_write (test_completed_prerequisite_loss.CompletedLossTests.test_extra_run_or_candidate_request_refuses_without_write) ... ok
+test_guard_allows_later_runtime_active_job_without_refund (test_completed_prerequisite_loss.CompletedLossTests.test_guard_allows_later_runtime_active_job_without_refund) ... ok
+test_incomplete_misbound_report_live_runtime_or_stale_state_refused (test_completed_prerequisite_loss.CompletedLossTests.test_incomplete_misbound_report_live_runtime_or_stale_state_refused) ... ok
+test_late_run_and_changed_report_invalidates_guard (test_completed_prerequisite_loss.CompletedLossTests.test_late_run_and_changed_report_invalidates_guard) ... ok
+test_only_notes_and_snapshot_no_run_or_budget_mutation (test_completed_prerequisite_loss.CompletedLossTests.test_only_notes_and_snapshot_no_run_or_budget_mutation) ... ok
+test_canonical_generations_and_previous (test_completed_prerequisite_loss.GenerationTests.test_canonical_generations_and_previous) ... ok
+test_runtime7_observation_uses_exact_previous_generation_and_new_nonce (test_completed_prerequisite_loss.GenerationTests.test_runtime7_observation_uses_exact_previous_generation_and_new_nonce) ... ok
+test_runtime8_requires_all_intervening_completed_loss_records (test_completed_prerequisite_loss.GenerationTests.test_runtime8_requires_all_intervening_completed_loss_records) ... ok
+test_invalid_abba_roles_and_duplicate_labels_reject (test_confirmation_round.OrderTests.test_invalid_abba_roles_and_duplicate_labels_reject) ... ok
+test_original_scheduler_preview_is_abba_without_spending (test_confirmation_round.OrderTests.test_original_scheduler_preview_is_abba_without_spending) ... ok
+test_previous_round_window_accepts_round1_only_or_original_pair (test_confirmation_round.OrderTests.test_previous_round_window_accepts_round1_only_or_original_pair) ... ok
+test_wrong_priority_paused_strategy_and_budget_shortfall_reject (test_confirmation_round.OrderTests.test_wrong_priority_paused_strategy_and_budget_shortfall_reject) ... ok
+test_prepare_rejects_changed_saved_selection_before_freezing_policy (test_confirmation_round.PolicyDispatchTests.test_prepare_rejects_changed_saved_selection_before_freezing_policy) ... ok
+test_prepare_requires_policy_before_session_or_store_writes (test_confirmation_round.PolicyDispatchTests.test_prepare_requires_policy_before_session_or_store_writes) ... ok
+test_run_rejects_frozen_selection_mismatch_before_publication (test_confirmation_round.PolicyDispatchTests.test_run_rejects_frozen_selection_mismatch_before_publication) ... ok
+test_run_rejects_missing_frozen_marker_before_publication (test_confirmation_round.PolicyDispatchTests.test_run_rejects_missing_frozen_marker_before_publication) ... ok
+test_run_rejects_missing_policy_before_publication (test_confirmation_round.PolicyDispatchTests.test_run_rejects_missing_policy_before_publication) ... ok
+test_blocked_without_operation_still_stops_before_step_budget (test_confirmation_round.RecoveryTests.test_blocked_without_operation_still_stops_before_step_budget) ... Executing <Task finished name='Task-26' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 37.929 seconds
+Executing <Task finished name='Task-27' coro=<RecoveryTests.test_blocked_without_operation_still_stops_before_step_budget() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:416> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 50.584 seconds
+ok
+test_changed_candidate_artifact_rejected_before_new_attempt (test_confirmation_round.RecoveryTests.test_changed_candidate_artifact_rejected_before_new_attempt) ... Executing <Task finished name='Task-31' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 37.498 seconds
+Executing <Task finished name='Task-32' coro=<RecoveryTests.test_changed_candidate_artifact_rejected_before_new_attempt() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:362> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 26.022 seconds
+ok
+test_partial_run_restart_keeps_ids_budget_and_abba_order (test_confirmation_round.RecoveryTests.test_partial_run_restart_keeps_ids_budget_and_abba_order) ... Executing <Task finished name='Task-36' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 34.708 seconds
+Executing <Task finished name='Task-37' coro=<RecoveryTests.test_partial_run_restart_keeps_ids_budget_and_abba_order() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:434> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 95.323 seconds
+ok
+test_permanent_unknown_uses_step_budget_and_keeps_original_reservation (test_confirmation_round.RecoveryTests.test_permanent_unknown_uses_step_budget_and_keeps_original_reservation) ... Executing <Task finished name='Task-41' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 35.382 seconds
+Executing <Task finished name='Task-42' coro=<RecoveryTests.test_permanent_unknown_uses_step_budget_and_keeps_original_reservation() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:396> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 43.515 seconds
+ok
+test_prepare_recovery_preserves_manifest_and_rejects_changed_selection (test_confirmation_round.RecoveryTests.test_prepare_recovery_preserves_manifest_and_rejects_changed_selection) ... Executing <Task finished name='Task-46' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 37.823 seconds
+Executing <Task finished name='Task-47' coro=<RecoveryTests.test_prepare_recovery_preserves_manifest_and_rejects_changed_selection() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:299> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 21.138 seconds
+ok
+test_prepared_prior_round_window_cannot_be_changed (test_confirmation_round.RecoveryTests.test_prepared_prior_round_window_cannot_be_changed) ... Executing <Task finished name='Task-51' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 40.387 seconds
+Executing <Task finished name='Task-52' coro=<RecoveryTests.test_prepared_prior_round_window_cannot_be_changed() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:313> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 16.296 seconds
+ok
+test_round1_only_preparation_pins_completed_round1_history (test_confirmation_round.RecoveryTests.test_round1_only_preparation_pins_completed_round1_history) ... Executing <Task finished name='Task-56' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 41.138 seconds
+Executing <Task finished name='Task-57' coro=<RecoveryTests.test_round1_only_preparation_pins_completed_round1_history() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.869 seconds
+ok
+test_unfinished_prior_attempt_and_insufficient_budget_block_preparation (test_confirmation_round.RecoveryTests.test_unfinished_prior_attempt_and_insufficient_budget_block_preparation) ... Executing <Task finished name='Task-61' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 41.342 seconds
+Executing <Task finished name='Task-62' coro=<RecoveryTests.test_unfinished_prior_attempt_and_insufficient_budget_block_preparation() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:349> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.092 seconds
+ok
+test_unknown_operation_reconciles_within_steps_without_resubmit_or_charge (test_confirmation_round.RecoveryTests.test_unknown_operation_reconciles_within_steps_without_resubmit_or_charge) ... Executing <Task finished name='Task-66' coro=<RecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:230> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 39.844 seconds
+Executing <Task finished name='Task-67' coro=<RecoveryTests.test_unknown_operation_reconciles_within_steps_without_resubmit_or_charge() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_confirmation_round.py:374> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 56.120 seconds
+ok
+test_archive_retains_budget_unknown_evidence_and_unstarted_runs (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_archive_retains_budget_unknown_evidence_and_unstarted_runs) ... ok
+test_changed_budget_context_identity_or_global_cancel_refused_without_writes (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_changed_budget_context_identity_or_global_cancel_refused_without_writes) ... ok
+test_changed_loss_observation_and_live_assignment_refused (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_changed_loss_observation_and_live_assignment_refused) ... ok
+test_durable_submit_or_receipt_or_orphan_binding_prevents_any_archive_write (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_durable_submit_or_receipt_or_orphan_binding_prevents_any_archive_write) ... ok
+test_every_store_effect_recovers_before_and_after_crash (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_every_store_effect_recovers_before_and_after_crash) ... ok
+test_malformed_or_unsanitized_discovery_rows_are_refused (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_malformed_or_unsanitized_discovery_rows_are_refused) ... ok
+test_new_request_after_intent_prevents_recovery (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_new_request_after_intent_prevents_recovery) ... ok
+test_output_file_crashes_recover_and_do_not_duplicate_snapshot (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_output_file_crashes_recover_and_do_not_duplicate_snapshot) ... ok
+test_queued_operation_or_run_start_refused (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_queued_operation_or_run_start_refused) ... ok
+test_readonly_guard_allows_new_jobs_but_refuses_refund_or_old_job_mutation (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_readonly_guard_allows_new_jobs_but_refuses_refund_or_old_job_mutation) ... ok
+test_replacement_runtime_present_is_accepted_when_old_runtime_absent (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_replacement_runtime_present_is_accepted_when_old_runtime_absent) ... ok
+test_replay_is_idempotent_without_new_snapshot_or_history (test_p35_archive_unsubmitted_runtime_loss.ArchiveTests.test_replay_is_idempotent_without_new_snapshot_or_history) ... ok
+test_changed_final_report_or_execution_verification_source_is_rejected (test_p35_b2_milestone.B2MilestoneTests.test_changed_final_report_or_execution_verification_source_is_rejected) ... ok
+test_exact_A2_and_two_diagnostics_preserve_one_reserved_execution (test_p35_b2_milestone.B2MilestoneTests.test_exact_A2_and_two_diagnostics_preserve_one_reserved_execution) ... ok
+test_final_memory_and_source_report_are_rebound_before_snapshot_archive_guards (test_p35_b2_milestone.B2MilestoneTests.test_final_memory_and_source_report_are_rebound_before_snapshot_archive_guards) ... ok
+test_frozen_snapshot_store_never_exposes_later_live_journal (test_p35_b2_milestone.B2MilestoneTests.test_frozen_snapshot_store_never_exposes_later_live_journal) ... ok
+test_old_success_missing_profile_bad_diagnostic_or_missing_candidate_refused (test_p35_b2_milestone.B2MilestoneTests.test_old_success_missing_profile_bad_diagnostic_or_missing_candidate_refused) ... ok
+test_only_two_B_routes_with_exact_per_run_cost_can_be_dispatched (test_p35_b2_milestone.B2MilestoneTests.test_only_two_B_routes_with_exact_per_run_cost_can_be_dispatched) ... ok
+test_both_pairs_must_meet_minimum_and_all_treatments_must_be_faster (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_both_pairs_must_meet_minimum_and_all_treatments_must_be_faster) ... ok
+test_distinct_role_identities_are_allowed_and_copied_result_has_no_aliases (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_distinct_role_identities_are_allowed_and_copied_result_has_no_aliases) ... ok
+test_duplicate_run_and_capture_ids_and_each_identity_mismatch_are_rejected (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_duplicate_run_and_capture_ids_and_each_identity_mismatch_are_rejected) ... ok
+test_each_required_field_and_invalid_numeric_sample_is_rejected (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_each_required_field_and_invalid_numeric_sample_is_rejected) ... ok
+test_exact_decimal_reduction_boundary_is_inclusive_without_binary_roundoff (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_exact_decimal_reduction_boundary_is_inclusive_without_binary_roundoff) ... ok
+test_exact_decimal_spread_boundary_is_inclusive_without_binary_roundoff (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_exact_decimal_spread_boundary_is_inclusive_without_binary_roundoff) ... ok
+test_extra_metadata_must_be_finite_json_data (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_extra_metadata_must_be_finite_json_data) ... ok
+test_finite_samples_that_overflow_a_derived_ratio_are_rejected (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_finite_samples_that_overflow_a_derived_ratio_are_rejected) ... ok
+test_fixed_identity_and_profile_capture_bindings_are_required (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_fixed_identity_and_profile_capture_bindings_are_required) ... ok
+test_host_program_disagreement_reports_host_only_without_significance_claim (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_host_program_disagreement_reports_host_only_without_significance_claim) ... ok
+test_nan_zero_and_short_samples_are_rejected (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_nan_zero_and_short_samples_are_rejected) ... ok
+test_nonconstant_samples_report_population_statistics_without_pooling (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_nonconstant_samples_report_population_statistics_without_pooling) ... ok
+test_policy_is_predeclared_and_exact (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_policy_is_predeclared_and_exact) ... ok
+test_program_only_and_neither_outcomes (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_program_only_and_neither_outcomes) ... ok
+test_reversed_or_incomplete_abba_order_is_rejected (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_reversed_or_incomplete_abba_order_is_rejected) ... ok
+test_role_drift_masks_improvement_and_joint_outcome_is_inconclusive (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_role_drift_masks_improvement_and_joint_outcome_is_inconclusive) ... ok
+test_treatment_drift_and_single_dimension_drift_make_joint_inconclusive (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_treatment_drift_and_single_dimension_drift_make_joint_inconclusive) ... ok
+test_two_percent_and_five_percent_limits_are_inclusive (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_two_percent_and_five_percent_limits_are_inclusive) ... ok
+test_valid_abba_reports_literal_pair_stats_and_preserves_raw_order (test_p35_confirmation_statistics.P35ConfirmationStatisticsTests.test_valid_abba_reports_literal_pair_stats_and_preserves_raw_order) ... ok
+test_changed_frozen_spec_or_config_is_rejected (test_p35_continuation_round.ContinuationTests.test_changed_frozen_spec_or_config_is_rejected) ... Executing <Task finished name='Task-71' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.106 seconds
+Executing <Task finished name='Task-72' coro=<ContinuationTests.test_changed_frozen_spec_or_config_is_rejected() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:138> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.779 seconds
+ok
+test_changed_or_overbudget_variants_rejected_without_dispatch (test_p35_continuation_round.ContinuationTests.test_changed_or_overbudget_variants_rejected_without_dispatch) ... Executing <Task finished name='Task-76' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.132 seconds
+Executing <Task finished name='Task-77' coro=<ContinuationTests.test_changed_or_overbudget_variants_rejected_without_dispatch() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:166> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 7.136 seconds
+ok
+test_dedicated_milestone_failure_prevents_prepare_and_store_writes (test_p35_continuation_round.ContinuationTests.test_dedicated_milestone_failure_prevents_prepare_and_store_writes) ... Executing <Task finished name='Task-81' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.155 seconds
+Executing <Task finished name='Task-82' coro=<ContinuationTests.test_dedicated_milestone_failure_prevents_prepare_and_store_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:118> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.147 seconds
+ok
+test_intake_response_loss_recovers_original_candidates (test_p35_continuation_round.ContinuationTests.test_intake_response_loss_recovers_original_candidates) ... Executing <Task finished name='Task-86' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.132 seconds
+Executing <Task finished name='Task-87' coro=<ContinuationTests.test_intake_response_loss_recovers_original_candidates() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:207> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 17.558 seconds
+ok
+test_missing_grant_wrong_context_runtime_and_milestone_rejected_before_prepare (test_p35_continuation_round.ContinuationTests.test_missing_grant_wrong_context_runtime_and_milestone_rejected_before_prepare) ... Executing <Task finished name='Task-91' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.183 seconds
+Executing <Task finished name='Task-92' coro=<ContinuationTests.test_missing_grant_wrong_context_runtime_and_milestone_rejected_before_prepare() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:124> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.707 seconds
+ok
+test_prepare_crash_after_pinned_round_resumes_same_manifest (test_p35_continuation_round.ContinuationTests.test_prepare_crash_after_pinned_round_resumes_same_manifest) ... Executing <Task finished name='Task-96' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.091 seconds
+Executing <Task finished name='Task-97' coro=<ContinuationTests.test_prepare_crash_after_pinned_round_resumes_same_manifest() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:195> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.897 seconds
+ok
+test_prepare_freezes_original_snapshot_parent_and_readable_budget_note (test_p35_continuation_round.ContinuationTests.test_prepare_freezes_original_snapshot_parent_and_readable_budget_note) ... Executing <Task finished name='Task-101' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.153 seconds
+Executing <Task finished name='Task-102' coro=<ContinuationTests.test_prepare_freezes_original_snapshot_parent_and_readable_budget_note() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:105> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.435 seconds
+ok
+test_real_chain_lost_ack_reuses_operations_and_does_not_charge_twice (test_p35_continuation_round.ContinuationTests.test_real_chain_lost_ack_reuses_operations_and_does_not_charge_twice) ... Executing <Task finished name='Task-106' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.262 seconds
+Executing <Task finished name='Task-107' coro=<ContinuationTests.test_real_chain_lost_ack_reuses_operations_and_does_not_charge_twice() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:146> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 22.421 seconds
+ok
+test_unrelated_job_and_refund_are_rejected_before_step (test_p35_continuation_round.ContinuationTests.test_unrelated_job_and_refund_are_rejected_before_step) ... Executing <Task finished name='Task-111' coro=<ContinuationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:51> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.261 seconds
+Executing <Task finished name='Task-112' coro=<ContinuationTests.test_unrelated_job_and_refund_are_rejected_before_step() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_continuation_round.py:180> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 3.172 seconds
+ok
+test_admission_remeasures_five_distinct_runs_and_restores_same_control (test_p35_control_admission.ControlAdmissionTests.test_admission_remeasures_five_distinct_runs_and_restores_same_control) ... ok
+test_legacy_gate_without_policy_keeps_original_four_prerequisites (test_p35_control_admission.ControlAdmissionTests.test_legacy_gate_without_policy_keeps_original_four_prerequisites) ... ok
+test_policy_does_not_rewrite_pinned_runtime2_prerequisites (test_p35_control_admission.ControlAdmissionTests.test_policy_does_not_rewrite_pinned_runtime2_prerequisites) ... ok
+test_policy_gate_rejects_control_origin_or_identity_substitution (test_p35_control_admission.ControlAdmissionTests.test_policy_gate_rejects_control_origin_or_identity_substitution) ... ok
+test_policy_gate_rejects_missing_control (test_p35_control_admission.ControlAdmissionTests.test_policy_gate_rejects_missing_control) ... ok
+test_policy_gate_returns_independent_b_control (test_p35_control_admission.ControlAdmissionTests.test_policy_gate_returns_independent_b_control) ... ok
+test_prerequisite_driver_executes_fifth_control_with_separate_reservation (test_p35_control_admission.ControlAdmissionTests.test_prerequisite_driver_executes_fifth_control_with_separate_reservation) ... ok
+test_budget_shortfall_rejects_before_diagnostic_records (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_budget_shortfall_rejects_before_diagnostic_records) ... Executing <Task finished name='Task-116' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.283 seconds
+Executing <Task finished name='Task-117' coro=<DiagnosticDispatchTests.test_budget_shortfall_rejects_before_diagnostic_records() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:231> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.143 seconds
+ok
+test_changed_budget_checkpoint_is_not_a_new_spending_authority (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_changed_budget_checkpoint_is_not_a_new_spending_authority) ... Executing <Task finished name='Task-121' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.922 seconds
+Executing <Task finished name='Task-122' coro=<DiagnosticDispatchTests.test_changed_budget_checkpoint_is_not_a_new_spending_authority() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:303> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 8.389 seconds
+ok
+test_changed_frozen_variant_cannot_publish_or_spend (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_changed_frozen_variant_cannot_publish_or_spend) ... Executing <Task finished name='Task-126' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.986 seconds
+Executing <Task finished name='Task-127' coro=<DiagnosticDispatchTests.test_changed_frozen_variant_cannot_publish_or_spend() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:210> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 4.218 seconds
+ok
+test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare) ... Executing <Task finished name='Task-131' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.953 seconds
+Executing <Task finished name='Task-132' coro=<DiagnosticDispatchTests.test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:265> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 4.564 seconds
+ok
+test_driver_lock_excludes_second_diagnostic_invocation (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_driver_lock_excludes_second_diagnostic_invocation) ... Executing <Task finished name='Task-136' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.985 seconds
+ok
+test_extra_same_round_attempt_blocks_recovery_before_submission (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_extra_same_round_attempt_blocks_recovery_before_submission) ... Executing <Task finished name='Task-141' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.991 seconds
+Executing <Task finished name='Task-142' coro=<DiagnosticDispatchTests.test_extra_same_round_attempt_blocks_recovery_before_submission() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:283> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 10.621 seconds
+ok
+test_incomplete_session_cannot_publish_or_spend (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_incomplete_session_cannot_publish_or_spend) ... Executing <Task finished name='Task-146' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.986 seconds
+Executing <Task finished name='Task-147' coro=<DiagnosticDispatchTests.test_incomplete_session_cannot_publish_or_spend() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:223> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 4.675 seconds
+ok
+test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic) ... Executing <Task finished name='Task-151' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.149 seconds
+Executing <Task finished name='Task-152' coro=<DiagnosticDispatchTests.test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:255> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.684 seconds
+ok
+test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two) ... Executing <Task finished name='Task-156' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.121 seconds
+Executing <Task finished name='Task-157' coro=<DiagnosticDispatchTests.test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:182> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 21.495 seconds
+ok
+test_other_round_pending_blocks_before_diagnostic_records (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_other_round_pending_blocks_before_diagnostic_records) ... Executing <Task finished name='Task-161' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.084 seconds
+Executing <Task finished name='Task-162' coro=<DiagnosticDispatchTests.test_other_round_pending_blocks_before_diagnostic_records() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:240> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.131 seconds
+ok
+test_prepare_keeps_independent_contract_and_no_execution_budget (test_p35_diagnostic_dispatch.DiagnosticDispatchTests.test_prepare_keeps_independent_contract_and_no_execution_budget) ... Executing <Task finished name='Task-166' coro=<DiagnosticDispatchTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.071 seconds
+Executing <Task finished name='Task-167' coro=<DiagnosticDispatchTests.test_prepare_keeps_independent_contract_and_no_execution_budget() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:162> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 4.560 seconds
+ok
+test_budget_shortfall_rejects_before_diagnostic_records (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_budget_shortfall_rejects_before_diagnostic_records) ... Executing <Task finished name='Task-171' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.069 seconds
+Executing <Task finished name='Task-172' coro=<DiagnosticDispatchTests.test_budget_shortfall_rejects_before_diagnostic_records() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:231> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.128 seconds
+ok
+test_changed_budget_checkpoint_is_not_a_new_spending_authority (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_changed_budget_checkpoint_is_not_a_new_spending_authority) ... Executing <Task finished name='Task-176' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.114 seconds
+Executing <Task finished name='Task-177' coro=<DiagnosticDispatchTests.test_changed_budget_checkpoint_is_not_a_new_spending_authority() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:303> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 9.551 seconds
+ok
+test_changed_frozen_variant_cannot_publish_or_spend (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_changed_frozen_variant_cannot_publish_or_spend) ... Executing <Task finished name='Task-181' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.123 seconds
+Executing <Task finished name='Task-182' coro=<DiagnosticDispatchTests.test_changed_frozen_variant_cannot_publish_or_spend() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:210> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 4.841 seconds
+ok
+test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare) ... Executing <Task finished name='Task-186' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.126 seconds
+Executing <Task finished name='Task-187' coro=<DiagnosticDispatchTests.test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:265> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 5.144 seconds
+ok
+test_driver_lock_excludes_second_diagnostic_invocation (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_driver_lock_excludes_second_diagnostic_invocation) ... Executing <Task finished name='Task-191' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.259 seconds
+ok
+test_extra_same_round_attempt_blocks_recovery_before_submission (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_extra_same_round_attempt_blocks_recovery_before_submission) ... Executing <Task finished name='Task-196' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.107 seconds
+Executing <Task finished name='Task-197' coro=<DiagnosticDispatchTests.test_extra_same_round_attempt_blocks_recovery_before_submission() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:283> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 10.563 seconds
+ok
+test_incomplete_session_cannot_publish_or_spend (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_incomplete_session_cannot_publish_or_spend) ... Executing <Task finished name='Task-201' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.127 seconds
+Executing <Task finished name='Task-202' coro=<DiagnosticDispatchTests.test_incomplete_session_cannot_publish_or_spend() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:223> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 5.272 seconds
+ok
+test_missing_archive_or_historical_confirmation_blocks_before_writes (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_missing_archive_or_historical_confirmation_blocks_before_writes) ... Executing <Task finished name='Task-206' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.109 seconds
+ok
+test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic) ... Executing <Task finished name='Task-211' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.036 seconds
+Executing <Task finished name='Task-212' coro=<DiagnosticDispatchTests.test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:255> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.798 seconds
+ok
+test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two) ... Executing <Task finished name='Task-216' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.966 seconds
+Executing <Task finished name='Task-217' coro=<DiagnosticDispatchTests.test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:182> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 21.858 seconds
+ok
+test_other_round_pending_blocks_before_diagnostic_records (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_other_round_pending_blocks_before_diagnostic_records) ... Executing <Task finished name='Task-221' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.235 seconds
+Executing <Task finished name='Task-222' coro=<DiagnosticDispatchTests.test_other_round_pending_blocks_before_diagnostic_records() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:240> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.262 seconds
+ok
+test_prepare_keeps_independent_contract_and_no_execution_budget (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_prepare_keeps_independent_contract_and_no_execution_budget) ... Executing <Task finished name='Task-226' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.043 seconds
+Executing <Task finished name='Task-227' coro=<DiagnosticDispatchTests.test_prepare_keeps_independent_contract_and_no_execution_budget() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:162> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 4.565 seconds
+ok
+test_prepare_v2_freezes_runtime4_and_preserves_v1_scope (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_prepare_v2_freezes_runtime4_and_preserves_v1_scope) ... Executing <Task finished name='Task-231' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.083 seconds
+Executing <Task finished name='Task-232' coro=<DiagnosticRuntime4Tests.test_prepare_v2_freezes_runtime4_and_preserves_v1_scope() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:346> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.862 seconds
+ok
+test_v2_dispatch_uses_only_runtime4_remote_binding (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_v2_dispatch_uses_only_runtime4_remote_binding) ... Executing <Task finished name='Task-236' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.131 seconds
+Executing <Task finished name='Task-237' coro=<DiagnosticRuntime4Tests.test_v2_dispatch_uses_only_runtime4_remote_binding() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:384> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.837 seconds
+ok
+test_v2_rejects_other_generation_or_recovery_round_identity_before_writes (test_p35_diagnostic_dispatch.DiagnosticRuntime4Tests.test_v2_rejects_other_generation_or_recovery_round_identity_before_writes) ... Executing <Task finished name='Task-241' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.988 seconds
+Executing <Task finished name='Task-242' coro=<DiagnosticRuntime4Tests.test_v2_rejects_other_generation_or_recovery_round_identity_before_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:363> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.162 seconds
+ok
+test_budget_shortfall_rejects_before_diagnostic_records (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_budget_shortfall_rejects_before_diagnostic_records) ... Executing <Task finished name='Task-246' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.228 seconds
+Executing <Task finished name='Task-247' coro=<DiagnosticDispatchTests.test_budget_shortfall_rejects_before_diagnostic_records() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:231> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.531 seconds
+ok
+test_cancelled_recovery_prefix_cannot_prepare_diagnostic (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_cancelled_recovery_prefix_cannot_prepare_diagnostic) ... Executing <Task finished name='Task-251' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.077 seconds
+Executing <Task finished name='Task-252' coro=<DiagnosticRuntime5Tests.test_cancelled_recovery_prefix_cannot_prepare_diagnostic() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:400> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.629 seconds
+ok
+test_changed_budget_checkpoint_is_not_a_new_spending_authority (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_changed_budget_checkpoint_is_not_a_new_spending_authority) ... Executing <Task finished name='Task-256' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.092 seconds
+Executing <Task finished name='Task-257' coro=<DiagnosticDispatchTests.test_changed_budget_checkpoint_is_not_a_new_spending_authority() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:303> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 11.732 seconds
+ok
+test_changed_frozen_variant_cannot_publish_or_spend (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_changed_frozen_variant_cannot_publish_or_spend) ... Executing <Task finished name='Task-261' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.103 seconds
+Executing <Task finished name='Task-262' coro=<DiagnosticDispatchTests.test_changed_frozen_variant_cannot_publish_or_spend() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:210> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 5.822 seconds
+ok
+test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare) ... Executing <Task finished name='Task-266' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.995 seconds
+Executing <Task finished name='Task-267' coro=<DiagnosticDispatchTests.test_conflicting_prepared_round_rejects_before_freeze_then_corrected_round_can_prepare() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:265> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 6.168 seconds
+ok
+test_driver_lock_excludes_second_diagnostic_invocation (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_driver_lock_excludes_second_diagnostic_invocation) ... Executing <Task finished name='Task-271' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.924 seconds
+ok
+test_extra_same_round_attempt_blocks_recovery_before_submission (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_extra_same_round_attempt_blocks_recovery_before_submission) ... Executing <Task finished name='Task-276' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.920 seconds
+Executing <Task finished name='Task-277' coro=<DiagnosticDispatchTests.test_extra_same_round_attempt_blocks_recovery_before_submission() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:283> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 12.651 seconds
+ok
+test_incomplete_session_cannot_publish_or_spend (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_incomplete_session_cannot_publish_or_spend) ... Executing <Task finished name='Task-281' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.083 seconds
+Executing <Task finished name='Task-282' coro=<DiagnosticDispatchTests.test_incomplete_session_cannot_publish_or_spend() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:223> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 6.131 seconds
+ok
+test_missing_archive_or_historical_confirmation_blocks_before_writes (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_missing_archive_or_historical_confirmation_blocks_before_writes) ... Executing <Task finished name='Task-286' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.028 seconds
+ok
+test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic) ... Executing <Task finished name='Task-291' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.970 seconds
+Executing <Task finished name='Task-292' coro=<DiagnosticDispatchTests.test_new_round_cannot_repeat_the_frozen_two_execution_diagnostic() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:255> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 3.618 seconds
+ok
+test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two) ... Executing <Task finished name='Task-296' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.873 seconds
+Executing <Task finished name='Task-297' coro=<DiagnosticDispatchTests.test_original_analyzer_intake_controller_resume_unknown_charges_exactly_two() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:182> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 24.316 seconds
+ok
+test_other_round_pending_blocks_before_diagnostic_records (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_other_round_pending_blocks_before_diagnostic_records) ... Executing <Task finished name='Task-301' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.076 seconds
+Executing <Task finished name='Task-302' coro=<DiagnosticDispatchTests.test_other_round_pending_blocks_before_diagnostic_records() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:240> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.611 seconds
+ok
+test_prepare_keeps_independent_contract_and_no_execution_budget (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_prepare_keeps_independent_contract_and_no_execution_budget) ... Executing <Task finished name='Task-306' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.987 seconds
+Executing <Task finished name='Task-307' coro=<DiagnosticDispatchTests.test_prepare_keeps_independent_contract_and_no_execution_budget() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:162> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 6.023 seconds
+ok
+test_prepare_v2_freezes_runtime4_and_preserves_v1_scope (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_prepare_v2_freezes_runtime4_and_preserves_v1_scope) ... Executing <Task finished name='Task-311' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.421 seconds
+Executing <Task finished name='Task-312' coro=<DiagnosticRuntime4Tests.test_prepare_v2_freezes_runtime4_and_preserves_v1_scope() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:346> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 3.836 seconds
+ok
+test_snapshot_must_contain_verified_recovery_compile_publication (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_snapshot_must_contain_verified_recovery_compile_publication) ... Executing <Task finished name='Task-316' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.006 seconds
+Executing <Task finished name='Task-317' coro=<DiagnosticRuntime5Tests.test_snapshot_must_contain_verified_recovery_compile_publication() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:422> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 4.700 seconds
+ok
+test_v2_dispatch_uses_only_runtime4_remote_binding (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_v2_dispatch_uses_only_runtime4_remote_binding) ... Executing <Task finished name='Task-321' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.045 seconds
+Executing <Task finished name='Task-322' coro=<DiagnosticRuntime4Tests.test_v2_dispatch_uses_only_runtime4_remote_binding() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:384> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 16.677 seconds
+ok
+test_v2_rejects_other_generation_or_recovery_round_identity_before_writes (test_p35_diagnostic_dispatch.DiagnosticRuntime5Tests.test_v2_rejects_other_generation_or_recovery_round_identity_before_writes) ... Executing <Task finished name='Task-326' coro=<DiagnosticRuntime4Tests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:324> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.987 seconds
+Executing <Task finished name='Task-327' coro=<DiagnosticRuntime4Tests.test_v2_rejects_other_generation_or_recovery_round_identity_before_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:363> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.194 seconds
+ok
+test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches (test_p35_diagnostic_dispatch.DiagnosticRuntime6FlowTests.test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches) ... Executing <Task finished name='Task-332' coro=<DiagnosticRuntime6FlowTests.test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:439> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 30.491 seconds
+ok
+test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches (test_p35_diagnostic_dispatch.DiagnosticRuntime7FlowTests.test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches) ... Executing <Task finished name='Task-337' coro=<DiagnosticRuntime6FlowTests.test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_diagnostic_dispatch.py:439> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 31.450 seconds
+ok
+test_generation7_and_later_keep_the_same_two_A_scope (test_p35_generation_recovery.RepeatedRecoveryTests.test_generation7_and_later_keep_the_same_two_A_scope) ... ok
+test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids (test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids) ... FAIL
+test_runtime8_requires_both_previous_completed_prerequisite_losses (test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime8_requires_both_previous_completed_prerequisite_losses) ... FAIL
+test_later_record_is_missing_without_live_get_fallback (test_p35_milestone_store_missing.MilestoneMissingRecordTests.test_later_record_is_missing_without_live_get_fallback) ... ok
+test_original_maybe_recognizes_missing_snapshot_record (test_p35_milestone_store_missing.MilestoneMissingRecordTests.test_original_maybe_recognizes_missing_snapshot_record) ... ok
+test_runtime4_archive_missing_correctness_receipt_stays_unknown_in_snapshot (test_p35_milestone_store_missing.MilestoneMissingRecordTests.test_runtime4_archive_missing_correctness_receipt_stays_unknown_in_snapshot) ... ok
+test_changed_policy_or_selection_rejected_without_record_append (test_p35_publish_confirmation.PolicyFreezeTests.test_changed_policy_or_selection_rejected_without_record_append) ... ok
+test_dispatch_rejects_wrong_task_or_target_note (test_p35_publish_confirmation.PolicyFreezeTests.test_dispatch_rejects_wrong_task_or_target_note) ... ok
+test_dispatch_requires_original_policy_without_writes (test_p35_publish_confirmation.PolicyFreezeTests.test_dispatch_requires_original_policy_without_writes) ... ok
+test_intake_record_before_journal_also_prevents_late_freeze (test_p35_publish_confirmation.PolicyFreezeTests.test_intake_record_before_journal_also_prevents_late_freeze) ... ok
+test_policy_cannot_be_created_after_round_intake (test_p35_publish_confirmation.PolicyFreezeTests.test_policy_cannot_be_created_after_round_intake) ... ok
+test_policy_is_saved_once_in_original_store_before_execution (test_p35_publish_confirmation.PolicyFreezeTests.test_policy_is_saved_once_in_original_store_before_execution) ... ok
+test_incomplete_or_corrupted_results_cannot_publish (test_p35_publish_confirmation.PublicationTests.test_incomplete_or_corrupted_results_cannot_publish) ... ERROR
+test_npz_verification_failure_prevents_publication (test_p35_publish_confirmation.PublicationTests.test_npz_verification_failure_prevents_publication) ... ERROR
+test_publication_recomputes_receipts_is_idempotent_and_visible_in_histories (test_p35_publish_confirmation.PublicationTests.test_publication_recomputes_receipts_is_idempotent_and_visible_in_histories) ... ERROR
+test_replica_must_match_selected_origin_before_record_publication (test_p35_publish_confirmation.PublicationTests.test_replica_must_match_selected_origin_before_record_publication) ... ERROR
+test_administrative_cancel_with_valid_workflow_result_is_not_feedback (test_p35_recovery_feedback.RecoveryFeedbackTests.test_administrative_cancel_with_valid_workflow_result_is_not_feedback) ... ok
+test_complete_real_execution_is_feedback (test_p35_recovery_feedback.RecoveryFeedbackTests.test_complete_real_execution_is_feedback) ... ok
+test_corrupted_compile_artifact_is_rejected (test_p35_recovery_feedback.RecoveryFeedbackTests.test_corrupted_compile_artifact_is_rejected) ... ok
+test_forged_compile_dictionary_without_durable_receipt_is_rejected (test_p35_recovery_feedback.RecoveryFeedbackTests.test_forged_compile_dictionary_without_durable_receipt_is_rejected) ... ok
+test_generate_only_cancel_is_not_feedback (test_p35_recovery_feedback.RecoveryFeedbackTests.test_generate_only_cancel_is_not_feedback) ... ok
+test_real_compile_failure_is_feedback_without_correctness_or_win (test_p35_recovery_feedback.RecoveryFeedbackTests.test_real_compile_failure_is_feedback_without_correctness_or_win) ... ok
+test_wrong_context_or_synthetic_label_cannot_supply_feedback (test_p35_recovery_feedback.RecoveryFeedbackTests.test_wrong_context_or_synthetic_label_cannot_supply_feedback) ... ok
+test_foreign_unfinished_jobs_block_recovery (test_p35_recovery_round.RecoveryRoundTests.test_foreign_unfinished_jobs_block_recovery) ... FAIL
+test_historical_abba_keeps_its_context (test_p35_recovery_round.RecoveryRoundTests.test_historical_abba_keeps_its_context) ... FAIL
+test_recovery_identity_is_separate_for_explicit_generations (test_p35_recovery_round.RecoveryRoundTests.test_recovery_identity_is_separate_for_explicit_generations) ... ok
+test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) ... 
+  test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('context_id',)) ... FAIL
+  test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('contract', 'context', 'environment', 'runtime_session_id')) ... FAIL
+  test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('variant', 'source_ref', 'digest')) ... FAIL
+  test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('strategy_id',)) ... FAIL
+test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives (test_p35_recovery_round.RecoveryRoundTests.test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives) ... ERROR
+test_unarchived_loss_blocks_before_admission_reads (test_p35_recovery_round.RecoveryRoundTests.test_unarchived_loss_blocks_before_admission_reads) ... FAIL
+test_absent_policy_cannot_bypass_round2_confirmation (test_p35_round2_gate.ConfirmationGateTests.test_absent_policy_cannot_bypass_round2_confirmation) ... ERROR
+test_changed_policy_rejected (test_p35_round2_gate.ConfirmationGateTests.test_changed_policy_rejected) ... ERROR
+test_complete_not_confirmed_result_is_admissible_and_shared_in_history (test_p35_round2_gate.ConfirmationGateTests.test_complete_not_confirmed_result_is_admissible_and_shared_in_history) ... ERROR
+test_confirmation_cannot_omit_an_extra_same_round_job (test_p35_round2_gate.ConfirmationGateTests.test_confirmation_cannot_omit_an_extra_same_round_job) ... ERROR
+test_controller_result_must_match_immutable_completion (test_p35_round2_gate.ConfirmationGateTests.test_controller_result_must_match_immutable_completion) ... ERROR
+test_forged_raw_measurement_rejected_against_receipts (test_p35_round2_gate.ConfirmationGateTests.test_forged_raw_measurement_rejected_against_receipts) ... ERROR
+test_forged_summary_rejected (test_p35_round2_gate.ConfirmationGateTests.test_forged_summary_rejected) ... ERROR
+test_later_policy_note_cannot_replace_predeclared_policy (test_p35_round2_gate.ConfirmationGateTests.test_later_policy_note_cannot_replace_predeclared_policy) ... ERROR
+test_missing_result_blocks_without_new_records_or_snapshot (test_p35_round2_gate.ConfirmationGateTests.test_missing_result_blocks_without_new_records_or_snapshot) ... ERROR
+test_missing_strategy_history_association_rejected (test_p35_round2_gate.ConfirmationGateTests.test_missing_strategy_history_association_rejected) ... ERROR
+test_pending_job_rejected (test_p35_round2_gate.ConfirmationGateTests.test_pending_job_rejected) ... ERROR
+test_policy_after_intake_but_before_runs_is_rejected (test_p35_round2_gate.ConfirmationGateTests.test_policy_after_intake_but_before_runs_is_rejected) ... ERROR
+test_raw_receipt_corruption_blocks_confirmation (test_p35_round2_gate.ConfirmationGateTests.test_raw_receipt_corruption_blocks_confirmation) ... ERROR
+test_receipt_row_reads_exact_original_measurements (test_p35_round2_gate.ConfirmationGateTests.test_receipt_row_reads_exact_original_measurements) ... ERROR
+test_role_origin_cannot_borrow_other_strategy_candidate (test_p35_round2_gate.ConfirmationGateTests.test_role_origin_cannot_borrow_other_strategy_candidate) ... ERROR
+test_role_origin_swap_with_same_labels_is_rejected (test_p35_round2_gate.ConfirmationGateTests.test_role_origin_swap_with_same_labels_is_rejected) ... ERROR
+test_snapshot_before_confirmation_cannot_be_reused (test_p35_round2_gate.ConfirmationGateTests.test_snapshot_before_confirmation_cannot_be_reused) ... ERROR
+test_prepare_and_publish_round2_reject_missing_confirmation_before_writes (test_p35_round2_gate.MissingResultDriverTests.test_prepare_and_publish_round2_reject_missing_confirmation_before_writes) ... Executing <Task finished name='Task-342' coro=<MissingResultDriverTests.test_prepare_and_publish_round2_reject_missing_confirmation_before_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py:275> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.967 seconds
+ok
+test_round2_missing_policy_cannot_bypass_gate_before_writes (test_p35_round2_gate.MissingResultDriverTests.test_round2_missing_policy_cannot_bypass_gate_before_writes) ... Executing <Task finished name='Task-347' coro=<MissingResultDriverTests.test_round2_missing_policy_cannot_bypass_gate_before_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py:296> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 3.061 seconds
+ok
+test_A_only_history_keeps_ABBA_and_both_routes_in_whole_original_snapshot (test_p35_runtime6_scope.Runtime6ScopeTests.test_A_only_history_keeps_ABBA_and_both_routes_in_whole_original_snapshot) ... ok
+test_diagnostic_needs_both_exact_A_candidates_with_actual_compile_feedback (test_p35_runtime6_scope.Runtime6ScopeTests.test_diagnostic_needs_both_exact_A_candidates_with_actual_compile_feedback) ... ok
+test_diagnostic_scope_accepts_generation6_but_not_recovery_round_id (test_p35_runtime6_scope.Runtime6ScopeTests.test_diagnostic_scope_accepts_generation6_but_not_recovery_round_id) ... ok
+test_new_snapshot_cannot_omit_runtime5_archive (test_p35_runtime6_scope.Runtime6ScopeTests.test_new_snapshot_cannot_omit_runtime5_archive) ... ERROR
+test_runtime5_loss_must_be_archived_before_reading_admission (test_p35_runtime6_scope.Runtime6ScopeTests.test_runtime5_loss_must_be_archived_before_reading_admission) ... FAIL
+test_runtime6_selects_only_A_and_preserves_older_four_candidate_scope (test_p35_runtime6_scope.Runtime6ScopeTests.test_runtime6_selects_only_A_and_preserves_older_four_candidate_scope) ... ok
+test_two_plan_scope_rejects_extra_B_wrong_parent_or_unbudgeted_variant (test_p35_runtime6_scope.Runtime6ScopeTests.test_two_plan_scope_rejects_extra_B_wrong_parent_or_unbudgeted_variant) ... ok
+test_changed_configuration_stops_without_following_new_runtime (test_p35_runtime_health_monitor.MonitorTests.test_changed_configuration_stops_without_following_new_runtime) ... ok
+test_default_is_one_poll_and_explicit_unlimited_remains_interruptible (test_p35_runtime_health_monitor.MonitorTests.test_default_is_one_poll_and_explicit_unlimited_remains_interruptible) ... ok
+test_errors_and_unknown_only_record_and_continue (test_p35_runtime_health_monitor.MonitorTests.test_errors_and_unknown_only_record_and_continue) ... ok
+test_invalid_parameters_reject_before_remote (test_p35_runtime_health_monitor.MonitorTests.test_invalid_parameters_reject_before_remote) ... ok
+test_malformed_or_mismatched_receipt_is_unknown (test_p35_runtime_health_monitor.MonitorTests.test_malformed_or_mismatched_receipt_is_unknown) ... ok
+test_same_operation_status_only_and_no_submit_surface (test_p35_runtime_health_monitor.MonitorTests.test_same_operation_status_only_and_no_submit_surface) ... ok
+test_archived_original_job_and_configs_transform_without_store_access (test_p35_single_tile_diagnostic.SingleTileDiagnosticTests.test_archived_original_job_and_configs_transform_without_store_access) ... ok
+test_candidate_semantic_override_and_wrong_source_are_rejected (test_p35_single_tile_diagnostic.SingleTileDiagnosticTests.test_candidate_semantic_override_and_wrong_source_are_rejected) ... ok
+test_illegal_lengths_shapes_or_old_identity_mismatch_are_rejected (test_p35_single_tile_diagnostic.SingleTileDiagnosticTests.test_illegal_lengths_shapes_or_old_identity_mismatch_are_rejected) ... ok
+test_original_scheduler_can_charge_two_diagnostic_intents_without_new_executor (test_p35_single_tile_diagnostic.SingleTileDiagnosticTests.test_original_scheduler_can_charge_two_diagnostic_intents_without_new_executor) ... ok
+test_resource_override_difference_cannot_confound_the_two_roles (test_p35_single_tile_diagnostic.SingleTileDiagnosticTests.test_resource_override_difference_cannot_confound_the_two_roles) ... ok
+test_small_zero_and_boundary_inputs_legally_reach_actual_single_tile_predicate (test_p35_single_tile_diagnostic.SingleTileDiagnosticTests.test_small_zero_and_boundary_inputs_legally_reach_actual_single_tile_predicate) ... ok
+test_transform_creates_independent_context_with_frozen_protocol_and_no_old_mutation (test_p35_single_tile_diagnostic.SingleTileDiagnosticTests.test_transform_creates_independent_context_with_frozen_protocol_and_no_old_mutation) ... ok
+test_transformed_packet_rejects_changed_lengths_opaque_tail_or_multitile_config (test_p35_single_tile_diagnostic.SingleTileDiagnosticTests.test_transformed_packet_rejects_changed_lengths_opaque_tail_or_multitile_config) ... ok
+test_all_page_boundaries_equal_the_original_reader (test_p35_verification_view.VerificationViewTests.test_all_page_boundaries_equal_the_original_reader) ... ok
+test_changed_probe_record_cannot_be_silently_replaced_by_full_page (test_p35_verification_view.VerificationViewTests.test_changed_probe_record_cannot_be_silently_replaced_by_full_page) ... ok
+test_different_snapshot_versions_remain_isolated (test_p35_verification_view.VerificationViewTests.test_different_snapshot_versions_remain_isolated) ... ok
+test_first_read_keeps_original_digest_rejection (test_p35_verification_view.VerificationViewTests.test_first_read_keeps_original_digest_rejection) ... ok
+test_inconsistent_probe_and_full_read_are_rejected_and_not_cached (test_p35_verification_view.VerificationViewTests.test_inconsistent_probe_and_full_read_are_rejected_and_not_cached) ... ok
+test_invalid_pagination_and_unknown_snapshot_keep_original_errors (test_p35_verification_view.VerificationViewTests.test_invalid_pagination_and_unknown_snapshot_keep_original_errors) ... ok
+test_live_append_and_run_state_are_not_cached (test_p35_verification_view.VerificationViewTests.test_live_append_and_run_state_are_not_cached) ... ok
+test_memory_reader_reuses_complete_verified_snapshot_after_two_reads (test_p35_verification_view.VerificationViewTests.test_memory_reader_reuses_complete_verified_snapshot_after_two_reads) ... ok
+test_metadata_boolean_alias_does_not_match_original_numeric_version (test_p35_verification_view.VerificationViewTests.test_metadata_boolean_alias_does_not_match_original_numeric_version) ... ok
+test_mutating_nested_output_cannot_change_the_cached_snapshot (test_p35_verification_view.VerificationViewTests.test_mutating_nested_output_cannot_change_the_cached_snapshot) ... ok
+test_new_instance_revalidates_after_previous_snapshot_was_pinned (test_p35_verification_view.VerificationViewTests.test_new_instance_revalidates_after_previous_snapshot_was_pinned) ... ok
+test_view_snapshot_reads_do_not_write_database (test_p35_verification_view.VerificationViewTests.test_view_snapshot_reads_do_not_write_database) ... ok
+test_gate_rechecks_raw_receipt_artifacts (test_real_round_aux.GateTests.test_gate_rechecks_raw_receipt_artifacts) ... ok
+test_gate_rejects_job_relabelled_as_another_run (test_real_round_aux.GateTests.test_gate_rejects_job_relabelled_as_another_run) ... ok
+test_gate_requires_store_completion_not_a_result_dictionary (test_real_round_aux.GateTests.test_gate_requires_store_completion_not_a_result_dictionary) ... ok
+test_negative_gate_accepts_only_actual_correctness_rejection (test_real_round_aux.GateTests.test_negative_gate_accepts_only_actual_correctness_rejection) ... ok
+test_unavailable_profile_blocks_even_valid_benchmark (test_real_round_aux.GateTests.test_unavailable_profile_blocks_even_valid_benchmark) ... ok
+test_changed_recovery_variants_are_rejected_without_overwrite (test_real_round_aux.RoundRecoveryTests.test_changed_recovery_variants_are_rejected_without_overwrite) ... Executing <Task finished name='Task-351' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.953 seconds
+ok
+test_completed_session_digest_and_manifest_are_fixed (test_real_round_aux.RoundRecoveryTests.test_completed_session_digest_and_manifest_are_fixed) ... Executing <Task finished name='Task-356' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.845 seconds
+ok
+test_driver_resume_keeps_original_attempts_budget_and_completion (test_real_round_aux.RoundRecoveryTests.test_driver_resume_keeps_original_attempts_budget_and_completion) ... Executing <Task finished name='Task-361' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.907 seconds
+Executing <Task finished name='Task-362' coro=<RoundRecoveryTests.test_driver_resume_keeps_original_attempts_budget_and_completion() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:215> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 25.744 seconds
+ok
+test_existing_round_keeps_pinned_knowledge_and_rejects_wrong_round (test_real_round_aux.RoundRecoveryTests.test_existing_round_keeps_pinned_knowledge_and_rejects_wrong_round) ... Executing <Task finished name='Task-366' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.904 seconds
+Executing <Task finished name='Task-367' coro=<RoundRecoveryTests.test_existing_round_keeps_pinned_knowledge_and_rejects_wrong_round() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:96> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.617 seconds
+ok
+test_prepare_restores_saved_round_without_live_revision_read (test_real_round_aux.RoundRecoveryTests.test_prepare_restores_saved_round_without_live_revision_read) ... Executing <Task finished name='Task-371' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.909 seconds
+Executing <Task finished name='Task-372' coro=<RoundRecoveryTests.test_prepare_restores_saved_round_without_live_revision_read() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:117> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 3.194 seconds
+ok
+test_previous_round_requires_exact_intake_and_completed_jobs (test_real_round_aux.RoundRecoveryTests.test_previous_round_requires_exact_intake_and_completed_jobs) ... Executing <Task finished name='Task-376' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.858 seconds
+Executing <Task finished name='Task-377' coro=<RoundRecoveryTests.test_previous_round_requires_exact_intake_and_completed_jobs() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:204> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 18.507 seconds
+ok
+test_runtime6_dispatch_rechecks_uncached_gates_before_original_controller (test_real_round_aux.RoundRecoveryTests.test_runtime6_dispatch_rechecks_uncached_gates_before_original_controller) ... Executing <Task finished name='Task-381' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.817 seconds
+Executing <Task finished name='Task-382' coro=<RoundRecoveryTests.test_runtime6_dispatch_rechecks_uncached_gates_before_original_controller() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:166> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.145 seconds
+ok
+test_runtime6_prepare_caches_snapshot_reads_but_controller_gets_original_store (test_real_round_aux.RoundRecoveryTests.test_runtime6_prepare_caches_snapshot_reads_but_controller_gets_original_store) ... Executing <Task finished name='Task-386' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.859 seconds
+Executing <Task finished name='Task-387' coro=<RoundRecoveryTests.test_runtime6_prepare_caches_snapshot_reads_but_controller_gets_original_store() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:141> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.746 seconds
+ok
+test_runtime7_dispatch_rechecks_uncached_gates_before_original_controller (test_real_round_aux.RoundRecoveryTests.test_runtime7_dispatch_rechecks_uncached_gates_before_original_controller) ... Executing <Task finished name='Task-391' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.917 seconds
+Executing <Task finished name='Task-392' coro=<RoundRecoveryTests.test_runtime7_dispatch_rechecks_uncached_gates_before_original_controller() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:169> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.104 seconds
+ok
+test_runtime7_prepare_caches_snapshot_reads_but_controller_gets_original_store (test_real_round_aux.RoundRecoveryTests.test_runtime7_prepare_caches_snapshot_reads_but_controller_gets_original_store) ... Executing <Task finished name='Task-396' coro=<RoundRecoveryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:86> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 2.815 seconds
+Executing <Task finished name='Task-397' coro=<RoundRecoveryTests.test_runtime7_prepare_caches_snapshot_reads_but_controller_gets_original_store() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_real_round_aux.py:144> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.784 seconds
+ok
+test_driver_lock_rejects_concurrent_resume (test_resume_active_round.ResumeRoundTests.test_driver_lock_rejects_concurrent_resume) ... ok
+test_missing_admission_or_changed_limits_never_initializes_or_dispatches (test_resume_active_round.ResumeRoundTests.test_missing_admission_or_changed_limits_never_initializes_or_dispatches) ... ok
+test_terminal_completion_requires_original_result_marker (test_resume_active_round.ResumeRoundTests.test_terminal_completion_requires_original_result_marker) ... ok
+test_terminal_snapshot_and_completed_file_use_original_identity_idempotently (test_resume_active_round.ResumeRoundTests.test_terminal_snapshot_and_completed_file_use_original_identity_idempotently) ... ok
+test_unknown_resume_looks_up_same_operation_without_extra_charge (test_resume_active_round.ResumeRoundTests.test_unknown_resume_looks_up_same_operation_without_extra_charge) ... ok
+test_wrong_binding_round_or_extra_attempt_fails_before_remote (test_resume_active_round.ResumeRoundTests.test_wrong_binding_round_or_extra_attempt_fails_before_remote) ... ok
+test_driver_lock_rejects_concurrent_resume (test_resume_active_round.Runtime7ResumeTests.test_driver_lock_rejects_concurrent_resume) ... ok
+test_missing_admission_or_changed_limits_never_initializes_or_dispatches (test_resume_active_round.Runtime7ResumeTests.test_missing_admission_or_changed_limits_never_initializes_or_dispatches) ... ok
+test_terminal_completion_requires_original_result_marker (test_resume_active_round.Runtime7ResumeTests.test_terminal_completion_requires_original_result_marker) ... ok
+test_terminal_snapshot_and_completed_file_use_original_identity_idempotently (test_resume_active_round.Runtime7ResumeTests.test_terminal_snapshot_and_completed_file_use_original_identity_idempotently) ... ok
+test_unknown_resume_looks_up_same_operation_without_extra_charge (test_resume_active_round.Runtime7ResumeTests.test_unknown_resume_looks_up_same_operation_without_extra_charge) ... ok
+test_wrong_binding_round_or_extra_attempt_fails_before_remote (test_resume_active_round.Runtime7ResumeTests.test_wrong_binding_round_or_extra_attempt_fails_before_remote) ... ok
+test_missing_journal_does_not_initialize_budget_or_call_remote (test_resume_guard.GuardTest.test_missing_journal_does_not_initialize_budget_or_call_remote) ... ok
+test_config_change_during_polling_blocks_next_step (test_resume_p35_diagnostic.DiagnosticResumeTests.test_config_change_during_polling_blocks_next_step) ... Executing <Task finished name='Task-401' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 19.523 seconds
+Executing <Task finished name='Task-402' coro=<DiagnosticResumeTests.test_config_change_during_polling_blocks_next_step() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:160> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.715 seconds
+ok
+test_coordinated_local_variant_and_input_edits_do_not_bypass_original_intake (test_resume_p35_diagnostic.DiagnosticResumeTests.test_coordinated_local_variant_and_input_edits_do_not_bypass_original_intake) ... Executing <Task finished name='Task-406' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 19.723 seconds
+Executing <Task finished name='Task-407' coro=<DiagnosticResumeTests.test_coordinated_local_variant_and_input_edits_do_not_bypass_original_intake() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:130> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.217 seconds
+ok
+test_frozen_file_or_artifact_tampering_rejects_before_backend_or_store_writes (test_resume_p35_diagnostic.DiagnosticResumeTests.test_frozen_file_or_artifact_tampering_rejects_before_backend_or_store_writes) ... Executing <Task finished name='Task-411' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.378 seconds
+Executing <Task finished name='Task-412' coro=<DiagnosticResumeTests.test_frozen_file_or_artifact_tampering_rejects_before_backend_or_store_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:94> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 3.333 seconds
+ok
+test_frozen_prerequisite_intent_uses_original_completed_marker (test_resume_p35_diagnostic.DiagnosticResumeTests.test_frozen_prerequisite_intent_uses_original_completed_marker) ... Executing <Task finished name='Task-416' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.216 seconds
+Executing <Task finished name='Task-417' coro=<DiagnosticResumeTests.test_frozen_prerequisite_intent_uses_original_completed_marker() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:170> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.707 seconds
+ok
+test_intake_digest_and_checkpoint_parent_bindings_are_required (test_resume_p35_diagnostic.DiagnosticResumeTests.test_intake_digest_and_checkpoint_parent_bindings_are_required) ... Executing <Task finished name='Task-421' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.502 seconds
+Executing <Task finished name='Task-422' coro=<DiagnosticResumeTests.test_intake_digest_and_checkpoint_parent_bindings_are_required() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:119> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.368 seconds
+ok
+test_paused_pair_does_not_resume_and_changed_parent_context_is_rejected (test_resume_p35_diagnostic.DiagnosticResumeTests.test_paused_pair_does_not_resume_and_changed_parent_context_is_rejected) ... Executing <Task finished name='Task-426' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 19.654 seconds
+Executing <Task finished name='Task-427' coro=<DiagnosticResumeTests.test_paused_pair_does_not_resume_and_changed_parent_context_is_rejected() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:143> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.831 seconds
+ok
+test_unknown_recovery_keeps_original_operations_two_charges_and_idempotent_completion (test_resume_p35_diagnostic.DiagnosticResumeTests.test_unknown_recovery_keeps_original_operations_two_charges_and_idempotent_completion) ... Executing <Task finished name='Task-431' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.131 seconds
+Executing <Task finished name='Task-432' coro=<DiagnosticResumeTests.test_unknown_recovery_keeps_original_operations_two_charges_and_idempotent_completion() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:66> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.445 seconds
+ok
+test_config_change_during_admission_cannot_be_accepted_as_new_pin (test_resume_p35_diagnostic_independent.DiagnosticResumeOutputTests.test_config_change_during_admission_cannot_be_accepted_as_new_pin) ... Executing <Task finished name='Task-437' coro=<DiagnosticResumeOutputTests.test_config_change_during_admission_cannot_be_accepted_as_new_pin() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic_independent.py:13> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.627 seconds
+ok
+test_terminal_journal_recovers_missing_final_status_before_completion (test_resume_p35_diagnostic_independent.DiagnosticResumeOutputTests.test_terminal_journal_recovers_missing_final_status_before_completion) ... Executing <Task finished name='Task-442' coro=<DiagnosticResumeOutputTests.test_terminal_journal_recovers_missing_final_status_before_completion() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic_independent.py:37> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 31.537 seconds
+ok
+test_config_change_during_polling_blocks_next_step (test_resume_p35_diagnostic.DiagnosticResumeTests.test_config_change_during_polling_blocks_next_step) ... Executing <Task finished name='Task-446' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.800 seconds
+Executing <Task finished name='Task-447' coro=<DiagnosticResumeTests.test_config_change_during_polling_blocks_next_step() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:160> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.729 seconds
+ok
+test_coordinated_local_variant_and_input_edits_do_not_bypass_original_intake (test_resume_p35_diagnostic.DiagnosticResumeTests.test_coordinated_local_variant_and_input_edits_do_not_bypass_original_intake) ... Executing <Task finished name='Task-451' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 19.699 seconds
+Executing <Task finished name='Task-452' coro=<DiagnosticResumeTests.test_coordinated_local_variant_and_input_edits_do_not_bypass_original_intake() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:130> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.234 seconds
+ok
+test_frozen_file_or_artifact_tampering_rejects_before_backend_or_store_writes (test_resume_p35_diagnostic.DiagnosticResumeTests.test_frozen_file_or_artifact_tampering_rejects_before_backend_or_store_writes) ... Executing <Task finished name='Task-456' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 19.954 seconds
+Executing <Task finished name='Task-457' coro=<DiagnosticResumeTests.test_frozen_file_or_artifact_tampering_rejects_before_backend_or_store_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:94> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 3.653 seconds
+ok
+test_frozen_prerequisite_intent_uses_original_completed_marker (test_resume_p35_diagnostic.DiagnosticResumeTests.test_frozen_prerequisite_intent_uses_original_completed_marker) ... Executing <Task finished name='Task-461' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 19.413 seconds
+Executing <Task finished name='Task-462' coro=<DiagnosticResumeTests.test_frozen_prerequisite_intent_uses_original_completed_marker() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:170> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.692 seconds
+ok
+test_intake_digest_and_checkpoint_parent_bindings_are_required (test_resume_p35_diagnostic.DiagnosticResumeTests.test_intake_digest_and_checkpoint_parent_bindings_are_required) ... Executing <Task finished name='Task-466' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.008 seconds
+Executing <Task finished name='Task-467' coro=<DiagnosticResumeTests.test_intake_digest_and_checkpoint_parent_bindings_are_required() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:119> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.376 seconds
+ok
+test_paused_pair_does_not_resume_and_changed_parent_context_is_rejected (test_resume_p35_diagnostic.DiagnosticResumeTests.test_paused_pair_does_not_resume_and_changed_parent_context_is_rejected) ... Executing <Task finished name='Task-471' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.085 seconds
+Executing <Task finished name='Task-472' coro=<DiagnosticResumeTests.test_paused_pair_does_not_resume_and_changed_parent_context_is_rejected() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:143> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 0.966 seconds
+ok
+test_unknown_recovery_keeps_original_operations_two_charges_and_idempotent_completion (test_resume_p35_diagnostic.DiagnosticResumeTests.test_unknown_recovery_keeps_original_operations_two_charges_and_idempotent_completion) ... Executing <Task finished name='Task-476' coro=<DiagnosticResumeTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:17> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 20.241 seconds
+Executing <Task finished name='Task-477' coro=<DiagnosticResumeTests.test_unknown_recovery_keeps_original_operations_two_charges_and_idempotent_completion() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_resume_p35_diagnostic.py:66> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.710 seconds
+ok
+test_existing_config_must_match_observed_runtime (test_runtime2_aux.AdmissionTests.test_existing_config_must_match_observed_runtime) ... ok
+test_publication_rejects_replacing_existing_recovery_input (test_runtime2_aux.AdmissionTests.test_publication_rejects_replacing_existing_recovery_input) ... ok
+test_administratively_closed_run_cannot_resume_without_evaluation_intent (test_runtime2_aux.OracleFailureTests.test_administratively_closed_run_cannot_resume_without_evaluation_intent) ... ok
+test_driver_scripts_parse_and_terminate_negatives_at_correctness (test_runtime2_aux.OracleFailureTests.test_driver_scripts_parse_and_terminate_negatives_at_correctness) ... ok
+test_recovery_after_gate_decision_before_terminal_event (test_runtime2_aux.OracleFailureTests.test_recovery_after_gate_decision_before_terminal_event) ... ok
+test_unexpected_pass_is_incomplete_with_receipts_and_without_consider (test_runtime2_aux.OracleFailureTests.test_unexpected_pass_is_incomplete_with_receipts_and_without_consider) ... ok
+test_guard_runs_under_lock_before_backend_creation (test_runtime4_admission.AdvanceGuardTests.test_guard_runs_under_lock_before_backend_creation) ... ok
+test_generations_and_legacy_flags (test_runtime4_admission.ObservationArgumentsTests.test_generations_and_legacy_flags) ... usage: python.exe -m unittest [-h] [--generation GENERATION | --runtime2 |
+                              --runtime3]
+python.exe -m unittest: error: argument --generation: not allowed with argument --runtime3
+usage: python.exe -m unittest [-h] [--generation GENERATION | --runtime2 |
+                              --runtime3]
+python.exe -m unittest: error: generation must be runtimeN with N >= 2
+ok
+test_runtime4_pin_does_not_overwrite_runtime3 (test_runtime4_admission.ObservationArgumentsTests.test_runtime4_pin_does_not_overwrite_runtime3) ... ok
+test_all_origins_validated_before_any_new_record (test_runtime4_admission.Runtime4Tests.test_all_origins_validated_before_any_new_record) ... ok
+test_four_new_runs_preserve_sources_and_are_idempotent (test_runtime4_admission.Runtime4Tests.test_four_new_runs_preserve_sources_and_are_idempotent) ... ok
+test_last_saved_job_conflict_rejects_before_new_records (test_runtime4_admission.Runtime4Tests.test_last_saved_job_conflict_rejects_before_new_records) ... ok
+test_missing_archive_and_unfinished_state_reject_before_remeasure (test_runtime4_admission.Runtime4Tests.test_missing_archive_and_unfinished_state_reject_before_remeasure) ... ok
+test_observation_requires_synchronized_success_and_exact_environment (test_runtime4_admission.Runtime4Tests.test_observation_requires_synchronized_success_and_exact_environment) ... ok
+test_old_runtime_and_saved_config_session_change_reject_without_writes (test_runtime4_admission.Runtime4Tests.test_old_runtime_and_saved_config_session_change_reject_without_writes) ... ok
+test_changed_nonce_and_started_other_run_reject_without_archive_writes (test_runtime5_admission.Runtime4UnknownLossTests.test_changed_nonce_and_started_other_run_reject_without_archive_writes) ... ok
+test_completed_correctness_rejected_before_any_write (test_runtime5_admission.Runtime4UnknownLossTests.test_completed_correctness_rejected_before_any_write) ... ok
+test_crash_after_each_durable_effect_recovers_without_duplicate_records (test_runtime5_admission.Runtime4UnknownLossTests.test_crash_after_each_durable_effect_recovers_without_duplicate_records) ... ok
+test_live_runtime_rejected_before_write (test_runtime5_admission.Runtime4UnknownLossTests.test_live_runtime_rejected_before_write) ... ok
+test_misbound_request_nested_run_is_refused (test_runtime5_admission.Runtime4UnknownLossTests.test_misbound_request_nested_run_is_refused) ... ok
+test_output_file_crash_recovers_and_late_receipt_invalidates_readonly_guard (test_runtime5_admission.Runtime4UnknownLossTests.test_output_file_crash_recovers_and_late_receipt_invalidates_readonly_guard) ... ok
+test_unknown_submission_preserved_no_evaluation_or_budget_change_and_replay (test_runtime5_admission.Runtime4UnknownLossTests.test_unknown_submission_preserved_no_evaluation_or_budget_change_and_replay) ... ok
+test_runtime5_jobs_keep_old_files_and_sources_and_require_loss_gate (test_runtime5_admission.Runtime5ObservationTests.test_runtime5_jobs_keep_old_files_and_sources_and_require_loss_gate) ... ok
+test_runtime5_uses_separate_pin_config_and_nonce (test_runtime5_admission.Runtime5ObservationTests.test_runtime5_uses_separate_pin_config_and_nonce) ... ok
+test_archive_preserves_operation_budget_old_jobs_and_unstarted_runs (test_runtime6_admission.Runtime5LossTests.test_archive_preserves_operation_budget_old_jobs_and_unstarted_runs) ... ok
+test_changed_observation_live_runtime_and_refund_refuse (test_runtime6_admission.Runtime5LossTests.test_changed_observation_live_runtime_and_refund_refuse) ... ok
+test_cli_help_without_pythonpath_or_store (test_runtime6_admission.Runtime5LossTests.test_cli_help_without_pythonpath_or_store) ... ok
+test_crash_after_each_durable_effect_resumes_idempotently (test_runtime6_admission.Runtime5LossTests.test_crash_after_each_durable_effect_resumes_idempotently) ... ok
+test_durable_or_orphan_request_refuses_before_archive (test_runtime6_admission.Runtime5LossTests.test_durable_or_orphan_request_refuses_before_archive) ... ok
+test_preexisting_evaluation_intent_refuses_before_archival (test_runtime6_admission.Runtime5LossTests.test_preexisting_evaluation_intent_refuses_before_archival) ... ok
+test_snapshot_must_contain_exact_terminal_journal (test_runtime6_admission.Runtime5LossTests.test_snapshot_must_contain_exact_terminal_journal) ... ok
+test_stale_journal_after_intent_refuses_before_evaluation (test_runtime6_admission.Runtime5LossTests.test_stale_journal_after_intent_refuses_before_evaluation) ... ok
+test_runtime6_observation_uses_runtime5_as_prior (test_runtime6_admission.Runtime6Tests.test_runtime6_observation_uses_runtime5_as_prior) ... ok
+test_runtime6_requires_r5_loss_and_preserves_prior_generation_files (test_runtime6_admission.Runtime6Tests.test_runtime6_requires_r5_loss_and_preserves_prior_generation_files) ... ok
+test_existing_round_keeps_original_runtime_after_active_replacement (test_runtime_binding.BindingTests.test_existing_round_keeps_original_runtime_after_active_replacement) ... ok
+test_untrusted_generation_cannot_select_other_paths (test_runtime_binding.BindingTests.test_untrusted_generation_cannot_select_other_paths) ... ok
+test_observation_updates_archive_original_bytes (test_runtime_readmission.ReadmissionTests.test_observation_updates_archive_original_bytes) ... ok
+test_remeasure_preserves_source_and_old_result_but_changes_operation (test_runtime_readmission.ReadmissionTests.test_remeasure_preserves_source_and_old_result_but_changes_operation) ... ok
+test_same_runtime_rejected_without_writes (test_runtime_readmission.ReadmissionTests.test_same_runtime_rejected_without_writes) ... ok
+test_wrong_candidate_binding_rejected_without_writes (test_runtime_readmission.ReadmissionTests.test_wrong_candidate_binding_rejected_without_writes) ... ok
+test_wrong_generation_rejected_before_remote_work (test_runtime_readmission.ReadmissionTests.test_wrong_generation_rejected_before_remote_work) ... ok
+test_completed_receipt_can_finish_guard_cleanup_without_probe (test_trace_modes_aux.DiagnosticTests.test_completed_receipt_can_finish_guard_cleanup_without_probe) ... ok
+test_persisted_dispatch_without_live_process_is_unknown_never_relaunched (test_trace_modes_aux.DiagnosticTests.test_persisted_dispatch_without_live_process_is_unknown_never_relaunched) ... ok
+test_probe_holds_runtime_lock_and_guard_until_durable_receipt (test_trace_modes_aux.DiagnosticTests.test_probe_holds_runtime_lock_and_guard_until_durable_receipt) ... ok
+test_sources_parse_without_import_time_hardware_actions (test_trace_modes_aux.DiagnosticTests.test_sources_parse_without_import_time_hardware_actions) ... ok
+test_unknown_formal_worker_operation_blocks_before_jax (test_trace_modes_aux.DiagnosticTests.test_unknown_formal_worker_operation_blocks_before_jax) ... ok
+test_mismatched_guard_at_own_path_is_never_deleted (test_trace_modes_aux.RealWorkerGuardTests.test_mismatched_guard_at_own_path_is_never_deleted) ... ok
+test_receipt_poll_only_cleans_own_guard_and_never_reexecutes (test_trace_modes_aux.RealWorkerGuardTests.test_receipt_poll_only_cleans_own_guard_and_never_reexecutes) ... ok
+test_unknown_diagnostic_never_restarts_and_real_worker_is_blocked (test_trace_modes_aux.RealWorkerGuardTests.test_unknown_diagnostic_never_restarts_and_real_worker_is_blocked) ... ok
+test_actual_completed_pair_reconciles_six_runs_all_contexts_and_grant_budget_without_writes (test_verify_p35_b2_final_memory.PostB2MemoryTests.test_actual_completed_pair_reconciles_six_runs_all_contexts_and_grant_budget_without_writes) ... Executing <Task finished name='Task-481' coro=<PostB2MemoryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.168 seconds
+Executing <Task finished name='Task-482' coro=<PostB2MemoryTests.test_actual_completed_pair_reconciles_six_runs_all_contexts_and_grant_budget_without_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:190> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 52.147 seconds
+ok
+test_changed_local_completion_intake_spec_report_or_receipt_rejects_without_writes (test_verify_p35_b2_final_memory.PostB2MemoryTests.test_changed_local_completion_intake_spec_report_or_receipt_rejects_without_writes) ... Executing <Task finished name='Task-486' coro=<PostB2MemoryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.509 seconds
+Executing <Task finished name='Task-487' coro=<PostB2MemoryTests.test_changed_local_completion_intake_spec_report_or_receipt_rejects_without_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:227> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 57.708 seconds
+ok
+test_generation_failure_does_not_count_as_executed_scope (test_verify_p35_b2_final_memory.PostB2MemoryTests.test_generation_failure_does_not_count_as_executed_scope) ... Executing <Task finished name='Task-491' coro=<PostB2MemoryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.258 seconds
+Executing <Task finished name='Task-492' coro=<PostB2MemoryTests.test_generation_failure_does_not_count_as_executed_scope() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:220> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 36.434 seconds
+ok
+test_later_live_note_does_not_replace_final_snapshot_watermark_or_budget (test_verify_p35_b2_final_memory.PostB2MemoryTests.test_later_live_note_does_not_replace_final_snapshot_watermark_or_budget) ... Executing <Task finished name='Task-496' coro=<PostB2MemoryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.543 seconds
+Executing <Task finished name='Task-497' coro=<PostB2MemoryTests.test_later_live_note_does_not_replace_final_snapshot_watermark_or_budget() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:246> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 51.222 seconds
+ok
+test_real_compile_failure_remains_complete_feedback_without_claiming_success (test_verify_p35_b2_final_memory.PostB2MemoryTests.test_real_compile_failure_remains_complete_feedback_without_claiming_success) ... Executing <Task finished name='Task-501' coro=<PostB2MemoryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.107 seconds
+Executing <Task finished name='Task-502' coro=<PostB2MemoryTests.test_real_compile_failure_remains_complete_feedback_without_claiming_success() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:205> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 39.943 seconds
+ok
+test_real_correctness_failure_is_preserved_and_bound_to_original_arrays_verification (test_verify_p35_b2_final_memory.PostB2MemoryTests.test_real_correctness_failure_is_preserved_and_bound_to_original_arrays_verification) ... Executing <Task finished name='Task-506' coro=<PostB2MemoryTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:30> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 14.362 seconds
+Executing <Task finished name='Task-507' coro=<PostB2MemoryTests.test_real_correctness_failure_is_preserved_and_bound_to_original_arrays_verification() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_b2_final_memory.py:213> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 42.816 seconds
+ok
+test_changed_completion_or_frozen_input_is_rejected_before_artifact_verification (test_verify_p35_continuation.ContinuationVerificationTests.test_changed_completion_or_frozen_input_is_rejected_before_artifact_verification) ... Executing <Task finished name='Task-511' coro=<ContinuationVerificationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:18> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.123 seconds
+Executing <Task finished name='Task-512' coro=<ContinuationVerificationTests.test_changed_completion_or_frozen_input_is_rejected_before_artifact_verification() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:60> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 18.475 seconds
+ok
+test_cli_returns_failure_for_changed_archived_stage_artifact (test_verify_p35_continuation.ContinuationVerificationTests.test_cli_returns_failure_for_changed_archived_stage_artifact) ... Executing <Task finished name='Task-516' coro=<ContinuationVerificationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:18> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.123 seconds
+C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py:941: ResourceWarning: Implicitly cleaning up <TemporaryDirectory 'C:\\Users\\fengluo\\AppData\\Local\\Temp\\tmpkfsrkaxq'>
+  _warnings.warn(warn_message, ResourceWarning)
+Executing <Task finished name='Task-517' coro=<ContinuationVerificationTests.test_cli_returns_failure_for_changed_archived_stage_artifact() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:90> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 18.537 seconds
+ok
+test_common_verifier_rechecks_actual_protocol_receipts_and_saved_samples (test_verify_p35_continuation.ContinuationVerificationTests.test_common_verifier_rechecks_actual_protocol_receipts_and_saved_samples) ... Executing <Task finished name='Task-521' coro=<ContinuationVerificationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:18> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.112 seconds
+C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py:941: ResourceWarning: Implicitly cleaning up <TemporaryDirectory 'C:\\Users\\fengluo\\AppData\\Local\\Temp\\tmpnz9j9907'>
+  _warnings.warn(warn_message, ResourceWarning)
+Executing <Task finished name='Task-522' coro=<ContinuationVerificationTests.test_common_verifier_rechecks_actual_protocol_receipts_and_saved_samples() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:78> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 18.579 seconds
+ok
+test_completed_snapshot_and_each_original_job_are_verified_without_writes (test_verify_p35_continuation.ContinuationVerificationTests.test_completed_snapshot_and_each_original_job_are_verified_without_writes) ... Executing <Task finished name='Task-526' coro=<ContinuationVerificationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:18> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.180 seconds
+C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py:941: ResourceWarning: Implicitly cleaning up <TemporaryDirectory 'C:\\Users\\fengluo\\AppData\\Local\\Temp\\tmpm4_bbkq_'>
+  _warnings.warn(warn_message, ResourceWarning)
+Executing <Task finished name='Task-527' coro=<ContinuationVerificationTests.test_completed_snapshot_and_each_original_job_are_verified_without_writes() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:42> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 18.715 seconds
+ok
+test_prepared_but_unstarted_is_pending_and_does_not_invent_results (test_verify_p35_continuation.ContinuationVerificationTests.test_prepared_but_unstarted_is_pending_and_does_not_invent_results) ... Executing <Task finished name='Task-531' coro=<ContinuationVerificationTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:18> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.254 seconds
+Executing <Task finished name='Task-532' coro=<ContinuationVerificationTests.test_prepared_but_unstarted_is_pending_and_does_not_invent_results() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation.py:34> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.839 seconds
+ok
+test_changed_valid_variant_is_rejected_before_verification (test_verify_p35_continuation_independent.IndependentIntakeBindingTests.test_changed_valid_variant_is_rejected_before_verification) ... Executing <Task finished name='Task-536' coro=<IndependentIntakeBindingTests.asyncSetUp() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation_independent.py:11> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 1.152 seconds
+C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py:941: ResourceWarning: Implicitly cleaning up <TemporaryDirectory 'C:\\Users\\fengluo\\AppData\\Local\\Temp\\tmpx5sswosy'>
+  _warnings.warn(warn_message, ResourceWarning)
+C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\tempfile.py:941: ResourceWarning: Implicitly cleaning up <TemporaryDirectory 'C:\\Users\\fengluo\\AppData\\Local\\Temp\\tmp50wvuupm'>
+  _warnings.warn(warn_message, ResourceWarning)
+Executing <Task finished name='Task-537' coro=<IndependentIntakeBindingTests.test_changed_valid_variant_is_rejected_before_verification() done, defined at C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_verify_p35_continuation_independent.py:16> result=None created at C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\runners.py:101> took 18.316 seconds
+ok
+test_both_roles_delegate_and_retain_failed_verification (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_both_roles_delegate_and_retain_failed_verification) ... ok
+test_cli_existing_status_missing_database_saves_failure_report (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_cli_existing_status_missing_database_saves_failure_report) ... ok
+test_cli_pending_writes_unique_reports_without_database (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_cli_pending_writes_unique_reports_without_database) ... ok
+test_missing_status_is_pending_without_store_or_directory_creation (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_missing_status_is_pending_without_store_or_directory_creation) ... ok
+test_original_pending_semantics_and_missing_second_role_remain_pending (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_original_pending_semantics_and_missing_second_role_remain_pending) ... ok
+test_tampered_saved_status_cannot_reach_job_verification (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_tampered_saved_status_cannot_reach_job_verification) ... ok
+test_v2_runtime5_verifier_cannot_use_runtime4_configuration (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_v2_runtime5_verifier_cannot_use_runtime4_configuration) ... ok
+test_v2_verifier_rejects_wrong_runtime_binding_before_opening_store (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_v2_verifier_rejects_wrong_runtime_binding_before_opening_store) ... ok
+test_v2_verifier_uses_new_runtime_and_preserves_pending_semantics (test_verify_p35_diagnostic.DiagnosticVerificationTests.test_v2_verifier_uses_new_runtime_and_preserves_pending_semantics) ... ok
+test_budget_refund_in_completion_snapshot_is_rejected (test_verify_p35_final_memory.FinalMemoryTests.test_budget_refund_in_completion_snapshot_is_rejected) ... ok
+test_completed_snapshot_metadata_mismatch_is_rejected (test_verify_p35_final_memory.FinalMemoryTests.test_completed_snapshot_metadata_mismatch_is_rejected) ... ok
+test_corrupt_small_receipt_is_rejected_even_with_old_verification_report (test_verify_p35_final_memory.FinalMemoryTests.test_corrupt_small_receipt_is_rejected_even_with_old_verification_report) ... ok
+test_later_live_journal_does_not_relabel_milestone_revision (test_verify_p35_final_memory.FinalMemoryTests.test_later_live_journal_does_not_relabel_milestone_revision) ... ok
+test_missing_completion_is_pending_without_opening_database (test_verify_p35_final_memory.FinalMemoryTests.test_missing_completion_is_pending_without_opening_database) ... ok
+test_missing_execution_verification_stays_pending (test_verify_p35_final_memory.FinalMemoryTests.test_missing_execution_verification_stays_pending) ... ok
+test_missing_verification_report_path_stays_pending (test_verify_p35_final_memory.FinalMemoryTests.test_missing_verification_report_path_stays_pending) ... ok
+test_original_verify_job_compile_failure_report_can_be_rebound (test_verify_p35_final_memory.FinalMemoryTests.test_original_verify_job_compile_failure_report_can_be_rebound) ... ok
+test_receipt_contract_digest_is_rebound_to_job (test_verify_p35_final_memory.FinalMemoryTests.test_receipt_contract_digest_is_rebound_to_job) ... ok
+test_transaction_enforces_read_only_database_access (test_verify_p35_final_memory.FinalMemoryTests.test_transaction_enforces_read_only_database_access) ... ok
+test_verified_milestone_preserves_contexts_and_original_memory_semantics (test_verify_p35_final_memory.FinalMemoryTests.test_verified_milestone_preserves_contexts_and_original_memory_semantics) ... ok
+test_wrong_report_identity_or_digest_is_rejected (test_verify_p35_final_memory.FinalMemoryTests.test_wrong_report_identity_or_digest_is_rejected) ... ok
+test_wrong_runtime_binding_is_rejected (test_verify_p35_final_memory.FinalMemoryTests.test_wrong_runtime_binding_is_rejected) ... ok
+test_budget_refund_in_completion_snapshot_is_rejected (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_budget_refund_in_completion_snapshot_is_rejected) ... ok
+test_completed_snapshot_metadata_mismatch_is_rejected (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_completed_snapshot_metadata_mismatch_is_rejected) ... ok
+test_corrupt_small_receipt_is_rejected_even_with_old_verification_report (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_corrupt_small_receipt_is_rejected_even_with_old_verification_report) ... ok
+test_later_live_journal_does_not_relabel_milestone_revision (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_later_live_journal_does_not_relabel_milestone_revision) ... ok
+test_missing_completion_is_pending_without_opening_database (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_missing_completion_is_pending_without_opening_database) ... ok
+test_missing_execution_verification_stays_pending (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_missing_execution_verification_stays_pending) ... ok
+test_missing_verification_report_path_stays_pending (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_missing_verification_report_path_stays_pending) ... ok
+test_original_verify_job_compile_failure_report_can_be_rebound (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_original_verify_job_compile_failure_report_can_be_rebound) ... ok
+test_receipt_contract_digest_is_rebound_to_job (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_receipt_contract_digest_is_rebound_to_job) ... ok
+test_runtime6_preserves_repair_reserve_and_marks_original_B_goal_pending (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_runtime6_preserves_repair_reserve_and_marks_original_B_goal_pending) ... ok
+test_transaction_enforces_read_only_database_access (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_transaction_enforces_read_only_database_access) ... ok
+test_verified_milestone_preserves_contexts_and_original_memory_semantics (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_verified_milestone_preserves_contexts_and_original_memory_semantics) ... ok
+test_wrong_report_identity_or_digest_is_rejected (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_wrong_report_identity_or_digest_is_rejected) ... ok
+test_wrong_runtime_binding_is_rejected (test_verify_p35_final_memory.Runtime6FinalMemoryTests.test_wrong_runtime_binding_is_rejected) ... ok
+test_budget_refund_in_completion_snapshot_is_rejected (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_budget_refund_in_completion_snapshot_is_rejected) ... ok
+test_completed_snapshot_metadata_mismatch_is_rejected (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_completed_snapshot_metadata_mismatch_is_rejected) ... ok
+test_corrupt_small_receipt_is_rejected_even_with_old_verification_report (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_corrupt_small_receipt_is_rejected_even_with_old_verification_report) ... ok
+test_later_live_journal_does_not_relabel_milestone_revision (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_later_live_journal_does_not_relabel_milestone_revision) ... ok
+test_missing_completion_is_pending_without_opening_database (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_missing_completion_is_pending_without_opening_database) ... ok
+test_missing_execution_verification_stays_pending (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_missing_execution_verification_stays_pending) ... ok
+test_missing_verification_report_path_stays_pending (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_missing_verification_report_path_stays_pending) ... ok
+test_original_verify_job_compile_failure_report_can_be_rebound (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_original_verify_job_compile_failure_report_can_be_rebound) ... ok
+test_receipt_contract_digest_is_rebound_to_job (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_receipt_contract_digest_is_rebound_to_job) ... ok
+test_runtime6_preserves_repair_reserve_and_marks_original_B_goal_pending (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_runtime6_preserves_repair_reserve_and_marks_original_B_goal_pending) ... ok
+test_transaction_enforces_read_only_database_access (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_transaction_enforces_read_only_database_access) ... ok
+test_verified_milestone_preserves_contexts_and_original_memory_semantics (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_verified_milestone_preserves_contexts_and_original_memory_semantics) ... ok
+test_wrong_report_identity_or_digest_is_rejected (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_wrong_report_identity_or_digest_is_rejected) ... ok
+test_wrong_runtime_binding_is_rejected (test_verify_p35_final_memory.Runtime7FinalMemoryTests.test_wrong_runtime_binding_is_rejected) ... ok
+test_corrupted_raw_artifact_and_relabelled_result_are_rejected (test_verify_real_round.VerificationTests.test_corrupted_raw_artifact_and_relabelled_result_are_rejected) ... ok
+test_failed_result_cannot_be_relabelled_completed (test_verify_real_round.VerificationTests.test_failed_result_cannot_be_relabelled_completed) ... ok
+test_missing_status_remains_pending_without_creating_database (test_verify_real_round.VerificationTests.test_missing_status_remains_pending_without_creating_database) ... ok
+test_numeric_tolerance_preserves_reference_actual_direction (test_verify_real_round.VerificationTests.test_numeric_tolerance_preserves_reference_actual_direction) ... ok
+test_pending_never_needs_result_or_store (test_verify_real_round.VerificationTests.test_pending_never_needs_result_or_store) ... ok
+test_profile_failure_preserves_benchmark_without_claiming_available_profile (test_verify_real_round.VerificationTests.test_profile_failure_preserves_benchmark_without_claiming_available_profile) ... ok
+test_recovery_verifier_rejects_binding_and_journal_tampering (test_verify_real_round.VerificationTests.test_recovery_verifier_rejects_binding_and_journal_tampering) ... ok
+test_recovery_verifier_selects_new_round_and_preserves_store (test_verify_real_round.VerificationTests.test_recovery_verifier_selects_new_round_and_preserves_store) ... ok
+test_runtime_input_mutation_rejection_is_not_changed_by_matching_output_npz (test_verify_real_round.VerificationTests.test_runtime_input_mutation_rejection_is_not_changed_by_matching_output_npz) ... ok
+test_streamed_npz_compares_numeric_attention_and_opaque_nan_cache (test_verify_real_round.VerificationTests.test_streamed_npz_compares_numeric_attention_and_opaque_nan_cache) ... ok
+test_streamed_npz_rejects_wrong_internal_digest (test_verify_real_round.VerificationTests.test_streamed_npz_rejects_wrong_internal_digest) ... ok
+test_success_recomputes_statistics_and_preserves_database (test_verify_real_round.VerificationTests.test_success_recomputes_statistics_and_preserves_database) ... ok
+test_terminal_requires_original_completion_marker (test_verify_real_round.VerificationTests.test_terminal_requires_original_completion_marker) ... ok
+test_unstarted_cancellation_does_not_require_execution_marker (test_verify_real_round.VerificationTests.test_unstarted_cancellation_does_not_require_execution_marker) ... ok
+test_each_main_call_archives_a_distinct_report_without_overwrite (test_verify_runtime4_prerequisites.Runtime4VerificationTests.test_each_main_call_archives_a_distinct_report_without_overwrite) ... ok
+test_four_terminal_fixture_rows_are_aggregated (test_verify_runtime4_prerequisites.Runtime4VerificationTests.test_four_terminal_fixture_rows_are_aggregated) ... ok
+test_missing_runtime4_inputs_stay_pending (test_verify_runtime4_prerequisites.Runtime4VerificationTests.test_missing_runtime4_inputs_stay_pending) ... ok
+test_verification_error_is_failed_but_missing_marker_is_pending (test_verify_runtime4_prerequisites.Runtime4VerificationTests.test_verification_error_is_failed_but_missing_marker_is_pending) ... ok
+
+======================================================================
+ERROR: test_incomplete_or_corrupted_results_cannot_publish (test_p35_publish_confirmation.PublicationTests.test_incomplete_or_corrupted_results_cannot_publish)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_publish_confirmation.py", line 108, in setUp
+    self.fixture.setUp()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_npz_verification_failure_prevents_publication (test_p35_publish_confirmation.PublicationTests.test_npz_verification_failure_prevents_publication)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_publish_confirmation.py", line 108, in setUp
+    self.fixture.setUp()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_publication_recomputes_receipts_is_idempotent_and_visible_in_histories (test_p35_publish_confirmation.PublicationTests.test_publication_recomputes_receipts_is_idempotent_and_visible_in_histories)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_publish_confirmation.py", line 108, in setUp
+    self.fixture.setUp()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_replica_must_match_selected_origin_before_record_publication (test_p35_publish_confirmation.PublicationTests.test_replica_must_match_selected_origin_before_record_publication)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_publish_confirmation.py", line 108, in setUp
+    self.fixture.setUp()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives (test_p35_recovery_round.RecoveryRoundTests.test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 51, in test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives
+    self.assertEqual(result['replacement_archive']['decision_id'], 'runtime4-loss')
+                     ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'replacement_archive'
+
+======================================================================
+ERROR: test_absent_policy_cannot_bypass_round2_confirmation (test_p35_round2_gate.ConfirmationGateTests.test_absent_policy_cannot_bypass_round2_confirmation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_changed_policy_rejected (test_p35_round2_gate.ConfirmationGateTests.test_changed_policy_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_complete_not_confirmed_result_is_admissible_and_shared_in_history (test_p35_round2_gate.ConfirmationGateTests.test_complete_not_confirmed_result_is_admissible_and_shared_in_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_confirmation_cannot_omit_an_extra_same_round_job (test_p35_round2_gate.ConfirmationGateTests.test_confirmation_cannot_omit_an_extra_same_round_job)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_controller_result_must_match_immutable_completion (test_p35_round2_gate.ConfirmationGateTests.test_controller_result_must_match_immutable_completion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_forged_raw_measurement_rejected_against_receipts (test_p35_round2_gate.ConfirmationGateTests.test_forged_raw_measurement_rejected_against_receipts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_forged_summary_rejected (test_p35_round2_gate.ConfirmationGateTests.test_forged_summary_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_later_policy_note_cannot_replace_predeclared_policy (test_p35_round2_gate.ConfirmationGateTests.test_later_policy_note_cannot_replace_predeclared_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_missing_result_blocks_without_new_records_or_snapshot (test_p35_round2_gate.ConfirmationGateTests.test_missing_result_blocks_without_new_records_or_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_missing_strategy_history_association_rejected (test_p35_round2_gate.ConfirmationGateTests.test_missing_strategy_history_association_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_pending_job_rejected (test_p35_round2_gate.ConfirmationGateTests.test_pending_job_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_policy_after_intake_but_before_runs_is_rejected (test_p35_round2_gate.ConfirmationGateTests.test_policy_after_intake_but_before_runs_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_raw_receipt_corruption_blocks_confirmation (test_p35_round2_gate.ConfirmationGateTests.test_raw_receipt_corruption_blocks_confirmation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_receipt_row_reads_exact_original_measurements (test_p35_round2_gate.ConfirmationGateTests.test_receipt_row_reads_exact_original_measurements)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_role_origin_cannot_borrow_other_strategy_candidate (test_p35_round2_gate.ConfirmationGateTests.test_role_origin_cannot_borrow_other_strategy_candidate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_role_origin_swap_with_same_labels_is_rejected (test_p35_round2_gate.ConfirmationGateTests.test_role_origin_swap_with_same_labels_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_snapshot_before_confirmation_cannot_be_reused (test_p35_round2_gate.ConfirmationGateTests.test_snapshot_before_confirmation_cannot_be_reused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 30, in setUp
+    self.prepare_confirmation_fixture()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_round2_gate.py", line 106, in prepare_confirmation_fixture
+    WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 107, in save
+    return self.save(state, reason, target_id)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\journal.py", line 126, in save
+    validate_transition(self.store, events[-1].details['state'] if events else None, payload)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 213, in validate_transition
+    require('spent' in state, 'Workflow limits require spending fields')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\src\rsi_kernel_agent\workflow\budget.py", line 17, in require
+    raise ValueError(message)
+ValueError: Workflow limits require spending fields
+
+======================================================================
+ERROR: test_new_snapshot_cannot_omit_runtime5_archive (test_p35_runtime6_scope.Runtime6ScopeTests.test_new_snapshot_cannot_omit_runtime5_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_runtime6_scope.py", line 137, in test_new_snapshot_cannot_omit_runtime5_archive
+    self.assertEqual(result['runtime5_archive']['decision_id'], 'archive5')
+                     ~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'runtime5_archive'
+
+======================================================================
+FAIL: test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids (test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_generation_recovery.py", line 50, in test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids
+    loss.assert_called_with(store, HERE, 'runtime6')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 970, in assert_called_with
+    raise AssertionError(error_message)
+AssertionError: expected call not found.
+Expected: require_completed_prerequisite_loss(namespace(snapshot_page=<function RepeatedRecoveryTests.test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids.<locals>.<lambda> at 0x000001CE4FF3B7E0>), WindowsPath('C:/Users/fengluo/Desktop/rsi-kernel-agent/.artifacts/phase3-2026-11-12'), 'runtime6')
+  Actual: not called.
+
+======================================================================
+FAIL: test_runtime8_requires_both_previous_completed_prerequisite_losses (test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime8_requires_both_previous_completed_prerequisite_losses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_generation_recovery.py", line 75, in test_runtime8_requires_both_previous_completed_prerequisite_losses
+    self.assertEqual([call.args[2] for call in loss.call_args_list], ['runtime6', 'runtime7'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['runtime6', 'runtime7']
+
+Second list contains 2 additional elements.
+First extra element 0:
+'runtime6'
+
+- []
++ ['runtime6', 'runtime7']
+
+======================================================================
+FAIL: test_foreign_unfinished_jobs_block_recovery (test_p35_recovery_round.RecoveryRoundTests.test_foreign_unfinished_jobs_block_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 116, in test_foreign_unfinished_jobs_block_recovery
+    with self.assertRaisesRegex(ValueError, 'unfinished'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_historical_abba_keeps_its_context (test_p35_recovery_round.RecoveryRoundTests.test_historical_abba_keeps_its_context)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 86, in test_historical_abba_keeps_its_context
+    self.invoke(prepared={'snapshot': {'id': 'fresh', 'record_count': 2}})
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('context_id',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 99, in test_relabelled_context_or_changed_source_is_rejected
+    self.invoke(changed)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('contract', 'context', 'environment', 'runtime_session_id'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 99, in test_relabelled_context_or_changed_source_is_rejected
+    self.invoke(changed)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('variant', 'source_ref', 'digest'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 99, in test_relabelled_context_or_changed_source_is_rejected
+    self.invoke(changed)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('strategy_id',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 99, in test_relabelled_context_or_changed_source_is_rejected
+    self.invoke(changed)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_unarchived_loss_blocks_before_admission_reads (test_p35_recovery_round.RecoveryRoundTests.test_unarchived_loss_blocks_before_admission_reads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 104, in test_unarchived_loss_blocks_before_admission_reads
+    with self.assertRaisesRegex(ValueError, 'missing archive'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_runtime5_loss_must_be_archived_before_reading_admission (test_p35_runtime6_scope.Runtime6ScopeTests.test_runtime5_loss_must_be_archived_before_reading_admission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_runtime6_scope.py", line 56, in test_runtime5_loss_must_be_archived_before_reading_admission
+    with self.assertRaisesRegex(ValueError, 'Runtime 5 not archived'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 383 tests in 2493.076s
+
+FAILED (failures=10, errors=23)

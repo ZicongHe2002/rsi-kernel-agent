@@ -69,6 +69,56 @@ class VerificationTests(RealProtocolFixture, unittest.TestCase):
         self.assertEqual(report['status'], 'pending_status_file')
         self.assertFalse((Path(self.tmp.name) / 'missing').exists())
 
+    def recovery_status(self):
+        from rsi_kernel_agent.contracts import RunEvent, canonical_json
+        from rsi_kernel_agent.workflow.controller import Controller
+        directory = Path(self.tmp.name)
+        new_db = directory / 'experiments.sqlite3'
+        self.store.db_path.rename(new_db)
+        self.store.db_path = new_db
+        job = self.job()
+        job['round_id'] = 'real-runtime5-recovery-round:2'
+        self.store.transition(RunEvent('run:start', 'run', 'running', 'active', 'CPU recovery fixture'),
+                              None, 'run:start')
+        receipts = {stage: self.receipt(job, stage, output) for stage, output in self.outputs(job).items()}
+        job.update(state='completed', result=integrate_result(self.store, job, receipts), receipts=receipts)
+        controller = Controller(self.store, 'task', None)
+        state = controller.journal.load()
+        state['jobs'] = {'job': job, 'old-only': {
+            'round_id': 'real-runtime2-round:2', 'state': 'completed'}}
+        controller.journal.save(state, 'CPU recovery verifier fixture')
+        target = directory / 'real-round-2-runtime5'
+        target.mkdir()
+        (target / 'runtime-binding.json').write_text('{"generation":"runtime5"}')
+        (directory / 'colab-config-runtime5.json').write_text(json.dumps({
+            'runtime_id': self.environment['runtime_session_id']}))
+        (target / 'controller-status.json').write_text(canonical_json(controller.status()))
+        return directory, target
+
+    def test_recovery_verifier_selects_new_round_and_preserves_store(self):
+        directory, _ = self.recovery_status()
+        before = self.store.db_path.read_bytes()
+        try:
+            report = self.api.verify_round(directory, 2, recompute_npz=False, recovery_generation='runtime5')
+        except TypeError as error:
+            self.fail('Recovery verifier is missing: ' + str(error))
+        self.assertEqual(report['status'], 'selected_terminal_jobs_verified')
+        self.assertEqual([row['run_id'] for row in report['jobs']], ['run'])
+        self.assertEqual(self.store.db_path.read_bytes(), before)
+
+    def test_recovery_verifier_rejects_binding_and_journal_tampering(self):
+        directory, target = self.recovery_status()
+        (target / 'runtime-binding.json').write_text('{"generation":"runtime4"}')
+        with self.assertRaisesRegex(ValueError, 'binding'):
+            self.api.verify_round(directory, 2, recovery_generation='runtime5')
+        (target / 'runtime-binding.json').write_text('{"generation":"runtime5"}')
+        path = target / 'controller-status.json'
+        status = json.loads(path.read_text())
+        status['jobs']['job']['state'] = 'failed'
+        path.write_text(json.dumps(status))
+        with self.assertRaisesRegex(ValueError, 'persisted journal'):
+            self.api.verify_round(directory, 2, recovery_generation='runtime5')
+
     def test_terminal_requires_original_completion_marker(self):
         job, receipts = self.execute_fixture()
         job.update(state='completed', receipts=receipts, result={})

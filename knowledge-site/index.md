@@ -1,13 +1,13 @@
 # RSI 知识库工程索引
 
-> 2026-11-11｜仓库维护入口。网站可读正文位于现有content目录；未创建嵌套knowledge-site。
+> 2026-11-16｜仓库维护入口。项目报告与历史文档见[文档总索引](../docs/README.md)；网站可读的个人正文位于本机 content 目录，未随 GitHub 发布。
 
 | 入口 | 内容与状态 |
 |---|---|
 | [文档索引与权威图](content/学习方法/rsi-document-index.md) | 当前模块、实践、归档和缺失来源 |
 | [系统总览](content/学习方法/rsi-kernel-agent.md) | 多策略闭环；Profiler → Analyzer |
-| [Phase 2–3路线图](content/学习方法/RSI实践/rsi-phase2-roadmap.md) | 2A核心基础 → 2B知识/Memory → 2C分析 → 2D工作流 → 3最终MLA/Colab；2D+ 已本地验收；Phase 3 真实集成进行中，完整硬件闭环未验收 |
-| [Phase 3进展报告](manifests/phase3-2026-11-12/implementation-report.md) · [P3.5验证记录](../docs/phase3/phase3-p35-final-validation.md) | 2026-11-13 19:07：首轮与ABBA已完成；host漂移，稳定端到端收益未确认。Runtime4已取得，准入待恢复；第二轮真实实验与单tile诊断尚未完成 |
+| [Phase 2–3路线图](content/学习方法/RSI实践/rsi-phase2-roadmap.md) | 本机设计路线资料；已完成阶段的当前结论见最终验收报告 |
+| [P3.5 最终验收](../docs/phase3/phase3-final-acceptance-report.md) · [历史实现记录](manifests/phase3-2026-11-12/implementation-report.md) | 2026-11-16：两轮多方案、ABBA、独立诊断及 Memory 审计完成；声明范围内系统 PASS_WITH_LIMITATIONS，稳定端到端收益 NOT_CONFIRMED |
 | [Phase 2D+实现报告](manifests/phase2d-2026-11-11/implementation-report.md) · [接口指南](../docs/phase2d-workflow-controller.md) | 确定性 Controller、持久回执恢复、原接口两轮 synthetic 软件闭环；已通过本地验收，等待用户审查 |
 | [Phase 2C实现报告](manifests/phase2c-2026-11-11/implementation-report.md) · [接口指南](../docs/phase2c-profiler-analyzer.md) | 保存Profile、四类数学工具、会话模型多Plan与固定评估 |
 | [Phase 2B实现报告](manifests/phase2b-2026-11-11/implementation-report.md) | 原MCP方法/来源、全部策略卡片与独立历史；2B新增40项测试通过 |

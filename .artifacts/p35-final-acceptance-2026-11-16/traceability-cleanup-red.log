@@ -1,0 +1,170 @@
+test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches (test_p35_diagnostic_dispatch.DiagnosticRuntime6FlowTests.test_two_A_feedback_runs_allow_exact_two_independent_diagnostic_dispatches) ... ok
+test_foreign_unfinished_jobs_block_recovery (test_p35_recovery_round.RecoveryRoundTests.test_foreign_unfinished_jobs_block_recovery) ... FAIL
+test_historical_abba_keeps_its_context (test_p35_recovery_round.RecoveryRoundTests.test_historical_abba_keeps_its_context) ... FAIL
+test_recovery_identity_is_separate_for_explicit_generations (test_p35_recovery_round.RecoveryRoundTests.test_recovery_identity_is_separate_for_explicit_generations) ... ok
+test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) ... 
+  test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('context_id',)) ... FAIL
+  test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('contract', 'context', 'environment', 'runtime_session_id')) ... FAIL
+  test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('variant', 'source_ref', 'digest')) ... FAIL
+  test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('strategy_id',)) ... FAIL
+test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives (test_p35_recovery_round.RecoveryRoundTests.test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives) ... ERROR
+test_unarchived_loss_blocks_before_admission_reads (test_p35_recovery_round.RecoveryRoundTests.test_unarchived_loss_blocks_before_admission_reads) ... FAIL
+test_generation7_and_later_keep_the_same_two_A_scope (test_p35_generation_recovery.RepeatedRecoveryTests.test_generation7_and_later_keep_the_same_two_A_scope) ... ok
+test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids (test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids) ... FAIL
+test_runtime8_requires_both_previous_completed_prerequisite_losses (test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime8_requires_both_previous_completed_prerequisite_losses) ... FAIL
+test_A_only_history_keeps_ABBA_and_both_routes_in_whole_original_snapshot (test_p35_runtime6_scope.Runtime6ScopeTests.test_A_only_history_keeps_ABBA_and_both_routes_in_whole_original_snapshot) ... ok
+test_diagnostic_needs_both_exact_A_candidates_with_actual_compile_feedback (test_p35_runtime6_scope.Runtime6ScopeTests.test_diagnostic_needs_both_exact_A_candidates_with_actual_compile_feedback) ... ok
+test_diagnostic_scope_accepts_generation6_but_not_recovery_round_id (test_p35_runtime6_scope.Runtime6ScopeTests.test_diagnostic_scope_accepts_generation6_but_not_recovery_round_id) ... ok
+test_new_snapshot_cannot_omit_runtime5_archive (test_p35_runtime6_scope.Runtime6ScopeTests.test_new_snapshot_cannot_omit_runtime5_archive) ... ERROR
+test_runtime5_loss_must_be_archived_before_reading_admission (test_p35_runtime6_scope.Runtime6ScopeTests.test_runtime5_loss_must_be_archived_before_reading_admission) ... FAIL
+test_runtime6_selects_only_A_and_preserves_older_four_candidate_scope (test_p35_runtime6_scope.Runtime6ScopeTests.test_runtime6_selects_only_A_and_preserves_older_four_candidate_scope) ... ok
+test_two_plan_scope_rejects_extra_B_wrong_parent_or_unbudgeted_variant (test_p35_runtime6_scope.Runtime6ScopeTests.test_two_plan_scope_rejects_extra_B_wrong_parent_or_unbudgeted_variant) ... ok
+
+======================================================================
+ERROR: test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives (test_p35_recovery_round.RecoveryRoundTests.test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 51, in test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives
+    self.assertEqual(result['replacement_archive']['decision_id'], 'runtime4-loss')
+                     ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'replacement_archive'
+
+======================================================================
+ERROR: test_new_snapshot_cannot_omit_runtime5_archive (test_p35_runtime6_scope.Runtime6ScopeTests.test_new_snapshot_cannot_omit_runtime5_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_runtime6_scope.py", line 137, in test_new_snapshot_cannot_omit_runtime5_archive
+    self.assertEqual(result['runtime5_archive']['decision_id'], 'archive5')
+                     ~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'runtime5_archive'
+
+======================================================================
+FAIL: test_foreign_unfinished_jobs_block_recovery (test_p35_recovery_round.RecoveryRoundTests.test_foreign_unfinished_jobs_block_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 116, in test_foreign_unfinished_jobs_block_recovery
+    with self.assertRaisesRegex(ValueError, 'unfinished'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_historical_abba_keeps_its_context (test_p35_recovery_round.RecoveryRoundTests.test_historical_abba_keeps_its_context)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 86, in test_historical_abba_keeps_its_context
+    self.invoke(prepared={'snapshot': {'id': 'fresh', 'record_count': 2}})
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('context_id',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 99, in test_relabelled_context_or_changed_source_is_rejected
+    self.invoke(changed)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('contract', 'context', 'environment', 'runtime_session_id'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 99, in test_relabelled_context_or_changed_source_is_rejected
+    self.invoke(changed)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('variant', 'source_ref', 'digest'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 99, in test_relabelled_context_or_changed_source_is_rejected
+    self.invoke(changed)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_relabelled_context_or_changed_source_is_rejected (test_p35_recovery_round.RecoveryRoundTests.test_relabelled_context_or_changed_source_is_rejected) (path=('strategy_id',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 99, in test_relabelled_context_or_changed_source_is_rejected
+    self.invoke(changed)
+    ~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 81, in invoke
+    archive.assert_called_once()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 958, in assert_called_once
+    raise AssertionError(msg)
+AssertionError: Expected 'require_archived_unsubmitted_runtime_loss' to have been called once. Called 0 times.
+
+======================================================================
+FAIL: test_unarchived_loss_blocks_before_admission_reads (test_p35_recovery_round.RecoveryRoundTests.test_unarchived_loss_blocks_before_admission_reads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_recovery_round.py", line 104, in test_unarchived_loss_blocks_before_admission_reads
+    with self.assertRaisesRegex(ValueError, 'missing archive'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids (test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_generation_recovery.py", line 50, in test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids
+    loss.assert_called_with(store, HERE, 'runtime6')
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\fengluo\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py", line 970, in assert_called_with
+    raise AssertionError(error_message)
+AssertionError: expected call not found.
+Expected: require_completed_prerequisite_loss(namespace(snapshot_page=<function RepeatedRecoveryTests.test_runtime7_requires_runtime6_loss_and_captures_all_archive_ids.<locals>.<lambda> at 0x0000023AFA48F920>), WindowsPath('C:/Users/fengluo/Desktop/rsi-kernel-agent/.artifacts/phase3-2026-11-12'), 'runtime6')
+  Actual: not called.
+
+======================================================================
+FAIL: test_runtime8_requires_both_previous_completed_prerequisite_losses (test_p35_generation_recovery.RepeatedRecoveryTests.test_runtime8_requires_both_previous_completed_prerequisite_losses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_generation_recovery.py", line 75, in test_runtime8_requires_both_previous_completed_prerequisite_losses
+    self.assertEqual([call.args[2] for call in loss.call_args_list], ['runtime6', 'runtime7'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != ['runtime6', 'runtime7']
+
+Second list contains 2 additional elements.
+First extra element 0:
+'runtime6'
+
+- []
++ ['runtime6', 'runtime7']
+
+======================================================================
+FAIL: test_runtime5_loss_must_be_archived_before_reading_admission (test_p35_runtime6_scope.Runtime6ScopeTests.test_runtime5_loss_must_be_archived_before_reading_admission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\fengluo\Desktop\rsi-kernel-agent\.artifacts\phase3-2026-11-12\test_p35_runtime6_scope.py", line 56, in test_runtime5_loss_must_be_archived_before_reading_admission
+    with self.assertRaisesRegex(ValueError, 'Runtime 5 not archived'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 17 tests in 29.294s
+
+FAILED (failures=10, errors=2)

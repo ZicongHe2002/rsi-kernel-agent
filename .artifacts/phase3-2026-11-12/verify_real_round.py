@@ -292,9 +292,15 @@ def verify_job(store, job, *, recompute_npz=True, comparison_cache=None):
     return row
 
 
-def verify_round(directory, number, *, labels=(), recompute_npz=True):
+def verify_round(directory, number, *, labels=(), recompute_npz=True, recovery_generation=None):
     directory = Path(directory)
-    path = directory / ('real-round-' + str(number)) / 'controller-status.json'
+    target = directory / ('real-round-' + str(number))
+    round_id = 'real-runtime2-round:' + str(number)
+    if recovery_generation is not None:
+        from p35_recovery_round import recovery_identity
+        require(number == 2, 'Only round 2 has a recovery identity')
+        target, round_id = recovery_identity(directory, recovery_generation)
+    path = target / 'controller-status.json'
     report = {'schema_version': 1, 'verified_at_utc': datetime.now(timezone.utc).isoformat(),
               'round': number, 'network_calls': 0, 'store_writes': 0, 'jobs': [],
               'recompute_npz_requested': recompute_npz,
@@ -306,6 +312,12 @@ def verify_round(directory, number, *, labels=(), recompute_npz=True):
         report['limitations'].append('NPZ numerical/byte comparisons were explicitly disabled; only archived raw SHA/size and original correctness receipts are verified.')
     if not path.exists():
         return {**report, 'status': 'pending_status_file'}
+    runtime_id = None
+    if recovery_generation is not None:
+        require(read_json(target / 'runtime-binding.json') == {'generation': recovery_generation},
+                'Recovery verifier Runtime binding differs')
+        runtime_id = read_json(directory / ('colab-config-' + recovery_generation + '.json'))['runtime_id']
+        report.update(round_id=round_id, runtime_generation=recovery_generation, runtime_id=runtime_id)
     raw = path.read_bytes()
     state = json.loads(raw)
     report.update(controller_status_sha256=sha256(raw).hexdigest(), revision=state['revision'],
@@ -319,9 +331,12 @@ def verify_round(directory, number, *, labels=(), recompute_npz=True):
             'Controller status differs from persisted journal revision')
     cache = {}
     for job in state['jobs'].values():
-        if job['round_id'] != 'real-runtime2-round:' + str(number) or labels and job['variant']['label'] not in labels:
+        if job['round_id'] != round_id or labels and job['variant']['label'] not in labels:
             continue
         try:
+            if runtime_id is not None:
+                require(job['contract']['context']['environment']['runtime_session_id'] == runtime_id,
+                        'Recovery job belongs to another Runtime')
             row = verify_job(store, job, recompute_npz=recompute_npz, comparison_cache=cache)
         except (ValueError, AssertionError, KeyError, OSError, zipfile.BadZipFile) as error:
             row = {'id': job['id'], 'label': job['variant']['label'], 'run_id': job['run_id'],
@@ -343,9 +358,16 @@ if __name__ == '__main__':
     parser.add_argument('--directory', type=Path, default=Path(__file__).resolve().parent)
     parser.add_argument('--label', action='append', default=[])
     parser.add_argument('--no-npz', action='store_true', help='Only verify raw hashes and original correctness receipts')
+    parser.add_argument('--generation',
+                        help='Verify the separately frozen recovery round instead of the old original round')
     args = parser.parse_args()
-    report = verify_round(args.directory, args.round, labels=args.label, recompute_npz=not args.no_npz)
-    target = args.directory / ('real-round-' + str(args.round)) / 'local-verifications'
+    report = verify_round(args.directory, args.round, labels=args.label, recompute_npz=not args.no_npz,
+                          recovery_generation=args.generation)
+    target = args.directory / ('real-round-' + str(args.round))
+    if args.generation is not None:
+        from p35_recovery_round import recovery_identity
+        target, _ = recovery_identity(args.directory, args.generation)
+    target = target / 'local-verifications'
     target.mkdir(parents=True, exist_ok=True)
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
     output = target / (stamp + '-r' + str(report.get('revision', 0)) + '.json')

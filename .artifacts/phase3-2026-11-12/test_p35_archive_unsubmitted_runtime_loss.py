@@ -200,6 +200,13 @@ class ArchiveTests(unittest.TestCase):
                 elif mutation == 'cancel': state['cancelled'] = True
                 elif mutation == 'limits': state['limits']['executions'] = 17
                 else: state['jobs']['prior:0']['result'] = {'changed': True}
+                if mutation == 'limits':
+                    # The original Journal now rejects an ungranted limit edit
+                    # before it can become input to this archival guard.
+                    count = len(store.history('task'))
+                    with self.assertRaises(ValueError): journal.save(state, 'CPU ungranted limit rejection')
+                    self.assertEqual(len(store.history('task')), count)
+                    continue
                 updated = journal.save(state, 'CPU guard rejection')
                 data[2]['initial_revision'] = updated['revision']
                 count = len(store.history('task'))

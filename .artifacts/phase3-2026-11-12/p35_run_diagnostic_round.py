@@ -33,6 +33,7 @@ from real_round_aux import (LIMITS, completed_session, load_prepared, read_json,
                             runtime_config_path, write_once)
 from p35_prepare_diagnostic_round import (COST, PLAN_ROLES, build_packet,
     prerequisites, require_prepared_history, runtime_binding, scope_path, target_for, validate_selection)
+from p35_recovery_round import two_candidate_recovery
 
 
 @contextmanager
@@ -94,7 +95,11 @@ async def run(selection_path, *, steps=1, interval=15, directory=None):
     require(read_json(target / 'runtime-binding.json') == runtime_binding(selection),
             'Diagnostic Runtime binding differs')
     store = ExperimentStore(directory / 'experiments.sqlite3', directory / 'artifacts')
-    with driver_lock(store, selection['task_id']):
+    raw_store = store
+    if two_candidate_recovery(selection.get('runtime_generation')):
+        from p35_verification_view import VerificationView
+        store = VerificationView(raw_store)
+    with driver_lock(raw_store, selection['task_id']):
         state, origins = prerequisites(store, directory, selection)
         packet, expected_variants = build_packet(store, selection, origins, persist_config=False)
         require(read_json(target / 'diagnostic-packet.json') == packet, 'Frozen diagnostic packet differs')
@@ -156,8 +161,14 @@ async def run(selection_path, *, steps=1, interval=15, directory=None):
                     'Task changed after diagnostic budget checkpoint')
             preview_pair(state, jobs)
         write_once(target / 'intake.json', intake)
-        controller = Controller(store, selection['task_id'],
-            ColabBackend(store, colab_remote(runtime_config_path(directory, runtime_binding(selection)))), limits=LIMITS)
+        if two_candidate_recovery(selection.get('runtime_generation')):
+            require(read_json(target / 'runtime-binding.json') == runtime_binding(selection),
+                    'Diagnostic Runtime binding changed before dispatch')
+            current_state, current_origins = prerequisites(raw_store, directory, selection)
+            require(current_state == state and current_origins == origins,
+                    'Diagnostic state or admission changed before dispatch')
+        controller = Controller(raw_store, selection['task_id'],
+            ColabBackend(raw_store, colab_remote(runtime_config_path(directory, runtime_binding(selection)))), limits=LIMITS)
         controller.accept_intake(intake)
         for index in range(steps):
             state = controller.status()

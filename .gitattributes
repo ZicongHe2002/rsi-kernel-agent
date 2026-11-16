@@ -1,0 +1,3 @@
+# Preserve the byte identities recorded by the acceptance audit.
+/.artifacts/** -text
+/knowledge-site/manifests/** -text

@@ -1,0 +1,43 @@
+{
+  "kind": "root",
+  "started_utc": "2026-11-16T02:12:33.117772+00:00",
+  "finished_utc": "2026-11-16T02:21:34.930374+00:00",
+  "command": [
+    "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent",
+  "python": "3.13.14 (main, Jun 23 2026, 15:19:27) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\fengluo\\Desktop\\rsi-kernel-agent\\knowledge-site\\.venv-mcp\\Scripts\\python.exe",
+  "exit_code": 0,
+  "total": 343,
+  "skipped": 3,
+  "failures": 0,
+  "errors": 0,
+  "expected failures": 0,
+  "unexpected successes": 0,
+  "passed": 340,
+  "unittest_seconds": 540.69,
+  "wall_seconds": 541.6359644000186,
+  "summary": "OK (skipped=3)",
+  "source_files_checked": 243,
+  "source_changed": [],
+  "logs": {
+    "stdout": {
+      "path": "root-tests.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "path": "root-tests.stderr.txt",
+      "sha256": "30ed9e20db7a303f406bc9d3f19ebaadb5ddbf1129c111f36afa3ee7265e0e9c"
+    }
+  }
+}

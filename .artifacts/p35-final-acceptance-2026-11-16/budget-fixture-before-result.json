@@ -1,0 +1,5 @@
+﻿{
+    "exit_code":  1,
+    "command":  "python -B -X utf8 -m unittest -v test_p35_round2_gate.ConfirmationGateTests.test_absent_policy_cannot_bypass_round2_confirmation",
+    "phase":  "before_fix"
+}

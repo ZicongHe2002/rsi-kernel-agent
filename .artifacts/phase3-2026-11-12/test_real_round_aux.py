@@ -138,6 +138,69 @@ class RoundRecoveryTests(unittest.IsolatedAsyncioTestCase):
             self.api.write_once(path, {'variants': {'plan': ['changed']}})
         self.assertEqual(path.read_bytes(), before)
 
+    async def test_runtime6_prepare_caches_snapshot_reads_but_controller_gets_original_store(self):
+        await self.prepare_cache_fixture('runtime6')
+
+    async def test_runtime7_prepare_caches_snapshot_reads_but_controller_gets_original_store(self):
+        await self.prepare_cache_fixture('runtime7')
+
+    async def prepare_cache_fixture(self, generation):
+        script = importlib.import_module('prepare_real_round')
+        recovery = importlib.import_module('p35_recovery_round')
+        from p35_verification_view import VerificationView
+        from rsi_kernel_agent.store import ExperimentStore
+        prepared = await prepare_round(self.store, self.data['knowledge'], 'task', 'context', ['A'],
+            'real-' + generation + '-recovery-round:2', self.data['request']['knowledge'])
+        gates = {'baseline-repair': {'task_id': 'task', 'context_id': 'context', 'strategy_id': 'A'},
+                 'baseline-b': {'task_id': 'task', 'context_id': 'context', 'strategy_id': 'B'}}
+        with patch.object(script, 'require_gates', return_value=(gates, {})) as gate, \
+             patch.object(script, 'runtime_binding', return_value={'generation': generation}), \
+             patch.object(recovery, 'require_recovery_context'), patch.object(script, 'completed_round'), \
+             patch.object(script, 'Controller', wraps=Controller) as constructor, \
+             patch.object(script, 'StdioKnowledge', side_effect=AssertionError('must restore frozen knowledge')):
+            result = await script.prepare(2, self.tmp.name, recovery_generation=generation)
+        self.assertIsInstance(gate.call_args.args[0], VerificationView)
+        self.assertIs(type(constructor.call_args.args[0]), ExperimentStore)
+        self.assertEqual(result['manifest']['digest'], prepared['manifest'].artifact_ref.digest)
+
+    async def test_runtime6_dispatch_rechecks_uncached_gates_before_original_controller(self):
+        await self.dispatch_cache_fixture('runtime6')
+
+    async def test_runtime7_dispatch_rechecks_uncached_gates_before_original_controller(self):
+        await self.dispatch_cache_fixture('runtime7')
+
+    async def dispatch_cache_fixture(self, generation):
+        script = importlib.import_module('run_real_round')
+        recovery = importlib.import_module('p35_recovery_round')
+        from p35_verification_view import VerificationView
+        from rsi_kernel_agent.store import ExperimentStore
+        target = Path(self.tmp.name) / ('real-round-2-' + generation)
+        shutil.copytree(Path(self.tmp.name) / 'recorded-session', target)
+        variants = Path(self.tmp.name) / 'variants.json'
+        variants.write_text(json.dumps(self.data['variants']), encoding='utf-8')
+        gates = {'baseline-repair': {'task_id': 'task', 'context_id': 'context', 'strategy_id': 'A'},
+                 'baseline-b': {'task_id': 'task', 'context_id': 'context', 'strategy_id': 'B'}}
+        Controller(self.store, 'task', None, limits=self.api.LIMITS)
+        class KnowledgeContext:
+            async def __aenter__(inner):
+                return self.data['knowledge']
+            async def __aexit__(inner, *args):
+                return False
+        with patch.object(script, 'require_gates', return_value=(gates, {})) as gate, \
+             patch.object(script, 'runtime_binding', return_value={'generation': generation}) as binding, \
+             patch.object(recovery, 'require_recovery_context'), patch.object(recovery, 'require_recovery_proposal'), \
+             patch.object(script, 'load_prepared', return_value={'manifest': self.data['manifest']}), \
+             patch.object(script, 'StdioKnowledge', return_value=KnowledgeContext()), \
+             patch.object(script, 'colab_remote', return_value=None), \
+             patch.object(script, 'Controller', side_effect=RuntimeError('CPU fixture stops before dispatch')) as constructor:
+            with self.assertRaisesRegex(RuntimeError, 'CPU fixture stops'):
+                await script.run(2, variants, directory=self.tmp.name, recovery_generation=generation)
+        self.assertEqual(gate.call_count, 2)
+        self.assertIsInstance(gate.call_args_list[0].args[0], VerificationView)
+        self.assertIs(type(gate.call_args_list[-1].args[0]), ExperimentStore)
+        self.assertIs(type(constructor.call_args.args[0]), ExperimentStore)
+        self.assertGreaterEqual(binding.call_count, 2)
+
     async def test_previous_round_requires_exact_intake_and_completed_jobs(self):
         controller = Controller(self.store, 'task', SyntheticBackend(self.store, Path(self.tmp.name) / 'workspaces'))
         controller.accept_intake(self.data['intake'])

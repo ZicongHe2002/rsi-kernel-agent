@@ -1,0 +1,31 @@
+{
+  "status": "fixed_targeted_verification_passed",
+  "python_version": "3.13.14",
+  "changed_files": [".artifacts/phase3-2026-11-12/test_p35_round2_gate.py"],
+  "root_cause": "ConfirmationGateTests.prepare_confirmation_fixture saved an initial Journal state with limits and four reserved completed jobs but omitted the mandatory spent object. PublicationTests reused this malformed fixture. The existing budget guard correctly rejected it before the gate/publication assertions.",
+  "fix": "Compute spending from each reserved fixture job's declared executions/tokens/time_s cost and include the result in the initial state. Existing test expectations and production budget guards are unchanged.",
+  "before": {
+    "command": "python -B -X utf8 -m unittest -v test_p35_round2_gate.ConfirmationGateTests.test_absent_policy_cannot_bypass_round2_confirmation",
+    "tests": 1,
+    "passed": 0,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 1,
+    "duration_seconds": 2.444,
+    "exit_code": 1,
+    "log": "budget-fixture-before.log"
+  },
+  "after": {
+    "command": "python -B -X utf8 -m unittest -v test_p35_round2_gate test_p35_publish_confirmation",
+    "tests": 29,
+    "passed": 29,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "duration_seconds": 110.751,
+    "exit_code": 0,
+    "log": "budget-fixture-after.log"
+  },
+  "scope": "Only temporary fixture Stores; no production experiment metadata or hardware operation was changed or run.",
+  "remaining_validation": "Parent agent runs full current root and auxiliary suites after all independent fixes are ready."
+}

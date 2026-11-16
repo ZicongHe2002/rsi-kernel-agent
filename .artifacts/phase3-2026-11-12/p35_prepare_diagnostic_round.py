@@ -25,7 +25,7 @@ from real_round_aux import (LIMITS, completed_round, load_prepared, read_json,
     require_gates, validate_session, verified_gate_result, write_once)
 from p35_round2_gate import require_confirmation
 from p35_single_tile_diagnostic import prepare_diagnostic
-from verify_real_round import ReadOnlyStore
+from verify_real_round import ReadOnlyStore, verify_job
 import p35_recovery_round as recovery
 
 PLAN_ROLES = {'baseline': 'diagnostic-baseline', 'single_tile': 'diagnostic-single-tile'}
@@ -43,10 +43,11 @@ def validate_selection(selection):
     require(all(type(selection[key]) is str and bool(selection[key].strip())
                     for key in ('task_id', 'context_id', 'strategy_id', 'round_id')),
             'Invalid diagnostic selection identity')
-    require(version == 1 or selection['runtime_generation'] == 'runtime4',
-            'Diagnostic v2 supports only the explicitly admitted Runtime 4')
+    if version == 2:
+        recovery.recovery_identity(Path('.'), selection['runtime_generation'])
     require(bool(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._:-]{0,127}', selection['round_id']))
-            and selection['round_id'] not in (*PREVIOUS_ROUNDS, recovery.ROUND_ID),
+            and selection['round_id'] not in PREVIOUS_ROUNDS
+            and not re.fullmatch(r'real-runtime[0-9]+-recovery-round:2', selection['round_id']),
             'Invalid independent diagnostic round')
     require(type(selection['knowledge']) is list, 'Diagnostic knowledge must be a list')
     return selection
@@ -57,18 +58,40 @@ def runtime_binding(selection):
 
 
 def prior_rounds(selection):
-    return PREVIOUS_ROUNDS if selection['schema_version'] == 1 else (PREVIOUS_ROUNDS[0], recovery.ROUND_ID)
+    return PREVIOUS_ROUNDS if selection['schema_version'] == 1 else (
+        PREVIOUS_ROUNDS[0], recovery.recovery_identity(Path('.'), selection['runtime_generation'])[1])
 
 
 def scope_path(directory, selection):
     name = ('p35-diagnostic-selection.json' if selection['schema_version'] == 1
-            else 'p35-diagnostic-selection-runtime4.json')
+            else 'p35-diagnostic-selection-' + selection['runtime_generation'] + '.json')
     return Path(directory) / name
 
 
 def target_for(directory, selection):
     return Path(directory) / ('single-tile-diagnostic-' +
                               sha256(canonical_json(selection).encode()).hexdigest()[:16])
+
+
+def require_recovery_feedback(store, jobs, context_id, *, generation='runtime5', strategy_id=None):
+    """Require real compile feedback; terminal administrative records are insufficient."""
+    feedback = []
+    if recovery.two_candidate_recovery(generation):
+        require(strategy_id is not None and len(jobs) == 2
+                and {job['variant']['label'] for job in jobs} == set(recovery.RUNTIME6_PLANS.values())
+                and all(job['strategy_id'] == strategy_id for job in jobs),
+                'Diagnostic requires exactly the two A recovery candidates')
+    for job in jobs:
+        require(job['context_id'] == context_id, 'Recovery feedback belongs to another Context')
+        require(job['contract']['context']['provenance'] == 'real', 'Recovery feedback must have real provenance')
+        verified = verify_job(store, job, recompute_npz=False)
+        if verified['verification'] == 'verified' and verified['receipt_statuses'].get('compile') in ('succeeded', 'failed'):
+            feedback.append({'run_id': job['run_id'], 'result_marker_id': verified['result_marker_id'],
+                'compile_marker_id': stable_id('execution-receipt', stable_id('operation', job['run_id'], 'compile'))})
+    require(bool(feedback), 'Recovery round has no verified real compile feedback')
+    if recovery.two_candidate_recovery(generation):
+        require(len(feedback) == 2, 'Both A recovery candidates need verified real compile feedback')
+    return feedback
 
 
 def prerequisites(store, directory, selection):
@@ -82,9 +105,13 @@ def prerequisites(store, directory, selection):
         require_confirmation(store, directory, selection['task_id'], selection['context_id'],
                              [baseline['strategy_id'], other['strategy_id']])
     else:
-        recovery.require_recovery_context(store, directory, gates, allowed_round_id=selection['round_id'])
+        recovery.require_recovery_context(store, directory, gates, allowed_round_id=selection['round_id'],
+                                           generation=selection['runtime_generation'])
     prior = {round_id: completed_round(store, selection['task_id'], round_id)
              for round_id in prior_rounds(selection)}
+    if selection.get('runtime_generation') == 'runtime5' or recovery.two_candidate_recovery(selection.get('runtime_generation')):
+        require_recovery_feedback(store, prior[prior_rounds(selection)[1]], selection['context_id'],
+                                  generation=selection['runtime_generation'], strategy_id=selection['strategy_id'])
     state = WorkflowJournal(store, selection['task_id']).load()
     require(state is not None and state['limits'] == validate_limits(LIMITS) and not state['cancelled'],
             'Original diagnostic budget is missing, changed, or cancelled')
@@ -131,7 +158,8 @@ def require_prepared_history(store, directory, selection, prepared):
         # ABBA at its own Context, then check its notes and Runs in the complete
         # diagnostic snapshot without relabelling it as Runtime4 evidence.
         loaded = recovery.require_recovery_context(store, directory, gates,
-                                                   allowed_round_id=selection['round_id'])
+                                                   allowed_round_id=selection['round_id'],
+                                                   generation=selection['runtime_generation'])
         snapshot = prepared['snapshot']
         page = store.snapshot_page(snapshot['id'], limit=snapshot['record_count'])
         require(page['snapshot'] == snapshot, 'Diagnostic snapshot metadata differs')
@@ -143,6 +171,23 @@ def require_prepared_history(store, directory, selection, prepared):
                 and all(row['run_id'] in frozen for row in confirmation['report']['rows'])
                 and confirmation['association_notes'][selection['strategy_id']].id in records,
                 'Runtime4 diagnostic snapshot omits archived loss or historical ABBA evidence')
+        replacement = loaded.get('replacement_archive')
+        if replacement is not None:
+            require(replacement['decision_id'] in frozen and replacement['intent_id'] in frozen,
+                    'Diagnostic snapshot omits the Runtime 4 unknown prerequisite loss archive')
+        runtime5_loss = loaded.get('runtime5_archive')
+        if runtime5_loss is not None:
+            require(runtime5_loss['decision_id'] in frozen and runtime5_loss['intent_id'] in frozen,
+                    'Diagnostic snapshot omits the Runtime 5 unsubmitted recovery loss archive')
+        require(all(row['archive']['decision_id'] in frozen and row['archive']['intent_id'] in frozen
+                    for row in loaded.get('completed_prerequisite_losses', [])),
+                'Diagnostic snapshot omits a completed prerequisite loss archive')
+        if selection['runtime_generation'] == 'runtime5' or recovery.two_candidate_recovery(selection['runtime_generation']):
+            feedback = require_recovery_feedback(store, completed_round(store, selection['task_id'],
+                prior_rounds(selection)[1]), selection['context_id'], generation=selection['runtime_generation'],
+                strategy_id=selection['strategy_id'])
+            require(all(record_id in frozen for row in feedback for record_id in row.values()),
+                    'Diagnostic snapshot omits verified real compile feedback')
 
 
 def build_packet(store, selection, origins, *, persist_config=True):
@@ -178,6 +223,9 @@ async def prepare(selection_path, *, directory=None):
     if selection_scope.exists():
         require(read_json(selection_scope) == selection, 'Diagnostic scope is already frozen to another selection')
     store = ReadOnlyStore(directory / 'experiments.sqlite3', directory / 'artifacts')
+    if recovery.two_candidate_recovery(selection.get('runtime_generation')):
+        from p35_verification_view import VerificationView
+        store = VerificationView(store)
     _, origins = prerequisites(store, directory, selection)
     packet, variants = build_packet(store, selection, origins, persist_config=False)
     context_id = packet['context']['id']
@@ -193,6 +241,8 @@ async def prepare(selection_path, *, directory=None):
     for name, value in frozen.items():
         write_once(target / name, value)
     store = ExperimentStore(directory / 'experiments.sqlite3', directory / 'artifacts')
+    if recovery.two_candidate_recovery(selection.get('runtime_generation')):
+        store = VerificationView(store)
     saved_packet, saved_variants = build_packet(store, selection, origins)
     require(saved_packet == packet and saved_variants == variants, 'Diagnostic config packaging changed')
     for record in (Workload(**packet['workload']), EvaluationContext(**packet['context'])):

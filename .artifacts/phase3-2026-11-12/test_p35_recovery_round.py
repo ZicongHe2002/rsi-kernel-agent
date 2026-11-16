@@ -18,13 +18,44 @@ class RecoveryRoundTests(unittest.TestCase):
         except ImportError:
             self.fail('Explicit recovery round gate is not implemented')
 
-    def test_recovery_identity_is_separate_and_only_runtime4_is_supported(self):
+    def test_recovery_identity_is_separate_for_explicit_generations(self):
         target, round_id = self.api.recovery_identity(HERE, 'runtime4')
         self.assertEqual(target, HERE / 'real-round-2-runtime4')
         self.assertEqual(round_id, 'real-runtime4-recovery-round:2')
-        for value in ('runtime3', 'runtime5', '../runtime4', None):
+        target5, round5 = self.api.recovery_identity(HERE, 'runtime5')
+        self.assertEqual(target5, HERE / 'real-round-2-runtime5')
+        self.assertEqual(round5, 'real-runtime5-recovery-round:2')
+        for value in ('runtime3', 'runtime07', '../runtime4', None):
             with self.assertRaises(ValueError):
                 self.api.recovery_identity(HERE, value)
+
+    def test_runtime5_requires_unknown_loss_and_snapshot_preserves_both_archives(self):
+        old, new = self.gates('context3', 'device3'), self.gates('context5', 'device5')
+        frozen = ['archive', 'intent', 'runtime4-loss', 'runtime4-loss-intent']
+        store = SimpleNamespace(snapshot_page=lambda *a, **k: {
+            'records': [SimpleNamespace(id=value) for value in frozen]})
+        with patch.object(self.api, 'require_archived_unsubmitted_runtime_loss', return_value={
+                'decision_id': 'archive', 'intent_id': 'intent'}), \
+             patch.object(self.api, 'require_runtime4_loss', create=True, return_value={
+                'decision_id': 'runtime4-loss', 'intent_id': 'runtime4-loss-intent'}) as loss, \
+             patch.object(self.api, 'require_gates', return_value=(old, {})), \
+             patch.object(self.api, 'require_confirmation', return_value={}), \
+             patch.object(self.api, 'WorkflowJournal') as journal:
+            journal.return_value.load.return_value = {'cancelled': False, 'jobs': {
+                'own': {'round_id': 'real-runtime5-recovery-round:2', 'state': 'queued'}}}
+            try:
+                result = self.api.require_recovery_context(store, HERE, new,
+                    generation='runtime5', prepared={'snapshot': {'id': 'fresh', 'record_count': 4}})
+            except TypeError as error:
+                self.fail('Runtime5 recovery gate is missing: ' + str(error))
+            self.assertEqual(result['replacement_archive']['decision_id'], 'runtime4-loss')
+            frozen.pop()
+            with self.assertRaisesRegex(ValueError, 'Runtime 4'):
+                self.api.require_recovery_context(store, HERE, new, generation='runtime5',
+                    prepared={'snapshot': {'id': 'fresh', 'record_count': 3}})
+            loss.side_effect = ValueError('Runtime 4 loss not archived')
+            with self.assertRaisesRegex(ValueError, 'not archived'):
+                self.api.require_recovery_context(store, HERE, new, generation='runtime5')
 
     def gates(self, context, runtime):
         return {name: {'task_id': 'task', 'context_id': context, 'strategy_id': strategy,

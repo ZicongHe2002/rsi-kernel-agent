@@ -31,6 +31,7 @@ from rsi_kernel_agent.workflow.journal import WorkflowJournal
 from real_round_aux import (LIMITS, completed_session, load_prepared, read_json, require_gates,
                             require_new_history, write_once, runtime_binding, runtime_config_path)
 from p35_round2_gate import require_confirmation
+from p35_recovery_round import two_candidate_recovery
 
 
 async def run(number, variants_path, *, steps=1, interval=15, directory=None, recovery_generation=None):
@@ -40,9 +41,14 @@ async def run(number, variants_path, *, steps=1, interval=15, directory=None, re
     directory = Path(directory) if directory is not None else Path(__file__).resolve().parent
     require((directory / 'experiments.sqlite3').is_file(), 'Existing Phase 3 Store is required')
     store = ExperimentStore(directory / 'experiments.sqlite3', directory / 'artifacts')
+    raw_store = store
+    if two_candidate_recovery(recovery_generation):
+        from p35_verification_view import VerificationView
+        store = VerificationView(raw_store)
     target = directory / ('real-round-' + str(number))
     if recovery_generation is not None:
-        from p35_recovery_round import recovery_identity, require_recovery_context
+        from p35_recovery_round import (recovery_identity, recovery_strategies,
+                                       require_recovery_context, require_recovery_proposal)
         require(number == 2, 'Only round 2 has a Runtime recovery path')
         target, recovery_round_id = recovery_identity(directory, recovery_generation)
     binding = runtime_binding(directory, target)
@@ -52,6 +58,8 @@ async def run(number, variants_path, *, steps=1, interval=15, directory=None, re
     base, other = gates['baseline-repair'], gates['baseline-b']
     task_id, context_id = base['task_id'], base['context_id']
     strategies = [base['strategy_id'], other['strategy_id']]
+    if recovery_generation is not None:
+        strategies = recovery_strategies(gates, recovery_generation)
     round_id = 'real-runtime2-round:' + str(number)
     if recovery_generation is not None:
         round_id = recovery_round_id
@@ -59,20 +67,23 @@ async def run(number, variants_path, *, steps=1, interval=15, directory=None, re
         if recovery_generation is None:
             require_confirmation(store, directory, task_id, context_id, strategies)
         else:
-            require_recovery_context(store, directory, gates)
+            require_recovery_context(store, directory, gates, generation=recovery_generation)
     prepared = load_prepared(store, task_id, context_id, strategies, round_id)
     require(prepared is not None, 'Prepare this exact round before publication')
     if number == 2:
-        require_new_history(store, task_id, prepared, 'real-runtime2-round:1')
+        if not two_candidate_recovery(recovery_generation):
+            require_new_history(store, task_id, prepared, 'real-runtime2-round:1')
         if recovery_generation is None:
             require_confirmation(store, directory, task_id, context_id, strategies, prepared=prepared)
         else:
-            require_recovery_context(store, directory, gates, prepared=prepared)
+            require_recovery_context(store, directory, gates, prepared=prepared, generation=recovery_generation)
     manifest = prepared['manifest']
     result = completed_session(store, target, manifest)
     variants = read_json(variants_path)
     require(type(variants) is dict and set(variants) == {p['id'] for p in result['plan_set']['plans']},
             'Variants must exactly cover the completed Analyzer PlanSet')
+    if recovery_generation is not None:
+        require_recovery_proposal(recovery_generation, gates, prepared, result, variants)
     # A changed file on restart cannot silently admit a new experiment.
     publication_key = round_id + ':' + manifest.artifact_ref.digest
     inputs = {'round_id': round_id, 'manifest': asdict(manifest.artifact_ref),
@@ -87,8 +98,12 @@ async def run(number, variants_path, *, steps=1, interval=15, directory=None, re
     async with StdioKnowledge(ROOT / 'knowledge-site') as knowledge:
         intake = await intake_publication(store, marker.id, round_id, variants, knowledge)
     write_once(target / 'intake.json', intake)
+    if two_candidate_recovery(recovery_generation):
+        require(runtime_binding(directory, target) == binding, 'Recovery Runtime binding changed before dispatch')
+        current_gates, _ = require_gates(raw_store, directory, binding)
+        require(current_gates == gates, 'Recovery admission changed before dispatch')
     remote = colab_remote(runtime_config_path(directory, binding))
-    controller = Controller(store, task_id, ColabBackend(store, remote), limits=LIMITS)
+    controller = Controller(raw_store, task_id, ColabBackend(raw_store, remote), limits=LIMITS)
     controller.accept_intake(intake)
     for index in range(steps):
         # Existing Controller owns intents, reservations, submit/lookup/poll and

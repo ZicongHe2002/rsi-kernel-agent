@@ -51,7 +51,7 @@ def verify_diagnostic(selection_path, *, directory=None, recompute_npz=True):
                 'Diagnostic Runtime binding differs from selection v2')
         require(packet['original_context_id'] == selection['context_id']
                 and packet['context']['environment']['runtime_session_id'] ==
-                    read_json(directory / 'colab-config-runtime4.json')['runtime_id'],
+                    read_json(directory / ('colab-config-' + selection['runtime_generation'] + '.json'))['runtime_id'],
                 'Diagnostic v2 Context or Runtime differs from admitted Runtime 4')
     raw = path.read_bytes()
     state = json.loads(raw)

@@ -102,7 +102,10 @@ class ConfirmationGateTests(RealProtocolFixture, unittest.TestCase):
                 'profile_run_id': rid, 'profile_capture_operation_id': outputs['profile']['capture_operation_id'],
                 'benchmark_started_ns': 10 + 100 * index, 'benchmark_finished_ns': 20 + 100 * index,
                 'profile_started_ns': 20 + 100 * index, 'profile_finished_ns': 30 + 100 * index})
-        state = {'task_id': 'task', 'revision': 0, 'limits': LIMITS, 'jobs': {j['id']: j for j in self.jobs}}
+        spent = {key: sum(job['variant']['cost'][key] for job in self.jobs if job['reserved'])
+                 for key in ('executions', 'tokens', 'time_s')}
+        state = {'task_id': 'task', 'revision': 0, 'limits': LIMITS, 'spent': spent,
+                 'jobs': {j['id']: j for j in self.jobs}}
         WorkflowJournal(self.store, 'task').save(state, 'Local confirmed fixture jobs')
 
     def publish(self, *, rows=None, summary=None):

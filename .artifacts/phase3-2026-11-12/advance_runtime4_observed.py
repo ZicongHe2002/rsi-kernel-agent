@@ -1,5 +1,6 @@
 """Same original driver with sanitized per-call transport diagnostics only."""
 from datetime import datetime, timezone
+import argparse
 import json
 from pathlib import Path
 import subprocess
@@ -7,6 +8,7 @@ import time
 from advance_runtime4 import advance, runtime4_guard
 
 directory = Path(__file__).resolve().parent
+generation = 'runtime4'
 original_run = subprocess.run
 
 
@@ -33,14 +35,19 @@ def observed_run(*args, **kwargs):
         raise
     finally:
         event.update(elapsed_s=time.monotonic() - started, finished_at_utc=datetime.now(timezone.utc).isoformat())
-        with (directory / 'runtime4-transport-diagnostics.jsonl').open('a', encoding='utf-8') as out:
+        with (directory / (generation + '-transport-diagnostics.jsonl')).open('a', encoding='utf-8') as out:
             out.write(json.dumps(event) + '\n')
         print(json.dumps({'transport_diagnostic': event}), flush=True)
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--directory', type=Path, default=directory)
+    parser.add_argument('--generation', default='runtime4')
+    args = parser.parse_args()
+    directory, generation = args.directory, args.generation
     subprocess.run = observed_run
     try:
-        advance(directory, 'runtime4', guard=runtime4_guard)
+        advance(directory, generation, guard=runtime4_guard)
     finally:
         subprocess.run = original_run
