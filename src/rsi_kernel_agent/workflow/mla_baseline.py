@@ -126,7 +126,7 @@ def create_baseline(store, environment, *, source_root=SOURCE_ROOT, task_id='mla
     benchmark = {'version': 'mla-contiguous-host-sync-v1', 'timer': 'original-benchmarks.profiler.measure',
                  'warmup': 5, 'measurements': 20, 'statistic': 'median', 'unit': 'ms',
                  'scope': 'public-contiguous-prepare-attention-full-cache-output-host-synchronized', 'outlier_rule': 'none'}
-    protocol = {'backend_id': 'colab.v1', 'runner_digest': runner_digest,
+    protocol = {'backend_id': 'colab.v1', 'execution_mode': 'candidate.v1', 'runner_digest': runner_digest,
                 'oracle_digest': sources['oracle_digest'], 'oracle_bundle_ref': sources['oracle_bundle_ref'],
                 'trusted_files': sources['trusted_files'], 'correctness': {'atol': .01, 'rtol': .01},
                 'benchmark': benchmark, 'benchmark_case_id': benchmark_case_id,

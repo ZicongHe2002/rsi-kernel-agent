@@ -150,8 +150,14 @@ def validate_identity(store, request, output):
     require(canonical_json(output['environment']) == canonical_json(job['contract']['context']['environment']),
             'Runtime environment drift or mismatch')
     identity = output['identity']
-    fields(identity, 'runtime_session_id workspace module_path entry loaded_files source_bundle_digest config_digest fresh_process specialization_digest',
-           'loaded identity')
+    names = 'runtime_session_id workspace module_path entry loaded_files source_bundle_digest config_digest fresh_process specialization_digest'
+    if job['contract']['context']['protocol'].get('execution_mode') == 'candidate.v1':
+        names += ' process_scope process_run_id process_id'
+    fields(identity, names, 'loaded identity')
+    if job['contract']['context']['protocol'].get('execution_mode') == 'candidate.v1':
+        require(identity['process_scope'] == 'candidate_run' and identity['process_run_id'] == job['run_id']
+                and type(identity['process_id']) is int and identity['process_id'] > 0,
+                'Candidate process does not belong to this Run')
     variant = job['variant']
     bundle = validate_bundle_identity(store, variant, job['contract']['context']['protocol'])
     require(identity['runtime_session_id'] == output['environment']['runtime_session_id'], 'Loaded runtime session mismatch')

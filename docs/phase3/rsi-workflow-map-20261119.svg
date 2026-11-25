@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="1980" viewBox="0 0 1560 1980" role="img" aria-labelledby="title desc">
+<title id="title">RSI 完整流程：当前实现、现在位置与建议简化</title>
+<desc id="desc">2026年11月19日14:17北京时间只读快照。左侧是离线研究和封存，右侧是单个TPU Runtime的四项准入。两边都完成后，当前实现仍要求正式输入完整重读及新响应，然后才能统一执行候选并回写反馈。建议只保留必要的硬件检查和变更复核，避免反复全量阅读及重放；建议尚未实现。</desc>
+<defs>
+  <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#52514e"/></marker>
+  <marker id="orange-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#eb6834"/></marker>
+  <style>
+    text{font-family:"Microsoft YaHei","Segoe UI",sans-serif;fill:#0b0b0b} .title{font-size:32px;font-weight:700}.h{font-size:21px;font-weight:700}.b{font-size:17px}.s{font-size:15px;fill:#52514e}.small{font-size:13px;fill:#52514e}.num{font-size:16px;font-weight:700}.note{font-size:17px;font-weight:600}.box{fill:#fcfcfb;stroke:#c3c2b7;stroke-width:1.5;rx:12}.blue{stroke:#2a78d6;stroke-width:2}.orange{stroke:#eb6834;stroke-width:2}.future{stroke-dasharray:7 5}.flow{fill:none;stroke:#52514e;stroke-width:2;marker-end:url(#arrow)}.recovery{fill:none;stroke:#eb6834;stroke-width:2;stroke-dasharray:6 5;marker-end:url(#orange-arrow)}.rule{stroke:#e1e0d9;stroke-width:1}.label{font-size:14px;font-weight:700}.pill{fill:#f0efec;rx:10} a:hover rect{stroke-width:3} .node:focus{outline:none}.node:focus rect{stroke-width:3}
+  </style>
+</defs>
+<rect width="1560" height="1980" fill="#fcfcfb"/>
+<text x="56" y="60" class="title">RSI 完整流程：为什么“已经准备好了”却还没跑到优化？</text>
+<text x="56" y="92" class="b">核心区别：模型分析上下文彼此独立；硬件执行使用同一个 TPU Runtime 串行排队。</text>
+<text x="56" y="120" class="s">状态快照：2026-11-19 14:17 Asia/Shanghai · 仅本地代码、进程与保存回执核对 · 不是远端实时监控</text>
+<line x1="56" y1="144" x2="1504" y2="144" class="rule"/>
+<rect x="56" y="165" width="14" height="14" fill="#2a78d6"/><text x="80" y="178" class="s">当前实现的主流程</text>
+<rect x="300" y="165" width="14" height="14" fill="#eb6834"/><text x="324" y="178" class="s">重复成本 / 需要注意的衔接</text>
+<path d="M680 173H730" stroke="#52514e" stroke-width="2" stroke-dasharray="6 5"/><text x="744" y="178" class="s">虚线：尚未完成或异常恢复分支（以文字标签区分）</text>
+<g class="node" tabindex="0"><title>固定Task语义、workload、Oracle、容差、完整cache、计时方式；Knowledge可以持续检索，已冻结输入不悄悄更换版本。</title>
+<rect x="56" y="202" width="1448" height="84" class="box blue"/>
+<text x="78" y="234" class="h">0  共同输入与不变约束</text>
+<text x="78" y="263" class="b">Task / Workload / Oracle / 预算授权  ＋  Knowledge 方法与来源  ＋  Memory 历史和精确父版本</text>
+</g>
+<path d="M425 286V324" class="flow"/><path d="M1125 286V324" class="flow"/>
+<text x="56" y="316" class="label">离线准备轨道：本机 CPU + 模型，不需要活动 TPU</text>
+<text x="814" y="316" class="label">设备准入轨道：一次分配，一个共享 Runtime</text>
+<rect x="56" y="328" width="690" height="466" fill="#f9f9f7" rx="16"/>
+<rect x="814" y="328" width="690" height="466" fill="#f9f9f7" rx="16"/>
+<g class="node" tabindex="0"><title>preparation-begin 冻结全路线assessment及同一个Memory快照。使用历史Context作为参考，不宣称设备仍在线。</title><rect x="78" y="348" width="646" height="72" class="box"/>
+<text x="98" y="377" class="h">1  冻结离线研究输入</text><text x="98" y="403" class="s">所有路线 assessment + 同一 Snapshot + 每路线父版本/知识 pins</text></g>
+<path d="M401 420V444" class="flow"/>
+<g class="node" tabindex="0"><title>A、B、D按稳定顺序在各自fresh model context中读完整历史及显式父依赖。没有独立C优化路线；Oracle负例不是C。</title><rect x="78" y="448" width="646" height="104" class="box blue"/>
+<text x="98" y="478" class="h">2  A → B → D：独立阅读、研究、形成草稿</text>
+<text x="98" y="506" class="b">完整历史 + 源码 → 假设 / 多个草稿方案 → 候选代码</text>
+<text x="98" y="532" class="s">不是换一条路线就换 TPU；路线之间不自动继承整段对话</text></g>
+<path d="M401 552V577" class="flow"/>
+<g class="node" tabindex="0"><title>当前三条路线单独封存均完成。static和CPU Oracle reference passed；另有CPU Pallas解释执行数值通过记录。正式硬件candidate_numerics仍unavailable，executable=false。</title><rect x="78" y="580" width="646" height="92" class="box blue"/>
+<text x="98" y="611" class="h">3  本地检查 + 各路线离线封存  [三路已完成]</text>
+<text x="98" y="639" class="b">语法/身份/配置检查；CPU参考与解释执行各自留证</text>
+<text x="98" y="661" class="s">产物仍是 draft，executable=false；不算 TPU 优化轮次</text></g>
+<path d="M401 672V696" class="flow"/>
+<g class="node" tabindex="0"><title>当前进程为preparation-complete。complete_preparation遍历三路read_route，后者重新载入manifest、重放Analyzer、验证页面覆盖和静态检查；该步不重新发起模型推理或TPU操作。此时尚无offline_complete标记。</title><rect x="78" y="699" width="646" height="75" class="box orange"/>
+<text x="98" y="730" class="h">4  preparation-complete  [观察时正在运行]</text>
+<text x="98" y="758" class="s">逐路再验证历史 / 分析重放 / 页面覆盖 / 检查 → 总完成标记</text></g>
+<g class="node" tabindex="0"><title>硬件申请只进行一次串行分配。历史上Runtime丢失后转用新Runtime，而不是因为切换A/B/D主动更换设备。</title><rect x="836" y="348" width="646" height="72" class="box"/>
+<text x="856" y="377" class="h">5  分配 / 复用 TPU → setup → 环境 probe</text><text x="856" y="403" class="s">当前是 Runtime 16；新设备不得直接冒用旧 Context 的计时</text></g>
+<path d="M1159 420V444" class="flow"/>
+<g class="node" tabindex="0"><title>四项准入包括两个故意错误的Oracle负例和两个精确父版本。负例预期incorrect，父版本要完成五阶段后整合。D复用其精确A父版本，不需要第三套D基线。</title><rect x="836" y="448" width="646" height="104" class="box blue"/>
+<text x="856" y="478" class="h">6  四项硬件准入：负例 ×2 + 准确父版本 A/B</text>
+<text x="856" y="506" class="b">负例：错误被正确拒绝；父版本：正确性 + benchmark + profile</text>
+<text x="856" y="532" class="s">这是裁判/环境/比较基线，不是三个新优化候选的成绩</text></g>
+<g class="node" tabindex="0"><title>原Store及回执的14:11核对：attention/cache负例均incorrect；A父版本五阶段齐备且correct_inconclusive；B仅generate成功，无compile请求；尚无admission-ready。</title><rect x="836" y="580" width="646" height="92" class="box orange"/>
+<text x="856" y="611" class="h">Runtime 16 当前：3 项已完成，B 父版本待续</text>
+<text x="856" y="639" class="b">负例 ×2 已拒绝；A 五阶段完成；B 仅 generate 完成</text>
+<text x="856" y="661" class="s">仍缺 B 的 compile → correctness → benchmark → profile</text></g>
+<path d="M1159 552V577" class="flow"/>
+<path d="M1159 672V696" class="flow"/>
+<g class="node" tabindex="0"><title>必须完成本Runtime准入，且执行前检查真实存活、原operation、账本和授权。图只使用本地保存证据，不代表现在已远端在线。</title><rect x="836" y="699" width="646" height="75" class="box future"/>
+<text x="856" y="730" class="h">7  admission-ready  [尚未形成]</text>
+<text x="856" y="758" class="s">同一个 Runtime 已具备正式设计与比较条件</text></g>
+<path d="M401 774V822H780V846" class="flow"/><path d="M1159 774V822H780" fill="none" stroke="#52514e" stroke-width="2"/>
+<text x="102" y="818" class="small">离线材料总核验通过后</text><text x="1194" y="818" class="small">当前环境和父测量齐备后</text>
+<g class="node" tabindex="0"><title>prepare_design先验证四gate，再选择原精确父版本和新的Context，begin_design_round创建新的正式单路线manifest，并实际注入草稿、源码、检查报告及变化信息。不能原地改旧publication。</title><rect x="236" y="850" width="1088" height="88" class="box future"/>
+<text x="260" y="883" class="h">8  汇合：新正式 Context / Snapshot / 路线 manifest</text>
+<text x="260" y="912" class="b">绑定真实 Runtime 与准确父测量；带入各自草稿及新条件差异，不篡改旧证据</text></g>
+<path d="M780 938V965" class="flow"/>
+<g class="node" tabindex="0"><title>当前正式Analyzer不是只看差量：要求Read the complete current input，发布时再次检查完整页面交付覆盖。虽然复用研究和源码，仍需一套完整新输入和新模型response。</title><rect x="236" y="969" width="1088" height="100" class="box orange future"/>
+<text x="260" y="1002" class="h">9  A → B → D 正式复核  [这里仍有第二次完整阅读]</text>
+<text x="260" y="1031" class="b">新的模型响应逐 Plan 确认：保留 / 修订 / 有理由延期 → 发布正式 Plan</text>
+<text x="260" y="1056" class="s">不是机械改 Context ID；但目前也不是“只审变化”——设备可能在等待这轮阅读</text></g>
+<path d="M780 1069V1096" class="flow"/>
+<g class="node" tabindex="0"><title>所有路线先关闭设计；完整保留所有合法候选。确切实现/成本冻结，预算授权与累计grant检查，全部Plan Intake接受才开放队列。当前优化账本仅余1次，不能自动推导足够跑整批或有新增授权。</title><rect x="236" y="1100" width="1088" height="92" class="box future"/>
+<text x="260" y="1133" class="h">10  design_complete → 全部候选绑定 → 预算/授权 → 全量 Intake</text>
+<text x="260" y="1163" class="b">全批就绪才执行；旧优化预算余 1 次，不等于三候选批次已获准</text>
+<text x="260" y="1185" class="small">四门准入成本另记；准入、恢复次数不计 D 的有效探索轮</text></g>
+<path d="M780 1192V1219" class="flow"/>
+<g class="node" tabindex="0"><title>同一个Runtime内按受控顺序逐个候选执行。每个候选有独立source、Plan、Candidate、Run、operation及回执。正确性失败不继续性能测量；合法有限repair沿原协议。</title><rect x="236" y="1223" width="1088" height="93" class="box blue future"/>
+<text x="260" y="1257" class="h">11  一个 TPU Runtime，串行跑所有获准候选</text>
+<text x="260" y="1287" class="b">generate → compile → correctness → benchmark → profile → 固定 Evaluator</text>
+<text x="260" y="1309" class="small">这里才是新候选的真实验证与计时；正确性不通过，不晋升、不伪造速度收益</text></g>
+<path d="M780 1316V1343" class="flow"/>
+<g class="node" tabindex="0"><title>分别回写Memory、latest/last-correct/best/frontier。真实且有效反馈才计轮；同一全局轮同路线多候选最多一轮。正确性失败可形成失败反馈，infra/unknown/重复计时不刷轮。</title><rect x="236" y="1347" width="1088" height="86" class="box future"/>
+<text x="260" y="1380" class="h">12  各路线结果回写 Memory → 有效反馈计数 → 下一轮研究</text>
+<text x="260" y="1409" class="b">D 当前 0/5；一条路线同批多个候选最多算一轮，旧路线有新假设继续推进</text></g>
+<path d="M236 1390H34V500H78" class="flow"/><text x="23" y="1255" class="small" transform="rotate(-90 23 1255)">下一轮读取真实反馈；Runtime 仍可用就复用，不按路线换设备</text>
+<path d="M1324 1268H1525V384H1482" class="recovery"/>
+<text x="1352" y="946" class="small">异常恢复旁路</text><text x="1352" y="973" class="small">completed：回收</text><text x="1352" y="997" class="small">running：查询</text><text x="1352" y="1021" class="small">unknown：保留</text><text x="1352" y="1054" class="small">设备丢失：</text><text x="1352" y="1078" class="small">保留旧操作/成本</text><text x="1352" y="1102" class="small">重新分配与准入</text><text x="1352" y="1135" class="small">离线草稿可保留</text><text x="1352" y="1159" class="small">正式 Context 重建</text>
+<line x1="56" y1="1465" x2="1504" y2="1465" class="rule"/>
+<text x="56" y="1502" class="h">“怪”的来源不是模型上下文，而是三类工作交叠</text>
+<rect x="56" y="1523" width="461" height="153" class="box orange"/><text x="78" y="1555" class="note">① 先离线研究，拿到 TPU 后还要全读</text><text x="78" y="1584" class="s">候选代码可复用，但正式阶段仍完整读输入。</text><text x="78" y="1609" class="s">前置减少了写码等待，没完全消除研究等待。</text><text x="78" y="1650" class="small">事实：analyzer.py 102–107；outputs.py 253–261</text>
+<rect x="549" y="1523" width="461" height="153" class="box orange"/><text x="571" y="1555" class="note">② “完成检查”本身也在重复做重活</text><text x="571" y="1584" class="s">封存、总收束、绑定都再次加载和重放。</text><text x="571" y="1609" class="s">确定存在重复路径；耗时占比还没有 profiling。</text><text x="571" y="1650" class="small">事实：offline_preparation.py / validate_result</text>
+<rect x="1042" y="1523" width="462" height="153" class="box orange"/><text x="1064" y="1555" class="note">③ 新 Runtime 反复做准入，优化仍是 0</text><text x="1064" y="1584" class="s">负例、父测量、桥接恢复都在真实消耗时间。</text><text x="1064" y="1609" class="s">这些是前置工作，不是新方法的有效反馈。</text><text x="1064" y="1650" class="small">必要边界：正确性 / 父分母 / 环境一致 / 预算</text>
+<rect x="56" y="1704" width="1448" height="164" fill="#f9f9f7" rx="14"/>
+<text x="78" y="1738" class="h">建议的精简主线  [设计建议，尚未实现]</text>
+<text x="78" y="1772" class="b">一次独立研究与候选检查 → 准备包就绪再申请 / 复用 TPU → 必要准入和父测量 → 只复核有影响的差异</text>
+<text x="78" y="1805" class="b">→ 全批预算/就绪门禁 → 同一设备串行执行 → Memory 反馈 → 下一轮；不因路线切换重建 Runtime</text>
+<text x="78" y="1841" class="s">可简化的是未变内容的反复重放与完整重读，不是删掉正确性、准确父版本、预算或 unknown 恢复保护。</text>
+<text x="56" y="1903" class="s">图中“已完成”仅对标明范围有效：软件回归通过 ≠ CPU 候选通过 ≠ TPU 正确 ≠ 性能提升 ≠ 五轮探索完成。</text>
+<text x="56" y="1932" class="s">当前离线草稿：A first-block-direct-init · B delayed-length-row · D transposed-score-state。无单独 C 优化路线。</text>
+<text x="56" y="1960" class="small">依据：workflow/offline_preparation.py、workflow/design.py、profiler/analyzer.py、profiler/outputs.py、prepare_design.py、Runtime16 原始阶段回执。</text>
+</svg>

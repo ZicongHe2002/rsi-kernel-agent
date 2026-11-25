@@ -45,6 +45,50 @@ class RemoteTests(unittest.TestCase):
         self.assertIn('lookup', code)
         self.assertIn('fixed-nonce', code)
 
+    def test_candidate_transport_submits_payload_once_and_controls_by_original_identity(self):
+        import ast
+        commands, uploads = [], []
+        state = {'status': 'running', 'stages': [], 'cancelled': False}
+        def execute(code):
+            tree = ast.parse(code)
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute) and node.func.attr == 'loads':
+                    value = ast.literal_eval(node.args[0])
+                    if isinstance(value, str):
+                        command = json.loads(value)
+                        if isinstance(command, dict) and 'action' in command:
+                            commands.append(command)
+            return [{'output_type': 'stream', 'text': 'RSI_RESULT:' + json.dumps(state)}]
+        self.bridge.execute = execute
+        self.bridge.put = lambda local, remote: uploads.append((json.loads(Path(local).read_bytes()), remote))
+        request = {'operation_id': 'candidate-operation:' + 'a' * 64, 'request_digest': 'b' * 64}
+        payload = {'source_bundle': {}, 'oracle_bundle': {}, 'blobs': {}}
+        self.assertEqual(self.remote.submit_candidate(request, payload), state)
+        self.assertEqual(self.remote.lookup_candidate(request['operation_id']), state)
+        self.assertEqual(self.remote.cancel_candidate(request['operation_id']), state)
+        self.assertEqual([command['action'] for command in commands],
+                         ['submit_candidate', 'lookup_candidate', 'cancel_candidate'])
+        self.assertEqual(commands[0]['request'], request)
+        self.assertTrue(all(command['runtime_id'] == self.bridge.runtime_id for command in commands))
+        self.assertEqual([item[0] for item in uploads], [payload])
+        self.assertEqual(commands[1]['operation_id'], request['operation_id'])
+
+    def test_bootstrap_rejects_linked_tools_parent_before_writing(self):
+        from unittest.mock import patch
+        self.remote.bootstrap()
+        code = self.bridge.calls[0][1]
+        marker = str(self.root / 'spool')
+        code = code.replace(repr(self.remote.root), repr(marker))
+        code = code[:code.index('import importlib.util, json, hashlib')]
+        outside = self.root / 'outside-tools'
+        outside.mkdir()
+        tools = Path(marker) / 'tools'
+        original = Path.is_symlink
+        with patch.object(Path, 'is_symlink', lambda p: p == tools or original(p)):
+            with self.assertRaisesRegex(AssertionError, 'linked'):
+                exec(compile(code, '<local bootstrap fixture>', 'exec'), {})
+        self.assertEqual(list(outside.iterdir()), [])
+
     def test_artifact_download_rejects_paths_outside_pinned_spool(self):
         for path in ('/content/user-file', '/content/rsi-kernel-agent/test/../outside',
                      '/content/rsi-kernel-agent/test2/artifacts/file'):

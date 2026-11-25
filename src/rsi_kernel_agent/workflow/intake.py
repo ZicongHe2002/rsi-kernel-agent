@@ -92,46 +92,88 @@ async def _fresh_knowledge(knowledge, data):
     return status
 
 
-async def intake_publication(store, publication_id, round_id, variant_specs, knowledge=None):
+async def intake_publication(store, publication_id, round_id, variant_specs, knowledge=None, *, retry_key=None):
     """Serialize intake with Controller operations on the same local Task."""
     from .journal import WorkflowJournal
     marker = store.get(publication_id)
     require(type(marker) is Decision and marker.details.get('type') == 'analysis_result.v1',
             'A completed 2C publication is required')
     with WorkflowJournal(store, marker.task_id).lock():
-        return await _intake_publication(store, publication_id, round_id, variant_specs, knowledge)
+        return await _intake_publication(store, publication_id, round_id, variant_specs, knowledge, retry_key=retry_key)
 
 
-async def _intake_publication(store, publication_id, round_id, variant_specs, knowledge=None):
-    """Persist one immutable result per round/publication; a retry returns it exactly.
+async def _intake_publication(store, publication_id, round_id, variant_specs, knowledge=None, *, retry_key=None):
+    """Persist immutable outcomes; repeating a request returns its exact result.
 
-    A waiting result is historical, not mutable. Retry with a new round ID after
-    prerequisites become available (or a new analysis if pinned sources changed).
+    A design-bound v2 publication permits three explicit retries per publication
+    and round, using distinct retry keys after prerequisites recover. Each retry
+    appends an outcome and reuses accepted jobs. A repeated key replays its result.
+    Legacy publications retain recovery by new round ID; changed pins need new analysis.
     Invalid finite-JSON values are fingerprinted but never persisted as records.
     """
     require(type(round_id) is str and bool(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._:-]{0,127}', round_id)), 'Invalid Round ID')
+    require(retry_key is None or (type(retry_key) is str
+            and bool(re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._:-]{0,127}', retry_key))), 'Invalid Intake retry key')
     require(type(variant_specs) is dict and all(type(k) is str for k in variant_specs), 'Variant mapping must be an object')
     marker = store.get(publication_id)
     require(type(marker) is Decision and marker.kind == 'note'
             and marker.details.get('type') == 'analysis_result.v1', 'A completed 2C publication is required')
+    from .design import require_design_complete
     rid = _id('wf-intake', round_id, publication_id)
     # allow_nan is used only for a request fingerprint. Invalid values remain
     # Plan-local rejections, and are never put in canonical stored JSON.
     fingerprint = sha256(json.dumps({'publication_id': publication_id, 'round_id': round_id,
         'variants': variant_specs}, sort_keys=True, ensure_ascii=True).encode()).hexdigest()
     old = _get_optional(store, rid)
-    if old is not None:
+    if old is not None and old.details.get('request_digest') == fingerprint:
+        require(type(old) is Decision and old.details.get('type') == 'workflow_intake.v1', 'Invalid intake marker')
+        require(retry_key is None, 'Explicit Intake retry requires a design-bound v2 publication')
+        return old.details['result']
+    completion = require_design_complete(store, publication_id, round_id)
+    if completion is not None:
+        rid = _id('wf-intake-v2', round_id, publication_id, fingerprint)
+        old = _get_optional(store, rid)
+    retry = None
+    if retry_key is not None:
+        require(completion is not None, 'Explicit Intake retry requires a design-bound v2 publication')
+        retry_id = _id('wf-intake-retry', round_id, publication_id, retry_key)
+        saved = _get_optional(store, retry_id)
+        if saved is not None:
+            require(type(saved) is Decision and saved.details.get('type') == 'workflow_intake.v1'
+                    and saved.details['request_digest'] == fingerprint, 'Intake retry key reused with different inputs')
+            return saved.details['result']
+        require(old is not None and type(old) is Decision
+                and old.details.get('type') == 'workflow_intake.v1'
+                and old.details['request_digest'] == fingerprint, 'Intake retry requires an existing identical request')
+        retries = [record for record in store.history(marker.task_id) if type(record) is Decision
+                   and record.details.get('type') == 'workflow_intake.v1'
+                   and record.details['result'].get('retry') is not None
+                   and record.details['result']['publication_id'] == publication_id
+                   and record.details['result']['round_id'] == round_id]
+        previous = next((record for record in reversed(retries)
+                         if record.details['request_digest'] == fingerprint), old)
+        require(any(item['status'] in ('waiting', 'rejected') for item in previous.details['result']['items']),
+                'Intake retry requires a waiting or rejected Plan')
+        require(len(retries) < 3, 'Intake retry limit reached for this publication and round')
+        retry = {'key': retry_key, 'base_intake_id': rid, 'previous_intake_id': previous.id,
+                 'attempt': len(retries) + 1}
+        rid = retry_id
+    elif old is not None:
         require(type(old) is Decision and old.details.get('type') == 'workflow_intake.v1'
                 and old.details['request_digest'] == fingerprint, 'Intake identity reused with different inputs')
         return old.details['result']
     result = {'id': rid, 'task_id': marker.task_id, 'round_id': round_id,
               'publication_id': publication_id, 'items': []}
+    if retry is not None:
+        result['retry'] = retry
     try:
         prior = [r for r in store.history(marker.task_id) if type(r) is Decision
                  and r.details.get('type') == 'workflow_intake.v1'
                  and r.details['result']['publication_id'] == publication_id
                  and any(item['status'] == 'accepted' for item in r.details['result']['items'])]
-        require(not prior, 'Publication already consumed in a previous round; use a new Analyzer publication')
+        require(completion is not None or not prior, 'Publication already consumed in a previous round; use a new Analyzer publication')
+        accepted = {item['plan_id']: item for record in prior for item in record.details['result']['items']
+                    if item['status'] == 'accepted'}
         data, analysis = _publication(store, marker)
     except (ValueError, KeyError, TypeError, OSError) as error:
         for mapping in marker.details.get('plans', []):
@@ -155,11 +197,23 @@ async def _intake_publication(store, publication_id, round_id, variant_specs, kn
                     'Published Plan has the wrong exact parent binding')
                 from .execution import execution_contract
                 execution_contract(store, binding['context']['id'])
-                variants = variant_specs.get(proposal['id'])
+                prepared = data['request']['environment'].get('preparation_id') is not None
+                require(not (prepared and proposal['id'] in variant_specs and pid in variant_specs),
+                        'Candidate variants have ambiguous proposal and published Plan keys')
+                variants = variant_specs.get(pid, variant_specs.get(proposal['id'])) if prepared else variant_specs.get(proposal['id'])
                 require(type(variants) is list and len(variants) == len(proposal['variants']), 'Variant count differs from published Plan')
                 validated = [validate_variant(store, v, label, provenance=binding['context']['provenance'])
                              for v, label in zip(variants, proposal['variants'])]
                 require(len({_digest(v) for v in validated}) == len(validated), 'Duplicate Candidate variant')
+                if (data['request']['environment'].get('preparation_id') is not None
+                        or binding['context']['protocol'].get('execution_mode') == 'candidate.v1'):
+                    from .offline_preparation import require_prepared_implementations
+                    require_prepared_implementations(store, data, analysis, proposal['id'], validated)
+                if pid in accepted:
+                    require(canonical_json(validated) == canonical_json([job['variant'] for job in accepted[pid]['jobs']]),
+                            'Already accepted Plan implementations cannot change')
+                    result['items'].append(accepted[pid])
+                    continue
                 pending = []
                 cited = set(proposal['refs'])
                 for observation in analysis['analysis']['observations']:
@@ -187,8 +241,12 @@ async def _intake_publication(store, publication_id, round_id, variant_specs, kn
                              'strategy_id': sid, 'plan_id': pid, 'parent_id': proposal['parent_id'],
                              'context_id': binding['context']['id'], 'variant': v, 'contract': contract,
                              'contract_digest': _digest(contract),
-                             'parent_evaluation_id': sorted(parent_evaluations)[0] if parent_evaluations else None}
+                             'parent_evaluation_id': sorted(parent_evaluations)[0] if parent_evaluations else None,
+                             'publication_id': publication_id}
                             for index, v in enumerate(validated)]
+                    if data['request']['schema_version'] == 2:
+                        for job in jobs:
+                            job['design_batch_id'] = data['request']['environment']['design_batch_id']
                     item.update(status='accepted', reason='Verified publication, exact bindings and live references', jobs=jobs)
             except (ValueError, KeyError, TypeError, OSError) as error:
                 item.update(status='rejected', reason=str(error), jobs=[])

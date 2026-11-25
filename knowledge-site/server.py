@@ -19,6 +19,7 @@ import threading
 from urllib.parse import parse_qs, quote, unquote, urlsplit
 
 from auth import AuthError, AuthStore, can_read, can_edit, can_create
+from navigation import visible_navigation
 from local_access import auth_state_dir, get_service_token
 from task_rollover import carry_content
 
@@ -519,7 +520,8 @@ class Handler(BaseHTTPRequestHandler):
                 if grant["scope"] == "category":
                     categories.add(grant["path"])
             categories = sorted(categories, key=str.casefold)
-        return {"notes": notes, "categories": categories}
+        return {"notes": notes, "categories": categories,
+                "navigation": visible_navigation(self.server.store.root.parent / "navigation.json", notes)}
 
     def payload(self):
         if self.headers.get_content_type() != "application/json":

@@ -534,6 +534,291 @@ def run_mla_stage(request, workspace, oracle_workspace, output_dir, *, source_bu
             'synchronized': True, 'lease': lease}
 
 
+class CandidateRun:
+    _stages = ('generate', 'compile', 'correctness', 'benchmark', 'profile')
+
+    def __init__(self, requests, workspace, oracle_workspace, output_root, *, source_bundle, oracle_bundle,
+                 config_path, runtime_session_id):
+        _require(type(requests) is list and len(requests) == len(self._stages), 'All candidate stage requests are required')
+        first = requests[0]
+        _require(type(first) is dict and type(first.get('job')) is dict, 'Invalid candidate request')
+        for stage, request in zip(self._stages, requests):
+            _require(type(request) is dict and request.get('stage') == stage
+                     and request.get('schema_version') == 1 and request.get('backend_id') == 'colab.v1'
+                     and request.get('provenance') == 'real', 'Candidate stage order or protocol differs')
+            _require(request.get('request_digest') == sha256(_json({k: v for k, v in request.items()
+                         if k != 'request_digest'}).encode()).hexdigest(), 'Candidate stage digest differs')
+            _require(all(_json(request.get(key)) == _json(first.get(key))
+                         for key in ('job', 'candidate_identity', 'parent_identity')), 'Candidate stage Run or identity differs')
+            _require(request['operation_id'] == 'operation:' + sha256(
+                _json([first['job']['run_id'], stage]).encode()).hexdigest(), 'Candidate stage operation differs')
+        self.requests = deepcopy(requests)
+        self.job = self.requests[0]['job']
+        self.protocol = self.job['contract']['context']['protocol']
+        _require(self.protocol.get('execution_mode') == 'candidate.v1', 'Candidate execution protocol is required')
+        self.workload = validate_workload(self.job['contract']['workload']['spec'])
+        self.workspace = self._directory(workspace)
+        self.oracle_workspace = self._directory(oracle_workspace)
+        self.output_root = self._directory(output_root)
+        _require(self.workspace != self.oracle_workspace
+                 and not self.output_root.is_relative_to(self.workspace)
+                 and not self.output_root.is_relative_to(self.oracle_workspace), 'Candidate workspaces must be separate')
+        self.output_root.mkdir(parents=True, exist_ok=True)
+        self.source_bundle, self.oracle_bundle = deepcopy(source_bundle), deepcopy(oracle_bundle)
+        self.config_path = Path(config_path)
+        self.config_bytes = self.config_path.read_bytes()
+        _require(sha256(self.config_bytes).hexdigest() == first['candidate_identity']['config_digest'],
+                 'Candidate config bytes mismatch')
+        self.config = validate_candidate_config(json.loads(self.config_bytes), self.workload)
+        _require(source_bundle['entry'] == {'path': 'pallas_kernels/kernels/mla_decode.py',
+                                           'symbol': 'build_mla_decode_contiguous'}, 'Unexpected Candidate entry')
+        self.runtime_session_id = runtime_session_id
+        _require(self.job['contract']['context']['environment']['runtime_session_id'] == runtime_session_id,
+                 'Candidate Runtime differs')
+        self.tolerance = self.protocol['correctness']
+        _require(self.tolerance == {'atol': .01, 'rtol': .01}, 'This runner preserves the original MLA BF16 tolerance')
+        self.benchmark_case = self.protocol.get('benchmark_case_id', self.workload['cases'][0]['id'])
+        _require(any(case['id'] == self.benchmark_case for case in self.workload['cases']), 'Benchmark case is absent')
+        self.next_stage, self.failed = 1, False
+        self.cases = []
+        self._measurement_modules = {}
+        self.process_id = os.getpid()
+
+    @staticmethod
+    def _directory(value):
+        path = Path(value).absolute()
+        _require(not any(p.is_symlink() or (hasattr(p, 'is_junction') and p.is_junction())
+                         for p in (path, *path.parents)), 'Candidate output contains a link')
+        return path.resolve()
+
+    def _initialize(self):
+        _require(not any(name == 'pallas_kernels' or name.startswith('pallas_kernels.')
+                         or name == 'jax_ops' or name.startswith('jax_ops.') for name in sys.modules),
+                 'Fresh candidate process required before Kernel import')
+        sys.path.insert(0, str(self.workspace))
+        import jax
+        import numpy as np
+        from pallas_kernels.kernels import get_kernel
+        from pallas_kernels.kernels.config_loader import load_kernel_config
+        self.environment = collect_environment(self.runtime_session_id)
+        _require(self.environment == self.job['contract']['context']['environment'],
+                 'Actual runtime is not the fixed evaluation context')
+        devices = jax.devices('tpu')
+        _require(jax.process_count() == 1 and len(devices) == 1 and self.environment['device_count'] == 1,
+                 'One TPU device and process are required')
+        _require(devices[0].device_kind.lower() in ('tpu v6e', 'tpu v6 lite'), 'Only TPU v6e is authorized')
+        self.jax, self.np, self.device = jax, np, devices[0]
+        self.get_kernel, self.load_kernel_config = get_kernel, load_kernel_config
+        self.kernel_module = importlib.import_module('pallas_kernels.kernels.mla_decode')
+        verify_entry(self.workspace, self.source_bundle['entry'], self.kernel_module)
+
+    @staticmethod
+    def _release(*trees):
+        seen = set()
+        for tree in trees:
+            for array in tree or ():
+                if id(array) not in seen:
+                    seen.add(id(array))
+                    array.delete()
+        gc.collect()
+
+    def _modules(self):
+        modules = dict(sys.modules)
+        for name, (module, relative) in self._measurement_modules.items():
+            path = self.oracle_workspace / relative
+            _require(modules.get(name) is module and Path(module.__file__).resolve() == path.resolve()
+                     and sha256(path.read_bytes()).hexdigest() == self.protocol['trusted_files'][relative],
+                     'Frozen measurement module changed')
+            del modules[name]
+        return modules
+
+    def _tool(self, relative, name):
+        module = load_trusted_tool(self.oracle_workspace, relative, self.protocol['trusted_files'], name)
+        self._measurement_modules[name] = (module, relative)
+        return module
+
+    def _identity(self):
+        loaded = verify_loaded_bundle(self.workspace, self.source_bundle, self._modules())
+        identity = self.requests[0]['candidate_identity']
+        return {'runtime_session_id': self.runtime_session_id, 'workspace': str(self.workspace),
+                'module_path': str(self.workspace / self.source_bundle['entry']['path']),
+                'entry': self.source_bundle['entry'], 'loaded_files': loaded,
+                'source_bundle_digest': self.job['variant']['source_bundle_ref']['digest'],
+                'config_digest': identity['config_digest'], 'specialization_digest': identity['config_digest'],
+                'fresh_process': True, 'process_scope': 'candidate_run',
+                'process_run_id': self.job['run_id'], 'process_id': self.process_id}
+
+    def _compile(self, output_dir):
+        total = 0.0
+        for index, case in enumerate(self.workload['cases']):
+            directory = self._directory(self.output_root / 'shared' / ('case_' + str(index)))
+            metadata = _run_oracle(case, self.oracle_workspace, self.oracle_bundle,
+                                  self.protocol['oracle_bundle_ref']['digest'], directory, self.tolerance)
+            host_inputs = _load_arrays(directory / 'inputs.npz')
+            overrides = deepcopy(case.get('overrides', {}))
+            for key, values in self.config['case_overrides'].get(case['id'], {}).items():
+                overrides.setdefault(key, {}).update(values)
+            cfg = self.load_kernel_config(case['config_name'], overrides=overrides)
+            _require(cfg.get_tolerance('bfloat16') == self.tolerance and cfg.params.get('interface') == 'contiguous'
+                     and not cfg.params.get('interpret_mode', False), 'Candidate changed fixed validation rules')
+            kernel = self.get_kernel('mla_decode', cfg)
+            verify_entry(self.workspace, self.source_bundle['entry'], self.kernel_module)
+            tag = 'rsi_mla_' + sha256(self.job['run_id'].encode()).hexdigest()[:16] + '_' + str(index)
+            def public(*values, _kernel=kernel):
+                return _kernel(*values)
+            public.__name__ = tag
+            inputs = None
+            try:
+                with self.jax.default_device(self.device):
+                    inputs = self.jax.device_put(host_inputs, self.device)
+                    self.jax.block_until_ready(inputs)
+                    started = time.perf_counter_ns()
+                    compiled = self.jax.jit(public).lower(*inputs).compile()
+                    compile_ms = (time.perf_counter_ns() - started) / 1e6
+                executable = compiled.runtime_executable()
+                _require(executable is not None and set(executable.local_devices()) == {self.device},
+                         'Compiled executable uses unexpected devices')
+                (directory / 'compiled-hlo.txt').write_text(compiled.as_text(), encoding='utf-8')
+                _write_json(directory / 'specialization.json', {'case_id': case['id'], 'shape': cfg.shape,
+                    'tiling': cfg.tiling, 'params': cfg.params, 'dtype': cfg.dtype, 'seed': cfg.seed,
+                    'input_arrays': metadata['input_arrays'], 'entry': self.source_bundle['entry'],
+                    'device_ids': [d.id for d in executable.local_devices()]})
+                self.cases.append({'case': case, 'directory': directory, 'compiled': compiled,
+                    'compile_ms': compile_ms, 'tag': tag, 'metadata': metadata,
+                    'input_digest': sha256((directory / 'inputs.npz').read_bytes()).hexdigest()})
+                total += compile_ms
+            finally:
+                self._release(inputs)
+                del host_inputs
+        _write_json(output_dir / 'compile-details.json', {'compile_time_ms': total,
+            'case_ids': [row['case']['id'] for row in self.cases], 'compiled_executables': len(self.cases)})
+        return {'compile_time_ms': total, 'executed': True}
+
+    def _inputs(self, row):
+        path = row['directory'] / 'inputs.npz'
+        _require(sha256(path.read_bytes()).hexdigest() == row['input_digest'], 'Frozen candidate inputs changed')
+        host = _load_arrays(path)
+        placed = self.jax.device_put(host, self.device)
+        self.jax.block_until_ready(placed)
+        return host, placed
+
+    def _correctness(self, output_dir):
+        results, raw_paths, input_rows = [], [], []
+        oracle_identity = None
+        for index, row in enumerate(self.cases):
+            case, directory = row['case'], row['directory']
+            case_output = output_dir / ('case_' + str(index))
+            case_output.mkdir()
+            host, inputs = self._inputs(row)
+            actual = None
+            try:
+                actual = self.jax.block_until_ready(row['compiled'](*inputs))
+                _require(type(actual) is tuple and len(actual) == 2, 'Kernel must return attention and full cache')
+                expected = _load_arrays(directory / 'oracle_outputs.npz')
+                _save_arrays(case_output / 'candidate_outputs.npz', actual)
+                _save_arrays(case_output / 'input_cache_after.npz', (inputs[2],))
+                outputs = [compare_frame(_frame(a, exact=spec['comparison'] == 'exact'),
+                                         _frame(e, exact=spec['comparison'] == 'exact'), spec, **self.tolerance)
+                           for a, e, spec in zip(actual, expected, case['outputs'])]
+                if self.np.asarray(inputs[2]).tobytes() != self.np.asarray(host[2]).tobytes():
+                    outputs[1].update(passed=False, tolerance_violations=max(1, outputs[1]['tolerance_violations']),
+                                      metric_reason='Candidate mutated the input cache')
+                results.append({'id': case['id'], 'outputs': outputs, 'passed': all(v['passed'] for v in outputs)})
+                raw_paths.extend(str(directory / name) for name in ('inputs.npz', 'oracle_outputs.npz',
+                    'oracle_metadata.json', 'specialization.json', 'compiled-hlo.txt'))
+                raw_paths.extend(str(case_output / name) for name in ('candidate_outputs.npz', 'input_cache_after.npz'))
+                input_rows.append({'case_id': case['id'], 'arrays': row['metadata']['input_arrays'],
+                                   'npz_digest': row['input_digest']})
+                oracle_identity = row['metadata']['oracle_identity']
+            finally:
+                self._release(actual, inputs)
+                del host
+        manifest = output_dir / 'input_manifest.json'
+        _write_json(manifest, {'schema_version': 1, 'cases': input_rows})
+        raw_paths.append(str(manifest))
+        return {'oracle_digest': self.protocol['oracle_digest'], 'oracle_identity': oracle_identity,
+                'input_digest': sha256(manifest.read_bytes()).hexdigest(), 'cases': results,
+                'correctness': 'passed' if all(row['passed'] for row in results) else 'failed',
+                'raw_artifact_paths': raw_paths}
+
+    def _measure(self, request, output_dir, lease):
+        row = next(row for row in self.cases if row['case']['id'] == self.benchmark_case)
+        host, inputs = self._inputs(row)
+        try:
+            if request['stage'] == 'benchmark':
+                helpers = self._tool('benchmarks/profiler.py', '_rsi_benchmark')
+                bench = self.protocol['benchmark']
+                timing = measure_compiled(lambda unused: row['compiled'], inputs, synchronize=self.jax.block_until_ready,
+                    warmup=helpers.warmup, measure=helpers.measure, warmup_count=bench['warmup'],
+                    measurements=bench['measurements'])
+                timing['compile_time_ms'] = row['compile_ms']
+                _write_json(output_dir / 'benchmark-details.json', {**timing, 'case_id': row['case']['id']})
+                result = {'protocol': bench, 'samples_ms': timing['samples_ms'], 'latency_ms': timing['latency_ms'],
+                          'compile_time_ms': row['compile_ms'], 'warmup_count': timing['warmup_count'],
+                          'synchronized': True, 'lease': lease}
+            else:
+                profile = self.protocol['profile']
+                _require(profile['trace_mode'] in ('default', 'default_profile_options'), 'Unverified trace mode')
+                if 'tools' not in sys.modules:
+                    import types
+                    package = types.ModuleType('tools')
+                    package.__path__ = [str(self.oracle_workspace / 'tools')]
+                    sys.modules['tools'] = package
+                self._tool('tools/tpu_duration_profile.py', 'tools.tpu_duration_profile')
+                capture = self._tool('tools/get_tpu_duration_info.py', '_rsi_capture')
+                trace_dir = output_dir / 'trace'
+                report = capture._capture_entry(row['compiled'], inputs, directory=trace_dir, tag=row['tag'],
+                    calls=profile.get('profile_calls', 20), warmup=profile.get('profile_warmup', 5),
+                    device_ids=[self.device.id])
+                _require(not report['errors'], 'Profile parser rejected capture; raw XPlane retained')
+                paths = sorted(trace_dir.rglob('*.xplane.pb'))
+                _require(len(paths) == 1, 'Profile must contain exactly one raw XPlane')
+                result = {'parser_digest': profile['parser_digest'], 'trace_mode': profile['trace_mode'],
+                          'raw_xplane_paths': [str(p) for p in paths], 'report_path': str(trace_dir / 'duration.json'),
+                          'capture_operation_id': request['operation_id'],
+                          'benchmark_operation_id': self.requests[3]['operation_id'], 'synchronized': True, 'lease': lease}
+            _require(self.np.asarray(inputs[2]).tobytes() == self.np.asarray(host[2]).tobytes(),
+                     'Candidate mutated the measurement input cache')
+            return result
+        finally:
+            self._release(inputs)
+            del host
+
+    def run_stage(self, stage_request, stage_output_dir, *, lease):
+        _require(not self.failed and self.next_stage < len(self.requests), 'Candidate Run cannot execute again')
+        _require(_json(stage_request) == _json(self.requests[self.next_stage]), 'Candidate stage is changed or out of order')
+        output_dir = self._directory(stage_output_dir)
+        _require(output_dir.is_relative_to(self.output_root) and output_dir != self.output_root,
+                 'Stage output escapes candidate output root')
+        output_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            _require(os.getpid() == self.process_id, 'Candidate Run cannot move between processes')
+            _require(self.config_path.read_bytes() == self.config_bytes, 'Frozen candidate config changed')
+            verify_loaded_bundle(self.workspace, self.source_bundle, self._modules())
+            verify_loaded_bundle(self.oracle_workspace, self.oracle_bundle)
+            if self.next_stage == 1:
+                self._initialize()
+            if stage_request['stage'] == 'compile':
+                output = self._compile(output_dir)
+            elif stage_request['stage'] == 'correctness':
+                output = self._correctness(output_dir)
+            else:
+                output = self._measure(stage_request, output_dir, lease)
+            output = {'environment': deepcopy(self.environment), 'identity': self._identity(), **output}
+            self.next_stage += 1
+            if output.get('correctness') == 'failed':
+                self.failed = True
+            if self.failed or self.next_stage == len(self.requests):
+                self.cases.clear()
+                gc.collect()
+            return output
+        except BaseException:
+            self.failed = True
+            self.cases.clear()
+            gc.collect()
+            raise
+
+
 if __name__ == '__main__':
     if len(sys.argv) == 3 and sys.argv[1] == '--oracle':
         _oracle_process(json.loads(Path(sys.argv[2]).read_text(encoding='utf-8')))

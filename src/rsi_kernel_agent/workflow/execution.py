@@ -174,6 +174,23 @@ def make_request(store, job, stage):
     return {**body, 'request_digest': _digest(body)}
 
 
+def make_candidate_request(store, job):
+    _require(job['contract']['context']['protocol'].get('execution_mode') == 'candidate.v1',
+             'Candidate execution requires its fixed protocol')
+    requests = [make_request(store, job, stage) for stage in stages_for('real')]
+    body = {'schema_version': 1, 'type': 'candidate_execution.v1',
+            'operation_id': stable_id('candidate-operation', job['run_id']), 'requests': requests}
+    return {**body, 'request_digest': _digest(body)}
+
+
+def validate_candidate_request(store, request):
+    _require(type(request) is dict and type(request.get('requests')) is list and request['requests'],
+             'Candidate execution requires stage requests')
+    expected = make_candidate_request(store, request['requests'][0]['job'])
+    _require(canonical_json(request) == canonical_json(expected), 'Candidate execution binding mismatch')
+    return expected
+
+
 def _validate_request(store, request):
     _require(type(request) is dict, 'Execution request must be an object')
     try:

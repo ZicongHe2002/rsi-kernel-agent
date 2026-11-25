@@ -62,6 +62,7 @@ def _verified_prefix(store, job, receipts, cancelled):
     stages = stages_for(provenance)
     _require(type(receipts) is dict and not (set(receipts) - set(stages)), 'Invalid receipt stage set')
     verified = {}
+    process_id = None
     for stage in stages:
         if stage not in receipts:
             break
@@ -74,6 +75,11 @@ def _verified_prefix(store, job, receipts, cancelled):
             from .real_protocol import validate_stage
             validate_stage(store, request, receipt)
             if stage != 'generate' and status == 'succeeded':
+                if job['contract']['context']['protocol'].get('execution_mode') == 'candidate.v1':
+                    current = output['identity']['process_id']
+                    _require(process_id is None or current == process_id,
+                             'Candidate receipts came from different process identities')
+                    process_id = current
                 _require(output['identity']['workspace'] == verified['generate']['outputs']['workspace'],
                          'Loaded workspace differs from materialization')
             if stage == 'profile' and status == 'succeeded':

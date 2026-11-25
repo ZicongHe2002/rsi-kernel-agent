@@ -1,6 +1,7 @@
 'use strict';
 const $ = (id) => document.getElementById(id);
-const state = { all: [], matches: [], categories: [], category: '', trash: false, note: null, editing: false, original: '', saving: false, navigating: false, library: '', draftKey: null, inline: null, user: null };
+const state = { all: [], matches: [], categories: [], navigation: [], category: '', trash: false, note: null, editing: false, original: '', saving: false, navigating: false, library: '', draftKey: null, inline: null, user: null };
+const outlineExpanded = new Map();
 let searchTimer, toastTimer, requestId = 0, selectionId = 0;
 let routeIndex = Number.isInteger(history.state?.noteRouteIndex) ? history.state.noteRouteIndex : 0;
 let revertingHistory = false;
@@ -160,6 +161,7 @@ function updatePermissionUi() {
   $('edit-category').readOnly = lockedMetadata || state.saving || state.navigating;
 }
 function clearAppForLogout() {
+  state.navigation = []; outlineExpanded.clear();
   initialized = false; requestId++; selectionId++; taskListsDay = ''; taskListsRequest = null;
   clearNoteCache();
   diagramCache.clear(); diagramCacheGeneration++; navigationStatus();
@@ -829,11 +831,64 @@ async function renderDiagrams(target, version, diagrams) {
     }
   }
 }
+function navigationOutline(notes = state.all) {
+  const allowed = new Map(state.all.map((note) => [note.id, note]));
+  const included = new Set(notes.map((note) => note.id));
+  const visit = (nodes, parent = '') => (Array.isArray(nodes) ? nodes : []).flatMap((node, index) => {
+    if (!node || typeof node !== 'object') return [];
+    const key = parent ? `${parent}-${index}` : String(index);
+    const children = visit(node.children, key);
+    const note = allowed.get(node.id);
+    const id = note && included.has(node.id) ? node.id : undefined;
+    if (!id && !children.length) return [];
+    // The server removes inaccessible parents. A category filter may omit a
+    // readable parent, in which case keep its label as context for its children.
+    if (node.id && !note) return children;
+    return [{ id, label: String(node.label || note?.title || '文档分组'), children, key }];
+  });
+  return visit(state.navigation);
+}
+function outlineNotes(nodes = navigationOutline()) {
+  return nodes.flatMap((node) => [...(node.id ? [node] : []), ...outlineNotes(node.children)]);
+}
+function preferredNote(notes) {
+  const available = new Map(notes.map((note) => [note.id, note]));
+  return outlineNotes().map((node) => available.get(node.id)).find(Boolean) || notes[0];
+}
+function outlineCategory(note) {
+  const root = navigationOutline().find((node) => outlineNotes([node]).some((item) => item.id === note.id));
+  const category = state.all.find((item) => item.id === root?.id)?.category;
+  return category && (note.category === category || note.category.startsWith(category + '/')) ? category : note.category;
+}
+function expandOutlineAncestors(id) {
+  const visit = (nodes) => nodes.some((node) => {
+    if (node.id === id) return true;
+    if (visit(node.children)) { outlineExpanded.set(node.key, true); return true; }
+    return false;
+  });
+  visit(navigationOutline());
+}
+function renderOutline(nodes, depth = 0) {
+  return `<ul class="outline-level${depth ? '' : ' document-outline'}"${depth ? '' : ' aria-label="文档层级"'}>${nodes.map((node) => {
+    const hasChildren = node.children.length > 0;
+    const expanded = outlineExpanded.has(node.key) ? outlineExpanded.get(node.key) : depth === 0 && Boolean(node.id);
+    const selected = !state.trash && state.note?.id === node.id;
+    const toggle = hasChildren ? `<button type="button" class="outline-toggle" data-outline-toggle="${node.key}" aria-expanded="${expanded}" aria-controls="outline-children-${node.key}" aria-label="${expanded ? '收起' : '展开'} ${escapeHtml(node.label)}">${icon('arrow')}</button>` : '<span class="outline-spacer" aria-hidden="true"></span>';
+    const title = node.id ? `<button type="button" class="outline-link${selected ? ' selected' : ''}" data-id="${escapeHtml(node.id)}"${selected ? ' aria-current="page"' : ''}>${escapeHtml(node.label)}</button>` : `<button type="button" class="outline-group" data-outline-toggle="${node.key}" aria-expanded="${expanded}" aria-controls="outline-children-${node.key}">${escapeHtml(node.label)}</button>`;
+    return `<li class="outline-node${depth === 0 && node.id ? ' outline-root' : ''}"><div class="outline-row">${toggle}${title}</div>${hasChildren ? `<div id="outline-children-${node.key}"${expanded ? '' : ' hidden'}>${renderOutline(node.children, depth + 1)}</div>` : ''}</li>`;
+  }).join('')}</ul>`;
+}
 function renderNavigation() {
   $('total-count').textContent = state.all.length;
   $('all-notes').classList.toggle('active', !state.trash && !state.category);
   $('deleted-notes').classList.toggle('active', state.trash);
-  $('categories').innerHTML = state.categories.map((category) => {
+  const mapped = new Set(outlineNotes().map((node) => node.id));
+  const roots = state.navigation.flatMap((node) => state.all.find((note) => note.id === node.id)?.category || []);
+  const shownCategories = state.categories.filter((category) => {
+    const notes = state.all.filter((note) => note.category === category || note.category.startsWith(category + '/'));
+    return !(roots.some((root) => category.startsWith(root + '/')) && notes.length && notes.every((note) => mapped.has(note.id)));
+  });
+  $('categories').innerHTML = shownCategories.map((category) => {
     const count = state.all.filter((note) => note.category === category || note.category.startsWith(category + '/')).length;
     const parts = category.split('/');
     return `<button class="nav-item ${!state.trash && state.category === category ? 'active' : ''}" data-category="${escapeHtml(category)}" title="${escapeHtml(category)}" style="padding-left:${11 + Math.min(parts.length - 1, 3) * 12}px">${icon('folder')}<span>${escapeHtml(parts.at(-1))}</span><span class="count">${count}</span></button>`;
@@ -849,18 +904,26 @@ function visibleNotes() {
 }
 function renderList() {
   const notes = visibleNotes();
+  const searching = Boolean($('search').value.trim());
+  const outline = !state.trash && !searching ? navigationOutline(notes) : [];
+  const mapped = new Set(outlineNotes(outline).map((node) => node.id));
+  const labels = new Map(outlineNotes().map((node) => [node.id, node.label]));
+  const remaining = outline.length ? notes.filter((note) => !mapped.has(note.id)) : notes;
   $('list-count').textContent = `${notes.length} 篇`;
-  $('list-subtitle').textContent = $('search').value.trim() ? '搜索结果' : state.trash ? '按删除时间排序 · 可恢复' : '最近更新';
-  $('note-list').innerHTML = notes.length ? notes.map((note) => {
+  $('list-subtitle').textContent = searching ? '搜索结果' : state.trash ? '按删除时间排序 · 可恢复' : outline.length ? '主文 → 组件 → 详细专题' : '最近更新';
+  $('note-list').classList.toggle('has-outline', Boolean(outline.length));
+  const cards = remaining.map((note) => {
     const selected = note.trash_id ? state.note?.trash_id === note.trash_id : !state.note?.trash_id && state.note?.id === note.id;
     const date = note.deleted_at || note.updated;
-    return `<button class="note-card ${selected ? 'selected' : ''}" data-id="${escapeHtml(note.id)}"${note.trash_id ? ` data-trash-id="${escapeHtml(note.trash_id)}"` : ''}><h2>${icon('file')}${escapeHtml(note.title)}</h2><p>${escapeHtml(note.excerpt || '这篇文档还没有正文。')}</p><div class="note-card-footer"><span>${escapeHtml(note.category)}</span><time datetime="${escapeHtml(date)}">${note.trash_id ? '删除于 ' : ''}${shortDate(date)}</time></div></button>`;
-  }).join('') : `<div class="no-results"><strong>${state.trash ? '没有已删除的文档' : '还没有找到文档'}</strong>${state.trash ? '删除的文档会保留在这里。' : '换个关键词，或新建一篇笔记。'}</div>`;
+    return `<button class="note-card ${selected ? 'selected' : ''}" data-id="${escapeHtml(note.id)}"${note.trash_id ? ` data-trash-id="${escapeHtml(note.trash_id)}"` : ''}><h2>${icon('file')}${escapeHtml(state.trash ? note.title : labels.get(note.id) || note.title)}</h2><p>${escapeHtml(note.excerpt || '这篇文档还没有正文。')}</p><div class="note-card-footer"><span>${escapeHtml(note.category)}</span><time datetime="${escapeHtml(date)}">${note.trash_id ? '删除于 ' : ''}${shortDate(date)}</time></div></button>`;
+  }).join('');
+  $('note-list').innerHTML = notes.length ? (outline.length ? renderOutline(outline) + (remaining.length ? '<div class="outline-other-label">其他文档</div>' : '') : '') + cards : `<div class="no-results"><strong>${state.trash ? '没有已删除的文档' : '还没有找到文档'}</strong>${state.trash ? '删除的文档会保留在这里。' : '换个关键词，或新建一篇笔记。'}</div>`;
 }
 async function loadIndex() {
   const data = await api('/api/notes');
   state.all = data.notes;
   state.categories = data.categories;
+  state.navigation = Array.isArray(data.navigation) ? data.navigation : [];
   renderNavigation();
   if (!state.trash && !$('search').value.trim()) {
     requestId++; state.matches = state.all; renderList();
@@ -977,10 +1040,11 @@ async function openNote(id, confirmed = false, category, options = {}) {
     const changedMode = state.trash !== Boolean(options.trash);
     state.trash = Boolean(options.trash);
     if (category !== undefined) state.category = category;
-    if (options.linked) state.category = note.category;
+    if (options.linked) state.category = options.trash ? note.category : outlineCategory(note);
     if (changedMode || options.linked) { $('search').value = ''; requestId++; }
     if (!changedMode && options.linked && !state.trash) state.matches = state.all;
     state.note = note;
+    if (!state.trash) expandOutlineAncestors(id);
     if (!state.trash) rememberLastNote(id);
     updateLocation(options.replace, options.fragment);
     renderNavigation();
@@ -1013,7 +1077,7 @@ async function chooseCategory(category) {
   setNoteListCollapsed(false);
   selectionId++;
   const notes = (state.trash ? state.all : state.matches).filter((note) => !category || note.category === category || note.category.startsWith(category + '/'));
-  if (notes.length) await openNote(notes[0].id, true, category);
+  if (notes.length) await openNote(preferredNote(notes).id, true, category);
   else {
     const wasTrash = state.trash;
     state.trash = false; state.category = category; state.note = null;
@@ -1197,9 +1261,14 @@ $('toc').addEventListener('click', async (event) => {
   updateLocation(false, fragment); scrollToFragment(fragment);
 });
 $('categories').addEventListener('click', (event) => { const button = event.target.closest('[data-category]'); if (button) chooseCategory(button.dataset.category); });
-$('note-list').addEventListener('click', (event) => { const button = event.target.closest('[data-id]'); if (button) openNote(button.dataset.trashId || button.dataset.id, false, undefined, { trash: Boolean(button.dataset.trashId) }); });
+$('note-list').addEventListener('click', (event) => {
+  const toggle = event.target.closest('[data-outline-toggle]');
+  if (toggle) { outlineExpanded.set(toggle.dataset.outlineToggle, toggle.getAttribute('aria-expanded') !== 'true'); renderList(); $('note-list').querySelector(`[data-outline-toggle="${toggle.dataset.outlineToggle}"]`)?.focus({ preventScroll: true }); return; }
+  const button = event.target.closest('[data-id]');
+  if (button) openNote(button.dataset.trashId || button.dataset.id, false, undefined, { trash: Boolean(button.dataset.trashId) });
+});
 for (const type of ['pointerover', 'focusin', 'touchstart']) $('note-list').addEventListener(type, (event) => {
-  const button = event.target.closest('.note-card[data-id]');
+  const button = event.target.closest('.note-card[data-id], .outline-link[data-id]');
   if (button && !button.dataset.trashId && !button.contains(event.relatedTarget)) prefetchNote(button.dataset.id);
 }, { passive: true });
 $('search').addEventListener('input', () => { requestId++; clearTimeout(searchTimer); searchTimer = setTimeout(search, 180); });
@@ -1370,7 +1439,7 @@ async function openLocation() {
   if (params.get('view') === 'deleted') return showDeleted({ replace: true });
   if (params.has('note')) return openNote(params.get('note'), false, undefined, { linked: true, replace: true, fragment });
   const last = lastNoteId();
-  const note = state.all.find((item) => item.id === last) || state.all.find((item) => item.title === '欢迎来到知序') || state.all[0];
+  const note = (state.navigation.length ? preferredNote(state.all) : null) || state.all.find((item) => item.id === last) || state.all.find((item) => item.title === '欢迎来到知序') || state.all[0];
   if (note) return openNote(note.id, false, '', { replace: true, fragment });
   if (!canLeave()) return false;
   state.note = null; state.trash = false; state.category = ''; state.matches = []; showView('empty-view'); renderNavigation(); renderList(); return true;

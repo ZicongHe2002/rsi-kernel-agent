@@ -1,5 +1,13 @@
 # Phase 3 真实执行接口指南
 
+## 2026-11-20 连续候选协议增量
+
+新准备的 Context 使用 `execution_mode=candidate.v1`。`make_candidate_request` 固定一个 Run 的 generate/compile/correctness/benchmark/profile 请求；Controller 先预留一次预算并持久化提交边界，ColabBackend/ColabRemote 经 `submit_candidate` 一次提交整份候选包，worker 在同一新进程、同一 Runtime 锁内串行完成各阶段。`lookup_candidate` 返回已验证回执前缀与运行终态；原 stage 请求 ID 和固定 Evaluator 保留。旧 Context 的阶段协议与已完成回执继续可读，不能把旧父计时当新 Context 分母。
+
+`cancel_candidate` 只在阶段边界停止后续工作；必须有终态并确认原 PID/创建身份已经退出才能释放执行槽。unknown 保持隔离，不因后续缺目录自动重提；提交前只读查询失败而从未提交的尝试，可以在确认未启动后取消。新连续 Run 的修复/重试必须回到下一设计轮并重新 CPU 检查，不能继承旧候选请求或绕过冻结批次。
+
+上传仍受企业文件检查约束：源码、worker/runner、候选包外发前必须取得 `allow`，block/error 不得换通道绕过；当前工具入口缺失，尚未执行三轮 TPU 验证。设备限定单 TPU v6e，使用 `Desktop/colab/google-colab-cli` 既有安装。以下 2026-11-12/13 内容是旧阶段协议的历史说明，不表示连续协议已完成硬件验收。
+
 <!-- report-status-20261113 -->
 > 2026-11-13状态索引：真实Oracle负例、基线、Profile和首轮5候选均已完成；第二轮和稳定收益未确认，当前无Runtime。下文接口说明中的“当前/尚未”及测试数量记录其原撰写时点；最新总体结论见 [Phase 3进展报告](../../knowledge-site/manifests/phase3-2026-11-12/implementation-report.md)。
 

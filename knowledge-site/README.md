@@ -76,7 +76,7 @@ content/
   .trash/                               # owner 回收站
 ```
 
-当前文档入口见[RSI 文档索引](content/学习方法/rsi-document-index.md)，仓库层审计、来源清单和权限说明见[工程索引](index.md)。最初四篇使用示例目前位于回收站，不是当前设计资料。
+主入口是[RSI Kernel Agent：整体流程与模块分工](content/学习方法/rsi-kernel-agent.md)，再按五个组件进入详细专题；[辅助目录](content/学习方法/rsi-document-index.md)收在参考资料中，仓库层审计、来源清单和权限说明见[工程索引](index.md)。最初四篇使用示例目前位于回收站，不是当前设计资料。
 
 - 在有分类编辑权限时，点击「新建文档」后填写标题、分类和 Markdown 正文，再保存。
 - 分类支持 `机器学习/TPU` 这样的多级名称；owner 编辑文档的分类即可移动文档。
@@ -146,3 +146,7 @@ python -B -m unittest discover -v
 ## RSI 文档与工程边界
 
 网站已实现 Markdown 与 MCP 读写；RSI Phase 2A 的共享契约、独立实验存储与版本化快照已通过本地验收，见[实现报告](manifests/phase2a-2026-11-11/implementation-report.md)。Phase 2B 已实现 Knowledge 方法/来源与 Memory 两阶段检索，见[2B实现报告](manifests/phase2b-2026-11-11/implementation-report.md)。Phase 2C 已实现离线 Profiler/Analyzer、会话模型工具循环与多策略Plan，见[接口指南](../docs/phase2c-profiler-analyzer.md)及[实现报告](manifests/phase2c-2026-11-11/implementation-report.md)。Phase 2D+ 已实现确定性Controller、逐Plan Intake、预算/队列、固定Evaluator、有限修复和持久回执恢复，并运行原MCP/Memory/Profiler/Analyzer串联的两轮synthetic Demo；当前已通过本地验收，等待用户审查，见[2D+接口指南](../docs/phase2d-workflow-controller.md)和[实现报告](manifests/phase2d-2026-11-11/implementation-report.md)。Workflow沿用原schema v1、Store与Memory，模型推理仍使用当前对话会话；synthetic结果不证明真实Kernel优化，Phase 3真实硬件验证未开始。真实 MLA 源码与现有 Colab CLI 已做只读审计，后续执行范围与限制见[工程索引](index.md)。权限政策见[ACCESS_POLICY](access/ACCESS_POLICY.md)，连接边界见[connections](connections/README.md)。
+
+## 文档目录层级
+
+`navigation.json` 声明网站展示目录；主文、五个组件与详细专题按固定层级展开，参考进展和历史资料默认折叠。只有当前账号可访问的文档会显示。未配置的新增笔记仍在文档列表和搜索中可见，原文档 ID 与链接保持可用。
