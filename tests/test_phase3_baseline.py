@@ -60,6 +60,7 @@ class BaselineTests(unittest.TestCase):
             created = self.module.create_baseline(store, environment, source_root=root)
             self.assertEqual(created['task_id'], 'mla-decode-v1')
             self.assertEqual(store.get(created['context_id']).provenance, 'real')
+            self.assertEqual(store.get(created['context_id']).protocol['execution_mode'], 'candidate.v1')
             self.assertIsNone(store.get(created['parent_id']).candidate_id)
             self.assertEqual(created['variant']['source_ref']['digest'], store.get(created['candidate_id']).identity.source_digest)
             self.assertIn('decode-default', [case['id'] for case in created['contract']['workload']['spec']['cases']])

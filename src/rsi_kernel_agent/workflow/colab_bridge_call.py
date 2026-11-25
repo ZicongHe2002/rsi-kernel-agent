@@ -11,6 +11,38 @@ from pathlib import Path
 import sys
 
 
+class PinnedKernelUnavailable(RuntimeError):
+    """The saved control kernel cannot be attached without replacing it."""
+
+
+@contextlib.contextmanager
+def _bound_kernel(kernel_id):
+    if not kernel_id:
+        yield  # Initial admission may create the session's first control kernel.
+        return
+    import jupyter_kernel_client
+
+    for name in ('ColabKernelClient', 'KernelClient', 'JupyterKernelClient'):
+        if hasattr(jupyter_kernel_client, name):
+            break
+    original = getattr(jupyter_kernel_client, name)
+
+    class BoundKernelClient(original):
+        def start(self, *args, **kwargs):
+            # The SDK converts GET 404 into a missing model, then start() would
+            # POST a replacement. Check its observed identity before start().
+            if self.id != kernel_id:
+                raise PinnedKernelUnavailable('Pinned control kernel is unavailable')
+            return super().start(*args, **kwargs)
+
+    # This module runs in a dedicated bridge child; restore even after failure.
+    setattr(jupyter_kernel_client, name, BoundKernelClient)
+    try:
+        yield
+    finally:
+        setattr(jupyter_kernel_client, name, original)
+
+
 def call(request):
     from colab_cli.common import state
     from colab_cli.contents import ContentsClient
@@ -44,10 +76,11 @@ def call(request):
     runtime = ColabRuntime(session.url, session.token, kernel_id=session.kernel_id,
                            session_id=session.session_id, on_kernel_started=kernel_started,
                            on_session_started=session_started)
-    try:
-        return runtime.execute_code(request['code'], timeout=request['timeout'], allow_stdin=False)
-    finally:
-        runtime.stop(shutdown_kernel=False)
+    with _bound_kernel(session.kernel_id):
+        try:
+            return runtime.execute_code(request['code'], timeout=request['timeout'], allow_stdin=False)
+        finally:
+            runtime.stop(shutdown_kernel=False)
 
 
 def main():

@@ -31,19 +31,29 @@ def _write(path, value):
 
 
 def start_session(store, manifest, directory, *, model_label, configuration='review', skills=None,
-                  max_turns=6, max_tool_calls=12, max_response_chars=60000):
+                  max_turns=None, max_tool_calls=None, max_response_chars=60000):
     require(type(model_label) is str and bool(model_label.strip()), 'Session model label required')
     directory = Path(directory)
     directory.mkdir(parents=True,exist_ok=True)
     require(not (directory/'session.json').exists(), 'Session already exists')
     pinned = load_manifest(store,manifest.artifact_ref)
-    options = dict(configuration=configuration,skills=skills or {},max_turns=max_turns,
-                   max_tool_calls=max_tool_calls,max_response_chars=max_response_chars)
+    options = dict(configuration=configuration,skills=skills or {},max_turns=6 if max_turns is None else max_turns,
+                   max_tool_calls=12 if max_tool_calls is None else max_tool_calls,max_response_chars=max_response_chars)
     analyzer = Analyzer(pinned,artifacts=store.artifacts,**options)
+    packet = analyzer.packet()
+    if pinned.to_dict()['schema_version'] == 2:
+        chars = sum(len(canonical_json(node)) for node in packet['manifest']['nodes'].values())
+        pages = (chars + 23999) // 24000
+        if max_turns is None:
+            options['max_turns'] = pages + 6
+        if max_tool_calls is None:
+            options['max_tool_calls'] = pages + 12
+        analyzer.limits = (options['max_turns'], options['max_tool_calls'], max_response_chars)
+        packet = analyzer.packet()
     state = {'schema_version':1,'manifest':asdict(manifest.artifact_ref),'model_label':model_label,
              'options':options,'responses':[],'result_digest':None}
     _write(directory/'session.json',state)
-    _write(directory/'packet.json',analyzer.packet())
+    _write(directory/'packet.json',packet)
     return directory/'packet.json'
 
 

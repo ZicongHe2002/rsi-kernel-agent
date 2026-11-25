@@ -76,7 +76,7 @@ def reserve(state, job):
     return True
 
 
-def choose_jobs(state):
+def choose_jobs(state, *, eligible=None):
     """Mutate one admission batch; pending/unknown jobs retain their slots."""
     limits = validate_limits(state['limits'])
     remaining_budget(state)
@@ -95,9 +95,18 @@ def choose_jobs(state):
     admitted = []
     while active < limits['max_concurrency']:
         queued = [job for job in state['jobs'].values()
-                  if job['state']=='queued' and job['strategy_id'] not in state['paused']]
+                  if job['state']=='queued' and job['strategy_id'] not in state['paused']
+                  and (eligible is None or job['id'] in eligible)]
         if not queued:
             break
+        batch_queued = [job for job in queued if job.get('design_batch_id')]
+        if batch_queued:
+            first_pass = [job for job in batch_queued if not any(
+                other.get('design_batch_id') == job['design_batch_id']
+                and other['strategy_id'] == job['strategy_id'] and other['reserved']
+                for other in state['jobs'].values())]
+            if first_pass:
+                queued = [job for job in queued if not job.get('design_batch_id')] + first_pass
         strategies = {job['strategy_id'] for job in queued}
         sid = min(strategies,key=lambda sid:(
             Fraction(state['served'].get(sid,0)) / Fraction(limits['weights'].get(sid,1)),sid))

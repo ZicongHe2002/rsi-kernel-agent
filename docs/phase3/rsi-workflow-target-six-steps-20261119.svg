@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2200" viewBox="0 0 1600 2200" role="img" aria-labelledby="title desc">
+<title id="title">RSI 修订目标流程：每条路线独立迭代，所有候选共用一台 TPU</title>
+<desc id="desc">目标流程第三版，尚未完整实现。每条方法/路线读取本轮全部结果及所有轮次、所有候选的结构化指标历史，包括有来源的MFU、cycle、host/device毫秒、正确性、失败与环境；大日志和原始trace按需展开。AI结合历史、Profiler、Memory和Knowledge自主判断新假设与继续/暂停，保留理由和重启条件。全部CPU通过的同源候选在一台TPU上串行完成编译、正确性、重复计时与Profile。新路线首次尝试后进入相同循环。本次仅改图和约定记录，不启动实验。</desc>
+<defs>
+<marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#52514e"/></marker>
+<style>text{font-family:"Microsoft YaHei","Segoe UI",sans-serif;fill:#0b0b0b}.title{font-size:32px;font-weight:700}.h{font-size:21px;font-weight:700}.b{font-size:17px}.s{font-size:15px;fill:#52514e}.small{font-size:13px;fill:#52514e}.note{font-size:17px;font-weight:600}.label{font-size:14px;font-weight:700}.box{fill:#fcfcfb;stroke:#c3c2b7;stroke-width:1.5;rx:12}.blue{stroke:#2a78d6;stroke-width:2}.orange{stroke:#eb6834;stroke-width:2}.flow{fill:none;stroke:#52514e;stroke-width:2;marker-end:url(#arrow)}.rule{stroke:#e1e0d9;stroke-width:1}.node:focus rect{stroke-width:3}</style>
+</defs>
+<rect width="1600" height="2200" fill="#fcfcfb"/>
+<text x="56" y="58" class="title">每条路线各自迭代，所有候选在一台 TPU 上跑完</text>
+<text x="56" y="92" class="b">修订目标图 v3 · 完整指标 history + AI 自主决定暂停 · 2026-11-19 · 目标约定，不是已实现状态</text>
+<text x="56" y="121" class="s">你的“method A/B”在此按长期路线理解（代码中 strategy）；Knowledge 的 method 是可复用机制，不等于单个候选。</text>
+<line x1="56" y1="144" x2="1544" y2="144" class="rule"/>
+<rect x="56" y="162" width="13" height="13" fill="#2a78d6"/><text x="80" y="175" class="s">各路线：自己的结果 → 自己的分析 → 自己的新候选</text>
+<rect x="660" y="162" width="13" height="13" fill="#eb6834"/><text x="684" y="175" class="s">全局只汇总、调度与共享 TPU；不是只挑一个 winner 继续</text>
+
+<g class="node" tabindex="0"><title>第r轮的N个候选结果全部进入archive并按strategy/Plan/候选/父版本/Context绑定。失败也要分析并保留；最新结果不自动成为下一父版本。</title><rect x="80" y="199" width="1440" height="90" class="box"/>
+<text x="104" y="233" class="h">第 r 轮的 N 个候选结果：A 的 nA 个 + B 的 nB 个 + 其它路线的结果</text>
+<text x="104" y="264" class="b">每个结果都看：正确性 / 速度 / Profile / 失败 / 成本；全部保存，再按路线组织下一轮，不只看最快的一个。</text></g>
+<path d="M800 289V307H305V333" class="flow"/><path d="M800 307V333" class="flow"/><path d="M800 307H1295V333" class="flow"/>
+
+<rect x="80" y="337" width="450" height="523" fill="#f9f9f7" rx="16"/>
+<text x="102" y="370" class="h">路线 A：独立上下文</text>
+<g class="node" tabindex="0"><title>逐项查看A最新一轮的所有候选结果，包括正确但慢、失败和未执行；Profile必须与对应候选/父版本和环境匹配。</title><rect x="100" y="390" width="410" height="90" class="box blue"/>
+<text x="120" y="422" class="note">1–2  看 A 本轮全部结果及不足</text><text x="120" y="451" class="s">对应源码 + timing + Profile + 失败原因</text><text x="120" y="473" class="small">Parser 整理，Analyzer 解释；未知不是零</text></g>
+<path d="M305 480V502" class="flow"/>
+<g class="node" tabindex="0"><title>将A本轮不足与A全部轮次、全部候选的结构化指标历史对照，包括MFU、cycle、ms、正确性、失败与变更身份。全量指标记录不截断为最近几条或只有最佳；原始trace、大日志和旧对话按需展开，不混入B完整会话。</title><rect x="100" y="506" width="410" height="82" class="box"/>
+<text x="120" y="538" class="note">读 A 的完整指标 history / Memory</text><text x="120" y="567" class="s">全部轮次：MFU / cycles / ms / 正确性与失败</text></g>
+<path d="M305 588V610" class="flow"/>
+<g class="node" tabindex="0"><title>围绕A的新问题定向检索或主动发现，形成可检验下一步，保留多个有依据的Plan。无合理下一步可暂停并记原因，不能因一次慢就自动判死。</title><rect x="100" y="614" width="410" height="94" class="box blue"/>
+<text x="120" y="646" class="note">3–4  Knowledge → 新 Plan → AI 决定去留</text><text x="120" y="675" class="s">AI 判断新假设与投入价值；生成候选或暂停</text><text x="120" y="699" class="small">A1、A2…均有自己的目的、源码和父版本</text></g>
+<path d="M305 708V730" class="flow"/>
+<g class="node" tabindex="0"><title>执行A的候选源码而不只是Oracle。CPU通过后固定源码/依赖/语义配置及结果摘要；后续源码变化必须重验。</title><rect x="100" y="734" width="410" height="106" class="box blue"/>
+<text x="120" y="766" class="note">5  CPU 验证 A1、A2…同源候选</text><text x="120" y="795" class="s">常规/边界/完整 cache；通过后冻结候选包</text><text x="120" y="824" class="small">失败有限修复或结束；不支持则未验证/延期</text></g>
+
+<rect x="575" y="337" width="450" height="523" fill="#f9f9f7" rx="16"/>
+<text x="597" y="370" class="h">路线 B：独立上下文</text>
+<g class="node" tabindex="0"><title>B必须检查自己的N个结果，不自动把A的Profile当成B瓶颈；必要跨路线经验以显式引用共享。</title><rect x="595" y="390" width="410" height="90" class="box blue"/>
+<text x="615" y="422" class="note">1–2  看 B 本轮全部结果及不足</text><text x="615" y="451" class="s">对应源码 + timing + Profile + 失败原因</text><text x="615" y="473" class="small">不因 A 更快就跳过 B 的结果与新机会</text></g>
+<path d="M800 480V502" class="flow"/>
+<g class="node" tabindex="0"><title>每条路线都有自己的Memory上下文，公共契约和具名父依赖可共享，但不互相继承完整对话。</title><rect x="595" y="506" width="410" height="82" class="box"/>
+<text x="615" y="538" class="note">读 B 的完整指标 history / Memory</text><text x="615" y="567" class="s">全部候选都保留，不只看最近或最快的记录</text></g>
+<path d="M800 588V610" class="flow"/>
+<g class="node" tabindex="0"><title>每条可继续路线都走Knowledge和方案优化，不是选出全局最好路线后只有它生成新计划。</title><rect x="595" y="614" width="410" height="94" class="box blue"/>
+<text x="615" y="646" class="note">3–4  Knowledge → 新 Plan → AI 决定去留</text><text x="615" y="675" class="s">AI 判断新假设与投入价值；生成候选或暂停</text><text x="615" y="699" class="small">B1、B2…与 A 的候选一起进入同一批次</text></g>
+<path d="M800 708V730" class="flow"/>
+<g class="node" tabindex="0"><title>CPU与TPU共享同一份B候选源码/依赖/语义配置；后端可分别是Pallas解释模式和TPU真实编译。</title><rect x="595" y="734" width="410" height="106" class="box blue"/>
+<text x="615" y="766" class="note">5  CPU 验证 B1、B2…同源候选</text><text x="615" y="795" class="s">同一份 kernel，只切 CPU / TPU 后端</text><text x="615" y="824" class="small">CPU 通过仍不等于 TPU 正确或性能更快</text></g>
+
+<rect x="1070" y="337" width="450" height="523" fill="#f9f9f7" rx="16"/>
+<text x="1092" y="370" class="h">D / 其它路线：同样的循环</text>
+<g class="node" tabindex="0"><title>已有D路线与A/B完全同流程。新路线首次没有自己的结果，不伪造最新结果；使用方法来源、精确父实现和适用条件做第一次有界尝试，第二轮起读自己的反馈。</title><rect x="1090" y="390" width="410" height="90" class="box blue"/>
+<text x="1110" y="422" class="note">已有路线：看自己最新一轮结果</text><text x="1110" y="451" class="s">新路线首次：方法来源 + 精确父版本</text><text x="1110" y="473" class="small">没有自己的 result 时，不虚构历史或瓶颈</text></g>
+<path d="M1295 480V502" class="flow"/>
+<g class="node" tabindex="0"><title>新方法不一定成为新路线：普通参数变化留在原路线；值得独立演进的实质机制才新建，并保留父谱系。</title><rect x="1090" y="506" width="410" height="82" class="box"/>
+<text x="1110" y="538" class="note">读本路线全部指标 / 明确父依赖</text><text x="1110" y="567" class="s">首次没有自有历史；随后每轮追加并完整读取</text></g>
+<path d="M1295 588V610" class="flow"/>
+<g class="node" tabindex="0"><title>新路线首轮先形成有界实验，不必马上胜出；后续由AI基于本路线完整指标历史、Profile、Memory和Knowledge自主判断是否仍有合理新假设，决定继续或暂停。保留理由和重启条件，预算与权限仍由程序约束。</title><rect x="1090" y="614" width="410" height="94" class="box blue"/>
+<text x="1110" y="646" class="note">3–4  Knowledge → 新 Plan → AI 决定去留</text><text x="1110" y="675" class="s">首轮尝试；后续 AI 据全部历史决定是否继续</text><text x="1110" y="699" class="small">不保证第一版变快，不因一次慢就自动淘汰</text></g>
+<path d="M1295 708V730" class="flow"/>
+<g class="node" tabindex="0"><title>所有新旧路线的候选经过同一CPU检查标准，归入统一批次；没有合理候选的路线保存原因，本轮不占TPU队列。</title><rect x="1090" y="734" width="410" height="106" class="box blue"/>
+<text x="1110" y="766" class="note">5  CPU 验证 D1、D2…同源候选</text><text x="1110" y="795" class="s">固定同一正确性规则；不因新颖而绕过验证</text><text x="1110" y="824" class="small">无候选/资源不足明确延期，历史完整保留</text></g>
+
+<path d="M305 840V889H800V919" class="flow"/><path d="M800 840V889" fill="none" stroke="#52514e" stroke-width="2"/><path d="M1295 840V889H800" fill="none" stroke="#52514e" stroke-width="2"/>
+<text x="80" y="912" class="small">各路线分别执行这套逻辑；可按稳定顺序逐个分析，不要求多个 Agent 并行。</text>
+<g class="node" tabindex="0"><title>全部路线产出候选或明确无Plan理由后，只做一次批次就绪检查；冻结版本和CPU结果不变则复用，不要求拿到TPU后再做一轮完整模型研究。</title><rect x="240" y="923" width="1120" height="86" class="box orange"/>
+<text x="264" y="956" class="h">汇总本轮 CPU 已通过候选：A1、A2、B1、B2、D1…</text><text x="264" y="986" class="b">全批方案收束 + 源码身份 + 预算/权限一次检查；没有候选就结束，不为凑流程申请 TPU</text></g>
+<path d="M800 1009V1040" class="flow"/>
+<g class="node" tabindex="0"><title>整批所有候选的编译、正确性、预热重复计时和Profile都在同一台已分配TPU Runtime串行完成；不是编译一台、计时一台，也不是路线各一台。环境可用就尽量跨轮复用。设备异常保留检查点，unknown不盲目重提。</title><rect x="120" y="1044" width="1360" height="248" class="box orange"/>
+<text x="146" y="1080" class="h">6  同一台 TPU / 同一个 Runtime：所有路线、所有候选串行跑完整流程</text>
+<text x="146" y="1114" class="b">分配或复用一次 → 环境/身份核对 → 必要裁判校准和准确父版本测量 → 连续执行整批</text>
+<text x="146" y="1153" class="h">A1：编译 → TPU 正确性 → 预热 / 重复计时 → Profile → 保存</text>
+<text x="146" y="1186" class="b">接着 A2、B1、B2、D1…；不换设备，不在每个阶段回来找 LLM 重新研究</text>
+<line x1="146" y1="1203" x2="1454" y2="1203" class="rule"/>
+<text x="146" y="1229" class="s">每候选/特化复用输入、Oracle、编译产物；计时与诊断分开执行，状态型输入按协议恢复。</text>
+<text x="146" y="1257" class="s">正确性失败：不记性能胜出，归档后继续其它候选；设备丢失：保留结果与检查点，核查后恢复剩余工作。</text>
+<text x="146" y="1280" class="small">一次批次 ≠ 一次计时样本；同设备可用时下一轮继续复用；诊断编译参数变化时单独标记 executable。</text></g>
+<path d="M800 1292V1322" class="flow"/>
+<g class="node" tabindex="0"><title>结果按route/candidate回写，包括成功、慢、错误和缺项。各路线各自读新结果进入下一轮，branch best/task best/frontier分别更新，不把全局winner选择替代其它路线的下一步。</title><rect x="240" y="1326" width="1120" height="91" class="box"/>
+<text x="264" y="1360" class="h">结果分别回写：Memory A / Memory B / Memory D…</text><text x="264" y="1391" class="b">形成第 r+1 轮的新结果集合（数量可变）→ 每条路线再次分析自己的不足 → 下一批候选</text></g>
+<path d="M240 1370H35V244H80" class="flow"/><text x="22" y="1196" class="small" transform="rotate(-90 22 1196)">每轮读取本路线全部指标 history；原始 trace / 大日志按需展开，不重跑已完成操作</text>
+
+<line x1="56" y1="1450" x2="1544" y2="1450" class="rule"/>
+<text x="56" y="1488" class="h">Profiler / XProf / Analyzer：是三个职责，不是三个都要重跑 TPU 的步骤</text>
+<g class="node" tabindex="0"><title>实际固定脚本用jax.profiler.start_trace、StepTraceAnnotation、stop_trace采集。XPlane可以用XProf查看，但自动流程直接保存并解析文件；不需要人工打开UI才继续。</title><rect x="80" y="1512" width="450" height="170" class="box"/>
+<text x="103" y="1546" class="note">① TPU 运行时：JAX Profiler 采集</text><text x="103" y="1578" class="s">jax.profiler 开启/停止采集，等待输出完成</text><text x="103" y="1608" class="s">保存原始 .xplane.pb；关联候选与 Run</text><text x="103" y="1638" class="s">当前固定环境记录 xprof 2.22.1</text><text x="103" y="1667" class="small">不要求每轮手动打开 XProf 网页界面</text></g>
+<path d="M530 1597H571" class="flow"/>
+<g class="node" tabindex="0"><title>固定Parser读取XPlane，按程序/操作和调用标识关联，提取事件样本、起止和duration，生成duration.json，再由profiles.py归一化。缺失的DMA、VMEM、MXU信息不能编造。</title><rect x="575" y="1512" width="450" height="170" class="box"/>
+<text x="598" y="1546" class="note">② 运行后解析：Parser / Profiler</text><text x="598" y="1578" class="s">原始 trace → duration.json → 统一证据</text><text x="598" y="1608" class="s">Program / prepare / attention 等实际事件</text><text x="598" y="1638" class="s">核对身份、时间单位、范围及缺失项</text><text x="598" y="1667" class="small">已有数据够用就离线复用，不重复采集</text></g>
+<path d="M1025 1597H1066" class="flow"/>
+<g class="node" tabindex="0"><title>Analyzer是Profiler的分析分支。它结合路线结果、Profile、源码、Memory、Knowledge和按需工具形成假设/Plans，不修改Oracle或决定真实性能冠军。</title><rect x="1070" y="1512" width="450" height="170" class="box blue"/>
+<text x="1093" y="1546" class="note">③ 离线理解：Analyzer → 新 Plan</text><text x="1093" y="1578" class="s">结合代码 + Profile + 本路线 Memory</text><text x="1093" y="1608" class="s">Knowledge / 数学工具 → 不足与优化假设</text><text x="1093" y="1638" class="s">每条路线一份或多份 Plan；无 Plan 有原因</text><text x="1093" y="1667" class="small">性能由固定测量裁判，不是模型猜测</text></g>
+
+<g class="node" tabindex="0"><title>History明确指本方法/路线所有轮次、所有候选的结构化实验指标记录，不只看最新、最近K条或赢家。输入超长可以完整分页，不把摘要当全部记录。原始trace、旧对话和大日志仅在解释问题时按需展开。指标必须带来源、定义和可比条件，不同host/device或环境不混比。</title><rect x="56" y="1711" width="720" height="242" class="box blue"/>
+<text x="80" y="1747" class="h">已明确：history = 本路线全部实验指标历史</text>
+<text x="80" y="1780" class="b">全部轮次 / 全部候选，包括失败与未取得指标的记录</text>
+<text x="80" y="1812" class="s">每行：round / candidate / 代码版本 / parent / workload / 环境</text>
+<text x="80" y="1844" class="s">指标：MFU / cycles / host_ms / device_ms / correctness / 失败原因</text>
+<text x="80" y="1876" class="s">MFU、cycles 保留定义与来源；host/device 分列，不跨环境混比。</text>
+<text x="80" y="1908" class="s">缺失写 unavailable/null，不能填 0；这不表示所有指标现在都有。</text>
+<text x="80" y="1934" class="small">完整指标表可分页；原始 trace、大日志、旧对话按需展开，不逐轮全重放。</text></g>
+<g class="node" tabindex="0"><title>AI综合完整指标趋势、最新不足、Memory和Knowledge自主判断是否有值得继续验证的新假设，决定继续、暂停或在条件变化后重启。不固定以一次慢、机械阈值或凑轮数替代判断；记录理由、证据引用及重启条件。Controller执行预算、授权及正确性边界，AI不能扩权。</title><rect x="800" y="1711" width="744" height="242" class="box orange"/>
+<text x="824" y="1747" class="h">已明确：AI 自主判断是否继续 / 暂停</text>
+<text x="824" y="1780" class="b">完整指标趋势 + 本轮不足 + Memory + Knowledge → 判断</text>
+<text x="824" y="1812" class="s">有合理、可验证的新假设 → 继续生成候选；暂无值得尝试的方向 → 暂停。</text>
+<text x="824" y="1844" class="s">记录判断理由、引用的结果与重启条件；不要求用户逐次批准暂停。</text>
+<text x="824" y="1876" class="s">不是“单次慢就淘汰”，也不为凑轮数重复无信息量的尝试。</text>
+<text x="824" y="1908" class="s">新知识 / 新证据 / 条件变化后，AI 可以重新评估暂停路线。</text>
+<text x="824" y="1934" class="small">AI 决定研究价值；程序仍约束预算、执行权限与正确性，不能无限重试。</text></g>
+<rect x="56" y="1981" width="1488" height="100" fill="#f9f9f7" rx="14"/>
+<text x="79" y="2014" class="note">当前实现边界：图中指标与决策规则是目标，不冒充现有能力</text>
+<text x="79" y="2044" class="s">采集链已接通；host benchmark 与 Profile device 时长分开。MFU/cycles 需有效来源，未采集或未推导就明确缺失。</text>
+<text x="79" y="2070" class="s">当前 Parser 主要提取 program/custom-call 时长，尚非完整 DMA/等待/VMEM/MXU 自动诊断；本次未改生产代码或启动实验。</text>
+<text x="56" y="2118" class="h">本次确认：指标历史全量读取，AI 自主判断暂停；每条路线迭代，全部候选共享一台 TPU</text>
+<text x="56" y="2148" class="s">新路线首轮基于方法与精确父版本尝试；之后与其它路线一样按完整指标 history 和新结果优化。执行政策仍需后续落实。</text>
+<text x="56" y="2176" class="small">依据：本轮用户澄清；知识库 Profiler / Analyzer、Memory、Benchmark 与单 Runtime 约定。本图更新不代表已实现或新增执行授权。</text>
+</svg>

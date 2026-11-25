@@ -49,10 +49,12 @@ class ColabBridge:
         options = {'input': json.dumps(request), 'text': True, 'encoding': 'utf-8',
                    'capture_output': True, 'timeout': self.timeout + 10,
                    'env': {**os.environ, 'PYTHONUTF8': '1', 'COLAB_CLI_REQUEST_TIMEOUT': str(self.timeout)}}
+        options['env'].pop('PYTHONPATH', None)
+        options['env'].pop('PYTHONHOME', None)
         if os.name == 'nt':
             options['creationflags'] = subprocess.CREATE_NO_WINDOW
         try:
-            result = subprocess.run([self.python, '-B', '-X', 'utf8',
+            result = subprocess.run([self.python, '-I', '-B', '-X', 'utf8',
                                      str(Path(__file__).with_name('colab_bridge_call.py'))], **options)
         except subprocess.TimeoutExpired:
             raise BridgeUnavailable('Bridge deadline exceeded; remote outcome unknown') from None

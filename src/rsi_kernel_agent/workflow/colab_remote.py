@@ -92,7 +92,9 @@ class ColabRemote:
         code = ('import base64, hashlib, json, os\nfrom pathlib import Path\n'
                 f'_rsi_root=Path({self.root!r})\n'
                 'assert all(not p.is_symlink() for p in (_rsi_root,*_rsi_root.parents)), "linked root"\n'
-                '_rsi_tools=_rsi_root/"tools"\n_rsi_tools.mkdir(parents=True,exist_ok=True)\n'
+                '_rsi_tools=_rsi_root/"tools"\n'
+                'assert all(not p.is_symlink() for p in (_rsi_tools,*_rsi_tools.parents)), "linked tools"\n'
+                '_rsi_tools.mkdir(parents=True,exist_ok=True)\n'
                 f'for _rsi_name,_rsi_item in json.loads({json.dumps(content)!r}).items():\n'
                 '    _rsi_raw=base64.b64decode(_rsi_item["bytes"],validate=True)\n'
                 '    assert hashlib.sha256(_rsi_raw).hexdigest()==_rsi_item["digest"]\n'
@@ -108,7 +110,19 @@ class ColabRemote:
     def lookup(self, operation_id):
         return extract_json_result(self.bridge.execute(self._code(self._command('lookup', operation_id=operation_id))))
 
+    def lookup_candidate(self, operation_id):
+        return extract_json_result(self.bridge.execute(self._code(self._command('lookup_candidate', operation_id=operation_id))))
+
+    def cancel_candidate(self, operation_id):
+        return extract_json_result(self.bridge.execute(self._code(self._command('cancel_candidate', operation_id=operation_id))))
+
+    def submit_candidate(self, request, payload):
+        return self._submit('submit_candidate', request, payload)
+
     def submit(self, request, payload):
+        return self._submit('submit', request, payload)
+
+    def _submit(self, action, request, payload):
         digest = sha256(json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()).hexdigest()
         remote = self.root + '/incoming/' + digest + '.json'
         # Upload only to an observed runtime and existing spool. Failed upload
@@ -124,7 +138,7 @@ class ColabRemote:
             local.write_text(json.dumps(payload, sort_keys=True, separators=(',', ':'), ensure_ascii=False), encoding='utf-8')
             self.bridge.put(local, remote.lstrip('/'))
         return extract_json_result(self.bridge.execute(self._code(self._command(
-            'submit', request=request, payload_path=remote, runner_path=self.runner_remote_path))))
+            action, request=request, payload_path=remote, runner_path=self.runner_remote_path))))
 
     def read_artifact(self, artifact):
         path = artifact['path']

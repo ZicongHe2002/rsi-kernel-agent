@@ -171,6 +171,52 @@ def observe_device_owners():
     return report
 
 
+def _process_identity(pid):
+    if os.name == 'posix':
+        try:
+            fields = Path('/proc', str(pid), 'stat').read_text().rsplit(')', 1)[1].split()
+            if fields[0] in ('Z', 'X'):
+                return 'dead', None
+            return 'alive', {'pid': pid, 'created': fields[19]}
+        except FileNotFoundError:
+            return 'dead', None
+        except (OSError, IndexError):
+            return 'unknown', None
+    if os.name == 'nt':
+        import ctypes
+        from ctypes import wintypes
+        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        kernel.OpenProcess.argtypes = (wintypes.DWORD, wintypes.BOOL, wintypes.DWORD)
+        kernel.OpenProcess.restype = wintypes.HANDLE
+        kernel.GetProcessTimes.argtypes = (wintypes.HANDLE, *([ctypes.POINTER(wintypes.FILETIME)] * 4))
+        kernel.GetExitCodeProcess.argtypes = (wintypes.HANDLE, ctypes.POINTER(wintypes.DWORD))
+        kernel.CloseHandle.argtypes = (wintypes.HANDLE,)
+        handle = kernel.OpenProcess(0x1000, False, pid)
+        if not handle:
+            return ('dead' if ctypes.get_last_error() == 87 else 'unknown'), None
+        try:
+            code = wintypes.DWORD()
+            times = [wintypes.FILETIME() for _ in range(4)]
+            if not kernel.GetExitCodeProcess(handle, ctypes.byref(code)):
+                return 'unknown', None
+            if code.value != 259:
+                return 'dead', None
+            if not kernel.GetProcessTimes(handle, *(ctypes.byref(value) for value in times)):
+                return 'unknown', None
+            return 'alive', {'pid': pid, 'created': str((times[0].dwHighDateTime << 32) | times[0].dwLowDateTime)}
+        finally:
+            kernel.CloseHandle(handle)
+    return 'unknown', None
+
+
+def _process_exited(identity):
+    _require(type(identity) is dict and set(identity) == {'pid', 'created'}
+             and type(identity['pid']) is int and identity['pid'] > 0
+             and type(identity['created']) is str and identity['created'].isdigit(), 'Invalid worker process identity')
+    state, current = _process_identity(identity['pid'])
+    return None if state == 'unknown' else state == 'dead' or current != identity
+
+
 class WorkerSpool:
     def __init__(self, root, runtime_id, nonce):
         _require(all(type(v) is str and v.strip() for v in (runtime_id, nonce)), 'Missing runtime binding')
@@ -262,6 +308,10 @@ class WorkerSpool:
                      'Persisted request checksum mismatch')
             if (path / 'completed.json').exists():
                 return self._completed(path)
+            if (path / 'candidate.json').exists():
+                owner = _read(path / 'candidate.json')
+                candidate = self.lookup_candidate(owner['operation_id'])
+                return {'status': 'running', 'receipt': None} if candidate['status'] == 'running' else self._unknown()
             if (path / 'blocked.json').exists():
                 return self._unknown()
             with _lock(path / 'operation.lock') as acquired:
@@ -328,6 +378,7 @@ class WorkerSpool:
         path = self._operation(request['operation_id'])
         path.mkdir(parents=True, exist_ok=True)
         with _lock(self.root / 'submission.lock', blocking=True):
+            _require(not (path / 'candidate.json').exists(), 'Stage belongs to a candidate execution')
             _publish(path / 'request.json', _json(request))
             _publish(path / 'payload.json', _json(payload))
             _publish(path / 'runner.py', _safe(runner_path).read_bytes())
@@ -353,6 +404,316 @@ class WorkerSpool:
                     break
                 time.sleep(.01)
             return result if result['status'] != 'definitely_not_started' else {'status': 'running', 'receipt': None}
+
+    def _candidate(self, operation_id):
+        _require(type(operation_id) is str and re.fullmatch('candidate-operation:[0-9a-f]{64}', operation_id),
+                 'Invalid candidate operation ID')
+        return _safe(self.root / 'candidates' / _sha(operation_id.encode()))
+
+    def _candidate_shape(self, request):
+        _require(type(request) is dict and set(request) == {'schema_version', 'type', 'operation_id', 'requests', 'request_digest'}
+                 and type(request['schema_version']) is int and request['schema_version'] == 1
+                 and request['type'] == 'candidate_execution.v1', 'Invalid candidate request')
+        _require(request['request_digest'] == _sha(_json({k: v for k, v in request.items() if k != 'request_digest'})),
+                 'Candidate request digest mismatch')
+        rows = request['requests']
+        kinds = ('generate', 'compile', 'correctness', 'benchmark', 'profile')
+        _require(type(rows) is list and len(rows) == len(kinds), 'Candidate requires five ordered stages')
+        first = rows[0]
+        _require(request['operation_id'] == 'candidate-operation:' + _sha(_json([first['job']['run_id']])),
+                 'Candidate operation differs from Run')
+        for row, kind in zip(rows, kinds):
+            _require(type(row) is dict and row['stage'] == kind
+                     and row['operation_id'] == 'operation:' + _sha(_json([first['job']['run_id'], kind])),
+                     'Candidate stage order or operation identity differs')
+            _require(row['request_digest'] == _sha(_json({k: v for k, v in row.items() if k != 'request_digest'})),
+                     'Candidate stage checksum differs')
+            _require(all(row[key] == first[key] for key in
+                         ('schema_version', 'backend_id', 'job', 'candidate_identity', 'parent_identity', 'provenance')),
+                     'Candidate stages mix Run, source or contract identities')
+        return rows
+
+    def _candidate_state(self, status, stages=None, cancelled=False):
+        return {'status': status, 'stages': stages or [], 'cancelled': cancelled}
+
+    def _candidate_prefix(self, request):
+        stages, ended = [], False
+        owner = {'operation_id': request['operation_id'], 'request_digest': request['request_digest']}
+        for row in request['requests']:
+            path = self._operation(row['operation_id'])
+            _require(_read(path / 'request.json') == row and _read(path / 'candidate.json') == owner,
+                     'Candidate stage ownership differs')
+            if (path / 'completed.json').exists():
+                _require(not ended, 'Candidate completion is not an ordered prefix')
+                completed = self._completed(path)
+                stages.append(completed)
+                ended = completed['receipt']['status'] != 'succeeded'
+            else:
+                ended = True
+        return stages
+
+    def lookup_candidate(self, operation_id):
+        if not self._ready():
+            return self._candidate_state('unknown')
+        path = self._candidate(operation_id)
+        if not path.exists():
+            return self._candidate_state('definitely_not_started')
+        try:
+            request = _read(path / 'request.json')
+            self._candidate_shape(request)
+            _require(request['operation_id'] == operation_id, 'Candidate spool identity differs')
+            stages = self._candidate_prefix(request)
+            dispatch = _read(path / 'dispatch.json')
+            _require(set(dispatch) == {'request_digest', 'sequence'}
+                     and dispatch['request_digest'] == request['request_digest']
+                     and type(dispatch['sequence']) is int and dispatch['sequence'] > 0,
+                     'Candidate dispatch identity differs')
+            if (path / 'blocked.json').exists():
+                return self._candidate_state('unknown')
+            with _lock(path / 'candidate.lock') as acquired:
+                if not acquired:
+                    return self._candidate_state('running', stages)
+                if not (path / 'started.json').exists():
+                    return self._candidate_state('unknown')
+                started = _read(path / 'started.json')
+                _require(set(started) == {'request_digest', 'process'}
+                         and started['request_digest'] == request['request_digest'], 'Candidate start identity differs')
+                exited = _process_exited(started['process'])
+                if exited is None:
+                    return self._candidate_state('unknown')
+                if not exited:
+                    return self._candidate_state('running', stages)
+                terminal = _read(path / 'terminal.json')
+                _require(set(terminal) == {'request_digest', 'completed_operations', 'cancelled'}
+                         and terminal['request_digest'] == request['request_digest']
+                         and terminal['completed_operations'] == [r['receipt']['operation_id'] for r in stages]
+                         and type(terminal['cancelled']) is bool, 'Candidate terminal differs from receipts')
+                if terminal['cancelled']:
+                    _require(_read(path / 'cancel.json') == {'request_digest': request['request_digest']},
+                             'Candidate cancellation has no durable request')
+                else:
+                    _require(stages and (len(stages) == 5 or stages[-1]['receipt']['status'] != 'succeeded'),
+                             'Candidate terminal lacks a complete or failed prefix')
+                return self._candidate_state('completed', stages, terminal['cancelled'])
+        except (OSError, ValueError, KeyError, TypeError, IndexError):
+            return self._candidate_state('unknown')
+
+    def cancel_candidate(self, operation_id):
+        value = self.lookup_candidate(operation_id)
+        if value['status'] in ('definitely_not_started', 'completed', 'unknown'):
+            return value
+        path = self._candidate(operation_id)
+        request = _read(path / 'request.json')
+        _publish(path / 'cancel.json', _json({'request_digest': request['request_digest']}))
+        return self.lookup_candidate(operation_id)
+
+    def submit_candidate(self, request, payload, runner_path):
+        rows = self._candidate_shape(request)
+        decoded = self._validate(rows[0], payload, runner_path)
+        path = self._candidate(request['operation_id'])
+        with _lock(self.root / 'submission.lock', blocking=True):
+            if path.exists():
+                _require(_read(path / 'request.json') == request, 'Candidate request reused with changed identity')
+                return self.lookup_candidate(request['operation_id'])
+            _require(all(not self._operation(row['operation_id']).exists() for row in rows),
+                     'Candidate stage already belongs to another execution')
+            path.mkdir(parents=True)
+            _publish(path / 'request.json', _json(request))
+            _publish(path / 'payload.json', _json(payload))
+            _publish(path / 'runner.py', _safe(runner_path).read_bytes())
+            owner = {'operation_id': request['operation_id'], 'request_digest': request['request_digest']}
+            for row in rows:
+                stage_path = self._operation(row['operation_id'])
+                _publish(stage_path / 'candidate.json', _json(owner))
+                _publish(stage_path / 'request.json', _json(row))
+            for sha, data in decoded.items():
+                _publish(self.root / 'blobs' / sha, data)
+            _publish(path / 'dispatch.json', _json({'request_digest': request['request_digest'],
+                'sequence': len(list(path.parent.iterdir()))}))
+            options = {'stdin': subprocess.DEVNULL, 'stdout': subprocess.DEVNULL, 'stderr': subprocess.DEVNULL,
+                       'close_fds': True, 'env': {key: value for key, value in os.environ.items() if key != 'PYTHONPATH'}}
+            if os.name == 'nt':
+                options['creationflags'] = subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP
+            else:
+                options['start_new_session'] = True
+            process = subprocess.Popen([sys.executable, '-I', '-B', str(Path(__file__).absolute()), '--execute-candidate',
+                str(self.root), self.runtime_id, self.nonce, request['operation_id']], **options)
+            threading.Thread(target=process.wait, daemon=True).start()
+            deadline = time.monotonic() + 1
+            while time.monotonic() < deadline:
+                state = self.lookup_candidate(request['operation_id'])
+                if state['status'] != 'unknown' or process.poll() is not None:
+                    return state
+                time.sleep(.01)
+            return self._candidate_state('running') if process.poll() is None else self.lookup_candidate(request['operation_id'])
+
+    def _candidate_barrier(self, current=None):
+        try:
+            # Publication exposes directories before request/dispatch. Snapshot
+            # under its lock, but never hold it across liveness/terminal waits.
+            with _lock(self.root / 'submission.lock', blocking=True):
+                root = self.root / 'candidates'
+                if not root.exists():
+                    return False
+                candidates, current_sequence = [], None
+                for path in root.iterdir():
+                    request = _read(path / 'request.json')
+                    self._candidate_shape(request)
+                    _require(self._candidate(request['operation_id']) == path, 'Candidate spool identity differs')
+                    dispatch = _read(path / 'dispatch.json')
+                    _require(set(dispatch) == {'request_digest', 'sequence'}
+                             and dispatch['request_digest'] == request['request_digest']
+                             and type(dispatch['sequence']) is int and dispatch['sequence'] > 0,
+                             'Candidate dispatch identity differs')
+                    if path == current:
+                        current_sequence = dispatch['sequence']
+                    else:
+                        candidates.append((path, request, dispatch['sequence']))
+                _require(current is None or current_sequence is not None, 'Missing current candidate dispatch')
+        except (OSError, ValueError, KeyError, TypeError, IndexError):
+            return True
+        for path, request, sequence in candidates:
+            try:
+                if not (path / 'runtime-started.json').exists():
+                    if current is not None and sequence > current_sequence:
+                        continue
+                    if self.lookup_candidate(request['operation_id'])['status'] != 'running':
+                        return True
+                    continue
+                while True:
+                    status = self.lookup_candidate(request['operation_id'])['status']
+                    if status == 'completed':
+                        break
+                    if status != 'running' or not (path / 'terminal.json').exists():
+                        return True
+                    time.sleep(.05)
+            except (OSError, ValueError, KeyError, TypeError):
+                return True
+        return False
+
+    def _candidate_stage(self, request, payload, output_dir, output_root, runner_factory, run):
+        path = self._operation(request['operation_id'])
+        _publish(path / 'intent.json', _json({'request_digest': request['request_digest'], 'started_ns': time.time_ns()}))
+        output_dir.mkdir(parents=True, exist_ok=True)
+        before = observe_device_owners()
+        _publish(output_dir / 'device-before.json', _json(before))
+        lease = {'runtime_session_id': self.runtime_id, 'operation_id': request['operation_id'],
+                 'owner_run_id': request['job']['run_id'], 'exclusive_worker': True,
+                 'interference_observed': before['status'] != 'clear_visible_processes',
+                 'started_ns': time.time_ns(), 'finished_ns': 0}
+        artifacts, status = [], 'succeeded'
+        try:
+            if request['stage'] == 'generate':
+                workspace, _, _ = self._materialize(request, payload)
+                outputs = {'workspace': str(workspace), **request['candidate_identity'],
+                           'source_bundle_digest': request['job']['variant']['source_bundle_ref']['digest']}
+            else:
+                if before['status'] == 'interference' or (request['stage'] in ('benchmark', 'profile')
+                                                         and before['status'] != 'clear_visible_processes'):
+                    raise RuntimeError('TPU process ownership cannot establish a controlled measurement')
+                with _capture(output_dir):
+                    if run is None:
+                        run = runner_factory()
+                    outputs = run.run_stage(request, output_dir, lease=lease)
+                _require(type(outputs) is dict, 'Runner returned no result object')
+                for paths_key, refs_key in (('raw_artifact_paths', 'raw_artifact_refs'), ('raw_xplane_paths', 'raw_xplane_refs')):
+                    if paths_key in outputs:
+                        entries = [self._artifact(p, output_root) for p in outputs.pop(paths_key)]
+                        artifacts.extend(entries)
+                        outputs[refs_key] = [entry['ref'] for entry in entries]
+                if 'report_path' in outputs:
+                    entry = self._artifact(outputs.pop('report_path'), output_root)
+                    artifacts.append(entry)
+                    outputs['report_ref'] = entry['ref']
+                if request['stage'] == 'profile':
+                    outputs['capture_operation_id'] = request['operation_id']
+                    outputs['benchmark_operation_id'] = 'operation:' + _sha(_json([request['job']['run_id'], 'benchmark']))
+                if request['stage'] == 'correctness' and outputs.get('correctness') == 'failed':
+                    status = 'failed'
+            after = observe_device_owners()
+            _publish(output_dir / 'device-after.json', _json(after))
+            lease['finished_ns'] = time.time_ns()
+            lease['interference_observed'] |= after['status'] != 'clear_visible_processes'
+            if 'lease' in outputs:
+                outputs['lease'] = lease
+            if request['stage'] in ('benchmark', 'profile') and lease['interference_observed']:
+                status, outputs = 'invalid', {'error_type': 'InterferenceUnknown',
+                    'message': 'TPU process visibility/ownership was not clear before and after measurement'}
+        except Exception as exc:
+            status = 'invalid' if before['status'] != 'clear_visible_processes' and request['stage'] in ('benchmark', 'profile') else 'failed'
+            outputs = {'error_type': 'InterferenceUnknown' if status == 'invalid' else type(exc).__name__,
+                       'message': str(exc)[:2000] or 'Execution failed'}
+        for raw in sorted(output_root.rglob('*')):
+            try:
+                _safe(raw)
+                if raw.is_file():
+                    artifacts.append(self._artifact(raw, output_root))
+            except (OSError, ValueError) as exc:
+                status, outputs = 'invalid', {'error_type': type(exc).__name__,
+                                            'message': 'Unable to safely archive a runner output'}
+        artifacts = list({entry['ref']['digest']: entry for entry in artifacts}.values())
+        receipt = {key: request[key] for key in ('schema_version', 'backend_id', 'operation_id', 'request_digest',
+                                               'stage', 'candidate_identity', 'parent_identity', 'provenance')}
+        receipt.update({key: request['job'][key] for key in ('contract_digest', 'run_id', 'candidate_id', 'parent_id', 'context_id')})
+        receipt.update(status=status, outputs=outputs,
+                       cost=request['job']['variant']['cost'] if request['stage'] == 'generate'
+                       else {'executions': 0, 'tokens': 0, 'time_s': 0}, artifact_refs=[entry['ref'] for entry in artifacts])
+        completed = {'receipt': receipt, 'artifacts': artifacts}
+        _publish(path / 'completed.json', _json({**completed, 'completion_digest': _sha(_json(completed))}))
+        return status, run
+
+    def execute_candidate(self, operation_id):
+        path = self._candidate(operation_id)
+        if not self._ready():
+            return
+        with _lock(path / 'candidate.lock', blocking=True):
+            if (path / 'started.json').exists() or (path / 'terminal.json').exists():
+                return
+            request, payload = _read(path / 'request.json'), _read(path / 'payload.json')
+            rows = self._candidate_shape(request)
+            self._validate(rows[0], payload, path / 'runner.py')
+            state, identity = _process_identity(os.getpid())
+            _require(state == 'alive', 'Cannot pin worker process identity')
+            _publish(path / 'started.json', _json({'request_digest': request['request_digest'], 'process': identity}))
+            with _lock(self.coordinator / 'runtime.lock', blocking=True):
+                if self._candidate_barrier(path):
+                    _publish(path / 'blocked.json', _json({'reason': 'Unresolved candidate execution'}))
+                    return
+                owned = {self._operation(row['operation_id']) for row in rows}
+                for other in (self.root / 'operations').iterdir():
+                    if other in owned or not (other / 'intent.json').exists():
+                        continue
+                    try:
+                        self._completed(other)
+                    except (OSError, ValueError, KeyError, TypeError):
+                        _publish(path / 'blocked.json', _json({'reason': 'Unresolved previous operation'}))
+                        return
+                _publish(path / 'runtime-started.json', _json({'request_digest': request['request_digest']}))
+                output_root = _safe(path / 'output')
+                output_root.mkdir(exist_ok=True)
+                workspace, oracle, config = self._materialize(rows[0], payload)
+                def factory():
+                    spec = importlib.util.spec_from_file_location('_rsi_candidate_runner', path / 'runner.py')
+                    module = importlib.util.module_from_spec(spec)
+                    sys.modules[spec.name] = module
+                    spec.loader.exec_module(module)
+                    return module.CandidateRun(rows, workspace, oracle, output_root,
+                        source_bundle=payload['source_bundle'], oracle_bundle=payload['oracle_bundle'],
+                        config_path=config, runtime_session_id=self.runtime_id)
+                run, completed, cancelled = None, [], False
+                for row in rows:
+                    if (path / 'cancel.json').exists():
+                        _require(_read(path / 'cancel.json') == {'request_digest': request['request_digest']},
+                                 'Candidate cancel identity differs')
+                        cancelled = True
+                        break
+                    status, run = self._candidate_stage(row, payload, output_root / row['stage'], output_root, factory, run)
+                    completed.append(row['operation_id'])
+                    if status != 'succeeded':
+                        break
+                run = None
+                _publish(path / 'terminal.json', _json({'request_digest': request['request_digest'],
+                    'completed_operations': completed, 'cancelled': cancelled}))
 
     def _materialize(self, request, payload):
         variant = request['job']['variant']
@@ -388,6 +749,9 @@ class WorkerSpool:
             if not acquired or (path / 'completed.json').exists() or (path / 'intent.json').exists():
                 return
             with _lock(self.coordinator / 'runtime.lock', blocking=True):
+                if self._candidate_barrier():
+                    _publish(path / 'blocked.json', _json({'reason': 'Unresolved candidate execution'}))
+                    return
                 # An earlier started operation without a valid receipt may still have
                 # external work. Never free that uncertainty by merely taking a lock.
                 for other in (self.root / 'operations').iterdir():
@@ -479,11 +843,20 @@ def run_command(command):
     if command['action'] == 'submit':
         payload = json.loads(_safe(command['payload_path']).read_bytes())
         return worker.submit(command['request'], payload, command['runner_path'])
+    if command['action'] == 'submit_candidate':
+        payload = json.loads(_safe(command['payload_path']).read_bytes())
+        return worker.submit_candidate(command['request'], payload, command['runner_path'])
+    if command['action'] == 'lookup_candidate':
+        return worker.lookup_candidate(command['operation_id'])
+    if command['action'] == 'cancel_candidate':
+        return worker.cancel_candidate(command['operation_id'])
     raise ValueError('Unsupported worker action')
 
 
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == '--execute':
         WorkerSpool(*sys.argv[2:5]).execute(sys.argv[5])
+    elif len(sys.argv) > 1 and sys.argv[1] == '--execute-candidate':
+        WorkerSpool(*sys.argv[2:5]).execute_candidate(sys.argv[5])
     else:
         print(_json(run_command(json.load(sys.stdin))).decode('utf-8'))

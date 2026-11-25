@@ -206,19 +206,21 @@ class KnowledgeClient:
         _require(type(result) is dict, 'MCP tool did not return an object')
         return result
 
-    async def search(self, query='', page_size=50):
+    async def search(self, query='', page_size=50, *, max_results=None):
         _require(type(query) is str and len(query) <= 1000, 'Invalid search query')
         _require(type(page_size) is int and 1 <= page_size <= 50, 'Search page size must be 1..50')
+        _require(max_results is None or type(max_results) is int and max_results > 0, 'Invalid search result limit')
         results, seen, offset, total = [], set(), 0, None
         while True:
-            page = await self._call('search', {'query': query, 'offset': offset, 'limit': page_size})
+            limit = page_size if max_results is None else min(page_size, max_results - offset)
+            page = await self._call('search', {'query': query, 'offset': offset, 'limit': limit})
             count = page.get('total')
             _require(type(count) is int and count >= 0 and type(page.get('results')) is list, 'Invalid search page')
             if total is None:
                 total = count
             _require(count == total, 'Search corpus changed during pagination; restart the search')
             items = page['results']
-            _require(len(items) == min(page_size, max(total - offset, 0)), 'Search response has a coverage gap')
+            _require(len(items) == min(limit, max(total - offset, 0)), 'Search response has a coverage gap')
             for item in items:
                 _require(type(item) is dict and _text(item.get('id')) and item['id'] not in seen, 'Duplicate or invalid search result; corpus may have changed')
                 _require(type(item.get('revision')) is str and bool(_REVISION.fullmatch(item['revision'])), 'Search result needs revision')
@@ -227,16 +229,17 @@ class KnowledgeClient:
             end = offset + len(items)
             expected = end if end < total else None
             _require(page.get('next_offset') == expected, 'Search next_offset does not cover the requested range')
-            if expected is None:
+            if expected is None or max_results is not None and end >= max_results:
                 break
             offset = expected
         # The existing tool has no corpus snapshot token. Even unchanged counts
         # cannot prove one point-in-time view when documents are concurrently edited.
-        return {'results': results, 'total': total, 'complete': True, 'snapshot_consistent': False}
+        return {'results': results, 'total': total, 'complete': len(results) == total, 'snapshot_consistent': False}
 
-    async def fetch_document(self, note_id, expected_revision=None, page_size=24000):
+    async def fetch_document(self, note_id, expected_revision=None, page_size=24000, *, max_chars=None):
         _require(_text(note_id), 'Document ID required')
         _require(type(page_size) is int and 1 <= page_size <= 24000, 'Fetch page size must be 1..24000')
+        _require(max_chars is None or type(max_chars) is int and max_chars > 0, 'Invalid fetch character limit')
         if expected_revision is not None:
             _require(type(expected_revision) is str and bool(_REVISION.fullmatch(expected_revision)), 'Invalid expected revision')
         content, offset, first = [], 0, None
@@ -244,6 +247,7 @@ class KnowledgeClient:
             page = await self._call('fetch', {'id': note_id, 'offset': offset, 'limit': page_size})
             _require(page.get('id') == note_id and page.get('offset') == offset, 'Fetch response bound to wrong document or offset')
             _require(type(page.get('total_chars')) is int and page['total_chars'] >= 0 and type(page.get('content')) is str, 'Invalid fetch page')
+            _require(max_chars is None or page['total_chars'] <= max_chars, 'Document exceeds read character limit; coverage is incomplete')
             _require(type(page.get('revision')) is str and bool(_REVISION.fullmatch(page['revision'])), 'Fetch revision missing')
             if expected_revision is not None and page['revision'] != expected_revision:
                 raise RevisionConflict('Document differs from the expected revision')
@@ -315,6 +319,16 @@ class KnowledgeClient:
                 current = await self.fetch_document(source.document_id)
                 status['current_revision'] = current.revision
                 status['availability'] = 'available' if current.revision == source.revision else 'stale'
+                if current.id.startswith('RSI/Sources/'):
+                    blocks = re.findall(r'^```rsi-source-v1[ \t]*\r?\n(.*?)^```[ \t]*\r?$', current.content, re.M | re.S)
+                    status['coverage_complete'] = False
+                    if len(blocks) == 1:
+                        try:
+                            metadata = json.loads(blocks[0])
+                            status['coverage_complete'] = (metadata.get('schema_version') == 1
+                                and metadata.get('coverage', {}).get('complete') is True)
+                        except (ValueError, AttributeError):
+                            pass
                 if status['availability'] == 'stale':
                     status['reason'] = 'Current source differs; captured excerpt remains available in MethodRecord'
             except KnowledgeError as error:
@@ -326,7 +340,7 @@ class KnowledgeClient:
         for value in (keyword, category, hardware, mechanism, applicability):
             _require(value is None or type(value) is str, 'Method filters must be text')
         listing = await self.search(_METHOD_CATEGORY)
-        methods, unavailable, sources = [], [], {}
+        methods, unavailable, sources, pins = [], [], {}, {}
         for item in listing['results']:
             if item.get('category') != _METHOD_CATEGORY:
                 continue
@@ -342,9 +356,11 @@ class KnowledgeClient:
                      (mechanism, method.mechanism), (applicability, ' '.join((*method.applicable_workloads, *method.preconditions))))
             if all(not needle or needle.casefold() in haystack.casefold() for needle, haystack in tests):
                 methods.append(method)
+                pins[method.method_id] = {'note_id': document.id, 'revision': document.revision}
                 sources[method.method_id] = await self.source_status(method)
-        return {'methods': methods, 'sources': sources, 'unavailable': unavailable,
-                'complete': not unavailable, 'snapshot_consistent': False}
+        return {'methods': methods, 'sources': sources, 'pins': pins, 'unavailable': unavailable,
+                'complete': not unavailable, 'snapshot_consistent': False,
+                'index_scope': 'filtered' if any((keyword, category, hardware, mechanism, applicability)) else 'all_methods'}
 
     async def discover(self, queries=('',), page_size=50):
         _require(type(queries) in (tuple, list) and bool(queries) and all(type(q) is str for q in queries), 'Discovery requires search queries')

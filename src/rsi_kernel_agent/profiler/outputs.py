@@ -61,15 +61,47 @@ def _predicate(observation, catalog):
     kind = ref.get('kind')
     source = ref.get('value')
     evidence_kind = source.get('evidence_kind') if type(source) is dict else None
-    if kind == 'calculation': category = 'mathematical_prediction'
+    if ref.get('parent_strategy_id') not in (None, observation['strategy_id']):
+        category = 'historical_claim'
+    elif kind == 'calculation': category = 'mathematical_prediction'
     elif kind in ('knowledge', 'Knowledge', 'MethodRecord'): category = 'source_claim'
-    elif kind in ('history', 'History'): category = 'historical_claim'
+    elif kind in ('history', 'History', 'SharedProgress'): category = 'historical_claim'
     elif evidence_kind == 'compiler_estimated': category = 'compiler_estimate'
     elif evidence_kind == 'model_predicted': category = 'mathematical_prediction'
     elif evidence_kind in ('trace_derived', 'derived_measurement'): category = 'derived_measurement'
     elif evidence_kind in ('historical_claim', 'source_claim'): category = evidence_kind
     else: category = 'observed_fact'
     return category, f"{pred['ref']} {canonical_json(pred['path'])} = {canonical_json(value)}"
+
+
+def _review_draft(proposal, draft):
+    review = proposal.get('draft_review')
+    fields(review, 'preparation_id route_result_digest plan_decisions')
+    require(review['preparation_id'] == draft['preparation_id']
+            and review['route_result_digest'] == draft['result_digest'], 'Draft review cites different preparation')
+    old = {p['id']: p for p in draft['plan_set']['plans']}
+    current = {p['id']: p for p in proposal['plans']}
+    decisions, covered, mapped = review['plan_decisions'], set(), set()
+    require(type(decisions) is list, 'Draft plan decisions must be an array')
+    for item in decisions:
+        fields(item, 'draft_plan_id status final_plan_ids reason')
+        pid = item['draft_plan_id']
+        require(pid in old and pid not in covered, 'Draft decisions must cover each original Plan once')
+        covered.add(pid)
+        require(item['status'] in ('retained', 'revised', 'deferred')
+                and type(item['reason']) is str and item['reason'].strip(), 'Draft decision requires status and reason')
+        ids = item['final_plan_ids']
+        texts(ids, nonempty=item['status'] != 'deferred')
+        require(len(ids) == len(set(ids)) and set(ids) <= set(current) and not mapped.intersection(ids),
+                'Draft final Plan mapping is missing or duplicated')
+        mapped.update(ids)
+        if item['status'] == 'deferred':
+            require(not ids, 'Deferred draft cannot claim a final Plan')
+        elif item['status'] == 'retained':
+            require(len(ids) == 1 and all(canonical_json(current[ids[0]][key]) == canonical_json(old[pid][key])
+                    for key in ('strategy_id', 'parent_id', 'mechanism', 'modification', 'variants')),
+                    'Retained draft changed implementation or exact parent')
+    require(covered == set(old), 'Every draft Plan requires an explicit review decision')
 
 
 def review_proposal(proposal, manifest, calculations, *, evidence_review=True):
@@ -79,8 +111,16 @@ def review_proposal(proposal, manifest, calculations, *, evidence_review=True):
     it as a hypothesis even when a referenced numeric/string value is verified.
     """
     p = detached(proposal)
-    fields(p, 'code_understanding observations hypotheses plans unknowns')
+    route_mode = manifest.get('schema_version') == 2
+    optional_outcome = route_mode and type(p) is dict and 'outcome' in p
+    drafts = [entry['value'] for entry in manifest['references'].values() if entry['kind'] == 'OfflineDraft']
+    fields(p, 'code_understanding observations hypotheses plans unknowns'
+           + (' outcome' if optional_outcome else '') + (' draft_review' if drafts else ''))
+    if drafts:
+        require(len(drafts) == 1, 'Formal input must contain exactly one route draft')
+        _review_draft(p, drafts[0])
     strategies = manifest['strategies']
+    require(not route_mode or len(strategies) == 1, 'Route analysis requires exactly one strategy')
     catalog = detached(manifest['references'])
     for key, calc in calculations.items():
         catalog['calculation:' + key] = {'kind':'calculation','value':calc,'availability':'available',
@@ -121,7 +161,8 @@ def review_proposal(proposal, manifest, calculations, *, evidence_review=True):
                                'reason':'Reference does not establish the proposed assertion'})
                 obs['category'] = 'hypothesis'
         observations[obs['id']] = sid
-    require(bool(p['hypotheses']), 'At least one explicit alternative hypothesis required')
+    require(bool(p['hypotheses']) or route_mode and not p['plans'] and optional_outcome,
+            'At least one explicit alternative hypothesis required')
     for hyp in p['hypotheses']:
         fields(hyp, 'id strategy_id text refs alternatives')
         require(type(hyp['id']) is str and hyp['id'] and hyp['id'] not in ids, 'Duplicate hypothesis ID')
@@ -155,21 +196,39 @@ def review_proposal(proposal, manifest, calculations, *, evidence_review=True):
             require(cid in calculations, 'Unknown calculation')
             references(calculations[cid]['evidence_refs'], sid, catalog)
         plan['status'] = 'proposal_requires_validation'
-    require(all(n >= 2 for n in counts.values()), 'Each participating strategy needs at least two distinct Plans')
+    if route_mode:
+        if not p['plans']:
+            require(optional_outcome, 'A route with no Plan requires an explicit outcome')
+        if optional_outcome:
+            require(not p['plans'], 'A terminal no-Plan outcome cannot accompany executable Plans')
+            outcome = p['outcome']
+            metric_mode = manifest['request'].get('tool_versions', {}).get('route_progress') == '1'
+            paused = metric_mode and outcome.get('status') == 'paused'
+            fields(outcome, 'status reason refs' + (' restart_conditions' if paused else ''))
+            require(outcome['status'] in (('needs_research', 'inapplicable', 'deferred', 'awaiting_conditions', 'paused')
+                                         if metric_mode else ('needs_research', 'inapplicable', 'deferred', 'awaiting_conditions'))
+                    and type(outcome['reason']) is str and bool(outcome['reason'].strip()), 'No-Plan outcome needs a specific status and reason')
+            if paused:
+                texts(outcome['restart_conditions'])
+            references(outcome['refs'], next(iter(strategies)), catalog)
+    else:
+        require(all(n >= 2 for n in counts.values()), 'Each participating strategy needs at least two distinct Plans')
     texts(p['unknowns'])
     p['review'] = review
     p['review_enabled'] = evidence_review
     return p
 
 
-def publish_result(store, manifest, result, key):
-    """Publish retry-safe records then a completion marker; not a batch transaction."""
+def validate_result(store, manifest, result):
     from .inputs import load_manifest
-    from ..contracts import ArtifactRef
-    require(type(key) is str and bool(key.strip()), 'Publication key required')
     pinned = load_manifest(store, manifest.artifact_ref)
+    return _validate_pinned_result(store, pinned, result)
+
+
+def _validate_pinned_result(store, pinned, result):
+    """Internal replay of a manifest verified in the current synchronous call."""
     verified = pinned.to_dict()
-    require(result['manifest_digest'] == manifest.artifact_ref.digest, 'Result belongs to another manifest')
+    require(result['manifest_digest'] == pinned.artifact_ref.digest, 'Result belongs to another manifest')
     from .analyzer import Analyzer
     replay = Analyzer(pinned,artifacts=store.artifacts,skills=result.get('skill_captures',{}),
                       configuration=result['configuration'],**result['limits'])
@@ -182,6 +241,36 @@ def publish_result(store, manifest, result, key):
     reviewed = review_proposal(result['proposal'], verified, result['calculations'], evidence_review=result['review_enabled'])
     require(canonical_json(reviewed['plans']) == canonical_json(result['plan_set']['plans']), 'PlanSet was modified after validation')
     require(result['review_enabled'], 'Unreviewed evaluation output cannot be published')
+    return verified, reviewed
+
+
+def publish_result(store, manifest, result, key):
+    require(type(key) is str and bool(key.strip()), 'Publication key required')
+    verified, reviewed = validate_result(store, manifest, result)
+    require(verified['request']['environment'].get('analysis_phase') != 'offline_preparation',
+            'Offline preparation cannot publish executable Plans')
+    environment = verified['request']['environment']
+    if verified['request']['schema_version'] == 2:
+        from ..store import StoreError
+        try:
+            declared_batch = store.get(environment['design_batch_id'])
+        except StoreError as error:
+            if str(error) != 'Missing record: ' + environment['design_batch_id']:
+                raise
+            declared_batch = None
+        require(declared_batch is None or getattr(declared_batch, 'details', {}).get('type') != 'offline_preparation.v1',
+                'Offline preparation cannot be relabeled as a formal batch')
+        require('preparation_id' not in environment or environment.get('analysis_phase') == 'execution',
+                'Offline preparation needs a new formal route binding')
+    if environment.get('preparation_id') is not None:
+        from ..workflow.design import _batch
+        from ..workflow.offline_preparation import require_delivery
+        batch = _batch(store, environment['design_batch_id'])
+        sid = next(iter(verified['strategies']))
+        require(batch.details.get('preparation_id') == environment['preparation_id']
+                and batch.details['routes'][sid]['manifest'] == record_to_dict(manifest.artifact_ref),
+                'Prepared publication is outside its formal batch')
+        require_delivery(verified, result)
     ref = store.artifacts.put(canonical_json(result).encode('utf-8'))
     prefix = 'analysis:' + sha256(key.encode()).hexdigest()[:24]
     bundles = []

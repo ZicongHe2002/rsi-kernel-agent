@@ -1,5 +1,13 @@
 # 固定 MLA Baseline / Runner 接口
 
+## 2026-11-20 CandidateRun
+
+新 `candidate.v1` Context 由 `CandidateRun(requests, workspace, oracle_workspace, output_root, *, source_bundle, oracle_bundle, config_path, runtime_session_id)` 执行；worker 顺序调用 `run_stage(stage_request, stage_output_dir, *, lease)`，generate 仍由 worker 物化源码。一 Run 一干净进程，compile 对每个冻结 case 只生成一次 Oracle、编译一次；correctness、benchmark、profile 复用同一 executable，输入按阶段从固定字节恢复，大 case 设备输入及时释放。原 host timing 与独立 Profile 仍分开计量。
+
+新 identity 增加 `process_scope=candidate_run`、`process_run_id`、`process_id`，所有阶段必须属于同一 Run/进程；`fresh_process` 指 Run 初始化，不声称每个阶段另起进程。只接受一台 TPU v6e/v6 lite。正确性同时归档执行后的输入 cache，路径使用内部 case 索引，不把用户 case ID 当文件路径。原 `run_mla_stage` 留给旧冻结 Context/回执，不能用旧完整结果证明新 runner 已在 TPU 通过。
+
+正式 CPU 候选验证由独立 `cpu_checks.py` 运行同 source bundle/config（仅 interpret 后端切换），三组数值与完整 cache、输入不变通过后才可进入新的执行门禁；CPU 结果不是 TPU correctness 或性能结果。最新软件与数值验证见[六步实现记录](next-stage-completion-2026-11-16.md#2026-11-20-六步闭环实现与验证)。
+
 2026-11-12。此页记录本地实现和验证边界。真实 Gate 状态以本轮最终报告与回执为准；本页的 CPU 测试不证明真实 TPU Kernel 正确或更快。
 
 ## 准备基线

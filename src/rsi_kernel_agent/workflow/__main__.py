@@ -4,7 +4,7 @@ import asyncio
 import json
 from pathlib import Path
 
-from ..contracts import Decision, Task, Workload, EvaluationContext, Strategy, canonical_json, record_from_dict
+from ..contracts import Decision, Task, Workload, EvaluationContext, Strategy, canonical_json, record_from_dict, record_to_dict
 from ..knowledge_mcp import StdioKnowledge
 from ..memory import MemoryReader
 from ..profiler.inputs import AnalysisRequest, capture_inputs, load_manifest
@@ -19,6 +19,19 @@ from .intake import intake_publication
 
 def read_json(path):
     return json.loads(Path(path).read_text(encoding='utf-8-sig'))
+
+
+def read_object(path):
+    value = read_json(path)
+    if type(value) is not dict:
+        raise ValueError('Command specification must be a JSON object')
+    return value
+
+
+def session_limits(args):
+    return {'max_turns': getattr(args, 'max_turns', None),
+            'max_tool_calls': getattr(args, 'max_tool_calls', None),
+            'max_response_chars': getattr(args, 'max_response_chars', 60000)}
 
 
 def create_task(store, spec):
@@ -64,7 +77,7 @@ def make_backend(store, args, task_id):
         raise ValueError('Execution needs one explicit real or synthetic provenance per Task; saved/mixed contexts are not executable')
     from .colab import ColabBackend
     remote = colab_remote(args.colab_config)
-    if any(c.environment['runtime_session_id'] != remote.runtime_id for c in contexts):
+    if not any(c.environment['runtime_session_id'] == remote.runtime_id for c in contexts):
         raise ValueError('Colab configuration Runtime differs from immutable Task contexts')
     return ColabBackend(store, remote)
 
@@ -75,31 +88,127 @@ async def dispatch(args):
         return await run_demo(args.output)
     if args.command == 'colab-bootstrap':
         return colab_remote(args.colab_config).bootstrap()
+    if args.command == 'knowledge-search':
+        from ..discovery import search_sources
+        async with StdioKnowledge(args.website) as knowledge:
+            return await search_sources(knowledge, read_json(args.queries), mode=args.mode, max_reads=args.max_reads)
     store=ExperimentStore(args.db,args.artifacts)
     if args.command=='create': return create_task(store,read_json(args.spec))
+    if args.command == 'preparation-begin':
+        from .offline_preparation import begin_preparation
+        async with StdioKnowledge(args.website) as knowledge:
+            prep = await begin_preparation(store, knowledge, args.task, args.historical_context,
+                args.preparation_key, read_object(args.assessments), parents=read_object(args.parents),
+                knowledge_refs=read_object(args.knowledge_refs) if args.knowledge_refs else None)
+        return record_to_dict(prep)
+    if args.command == 'preparation-route':
+        from .offline_preparation import preparation_manifest
+        manifest = preparation_manifest(store, args.preparation, args.strategy)
+        packet = start_session(store, manifest, args.session, model_label='current conversation model', **session_limits(args))
+        return {'packet': str(packet), 'manifest': record_to_dict(manifest.artifact_ref)}
+    if args.command == 'preparation-finish':
+        from .offline_preparation import seal_preparation_route, _preparation, _route, read_route
+        from .offline_checks import check_drafts
+        directory = Path(args.session)
+        session = read_object(directory / 'session.json')
+        if session['result_digest'] is None:
+            raise ValueError('Offline analysis session is incomplete')
+        result = read_object(directory / 'result.json')
+        from .intake import _digest
+        if _digest(result) != session['result_digest']:
+            raise ValueError('Offline session result digest differs')
+        manifest = load_manifest(store, ArtifactRef(**session['manifest']))
+        drafts = read_object(args.drafts)
+        previous = _route(store, _preparation(store, args.preparation), args.strategy)
+        if previous is not None:
+            saved = read_route(store, previous.id)
+            return record_to_dict(seal_preparation_route(store, args.preparation, args.strategy,
+                                                         result, drafts, saved['checks']))
+        checks = check_drafts(store, manifest, result, drafts, cpu_python=args.cpu_python,
+                              output_dir=directory / 'checks') if result['plan_set']['plans'] else None
+        marker = seal_preparation_route(store, args.preparation, args.strategy, result, drafts, checks)
+        return record_to_dict(marker)
+    if args.command == 'preparation-complete':
+        from .offline_preparation import complete_preparation
+        return record_to_dict(complete_preparation(store, args.preparation))
+    if args.command == 'preparation-variants':
+        from .offline_preparation import bind_prepared_variants
+        from .offline_checks import check_drafts
+        revisions = {}
+        for publication_id, drafts in (read_object(args.revisions) if args.revisions else {}).items():
+            marker = store.get(publication_id)
+            manifest = load_manifest(store, ArtifactRef(**marker.details['manifest']))
+            result = json.loads(store.artifacts.read(ArtifactRef(**marker.details['result'])))
+            checks = check_drafts(store, manifest, result, drafts, cpu_python=args.cpu_python,
+                                  output_dir=Path(args.checks_dir))
+            revisions[publication_id] = {'drafts': drafts, 'checks': checks}
+        return bind_prepared_variants(store, args.batch, revisions=revisions)
+    if args.command == 'design-begin':
+        from .design import begin_design_round
+        async with StdioKnowledge(args.website) as knowledge:
+            batch = await begin_design_round(store, knowledge, args.task, args.context, args.round_id,
+                read_object(args.assessments), parents=read_object(args.parents) if args.parents else None,
+                knowledge_refs=read_object(args.knowledge_refs) if args.knowledge_refs else None,
+                preparation_id=args.preparation)
+        return record_to_dict(batch)
+    if args.command == 'design-route':
+        from .design import route_manifest
+        manifest = route_manifest(store, args.batch, args.strategy)
+        packet = start_session(store, manifest, args.session, model_label='current conversation model', **session_limits(args))
+        return {'packet': str(packet), 'manifest': record_to_dict(manifest.artifact_ref)}
+    if args.command == 'design-finish':
+        from .design import finish_route_design
+        return record_to_dict(finish_route_design(store, args.batch, args.strategy, args.publication))
+    if args.command == 'design-complete':
+        from .design import complete_design_round
+        return record_to_dict(complete_design_round(store, args.batch))
+    if args.command == 'exploration-status':
+        from .exploration import exploration_status
+        records = store.history(args.task)
+        return {'task_id': args.task, 'strategies': {r.id: exploration_status(records, r.id)
+                for r in records if type(r) is Strategy}}
+    if args.command == 'exploration-admit':
+        from .exploration import admit_strategy
+        return admit_strategy(store, **read_object(args.spec))
+    if args.command == 'exploration-feedback':
+        from .exploration import record_round_feedback
+        return record_round_feedback(store, args.task, args.round_id, args.strategy, **read_object(args.spec))
+    if args.command == 'exploration-state':
+        from .exploration import set_exploration_state
+        return set_exploration_state(store, **read_object(args.spec))
+    if args.command == 'exploration-research':
+        from .exploration import reserve_research_attempt
+        return reserve_research_attempt(store, **read_object(args.spec))
     if args.command=='round':
         request=AnalysisRequest.from_dict(read_json(args.request))
         async with StdioKnowledge(args.website) as knowledge:
             manifest=await capture_inputs(store,knowledge,request)
-        packet=start_session(store,manifest,args.session,model_label='current conversation model')
+        packet=start_session(store,manifest,args.session,model_label='current conversation model', **session_limits(args))
         return {'packet':str(packet),'manifest':{'digest':manifest.artifact_ref.digest,'size':manifest.artifact_ref.size}}
     if args.command=='next-round':
         from .rounds import prepare_round
         async with StdioKnowledge(args.website) as knowledge:
             prepared=await prepare_round(store,knowledge,args.task,args.context,args.strategies.split(','),
                 args.round_id,read_json(args.knowledge_refs),parent_policy='branch_best')
-        packet=start_session(store,prepared['manifest'],args.session,model_label='current conversation model')
+        packet=start_session(store,prepared['manifest'],args.session,model_label='current conversation model', **session_limits(args))
         return {'packet':str(packet),'snapshot':prepared['snapshot'],'cards':prepared['cards']}
     if args.command=='respond':
-        result=submit_response(store,args.session,args.response)
-        if result is None:return {'status':'awaiting conversation response'}
         session=read_json(Path(args.session)/'session.json')
         manifest=load_manifest(store,ArtifactRef(**session['manifest']))
+        offline = manifest.to_dict()['request']['environment'].get('analysis_phase') == 'offline_preparation'
+        if not offline and not args.key:
+            raise ValueError('Formal publication requires --key')
+        result=submit_response(store,args.session,args.response)
+        if result is None:return {'status':'awaiting conversation response'}
+        if offline:
+            return {'status': 'draft_complete', 'result': str(Path(args.session) / 'result.json'),
+                    'executable': False}
         marker=publish_result(store,manifest,result,args.key)
         return {'status':'published','publication_id':marker.id}
     if args.command=='intake':
         async with StdioKnowledge(args.website) as knowledge:
-            result=await intake_publication(store,args.publication,args.round_id,read_json(args.variants),knowledge=knowledge)
+            result=await intake_publication(store,args.publication,args.round_id,read_json(args.variants),knowledge=knowledge,
+                                            retry_key=getattr(args, 'retry_key', None))
         controller=Controller(store,result['task_id'],None)
         controller.accept_intake(result)
         return result
@@ -135,14 +244,54 @@ def main():
     p=sub.add_parser('create');p.add_argument('--spec',required=True)
     p=sub.add_parser('demo');p.add_argument('--output',required=True)
     sub.add_parser('colab-bootstrap')
+    p=sub.add_parser('knowledge-search')
+    for name in ('website','queries'):p.add_argument('--'+name,required=True)
+    p.add_argument('--mode',choices=('directed','exploratory'),default='exploratory')
+    p.add_argument('--max-reads',type=int,default=8)
+    p=sub.add_parser('preparation-begin')
+    for name in ('task','historical-context','preparation-key','assessments','parents','website'):
+        p.add_argument('--'+name,required=True)
+    p.add_argument('--knowledge-refs')
+    p=sub.add_parser('preparation-route')
+    for name in ('preparation','strategy','session'):p.add_argument('--'+name,required=True)
+    for name in ('max-turns','max-tool-calls'):p.add_argument('--'+name,type=int)
+    p.add_argument('--max-response-chars',type=int,default=60000)
+    p=sub.add_parser('preparation-finish')
+    for name in ('preparation','strategy','session','drafts'):p.add_argument('--'+name,required=True)
+    p.add_argument('--cpu-python')
+    p=sub.add_parser('preparation-complete');p.add_argument('--preparation',required=True)
+    p=sub.add_parser('preparation-variants');p.add_argument('--batch',required=True)
+    p.add_argument('--revisions');p.add_argument('--cpu-python')
+    p.add_argument('--checks-dir',default='offline-checks')
+    p=sub.add_parser('design-begin')
+    for name in ('task','context','round-id','assessments','website'):p.add_argument('--'+name,required=True)
+    for name in ('parents','knowledge-refs','preparation'):p.add_argument('--'+name)
+    p=sub.add_parser('design-route')
+    for name in ('batch','strategy','session'):p.add_argument('--'+name,required=True)
+    for name in ('max-turns','max-tool-calls'):p.add_argument('--'+name,type=int)
+    p.add_argument('--max-response-chars',type=int,default=60000)
+    p=sub.add_parser('design-finish')
+    for name in ('batch','strategy','publication'):p.add_argument('--'+name,required=True)
+    p=sub.add_parser('design-complete');p.add_argument('--batch',required=True)
+    p=sub.add_parser('exploration-status');p.add_argument('--task',required=True)
+    for name in ('exploration-admit','exploration-state','exploration-research'):
+        p=sub.add_parser(name);p.add_argument('--spec',required=True)
+    p=sub.add_parser('exploration-feedback')
+    for name in ('task','round-id','strategy','spec'):p.add_argument('--'+name,required=True)
     p=sub.add_parser('round')
     for name in ('request','website','session'):p.add_argument('--'+name,required=True)
+    for name in ('max-turns','max-tool-calls'):p.add_argument('--'+name,type=int)
+    p.add_argument('--max-response-chars',type=int,default=60000)
     p=sub.add_parser('next-round')
     for name in ('task','context','strategies','round-id','knowledge-refs','website','session'):p.add_argument('--'+name,required=True)
+    for name in ('max-turns','max-tool-calls'):p.add_argument('--'+name,type=int)
+    p.add_argument('--max-response-chars',type=int,default=60000)
     p=sub.add_parser('respond')
-    for name in ('session','response','key'):p.add_argument('--'+name,required=True)
+    for name in ('session','response'):p.add_argument('--'+name,required=True)
+    p.add_argument('--key',help='Required for formal publication; offline responses remain drafts')
     p=sub.add_parser('intake')
     for name in ('publication','round-id','variants','website'):p.add_argument('--'+name,required=True)
+    p.add_argument('--retry-key',help='Append a bounded v2 retry after waiting/rejected; saved keys replay idempotently')
     p=sub.add_parser('cards');p.add_argument('--task',required=True);p.add_argument('--context',required=True);p.add_argument('--key')
     p=sub.add_parser('extend-budget')
     for name in ('task','grant','key'):p.add_argument('--'+name,required=True)
@@ -157,7 +306,7 @@ def main():
     args=parser.parse_args()
     try:
         result=asyncio.run(dispatch(args))
-    except (ValueError,KeyError,OSError,RuntimeError) as error:
+    except (ValueError,KeyError,TypeError,OSError,RuntimeError) as error:
         parser.exit(2,str(error)+'\n')
     print(canonical_json(result))
 
