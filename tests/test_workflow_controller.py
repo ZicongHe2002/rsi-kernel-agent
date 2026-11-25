@@ -119,6 +119,39 @@ class WorkflowControllerTests(unittest.TestCase):
         state = c.run_until_idle()
         self.assertFalse(any(j['state']=='active' for j in state['jobs'].values()))
 
+    def test_ai_paused_route_resumes_without_early_execution_or_duplicate_controls(self):
+        c = self.make()
+        c.pause('B', 'Keep the other route paused')
+        self.store.append(Decision('ai-pause-A', 'task', 'note', 'A', 'No useful hypothesis',
+            {'type': 'route_decision.v1', 'decision': {'state': 'paused'}}), 'ai-pause-A')
+        paused = c.run_until_idle()
+        self.assertEqual(paused['spent']['executions'], 0)
+        self.assertTrue(all(job['state'] == 'queued' for job in paused['jobs'].values()))
+        resumed = c.resume('A', 'New evidence permits another attempt')
+        self.assertEqual(resumed['spent'], paused['spent'])
+        self.assertTrue(all(job['state'] == 'queued' for job in resumed['jobs'].values()))
+        self.assertEqual(c.resume('A', 'Already resumed')['revision'], resumed['revision'])
+        controls = [record for record in self.store.history('task')
+                    if isinstance(record, Decision) and record.kind == 'resumed' and record.target_id == 'A']
+        self.assertEqual(len(controls), 1)
+        restored = self.api.Controller(self.store, 'task', self.backend)
+        result = restored.run_until_idle()
+        self.assertTrue(all(job['state'] == 'completed' for job in result['jobs'].values()
+                            if job['strategy_id'] == 'A'))
+        self.assertTrue(all(job['state'] == 'queued' for job in result['jobs'].values()
+                            if job['strategy_id'] == 'B'))
+
+    def test_resuming_ai_paused_route_does_not_bypass_budget(self):
+        c = self.make(limits={'executions': 0})
+        self.store.append(Decision('ai-pause-A', 'task', 'note', 'A', 'No useful hypothesis',
+            {'type': 'route_decision.v1', 'decision': {'state': 'paused'}}), 'ai-pause-A')
+        c.resume('A', 'New evidence permits another attempt')
+        result = c.run_until_idle()
+        self.assertEqual(result['spent']['executions'], 0)
+        self.assertTrue(all(job['state'] == 'deferred' for job in result['jobs'].values()))
+        self.assertFalse(any(isinstance(record, Decision) and record.details.get('type') == 'execution_request.v1'
+                             for record in self.store.history('task')))
+
     def test_rebuild_after_each_step_matches_uninterrupted_and_no_duplicate_receipts(self):
         c = self.make()
         for _ in range(80):

@@ -1,12 +1,20 @@
 # RSI-Kernel-Agent 文档索引
 
-更新：2026-11-16。当前结论为 **P3.5 系统闭环 PASS_WITH_LIMITATIONS**，**稳定端到端性能 NOT_CONFIRMED**；范围是 MLA Decode contiguous BF16。
+**更新：2026-11-23。** 已根据当前代码与知识库整理[系统架构与组织调度](../knowledge-site/content/学习方法/rsi-kernel-agent.md)及[同事详解版](rsi-kernel-agent-current-architecture-2026-11-23.md)。同事版包含背景、术语、六步流程、模块职责、数据、预算、恢复和完整示例，可单独发送 Markdown。
+
+当前代码已有共享路线进展、完整指标历史、按需证据、同源 CPU 门禁、Runtime 差量复核和连续 Run 路径。历史真实 P3.5 两轮的系统闭环结论仍为 **PASS_WITH_LIMITATIONS**，稳定端到端性能为 **NOT_CONFIRMED**；新三轮 TPU 优化尚无完成证据。11 月 23 日保存的核查显示，旧准备/检查、Runtime 协议与辅助测量入口仍有集成缺口，不能把软件接口存在写成实验已可直接续跑。
+
+11 月 20 日保存的根级 666 项、辅助 383 项及 A/B/D CPU 9/9 结果属于对应冻结版本；后续 helper 修改与 11 月 23 日定向验证应按各自记录解读。具体当前停点见[进度核查](../.artifacts/progress-review-20261123/progress-report.md)，实现沿革见[六步流程记录](phase3/next-stage-completion-2026-11-16.md#2026-11-20-六步闭环实现与验证)。本次架构文档更新未重新执行实验测试或硬件。
 
 ## 先读这里
 
 | 文档 | 用途 |
 | --- | --- |
-| [P3.5 最终验收报告](phase3/phase3-final-acceptance-report.md) | 当前权威结论、两轮结果、原始证据、测试和限制 |
+| [系统架构与组织调度（同事详解版，2026-11-23）](rsi-kernel-agent-current-architecture-2026-11-23.md) | 可单独发送的完整说明：背景、六步流程、模块职责、数据与恢复、示例及当前限制 |
+| [离线准备与正式执行衔接](superpowers/plans/2026-11-17-runtime10-execution-handoff.md#offline-preparation-before-allocation) | 无活动 TPU 的独立研究/候选封存、CPU 检查范围、真实 Context 复核与串行执行入口 |
+| [续作与真实验证记录](phase3/next-stage-completion-2026-11-16.md) | 后续 Runtime 准入与中断，不把准入当成优化反馈 |
+| [开放发现与逐路线设计增量交付](phase3/next-stage-open-exploration-2026-11-16.md) | P3.5 之后的软件实现、当前验证、真实来源与待执行条件；不改旧实验结论 |
+| [P3.5 最终验收报告](phase3/phase3-final-acceptance-report.md) | 已有真实链路结论、两轮结果、原始证据、测试和限制 |
 | [第一轮优化结果](phase3/phase3-optimization-report.md) | 4 个 Plan、5 个 Candidate 的真实结果 |
 | [ABBA 复测结果](phase3/phase3-p35-abba-results.md) | program 有限复测改善与 host 漂移的独立解释 |
 | [最终独立审查](../.artifacts/p35-final-acceptance-2026-11-16/independent-final-review.md) | 审查方法、发现、修复和签结 |
@@ -36,7 +44,7 @@
 | Phase 2D+：Workflow / Controller | [确定性执行流程](phase2d-workflow-controller.md) | [2D+ 报告](../knowledge-site/manifests/phase2d-2026-11-11/implementation-report.md) |
 | Phase 3：真实硬件与多轮反馈 | [最终验收](phase3/phase3-final-acceptance-report.md) | [带时间的实现记录](../knowledge-site/manifests/phase3-2026-11-12/implementation-report.md) |
 
-旧阶段报告中的“后续阶段未开始”等表述属于其记录日期。当前整体状态以最终验收报告为准。
+旧阶段报告中的“后续阶段未开始”等表述属于其记录日期。P3.5 历史结论以最终验收报告为准；后续工作树的结构与进度另看当前架构说明和带日期的续作记录。
 
 ## 历史检查点与来源
 

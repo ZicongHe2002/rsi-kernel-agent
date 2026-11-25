@@ -33,6 +33,15 @@ class WorkflowSchedulingTests(unittest.TestCase):
         state['jobs']['b']['state']='completed'
         self.assertEqual(self.api.choose_jobs(state),['a-low'])
 
+    def test_new_batch_serves_each_route_before_extra_candidates(self):
+        jobs = [job('a', 'A'), job('d-first', 'D', 2), job('d-extra', 'D')]
+        for value in jobs:
+            value.update(round_id='design-1', design_batch_id='batch-1')
+        state = self.state(jobs, {'max_concurrency': 2})
+        state['served'] = {'A': 100, 'D': 0}
+        self.assertEqual(self.api.choose_jobs(state), ['d-first', 'a'])
+        self.assertEqual(state['jobs']['d-extra']['state'], 'queued')
+
     def test_weighted_service_has_no_fixed_strategy_ratio(self):
         state=self.state([job('a'+str(i),'A') for i in range(8)]+[job('b'+str(i),'B') for i in range(8)],
             {'max_concurrency':1,'weights':{'A':2,'B':1}})

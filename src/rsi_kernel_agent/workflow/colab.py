@@ -6,7 +6,7 @@ import json
 from ..contracts import Decision, canonical_json
 from .colab_bridge import BridgeUnavailable
 from .execution import (_validate_request, _require, _maybe, artifact_ref, make_request,
-                        stable_id, stages_for, verify_receipt)
+                        stable_id, stages_for, validate_candidate_request, verify_receipt)
 from .real_protocol import load_bundle, validate_stage
 
 
@@ -122,8 +122,128 @@ class ColabBackend:
         except BridgeUnavailable:
             return {'status': 'unknown', 'receipt': None}
 
+    def _candidate_operation(self, operation_id):
+        record = _maybe(self.store, stable_id('candidate-request', operation_id))
+        if record is None:
+            return None
+        _require(type(record) is Decision and record.kind == 'note'
+                 and set(record.details) == {'type', 'request', 'runtime_id', 'nonce', 'remote_root'}
+                 and record.details['type'] == 'colab_candidate_request.v1', 'Invalid candidate operation record')
+        request = validate_candidate_request(self.store, record.details['request'])
+        job = request['requests'][0]['job']
+        _require(request['operation_id'] == operation_id and record.task_id == job['task_id']
+                 and record.target_id == job['run_id'], 'Candidate operation ownership mismatch')
+        return record
+
+    def _candidate_state(self, request, state):
+        _require(type(state) is dict and set(state) == {'status', 'stages', 'cancelled'}
+                 and state['status'] in {'definitely_not_started', 'running', 'unknown', 'completed'}
+                 and type(state['stages']) is list and type(state['cancelled']) is bool,
+                 'Invalid candidate execution state')
+        _require(not state['cancelled'] or state['status'] == 'completed', 'Unconfirmed candidate cancellation')
+        _require(len(state['stages']) <= len(request['requests']), 'Too many candidate stage receipts')
+        receipts = {}
+        process_id = None
+        for stage_request, observed in zip(request['requests'], state['stages']):
+            _require(observed.get('status') == 'completed', 'Candidate stage prefix is not complete')
+            body = observed.get('receipt', {})
+            if stage_request['stage'] != 'generate' and body.get('status') == 'succeeded':
+                current = body.get('outputs', {}).get('identity', {}).get('process_id')
+                _require(type(current) is int and current > 0 and (process_id is None or current == process_id),
+                         'Candidate stages came from different process identities')
+                process_id = current
+            _require(not receipts or next(reversed(receipts.values()))['status'] == 'succeeded',
+                     'Candidate executed after a failed stage')
+            receipt = self._import(stage_request, observed)['receipt']
+            receipts[stage_request['stage']] = receipt
+        if state['status'] in ('unknown', 'definitely_not_started'):
+            _require(not receipts and not state['cancelled'], 'Unstarted or unknown candidate has a receipt prefix')
+        if state['status'] == 'completed' and not state['cancelled']:
+            _require(receipts and (len(receipts) == len(request['requests'])
+                     or next(reversed(receipts.values()))['status'] != 'succeeded'),
+                     'Candidate completion omits unfinished stages')
+        return {'status': state['status'], 'receipts': receipts, 'cancelled': state['cancelled']}
+
+    def _import_candidate(self, request, state):
+        result = self._candidate_state(request, state)
+        if result['status'] == 'completed':
+            record_id = stable_id('candidate-complete', request['operation_id'])
+            job = request['requests'][0]['job']
+            self.store.append(Decision(record_id, job['task_id'], 'note', job['run_id'],
+                'Terminal candidate process and verified stage prefix',
+                {'type': 'candidate_completion.v1', 'request_digest': request['request_digest'],
+                 'state_ref': asdict(self.store.artifacts.put(canonical_json(state).encode('utf-8')))}), record_id)
+        return result
+
+    def lookup_candidate(self, operation_id):
+        record = self._candidate_operation(operation_id)
+        if record is not None:
+            request = record.details['request']
+            complete = _maybe(self.store, stable_id('candidate-complete', operation_id))
+            if complete is not None:
+                _require(complete.details['type'] == 'candidate_completion.v1'
+                         and complete.details['request_digest'] == request['request_digest'],
+                         'Candidate completion differs from its request')
+                state = json.loads(self.store.artifacts.read(artifact_ref(complete.details['state_ref'])))
+                return self._candidate_state(request, state)
+            self._check_remote(request['requests'][0], record)
+        try:
+            state = self.remote.lookup_candidate(operation_id)
+            if record is None:
+                status = 'definitely_not_started' if state.get('status') == 'definitely_not_started' else 'unknown'
+                return {'status': status, 'receipts': {}, 'cancelled': False}
+            return self._import_candidate(request, state)
+        except BridgeUnavailable:
+            return {'status': 'unknown', 'receipts': {}, 'cancelled': False}
+
+    def submit_candidate(self, request):
+        request = validate_candidate_request(self.store, request)
+        first = request['requests'][0]
+        self._check_remote(first)
+        _require(self.store.run_state(first['job']['run_id'])['execution_status'] == 'running',
+                 'Candidate execution requires an active scheduled Run')
+        operation = self._candidate_operation(request['operation_id'])
+        if operation is None:
+            for stage in request['requests']:
+                existing = self._operation(stage['operation_id'])
+                _require(existing is None, 'Stage was already submitted outside this candidate execution')
+            rid = stable_id('candidate-request', request['operation_id'])
+            self.store.append(Decision(rid, first['job']['task_id'], 'note', first['job']['run_id'],
+                'Pinned complete candidate execution before remote submission',
+                {'type': 'colab_candidate_request.v1', 'request': request, 'runtime_id': self.remote.runtime_id,
+                 'nonce': self.remote.nonce, 'remote_root': self.remote.root}), rid)
+        else:
+            _require(operation.details['request'] == request, 'Candidate operation reused with different requests')
+            self._check_remote(first, operation)
+        for stage in request['requests']:
+            op = stage['operation_id']
+            self.store.append(Decision(stable_id('execution-request', op), first['job']['task_id'], 'note',
+                first['job']['run_id'], 'Pinned Colab operation before remote submission',
+                {'type': 'colab_execution_request.v1', 'request': stage, 'runtime_id': self.remote.runtime_id,
+                 'nonce': self.remote.nonce, 'remote_root': self.remote.root}), stable_id('execution-submit', op))
+        state = self.lookup_candidate(request['operation_id'])
+        if state['status'] != 'definitely_not_started':
+            return state
+        try:
+            return self._import_candidate(request, self.remote.submit_candidate(request, self.payload(first)))
+        except BridgeUnavailable:
+            return {'status': 'unknown', 'receipts': {}, 'cancelled': False}
+
+    def cancel_candidate(self, operation_id):
+        record = self._candidate_operation(operation_id)
+        _require(record is not None, 'Candidate cancellation requires its original request')
+        state = self.lookup_candidate(operation_id)
+        if state['status'] == 'completed':
+            return state
+        try:
+            return self._import_candidate(record.details['request'], self.remote.cancel_candidate(operation_id))
+        except BridgeUnavailable:
+            return {'status': 'unknown', 'receipts': {}, 'cancelled': False}
+
     def submit(self, request):
         request = _validate_request(self.store, request)
+        _require(request['job']['contract']['context']['protocol'].get('execution_mode') != 'candidate.v1',
+                 'Candidate stages cannot be submitted separately')
         op = request['operation_id']
         operation = self._operation(op)
         self._check_remote(request, operation)

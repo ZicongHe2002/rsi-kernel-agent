@@ -1,0 +1,87 @@
+{
+  "roots": [
+    {
+      "id": "学习方法/rsi-kernel-agent.md",
+      "label": "RSI Kernel Agent：整体流程与模块分工",
+      "children": [
+        {
+          "id": "学习方法/rsi-memory.md",
+          "label": "Memory · 实验记忆",
+          "children": []
+        },
+        {
+          "id": "学习方法/rsi-knowledge-search.md",
+          "label": "Knowledge Search · 知识检索",
+          "children": []
+        },
+        {
+          "id": "学习方法/rsi-profiler.md",
+          "label": "Profiler · 性能剖析",
+          "children": [
+            {
+              "id": "学习方法/RSI实践/rsi-profiler-analyzer.md",
+              "label": "Analyzer · 性能证据分析",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "学习方法/rsi-benchmark.md",
+          "label": "Benchmark · 正确性与性能评测",
+          "children": []
+        },
+        {
+          "id": "学习方法/rsi-optimization-workflow.md",
+          "label": "Optimization Workflow · 优化工作流",
+          "children": [
+            {
+              "id": "学习方法/RSI实践/rsi-multi-plan-exploration.md",
+              "label": "多方案探索与迭代",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "参考与进展",
+          "children": [
+            {
+              "id": "学习方法/rsi-implementation-status.md",
+              "label": "实现与验证进度",
+              "children": []
+            },
+            {
+              "id": "学习方法/rsi-evidence-contract.md",
+              "label": "共用证据契约",
+              "children": []
+            },
+            {
+              "id": "学习方法/rsi-document-index.md",
+              "label": "辅助文档索引",
+              "children": []
+            }
+          ]
+        },
+        {
+          "label": "历史资料",
+          "children": [
+            {
+              "id": "学习方法/RSI实践/rsi-phase2-roadmap.md",
+              "label": "阶段路线图（历史）",
+              "children": []
+            },
+            {
+              "id": "学习方法/RSI实践/rsi-next-optimization-prompt.md",
+              "label": "历史优化 Prompt",
+              "children": []
+            },
+            {
+              "id": "学习方法/RSI实践/rsi-method-search-and-selection.md",
+              "label": "旧方法搜索页（迁移说明）",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

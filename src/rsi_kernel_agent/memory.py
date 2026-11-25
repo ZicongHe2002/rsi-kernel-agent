@@ -351,6 +351,7 @@ class MemoryView:
             return {'candidate_id': run['candidate_id'], 'run_id': run['id'], 'evaluation_id': evaluation['id'],
                     'latency_ms': evaluation['latency_ms'], 'strategy_id': index.owner(run['id']), 'context_id': context_id}
 
+        from .workflow.exploration import exploration_status
         cards = []
         for strategy in index.strategy_ids():
             owned = [r for r in index.records if index.owner(r['payload']['id']) == strategy]
@@ -410,6 +411,7 @@ class MemoryView:
                           'task_best': best('task'),
                           'frontier': [r['candidate_id'] for r in index.body['projections']['frontier']
                                        if r['context_id'] == context_id and index.owner(r['candidate_id']) == strategy],
+                          'initial_exploration': exploration_status(index.records, strategy),
                           'paused': bool(pause and pause['kind'] == 'paused'), 'pause_decision': pause,
                           'deferred': deferred, 'current_parent_candidate': current_parent,
                           'recent_plans': list(reversed(plans))[:recent_plan_limit], 'recent_plans_total': len(plans),
